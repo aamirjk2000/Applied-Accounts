@@ -1,0 +1,86 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ds_General_Ledger" targetNamespace="http://tempuri.org/ds_General_Ledger.xsd" xmlns:mstns="http://tempuri.org/ds_General_Ledger.xsd" xmlns="http://tempuri.org/ds_General_Ledger.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.Applied_Accounts.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.Odbc" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="View_General_LedgerTableAdapter" GeneratorDataComponentClassName="View_General_LedgerTableAdapter" Name="View_General_Ledger" UserDataComponentName="View_General_LedgerTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="View_General_Ledger" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT "Vou_No", "Vou_Date", "COA", "COA_Title", "Description", "DR", "CR" FROM "View_General_Ledger"</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Vou_No" DataSetColumn="Vou_No" />
+              <Mapping SourceColumn="Vou_Date" DataSetColumn="Vou_Date" />
+              <Mapping SourceColumn="COA" DataSetColumn="COA" />
+              <Mapping SourceColumn="COA_Title" DataSetColumn="COA_Title" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="DR" DataSetColumn="DR" />
+              <Mapping SourceColumn="CR" DataSetColumn="CR" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ds_General_Ledger" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ds_General_Ledger" msprop:Generator_UserDSName="ds_General_Ledger">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="View_General_Ledger" msprop:Generator_TableClassName="View_General_LedgerDataTable" msprop:Generator_TableVarName="tableView_General_Ledger" msprop:Generator_TablePropName="View_General_Ledger" msprop:Generator_RowDeletingName="View_General_LedgerRowDeleting" msprop:Generator_RowChangingName="View_General_LedgerRowChanging" msprop:Generator_RowEvHandlerName="View_General_LedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="View_General_LedgerRowDeleted" msprop:Generator_UserTableName="View_General_Ledger" msprop:Generator_RowChangedName="View_General_LedgerRowChanged" msprop:Generator_RowEvArgName="View_General_LedgerRowChangeEvent" msprop:Generator_RowClassName="View_General_LedgerRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Vou_No" msprop:Generator_ColumnVarNameInTable="columnVou_No" msprop:Generator_ColumnPropNameInRow="Vou_No" msprop:Generator_ColumnPropNameInTable="Vou_NoColumn" msprop:Generator_UserColumnName="Vou_No">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" type="xs:dateTime" />
+              <xs:element name="COA" msprop:Generator_ColumnVarNameInTable="columnCOA" msprop:Generator_ColumnPropNameInRow="COA" msprop:Generator_ColumnPropNameInTable="COAColumn" msprop:Generator_UserColumnName="COA" type="xs:int" />
+              <xs:element name="COA_Title" msprop:Generator_ColumnVarNameInTable="columnCOA_Title" msprop:Generator_ColumnPropNameInRow="COA_Title" msprop:Generator_ColumnPropNameInTable="COA_TitleColumn" msprop:Generator_UserColumnName="COA_Title">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="65536" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DR" msprop:Generator_ColumnVarNameInTable="columnDR" msprop:Generator_ColumnPropNameInRow="DR" msprop:Generator_ColumnPropNameInTable="DRColumn" msprop:Generator_UserColumnName="DR">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CR" msprop:Generator_ColumnVarNameInTable="columnCR" msprop:Generator_ColumnPropNameInRow="CR" msprop:Generator_ColumnPropNameInTable="CRColumn" msprop:Generator_UserColumnName="CR">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

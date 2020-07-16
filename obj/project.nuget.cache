@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "dgSpecHash": "ErCPQ/rU8mhYz7pojCeOCtHk5HF/+1N1RJo+OYAPXPOBLlw+uDzhUzMzgNuanJnwwCvhMJKv6EHX7pgmI4KVZQ==",
+  "success": true,
+  "projectFilePath": "F:\\Applied\\Applied Accounts\\Applied Accounts.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\administrator\\.nuget\\packages\\entityframework\\6.3.0\\entityframework.6.3.0.nupkg.sha512",
+    "C:\\Users\\administrator\\.nuget\\packages\\microsoft.reportingservices.reportviewercontrol.winforms\\150.1404.0\\microsoft.reportingservices.reportviewercontrol.winforms.150.1404.0.nupkg.sha512",
+    "C:\\Users\\administrator\\.nuget\\packages\\microsoft.sqlserver.types\\14.0.1016.290\\microsoft.sqlserver.types.14.0.1016.290.nupkg.sha512",
+    "C:\\Users\\administrator\\.nuget\\packages\\system.data.sqlite\\1.0.113.1\\system.data.sqlite.1.0.113.1.nupkg.sha512",
+    "C:\\Users\\administrator\\.nuget\\packages\\system.data.sqlite.core\\1.0.113.1\\system.data.sqlite.core.1.0.113.1.nupkg.sha512",
+    "C:\\Users\\administrator\\.nuget\\packages\\system.data.sqlite.ef6\\1.0.113\\system.data.sqlite.ef6.1.0.113.nupkg.sha512",
+    "C:\\Users\\administrator\\.nuget\\packages\\system.data.sqlite.linq\\1.0.113\\system.data.sqlite.linq.1.0.113.nupkg.sha512"
+  ],
+  "logs": []
+}

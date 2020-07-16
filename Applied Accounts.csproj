@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{C521AE9F-297F-47D9-B40C-0181CF3936DD}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Applied_Accounts</RootNamespace>
+    <AssemblyName>Applied Accounts</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>G:\Applied Accounts\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>Applied_Accounts.Program</StartupObject>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Accounting.ico</ApplicationIcon>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Connection_Class">
+      <HintPath>..\Connection Class\Connection_Class_DLL\obj\Release\Connection_Class.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Classes\Applied.cs" />
+    <Compile Include="Classes\AppliedClass.cs" />
+    <Compile Include="Classes\AppliedTable.cs" />
+    <Compile Include="Classes\Connection.cs" />
+    <Compile Include="Classes\Conversion.cs" />
+    <Compile Include="Classes\DataSets.cs" />
+    <Compile Include="Classes\MigrationClass.cs" />
+    <Compile Include="Classes\ReportClass.cs" />
+    <Compile Include="Classes\ThisTable.cs" />
+    <Compile Include="Classes\Validation.cs" />
+    <Compile Include="Classes\VoucherClass.cs" />
+    <Compile Include="Components\AppliedDataGrid.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\AppliedDataGrid.Designer.cs">
+      <DependentUpon>AppliedDataGrid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\FKeyID.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\FKeyID.Designer.cs">
+      <DependentUpon>FKeyID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\MyTextBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\MyTextBox.Designer.cs">
+      <DependentUpon>MyTextBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\Navigator.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\Navigator.Designer.cs">
+      <DependentUpon>Navigator.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\SearchID.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\SearchID.Designer.cs">
+      <DependentUpon>SearchID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ds_Supplier_Ledger.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Supplier_Ledger.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ds_General_Ledger.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_General_Ledger.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ds_Voucher.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Voucher.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Accounts_Notes.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Accounts_Notes.Designer.cs">
+      <DependentUpon>Accounts_Notes.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Browse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Browse.Designer.cs">
+      <DependentUpon>Browse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\COA.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\COA.Designer.cs">
+      <DependentUpon>COA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\DBSetting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DBSetting.Designer.cs">
+      <DependentUpon>DBSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Employees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Employees.Designer.cs">
+      <DependentUpon>Employees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\General Ledger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\General Ledger.Designer.cs">
+      <DependentUpon>General Ledger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GL_Supplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GL_Supplier.Designer.cs">
+      <DependentUpon>GL_Supplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Migration.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Migration.Designer.cs">
+      <DependentUpon>Migration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Project.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Project.Designer.cs">
+      <DependentUpon>Project.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Setting.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Setting.Designer.cs">
+      <DependentUpon>Setting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Supplier Ledger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Supplier Ledger.Designer.cs">
+      <DependentUpon>Supplier Ledger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Suppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Suppliers.Designer.cs">
+      <DependentUpon>Suppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Vouchers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Vouchers.Designer.cs">
+      <DependentUpon>Vouchers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GlobalSuppressions.cs" />
+    <Compile Include="Login.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Login.Designer.cs">
+      <DependentUpon>Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MainMenu.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainMenu.Designer.cs">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reports\Preview_General_Ledger.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Preview_General_Ledger.Designer.cs">
+      <DependentUpon>Preview_General_Ledger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Preview_GL_Supplier.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Preview_GL_Supplier.Designer.cs">
+      <DependentUpon>Preview_GL_Supplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Preview_Voucher.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Preview_Voucher.Designer.cs">
+      <DependentUpon>Preview_Voucher.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Reports\Report_Vouchers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Reports\Report_Vouchers.Designer.cs">
+      <DependentUpon>Report_Vouchers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings.cs" />
+    <EmbeddedResource Include="Components\AppliedDataGrid.resx">
+      <DependentUpon>AppliedDataGrid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\FKeyID.resx">
+      <DependentUpon>FKeyID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\MyTextBox.resx">
+      <DependentUpon>MyTextBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\Navigator.resx">
+      <DependentUpon>Navigator.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\SearchID.resx">
+      <DependentUpon>SearchID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Accounts_Notes.resx">
+      <DependentUpon>Accounts_Notes.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Browse.resx">
+      <DependentUpon>Browse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\COA.resx">
+      <DependentUpon>COA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\DBSetting.resx">
+      <DependentUpon>DBSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Employees.resx">
+      <DependentUpon>Employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\General Ledger.resx">
+      <DependentUpon>General Ledger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GL_Supplier.resx">
+      <DependentUpon>GL_Supplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Migration.resx">
+      <DependentUpon>Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Project.resx">
+      <DependentUpon>Project.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Setting.resx">
+      <DependentUpon>Setting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Supplier Ledger.resx">
+      <DependentUpon>Supplier Ledger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Suppliers.resx">
+      <DependentUpon>Suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Vouchers.resx">
+      <DependentUpon>Vouchers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Login.resx">
+      <DependentUpon>Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainMenu.resx">
+      <DependentUpon>MainMenu.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Reports\Preview_General_Ledger.resx">
+      <DependentUpon>Preview_General_Ledger.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Preview_GL_Supplier.resx">
+      <DependentUpon>Preview_GL_Supplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Preview_Voucher.resx">
+      <DependentUpon>Preview_Voucher.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Preview_Voucher.rdlc" />
+    <EmbeddedResource Include="Reports\Report_General_Ledger.rdlc" />
+    <EmbeddedResource Include="Reports\Report_GL_Supplier.rdlc" />
+    <EmbeddedResource Include="Reports\Report_Vouchers.resx">
+      <DependentUpon>Report_Vouchers.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Data\ds_Supplier_Ledger.xsc">
+      <DependentUpon>ds_Supplier_Ledger.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_Supplier_Ledger.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Supplier_Ledger.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\ds_Supplier_Ledger.xss">
+      <DependentUpon>ds_Supplier_Ledger.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_General_Ledger.xsc">
+      <DependentUpon>ds_General_Ledger.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_General_Ledger.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_General_Ledger.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\ds_General_Ledger.xss">
+      <DependentUpon>ds_General_Ledger.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_Voucher.xsc">
+      <DependentUpon>ds_Voucher.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_Voucher.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Voucher.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\ds_Voucher.xss">
+      <DependentUpon>ds_Voucher.xsd</DependentUpon>
+    </None>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Accounting.ico" />
+    <Content Include="Icons\Accounting.ico" />
+    <Content Include="Icons\Accounting.png" />
+    <Content Include="Icons\AppliedLogo.jpg" />
+    <Content Include="Icons\BACK.png" />
+    <Content Include="Icons\BACKD.png" />
+    <Content Include="Icons\BOTTOM.png" />
+    <Content Include="Icons\BOTTOMD.png" />
+    <Content Include="Icons\Close.png" />
+    <Content Include="Icons\Delete.png" />
+    <Content Include="Icons\Exit.png" />
+    <Content Include="Icons\Files.png" />
+    <Content Include="Icons\Logo.png" />
+    <Content Include="Icons\New.png" />
+    <Content Include="Icons\NEXT.png" />
+    <Content Include="Icons\NextD.png" />
+    <Content Include="Icons\OK.png" />
+    <Content Include="Icons\Printer.png" />
+    <Content Include="Icons\Save.png" />
+    <Content Include="Icons\TOP.png" />
+    <Content Include="Icons\TOPD.png" />
+    <Content Include="Icons\UNDO.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.7">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.7 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WinForms">
+      <Version>150.1404.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.SqlServer.Types">
+      <Version>14.0.1016.290</Version>
+    </PackageReference>
+    <PackageReference Include="System.Data.SQLite">
+      <Version>1.0.113.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

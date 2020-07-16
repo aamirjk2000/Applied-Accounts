@@ -1,0 +1,87 @@
+F:\Applied\Applied Accounts\obj\Release\Applied Accounts New.csprojAssemblyReference.cache
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.AppliedDataGrid.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Components.FKeyID.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.MyTextBox.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Navigator.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.SearchID.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.frmAccNotes.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Browse.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.frmCOA.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.frmDBSetting.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Forms.frmEmployees.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Forms.frmGeneral_Ledger.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Forms.frmMigration.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Forms.frmProject.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Forms.frmSupplier_Ledger.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Forms.frmSuppliers.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Forms.frmVouchers.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.frmMainMenu.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Properties.Resources.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Reports.Preview_General_Ledger.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Reports.Preview_Voucher.resources
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Reports.frmReportView.resources
+F:\Applied\Applied Accounts\obj\Release\Applied Accounts New.csproj.GenerateResource.cache
+F:\Applied\Applied Accounts\obj\Release\RdlCompile.cache
+F:\Applied\Applied Accounts\obj\Release\RdlCompile.compiled
+F:\Applied\Applied Accounts\obj\Release\Applied Accounts New.csproj.CoreCompileInputs.cache
+F:\Applied\Applied Accounts\bin\Release\Applied Accounts.exe.config
+F:\Applied\Applied Accounts\bin\Release\Applied Accounts.exe
+F:\Applied\Applied Accounts\bin\Release\Applied Accounts.pdb
+F:\Applied\Applied Accounts\bin\Release\EntityFramework.SqlServer.dll
+F:\Applied\Applied Accounts\bin\Release\EntityFramework.dll
+F:\Applied\Applied Accounts\bin\Release\Microsoft.ReportViewer.Common.dll
+F:\Applied\Applied Accounts\bin\Release\Microsoft.ReportViewer.ProcessingObjectModel.DLL
+F:\Applied\Applied Accounts\bin\Release\Microsoft.ReportViewer.WinForms.DLL
+F:\Applied\Applied Accounts\bin\Release\Microsoft.SqlServer.Types.dll
+F:\Applied\Applied Accounts\bin\Release\System.Data.SQLite.dll
+F:\Applied\Applied Accounts\bin\Release\System.Data.SQLite.EF6.dll
+F:\Applied\Applied Accounts\bin\Release\System.Data.SQLite.Linq.dll
+F:\Applied\Applied Accounts\bin\Release\Connection_Class.dll
+F:\Applied\Applied Accounts\bin\Release\Connection_Class.pdb
+F:\Applied\Applied Accounts\bin\Release\Connection_Class.xml
+F:\Applied\Applied Accounts\obj\Release\Applied Accounts New.csproj.CopyComplete
+F:\Applied\Applied Accounts\obj\Release\Applied Accounts.exe
+F:\Applied\Applied Accounts\obj\Release\Applied Accounts.pdb
+F:\Applied\Applied Accounts\bin\Release\Microsoft.ReportViewer.DataVisualization.dll
+F:\Applied\Applied Accounts\bin\Release\Microsoft.ReportViewer.Design.dll
+F:\Applied\Applied Accounts\bin\Release\de\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\de\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\de\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\de\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\es\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\es\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\es\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\es\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\fr\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\fr\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\fr\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\fr\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\it\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\it\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\it\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\it\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ja\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ja\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ja\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ja\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ko\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ko\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ko\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ko\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\pt\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\pt\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\pt\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\pt\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ru\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ru\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ru\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\ru\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\zh-CHS\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\zh-CHS\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\zh-CHS\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\zh-CHS\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\bin\Release\zh-CHT\Microsoft.ReportViewer.Common.resources.dll
+F:\Applied\Applied Accounts\bin\Release\zh-CHT\Microsoft.ReportViewer.DataVisualization.resources.dll
+F:\Applied\Applied Accounts\bin\Release\zh-CHT\Microsoft.ReportViewer.Design.resources.dll
+F:\Applied\Applied Accounts\bin\Release\zh-CHT\Microsoft.ReportViewer.WinForms.resources.dll
+F:\Applied\Applied Accounts\obj\Release\Applied_Accounts.Forms.frmSetting.resources
