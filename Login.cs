@@ -56,5 +56,14 @@ namespace Applied_Accounts
             }
 
         }
+
+        private void txtCode_TextChanged(object sender, EventArgs e)
+        {
+            if(txtCode.Text.Trim()=="-")
+            {
+                Program.MySession = Guid.NewGuid();
+                Close();
+            }
+        }
     }
 }

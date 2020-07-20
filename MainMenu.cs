@@ -119,5 +119,11 @@ namespace Applied_Accounts
             frmGL_Supplier ThisForm = new frmGL_Supplier();
             ThisForm.Show();
         }
+
+        private void mnuProjectLedger_Click(object sender, EventArgs e)
+        {
+            frmGL_Project ThisForm = new frmGL_Project();
+            ThisForm.Show();
+        }
     }
 }

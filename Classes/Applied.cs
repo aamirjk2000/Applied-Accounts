@@ -259,6 +259,7 @@ namespace Applied_Accounts.Classes
         {
             General_Ledger,
             Supplier_Ledger,
+            Project_Ledger,
             General_Voucher
         }
 

@@ -1,6 +1,6 @@
-﻿namespace Applied_Accounts.Reports
+﻿namespace Applied_Accounts.Preview
 {
-    partial class frmPreview_GL_Supplier
+    partial class frmPreview_GL_Project
     {
         /// <summary>
         /// Required designer variable.
@@ -34,22 +34,22 @@
             // rpt_View
             // 
             this.rpt_View.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.rpt_View.LocalReport.ReportEmbeddedResource = "Applied_Accounts.Reports.Report_GL_Supplier.rdlc";
+            this.rpt_View.LocalReport.ReportEmbeddedResource = "Applied_Accounts.Reports.Report_GL_Projects.rdlc";
             this.rpt_View.Location = new System.Drawing.Point(0, 0);
             this.rpt_View.Name = "rpt_View";
             this.rpt_View.ServerReport.BearerToken = null;
             this.rpt_View.Size = new System.Drawing.Size(800, 450);
             this.rpt_View.TabIndex = 0;
             // 
-            // frmPreview_GL_Supplier
+            // frmPreview_GL_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.rpt_View);
-            this.Name = "frmPreview_GL_Supplier";
-            this.Text = "Preview_GL_Supplier";
-            this.Load += new System.EventHandler(this.Preview_GL_Supplier_Load);
+            this.Name = "frmPreview_GL_Project";
+            this.Text = "Preview - General Ledger Project";
+            this.Load += new System.EventHandler(this.Preview_GL_Project_Load);
             this.ResumeLayout(false);
 
         }

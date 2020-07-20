@@ -1,5 +1,4 @@
 ﻿using Applied_Accounts.Classes;
-using Applied_Accounts.Reports;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +11,8 @@ using System.Windows.Forms;
 
 namespace Applied_Accounts.Forms
 {
-    public partial class frmGL_Supplier : Form
+    public partial class frmGL_Project : Form
     {
-
         private DataTable dt_Suppliers;
         private DataTable dt_COA;
         private DataTable dt_Projects;
@@ -22,11 +20,9 @@ namespace Applied_Accounts.Forms
         private ReportClass MyReportClass = new ReportClass();
 
 
-        public frmGL_Supplier()
+        public frmGL_Project()
         {
             InitializeComponent();
-
-
 
             dt_Suppliers = AppliedTable.GetDataTable(Tables.Suppliers);
             dt_COA = AppliedTable.GetDataTable(Tables.COA);
@@ -49,21 +45,32 @@ namespace Applied_Accounts.Forms
             cBoxUnits.DisplayMember = "Title";
             cBoxUnits.ValueMember = "ID";
 
+            cBoxReportFormat.SelectedIndex = 0;
+
+            MyReportClass.Report_Location = "Applied_Accounts.Reports.Report_GL_projects.rdlc";
+
+
         }
 
-        private void frmGL_Supplier_Load(object sender, EventArgs e)
+        private void GL_Project_Load(object sender, EventArgs e)
         {
-            cBoxSuppliers.SelectedValue = Applied.GetInteger("rptGLSup_Supplier");
-            cBoxCOA.SelectedValue = Applied.GetInteger("rptGLSup_COA");
-            cBoxProjects.SelectedValue = Applied.GetInteger("rptGLSup_Project");
-            cBoxUnits.SelectedValue = Applied.GetInteger("rptGLSup_Unit");
+            cBoxProjects.SelectedValue = Applied.GetInteger("rptGLPro_Project");
+            cBoxSuppliers.SelectedValue = Applied.GetInteger("rptGLPro_Supplier");
+            cBoxCOA.SelectedValue = Applied.GetInteger("rptGLPro_COA");
+            cBoxUnits.SelectedValue = Applied.GetInteger("rptGLPro_Unit");
 
-            dt_From.Value = Applied.GetDate("rptGLSup_From");
-            dt_To.Value = Applied.GetDate("rptGLSup_To");
+            dt_From.Value = Applied.GetDate("rptGLPro_From");
+            dt_To.Value = Applied.GetDate("rptGLPro_To");
 
-            chkCOA.Checked = Applied.GetBoolean("rptGLSup_chkCOA");
-            chkProject.Checked = Applied.GetBoolean("rptGLSup_chkProject");
-            chkUnit.Checked = Applied.GetBoolean("rptGLSup_chkUnit");
+
+            chkCOA.Checked = Applied.GetBoolean("rptGLPro_chkCOA");
+            chkSuppliers.Checked = Applied.GetBoolean("rptGLPro_chkSupplier");
+            chkUnits.Checked = Applied.GetBoolean("rptGLPro_chkUnit");
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void btnPreview_Click(object sender, EventArgs e)
@@ -74,62 +81,61 @@ namespace Applied_Accounts.Forms
             MyReportClass.ID_Unit = Conversion.ToInteger(cBoxUnits.SelectedValue);
             MyReportClass.Report_From = dt_From.Value;
             MyReportClass.Report_To = dt_To.Value;
-            MyReportClass.PreviewForm = Applied.PreviewReports.Supplier_Ledger;
-            MyReportClass.DataTableID = Tables.View_Supplier_Ledger;
-            MyReportClass.DataSet_Name = "ds_GL_Supplier";                
-            MyReportClass.Heading1 = "Supplier Ledger | " + cBoxSuppliers.Text;
-            MyReportClass.Heading2 = string.Concat("Report from ",MyReportClass.FilterDate_From(), " to ",MyReportClass.FilterDate_To());
+            MyReportClass.PreviewForm = Applied.PreviewReports.Project_Ledger;
+            MyReportClass.DataTableID = Tables.View_Project_Ledger;
+            MyReportClass.DataSet_Name = "ds_Project_Ledger";
+            MyReportClass.Heading1 = "Project Ledger | " + cBoxProjects.Text;
+            MyReportClass.Heading2 = string.Concat("Report from ", MyReportClass.FilterDate_From(), " to ", MyReportClass.FilterDate_To());
 
             #region Load Source Data
 
-            string SourceFilter = string.Concat("Supplier=", MyReportClass.ID_Supplier);
-            SourceFilter += string.Concat(" AND [Vou_Date] BETWEEN '",MyReportClass.FilterDate_From(), "' AND '",MyReportClass.FilterDate_To() + "'");
+            string SourceFilter = string.Concat("Project=", MyReportClass.ID_Project);
+            SourceFilter += string.Concat(" AND [Vou_Date] BETWEEN '", MyReportClass.FilterDate_From(), "' AND '", MyReportClass.FilterDate_To() + "'");
             MyReportClass.DataSource_Filter = SourceFilter;                 // Filter for Data Source Table
             MyReportClass.Update_SourceData();                              // Load Source Data
             AddOpeningBalances();                                           // Add records for openign Balcnes
 
             #endregion
 
-            string ReportFilter = "";
-            if (chkCOA.Checked) { ReportFilter += string.Concat("COA=", MyReportClass.ID_COA); }
-            if (chkProject.Checked) { ReportFilter += string.Concat(" AND Project=", MyReportClass.ID_Project); }
-            if (chkUnit.Checked) { ReportFilter += string.Concat(" AND Unit=", MyReportClass.ID_Unit); }
+            string ReportFilter = string.Concat("[Project]=",cBoxProjects.SelectedValue.ToString()) ;
+            if (chkCOA.Checked) { ReportFilter += string.Concat(" AND COA=", MyReportClass.ID_COA); }
+            if (chkSuppliers.Checked) { ReportFilter += string.Concat(" AND Supplier=", MyReportClass.ID_Supplier); }
+            if (chkUnits.Checked) { ReportFilter += string.Concat(" AND Unit=", MyReportClass.ID_Unit); }
             MyReportClass.ReportView_Filter = ReportFilter;
-            MyReportClass.ReportView_Sort = "[Supplier],[COA],[Vou_Date],[Project],[Unit]";
+            MyReportClass.ReportView_Sort = "[Project],[Supplier],[COA],[Vou_Date],[Unit]";
             MyReportClass.Update_ReportData();
             MyReportClass.Preview();                                    // Preview Report
         }
-
 
         private void AddOpeningBalances()
         {
             //=================================== CALCULATE OPENING BALANCE
 
             string _OBalCommand = string.Concat(
-                "SELECT [Supplier],[COA],[Project],[Unit],SUM([DR]-[CR]) AS [AMOUNT] FROM [View_Supplier_Ledger] ",
+                "SELECT [Project],[Supplier],[COA],[Unit],SUM([DR]-[CR]) AS [AMOUNT] FROM [View_Project_Ledger] ",
                 "WHERE [Supplier]=", MyReportClass.ID_Supplier.ToString(), " AND [Vou_Date] < '",
-                 Conversion.ToReportDate(MyReportClass.Report_From), "' GROUP BY [Supplier],[COA],[Project],[Unit]");
+                 Conversion.ToReportDate(MyReportClass.Report_From), "' GROUP BY [Project],[Supplier],[COA],[Unit]");
             DataTable _OBalTable = AppliedTable.GetDataTable(_OBalCommand);
 
             if (_OBalTable.Rows.Count > 0)
             {
-                foreach(DataRow _Row in _OBalTable.Rows)
+                foreach (DataRow _Row in _OBalTable.Rows)
                 {
 
                     DataRow _TargetRow = MyReportClass.DataSource.NewRow();
 
                     _TargetRow["Vou_No"] = "Opening";
                     _TargetRow["Vou_Date"] = MyReportClass.Report_From.AddDays(-1);
-                    
 
-                    _TargetRow["COA"] = _Row["COA"];
-                    _TargetRow["COA_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["COA"]), dt_Suppliers);
-
-                    _TargetRow["Supplier"] = _Row["Supplier"];
-                    _TargetRow["Supplier_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Supplier"]),dt_Suppliers);
 
                     _TargetRow["Project"] = _Row["Project"];
                     _TargetRow["Project_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Project"]), dt_Suppliers);
+
+                    _TargetRow["Supplier"] = _Row["Supplier"];
+                    _TargetRow["Supplier_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Supplier"]), dt_Suppliers);
+
+                    _TargetRow["COA"] = _Row["COA"];
+                    _TargetRow["COA_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["COA"]), dt_Suppliers);
 
                     _TargetRow["Unit"] = _Row["Unit"];
                     _TargetRow["Unit_title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Unit"]), dt_Suppliers);
@@ -152,27 +158,20 @@ namespace Applied_Accounts.Forms
 
                 MyReportClass.Report_Data = MyReportClass.DataSource.AsDataView();
             }
-
-            //return MyReportClass.Report_Data.ToTable().AsDataView();
         }
 
-
-        private void frmGL_Supplier_FormClosed(object sender, FormClosedEventArgs e)
+        private void frmGL_Project_FormClosed(object sender, FormClosedEventArgs e)
         {
-            Applied.SetValue("rptGLSup_Supplier", cBoxSuppliers.SelectedValue, Applied.KeyType.Integer);
-            Applied.SetValue("rptGLSup_COA", cBoxCOA.SelectedValue, Applied.KeyType.Integer);
-            Applied.SetValue("rptGLSup_Project", cBoxProjects.SelectedValue, Applied.KeyType.Integer);
-            Applied.SetValue("rptGLSup_Unit", cBoxUnits.SelectedValue, Applied.KeyType.Integer);
-            Applied.SetValue("rptGLSup_From", dt_From.Value, Applied.KeyType.DateTime);
-            Applied.SetValue("rptGLSup_To", dt_To.Value, Applied.KeyType.DateTime);
-            Applied.SetValue("rptGLSup_chkCOA", chkCOA.Checked, Applied.KeyType.Boolean);
-            Applied.SetValue("rptGLSup_chkProject", chkProject.Checked, Applied.KeyType.Boolean);
-            Applied.SetValue("rptGLSup_chkUnit", chkUnit.Checked, Applied.KeyType.Boolean);
+            Applied.SetValue("rptGLPro_Supplier", cBoxSuppliers.SelectedValue, Applied.KeyType.Integer);
+            Applied.SetValue("rptGLPro_COA", cBoxCOA.SelectedValue, Applied.KeyType.Integer);
+            Applied.SetValue("rptGLPro_Project", cBoxProjects.SelectedValue, Applied.KeyType.Integer);
+            Applied.SetValue("rptGLPro_Unit", cBoxUnits.SelectedValue, Applied.KeyType.Integer);
+            Applied.SetValue("rptGLPro_From", dt_From.Value, Applied.KeyType.DateTime);
+            Applied.SetValue("rptGLPro_To", dt_To.Value, Applied.KeyType.DateTime);
+            Applied.SetValue("rptGLPro_chkCOA", chkCOA.Checked, Applied.KeyType.Boolean);
+            Applied.SetValue("rptGLPro_chkUnit", chkUnits.Checked, Applied.KeyType.Boolean);
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-    }
+        //END
+    }           
 }

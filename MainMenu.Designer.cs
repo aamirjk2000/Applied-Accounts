@@ -307,6 +307,7 @@
             this.mnuProjectLedger.Name = "mnuProjectLedger";
             this.mnuProjectLedger.Size = new System.Drawing.Size(200, 22);
             this.mnuProjectLedger.Text = "Project Ledger";
+            this.mnuProjectLedger.Click += new System.EventHandler(this.mnuProjectLedger_Click);
             // 
             // mnuUnitLedger
             // 

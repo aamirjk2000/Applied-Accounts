@@ -4,7 +4,7 @@ using System.Windows.Forms;
 using Applied_Accounts.Classes;
 using Microsoft.Reporting.WinForms;
 
-namespace Applied_Accounts.Reports
+namespace Applied_Accounts.Preview
 {
     public partial class frmPreview_General_Ledger : Form
     {

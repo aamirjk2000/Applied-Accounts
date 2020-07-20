@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Applied\\Applied Accounts\\Applied Accounts.csproj": {}
+    "F:\\Applied\\Applied-Accounts\\Applied Accounts.csproj": {}
   },
   "projects": {
-    "F:\\Applied\\Applied Accounts\\Applied Accounts.csproj": {
+    "F:\\Applied\\Applied-Accounts\\Applied Accounts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Applied\\Applied Accounts\\Applied Accounts.csproj",
+        "projectUniqueName": "F:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
         "projectName": "Applied Accounts",
-        "projectPath": "F:\\Applied\\Applied Accounts\\Applied Accounts.csproj",
+        "projectPath": "F:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
         "packagesPath": "C:\\Users\\administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Applied\\Applied Accounts\\obj\\",
+        "outputPath": "F:\\Applied\\Applied-Accounts\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [

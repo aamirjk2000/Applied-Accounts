@@ -112,6 +112,11 @@
     <Compile Include="Components\SearchID.Designer.cs">
       <DependentUpon>SearchID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Data\ds_Project_Ledger.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Project_Ledger.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Data\ds_Supplier_Ledger.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -162,6 +167,12 @@
     </Compile>
     <Compile Include="Forms\General Ledger.Designer.cs">
       <DependentUpon>General Ledger.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\GL_Project.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\GL_Project.Designer.cs">
+      <DependentUpon>GL_Project.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\GL_Supplier.cs">
       <SubType>Form</SubType>
@@ -218,30 +229,36 @@
     <Compile Include="MainMenu.Designer.cs">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </Compile>
+    <Compile Include="Preview\Preview_GL_Project.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview\Preview_GL_Project.Designer.cs">
+      <DependentUpon>Preview_GL_Project.cs</DependentUpon>
+    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Reports\Preview_General_Ledger.cs">
+    <Compile Include="Preview\Preview_General_Ledger.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\Preview_General_Ledger.Designer.cs">
+    <Compile Include="Preview\Preview_General_Ledger.Designer.cs">
       <DependentUpon>Preview_General_Ledger.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Preview_GL_Supplier.cs">
+    <Compile Include="Preview\Preview_GL_Supplier.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\Preview_GL_Supplier.Designer.cs">
+    <Compile Include="Preview\Preview_GL_Supplier.Designer.cs">
       <DependentUpon>Preview_GL_Supplier.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Preview_Voucher.cs">
+    <Compile Include="Preview\Preview_Voucher.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\Preview_Voucher.Designer.cs">
+    <Compile Include="Preview\Preview_Voucher.Designer.cs">
       <DependentUpon>Preview_Voucher.cs</DependentUpon>
     </Compile>
-    <Compile Include="Reports\Report_Vouchers.cs">
+    <Compile Include="Preview\Report_Vouchers.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Reports\Report_Vouchers.Designer.cs">
+    <Compile Include="Preview\Report_Vouchers.Designer.cs">
       <DependentUpon>Report_Vouchers.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
@@ -278,6 +295,9 @@
     <EmbeddedResource Include="Forms\General Ledger.resx">
       <DependentUpon>General Ledger.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\GL_Project.resx">
+      <DependentUpon>GL_Project.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\GL_Supplier.resx">
       <DependentUpon>GL_Supplier.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,6 +325,9 @@
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Preview\Preview_GL_Project.resx">
+      <DependentUpon>Preview_GL_Project.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -314,21 +337,34 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Reports\Preview_General_Ledger.resx">
+    <EmbeddedResource Include="Preview\Preview_General_Ledger.resx">
       <DependentUpon>Preview_General_Ledger.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Preview_GL_Supplier.resx">
+    <EmbeddedResource Include="Preview\Preview_GL_Supplier.resx">
       <DependentUpon>Preview_GL_Supplier.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Reports\Preview_Voucher.resx">
+    <EmbeddedResource Include="Preview\Preview_Voucher.resx">
       <DependentUpon>Preview_Voucher.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Reports\Preview_Voucher.rdlc" />
+    <EmbeddedResource Include="Preview\Report_Default.rdlc" />
+    <EmbeddedResource Include="Reports\Report_GL_Projects.rdlc" />
     <EmbeddedResource Include="Reports\Report_General_Ledger.rdlc" />
     <EmbeddedResource Include="Reports\Report_GL_Supplier.rdlc" />
-    <EmbeddedResource Include="Reports\Report_Vouchers.resx">
+    <EmbeddedResource Include="Preview\Report_Vouchers.resx">
       <DependentUpon>Report_Vouchers.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Data\ds_Project_Ledger.xsc">
+      <DependentUpon>ds_Project_Ledger.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_Project_Ledger.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Project_Ledger.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\ds_Project_Ledger.xss">
+      <DependentUpon>ds_Project_Ledger.xsd</DependentUpon>
+    </None>
     <None Include="Data\ds_Supplier_Ledger.xsc">
       <DependentUpon>ds_Supplier_Ledger.xsd</DependentUpon>
     </None>

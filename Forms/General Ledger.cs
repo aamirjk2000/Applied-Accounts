@@ -109,6 +109,7 @@ namespace Applied_Accounts.Forms
             MyReportClass.ID_COA = Conversion.ToInteger(cBoxCOA.SelectedValue);
             MyReportClass.Report_From = dt_From.Value;
             MyReportClass.Report_To = dt_To.Value;
+            MyReportClass.PreviewForm = Applied.PreviewReports.General_Ledger;
 
 
             MyReportClass.Report_Data = LoadData();                     // Gather Data for report preview from Database Tables.
@@ -120,18 +121,9 @@ namespace Applied_Accounts.Forms
                 COA_Title = MyReportClass.Report_Data[0]["COA_Title"].ToString();
                 MyReportClass.Heading1 = string.Concat("General Ledger | ", COA_Title, " (", MyReportClass.ID_COA, ")");
                 MyReportClass.Heading2 = string.Concat("Period from ", dt_From.Value.ToString("d"), " to ", dt_To.Value.ToString("d"));
-
                 MyReportClass.DataSet_Name = "ds_General_Ledger";
-
-                //======================================================================= Preview Report
-
-                frmPreview_General_Ledger ThisForm = new frmPreview_General_Ledger();
-                ThisForm.MyReportClass = MyReportClass;
-                ThisForm.ShowDialog();
-            }
-            else
-            {
-                MessageBox.Show("No Record to Preview Report", COA_Title);
+                MyReportClass.Preview();
+              
             }
         }
     }

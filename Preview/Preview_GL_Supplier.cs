@@ -3,7 +3,7 @@ using Microsoft.Reporting.WinForms;
 using System;
 using System.Windows.Forms;
 
-namespace Applied_Accounts.Reports
+namespace Applied_Accounts.Preview
 {
     public partial class frmPreview_GL_Supplier : Form
     {

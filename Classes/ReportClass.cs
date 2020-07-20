@@ -40,13 +40,14 @@ namespace Applied_Accounts.Classes
         public string DataSource_Filter { get; set; }
         public string ReportView_Filter { get; set; }
         public string ReportView_Sort { get; set; }
+        public string Report_Location { get; set; }
 
         //======================================
         public void Preview()
         {
 
             Form _PreviewForm = new Form();
-            _PreviewForm = new Applied_Accounts.Reports.frmPreview_GL_Supplier(this);
+            _PreviewForm = GetReportForm(PreviewForm);
 
 
             if (_PreviewForm == null) { MessageBox.Show("Report Name is not valid.", "ERROR"); return; }          // Return if report object not load poperly.
@@ -96,14 +97,16 @@ namespace Applied_Accounts.Classes
             switch (ReportFormID)
             {
                 case Applied.PreviewReports.General_Ledger:
-                    return new Reports.frmPreview_General_Ledger(this);
+                    return new Preview.frmPreview_General_Ledger(this);
 
                 case Applied.PreviewReports.Supplier_Ledger:
-                    return new Reports.frmPreview_GL_Supplier(this);
+                    return new Preview.frmPreview_GL_Supplier(this);
 
                 case Applied.PreviewReports.General_Voucher:
                     return new Reports.frmReport_Vouchers(this);
 
+                case Applied.PreviewReports.Project_Ledger:
+                    return new Preview.frmPreview_GL_Project(this);
 
 
                 default:
