@@ -1,12 +1,18 @@
-﻿using System;
+﻿using Microsoft.ReportingServices.Interfaces;
+using Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
+//using System.Windows.Forms;
+//using System.Windows.Forms;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+
 
 namespace Applied_Accounts.Classes
 {
@@ -95,37 +101,91 @@ namespace Applied_Accounts.Classes
         #region Date
 
 
-        public static DateTime ToDate(string _Value)
+        public static DateTime ToDate(string _DateTime)
         {
-            CultureInfo _Culture = Applied.MyCulture;
-            if (_Culture == null) { new CultureInfo("en-GB"); }         // Set Culture if not specifiy.
+            DateTime _Result;
 
-
-            if (_Value == "") { return Today(); } // Set Today Date if value is null.
-
-            if (_Value.Length == 10)
+            bool IsDate = DateTime.TryParse(_DateTime, Applied.MyCulture, 0, out _Result); ;
+            
+            if (!IsDate)
             {
-                return DateTime.ParseExact(_Value, "yyyy-mm-dd", null);
+                _Result = DateTime.Now;
+                MessageBox.Show(_DateTime + " can not conver into DateTime");
             }
 
-            else { return Convert.ToDateTime(_Value, _Culture); }
-
+            return _Result;
         }
 
-        public static DateTime ToDate(string _Value, CultureInfo _Culture)
+        public static DateTime ToMyDate(object _DateTime, object _Style)
         {
-            if (_Culture == null) { new CultureInfo("en-GB"); }         // Set Culture if not specifiy.
-
-            if (_Value == "") { return Today(); } // Set Today Date if value is null.
-            else { return Convert.ToDateTime(_Value, _Culture); }
-
+            return ToMyDate(_DateTime.ToString(), _Style);
         }
 
-        public static DateTime Today() { return DateTime.Now; }
+
+
+        public static DateTime ToMyDate(string _DateTime, object _Style)
+        {
+            DateTime _Result = DateTime.Now; ;
+
+            try
+            {
+                switch (_Style)
+                {
+                    case Applied.DateTimeStyle.DataColumn:
+                        _Result = DateTime.ParseExact(_DateTime, "yyyy-MM-dd", Applied.MyCulture);
+                        break;
+
+                    case Applied.DateTimeStyle.DD_MM_YYYY:
+                        _Result = DateTime.ParseExact(_DateTime, "dd-MM-yyyy", Applied.MyCulture);
+                        break;
+
+                    case Applied.DateTimeStyle.MM_DD_YYYY:
+                        _Result = DateTime.ParseExact(_DateTime, "MM-dd-yyyy", Applied.MyCulture);
+                        break;
+
+                    case Applied.DateTimeStyle.YYYY_MMM_DD:
+                        _Result = DateTime.ParseExact(_DateTime, "yyyy-MMM-dd", Applied.MyCulture);
+                        break;
+
+                    case Applied.DateTimeStyle.YYYY_MM_DD:
+                        _Result = DateTime.ParseExact(_DateTime, "yyyy-MM-dd", Applied.MyCulture);
+                        break;
+                }
+
+            }
+
+            
+
+            catch (Exception e)
+            {
+                try
+                {
+                    _Result = DateTime.Parse(_DateTime, Applied.MyCulture);
+                }
+                catch (Exception ee)
+                {
+
+                    Console.Beep(800, 200);
+                    MessageBox.Show(e.Message,_DateTime,MessageBoxButton.OK,MessageBoxImage.Error);
+                }
+
+            }
+            
+
+            
+            return _Result;
+        }
+
+
+
+        public static DateTime Today() 
+        { 
+            return DateTime.Now; 
+        }
 
         public static string ToReportDate(DateTime _DateTime)
         {
-            return _DateTime.ToString("yyyy-MM-dd");
+            return _DateTime.ToString("yyyy-MM-dd") ;
         }
 
 

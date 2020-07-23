@@ -37,3 +37,7 @@ F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
 F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csprojAssemblyReference.cache
+G:\Applied Accounts\Applied Accounts.exe.manifest
+G:\Applied Accounts\Applied Accounts.application
+F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe.manifest
+F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.application

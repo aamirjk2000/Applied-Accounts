@@ -1,17 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Data.Common;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Applied_Accounts.Classes;
-using Applied_Accounts.Data;
 using Microsoft.Reporting.WinForms;
-using Microsoft.ReportingServices.ReportProcessing.ReportObjectModel;
 
 namespace Applied_Accounts.Reports
 {
@@ -66,8 +57,8 @@ namespace Applied_Accounts.Reports
             {
                 MyDataView.RowFilter = string.Concat("Vou_No='", _Textbox.Text.Trim(), "'");
 
-                if(MyDataView.Count>0)
-                { MyReportClass.Report_From = Conversion.ToDate(MyDataView[0].Row["Vou_Date"].ToString()); }
+                if (MyDataView.Count > 0)
+                { MyReportClass.Report_From = Conversion.ToMyDate(MyDataView[0].Row["Vou_Date"], Applied.DateTimeStyle.DataColumn); }
                 
             }
             else

@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using Applied_Accounts.Classes;
 using Applied_Accounts.Reports;
+//using System.Windows;
 
 namespace Applied_Accounts
 {
@@ -16,15 +17,22 @@ namespace Applied_Accounts
 
         private void frmMainMenu_Load(object sender, EventArgs e)
         {
+            
+
+        }
+
+
+        private void frmMainMenu_Activated(object sender, EventArgs e)
+        {
             lbl_DevelopedBy.Text = Program.Developedby;
             lbl_Author.Text = Program.Author;
             lbl_GUID.Text = Program.MySession.ToString();
             lblCompanyName.Text = Applied.GetString("Company");
-
+            lblDBPath.Text = Properties.Settings.Default.DBFile;
+            lblAppPath.Text = Program.ExecutablePath;
+            lblStartPath.Text = Program.StartupPath;
             Text = lblCompanyName.Text.Trim();
-
         }
-
         private void mnuExit_Click(object sender, EventArgs e)
         {
             Close();
@@ -124,6 +132,13 @@ namespace Applied_Accounts
         {
             frmGL_Project ThisForm = new frmGL_Project();
             ThisForm.Show();
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DateTime _DateTime = Conversion.ToMyDate("2019-07-01", Applied.DateTimeStyle.DataColumn);
+
+            MessageBox.Show(_DateTime.ToString());    
         }
     }
 }

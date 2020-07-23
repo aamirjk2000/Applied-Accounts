@@ -18,7 +18,9 @@ namespace Applied_Accounts
         public const string Developedby = "Applied Software House";
         public const string Author = "Muhammad Aamir Jahangir Khan";
         public static object MySession = null;
-        
+        public static string StartupPath = Application.StartupPath;
+        public static string ExecutablePath = Application.ExecutablePath;
+
         [STAThread]
         static void Main()
         {

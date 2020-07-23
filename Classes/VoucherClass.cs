@@ -29,6 +29,7 @@ namespace Applied_Accounts.Classes
         public int CurrentYear { get; set; }
         public string Status { get; set; }
         public long NewID { get; set; }
+        
 
         #endregion
 
@@ -60,10 +61,14 @@ namespace Applied_Accounts.Classes
                         _SourceRow = _Row.ItemArray;                                    // Get Row value in Array
                         VoucherTable.Rows.Add(_SourceRow);                              // Add Row from Array    
                     }
+
                 
+
+
                 CurrentRow = VoucherTable.Rows[0];
                 Vou_No = VoucherTable.Rows[0]["Vou_No"].ToString();
-                Vou_Date = Conversion.ToDate(VoucherTable.Rows[0]["Vou_Date"].ToString());
+                //Vou_Date = Conversion.ToDate(VoucherTable.Rows[0]["Vou_Date"].ToString());
+                Vou_Date = Conversion.ToMyDate(VoucherTable.Rows[0]["Vou_Date"].ToString(),Applied.DateTimeStyle.DataColumn);
                 Vou_Type = Vou_No.Substring(1, 1);
                 Vou_Type = GetVoucherTypeText(Vou_Type);
                 Status = "EDIT";

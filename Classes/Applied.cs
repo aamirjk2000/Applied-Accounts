@@ -4,26 +4,47 @@ using System.Data;
 using System.IO;
 using System.Windows.Forms;
 using System.Data.SQLite;
-using System.Data.SQLite.EF6;
-//using Microsoft.ReportingServices.Diagnostics.Internal;
-//using Microsoft.Extensions.DependencyInjection;
 
 namespace Applied_Accounts.Classes
 {
-        public class Applied
-        {
-        public CultureInfo Culture { get; set; }
-        public DateTime Voucher_MinDate { get; set; } 
-        public DateTime Voucher_MaxDate { get; set; }
-        public static CultureInfo MyCulture { get => new CultureInfo((string)GetValue("Culture", (int)KeyType.String)); }
+    interface IApplied
+    {
+        DateTime MinVouDate();
+        DateTime MaxVouDate();
+        
 
+    }
+
+
+        public class Applied : IApplied
+        {
+        //private CultureInfo Culture { get; set; }
+        private DateTime Voucher_MinDate { get; set; }
+        private DateTime Voucher_MaxDate { get; set; }
+        public static CultureInfo MyCulture { get => new CultureInfo((string)GetValue("Culture", (int)KeyType.String)); }
         public Applied()
         {
+
+            Voucher_MinDate = GetDate("VouDate1");
             Voucher_MinDate = (DateTime)GetValue("VouDate1", (int)KeyType.Date);
             Voucher_MaxDate = (DateTime)GetValue("VouDate2", (int)KeyType.Date);
-            Culture = new CultureInfo((string)GetValue("Culture", (int)KeyType.String));
+            //Culture = new CultureInfo((string)GetValue("Culture", (int)KeyType.String));
             //Culture = 
         }
+
+        #region Interface Codes
+
+        public DateTime MinVouDate()
+        {
+            return Voucher_MinDate;
+        }
+
+        public DateTime MaxVouDate()
+        {
+            return Voucher_MinDate;
+        }
+
+        #endregion
 
 
         #region Get Values;
@@ -94,9 +115,7 @@ namespace Applied_Accounts.Classes
             DataView _DataView = new DataView(_DataTable);
             string _DateString = "";
             string _CultureString = "";
-#pragma warning disable CS0168 // The variable '_Culture' is declared but never used
-            CultureInfo _Culture ;
-#pragma warning restore CS0168 // The variable '_Culture' is declared but never used
+            //CultureInfo _Culture ;
 
             _DataView.RowFilter = string.Concat("Key='", _Key, "'");
 
@@ -112,7 +131,7 @@ namespace Applied_Accounts.Classes
                 _CultureString = _DataView[0].Row["sValue"].ToString();
             }
 
-            return Conversion.ToDate(_DateString, new CultureInfo(_CultureString));
+            return Conversion.ToMyDate(_DateString, Applied.DateTimeStyle.DataColumn);
         }
 
         public static bool GetBoolean(string _Key)
@@ -196,13 +215,13 @@ namespace Applied_Accounts.Classes
                     break;
 
                 case KeyType.Date:
-                    _CommandInsert.Parameters["@sValue"].Value = (DateTime)_Value;
-                    _CommandUpdate.Parameters["@sValue"].Value = (DateTime)_Value;
+                    _CommandInsert.Parameters["@sValue"].Value = Get_DBDate(_Value);
+                    _CommandUpdate.Parameters["@sValue"].Value = Get_DBDate(_Value);
                     break;
 
                 case KeyType.DateTime:
-                    _CommandInsert.Parameters["@sValue"].Value = (DateTime)_Value;
-                    _CommandUpdate.Parameters["@sValue"].Value = (DateTime)_Value;
+                    _CommandInsert.Parameters["@sValue"].Value = Get_DBDate(_Value);
+                    _CommandUpdate.Parameters["@sValue"].Value = Get_DBDate(_Value);
                     break;
 
                 default:
@@ -225,12 +244,27 @@ namespace Applied_Accounts.Classes
 
         }
 
+        private static string Get_DBDate(object _Value)
+        {
+            // Gate Datetime format for SQLite Data Column  YYYY-MM-DD
+
+            if(_Value.GetType()==typeof(System.DateTime))
+            {
+                DateTime _DateTime = (DateTime)_Value;
+                return _DateTime.ToString("yyyy-MM-dd");
+            }
+            else
+            {
+                MessageBox.Show("Is not a Date Type \n" + _Value.ToString());
+                return "";
+            }
+
+        }
+
 
 
 
         #endregion
-
-
 
         #region Enums
 
@@ -254,7 +288,6 @@ namespace Applied_Accounts.Classes
 
         }
 
-
         public enum PreviewReports
         {
             General_Ledger,
@@ -263,10 +296,17 @@ namespace Applied_Accounts.Classes
             General_Voucher
         }
 
+        public enum DateTimeStyle
+        {
+            DataColumn,
+            DD_MM_YYYY,
+            MM_DD_YYYY,
+            YYYY_MM_DD,
+            YYYY_MMM_DD
+        }
+
+
         #endregion
-
-
-
 
 
         public static bool IsFileExist(string _FileName)
@@ -313,4 +353,7 @@ namespace Applied_Accounts.Classes
         }
 
     }       // END Main Class
+
+
+
 }           // END NameSpace

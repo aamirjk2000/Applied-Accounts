@@ -7,6 +7,7 @@ namespace Applied_Accounts
 {
     public partial class frmDBSetting : Form
     {
+
         public frmDBSetting()
         {
             InitializeComponent();
@@ -21,6 +22,8 @@ namespace Applied_Accounts
         {
             openFDB.Filter = "Data Base files (*.db)|*.db|All files (*.*)|*.*";
             openFDB.ShowDialog();
+            openFDB.InitialDirectory = string.Concat(Program.ExecutablePath,"\\Date\\");
+
             txtLocation.Text = openFDB.FileName;
         }
 

@@ -646,6 +646,7 @@
             this.cBoxAccounts.Name = "cBoxAccounts";
             this.cBoxAccounts.Size = new System.Drawing.Size(493, 21);
             this.cBoxAccounts.TabIndex = 5;
+            this.cBoxAccounts.Enter += new System.EventHandler(this.cBoxAccounts_Enter);
             this.cBoxAccounts.Leave += new System.EventHandler(this.cBoxAccounts_Leave);
             // 
             // label5

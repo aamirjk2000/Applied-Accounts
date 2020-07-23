@@ -78,6 +78,10 @@
             this.lbl_Author = new System.Windows.Forms.Label();
             this.lbl_GUID = new System.Windows.Forms.Label();
             this.lblCompanyName = new System.Windows.Forms.Label();
+            this.lblDBPath = new System.Windows.Forms.Label();
+            this.lblAppPath = new System.Windows.Forms.Label();
+            this.lblStartPath = new System.Windows.Forms.Label();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -353,7 +357,8 @@
             this.backupDataToolStripMenuItem,
             this.restoreDataToolStripMenuItem,
             this.toolStripSeparator3,
-            this.vouchersValidationCheckToolStripMenuItem});
+            this.vouchersValidationCheckToolStripMenuItem,
+            this.testToolStripMenuItem});
             this.mnuSettings.Name = "mnuSettings";
             this.mnuSettings.Size = new System.Drawing.Size(61, 23);
             this.mnuSettings.Text = "Settings";
@@ -416,7 +421,7 @@
             // 
             this.lbl_DevelopedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_DevelopedBy.AutoSize = true;
-            this.lbl_DevelopedBy.Location = new System.Drawing.Point(12, 406);
+            this.lbl_DevelopedBy.Location = new System.Drawing.Point(12, 74);
             this.lbl_DevelopedBy.Name = "lbl_DevelopedBy";
             this.lbl_DevelopedBy.Size = new System.Drawing.Size(71, 13);
             this.lbl_DevelopedBy.TabIndex = 1;
@@ -427,7 +432,7 @@
             // 
             this.lbl_Author.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_Author.AutoSize = true;
-            this.lbl_Author.Location = new System.Drawing.Point(12, 428);
+            this.lbl_Author.Location = new System.Drawing.Point(12, 91);
             this.lbl_Author.Name = "lbl_Author";
             this.lbl_Author.Size = new System.Drawing.Size(38, 13);
             this.lbl_Author.TabIndex = 2;
@@ -437,7 +442,7 @@
             // lbl_GUID
             // 
             this.lbl_GUID.AutoSize = true;
-            this.lbl_GUID.Location = new System.Drawing.Point(545, 425);
+            this.lbl_GUID.Location = new System.Drawing.Point(12, 428);
             this.lbl_GUID.Name = "lbl_GUID";
             this.lbl_GUID.Size = new System.Drawing.Size(44, 13);
             this.lbl_GUID.TabIndex = 3;
@@ -448,17 +453,55 @@
             this.lblCompanyName.AutoSize = true;
             this.lblCompanyName.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Underline))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblCompanyName.ForeColor = System.Drawing.Color.MediumBlue;
-            this.lblCompanyName.Location = new System.Drawing.Point(15, 345);
+            this.lblCompanyName.Location = new System.Drawing.Point(12, 46);
             this.lblCompanyName.Name = "lblCompanyName";
             this.lblCompanyName.Size = new System.Drawing.Size(115, 17);
             this.lblCompanyName.TabIndex = 4;
             this.lblCompanyName.Text = "CompanyName";
+            this.lblCompanyName.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // lblDBPath
+            // 
+            this.lblDBPath.AutoSize = true;
+            this.lblDBPath.Location = new System.Drawing.Point(12, 407);
+            this.lblDBPath.Name = "lblDBPath";
+            this.lblDBPath.Size = new System.Drawing.Size(47, 13);
+            this.lblDBPath.TabIndex = 5;
+            this.lblDBPath.Text = "DB Path";
+            // 
+            // lblAppPath
+            // 
+            this.lblAppPath.AutoSize = true;
+            this.lblAppPath.Location = new System.Drawing.Point(12, 385);
+            this.lblAppPath.Name = "lblAppPath";
+            this.lblAppPath.Size = new System.Drawing.Size(59, 13);
+            this.lblAppPath.TabIndex = 6;
+            this.lblAppPath.Text = "Application";
+            // 
+            // lblStartPath
+            // 
+            this.lblStartPath.AutoSize = true;
+            this.lblStartPath.Location = new System.Drawing.Point(12, 364);
+            this.lblStartPath.Name = "lblStartPath";
+            this.lblStartPath.Size = new System.Drawing.Size(29, 13);
+            this.lblStartPath.TabIndex = 7;
+            this.lblStartPath.Text = "Start";
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.testToolStripMenuItem.Text = "Test";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // frmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblStartPath);
+            this.Controls.Add(this.lblAppPath);
+            this.Controls.Add(this.lblDBPath);
             this.Controls.Add(this.lblCompanyName);
             this.Controls.Add(this.lbl_GUID);
             this.Controls.Add(this.lbl_Author);
@@ -469,6 +512,7 @@
             this.Name = "frmMainMenu";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Applied Accounts";
+            this.Activated += new System.EventHandler(this.frmMainMenu_Activated);
             this.Load += new System.EventHandler(this.frmMainMenu_Load);
             this.mnuMain.ResumeLayout(false);
             this.mnuMain.PerformLayout();
@@ -528,6 +572,10 @@
         private System.Windows.Forms.Label lbl_GUID;
         private System.Windows.Forms.Label lblCompanyName;
         private System.Windows.Forms.ToolStripMenuItem mnuVouchers;
+        private System.Windows.Forms.Label lblDBPath;
+        private System.Windows.Forms.Label lblAppPath;
+        private System.Windows.Forms.Label lblStartPath;
+        private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
     }
 }
 
