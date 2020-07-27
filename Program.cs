@@ -1,6 +1,7 @@
 ﻿using Applied_Accounts.Classes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -20,10 +21,22 @@ namespace Applied_Accounts
         public static object MySession = null;
         public static string StartupPath = Application.StartupPath;
         public static string ExecutablePath = Application.ExecutablePath;
+        public static string DateTimeFormat = "";
+        public static DateTime MinDate;
+        public static DateTime MaxDate;
+        public static CultureInfo Culture;
+
+
+
 
         [STAThread]
         static void Main()
         {
+            DateTimeFormat = Applied.GetString("DateFormat");
+            MinDate = Applied.GetDate("MinDate");
+            MaxDate = Applied.GetDate("MaxDate");
+            Culture = new CultureInfo((string)Applied.GetValue("Culture", (int)Applied.KeyType.String));
+
             if (System.IO.File.Exists(Applied_Accounts.Properties.Settings.Default.DBFile))
             {
                 Application.EnableVisualStyles();
@@ -39,7 +52,6 @@ namespace Applied_Accounts
                 {
                     Application.Run(new frmMainMenu());
                 }
-                
             }
             else
             {

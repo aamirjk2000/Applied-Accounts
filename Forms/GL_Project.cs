@@ -20,6 +20,8 @@ namespace Applied_Accounts.Forms
         private ReportClass MyReportClass = new ReportClass();
 
 
+
+
         public frmGL_Project()
         {
             InitializeComponent();

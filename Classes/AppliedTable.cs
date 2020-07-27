@@ -52,7 +52,6 @@ namespace Applied_Accounts
                     }
                 }
 
-
                 return _DataTable;
             }
             else                                            // Error found.

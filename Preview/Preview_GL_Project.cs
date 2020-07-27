@@ -43,6 +43,7 @@ namespace Applied_Accounts.Preview
             ReportParameter rpt_Parameter2 = new ReportParameter("ReportHeading", MyReportClass.Heading1);
             ReportParameter rpt_Parameter3 = new ReportParameter("PeriodHeading", MyReportClass.Heading2);
             ReportParameter rpt_Parameter4 = new ReportParameter("DevelopedBy", Program.Developedby);
+            ReportParameter rpt_Parameter5 = new ReportParameter("DateFormat", Program.DateTimeFormat);
 
             //rpt_View.LocalReport.ReportEmbeddedResource = "Applied_Accounts.Reports.Report_GL_Projects";
             rpt_View.LocalReport.DataSources.Clear();
@@ -50,7 +51,8 @@ namespace Applied_Accounts.Preview
             rpt_View.LocalReport.SetParameters(rpt_Parameter1);         // Insert Company Name into Repoer
             rpt_View.LocalReport.SetParameters(rpt_Parameter2);         // Insert Heading into Report.
             rpt_View.LocalReport.SetParameters(rpt_Parameter3);         // Insert Heading into Report.
-            rpt_View.LocalReport.SetParameters(rpt_Parameter4);         // Insert Heading into Report.
+            rpt_View.LocalReport.SetParameters(rpt_Parameter4);         // Insert Developedby.
+            rpt_View.LocalReport.SetParameters(rpt_Parameter5);         // Insert Date Time Foramt.
             rpt_View.RefreshReport();
         }
 

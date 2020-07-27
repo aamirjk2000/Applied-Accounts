@@ -90,12 +90,12 @@ namespace Applied_Accounts.Forms
 
             #endregion
 
-            string ReportFilter = "";
-            if (chkCOA.Checked) { ReportFilter += string.Concat("COA=", MyReportClass.ID_COA); }
+            string ReportFilter = string.Concat("Supplier=", MyReportClass.ID_Supplier);
+            if (chkCOA.Checked) { ReportFilter += string.Concat(" AND COA=", MyReportClass.ID_COA); }
             if (chkProject.Checked) { ReportFilter += string.Concat(" AND Project=", MyReportClass.ID_Project); }
             if (chkUnit.Checked) { ReportFilter += string.Concat(" AND Unit=", MyReportClass.ID_Unit); }
             MyReportClass.ReportView_Filter = ReportFilter;
-            MyReportClass.ReportView_Sort = "[Supplier],[COA],[Vou_Date],[Project],[Unit]";
+            MyReportClass.ReportView_Sort = "[Supplier],[COA],[Project],[Unit],[Vou_Date]";
             MyReportClass.Update_ReportData();
             MyReportClass.Preview();                                    // Preview Report
         }
@@ -123,16 +123,16 @@ namespace Applied_Accounts.Forms
                     
 
                     _TargetRow["COA"] = _Row["COA"];
-                    _TargetRow["COA_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["COA"]), dt_Suppliers);
+                    _TargetRow["COA_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["COA"]), dt_COA);
 
                     _TargetRow["Supplier"] = _Row["Supplier"];
                     _TargetRow["Supplier_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Supplier"]),dt_Suppliers);
 
                     _TargetRow["Project"] = _Row["Project"];
-                    _TargetRow["Project_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Project"]), dt_Suppliers);
+                    _TargetRow["Project_Title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Project"]), dt_Projects);
 
                     _TargetRow["Unit"] = _Row["Unit"];
-                    _TargetRow["Unit_title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Unit"]), dt_Suppliers);
+                    _TargetRow["Unit_title"] = AppliedTable.GetTitle(Conversion.ToInteger(_Row["Unit"]), dt_Units);
 
                     if ((long)_Row["Amount"] > 0)
                     {
