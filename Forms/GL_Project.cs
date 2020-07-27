@@ -67,6 +67,7 @@ namespace Applied_Accounts.Forms
             cBoxSuppliers.SelectedValue = Applied.GetInteger("rptGLPro_Supplier");
             cBoxCOA.SelectedValue = Applied.GetInteger("rptGLPro_COA");
             cBoxUnits.SelectedValue = Applied.GetInteger("rptGLPro_Unit");
+            cBoxReportFormat.SelectedIndex = Applied.GetInteger("rptGLPro_Format");
 
             dt_From.Value = Applied.GetDate("rptGLPro_From");
             dt_To.Value = Applied.GetDate("rptGLPro_To");
@@ -175,8 +176,12 @@ namespace Applied_Accounts.Forms
             Applied.SetValue("rptGLPro_COA", cBoxCOA.SelectedValue, Applied.KeyType.Integer);
             Applied.SetValue("rptGLPro_Project", cBoxProjects.SelectedValue, Applied.KeyType.Integer);
             Applied.SetValue("rptGLPro_Unit", cBoxUnits.SelectedValue, Applied.KeyType.Integer);
+            Applied.SetValue("rptGLPro_Format", cBoxReportFormat.SelectedIndex, Applied.KeyType.Integer);
+            
             Applied.SetValue("rptGLPro_From", dt_From.Value, Applied.KeyType.DateTime);
             Applied.SetValue("rptGLPro_To", dt_To.Value, Applied.KeyType.DateTime);
+            
+            Applied.SetValue("rptGLPro_chkSupplier", chkSuppliers.Checked, Applied.KeyType.Boolean);
             Applied.SetValue("rptGLPro_chkCOA", chkCOA.Checked, Applied.KeyType.Boolean);
             Applied.SetValue("rptGLPro_chkUnit", chkUnits.Checked, Applied.KeyType.Boolean);
         }

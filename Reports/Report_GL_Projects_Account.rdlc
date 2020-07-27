@@ -331,14 +331,14 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Supplier_Title">
+                        <Textbox Name="COA_TITLE">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Supplier_Title.Value</Value>
+                                  <Value>=Fields!COA_TITLE.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -349,7 +349,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Supplier_Title</rd:DefaultName>
+                          <rd:DefaultName>COA_TITLE</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -645,7 +645,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=RunningValue(Fields!DR.Value-Fields!CR.Value,Sum,"Supplier")</Value>
+                                  <Value>=RunningValue(Fields!DR.Value-Fields!CR.Value,Sum,"Accounts")</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <Format>#,0;(#,0);'-'</Format>
@@ -962,9 +962,9 @@
                   <KeepWithGroup>After</KeepWithGroup>
                 </TablixMember>
                 <TablixMember>
-                  <Group Name="Supplier">
+                  <Group Name="Accounts">
                     <GroupExpressions>
-                      <GroupExpression>=Fields!Supplier.Value</GroupExpression>
+                      <GroupExpression>=Fields!COA.Value</GroupExpression>
                     </GroupExpressions>
                   </Group>
                   <SortExpressions>
@@ -975,14 +975,14 @@
                   <TablixHeader>
                     <Size>0.66667in</Size>
                     <CellContents>
-                      <Textbox Name="Supplier_Code">
+                      <Textbox Name="COA_Code">
                         <CanGrow>true</CanGrow>
                         <KeepTogether>true</KeepTogether>
                         <Paragraphs>
                           <Paragraph>
                             <TextRuns>
                               <TextRun>
-                                <Value>=Fields!Supplier_Code.Value</Value>
+                                <Value>=Fields!COA_Code.Value</Value>
                                 <Style>
                                   <FontSize>8pt</FontSize>
                                   <FontWeight>Bold</FontWeight>
@@ -993,7 +993,7 @@
                             <Style />
                           </Paragraph>
                         </Paragraphs>
-                        <rd:DefaultName>Supplier_Code</rd:DefaultName>
+                        <rd:DefaultName>COA_Code</rd:DefaultName>
                         <Style>
                           <Border>
                             <Color>LightGrey</Color>

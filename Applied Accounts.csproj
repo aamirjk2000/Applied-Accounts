@@ -336,6 +336,8 @@
     <EmbeddedResource Include="Preview\Preview_GL_Project.resx">
       <DependentUpon>Preview_GL_Project.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report_GL_Projects_Unit.rdlc" />
+    <EmbeddedResource Include="Reports\Report_GL_Projects_Account.rdlc" />
     <EmbeddedResource Include="Reports\Report_GL_Projects_Supplier.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

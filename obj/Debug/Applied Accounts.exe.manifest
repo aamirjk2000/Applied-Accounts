@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="531416">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="646104">
       <assemblyIdentity name="Applied Accounts" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>HLBrKot6bxnxeIOg/PAqQTw2aU6VSXINbhJhAm35rbQ=</dsig:DigestValue>
+        <dsig:DigestValue>l1Q31dKMO6Dsnn27b2QsD2/h8ItAyaiugHW2zLQh4+Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
