@@ -114,7 +114,7 @@ namespace Applied_Accounts.Classes
             DataTable _DataTable = AppliedTable.GetDataTable((int)Tables.Applied);
             DataView _DataView = new DataView(_DataTable);
             string _DateString = "";
-            string _CultureString = "";
+            //string _CultureString = "";
             //CultureInfo _Culture ;
 
             _DataView.RowFilter = string.Concat("Key='", _Key, "'");
@@ -124,14 +124,14 @@ namespace Applied_Accounts.Classes
                 _DateString = _DataView[0].Row["sValue"].ToString();
             }
 
-            if (_DateString != null)
-                { _DataView.RowFilter = "Key='Culture'"; }
-            if (_DataView.Count == 1)
-            {
-                _CultureString = _DataView[0].Row["sValue"].ToString();
-            }
+            //if (_DateString != null)
+            //    { _DataView.RowFilter = "Key='Culture'"; }
+            //if (_DataView.Count == 1)
+            //{
+            //    _CultureString = _DataView[0].Row["sValue"].ToString();
+            //}
 
-            return Conversion.ToMyDate(_DateString, Applied.DateTimeStyle.DataColumn);
+            return Conversion.ToMyDate(_DateString, DateTimeStyle.DataColumn);
         }
 
         public static bool GetBoolean(string _Key)
@@ -293,7 +293,8 @@ namespace Applied_Accounts.Classes
             General_Ledger,
             Supplier_Ledger,
             Project_Ledger,
-            General_Voucher
+            General_Voucher,
+            Trial_Balance,
         }
 
         public enum DateTimeStyle

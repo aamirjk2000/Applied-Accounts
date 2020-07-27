@@ -154,15 +154,13 @@ namespace Applied_Accounts.Classes
 
             }
 
-            
-
             catch (Exception e)
             {
                 try
                 {
                     _Result = DateTime.Parse(_DateTime, Applied.MyCulture);
                 }
-                catch (Exception ee)
+                catch (Exception)
                 {
 
                     Console.Beep(800, 200);

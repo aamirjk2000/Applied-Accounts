@@ -134,9 +134,12 @@ namespace Applied_Accounts
 
         public static DataTable GetDataTable(string CommandText)
         {
+            return GetDataTable(CommandText, "Table");
+        }
+        public static DataTable GetDataTable(string CommandText, string _TableName)
+        {
             if (CommandText.Length > 0)               // ID is zero
             {
-                string _TableName = "TEMP_Table";
                 DataTable _DataTable; //= new DataTable();
                 SQLiteCommand _SQLCommand = new SQLiteCommand(CommandText, Connection.AppliedConnection());
                 SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
@@ -248,6 +251,11 @@ namespace Applied_Accounts
             }
             return _DataRow;
         }
+
+       
+        
+
+
     }                             // Main
 
 
@@ -269,8 +277,8 @@ namespace Applied_Accounts
         View_VouNo = 102,
         View_General_Ledger = 103,
         View_Supplier_Ledger = 104,
-        View_Project_Ledger = 105
-           
+        View_Project_Ledger = 105,
+        View_Trial_Balance = 106
 
     };
         

@@ -72,6 +72,7 @@
             this.restoreDataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.vouchersValidationCheckToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripTextBox1 = new System.Windows.Forms.ToolStripTextBox();
             this.lbl_DevelopedBy = new System.Windows.Forms.Label();
@@ -81,7 +82,6 @@
             this.lblDBPath = new System.Windows.Forms.Label();
             this.lblAppPath = new System.Windows.Forms.Label();
             this.lblStartPath = new System.Windows.Forms.Label();
-            this.testToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -329,6 +329,7 @@
             this.mnuTrialBalance.Name = "mnuTrialBalance";
             this.mnuTrialBalance.Size = new System.Drawing.Size(200, 22);
             this.mnuTrialBalance.Text = "Trial Balance";
+            this.mnuTrialBalance.Click += new System.EventHandler(this.mnuTrialBalance_Click);
             // 
             // mnuBalanceSheet
             // 
@@ -403,6 +404,13 @@
             this.vouchersValidationCheckToolStripMenuItem.Name = "vouchersValidationCheckToolStripMenuItem";
             this.vouchersValidationCheckToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.vouchersValidationCheckToolStripMenuItem.Text = "Vouchers Validation Check";
+            // 
+            // testToolStripMenuItem
+            // 
+            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
+            this.testToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
+            this.testToolStripMenuItem.Text = "Test";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // mnuExit
             // 
@@ -486,13 +494,6 @@
             this.lblStartPath.Size = new System.Drawing.Size(29, 13);
             this.lblStartPath.TabIndex = 7;
             this.lblStartPath.Text = "Start";
-            // 
-            // testToolStripMenuItem
-            // 
-            this.testToolStripMenuItem.Name = "testToolStripMenuItem";
-            this.testToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
-            this.testToolStripMenuItem.Text = "Test";
-            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // frmMainMenu
             // 

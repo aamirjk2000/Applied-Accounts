@@ -90,8 +90,6 @@ namespace Applied_Accounts.Classes
         {
             CompanyName = Applied.GetString("Company");
         }
-
-
         private Form GetReportForm(object ReportFormID)
         {
             switch (ReportFormID)
@@ -108,6 +106,8 @@ namespace Applied_Accounts.Classes
                 case Applied.PreviewReports.Project_Ledger:
                     return new Preview.frmPreview_GL_Project(this);
 
+                case Applied.PreviewReports.Trial_Balance:
+                    return new Preview.frmPreview_Trial_Balance(this);
 
                 default:
                     break;

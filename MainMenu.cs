@@ -140,5 +140,12 @@ namespace Applied_Accounts
 
             MessageBox.Show(_DateTime.ToString());    
         }
+
+        private void mnuTrialBalance_Click(object sender, EventArgs e)
+        {
+
+            frmTrial_Balance ThisForm = new frmTrial_Balance();
+            ThisForm.Show();
+        }
     }
 }
