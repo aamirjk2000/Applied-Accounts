@@ -168,6 +168,7 @@
             this.cBoxReportFormat.Name = "cBoxReportFormat";
             this.cBoxReportFormat.Size = new System.Drawing.Size(421, 21);
             this.cBoxReportFormat.TabIndex = 12;
+            this.cBoxReportFormat.SelectedIndexChanged += new System.EventHandler(this.cBoxReportFormat_SelectedIndexChanged);
             // 
             // dt_From
             // 

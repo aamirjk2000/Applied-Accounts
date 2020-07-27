@@ -166,7 +166,6 @@ F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmGL_Supplier.re
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmMigration.resources
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmProject.resources
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmSetting.resources
-F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmSupplier_Ledger.resources
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmSuppliers.resources
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmVouchers.resources
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.frmLogin.resources

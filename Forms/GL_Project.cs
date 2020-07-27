@@ -19,7 +19,10 @@ namespace Applied_Accounts.Forms
         private DataTable dt_Units;
         private ReportClass MyReportClass = new ReportClass();
 
-
+        private string ReportLocation;
+        private string ReportLocation_Supplier;
+        private string ReportLocation_Account;
+        private string ReportLocation_Unit;
 
 
         public frmGL_Project()
@@ -49,8 +52,12 @@ namespace Applied_Accounts.Forms
 
             cBoxReportFormat.SelectedIndex = 0;
 
-            MyReportClass.Report_Location = "Applied_Accounts.Reports.Report_GL_projects.rdlc";
+            ReportLocation = "Applied_Accounts.Reports.Report_GL_Projects.rdlc";
+            ReportLocation_Supplier = "Applied_Accounts.Reports.Report_GL_Projects_Supplier.rdlc";
+            ReportLocation_Account = "Applied_Accounts.Reports.Report_GL_Projects_Account.rdlc"; ;
+            ReportLocation_Unit = "Applied_Accounts.Reports.Report_GL_Projects_Unit.rdlc"; ;
 
+            MyReportClass.Report_Location = ReportLocation;                 // Default reprot Location
 
         }
 
@@ -172,6 +179,35 @@ namespace Applied_Accounts.Forms
             Applied.SetValue("rptGLPro_To", dt_To.Value, Applied.KeyType.DateTime);
             Applied.SetValue("rptGLPro_chkCOA", chkCOA.Checked, Applied.KeyType.Boolean);
             Applied.SetValue("rptGLPro_chkUnit", chkUnits.Checked, Applied.KeyType.Boolean);
+        }
+
+        private void cBoxReportFormat_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int ReportID = cBoxReportFormat.SelectedIndex;
+
+
+            switch (ReportID)
+            {
+                case 0:
+                    MyReportClass.Report_Location = ReportLocation;
+                    break;
+
+                case 1:
+                    MyReportClass.Report_Location = ReportLocation_Supplier;
+                    break;
+
+                case 2:
+                    MyReportClass.Report_Location = ReportLocation_Account;
+                    break;
+
+                case 3:
+                    MyReportClass.Report_Location = ReportLocation_Unit;
+                    break;
+
+                default:
+                    MyReportClass.Report_Location = ReportLocation;
+                    break;
+            }
         }
 
         //END
