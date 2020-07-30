@@ -151,8 +151,8 @@ namespace Applied_Accounts
             thisDataRow["SCode"] = txtSCode.Text;
             thisDataRow["Title"] = txtTitle.Text;
             thisDataRow["Notes"] = txtNote.Text;
-            thisDataRow["IsBankBook"] = Conversion.ToDecimal(chkBank.Checked);
-            thisDataRow["IsCashBook"] = Conversion.ToDecimal(chkCash.Checked);
+            thisDataRow["IsBankBook"] = Conversion.ToBoolean(chkBank.Checked);
+            thisDataRow["IsCashBook"] = Conversion.ToBoolean(chkCash.Checked);
             thisDataRow["OBal"] = Conversion.ToInteger(txtOBal.Text);
 
         }

@@ -42,3 +42,5 @@ F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
 F:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csprojAssemblyReference.cache
+F:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Preview.frmPreview_Reports.resources
+F:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmUsers.resources

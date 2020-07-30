@@ -68,7 +68,7 @@ namespace Applied_Accounts
             {
                 DataTable _DataTable; //= new DataTable();
                 string _TableName = Conversion.GetTableName(_TableID);
-                string _Text = "Select * from " + _TableName;
+                string _Text = "SELECT * FROM " + _TableName;
                 SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
                 SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
                 DataSet _DataSet = new DataSet();
@@ -131,10 +131,9 @@ namespace Applied_Accounts
                 return new DataTable();
             }
         }
-
         public static DataTable GetDataTable(string CommandText)
         {
-            return GetDataTable(CommandText, "Table");
+            return GetDataTable(CommandText, "MyTable");
         }
         public static DataTable GetDataTable(string CommandText, string _TableName)
         {
@@ -155,6 +154,25 @@ namespace Applied_Accounts
                 return new DataTable();
             }
         }
+        public static DataTable GetDataTable(SQLiteCommand _SQLCommand)
+        {
+
+            DataTable _DataTable = new DataTable();
+
+            if (_SQLCommand == null) { return _DataTable; }     // Return empty Table when command is null;
+            if(_SQLCommand.CommandText.Length>0)                // Get Data in Table when Command Text is present
+            {
+                SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
+                DataSet _DataSet = new DataSet();
+                _Adapter.Fill(_DataSet, "MyTable");
+                _DataTable = _DataSet.Tables["MyTable"];
+            }
+
+
+            return _DataTable;
+
+        }
+
 
         #endregion
 
@@ -252,9 +270,82 @@ namespace Applied_Accounts
             return _DataRow;
         }
 
-       
-        
+        public static DataTable GetTable_TB_period(DateTime _From, DateTime _To)
+        {
+            DataTable _DataTable = GetDataTable(Tables.View_TB_Period);
+            DataView _DataView = _DataTable.AsDataView();
+            DataTable _Ledger = GetDataTable(Tables.Ledger);
+            DataTable _COA = GetDataTable(Tables.COA);
+            DataRow _AddRow; 
+            //decimal _DR, _CR, _Balance;
+            int _Index;
 
+            if (_Ledger.Rows.Count == 0) { return new DataTable(); }   // return empty if ledger is empty.
+
+            _DataTable.Clear();
+            
+            foreach(DataRow _Row in _Ledger.Rows)
+            {
+                _DataView.RowFilter = string.Concat("[COA]=", (long)_Row["COA"]);
+                if(_DataView.Count==0)
+                {
+                    _AddRow = _DataTable.NewRow();
+                    _AddRow["COA"] = _Row["COA"];
+                    _AddRow["Code"] = "";
+                    _AddRow["Title"] = GetTitle(Conversion.ToInteger(_Row["COA"]),_COA);
+
+                    if ((DateTime)_Row["Vou_Date"] < _From)
+                    {
+                        _AddRow["OBAL"] = (decimal)_Row["DR"] - (decimal)_Row["CR"];
+                        _AddRow["Debit"] = 0;
+                        _AddRow["Credit"] = 0;
+                    }
+                    if ((DateTime)_Row["Vou_Date"] >= _From && (DateTime)_Row["Vou_Date"]<= _To)
+                    {
+                        _AddRow["OBAL"] = 0;
+                        _AddRow["Debit"] = (decimal)_Row["DR"];
+                        _AddRow["Credit"] = (decimal)_Row["CR"];
+                    }
+
+                    _AddRow["BALANCE"] = Conversion.ToMoney(_AddRow["OBAL"])
+                                        + Conversion.ToMoney(_AddRow["Debit"]) 
+                                        - Conversion.ToMoney(_AddRow["Credit"]);
+
+                    _DataTable.Rows.Add(_AddRow);
+                    continue;
+                }
+
+                if(_DataView.Count>0)
+                {
+                    _Index = _DataTable.Rows.IndexOf(_DataView[0].Row);
+                    //_DR = Conversion.ToMoney(_DataView[0].Row["Debit"]);
+                    //_CR = Conversion.ToMoney(_DataView[0].Row["Credit"]);
+                    //_Balance =  Conversion.ToMoney(_DataView[0].Row["Balance"]);
+
+                    _AddRow = _DataTable.NewRow();
+
+                    if ((DateTime)_Row["Vou_Date"] < _From)
+                    {
+                        _DataTable.Rows[_Index]["OBAL"] =+ (Conversion.ToMoney(_Row["DR"])
+                                                         -  Conversion.ToMoney(_Row["CR"]));
+                    }
+                    if ((DateTime)_Row["Vou_Date"] >= _From && 
+                        (DateTime)_Row["Vou_Date"] <= _To)
+                    {
+
+
+                        _DataTable.Rows[_Index]["Debit"] =+Conversion.ToMoney(_Row["DR"]);
+                        _DataTable.Rows[_Index]["Credit"] =+Conversion.ToMoney(_Row["CR"]);
+                    }
+                        _DataTable.Rows[_Index]["Balance"]
+                                        = Conversion.ToMoney(_DataTable.Rows[_Index]["OBAL"])
+                                        + Conversion.ToMoney(_DataTable.Rows[_Index]["DEBIT"])
+                                        - Conversion.ToMoney(_DataTable.Rows[_Index]["CREDIT"]);
+                }
+
+            }
+            return _DataTable;
+        }
 
     }                             // Main
 
@@ -278,8 +369,8 @@ namespace Applied_Accounts
         View_General_Ledger = 103,
         View_Supplier_Ledger = 104,
         View_Project_Ledger = 105,
-        View_Trial_Balance = 106
-
+        View_Trial_Balance = 106,
+        View_TB_Period = 107
     };
         
 }                               // Namespace

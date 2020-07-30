@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Accounting.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Applied Accounts" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Applied Accounts" version="2020.7.29.1" language="neutral" processorArchitecture="msil" />
     <commandLine file="Applied Accounts.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="702936">
-      <assemblyIdentity name="Applied Accounts" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="777176">
+      <assemblyIdentity name="Applied Accounts" version="2020.7.29.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oytG3gfW7scGrE+IJ+Spdiw/FGUmKsRq94Kio/Vqle4=</dsig:DigestValue>
+        <dsig:DigestValue>cY+GS89wkmrMyZ+TDkAB4teWslxZcyqDx1NOrOjzQlo=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -705,13 +705,13 @@
       <dsig:DigestValue>3M9b6EnqHU0pStPLxwDNwnYW2gp85p/0iRsWZYJEh+U=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Icons\Accounting.png" size="5763">
+  <file name="Icons\Accounting.png" size="51470">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>wZjXWbcVYPu759gGGm7ES94ddwS8YwGgB7SO8WYm3c0=</dsig:DigestValue>
+      <dsig:DigestValue>UlnW5BMkLGOv6IAnEi7teDYS/5qeSLmpxRMT9r9m+5Q=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Icons\AppliedLogo.jpg" size="70319">

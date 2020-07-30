@@ -147,5 +147,14 @@ namespace Applied_Accounts
             frmTrial_Balance ThisForm = new frmTrial_Balance();
             ThisForm.Show();
         }
+
+        private void mnuPWChange_Click(object sender, EventArgs e)
+        {
+            frmUsers ThisForm = new frmUsers(Program.User);
+            ThisForm.Show();
+
+
+
+        }
     }
 }

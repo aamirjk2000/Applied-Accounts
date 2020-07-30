@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="ds_Trial_Balance_Period" targetNamespace="http://tempuri.org/ds_Trial_Balance_Period.xsd" xmlns:mstns="http://tempuri.org/ds_Trial_Balance_Period.xsd" xmlns="http://tempuri.org/ds_Trial_Balance_Period.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.Applied_Accounts.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.Odbc" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="View_TB_PeriodTableAdapter" GeneratorDataComponentClassName="View_TB_PeriodTableAdapter" Name="View_TB_Period" UserDataComponentName="View_TB_PeriodTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="View_TB_Period" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT "COA", "Code", "Title", "OBAL", "DEBIT", "CREDIT", "BALANCE" FROM "View_TB_Period"</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="COA" DataSetColumn="COA" />
+              <Mapping SourceColumn="Code" DataSetColumn="Code" />
+              <Mapping SourceColumn="Title" DataSetColumn="Title" />
+              <Mapping SourceColumn="OBAL" DataSetColumn="OBAL" />
+              <Mapping SourceColumn="DEBIT" DataSetColumn="DEBIT" />
+              <Mapping SourceColumn="CREDIT" DataSetColumn="CREDIT" />
+              <Mapping SourceColumn="BALANCE" DataSetColumn="BALANCE" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="ds_Trial_Balance_Period" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ds_Trial_Balance_Period" msprop:Generator_UserDSName="ds_Trial_Balance_Period">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="View_TB_Period" msprop:Generator_TableClassName="View_TB_PeriodDataTable" msprop:Generator_TableVarName="tableView_TB_Period" msprop:Generator_TablePropName="View_TB_Period" msprop:Generator_RowDeletingName="View_TB_PeriodRowDeleting" msprop:Generator_RowChangingName="View_TB_PeriodRowChanging" msprop:Generator_RowEvHandlerName="View_TB_PeriodRowChangeEventHandler" msprop:Generator_RowDeletedName="View_TB_PeriodRowDeleted" msprop:Generator_UserTableName="View_TB_Period" msprop:Generator_RowChangedName="View_TB_PeriodRowChanged" msprop:Generator_RowEvArgName="View_TB_PeriodRowChangeEvent" msprop:Generator_RowClassName="View_TB_PeriodRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="COA" msprop:Generator_ColumnVarNameInTable="columnCOA" msprop:Generator_ColumnPropNameInRow="COA" msprop:Generator_ColumnPropNameInTable="COAColumn" msprop:Generator_UserColumnName="COA" type="xs:int" />
+              <xs:element name="Code" msprop:Generator_ColumnVarNameInTable="columnCode" msprop:Generator_ColumnPropNameInRow="Code" msprop:Generator_ColumnPropNameInTable="CodeColumn" msprop:Generator_UserColumnName="Code">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="65536" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Title" msprop:Generator_ColumnVarNameInTable="columnTitle" msprop:Generator_ColumnPropNameInRow="Title" msprop:Generator_ColumnPropNameInTable="TitleColumn" msprop:Generator_UserColumnName="Title">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="65536" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="OBAL" msprop:Generator_ColumnVarNameInTable="columnOBAL" msprop:Generator_ColumnPropNameInRow="OBAL" msprop:Generator_ColumnPropNameInTable="OBALColumn" msprop:Generator_UserColumnName="OBAL" type="xs:long" minOccurs="0" />
+              <xs:element name="DEBIT" msprop:Generator_ColumnVarNameInTable="columnDEBIT" msprop:Generator_ColumnPropNameInRow="DEBIT" msprop:Generator_ColumnPropNameInTable="DEBITColumn" msprop:Generator_UserColumnName="DEBIT" type="xs:long" minOccurs="0" />
+              <xs:element name="CREDIT" msprop:Generator_ColumnVarNameInTable="columnCREDIT" msprop:Generator_ColumnPropNameInRow="CREDIT" msprop:Generator_ColumnPropNameInTable="CREDITColumn" msprop:Generator_UserColumnName="CREDIT" type="xs:long" minOccurs="0" />
+              <xs:element name="BALANCE" msprop:Generator_ColumnVarNameInTable="columnBALANCE" msprop:Generator_ColumnPropNameInRow="BALANCE" msprop:Generator_ColumnPropNameInTable="BALANCEColumn" msprop:Generator_UserColumnName="BALANCE" type="xs:long" minOccurs="0" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

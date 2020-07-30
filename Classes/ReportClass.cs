@@ -43,6 +43,12 @@ namespace Applied_Accounts.Classes
         public string Report_Location { get; set; }
 
         //======================================
+        public ReportClass()
+        {
+            CompanyName = Applied.GetString("Company");
+        }
+        //=====================================
+
         public void Preview()
         {
 
@@ -79,21 +85,27 @@ namespace Applied_Accounts.Classes
             else
             { DataSource = AppliedTable.GetDataTable(DataTableID, DataSource_Filter); }
         }
-
         public void Update_ReportData()
         {
-            Report_Data = DataSource.AsDataView();
-            Report_Data.RowFilter = ReportView_Filter;
-            Report_Data.Sort = ReportView_Sort;
+            if(DataSource!=null)
+            {
+                if(DataSource.Rows.Count>0)
+                {
+                    Report_Data = DataSource.AsDataView();
+                    Report_Data.RowFilter = ReportView_Filter;
+                    Report_Data.Sort = ReportView_Sort;
+                }
+            }
+            
         }
-        public ReportClass()
-        {
-            CompanyName = Applied.GetString("Company");
-        }
+      
         private Form GetReportForm(object ReportFormID)
         {
             switch (ReportFormID)
             {
+                case Applied.PreviewReports.Preview_Report:
+                    return new Preview.frmPreview_Reports(this);
+
                 case Applied.PreviewReports.General_Ledger:
                     return new Preview.frmPreview_General_Ledger(this);
 
@@ -107,7 +119,8 @@ namespace Applied_Accounts.Classes
                     return new Preview.frmPreview_GL_Project(this);
 
                 case Applied.PreviewReports.Trial_Balance:
-                    return new Preview.frmPreview_Trial_Balance(this);
+                    return new Preview.frmPreview_Reports(this);
+                    //return new Preview.frmPreview_Trial_Balance(this);
 
                 default:
                     break;

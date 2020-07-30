@@ -69,8 +69,8 @@ namespace Applied_Accounts.Forms
                 _Row["Vou_No"] = 0;
                 _Row["Vou_Date"] = MyReportClass.Report_From.AddDays(-1);
                 _Row["Description"] = "Opening Balacne ";
-                _Row["COA"] = _DataTable.Rows[0]["COA"];
-                _Row["COA_Title"] = _DataTable.Rows[0]["COA_Title"];
+                _Row["COA"] = cBoxCOA.SelectedValue;   //_DataTable.Rows[0]["COA"];
+                _Row["COA_Title"] = cBoxCOA.Text;      //_DataTable.Rows[0]["COA_Title"];
 
                 if ((long)_OBalTable.Rows[0]["Amount"] > 0)
                 {

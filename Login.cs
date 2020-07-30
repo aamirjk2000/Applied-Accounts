@@ -47,6 +47,7 @@ namespace Applied_Accounts
             if(Sucessful)
             {
                 Program.MySession = Guid.NewGuid();
+                Program.User = txtCode.Text.Trim();
                 Close();
             }
             else

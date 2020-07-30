@@ -16,10 +16,6 @@ namespace Applied_Accounts
 
     public class ThisTable  : IThisTable    // Main Class | Class start from here.
     {
-
-
-
-
         #region Variables
 
 

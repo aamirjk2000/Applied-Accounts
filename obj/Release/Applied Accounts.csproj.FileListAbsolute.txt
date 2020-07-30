@@ -188,3 +188,5 @@ G:\Applied Accounts\Applied Accounts.exe.manifest
 G:\Applied Accounts\Applied Accounts.application
 F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe.manifest
 F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.application
+F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmTrial_Balance.resources
+F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Preview.frmPreview_Trial_Balance.resources

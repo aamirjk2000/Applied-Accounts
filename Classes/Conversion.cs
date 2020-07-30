@@ -32,6 +32,7 @@ namespace Applied_Accounts.Classes
             if (_Value == string.Empty) { return 0; }
             else { return Convert.ToInt64(_Value); }
         }
+       
 
         #endregion
 
@@ -52,11 +53,13 @@ namespace Applied_Accounts.Classes
             return Convert.ToDecimal(_Value);
         }
 
-        //public static decimal ToMoney(object _Value)
-        //{
-        //    return Convert.ToDecimal(_Value);
-        //}
-
+        public static decimal ToMoney(object _Value)
+        {
+            decimal _Result;
+            if(_Value == DBNull.Value) { _Result = 0; }
+            else { _Result = Convert.ToDecimal(_Value); }
+            return _Result;
+        }
 
         public static decimal ToMoney(TextBox _TextBox)
         {
@@ -169,8 +172,6 @@ namespace Applied_Accounts.Classes
 
             }
             
-
-            
             return _Result;
         }
 
@@ -186,6 +187,10 @@ namespace Applied_Accounts.Classes
             return _DateTime.ToString("yyyy-MM-dd") ;
         }
 
+        public static string ToPrintDate(DateTime _DateTime)
+        {
+            return _DateTime.ToString(Program.DateTimeFormat);
+        }
 
 
         #endregion
@@ -227,7 +232,7 @@ namespace Applied_Accounts.Classes
             }
         }
 
-        public static decimal ToDecimal(bool _Bool)                   // convert Boolean to Number (Digit)
+        public static decimal ToBoolean(bool _Bool)                   // convert Boolean to Number (Digit)
         {
             if (_Bool) { return 1; } else { return 0; }
         }

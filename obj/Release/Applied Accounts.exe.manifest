@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="508376">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="681944">
       <assemblyIdentity name="Applied Accounts" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>LW/yWzHnvGVbdW1hk05TkjNTzVpL1ll79NTElvfThq4=</dsig:DigestValue>
+        <dsig:DigestValue>JDjAgFQ6yDDB7QepiOxM3PdC83CsTRmX41aF5/3R/t0=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -705,13 +705,13 @@
       <dsig:DigestValue>3M9b6EnqHU0pStPLxwDNwnYW2gp85p/0iRsWZYJEh+U=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Icons\Accounting.png" size="5763">
+  <file name="Icons\Accounting.png" size="51470">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>wZjXWbcVYPu759gGGm7ES94ddwS8YwGgB7SO8WYm3c0=</dsig:DigestValue>
+      <dsig:DigestValue>UlnW5BMkLGOv6IAnEi7teDYS/5qeSLmpxRMT9r9m+5Q=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Icons\AppliedLogo.jpg" size="70319">

@@ -149,6 +149,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_Trial_Balance.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Data\ds_Trial_Balance_Period.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Trial_Balance_Period.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Data\ds_Voucher.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -232,6 +237,12 @@
     <Compile Include="Forms\Trial Balance.Designer.cs">
       <DependentUpon>Trial Balance.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Users.Designer.cs">
+      <DependentUpon>Users.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Vouchers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -256,6 +267,12 @@
     </Compile>
     <Compile Include="Preview\Preview_GL_Project.Designer.cs">
       <DependentUpon>Preview_GL_Project.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Preview\Preview_Reports.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Preview\Preview_Reports.Designer.cs">
+      <DependentUpon>Preview_Reports.cs</DependentUpon>
     </Compile>
     <Compile Include="Preview\Preview_Trial_Balance.cs">
       <SubType>Form</SubType>
@@ -344,6 +361,9 @@
     <EmbeddedResource Include="Forms\Trial Balance.resx">
       <DependentUpon>Trial Balance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Users.resx">
+      <DependentUpon>Users.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Vouchers.resx">
       <DependentUpon>Vouchers.cs</DependentUpon>
     </EmbeddedResource>
@@ -356,9 +376,13 @@
     <EmbeddedResource Include="Preview\Preview_GL_Project.resx">
       <DependentUpon>Preview_GL_Project.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Preview\Preview_Reports.resx">
+      <DependentUpon>Preview_Reports.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Preview\Preview_Trial_Balance.resx">
       <DependentUpon>Preview_Trial_Balance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report_Trial_Balance_Period.rdlc" />
     <EmbeddedResource Include="Reports\Report_Trial_Balance.rdlc" />
     <EmbeddedResource Include="Reports\Report_GL_Projects_Unit.rdlc" />
     <EmbeddedResource Include="Reports\Report_GL_Projects_Account.rdlc" />
@@ -433,6 +457,17 @@
     </None>
     <None Include="Data\ds_Trial_Balance.xss">
       <DependentUpon>ds_Trial_Balance.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_Trial_Balance_Period.xsc">
+      <DependentUpon>ds_Trial_Balance_Period.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_Trial_Balance_Period.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Trial_Balance_Period.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\ds_Trial_Balance_Period.xss">
+      <DependentUpon>ds_Trial_Balance_Period.xsd</DependentUpon>
     </None>
     <None Include="Data\ds_Voucher.xsc">
       <DependentUpon>ds_Voucher.xsd</DependentUpon>

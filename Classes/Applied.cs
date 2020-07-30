@@ -290,11 +290,13 @@ namespace Applied_Accounts.Classes
 
         public enum PreviewReports
         {
+            Preview_Report,
             General_Ledger,
             Supplier_Ledger,
             Project_Ledger,
             General_Voucher,
             Trial_Balance,
+            Trial_Balance_Period,
         }
 
         public enum DateTimeStyle
@@ -353,8 +355,6 @@ namespace Applied_Accounts.Classes
             return ShowBrowseWin(new DataView(_DataTable), _CurrentValue);
         }
 
+
     }       // END Main Class
-
-
-
 }           // END NameSpace
