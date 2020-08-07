@@ -51,13 +51,13 @@ namespace Applied_Accounts.Forms
 
             string _OBalCommand = string.Concat(
                 "SELECT SUM([DR]-[CR]) AS [AMOUNT] FROM [View_General_Ledger] ",
-                "WHERE [COA]=", MyReportClass.ID_COA.ToString(), " AND [Vou_Date] < '",
+                "WHERE [COA]=", MyReportClass.ID_COA.ToString(), " AND DATE([Vou_Date]) < '",
                  Conversion.ToReportDate(MyReportClass.Report_From), "' GROUP BY [COA]");
             DataTable _OBalTable = AppliedTable.GetDataTable(_OBalCommand);
 
             //========================= LOAD PREVIEW DATE
 
-            MyReportClass.DataSource_Filter = string.Concat("COA=", MyReportClass.ID_COA.ToString(), " AND [Vou_Date] BETWEEN '",
+            MyReportClass.DataSource_Filter = string.Concat("COA=", MyReportClass.ID_COA.ToString(), " AND DATE([Vou_Date]) BETWEEN '",
                                                                   Conversion.ToReportDate(MyReportClass.Report_From), "' AND '",
                                                                   Conversion.ToReportDate(MyReportClass.Report_To)) + "'";
 
@@ -67,7 +67,7 @@ namespace Applied_Accounts.Forms
             {
                 DataRow _Row = _DataTable.NewRow();
                 _Row["Vou_No"] = 0;
-                _Row["Vou_Date"] = MyReportClass.Report_From.AddDays(-1);
+                _Row["Vou_Date"] = MyReportClass.Report_From.AddDays(-1).ToString(Program.DateTimeFormat);
                 _Row["Description"] = "Opening Balacne ";
                 _Row["COA"] = cBoxCOA.SelectedValue;   //_DataTable.Rows[0]["COA"];
                 _Row["COA_Title"] = cBoxCOA.Text;      //_DataTable.Rows[0]["COA_Title"];
@@ -109,7 +109,7 @@ namespace Applied_Accounts.Forms
             MyReportClass.ID_COA = Conversion.ToInteger(cBoxCOA.SelectedValue);
             MyReportClass.Report_From = dt_From.Value;
             MyReportClass.Report_To = dt_To.Value;
-            MyReportClass.PreviewForm = Applied.PreviewReports.General_Ledger;
+            MyReportClass.PreviewForm = Applied.PreviewReports.Preview_Report;
 
 
             MyReportClass.Report_Data = LoadData();                     // Gather Data for report preview from Database Tables.
@@ -122,6 +122,8 @@ namespace Applied_Accounts.Forms
                 MyReportClass.Heading1 = string.Concat("General Ledger | ", COA_Title, " (", MyReportClass.ID_COA, ")");
                 MyReportClass.Heading2 = string.Concat("Period from ", dt_From.Value.ToString("d"), " to ", dt_To.Value.ToString("d"));
                 MyReportClass.DataSet_Name = "ds_General_Ledger";
+                MyReportClass.Report_Location = "Applied_Accounts.Reports.Report_General_Ledger.rdlc";
+                MyReportClass.ReportView_Sort = "[Vou_Date],[Vou_No],[SRNO]";
                 MyReportClass.Preview();
               
             }

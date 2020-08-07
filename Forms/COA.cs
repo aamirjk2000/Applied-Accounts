@@ -36,6 +36,7 @@ namespace Applied_Accounts
             Table_COA = AppliedTable.GetDataTable((int)Tables.COA);
             View_COA = new DataView(Table_COA);
             MyNavigator.TableClass = new ThisTable(Table_COA);              // Set Table for Navigator 
+            MyNavigator.MyTableID = (int)Tables.COA;
         }
 
         #endregion
@@ -82,43 +83,11 @@ namespace Applied_Accounts
                 MyNavigator_Get_Values(null, null);
             }
         }
-
-        
-
-
-
-        private void DataRow_Validate()
-        {
-            // Validate the Datarow before save in Databas.Data Table
-
-            Has_Error = false;
-            string[] _Messages = new string[10];
-            _Messages[0] = "Error | Record Id is not define properly.";
-            _Messages[1] = "Error | Account note is not degine properly.";
-            _Messages[2] = "Error | Chart of Account Code is not define properly.";
-            _Messages[3] = "Error | Chart of Account Tag is not define properly.";
-            _Messages[4] = "Error | Chart of Account's Title is not define properly.";
-            
-            _Messages[5] = "Error | ";
-            _Messages[6] = "Error | ";
-
-            lblMessage.ForeColor = System.Drawing.Color.Red;
-
-            if (Convert.ToInt32(thisDataRow["ID"]) == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[0]; }
-            if (Convert.ToInt32(thisDataRow["Notes"]) == 0) { Has_Error = true; txtNote.Focus(); lblMessage.Text = _Messages[1]; }
-            if (thisDataRow["Code"].ToString().Length == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[2]; }
-            if (thisDataRow["SCode"].ToString().Length == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[3]; }
-            if (thisDataRow["Title"].ToString().Length == 0) { Has_Error = true; txtTitle.Focus(); lblMessage.Text = _Messages[4]; }
-
-        }
-
         private void Defaults()
         {
-
             if (txtID.Text.Length == 0) { txtID.Text = "0"; }
             if (txtNote.Text.Length == 0) { txtNote.Text = "0"; }
             if (txtOBal.Text.Length == 0) { txtOBal.Text = "0"; }
-            
         }
 
 
@@ -191,6 +160,36 @@ namespace Applied_Accounts
         {
             Table_Load();
         }
+
+        #endregion
+
+        #region Buttons
+
+        private void DataRow_Validate()
+        {
+            // Validate the Datarow before save in Databas.Data Table
+
+            Has_Error = false;
+            string[] _Messages = new string[10];
+            _Messages[0] = "Error | Record Id is not define properly.";
+            _Messages[1] = "Error | Account note is not degine properly.";
+            _Messages[2] = "Error | Chart of Account Code is not define properly.";
+            _Messages[3] = "Error | Chart of Account Tag is not define properly.";
+            _Messages[4] = "Error | Chart of Account's Title is not define properly.";
+
+            _Messages[5] = "Error | ";
+            _Messages[6] = "Error | ";
+
+            lblMessage.ForeColor = System.Drawing.Color.Red;
+
+            if (Convert.ToInt32(thisDataRow["ID"]) == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[0]; }
+            if (Convert.ToInt32(thisDataRow["Notes"]) == 0) { Has_Error = true; txtNote.Focus(); lblMessage.Text = _Messages[1]; }
+            if (thisDataRow["Code"].ToString().Length == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[2]; }
+            if (thisDataRow["SCode"].ToString().Length == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[3]; }
+            if (thisDataRow["Title"].ToString().Length == 0) { Has_Error = true; txtTitle.Focus(); lblMessage.Text = _Messages[4]; }
+
+        }
+
         private void MyCode_Get_Row(object sender, EventArgs e)
         {
             txtCode.MyRow = thisDataRow;
@@ -202,10 +201,7 @@ namespace Applied_Accounts
             e.Cancel = thisValidation.TextValidation();
             lblMessage.Text = thisValidation.Message;
         }
-        private void DataGrid_COA_Load(object sender, EventArgs e)
-        {
-            DataGrid_COA.Load_Data(MyNavigator.TableClass.MyDataTable);
-        }
+        
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
@@ -224,6 +220,23 @@ namespace Applied_Accounts
             }
         }
 
+
+        #endregion
+
+        #region DataGrid
+
+        private void DataGrid_COA_Load(object sender, EventArgs e)
+        {
+            DataGrid_COA.Load_Data(MyNavigator.TableClass.MyDataTable);
+        }
+
+        private void DataGrid_COA_Leave(object sender, EventArgs e)
+        {
+            MyNavigator.TableClass.MyDataRow = DataGrid_COA.MyDataRow;
+            MyNavigator_Get_Values(sender, e);
+        }
+
+       
         #endregion
 
         //=======================================

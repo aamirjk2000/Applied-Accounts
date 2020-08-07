@@ -172,8 +172,11 @@ namespace Applied_Accounts
 
                 if(TableClass.Count>1) { Buttons_Display(3); }
                 else { Buttons_Display(4); }
-                Get_Values.Invoke(sender, e);
-                TableClass.Refresh(MyTableID);
+                Get_Values.Invoke(sender, e);           // Invoke Get Value Prcedure
+                TableClass.Refresh(MyTableID);          // Update Datatable from DB after save row
+
+                TableClass.Row_Index = tableClass.MyDataTable.Rows.IndexOf(TableClass.MyDataRow);
+
             }
             else
             {

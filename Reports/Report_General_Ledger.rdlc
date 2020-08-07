@@ -410,7 +410,7 @@
                                   <Value>=Fields!Vou_Date.Value</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>dd-MMM-yyyy</Format>
+                                    <Format>=Parameters!DateFormat.Value</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -432,6 +432,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -652,14 +653,6 @@
               </TablixMembers>
             </TablixRowHierarchy>
             <DataSetName>ds_General_Ledger</DataSetName>
-            <SortExpressions>
-              <SortExpression>
-                <Value>=Fields!Vou_Date.Value</Value>
-              </SortExpression>
-              <SortExpression>
-                <Value>=Fields!Vou_No.Value</Value>
-              </SortExpression>
-            </SortExpressions>
             <Top>0.06944in</Top>
             <Left>0.00001in</Left>
             <Height>0.57639in</Height>
@@ -796,7 +789,7 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value EvaluationMode="Constant">Applied Software House</Value>
+                      <Value>=Parameters!DevelopedBy.Value</Value>
                       <Style>
                         <FontSize>7pt</FontSize>
                       </Style>
@@ -893,6 +886,16 @@
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
+    <ReportParameter Name="DateFormat">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DevelopedBy">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
   </ReportParameters>
   <ReportParametersLayout>
     <GridLayoutDefinition>
@@ -913,6 +916,16 @@
           <ColumnIndex>2</ColumnIndex>
           <RowIndex>0</RowIndex>
           <ParameterName>PeriodHeading</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DateFormat</ParameterName>
+        </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>0</ColumnIndex>
+          <RowIndex>1</RowIndex>
+          <ParameterName>DevelopedBy</ParameterName>
         </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>

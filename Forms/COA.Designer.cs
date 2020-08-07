@@ -172,7 +172,6 @@
             this.MyNavigator.Get_Values += new System.EventHandler(this.MyNavigator_Get_Values);
             this.MyNavigator.Set_Values += new System.EventHandler(this.MyNavigator_Set_Values);
             this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            //this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
             this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
             this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
             // 
@@ -268,11 +267,13 @@
             this.DataGrid_COA.Location = new System.Drawing.Point(6, 6);
             this.DataGrid_COA.MyDataRow = null;
             this.DataGrid_COA.MyDataView = null;
+            this.DataGrid_COA.MyViewRow = null;
             this.DataGrid_COA.Name = "DataGrid_COA";
             this.DataGrid_COA.RecordID = ((long)(0));
             this.DataGrid_COA.Size = new System.Drawing.Size(694, 391);
             this.DataGrid_COA.TabIndex = 1;
             this.DataGrid_COA.Load += new System.EventHandler(this.DataGrid_COA_Load);
+            this.DataGrid_COA.Leave += new System.EventHandler(this.DataGrid_COA_Leave);
             // 
             // btnExit
             // 
