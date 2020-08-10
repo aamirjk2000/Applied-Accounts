@@ -4,23 +4,25 @@ using System.ComponentModel;
 using System.Data;
 using System.Windows.Forms;
 
-
-
 namespace Applied_Accounts
 {
     public partial class frmCOA : Form
     {
-        DataTable Table_COA;
-        DataView View_COA;
+        
         
         Boolean Has_Error { get; set; }
         private DataRow thisDataRow { get => MyNavigator.TableClass.MyDataRow; }
         private DataView thisDataView { get => MyNavigator.TableClass.MyDataView; }
+        private ThisTable thisTableClas { get => MyNavigator.TableClass; }
+        private DataTable Table_COA { get => MyNavigator.TableClass.MyDataTable; }
+        private DataView View_COA { get => MyNavigator.TableClass.MyDataView; }
 
-        
+
         public frmCOA()
         {
             InitializeComponent();
+            MyNavigator.TableClass = new ThisTable(Tables.COA);
+            MyNavigator.InitializeClass(Table_COA);
         }
 
 
@@ -33,8 +35,8 @@ namespace Applied_Accounts
 
         private void Table_Load()
         {
-            Table_COA = AppliedTable.GetDataTable((int)Tables.COA);
-            View_COA = new DataView(Table_COA);
+            //Table_COA = AppliedTable.GetDataTable((int)Tables.COA);
+            //View_COA = new DataView(Table_COA);
             MyNavigator.TableClass = new ThisTable(Table_COA);              // Set Table for Navigator 
             MyNavigator.MyTableID = (int)Tables.COA;
         }
@@ -106,10 +108,10 @@ namespace Applied_Accounts
 
             TitleNotes.Text = AppliedTable.GetTitle(txtNote.Text, (int)Tables.Notes);
 
-            decimal IsBank = (decimal)thisDataRow["IsBankBook"];
-            decimal IsCash = (decimal)thisDataRow["IsCashBook"];
-            chkBank.Checked = Conversion.ToBoolean(IsBank.ToString());
-            chkCash.Checked = Conversion.ToBoolean(IsCash.ToString());
+            //decimal IsBank = (decimal)thisDataRow["IsBankBook"];
+            //decimal IsCash = (decimal)thisDataRow["IsCashBook"];
+            chkBank.Checked = Conversion.ToBoolean(thisDataRow["IsBankBook"].ToString());
+            chkCash.Checked = Conversion.ToBoolean(thisDataRow["IsCashBook"].ToString());
 
         }
         private void MyNavigator_Set_Values(object sender, EventArgs e)

@@ -723,8 +723,8 @@ namespace Applied_Accounts.Forms
             MyRow["RefNo"] = txtRefNo.Text;
             MyRow["Chq_No"] = txtChqNo.Text;
             MyRow["Chq_Date"] = dtChqDate.Value.ToString();
-            MyRow["DR"] = Convert.ToDecimal(txtDebit.Text);
-            MyRow["CR"] = Convert.ToDecimal(txtCredit.Text);
+            MyRow["DR"] = Conversion.ToMoney(txtDebit.Text);
+            MyRow["CR"] = Conversion.ToMoney(txtCredit.Text);
             MyRow["Description"] = txtDescription.Text.Trim();
             MyRow["Remarks"] = txtRemarks.Text.Trim();
 

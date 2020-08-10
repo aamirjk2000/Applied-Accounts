@@ -140,15 +140,18 @@ namespace Applied_Accounts
             }
         }
 
-        private void _DataGrid_RowLeave(object sender, DataGridViewCellEventArgs e)
+
+        #region Object Load and Leave
+
+        private void AppliedDataGrid_Leave(object sender, EventArgs e)
         {
-            if(((DataView)_DataGrid.DataSource).Table.Rows.Count==0)                // If Table does not have any record (Empty Table)
+            if (((DataView)_DataGrid.DataSource).Table.Rows.Count == 0)                // If Table does not have any record (Empty Table)
             {
                 MyViewRow = null;
                 MyDataRow = ((DataView)_DataGrid.DataSource).Table.NewRow();
             }
 
-            if (_DataGrid.CurrentRow!=null)                                   // Grid View has not selected any row.
+            if (_DataGrid.CurrentRow != null)                                   // Grid View has not selected any row.
             {
                 MyViewRow = _DataGrid.CurrentRow;
                 MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
@@ -159,6 +162,20 @@ namespace Applied_Accounts
                 MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
             }
 
+            MyDataView.RowFilter = string.Empty;
+            txtCode.Text = string.Empty;
+            txtTag.Text = string.Empty;
+            txtTitle.Text = string.Empty;
+
+        }
+
+        #endregion
+
+        private void AppliedDataGrid_Enter(object sender, EventArgs e)
+        {
+            int _TableID = (int)Enum.Parse(typeof(Tables), MyDataView.Table.TableName);
+            MyDataView = AppliedTable.GetDataTable(_TableID).AsDataView();
+            _DataGrid.DataSource = MyDataView;
         }
     }           // Main 
 }               // Namespace

@@ -17,30 +17,6 @@ namespace Applied_Accounts.Classes
         }
 
 
-        //public MigrationClass(string _FileName)
-        //{
-        //    if(_FileName.Length == 0 | _FileName.Length == null)
-        //    {
-        //        OpenFileBox();
-        //    }
-        //    else
-        //    { 
-        //        ExcelFileName = _FileName;
-        //        ExcelfileExist = Applied.IsFileExist(ExcelFileName);
-        //    }
-
-        //    if (ExcelfileExist)
-        //    {
-        //        GetExcelFileData();
-        //    }
-        //    else
-        //    {
-        //        OpenFileBox();
-        //        //MessageBox.Show("Excel File Name is not valid", "ERROR", MessageBoxButton.OK, MessageBoxImage.Question);
-        //    }
-        //}
-
-
         public void OpenFileBox()
         {
             OpenFileDialog FileDialog = new OpenFileDialog();
@@ -57,13 +33,6 @@ namespace Applied_Accounts.Classes
             {
                 GetExcelFileData();
             }
-            //else
-            //{
-            //    OpenFileBox();
-            //    //MessageBox.Show("Excel File Name is not valid", "ERROR", MessageBoxButton.OK, MessageBoxImage.Question);
-            //}
-
-
 
         }
 

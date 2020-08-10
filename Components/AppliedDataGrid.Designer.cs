@@ -51,7 +51,7 @@
             this._DataGrid.Size = new System.Drawing.Size(484, 296);
             this._DataGrid.TabIndex = 0;
             this._DataGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this._DataGrid_RowEnter);
-            this._DataGrid.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this._DataGrid_RowLeave);
+
             // 
             // lblMessage
             // 
@@ -108,6 +108,8 @@
             this.Controls.Add(this._DataGrid);
             this.Name = "AppliedDataGrid";
             this.Size = new System.Drawing.Size(490, 331);
+            this.Enter += new System.EventHandler(this.AppliedDataGrid_Enter);
+            this.Leave += new System.EventHandler(this.AppliedDataGrid_Leave);
             ((System.ComponentModel.ISupportInitialize)(this._DataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

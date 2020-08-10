@@ -552,5 +552,8 @@
       <Version>1.0.113.1</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="TEST\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

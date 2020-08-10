@@ -1,48 +1,33 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using Applied_Accounts.Classes;
 
 namespace Applied_Accounts
 {
     public partial class frmAccNotes : Form
     {
-        DataTable Table_Notes;
-#pragma warning disable CS0169 // The field 'frmAccNotes.View_Notes' is never used
-        DataView View_Notes;
-#pragma warning restore CS0169 // The field 'frmAccNotes.View_Notes' is never used
         Boolean Has_Error { get; set; }
-        private DataRow thisDataRow { get => MyNavigator.TableClass.MyDataRow; set { MyNavigator.TableClass.MyDataRow = value; } }
+        private DataRow thisDataRow { get => MyNavigator.TableClass.MyDataRow; }
         private DataView thisDataView { get => MyNavigator.TableClass.MyDataView; }
+        private ThisTable thisTableClas { get => MyNavigator.TableClass; }
+        private DataTable Table_Notes { get => MyNavigator.TableClass.MyDataTable; }
+        private DataView View_Notes { get => MyNavigator.TableClass.MyDataView; }
+
 
         public frmAccNotes()
         {
             InitializeComponent();
-
+            MyNavigator.TableClass = new ThisTable(Tables.Notes);
+            MyNavigator.InitializeClass(Table_Notes);
         }
-        //private void frmAccNotes_Load(object sender, EventArgs e)
-        //{
-        //    MyRefresh();
-        //}
-        //private void MyRefresh()
-        //{
-        //    Table_Load();
-
-        //    if (MyNavigator.TableClass != null)
-        //    {
-                
-        //    }
-        //}
+       
         private void Table_Load()
         {
-            Table_Notes = AppliedTable.GetDataTable((int)Tables.Notes);
-            MyNavigator.InitializeClass(Table_Notes);
-            DataGrid_Notes.Load_Data(MyNavigator.TableClass.MyDataTable);
+            //Table_Notes = AppliedTable.GetDataTable((int)Tables.Notes);
+            //MyNavigator.InitializeClass(Table_Notes);
+            //DataGrid_Notes.Load_Data(MyNavigator.TableClass.MyDataTable);
 
         }
         private void Defaults()
@@ -79,12 +64,15 @@ namespace Applied_Accounts
        
         private void Navigator_After_Delete(object sender, EventArgs e)
         {
-            Table_Load();
+            MyNavigator.TableClass.Update(MyNavigator.MyTableID);
+            //Table_Load();
         }
 
         private void Navigator_After_Save(object sender, EventArgs e)
         {
-            Table_Load();
+
+            MyNavigator.TableClass.Update(MyNavigator.MyTableID);
+            //Table_Load();
             ////Navigator_Get_Values(sender, e);
             //MyNavigator.InitializeClass((int)Tables.Notes);
             //DataGrid_Notes.Load_Data(MyNavigator.TableClass.MyDataTable);
@@ -113,7 +101,9 @@ namespace Applied_Accounts
 
         private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            thisDataRow = AppliedTable.SearchID((TextBox)sender, thisDataView.Table);
+            
+
+            //thisDataRow = AppliedTable.SearchID((TextBox)sender, thisDataView.Table);
             Navigator_Get_Values(sender, e);
         }
 
@@ -122,8 +112,6 @@ namespace Applied_Accounts
             Classes.Validation thisValidation = new Classes.Validation((TextBox)sender, (int)Tables.COA_Type);
             TitleType.Text = thisValidation.TextTitle;
             e.Cancel = thisValidation.TextValidation();
-            //lblMessage.Text = thisValidation.Message;
-
         }
 
         private void DataGrid_Notes_Load(object sender, EventArgs e)
@@ -142,23 +130,19 @@ namespace Applied_Accounts
 
             _AppliedGrid.Load_Data(MyNavigator.TableClass.MyDataTable);
             _AppliedGrid.Set_Columns();
-
-
         }
 
         private void DataGrid_Notes_Leave(object sender, EventArgs e)
         {
-            DataGrid_Notes.Load_Data(MyNavigator.TableClass.MyDataTable);
-
-            thisDataRow = DataGrid_Notes.MyDataRow;
-            Navigator_Set_Vakues(null,null);
+            MyNavigator.TableClass.MyDataRow = DataGrid_Notes.MyDataRow;
+            Navigator_Get_Values(sender, e);
         }
 
         private void MyNavigator_Load(object sender, EventArgs e)
         {
-            MyNavigator.TableClass = new ThisTable((int)Tables.Notes);   // Set Data Environment
-            MyNavigator.InitializeClass((int)Tables.Notes);              // Set Navigator Class 
-            Navigator_Get_Values(null, null);                            // Show Nagigator's Row to Text Box.
+            //MyNavigator.TableClass = new ThisTable((int)Tables.Notes);   // Set Data Environment
+            //MyNavigator.InitializeClass((int)Tables.Notes);              // Set Navigator Class 
+            //Navigator_Get_Values(null, null);                            // Show Nagigator's Row to Text Box.
         }
     }
 }

@@ -11,18 +11,20 @@ namespace Applied_Accounts
         void Previous();
         void Top();
         void Bottom();
+        DataRow GetNewRow();
+        void Update(int _TableID);
     }
 
 
-    public class ThisTable  : IThisTable    // Main Class | Class start from here.
+    public class ThisTable : IThisTable    // Main Class | Class start from here.
     {
         #region Variables
 
 
         public DataTable MyDataTable = new DataTable();
         public DataView MyDataView = new DataView();
-        public int MyTableID = 0;
-        public string MyPrimaryKeyName = "";
+        public int MyTableID  { get; set; }
+        public string MyPrimaryKeyName { get; set; }
         public long MyPrimaryKeyValue = 0;
         public bool IsSaved;
         public bool IsDeleted;
@@ -40,18 +42,37 @@ namespace Applied_Accounts
 
         #endregion
 
-
         #region Initialize
+
+
+        public ThisTable(object _DataTableID)
+        {
+            Update((int)_DataTableID);
+
+            if (MyDataTable != null)
+            {
+                //MessageBox.Show("Table name is not assigned", "ERROR");
+                initialize(MyDataTable);
+            }
+        }
 
         public ThisTable(int _DataTableID)
         {
-            MyTableID = _DataTableID;
-            DataTable _DataTable = AppliedTable.GetDataTable(MyTableID);
-            initialize(_DataTable);
+            Update(_DataTableID);
+
+            if (MyDataTable != null)
+            {
+                //MessageBox.Show("Table name is not assigned", "ERROR");
+                initialize(MyDataTable);
+            }
         }
         public ThisTable(DataTable _DataTable)
         {
-            initialize(_DataTable);
+            if(_DataTable!=null)
+            {
+                //MessageBox.Show("Table name is not assigned", "ERROR");
+                initialize(_DataTable);
+            }
         }
         
            // initialize the class.
@@ -64,20 +85,21 @@ namespace Applied_Accounts
 
                 
                 Active = true;
+                MyTableID = (int)Enum.Parse(typeof(Tables), _DataTable.TableName);
                 MyDataTable = _DataTable;
 
-                MyDataView.Table = _DataTable;
+                MyDataView = MyDataTable.AsDataView();      // Assign Table into Table view
                 OriginalRow = _DataTable.NewRow();          // Row with Original Data of the current row   
                 MyDataRow = OriginalRow;                    // Row is allowed to edit 
 
                 MyPrimaryKeyName = "ID";
 
-                if (_DataTable.Rows.Count > 0)
+                if (_DataTable.Rows.Count > 0)              // Initialize the first record PK value
                         { MyPrimaryKeyValue = (long)_DataTable.Rows[0][MyPrimaryKeyName]; }
                 else    { MyPrimaryKeyValue = -1; }
 
 
-                MoveTop();
+                MoveTop();                                  // Table row point at first record.
 
             }
             else
@@ -99,22 +121,25 @@ namespace Applied_Accounts
         {
             if (_ID == -1)                                    // Get New Row if Table is empty.
             {
-                if (Count == 0) {return MyDataTable.NewRow();}
-                else {return MyDataView.ToTable().Rows[0];}
+                return GetNewRow();
+
+                //if (Count == 0) {return GetNewRow(); }      // retuern new row if table is empty
+                //else {return MyDataView.ToTable().Rows[0];}         // return row
             }
             else
             { 
-                MyDataView.RowFilter = String.Concat("ID=", _ID.ToString());        // Get DataRow after filter condition appled.
-                if (MyDataView.Count == 1) { return MyDataView.ToTable().Rows[0];}
-                else { return MyDataTable.NewRow();}                                // Get New Row if Filter count zero rows.
+                if(MyPrimaryKeyName.Length==0) { MyPrimaryKeyName = "ID"; }                        // Assign ID Column as PK if not exist.
+                MyDataView.RowFilter = string.Concat(MyPrimaryKeyName,"=", _ID.ToString());        // Get DataRow after filter condition appled.
+                if (MyDataView.Count == 1) { return MyDataView.ToTable().Rows[0];}                 // Get a row from Table is exist.
+                else { return GetNewRow(); }                                               // Get New Row if Filter count zero rows.
             }
         }
         public DataRow GetRow(string _Filter)                   // Get Row after filter applied (string condition).
         {
             MyDataView.RowFilter = _Filter;
 
-            if (MyDataView.Count == 1) { return MyDataView.ToTable().Rows[0]; }
-            else { return MyDataTable.NewRow(); }
+            if (MyDataView.Count == 1) { return MyDataView.ToTable().Rows[0]; }                     // Get row if exist
+            else { return MyDataTable.NewRow(); }                                                   // GEt new row if not exist.
         }
 
         #endregion
@@ -124,22 +149,20 @@ namespace Applied_Accounts
 
         public long GetMaxID()                                  // Get Table Primery Kay Maximum Value for add new record.
         {
+
+            long _Result = 0;
+
             if(MyDataTable.Rows.Count==0)
             {
-                return 0;
+                _Result = 0;
             }
 
             if (MyDataTable.Rows.Count > 0)
             {
-                long _MaxID;
-                _MaxID = (long)MyDataTable.Compute("MAX(ID)", string.Empty);
-                return _MaxID;
+                _Result = (long)MyDataTable.Compute("MAX(ID)", string.Empty);
             }
-            else
-            {
-                return 1;
-            }
-            
+
+            return _Result;
         }
         public string Save()                                    // Save the record with Current Data Row
         {
@@ -163,10 +186,12 @@ namespace Applied_Accounts
                 if(Ask==DialogResult.No) { return "Cancelled.";}
             }
 
-            string _Message = "";                                           // Return value of this procedure.
-            bool _IsError = true;                                           // If error found = true otherwsie false.
+            string _Message;                                                // Return value of this procedure.
+            bool _IsError;                                                  // If error found = true otherwsie false.
             IsSaved = false;                                                // If Data Row saved then true else false. Default is false.
             MyPrimaryKeyValue = (long)_DataRow[MyPrimaryKeyName];           // Set Primary Key Value
+
+            _IsError = false;
 
             if(MyPrimaryKeyValue<=0)                                        // return if Table PK not exist.
             {
@@ -227,6 +252,11 @@ namespace Applied_Accounts
                 }
             }
 
+            if(IsSaved)
+            {
+                Update(MyTableID);               // update Data Table After Save row in DB
+            }
+
             
             MyMessage = _Message;                       // Save the message to Class Message 
             return MyMessage;
@@ -236,7 +266,7 @@ namespace Applied_Accounts
             string _Message = "Deleted.";
             IsDeleted = false;                   // if Data Row deleted when true else false. Default is false.
 
-            if (Seek(ID))
+            if (Seek(ID))                       // Seek a record in Datatable, if found is true otherwise false.
             {
                 DialogResult Ask = MessageBox.Show("Are you Sure to DELETE current record.", "DELETE RECORD", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (Ask == DialogResult.Yes)
@@ -258,7 +288,6 @@ namespace Applied_Accounts
                     {
                         IsDeleted = false;
                         _Message = ex.Message;
-                        //throw;
                     }
                 }
                 else
@@ -279,7 +308,7 @@ namespace Applied_Accounts
 
         public bool Seek(int _ID)
         {
-            MyDataView.RowFilter = "ID=" + _ID;
+            MyDataView.RowFilter = string.Concat(MyPrimaryKeyName,"=", _ID.ToString());
             if (MyDataView.Count == 1) 
                 { return true;} 
             else 
@@ -315,17 +344,15 @@ namespace Applied_Accounts
 
         public void MoveNext()
         {
-            Row_Index = Row_Index + 1;
-            if (Row_Index > (Count-1)) 
-            { Row_Index = (Count-1); }
+            Row_Index = MyDataTable.Rows.IndexOf(MyDataRow) + 1;
+            if (Row_Index > (Count-1)) { Row_Index = (Count-1); }       // if index is more than total record. get last record
             MyDataRow = MyDataTable.Rows[Row_Index];
         }
 
         public void MovePrevious()
         {
-            Row_Index = Row_Index - 1;
-            if (Row_Index < 0)
-            { Row_Index = 0; }
+            Row_Index = MyDataTable.Rows.IndexOf(MyDataRow) - 1;
+            if (Row_Index < 0) { Row_Index = 0; }                       // if index less than zero get first record.
             MyDataRow = MyDataTable.Rows[Row_Index];
         }
 
@@ -352,17 +379,16 @@ namespace Applied_Accounts
                 Row_Index = 0 ;
                 MyDataRow = GetNewRow();
             }
-
         }
 
         #endregion
 
-        public void Refresh(int _TableID)
+        public void Update(int _TableID)                                           // Update MyTable from DB
         {
-            Row_Index = MyDataTable.Rows.IndexOf(MyDataRow);            // Set current Row
-            MyDataTable = AppliedTable.GetDataTable(_TableID);           // Refill Data Table from Data Server.
-            initialize(MyDataTable);                                    // Refresh Table Class Properties
-            MyDataRow = MyDataTable.Rows[Row_Index];                    // Get current Row
+            MyDataTable = AppliedTable.GetDataTable(_TableID);         // Refill Data Table from Data Server.
+            MyDataView = MyDataTable.AsDataView();
+            Row_Index = MyDataTable.Rows.IndexOf(MyDataRow);                        // Set current Row
+            MyDataRow = GetRow(Row_Index);   //MyDataTable.Rows[Row_Index];                                // Get current Row
         }
         // Data Conversion
        

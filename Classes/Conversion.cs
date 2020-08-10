@@ -1,17 +1,6 @@
-﻿using Microsoft.ReportingServices.Interfaces;
-using Microsoft.ReportingServices.RdlExpressions.ExpressionHostObjectModel;
-using System;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-//using System.Windows.Forms;
-//using System.Windows.Forms;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
 
 
 namespace Applied_Accounts.Classes
@@ -40,6 +29,7 @@ namespace Applied_Accounts.Classes
 
         public static decimal ToMoney(string _Value)
         {
+            if (_Value.Length == 0) { return 0; }
             return Convert.ToDecimal(_Value);
         }
 
@@ -64,6 +54,7 @@ namespace Applied_Accounts.Classes
         public static decimal ToMoney(TextBox _TextBox)
         {
             string _Value = _TextBox.Text.Trim();
+            if (_Value.Length==0) { return 0; }
             return Convert.ToDecimal(_Value);
         }
 

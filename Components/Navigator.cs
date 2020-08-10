@@ -95,34 +95,41 @@ namespace Applied_Accounts
         }
         private void btnPrior_Click(object sender, EventArgs e)
         {
-            if (TableClass.MyDataTable.Rows.Count > 0)
-            {
-                TableClass.Row_Index -= 1;
-                if (TableClass.Row_Index < 0) { TableClass.Row_Index = 0; }
-                TableClass.MyDataRow = TableClass.MyDataTable.Rows[TableClass.Row_Index];
-                TableClass.OriginalRow = TableClass.MyDataRow;
-            }
-            else
-            { 
-                TableClass.MyDataRow = TableClass.GetNewRow();
-                TableClass.OriginalRow = TableClass.MyDataRow;
-            }
+            //if (TableClass.MyDataTable.Rows.Count > 0)
+            //{
+            //    TableClass.Row_Index -= 1;
+            //    if (TableClass.Row_Index < 0) { TableClass.Row_Index = 0; }
+            //    TableClass.MyDataRow = TableClass.MyDataTable.Rows[TableClass.Row_Index];
+            //    TableClass.OriginalRow = TableClass.MyDataRow;
+            //}
+            //else
+            //{ 
+            //    TableClass.MyDataRow = TableClass.GetNewRow();
+            //    TableClass.OriginalRow = TableClass.MyDataRow;
+            //}
+
+            TableClass.Previous();
             Get_Values.Invoke(sender, e);
         }
         private void btnNext_Click(object sender, EventArgs e)
         {
-            if ((TableClass.MyDataTable.Rows.Count -1) >= 0)
-            {
-                TableClass.Row_Index += 1; 
-                if(TableClass.Row_Index > TableClass.Count-1) { TableClass.Row_Index = TableClass.Count-1; }
-                TableClass.MyDataRow = TableClass.MyDataTable.Rows[TableClass.Row_Index];
-                TableClass.OriginalRow = TableClass.MyDataRow;
-            }
-            else
-            { 
-                TableClass.MyDataRow = TableClass.GetNewRow();
-                TableClass.OriginalRow = TableClass.MyDataRow;
-            }
+            TableClass.MoveNext();
+
+            //if ((TableClass.MyDataTable.Rows.Count -1) >= 0)
+            //{
+                
+
+            //    //TableClass.Row_Index += 1; 
+            //    //if(TableClass.Row_Index > TableClass.Count-1) { TableClass.Row_Index = TableClass.Count-1; }
+            //    //TableClass.MyDataRow = TableClass.MyDataTable.Rows[TableClass.Row_Index];
+            //    //TableClass.OriginalRow = TableClass.MyDataRow;
+            //}
+            //else
+            //{ 
+            //    TableClass.MyDataRow = TableClass.GetNewRow();
+            //    TableClass.OriginalRow = TableClass.MyDataRow;
+            //}
+
             Get_Values.Invoke(sender, e);
 
         }
@@ -173,7 +180,7 @@ namespace Applied_Accounts
                 if(TableClass.Count>1) { Buttons_Display(3); }
                 else { Buttons_Display(4); }
                 Get_Values.Invoke(sender, e);           // Invoke Get Value Prcedure
-                TableClass.Refresh(MyTableID);          // Update Datatable from DB after save row
+                TableClass.Update(MyTableID);          // Update Datatable from DB after save row
 
                 TableClass.Row_Index = tableClass.MyDataTable.Rows.IndexOf(TableClass.MyDataRow);
 

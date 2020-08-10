@@ -407,10 +407,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Vou_Date.Value</Value>
+                                  <Value>=CDATE(Fields!Vou_Date.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>=Parameters!DateFormat.Value</Format>
+                                    <Format>dd MMM yyyy</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -845,6 +845,36 @@
                   <Style>None</Style>
                 </Border>
                 <VerticalAlign>Middle</VerticalAlign>
+                <PaddingLeft>2pt</PaddingLeft>
+                <PaddingRight>2pt</PaddingRight>
+                <PaddingTop>2pt</PaddingTop>
+                <PaddingBottom>2pt</PaddingBottom>
+              </Style>
+            </Textbox>
+            <Textbox Name="Textbox6">
+              <CanGrow>true</CanGrow>
+              <KeepTogether>true</KeepTogether>
+              <Paragraphs>
+                <Paragraph>
+                  <TextRuns>
+                    <TextRun>
+                      <Value>=Parameters!DateFormat.Value</Value>
+                      <Style />
+                    </TextRun>
+                  </TextRuns>
+                  <Style />
+                </Paragraph>
+              </Paragraphs>
+              <rd:DefaultName>Textbox6</rd:DefaultName>
+              <Top>0.21181in</Top>
+              <Left>1.75917in</Left>
+              <Height>0.25in</Height>
+              <Width>1in</Width>
+              <ZIndex>2</ZIndex>
+              <Style>
+                <Border>
+                  <Style>None</Style>
+                </Border>
                 <PaddingLeft>2pt</PaddingLeft>
                 <PaddingRight>2pt</PaddingRight>
                 <PaddingTop>2pt</PaddingTop>
