@@ -22,11 +22,20 @@ namespace Applied_Accounts.Preview
             MyReportClass = _ReportClass;
             rpt_View.LocalReport.ReportEmbeddedResource = MyReportClass.Report_Location;
 
-            if(MyReportClass.Report_Location.Length==0)
+            if (MyReportClass.Report_Location == null)
+            {
+                MessageBox.Show("Report reference is null", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Close();
+                return;
+            }
+
+            if (MyReportClass.Report_Location.Length==0)
             {
                 MessageBox.Show("Report is not specifying here", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
+
+            
         }
 
 

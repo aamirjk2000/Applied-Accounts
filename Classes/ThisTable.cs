@@ -249,6 +249,7 @@ namespace Applied_Accounts
                 {
                     IsSaved = false;
                     _Message = ex.Message;
+                    MessageBox.Show(ex.Message);
                 }
             }
 

@@ -74,7 +74,7 @@ namespace Applied_Accounts.Forms
             MyReportClass.ID_Unit = Conversion.ToInteger(cBoxUnits.SelectedValue);
             MyReportClass.Report_From = dt_From.Value;
             MyReportClass.Report_To = dt_To.Value;
-            MyReportClass.PreviewForm = Applied.PreviewReports.Supplier_Ledger;
+            //MyReportClass.PreviewForm = Applied.PreviewReports.Supplier_Ledger;
             MyReportClass.DataTableID = Tables.View_Supplier_Ledger;
             MyReportClass.DataSet_Name = "ds_GL_Supplier";                
             MyReportClass.Heading1 = "Supplier Ledger | " + cBoxSuppliers.Text;
@@ -97,6 +97,7 @@ namespace Applied_Accounts.Forms
             MyReportClass.ReportView_Filter = ReportFilter;
             MyReportClass.ReportView_Sort = "[Supplier],[COA],[Project],[Unit],[Vou_Date]";
             MyReportClass.Update_ReportData();
+            MyReportClass.Report_Location = "Applied_Accounts.Reports.Report_GL_Supplier.rdlc";
             MyReportClass.Preview();                                    // Preview Report
         }
 
@@ -107,8 +108,9 @@ namespace Applied_Accounts.Forms
 
             string _OBalCommand = string.Concat(
                 "SELECT [Supplier],[COA],[Project],[Unit],SUM([DR]-[CR]) AS [AMOUNT] FROM [View_Supplier_Ledger] ",
-                "WHERE [Supplier]=", MyReportClass.ID_Supplier.ToString(), " AND [Vou_Date] < '",
+                "WHERE [Supplier]=", MyReportClass.ID_Supplier.ToString(), " AND DATE([Vou_Date]) < '",
                  Conversion.ToReportDate(MyReportClass.Report_From), "' GROUP BY [Supplier],[COA],[Project],[Unit]");
+                 
             DataTable _OBalTable = AppliedTable.GetDataTable(_OBalCommand);
 
             if (_OBalTable.Rows.Count > 0)
@@ -119,7 +121,7 @@ namespace Applied_Accounts.Forms
                     DataRow _TargetRow = MyReportClass.DataSource.NewRow();
 
                     _TargetRow["Vou_No"] = "Opening";
-                    _TargetRow["Vou_Date"] = MyReportClass.Report_From.AddDays(-1);
+                    _TargetRow["Vou_Date"] = MyReportClass.Report_From.AddDays(-1).ToString("yyyy-MM-dd");
                     
 
                     _TargetRow["COA"] = _Row["COA"];

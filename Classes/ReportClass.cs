@@ -14,6 +14,7 @@ namespace Applied_Accounts.Classes
         string FilterDate_To();
         void Update_SourceData();
         void Update_ReportData();
+        int Count();
     }
 
     public class ReportClass : IReportClass
@@ -52,13 +53,11 @@ namespace Applied_Accounts.Classes
         public void Preview()
         {
 
-            Form _PreviewForm = new Form();
-            _PreviewForm = GetReportForm(PreviewForm);
+            Form _PreviewForm =  new Preview.frmPreview_Reports(this);
 
+            Report_Data.Sort = ReportView_Sort;
 
             if (_PreviewForm == null) { MessageBox.Show("Report Name is not valid.", "ERROR"); return; }          // Return if report object not load poperly.
-
-            //Form _PreviewForm = (Form)PreviewForm;
 
             if (Report_Data.Count>0)
             {
@@ -98,41 +97,13 @@ namespace Applied_Accounts.Classes
             }
             
         }
-      
-        private Form GetReportForm(object ReportFormID)
+        public int Count()                               // Count Table Row
         {
-            switch (ReportFormID)
+            if(DataSource==null)
             {
-                case Applied.PreviewReports.Preview_Report:
-                    return new Preview.frmPreview_Reports(this);
-
-                case Applied.PreviewReports.General_Ledger:
-                    return new Preview.frmPreview_General_Ledger(this);
-
-                case Applied.PreviewReports.Supplier_Ledger:
-                    return new Preview.frmPreview_GL_Supplier(this);
-
-                case Applied.PreviewReports.General_Voucher:
-                    return new Reports.frmReport_Vouchers(this);
-
-                case Applied.PreviewReports.Project_Ledger:
-                    return new Preview.frmPreview_GL_Project(this);
-
-                case Applied.PreviewReports.Trial_Balance:
-                    return new Preview.frmPreview_Reports(this);
-                    //return new Preview.frmPreview_Trial_Balance(this);
-
-                default:
-                    break;
+                return Report_Data.Count;
             }
-
-            return null;
-
+            return 0;
         }
-
-
-
-      
-
     }
 }

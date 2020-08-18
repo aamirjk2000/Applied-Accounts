@@ -101,6 +101,10 @@ namespace Applied_Accounts.Forms
 
                 switch (TabTitle)
                 {
+                    case "Applied":
+                        Migrate_Table((int)Tables.Notes);                            // Migrate Data to Table Notes
+                        break;
+
                     case "Notes":
                         Migrate_Table((int)Tables.Notes);                            // Migrate Data to Table Notes
                         break;
@@ -139,7 +143,7 @@ namespace Applied_Accounts.Forms
 
 
                     default:
-                        MessageBox.Show("Selection is defined.", "ERROR");
+                        MessageBox.Show("Selection is not defined.", "ERROR");
                         break;
                 }
             }
@@ -183,30 +187,43 @@ namespace Applied_Accounts.Forms
 
                 foreach (DataColumn _Column in _Row.Table.Columns)
                 {
-                    if(_Column.ColumnName=="Chq_Date")
+                    if (_Column.ColumnName == "Chq_Date")
                     {
                         if (_Row["Chq_Date"].ToString() == "")
                         {
                             _Row["Chq_Date"] = DBNull.Value;
                         }
-                        
+                        else
+                        {
+                            _Row["Chq_Date"] = ((DateTime)_Row["Chq_Date"]).ToString("yyyy-MM-dd");
+                        }
+
+
                     }
 
+                    if (_Column.ColumnName == "Vou_Date")
+                    {
+                        _Row["Vou_Date"] = ((DateTime)_Row["Vou_Date"]).ToString("yyyy-MM-dd");
+                    }
                     _TargetRow[_Column.ColumnName] = _Row[_Column.ColumnName];
                 }
+
 
                 i += 1;
                 BarMigration.Value = i;
                 BarMigration.Refresh();
+
+
+                lblMessages.Text = _TargetTable.Save(_TargetRow, false);
+                lblMessages.Refresh();
+
                 lblMessage.Text = string.Concat(i.ToString(), " / ", BarMigration.Maximum);
                 lblMessage.Refresh();
-
-                lblMessages.Text =  _TargetTable.Save(_TargetRow, false);
-
             }
 
+
             System.Threading.Thread.Sleep(2000);
-            lblMessage.Text = "Done";
+            lblMessages.Text = "Done";
 
             btnExit.Enabled = true;
             btnLoad.Enabled = true;
