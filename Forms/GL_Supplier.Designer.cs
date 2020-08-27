@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGL_Supplier));
             this.cBoxSuppliers = new System.Windows.Forms.ComboBox();
             this.cBoxCOA = new System.Windows.Forms.ComboBox();
             this.cBoxProjects = new System.Windows.Forms.ComboBox();
@@ -50,6 +51,7 @@
             this.chkUnit = new System.Windows.Forms.CheckBox();
             this.chkProject = new System.Windows.Forms.CheckBox();
             this.chkCOA = new System.Windows.Forms.CheckBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -125,7 +127,7 @@
             // 
             this.dt_From.CustomFormat = "dd-MMM-yyyy";
             this.dt_From.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dt_From.Location = new System.Drawing.Point(130, 150);
+            this.dt_From.Location = new System.Drawing.Point(129, 150);
             this.dt_From.Name = "dt_From";
             this.dt_From.Size = new System.Drawing.Size(105, 20);
             this.dt_From.TabIndex = 8;
@@ -159,21 +161,21 @@
             // 
             // btnPreview
             // 
-            this.btnPreview.Location = new System.Drawing.Point(130, 242);
+            this.btnPreview.Image = ((System.Drawing.Image)(resources.GetObject("btnPreview.Image")));
+            this.btnPreview.Location = new System.Drawing.Point(397, 236);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnPreview.Size = new System.Drawing.Size(65, 65);
             this.btnPreview.TabIndex = 12;
-            this.btnPreview.Text = "PREVIEW";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(464, 242);
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Location = new System.Drawing.Point(474, 236);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(65, 65);
             this.btnExit.TabIndex = 13;
-            this.btnExit.Text = "EXIT";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
@@ -218,9 +220,9 @@
             this.groupBox1.Controls.Add(this.chkUnit);
             this.groupBox1.Controls.Add(this.chkProject);
             this.groupBox1.Controls.Add(this.chkCOA);
-            this.groupBox1.Location = new System.Drawing.Point(130, 176);
+            this.groupBox1.Location = new System.Drawing.Point(128, 176);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(371, 45);
+            this.groupBox1.Size = new System.Drawing.Size(411, 45);
             this.groupBox1.TabIndex = 18;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Include in Report";
@@ -255,11 +257,21 @@
             this.chkCOA.Text = "Ledger Account";
             this.chkCOA.UseVisualStyleBackColor = true;
             // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(26, 195);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(74, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Report Format";
+            // 
             // frmGL_Supplier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 281);
+            this.ClientSize = new System.Drawing.Size(555, 306);
+            this.Controls.Add(this.label7);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
@@ -314,5 +326,6 @@
         private System.Windows.Forms.CheckBox chkUnit;
         private System.Windows.Forms.CheckBox chkProject;
         private System.Windows.Forms.CheckBox chkCOA;
+        private System.Windows.Forms.Label label7;
     }
 }

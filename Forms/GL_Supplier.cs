@@ -95,7 +95,7 @@ namespace Applied_Accounts.Forms
             if (chkProject.Checked) { ReportFilter += string.Concat(" AND Project=", MyReportClass.ID_Project); }
             if (chkUnit.Checked) { ReportFilter += string.Concat(" AND Unit=", MyReportClass.ID_Unit); }
             MyReportClass.ReportView_Filter = ReportFilter;
-            MyReportClass.ReportView_Sort = "[Supplier],[COA],[Project],[Unit],[Vou_Date]";
+            MyReportClass.ReportView_Sort = "[Vou_Date],[Vou_No],[Supplier],[COA],[Project],[Unit]";
             MyReportClass.Update_ReportData();
             MyReportClass.Report_Location = "Applied_Accounts.Reports.Report_GL_Supplier.rdlc";
             MyReportClass.Preview();                                    // Preview Report

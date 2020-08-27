@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="859096">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="1195480">
       <assemblyIdentity name="Applied Accounts" version="2020.7.29.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>0cfeBO9oYXZDqtWtFPPzabUvpbOmF8iJfDRQNVeGIeM=</dsig:DigestValue>
+        <dsig:DigestValue>qZRFXWmvn7KljAooKpNMHasVlVjYkrBl0pc2IG8woSg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -786,6 +786,15 @@
       <dsig:DigestValue>aAKqqS/pbkgRWms9r3RqX5yR16O3mAy2G08Z3H8Ofj8=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Icons\exit-48.png" size="3587">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>b9oqjAkIvW6INkv2EDqtR+Hz41FKkk1zgMGQhrqN1Sk=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Icons\Files.png" size="383">
     <hash>
       <dsig:Transforms>
@@ -838,6 +847,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>6AW/dRZxx8rdPPAN1G5zA01ORUzHDS0KyetxZkxyU5s=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Icons\PREVIEW.BMP" size="9798">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>CLiQgNKROeg6SH72Eu2HOIvLtdfSmWHkOd/RWeiAU+E=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Icons\Printer.png" size="1966">

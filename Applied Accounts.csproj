@@ -513,6 +513,7 @@
     <Content Include="Icons\BOTTOMD.png" />
     <Content Include="Icons\Close.png" />
     <Content Include="Icons\Delete.png" />
+    <Content Include="Icons\exit-48.png" />
     <Content Include="Icons\Exit.png" />
     <Content Include="Icons\Files.png" />
     <Content Include="Icons\Logo.png" />
@@ -520,6 +521,7 @@
     <Content Include="Icons\NEXT.png" />
     <Content Include="Icons\NextD.png" />
     <Content Include="Icons\OK.png" />
+    <Content Include="Icons\PREVIEW.BMP" />
     <Content Include="Icons\Printer.png" />
     <Content Include="Icons\Save.png" />
     <Content Include="Icons\TOP.png" />

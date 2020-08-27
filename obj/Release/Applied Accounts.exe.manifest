@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <asmv1:assembly xsi:schemaLocation="urn:schemas-microsoft-com:asm.v1 assembly.adaptive.xsd" manifestVersion="1.0" xmlns:asmv1="urn:schemas-microsoft-com:asm.v1" xmlns="urn:schemas-microsoft-com:asm.v2" xmlns:asmv2="urn:schemas-microsoft-com:asm.v2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:co.v1="urn:schemas-microsoft-com:clickonce.v1" xmlns:asmv3="urn:schemas-microsoft-com:asm.v3" xmlns:dsig="http://www.w3.org/2000/09/xmldsig#" xmlns:co.v2="urn:schemas-microsoft-com:clickonce.v2">
   <asmv1:assemblyIdentity name="Applied Accounts.exe" version="2020.07.23.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
-  <description asmv2:iconFile="Accounting.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
+  <description asmv2:iconFile="Safe-Open.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
     <assemblyIdentity name="Applied Accounts" version="2020.7.29.1" language="neutral" processorArchitecture="msil" />
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="757720">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="1174488">
       <assemblyIdentity name="Applied Accounts" version="2020.7.29.1" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>jn/TolRZnjjrnxKgFfKnMefcd1HfC3O3NYguAZDOECc=</dsig:DigestValue>
+        <dsig:DigestValue>auk3FK/oKA1QgbIkWcqSO91gALR7JoJsHk0wEzMlrjc=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -786,6 +786,15 @@
       <dsig:DigestValue>aAKqqS/pbkgRWms9r3RqX5yR16O3mAy2G08Z3H8Ofj8=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Icons\exit-48.png" size="3587">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>b9oqjAkIvW6INkv2EDqtR+Hz41FKkk1zgMGQhrqN1Sk=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Icons\Files.png" size="383">
     <hash>
       <dsig:Transforms>
@@ -840,6 +849,15 @@
       <dsig:DigestValue>6AW/dRZxx8rdPPAN1G5zA01ORUzHDS0KyetxZkxyU5s=</dsig:DigestValue>
     </hash>
   </file>
+  <file name="Icons\PREVIEW.BMP" size="9798">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>CLiQgNKROeg6SH72Eu2HOIvLtdfSmWHkOd/RWeiAU+E=</dsig:DigestValue>
+    </hash>
+  </file>
   <file name="Icons\Printer.png" size="1966">
     <hash>
       <dsig:Transforms>
@@ -883,6 +901,15 @@
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
       <dsig:DigestValue>pgvMMMm+h7MIelfdsms/JQaRptcPvw2O/EGDl8uPDwM=</dsig:DigestValue>
+    </hash>
+  </file>
+  <file name="Safe-Open.ico" size="165382">
+    <hash>
+      <dsig:Transforms>
+        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+      </dsig:Transforms>
+      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+      <dsig:DigestValue>l9iYF5TfLxR8/n3FIy8gt8yK2U+LEFdbILjem0vt1EU=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

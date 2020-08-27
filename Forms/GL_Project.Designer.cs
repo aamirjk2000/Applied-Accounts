@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGL_Project));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,6 +48,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -120,31 +123,31 @@
             // chkSuppliers
             // 
             this.chkSuppliers.AutoSize = true;
-            this.chkSuppliers.Location = new System.Drawing.Point(548, 59);
+            this.chkSuppliers.Location = new System.Drawing.Point(12, 19);
             this.chkSuppliers.Name = "chkSuppliers";
-            this.chkSuppliers.Size = new System.Drawing.Size(83, 17);
+            this.chkSuppliers.Size = new System.Drawing.Size(64, 17);
             this.chkSuppliers.TabIndex = 8;
-            this.chkSuppliers.Text = "All Suppliers";
+            this.chkSuppliers.Text = "Supplier";
             this.chkSuppliers.UseVisualStyleBackColor = true;
             // 
             // chkCOA
             // 
             this.chkCOA.AutoSize = true;
-            this.chkCOA.Location = new System.Drawing.Point(548, 86);
+            this.chkCOA.Location = new System.Drawing.Point(120, 19);
             this.chkCOA.Name = "chkCOA";
-            this.chkCOA.Size = new System.Drawing.Size(85, 17);
+            this.chkCOA.Size = new System.Drawing.Size(66, 17);
             this.chkCOA.TabIndex = 9;
-            this.chkCOA.Text = "All Accounts";
+            this.chkCOA.Text = "Account";
             this.chkCOA.UseVisualStyleBackColor = true;
             // 
             // chkUnits
             // 
             this.chkUnits.AutoSize = true;
-            this.chkUnits.Location = new System.Drawing.Point(548, 114);
+            this.chkUnits.Location = new System.Drawing.Point(224, 19);
             this.chkUnits.Name = "chkUnits";
-            this.chkUnits.Size = new System.Drawing.Size(64, 17);
+            this.chkUnits.Size = new System.Drawing.Size(45, 17);
             this.chkUnits.TabIndex = 10;
-            this.chkUnits.Text = "All Units";
+            this.chkUnits.Text = "Unit";
             this.chkUnits.UseVisualStyleBackColor = true;
             // 
             // label5
@@ -183,7 +186,7 @@
             // 
             this.dt_To.CustomFormat = "dd-MMM-yyyy";
             this.dt_To.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dt_To.Location = new System.Drawing.Point(333, 182);
+            this.dt_To.Location = new System.Drawing.Point(112, 214);
             this.dt_To.Name = "dt_To";
             this.dt_To.Size = new System.Drawing.Size(107, 20);
             this.dt_To.TabIndex = 14;
@@ -200,7 +203,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(253, 186);
+            this.label7.Location = new System.Drawing.Point(55, 214);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(42, 13);
             this.label7.TabIndex = 16;
@@ -208,29 +211,40 @@
             // 
             // btnPreview
             // 
-            this.btnPreview.Location = new System.Drawing.Point(112, 243);
+            this.btnPreview.Image = ((System.Drawing.Image)(resources.GetObject("btnPreview.Image")));
+            this.btnPreview.Location = new System.Drawing.Point(378, 252);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnPreview.Size = new System.Drawing.Size(75, 70);
             this.btnPreview.TabIndex = 17;
-            this.btnPreview.Text = "PREVIEW";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(458, 234);
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Location = new System.Drawing.Point(459, 252);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(75, 70);
             this.btnExit.TabIndex = 18;
-            this.btnExit.Text = "EXIT";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.chkSuppliers);
+            this.panel1.Controls.Add(this.chkCOA);
+            this.panel1.Controls.Add(this.chkUnits);
+            this.panel1.Location = new System.Drawing.Point(235, 182);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(298, 52);
+            this.panel1.TabIndex = 19;
             // 
             // frmGL_Project
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(637, 293);
+            this.ClientSize = new System.Drawing.Size(548, 337);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.label7);
@@ -239,9 +253,6 @@
             this.Controls.Add(this.dt_From);
             this.Controls.Add(this.cBoxReportFormat);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.chkUnits);
-            this.Controls.Add(this.chkCOA);
-            this.Controls.Add(this.chkSuppliers);
             this.Controls.Add(this.cBoxUnits);
             this.Controls.Add(this.cBoxCOA);
             this.Controls.Add(this.cBoxSuppliers);
@@ -254,6 +265,8 @@
             this.Text = "General Ledger - Project";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmGL_Project_FormClosed);
             this.Load += new System.EventHandler(this.GL_Project_Load);
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -280,5 +293,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Panel panel1;
     }
 }
