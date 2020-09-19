@@ -18,18 +18,15 @@ namespace Applied_Accounts.Classes
 
         public class Applied : IApplied
         {
-        //private CultureInfo Culture { get; set; }
+        //private CultureInfo Culture { get; set; } aamir   
         private DateTime Voucher_MinDate { get; set; }
         private DateTime Voucher_MaxDate { get; set; }
         public static CultureInfo MyCulture { get => new CultureInfo((string)GetValue("Culture", (int)KeyType.String)); }
         public Applied()
         {
-
             Voucher_MinDate = GetDate("VouDate1");
             Voucher_MinDate = (DateTime)GetValue("VouDate1", (int)KeyType.Date);
             Voucher_MaxDate = (DateTime)GetValue("VouDate2", (int)KeyType.Date);
-            //Culture = new CultureInfo((string)GetValue("Culture", (int)KeyType.String));
-            //Culture = 
         }
 
         #region Interface Codes
@@ -114,8 +111,6 @@ namespace Applied_Accounts.Classes
             DataTable _DataTable = AppliedTable.GetDataTable((int)Tables.Applied);
             DataView _DataView = new DataView(_DataTable);
             string _DateString = "";
-            //string _CultureString = "";
-            //CultureInfo _Culture ;
 
             _DataView.RowFilter = string.Concat("Key='", _Key, "'");
 
@@ -124,15 +119,20 @@ namespace Applied_Accounts.Classes
                 _DateString = _DataView[0].Row["sValue"].ToString();
             }
 
-            //if (_DateString != null)
-            //    { _DataView.RowFilter = "Key='Culture'"; }
-            //if (_DataView.Count == 1)
-            //{
-            //    _CultureString = _DataView[0].Row["sValue"].ToString();
-            //}
-
             return Conversion.ToMyDate(_DateString, DateTimeStyle.DataColumn);
         }
+
+        public static DateTime GetVouDate(string _Key)
+        {
+            // Control Voucher Date should be in Date boundry
+            DateTime _DateTime = GetDate(_Key);
+            DateTime _MinDate = Applied.GetDate("VouDate1");
+            DateTime _MaxDate= Applied.GetDate("VouDate2");
+            if(_DateTime<_MinDate) { _DateTime = _MinDate; }
+            if(_DateTime>_MaxDate) { _DateTime = _MaxDate; }
+            return _DateTime;
+        }
+
 
         public static bool GetBoolean(string _Key)
         {

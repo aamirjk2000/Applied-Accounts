@@ -42,8 +42,8 @@ namespace Applied_Accounts.Reports
 
             // Load default values from Applied.
             txtVouNo.Text = Applied.GetString("rptVou_VouNo");
-            dt_From.Value = Applied.GetDate("rptVou_DateFrom");
-            dt_To.Value = Applied.GetDate("rptVou_DateTo");
+            dt_From.Value = Applied.GetVouDate("rptVou_DateFrom");
+            dt_To.Value = Applied.GetVouDate("rptVou_DateTo");
 
         }
 

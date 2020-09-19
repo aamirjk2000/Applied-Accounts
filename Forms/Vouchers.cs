@@ -847,56 +847,7 @@ namespace Applied_Accounts.Forms
 
         }
 
-        private void txtVouNo_Leave(object sender, EventArgs e)
-        {
-            if (VouNoLeave == false) { VouNoLeave = true; return; }
-
-            TextBox _TextBox = (TextBox)sender;
-
-            if (_TextBox.Text.ToUpper() == "END" | _TextBox.Text.ToUpper() == "CLOSE") { Close(); return; }
-
-            if (_TextBox.Text.ToUpper() == "NEW") { btnNewVoucher_Click(sender, e); }
-
-            string Voucher_No = _TextBox.Text.Trim();
-            MyVoucherClass = new VoucherClass(Voucher_No);                      // Load Voucher into Class (Memory)
-
-            if (MyDataTable.Rows.Count > 0)                                       // If Exist Load Voucher Class
-            {
-                SetComboBox(true);
-                DisplayRow(MyDataTable.Rows[0]);
-                char[] VoucherTag = MyVoucherClass.Vou_No.ToCharArray();
-
-                if (VoucherTag.Length > 0)
-                {
-                    cboxVouType.SelectedIndex = MyVoucherClass.GetVoucherTypeID(VoucherTag[0]);
-                }
-                else
-                {
-                    dtVouDate.Value = DateTime.Now;
-                }
-
-                MessageBox.Show(string.Concat(MyDataTable.Rows.Count, " Transactions."), Voucher_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                if (MyVoucherClass.Status == "EDIT")
-                {
-                    VouNoLeave = false;
-                    dtVouDate.Enabled = false;
-                    cboxVouType.Enabled = false;
-                    SelectNextControl(txtVouNo, true, true, true, true);
-
-                }
-            }
-            else
-            {
-                MyVoucherClass = new VoucherClass();                      // Load Voucher into Class (Memory)
-                DisplayRow(MyDataTable.Rows[0]);
-                //MessageBox.Show("No Transaction Found Found", Voucher_No);
-            }
-
-
-
-
-        }
+      
 
         #endregion
 
@@ -974,11 +925,7 @@ namespace Applied_Accounts.Forms
         {
 
             if (_DataRow == null) { return; }
-
-            //if(_DataRow["Vou_NO"].ToString().ToUpper() == "NEW") { return; }
-
-
-            //DateTime _Date_Vou = Conversion.ToDate(_DataRow["Vou_Date"].ToString());
+            
             DateTime _Date_Chq = Conversion.ToDate(_DataRow["Chq_Date"].ToString());
 
             txtID.Text = _DataRow["ID"].ToString();
@@ -986,7 +933,6 @@ namespace Applied_Accounts.Forms
 
             try
             {
-                //dtVouDate.Value = //_Date_Vou;
                 dtChqDate.Value = _Date_Chq;
             }
             catch (Exception)
@@ -1012,13 +958,9 @@ namespace Applied_Accounts.Forms
             cBoxEmployees.SelectedValue = _DataRow["Employee"];
 
             MyVoucherClass.Vou_No = _DataRow["Vou_NO"].ToString();
-            //MyVoucherClass.Vou_Date = _Date_Vou;
             MyVoucherClass.Vou_Type = cboxVouType.Text;
 
             btnSaveVoucher.Enabled = Total_Equal();
-
-            //txtVouNo.Focus();
-
 
         }
         private bool Total_Equal()
@@ -1151,10 +1093,6 @@ namespace Applied_Accounts.Forms
             MyRow = MyDataTable.Rows[0];
             DisplayRow(MyRow);
 
-            //txtVouNo.Enabled = false;
-            //dtVouDate.Enabled = false;
-            //cboxVouType.Enabled = false;
-
         }
 
         private void cboxVouType_Validated(object sender, EventArgs e)
@@ -1171,9 +1109,7 @@ namespace Applied_Accounts.Forms
 
         private void txtSRNO_Enter(object sender, EventArgs e)
         {
-            txtVouNo.Enabled = false;
-            dtVouDate.Enabled = false;
-            cboxVouType.Enabled = false;
+           
         }
 
         private void txtSRNO_Validated(object sender, EventArgs e)
@@ -1200,6 +1136,9 @@ namespace Applied_Accounts.Forms
 
         private void txtSRNO_Leave(object sender, EventArgs e)
         {
+            txtVouNo.Enabled = false;
+            dtVouDate.Enabled = false;
+            cboxVouType.Enabled = false;
             Repaint();
         }
 
@@ -1258,6 +1197,68 @@ namespace Applied_Accounts.Forms
 
         }
 
+        private void txtVouNo_Validating(object sender, CancelEventArgs e)
+        {
+            TextBox _TextBox = (TextBox)sender;
+            string Voucher_No = _TextBox.Text.Trim();
 
+            if (_TextBox.Text.Length == 0) { e.Cancel = false; return; }                 // Close this form in Leave event
+            if (_TextBox.Text.ToUpper() == "NEW") { e.Cancel = false; MyVoucherClass = new VoucherClass(); return;  }         // Create new Voucher in Leave Event
+            if (_TextBox.Text.ToUpper() == "END") { e.Cancel = false; return;  }         // Create new Voucher in Leave Event
+
+            MyVoucherClass = new VoucherClass(Voucher_No);                               // Load Voucher into Class (Memory)
+
+            if(Voucher_No.Trim().Length==0) { return; }
+
+            if (MyVoucherClass.Count_Table() > 0)                                       // If Exist Load Voucher Class
+            {
+                MessageBox.Show(string.Concat(MyDataTable.Rows.Count, " Transactions."), Voucher_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                e.Cancel = false;
+            }
+            else
+            {
+                e.Cancel = true;                                        // Cancel true is Voucher not foud.
+            }
+        }
+
+        private void txtVouNo_Validated(object sender, EventArgs e)
+        {
+            TextBox _TextBox = (TextBox)sender;
+
+
+            switch (_TextBox.Text.Trim().ToUpper())
+            {
+                //case "NEW":
+                //    MyVoucherClass = new VoucherClass();
+                //    break;
+
+                case "":
+                    break;
+
+                case "END":
+                    break;
+
+                default:
+                    SetComboBox(true);                                              // Enable Combo Box
+                    DisplayRow(MyDataTable.Rows[0]);                                // Display First Row of voucher into Text Boox
+                    char[] VoucherTag = MyVoucherClass.Vou_No.ToCharArray();        // Get Voucher Type Tag 
+
+                    if (VoucherTag.Length > 0)                                      // If Tax existing
+                    {
+                        cboxVouType.SelectedIndex = MyVoucherClass.GetVoucherTypeID(VoucherTag[0]);     // show Vocher Type in Voucher Combo
+                    }
+                    break;
+            }
+        }
+
+        private void txtVouNo_Leave(object sender, EventArgs e)
+        {
+            TextBox _TextBox = (TextBox)sender;
+            if (_TextBox.Text.Length==0) { Close(); }
+            if (_TextBox.Text.ToUpper() == "END") {Close(); }
+
+
+
+        }
     }       // END Main Class
 }           // END NameSpace

@@ -93,6 +93,8 @@
     <Compile Include="Classes\DataSets.cs" />
     <Compile Include="Classes\MigrationClass.cs" />
     <Compile Include="Classes\ReportClass.cs" />
+    <Compile Include="Classes\SQLite_Date.cs" />
+    <Compile Include="Classes\Table_Voucher.cs" />
     <Compile Include="Classes\ThisTable.cs" />
     <Compile Include="Classes\Validation.cs" />
     <Compile Include="Classes\VoucherClass.cs" />

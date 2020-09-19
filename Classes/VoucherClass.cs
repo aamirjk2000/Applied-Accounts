@@ -3,12 +3,23 @@ using System.Data;
 using System.Data.SQLite;
 using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
+using System.Threading;
 using System.Windows.Forms;
 
 namespace Applied_Accounts.Classes
 {
-    public class VoucherClass
+    interface iVoucherclass
     {
+        int Count_Table();
+        int Count_View();
+
+    }
+
+
+    public class VoucherClass : iVoucherclass
+    {
+
+
 
         #region Variables
 
@@ -23,13 +34,16 @@ namespace Applied_Accounts.Classes
         public int Total_Transactions { get; set; }
 
         public DataTable VoucherTable = new DataTable();
+        public DataView VoucherView = new DataView();
         private DataTable tbLedger;
 
         public DataRow CurrentRow { get; set; }
         public int CurrentYear { get; set; }
         public string Status { get; set; }
         public long NewID { get; set; }
-        
+        public int Count_Table() { return VoucherTable.Rows.Count; }
+        public int Count_View() { return VoucherView.Count; }
+
 
         #endregion
 
@@ -40,35 +54,24 @@ namespace Applied_Accounts.Classes
             NewVoucher();
         }
 
+
+
         public VoucherClass(string Voucher_No)
         {
             NewID = -1;
+            Vou_No = Voucher_No;
 
-            if(Voucher_No.Length==0) { return; }
-            if(Voucher_No.ToUpper() == "NEW") { NewVoucher(); return; }
+            if (Voucher_No.Length == 0) { return; }
+            if (Voucher_No.ToUpper() == "NEW") { NewVoucher(); return; }
 
             tbLedger = AppliedTable.GetDataTable((int)Tables.Ledger);
-            DataView _DataView = new DataView(tbLedger);
-            _DataView.RowFilter = string.Concat("Vou_No='", Voucher_No, "'");
-            VoucherTable = CreateTable();
+            CreateTable();
 
-            if (_DataView.Count > 0)
+            if (VoucherView.Count > 0)
             {
-                
-                    foreach (DataRow _Row in _DataView.ToTable().Rows)
-                    {
-                        object[] _SourceRow = new object[_Row.Table.Columns.Count];     // Create Array object
-                        _SourceRow = _Row.ItemArray;                                    // Get Row value in Array
-                        VoucherTable.Rows.Add(_SourceRow);                              // Add Row from Array    
-                    }
-
-                
-
-
                 CurrentRow = VoucherTable.Rows[0];
                 Vou_No = VoucherTable.Rows[0]["Vou_No"].ToString();
-                //Vou_Date = Conversion.ToDate(VoucherTable.Rows[0]["Vou_Date"].ToString());
-                Vou_Date = Conversion.ToMyDate(VoucherTable.Rows[0]["Vou_Date"].ToString(),Applied.DateTimeStyle.DataColumn);
+                Vou_Date = Applied.GetDate(VoucherTable.Rows[0]["Vou_Date"].ToString());
                 Vou_Type = Vou_No.Substring(1, 1);
                 Vou_Type = GetVoucherTypeText(Vou_Type);
                 Status = "EDIT";
@@ -79,7 +82,7 @@ namespace Applied_Accounts.Classes
             }
             else
             {
-                MessageBox.Show("No Voucher Found","VoucherClass");
+                MessageBox.Show("No Voucher Found", "VoucherClass");
                 return;
             }
 
@@ -105,9 +108,10 @@ namespace Applied_Accounts.Classes
             CurrentYear = Applied.GetInteger("CurrentYear");
             NewID = -1;
 
-            VoucherTable = CreateTable();
-            VoucherTable.Rows.Add(CreateRow(1));                  // DR Site.  Create two transaction.
-            VoucherTable.Rows.Add(CreateRow(2));                  // CR Site.
+            tbLedger = AppliedTable.GetDataTable((int)Tables.Ledger);   // Load Ledger Table
+            CreateTable();                                              // Create Voucher Table and voucher view
+            VoucherTable.Rows.Add(CreateRow(1));                        // DR Site.  Create two transaction.
+            VoucherTable.Rows.Add(CreateRow(2));                        // CR Site.
             CurrentRow = VoucherTable.Rows[0];
 
         }
@@ -143,19 +147,22 @@ namespace Applied_Accounts.Classes
             }
         }
 
-        public DataTable CreateTable()
+        public void CreateTable()
         {
-            // Create a Table for Voucher clone from Ledger DataTable.
-            DataTable dt;
-            DataTable _dt = AppliedTable.GetDataTable((int)Tables.Ledger);
-            dt = _dt.Clone();
-            DataColumn[] columns = new DataColumn[1];
-            columns[0] = dt.Columns["SRNO"];
-            dt.PrimaryKey = columns;
-            return dt;
+            if (Vou_No==null || Vou_No.Length == 0)
+            {
+                VoucherTable = new DataView(tbLedger.Clone()).ToTable();
+                VoucherView.Table = VoucherTable;
+            }
+            else
+            {
+                VoucherTable = new DataView(tbLedger, "Vou_No='" + Vou_No + "'", "SRNO", DataViewRowState.OriginalRows).ToTable().Copy();
+                VoucherView.Table = VoucherTable;
+            }
+                
         }
 
-        public void AddRow()
+            public void AddRow()
         {
             CurrentRow = CreateRow(MaxSRNO());
             VoucherTable.Rows.Add(CurrentRow);

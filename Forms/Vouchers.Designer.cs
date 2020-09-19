@@ -660,7 +660,7 @@
             // 
             // dtVouDate
             // 
-            this.dtVouDate.CustomFormat = "dd-MM-yyyy";
+            this.dtVouDate.CustomFormat = "dd-MMM-yyyy";
             this.dtVouDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtVouDate.Location = new System.Drawing.Point(267, 21);
             this.dtVouDate.Name = "dtVouDate";
@@ -687,6 +687,8 @@
             this.txtVouNo.TabIndex = 1;
             this.txtVouNo.Enter += new System.EventHandler(this.txtVouNo_Enter);
             this.txtVouNo.Leave += new System.EventHandler(this.txtVouNo_Leave);
+            this.txtVouNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtVouNo_Validating);
+            this.txtVouNo.Validated += new System.EventHandler(this.txtVouNo_Validated);
             // 
             // txtID
             // 

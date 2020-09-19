@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.ReportingServices.Interfaces;
+using Microsoft.SqlServer.Server;
+using System;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Forms;
 
 namespace Applied_Accounts.Classes
 {
@@ -51,7 +53,7 @@ namespace Applied_Accounts.Classes
             return _Result;
         }
 
-        public static decimal ToMoney(TextBox _TextBox)
+        public static decimal ToMoney(System.Windows.Forms.TextBox _TextBox)
         {
             string _Value = _TextBox.Text.Trim();
             if (_Value.Length==0) { return 0; }
@@ -94,79 +96,25 @@ namespace Applied_Accounts.Classes
 
         #region Date
 
-
+       
         public static DateTime ToDate(string _DateTime)
         {
-            DateTime _Result;
-
-            bool IsDate = DateTime.TryParse(_DateTime, Applied.MyCulture, 0, out _Result); ;
-            
-            if (!IsDate)
-            {
-                _Result = DateTime.Now;
-                MessageBox.Show(_DateTime + " can not conver into DateTime");
-            }
-
-            return _Result;
+            SQLite_Date DateClass = new SQLite_Date(_DateTime);
+            return DateClass.GetDate();
         }
 
         public static DateTime ToMyDate(object _DateTime, object _Style)
         {
-            return ToMyDate(_DateTime.ToString(), _Style);
+            SQLite_Date DateClass = new SQLite_Date(_DateTime);
+            return DateClass.GetDate();
+
         }
-
-
 
         public static DateTime ToMyDate(string _DateTime, object _Style)
         {
-            DateTime _Result = DateTime.Now; ;
-
-            try
-            {
-                switch (_Style)
-                {
-                    case Applied.DateTimeStyle.DataColumn:
-                        _Result = DateTime.ParseExact(_DateTime, "yyyy-MM-dd", Applied.MyCulture);
-                        break;
-
-                    case Applied.DateTimeStyle.DD_MM_YYYY:
-                        _Result = DateTime.ParseExact(_DateTime, "dd-MM-yyyy", Applied.MyCulture);
-                        break;
-
-                    case Applied.DateTimeStyle.MM_DD_YYYY:
-                        _Result = DateTime.ParseExact(_DateTime, "MM-dd-yyyy", Applied.MyCulture);
-                        break;
-
-                    case Applied.DateTimeStyle.YYYY_MMM_DD:
-                        _Result = DateTime.ParseExact(_DateTime, "yyyy-MMM-dd", Applied.MyCulture);
-                        break;
-
-                    case Applied.DateTimeStyle.YYYY_MM_DD:
-                        _Result = DateTime.ParseExact(_DateTime, "yyyy-MM-dd", Applied.MyCulture);
-                        break;
-                }
-
-            }
-
-            catch (Exception e)
-            {
-                try
-                {
-                    _Result = DateTime.Parse(_DateTime, Applied.MyCulture);
-                }
-                catch (Exception)
-                {
-
-                    Console.Beep(800, 200);
-                    MessageBox.Show(e.Message,_DateTime,MessageBoxButton.OK,MessageBoxImage.Error);
-                }
-
-            }
-            
-            return _Result;
+             SQLite_Date DateClass = new SQLite_Date(_DateTime);
+            return DateClass.GetDate();
         }
-
-
 
         public static DateTime Today() 
         { 
