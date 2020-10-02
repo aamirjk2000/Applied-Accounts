@@ -1,6 +1,7 @@
 ﻿using Microsoft.ReportingServices.Interfaces;
 using Microsoft.SqlServer.Server;
 using System;
+using System.Diagnostics.Eventing.Reader;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
@@ -23,7 +24,33 @@ namespace Applied_Accounts.Classes
             if (_Value == string.Empty) { return 0; }
             else { return Convert.ToInt64(_Value); }
         }
-       
+
+
+        public static long ToLong(object _Value)
+        {
+            long _Result;
+            string _value = _Value.ToString();
+
+
+            if (_value == null || _value.Trim() == string.Empty)
+            {
+                _Result = 0;
+            }
+            else
+            {
+                try
+                {
+                    _Result = long.Parse(_value);
+                }
+                catch
+                {
+                    _Result = 0;
+                }
+            }
+            return _Result;
+        }
+
+
 
         #endregion
 
@@ -100,21 +127,27 @@ namespace Applied_Accounts.Classes
         public static DateTime ToDate(string _DateTime)
         {
             SQLite_Date DateClass = new SQLite_Date(_DateTime);
-            return DateClass.GetDate();
+            return DateClass.GetDate();                                 // Get Date in Datetime format standard
         }
 
-        public static DateTime ToMyDate(object _DateTime, object _Style)
+        public static string ToDate_DB(DateTime _DateTime)
         {
             SQLite_Date DateClass = new SQLite_Date(_DateTime);
-            return DateClass.GetDate();
-
+            return DateClass.GetDate_DB();                              // return date in string format yyyy-MM-dd
         }
 
-        public static DateTime ToMyDate(string _DateTime, object _Style)
-        {
-             SQLite_Date DateClass = new SQLite_Date(_DateTime);
-            return DateClass.GetDate();
-        }
+        //public static DateTime ToMyDate(object _DateTime, object _Style)
+        //{
+        //    SQLite_Date DateClass = new SQLite_Date(_DateTime);
+        //    return DateClass.GetDate();
+
+        //}
+
+        //public static DateTime ToMyDate(string _DateTime, object _Style)
+        //{
+        //     SQLite_Date DateClass = new SQLite_Date(_DateTime);
+        //    return DateClass.GetDate();
+        //}
 
         public static DateTime Today() 
         { 
@@ -177,6 +210,13 @@ namespace Applied_Accounts.Classes
         }
 
         #endregion
+
+        #region Convert into Words
+
+       
+
+        #endregion
+
 
         #region Table Enum values
 

@@ -33,22 +33,29 @@ namespace Applied_Accounts.Forms
             dt_Projects = AppliedTable.GetDataTable(Tables.Projects);
             dt_Units = AppliedTable.GetDataTable(Tables.Units);
 
-            cBoxSuppliers.DataSource = dt_Suppliers;
+            cBoxSuppliers.DataSource = dt_Suppliers.AsDataView();
             cBoxSuppliers.DisplayMember = "Title";
             cBoxSuppliers.ValueMember = "ID";
+            ((DataView)cBoxSuppliers.DataSource).Sort = "Title";
+            ((DataView)cBoxSuppliers.DataSource).RowFilter = "Active=true";
 
-            cBoxProjects.DataSource = dt_Projects;
+            cBoxProjects.DataSource = dt_Projects.AsDataView();
             cBoxProjects.DisplayMember = "Title";
             cBoxProjects.ValueMember = "ID";
+            ((DataView)cBoxProjects.DataSource).Sort = "Title";
+            ((DataView)cBoxProjects.DataSource).RowFilter = "Active=true";
 
-            cBoxCOA.DataSource = dt_COA;
+            cBoxCOA.DataSource = dt_COA.AsDataView();
             cBoxCOA.DisplayMember = "Title";
             cBoxCOA.ValueMember = "ID";
+            ((DataView)cBoxCOA.DataSource).Sort = "Title";
+            ((DataView)cBoxCOA.DataSource).RowFilter = "Active=true";
 
-            cBoxUnits.DataSource = dt_Units;
+            cBoxUnits.DataSource = dt_Units.AsDataView();
             cBoxUnits.DisplayMember = "Title";
             cBoxUnits.ValueMember = "ID";
-
+            ((DataView)cBoxUnits.DataSource).Sort = "Title";
+            ((DataView)cBoxUnits.DataSource).RowFilter = "Active=true";
         }
 
         private void frmGL_Supplier_Load(object sender, EventArgs e)
@@ -68,13 +75,13 @@ namespace Applied_Accounts.Forms
 
         private void btnPreview_Click(object sender, EventArgs e)
         {
+            // Set Parametes for Reporting Class
             MyReportClass.ID_Supplier = Conversion.ToInteger(cBoxSuppliers.SelectedValue);
             MyReportClass.ID_COA = Conversion.ToInteger(cBoxCOA.SelectedValue);
             MyReportClass.ID_Project = Conversion.ToInteger(cBoxProjects.SelectedValue);
             MyReportClass.ID_Unit = Conversion.ToInteger(cBoxUnits.SelectedValue);
             MyReportClass.Report_From = dt_From.Value;
             MyReportClass.Report_To = dt_To.Value;
-            //MyReportClass.PreviewForm = Applied.PreviewReports.Supplier_Ledger;
             MyReportClass.DataTableID = Tables.View_Supplier_Ledger;
             MyReportClass.DataSet_Name = "ds_GL_Supplier";                
             MyReportClass.Heading1 = "Supplier Ledger | " + cBoxSuppliers.Text;
@@ -161,6 +168,7 @@ namespace Applied_Accounts.Forms
 
         private void frmGL_Supplier_FormClosed(object sender, FormClosedEventArgs e)
         {
+            // Save Form Values into Applied Table.
             Applied.SetValue("rptGLSup_Supplier", cBoxSuppliers.SelectedValue, Applied.KeyType.Integer);
             Applied.SetValue("rptGLSup_COA", cBoxCOA.SelectedValue, Applied.KeyType.Integer);
             Applied.SetValue("rptGLSup_Project", cBoxProjects.SelectedValue, Applied.KeyType.Integer);

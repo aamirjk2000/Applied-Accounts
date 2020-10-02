@@ -110,7 +110,7 @@
                   <Width>0.8in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.51666in</Width>
+                  <Width>2.36041in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.8in</Width>
@@ -669,7 +669,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -1024,7 +1023,7 @@
             <DataSetName>ds_Project_Ledger</DataSetName>
             <Top>0.06944in</Top>
             <Height>1in</Height>
-            <Width>7.14583in</Width>
+            <Width>6.98958in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1035,7 +1034,7 @@
         <Height>1.06944in</Height>
         <Style />
       </Body>
-      <Width>7.14583in</Width>
+      <Width>6.98958in</Width>
       <Page>
         <PageHeader>
           <Height>1.00222in</Height>
@@ -1064,7 +1063,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox1</rd:DefaultName>
               <Height>0.25in</Height>
-              <Width>7.14583in</Width>
+              <Width>6.98958in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1096,7 +1095,7 @@
               <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.375in</Top>
               <Height>0.25in</Height>
-              <Width>7.14583in</Width>
+              <Width>6.98958in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1130,7 +1129,7 @@
               <rd:DefaultName>Textbox3</rd:DefaultName>
               <Top>0.69444in</Top>
               <Height>0.25in</Height>
-              <Width>7.14583in</Width>
+              <Width>6.98958in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -1207,7 +1206,7 @@
               <Top>0.05556in</Top>
               <Left>3.11333in</Left>
               <Height>0.25in</Height>
-              <Width>4.0325in</Width>
+              <Width>3.87625in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>

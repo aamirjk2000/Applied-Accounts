@@ -14,3 +14,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Style", "IDE0059:Unnecessary assignment of a value", Justification = "<Pending>" )]
 [assembly: SuppressMessage("Style", "IDE0017:Simplify object initialization", Justification = "<Pending>" )]
 [assembly: SuppressMessage("Style", "IDE0054:Use compound assignment", Justification = "<Pending>")]
+[assembly: SuppressMessage("CodeQuality", "IDE0052:Remove unread private members", Justification = "<Pending>")]

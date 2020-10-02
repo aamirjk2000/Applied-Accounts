@@ -32,6 +32,7 @@
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
             this.label10 = new System.Windows.Forms.Label();
+            this.MyNavigator = new Applied_Accounts.Navigator();
             this.label9 = new System.Windows.Forms.Label();
             this.Cost = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -52,10 +53,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P2 = new System.Windows.Forms.TabPage();
+            this.Grid_Projects = new Applied_Accounts.AppliedDataGrid();
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
-            this.MyNavigator = new Applied_Accounts.Navigator();
-            this.Grid_Projects = new Applied_Accounts.AppliedDataGrid();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -68,7 +68,7 @@
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
-            this.Pages.Size = new System.Drawing.Size(583, 426);
+            this.Pages.Size = new System.Drawing.Size(579, 426);
             this.Pages.TabIndex = 1;
             // 
             // P1
@@ -97,7 +97,7 @@
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
-            this.P1.Size = new System.Drawing.Size(575, 400);
+            this.P1.Size = new System.Drawing.Size(571, 400);
             this.P1.TabIndex = 0;
             this.P1.Text = "Record";
             this.P1.UseVisualStyleBackColor = true;
@@ -110,6 +110,21 @@
             this.label10.Size = new System.Drawing.Size(49, 13);
             this.label10.TabIndex = 19;
             this.label10.Text = "Remarks";
+            // 
+            // MyNavigator
+            // 
+            this.MyNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MyNavigator.Location = new System.Drawing.Point(79, 361);
+            this.MyNavigator.Name = "MyNavigator";
+            this.MyNavigator.Size = new System.Drawing.Size(457, 24);
+            this.MyNavigator.TabIndex = 0;
+            this.MyNavigator.Get_Values += new System.EventHandler(this.MyNavigator_Get_Values);
+            this.MyNavigator.Set_Values += new System.EventHandler(this.MyNavigator_Set_Values);
+            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
+            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
+            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
+            this.MyNavigator.Load += new System.EventHandler(this.MyNavigator_Load);
             // 
             // label9
             // 
@@ -272,10 +287,32 @@
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
             this.P2.Padding = new System.Windows.Forms.Padding(3);
-            this.P2.Size = new System.Drawing.Size(575, 400);
+            this.P2.Size = new System.Drawing.Size(571, 400);
             this.P2.TabIndex = 1;
             this.P2.Text = "List";
             this.P2.UseVisualStyleBackColor = true;
+            this.P2.Leave += new System.EventHandler(this.P2_Leave);
+            // 
+            // Grid_Projects
+            // 
+            this.Grid_Projects.Active = false;
+            this.Grid_Projects.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.Grid_Projects.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.Grid_Projects.ColumnsFormat = null;
+            this.Grid_Projects.ColumnsName = null;
+            this.Grid_Projects.ColumnsVisiable = null;
+            this.Grid_Projects.ColumnsWidth = null;
+            this.Grid_Projects.IsBrowseWin = false;
+            this.Grid_Projects.IsPressEnter = false;
+            this.Grid_Projects.Location = new System.Drawing.Point(6, 6);
+            this.Grid_Projects.MyDataRow = null;
+            this.Grid_Projects.MyDataView = null;
+            this.Grid_Projects.MyViewRow = null;
+            this.Grid_Projects.Name = "Grid_Projects";
+            this.Grid_Projects.RecordID = ((long)(0));
+            this.Grid_Projects.Size = new System.Drawing.Size(559, 384);
+            this.Grid_Projects.TabIndex = 0;
+            this.Grid_Projects.Load += new System.EventHandler(this.Grid_Load);
             // 
             // lblMessage
             // 
@@ -297,41 +334,6 @@
             this.btnExit.TabIndex = 3;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // MyNavigator
-            // 
-            this.MyNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MyNavigator.Location = new System.Drawing.Point(79, 361);
-            this.MyNavigator.Name = "MyNavigator";
-            this.MyNavigator.Size = new System.Drawing.Size(457, 24);
-            this.MyNavigator.TabIndex = 0;
-            this.MyNavigator.Get_Values += new System.EventHandler(this.MyNavigator_Get_Values);
-            this.MyNavigator.Set_Values += new System.EventHandler(this.MyNavigator_Set_Values);
-            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
-            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
-            this.MyNavigator.Load += new System.EventHandler(this.MyNavigator_Load);
-            // 
-            // Grid_Projects
-            // 
-            this.Grid_Projects.Active = false;
-            this.Grid_Projects.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Grid_Projects.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Grid_Projects.ColumnsFormat = null;
-            this.Grid_Projects.ColumnsName = null;
-            this.Grid_Projects.ColumnsVisiable = null;
-            this.Grid_Projects.ColumnsWidth = null;
-            this.Grid_Projects.IsBrowseWin = false;
-            this.Grid_Projects.IsPressEnter = false;
-            this.Grid_Projects.Location = new System.Drawing.Point(6, 6);
-            this.Grid_Projects.MyDataRow = null;
-            this.Grid_Projects.MyDataView = null;
-            this.Grid_Projects.Name = "Grid_Projects";
-            this.Grid_Projects.RecordID = ((long)(0));
-            this.Grid_Projects.Size = new System.Drawing.Size(563, 384);
-            this.Grid_Projects.TabIndex = 0;
-            this.Grid_Projects.Load += new System.EventHandler(this.Grid_Load);
             // 
             // frmProject
             // 

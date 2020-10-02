@@ -1,4 +1,6 @@
-﻿namespace Applied_Accounts
+﻿using System;
+
+namespace Applied_Accounts
 {
     partial class AppliedDataGrid
     {
@@ -29,10 +31,9 @@
         private void InitializeComponent()
         {
             this._DataGrid = new System.Windows.Forms.DataGridView();
-            this.lblMessage = new System.Windows.Forms.Label();
-            this.txtCode = new System.Windows.Forms.TextBox();
-            this.txtTag = new System.Windows.Forms.TextBox();
-            this.txtTitle = new System.Windows.Forms.TextBox();
+            this.txtFilter = new System.Windows.Forms.TextBox();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.lblFilter = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this._DataGrid)).BeginInit();
             this.SuspendLayout();
             // 
@@ -50,50 +51,40 @@
             this._DataGrid.Name = "_DataGrid";
             this._DataGrid.Size = new System.Drawing.Size(484, 296);
             this._DataGrid.TabIndex = 0;
-            this._DataGrid.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this._DataGrid_RowEnter);
-
+            this._DataGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this._DataGrid_CellMouseClick);
+            this._DataGrid.Enter += new System.EventHandler(this._DataGrid_Enter);
+            this._DataGrid.Leave += new System.EventHandler(this._DataGrid_Leave);
             // 
-            // lblMessage
+            // txtFilter
             // 
-            this.lblMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.lblMessage.AutoSize = true;
-            this.lblMessage.Location = new System.Drawing.Point(3, 308);
-            this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(31, 13);
-            this.lblMessage.TabIndex = 1;
-            this.lblMessage.Text = "Clear";
-            this.lblMessage.Click += new System.EventHandler(this.lblMessage_Click);
-            // 
-            // txtCode
-            // 
-            this.txtCode.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtCode.Location = new System.Drawing.Point(58, 305);
-            this.txtCode.Name = "txtCode";
-            this.txtCode.Size = new System.Drawing.Size(84, 20);
-            this.txtCode.TabIndex = 2;
-            this.txtCode.TextChanged += new System.EventHandler(this.txtCode_TextChanged);
-            this.txtCode.Leave += new System.EventHandler(this.txtCode_Leave);
-            // 
-            // txtTag
-            // 
-            this.txtTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.txtTag.Location = new System.Drawing.Point(148, 305);
-            this.txtTag.Name = "txtTag";
-            this.txtTag.Size = new System.Drawing.Size(84, 20);
-            this.txtTag.TabIndex = 3;
-            this.txtTag.TextChanged += new System.EventHandler(this.txtTag_TextChanged);
-            this.txtTag.Leave += new System.EventHandler(this.txtTag_Leave);
-            // 
-            // txtTitle
-            // 
-            this.txtTitle.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            this.txtFilter.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtTitle.Location = new System.Drawing.Point(238, 305);
-            this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(249, 20);
-            this.txtTitle.TabIndex = 4;
-            this.txtTitle.TextChanged += new System.EventHandler(this.txtTitle_TextChanged);
-            this.txtTitle.Leave += new System.EventHandler(this.txtTitle_Leave);
+            this.txtFilter.Location = new System.Drawing.Point(38, 305);
+            this.txtFilter.Name = "txtFilter";
+            this.txtFilter.Size = new System.Drawing.Size(393, 20);
+            this.txtFilter.TabIndex = 4;
+            this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
+            // 
+            // btnClear
+            // 
+            this.btnClear.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClear.Location = new System.Drawing.Point(437, 303);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(50, 23);
+            this.btnClear.TabIndex = 5;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
+            // lblFilter
+            // 
+            this.lblFilter.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblFilter.AutoSize = true;
+            this.lblFilter.Location = new System.Drawing.Point(3, 308);
+            this.lblFilter.Name = "lblFilter";
+            this.lblFilter.Size = new System.Drawing.Size(29, 13);
+            this.lblFilter.TabIndex = 6;
+            this.lblFilter.Text = "Filter";
             // 
             // AppliedDataGrid
             // 
@@ -101,15 +92,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.txtTitle);
-            this.Controls.Add(this.txtTag);
-            this.Controls.Add(this.txtCode);
-            this.Controls.Add(this.lblMessage);
+            this.Controls.Add(this.lblFilter);
+            this.Controls.Add(this.btnClear);
+            this.Controls.Add(this.txtFilter);
             this.Controls.Add(this._DataGrid);
             this.Name = "AppliedDataGrid";
             this.Size = new System.Drawing.Size(490, 331);
-            this.Enter += new System.EventHandler(this.AppliedDataGrid_Enter);
-            this.Leave += new System.EventHandler(this.AppliedDataGrid_Leave);
             ((System.ComponentModel.ISupportInitialize)(this._DataGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -119,9 +107,8 @@
         #endregion
 
         public System.Windows.Forms.DataGridView _DataGrid;
-        private System.Windows.Forms.TextBox txtCode;
-        private System.Windows.Forms.TextBox txtTag;
-        private System.Windows.Forms.TextBox txtTitle;
-        public System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.TextBox txtFilter;
+        private System.Windows.Forms.Label lblFilter;
+        private System.Windows.Forms.Button btnClear;
     }
 }

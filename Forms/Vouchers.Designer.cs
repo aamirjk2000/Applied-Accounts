@@ -32,6 +32,12 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVouchers));
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
+            this.txtEmployee = new System.Windows.Forms.TextBox();
+            this.txtStock = new System.Windows.Forms.TextBox();
+            this.txtUnit = new System.Windows.Forms.TextBox();
+            this.txtProject = new System.Windows.Forms.TextBox();
+            this.txtVonder = new System.Windows.Forms.TextBox();
+            this.txtAccount = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnNewVoucher = new System.Windows.Forms.Button();
             this.btnSaveVoucher = new System.Windows.Forms.Button();
@@ -88,6 +94,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P2 = new System.Windows.Forms.TabPage();
+            this.lblWords = new System.Windows.Forms.Label();
             this.Grid = new System.Windows.Forms.DataGridView();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
@@ -108,6 +115,12 @@
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.txtEmployee);
+            this.P1.Controls.Add(this.txtStock);
+            this.P1.Controls.Add(this.txtUnit);
+            this.P1.Controls.Add(this.txtProject);
+            this.P1.Controls.Add(this.txtVonder);
+            this.P1.Controls.Add(this.txtAccount);
             this.P1.Controls.Add(this.groupBox1);
             this.P1.Controls.Add(this.btnBottom);
             this.P1.Controls.Add(this.btnTop);
@@ -166,6 +179,50 @@
             this.P1.TabIndex = 0;
             this.P1.Text = "TRANSACTION";
             this.P1.UseVisualStyleBackColor = true;
+            // 
+            // txtEmployee
+            // 
+            this.txtEmployee.Location = new System.Drawing.Point(95, 246);
+            this.txtEmployee.Name = "txtEmployee";
+            this.txtEmployee.Size = new System.Drawing.Size(59, 20);
+            this.txtEmployee.TabIndex = 116;
+            // 
+            // txtStock
+            // 
+            this.txtStock.Location = new System.Drawing.Point(95, 218);
+            this.txtStock.Name = "txtStock";
+            this.txtStock.Size = new System.Drawing.Size(59, 20);
+            this.txtStock.TabIndex = 115;
+            // 
+            // txtUnit
+            // 
+            this.txtUnit.Location = new System.Drawing.Point(95, 191);
+            this.txtUnit.Name = "txtUnit";
+            this.txtUnit.Size = new System.Drawing.Size(59, 20);
+            this.txtUnit.TabIndex = 114;
+            // 
+            // txtProject
+            // 
+            this.txtProject.Location = new System.Drawing.Point(95, 164);
+            this.txtProject.Name = "txtProject";
+            this.txtProject.Size = new System.Drawing.Size(59, 20);
+            this.txtProject.TabIndex = 113;
+            // 
+            // txtVonder
+            // 
+            this.txtVonder.Location = new System.Drawing.Point(95, 137);
+            this.txtVonder.Name = "txtVonder";
+            this.txtVonder.Size = new System.Drawing.Size(59, 20);
+            this.txtVonder.TabIndex = 112;
+            // 
+            // txtAccount
+            // 
+            this.txtAccount.Location = new System.Drawing.Point(95, 111);
+            this.txtAccount.Name = "txtAccount";
+            this.txtAccount.Size = new System.Drawing.Size(59, 20);
+            this.txtAccount.TabIndex = 111;
+            this.txtAccount.Validating += new System.ComponentModel.CancelEventHandler(this.txtAccount_Validating);
+            this.txtAccount.Validated += new System.EventHandler(this.txtAccount_Validated);
             // 
             // groupBox1
             // 
@@ -369,17 +426,19 @@
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(92, 391);
+            this.txtRemarks.Location = new System.Drawing.Point(95, 391);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(495, 20);
             this.txtRemarks.TabIndex = 17;
+            this.txtRemarks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRemarks_KeyDown);
             // 
             // txtDescription
             // 
-            this.txtDescription.Location = new System.Drawing.Point(92, 361);
+            this.txtDescription.Location = new System.Drawing.Point(95, 361);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(495, 20);
             this.txtDescription.TabIndex = 16;
+            this.txtDescription.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDescription_KeyDown);
             // 
             // label17
             // 
@@ -461,7 +520,7 @@
             // 
             // txtChqNo
             // 
-            this.txtChqNo.Location = new System.Drawing.Point(94, 304);
+            this.txtChqNo.Location = new System.Drawing.Point(95, 304);
             this.txtChqNo.Name = "txtChqNo";
             this.txtChqNo.Size = new System.Drawing.Size(150, 20);
             this.txtChqNo.TabIndex = 12;
@@ -541,9 +600,9 @@
             // cBoxEmployees
             // 
             this.cBoxEmployees.FormattingEnabled = true;
-            this.cBoxEmployees.Location = new System.Drawing.Point(95, 245);
+            this.cBoxEmployees.Location = new System.Drawing.Point(160, 245);
             this.cBoxEmployees.Name = "cBoxEmployees";
-            this.cBoxEmployees.Size = new System.Drawing.Size(493, 21);
+            this.cBoxEmployees.Size = new System.Drawing.Size(428, 21);
             this.cBoxEmployees.TabIndex = 10;
             this.cBoxEmployees.Leave += new System.EventHandler(this.cBoxEmployees_Leave);
             // 
@@ -594,9 +653,9 @@
             // 
             // txtSRNO
             // 
-            this.txtSRNO.Location = new System.Drawing.Point(94, 76);
+            this.txtSRNO.Location = new System.Drawing.Point(95, 76);
             this.txtSRNO.Name = "txtSRNO";
-            this.txtSRNO.Size = new System.Drawing.Size(100, 20);
+            this.txtSRNO.Size = new System.Drawing.Size(59, 20);
             this.txtSRNO.TabIndex = 4;
             this.txtSRNO.Enter += new System.EventHandler(this.txtSRNO_Enter);
             this.txtSRNO.Leave += new System.EventHandler(this.txtSRNO_Leave);
@@ -606,45 +665,45 @@
             // cBoxStocks
             // 
             this.cBoxStocks.FormattingEnabled = true;
-            this.cBoxStocks.Location = new System.Drawing.Point(94, 218);
+            this.cBoxStocks.Location = new System.Drawing.Point(160, 218);
             this.cBoxStocks.Name = "cBoxStocks";
-            this.cBoxStocks.Size = new System.Drawing.Size(493, 21);
+            this.cBoxStocks.Size = new System.Drawing.Size(427, 21);
             this.cBoxStocks.TabIndex = 9;
             this.cBoxStocks.Leave += new System.EventHandler(this.cBoxStocks_Leave);
             // 
             // cBoxUnits
             // 
             this.cBoxUnits.FormattingEnabled = true;
-            this.cBoxUnits.Location = new System.Drawing.Point(94, 191);
+            this.cBoxUnits.Location = new System.Drawing.Point(160, 191);
             this.cBoxUnits.Name = "cBoxUnits";
-            this.cBoxUnits.Size = new System.Drawing.Size(493, 21);
+            this.cBoxUnits.Size = new System.Drawing.Size(427, 21);
             this.cBoxUnits.TabIndex = 8;
             this.cBoxUnits.Leave += new System.EventHandler(this.cBoxUnits_Leave);
             // 
             // cBoxProjects
             // 
             this.cBoxProjects.FormattingEnabled = true;
-            this.cBoxProjects.Location = new System.Drawing.Point(94, 164);
+            this.cBoxProjects.Location = new System.Drawing.Point(160, 164);
             this.cBoxProjects.Name = "cBoxProjects";
-            this.cBoxProjects.Size = new System.Drawing.Size(493, 21);
+            this.cBoxProjects.Size = new System.Drawing.Size(427, 21);
             this.cBoxProjects.TabIndex = 7;
             this.cBoxProjects.Leave += new System.EventHandler(this.cBoxProjects_Leave);
             // 
             // cBoxSuppliers
             // 
             this.cBoxSuppliers.FormattingEnabled = true;
-            this.cBoxSuppliers.Location = new System.Drawing.Point(94, 137);
+            this.cBoxSuppliers.Location = new System.Drawing.Point(160, 137);
             this.cBoxSuppliers.Name = "cBoxSuppliers";
-            this.cBoxSuppliers.Size = new System.Drawing.Size(493, 21);
+            this.cBoxSuppliers.Size = new System.Drawing.Size(427, 21);
             this.cBoxSuppliers.TabIndex = 6;
             this.cBoxSuppliers.Leave += new System.EventHandler(this.cBoxSuppliers_Leave);
             // 
             // cBoxAccounts
             // 
             this.cBoxAccounts.FormattingEnabled = true;
-            this.cBoxAccounts.Location = new System.Drawing.Point(94, 110);
+            this.cBoxAccounts.Location = new System.Drawing.Point(160, 110);
             this.cBoxAccounts.Name = "cBoxAccounts";
-            this.cBoxAccounts.Size = new System.Drawing.Size(493, 21);
+            this.cBoxAccounts.Size = new System.Drawing.Size(427, 21);
             this.cBoxAccounts.TabIndex = 5;
             this.cBoxAccounts.Enter += new System.EventHandler(this.cBoxAccounts_Enter);
             this.cBoxAccounts.Leave += new System.EventHandler(this.cBoxAccounts_Leave);
@@ -662,7 +721,7 @@
             // 
             this.dtVouDate.CustomFormat = "dd-MMM-yyyy";
             this.dtVouDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtVouDate.Location = new System.Drawing.Point(267, 21);
+            this.dtVouDate.Location = new System.Drawing.Point(267, 24);
             this.dtVouDate.Name = "dtVouDate";
             this.dtVouDate.Size = new System.Drawing.Size(104, 20);
             this.dtVouDate.TabIndex = 2;
@@ -681,7 +740,7 @@
             // 
             // txtVouNo
             // 
-            this.txtVouNo.Location = new System.Drawing.Point(94, 21);
+            this.txtVouNo.Location = new System.Drawing.Point(95, 24);
             this.txtVouNo.Name = "txtVouNo";
             this.txtVouNo.Size = new System.Drawing.Size(87, 20);
             this.txtVouNo.TabIndex = 1;
@@ -736,6 +795,7 @@
             // 
             // P2
             // 
+            this.P2.Controls.Add(this.lblWords);
             this.P2.Controls.Add(this.Grid);
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
@@ -746,12 +806,21 @@
             this.P2.UseVisualStyleBackColor = true;
             this.P2.Enter += new System.EventHandler(this.P2_Enter);
             // 
+            // lblWords
+            // 
+            this.lblWords.AutoSize = true;
+            this.lblWords.Location = new System.Drawing.Point(7, 410);
+            this.lblWords.Name = "lblWords";
+            this.lblWords.Size = new System.Drawing.Size(85, 13);
+            this.lblWords.TabIndex = 1;
+            this.lblWords.Text = "Amount in words";
+            // 
             // Grid
             // 
             this.Grid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Grid.Location = new System.Drawing.Point(6, 6);
             this.Grid.Name = "Grid";
-            this.Grid.Size = new System.Drawing.Size(756, 422);
+            this.Grid.Size = new System.Drawing.Size(756, 398);
             this.Grid.TabIndex = 0;
             // 
             // frmVouchers
@@ -769,6 +838,7 @@
             this.P1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.P2.ResumeLayout(false);
+            this.P2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
             this.ResumeLayout(false);
 
@@ -835,5 +905,12 @@
         private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.Button btnNewVoucher;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label lblWords;
+        private System.Windows.Forms.TextBox txtEmployee;
+        private System.Windows.Forms.TextBox txtStock;
+        private System.Windows.Forms.TextBox txtUnit;
+        private System.Windows.Forms.TextBox txtProject;
+        private System.Windows.Forms.TextBox txtVonder;
+        private System.Windows.Forms.TextBox txtAccount;
     }
 }

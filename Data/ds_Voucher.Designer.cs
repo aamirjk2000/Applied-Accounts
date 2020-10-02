@@ -295,6 +295,10 @@ namespace Applied_Accounts.Data {
             
             private global::System.Data.DataColumn columnVou_Date;
             
+            private global::System.Data.DataColumn columnCOA_ID;
+            
+            private global::System.Data.DataColumn columnSupplier_ID;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public View_VoucherDataTable() {
@@ -394,6 +398,22 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn COA_IDColumn {
+                get {
+                    return this.columnCOA_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Supplier_IDColumn {
+                get {
+                    return this.columnSupplier_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -429,7 +449,7 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public View_VoucherRow AddView_VoucherRow(int SRNO, string ACCOUNT, string SUPPLIER, long DR, long CR, string Description, string Vou_No, System.DateTime Vou_Date) {
+            public View_VoucherRow AddView_VoucherRow(int SRNO, string ACCOUNT, string SUPPLIER, string DR, string CR, string Description, string Vou_No, string Vou_Date, int COA_ID, int Supplier_ID) {
                 View_VoucherRow rowView_VoucherRow = ((View_VoucherRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         SRNO,
@@ -439,7 +459,9 @@ namespace Applied_Accounts.Data {
                         CR,
                         Description,
                         Vou_No,
-                        Vou_Date};
+                        Vou_Date,
+                        COA_ID,
+                        Supplier_ID};
                 rowView_VoucherRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowView_VoucherRow);
                 return rowView_VoucherRow;
@@ -470,6 +492,8 @@ namespace Applied_Accounts.Data {
                 this.columnDescription = base.Columns["Description"];
                 this.columnVou_No = base.Columns["Vou_No"];
                 this.columnVou_Date = base.Columns["Vou_Date"];
+                this.columnCOA_ID = base.Columns["COA_ID"];
+                this.columnSupplier_ID = base.Columns["Supplier_ID"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -481,28 +505,35 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnACCOUNT);
                 this.columnSUPPLIER = new global::System.Data.DataColumn("SUPPLIER", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSUPPLIER);
-                this.columnDR = new global::System.Data.DataColumn("DR", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnDR = new global::System.Data.DataColumn("DR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDR);
-                this.columnCR = new global::System.Data.DataColumn("CR", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnCR = new global::System.Data.DataColumn("CR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCR);
                 this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescription);
                 this.columnVou_No = new global::System.Data.DataColumn("Vou_No", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVou_No);
-                this.columnVou_Date = new global::System.Data.DataColumn("Vou_Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnVou_Date = new global::System.Data.DataColumn("Vou_Date", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVou_Date);
+                this.columnCOA_ID = new global::System.Data.DataColumn("COA_ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOA_ID);
+                this.columnSupplier_ID = new global::System.Data.DataColumn("Supplier_ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSupplier_ID);
                 this.columnSRNO.AllowDBNull = false;
                 this.columnACCOUNT.AllowDBNull = false;
                 this.columnACCOUNT.MaxLength = 65536;
                 this.columnSUPPLIER.AllowDBNull = false;
                 this.columnSUPPLIER.MaxLength = 300;
                 this.columnDR.AllowDBNull = false;
+                this.columnDR.MaxLength = 15;
                 this.columnCR.AllowDBNull = false;
+                this.columnCR.MaxLength = 15;
                 this.columnDescription.AllowDBNull = false;
                 this.columnDescription.MaxLength = 200;
                 this.columnVou_No.AllowDBNull = false;
                 this.columnVou_No.MaxLength = 12;
-                this.columnVou_Date.AllowDBNull = false;
+                this.columnVou_Date.MaxLength = 255;
+                this.columnCOA_ID.AllowDBNull = false;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -678,9 +709,9 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public long DR {
+            public string DR {
                 get {
-                    return ((long)(this[this.tableView_Voucher.DRColumn]));
+                    return ((string)(this[this.tableView_Voucher.DRColumn]));
                 }
                 set {
                     this[this.tableView_Voucher.DRColumn] = value;
@@ -689,9 +720,9 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public long CR {
+            public string CR {
                 get {
-                    return ((long)(this[this.tableView_Voucher.CRColumn]));
+                    return ((string)(this[this.tableView_Voucher.CRColumn]));
                 }
                 set {
                     this[this.tableView_Voucher.CRColumn] = value;
@@ -722,13 +753,69 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime Vou_Date {
+            public string Vou_Date {
                 get {
-                    return ((global::System.DateTime)(this[this.tableView_Voucher.Vou_DateColumn]));
+                    try {
+                        return ((string)(this[this.tableView_Voucher.Vou_DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Vou_Date\' in table \'View_Voucher\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableView_Voucher.Vou_DateColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int COA_ID {
+                get {
+                    return ((int)(this[this.tableView_Voucher.COA_IDColumn]));
+                }
+                set {
+                    this[this.tableView_Voucher.COA_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int Supplier_ID {
+                get {
+                    try {
+                        return ((int)(this[this.tableView_Voucher.Supplier_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Supplier_ID\' in table \'View_Voucher\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView_Voucher.Supplier_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsVou_DateNull() {
+                return this.IsNull(this.tableView_Voucher.Vou_DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetVou_DateNull() {
+                this[this.tableView_Voucher.Vou_DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsSupplier_IDNull() {
+                return this.IsNull(this.tableView_Voucher.Supplier_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetSupplier_IDNull() {
+                this[this.tableView_Voucher.Supplier_IDColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -899,6 +986,8 @@ namespace Applied_Accounts.Data.ds_VoucherTableAdapters {
             tableMapping.ColumnMappings.Add("Description", "Description");
             tableMapping.ColumnMappings.Add("Vou_No", "Vou_No");
             tableMapping.ColumnMappings.Add("Vou_Date", "Vou_Date");
+            tableMapping.ColumnMappings.Add("COA_ID", "COA_ID");
+            tableMapping.ColumnMappings.Add("Supplier_ID", "Supplier_ID");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -916,7 +1005,7 @@ namespace Applied_Accounts.Data.ds_VoucherTableAdapters {
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
             this._commandCollection[0].CommandText = "SELECT \"SRNO\", \"ACCOUNT\", \"SUPPLIER\", \"DR\", \"CR\", \"Description\", \"Vou_No\", \"Vou_D" +
-                "ate\" FROM \"View_Voucher\"";
+                "ate\", \"COA_ID\", \"Supplier_ID\" FROM \"View_Voucher\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

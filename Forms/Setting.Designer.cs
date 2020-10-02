@@ -35,12 +35,20 @@
             this.dtAccountingTo = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtReportDateFormat = new System.Windows.Forms.TextBox();
+            this.txtDatePickerFormat = new System.Windows.Forms.TextBox();
+            this.txtDefaultDateFormat = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txtComboDateFormat = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 25);
+            this.label1.Location = new System.Drawing.Point(12, 25);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 13);
             this.label1.TabIndex = 0;
@@ -48,7 +56,7 @@
             // 
             // txtCompanyName
             // 
-            this.txtCompanyName.Location = new System.Drawing.Point(113, 25);
+            this.txtCompanyName.Location = new System.Drawing.Point(143, 25);
             this.txtCompanyName.Name = "txtCompanyName";
             this.txtCompanyName.Size = new System.Drawing.Size(510, 20);
             this.txtCompanyName.TabIndex = 1;
@@ -84,7 +92,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 63);
+            this.label2.Location = new System.Drawing.Point(12, 63);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(107, 13);
             this.label2.TabIndex = 3;
@@ -93,17 +101,93 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(13, 106);
+            this.label3.Location = new System.Drawing.Point(12, 106);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(96, 13);
             this.label3.TabIndex = 4;
             this.label3.Text = "Fiscal Year End on";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(12, 150);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(100, 13);
+            this.label4.TabIndex = 100;
+            this.label4.Text = "Report Date Format";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(14, 176);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(98, 13);
+            this.label5.TabIndex = 101;
+            this.label5.Text = "Date Picker Format";
+            // 
+            // txtReportDateFormat
+            // 
+            this.txtReportDateFormat.Location = new System.Drawing.Point(143, 147);
+            this.txtReportDateFormat.Name = "txtReportDateFormat";
+            this.txtReportDateFormat.Size = new System.Drawing.Size(200, 20);
+            this.txtReportDateFormat.TabIndex = 102;
+            this.txtReportDateFormat.Leave += new System.EventHandler(this.txtReportDateFormat_Leave);
+            // 
+            // txtDatePickerFormat
+            // 
+            this.txtDatePickerFormat.Location = new System.Drawing.Point(143, 173);
+            this.txtDatePickerFormat.Name = "txtDatePickerFormat";
+            this.txtDatePickerFormat.Size = new System.Drawing.Size(200, 20);
+            this.txtDatePickerFormat.TabIndex = 103;
+            this.txtDatePickerFormat.Leave += new System.EventHandler(this.txtDatePickerFormat_Leave);
+            // 
+            // txtDefaultDateFormat
+            // 
+            this.txtDefaultDateFormat.Location = new System.Drawing.Point(143, 199);
+            this.txtDefaultDateFormat.Name = "txtDefaultDateFormat";
+            this.txtDefaultDateFormat.Size = new System.Drawing.Size(200, 20);
+            this.txtDefaultDateFormat.TabIndex = 105;
+            this.txtDefaultDateFormat.Leave += new System.EventHandler(this.txtDefaultDateFormat_Leave);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(14, 202);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(102, 13);
+            this.label6.TabIndex = 104;
+            this.label6.Text = "Default Date Format";
+            // 
+            // txtComboDateFormat
+            // 
+            this.txtComboDateFormat.Location = new System.Drawing.Point(143, 225);
+            this.txtComboDateFormat.Name = "txtComboDateFormat";
+            this.txtComboDateFormat.Size = new System.Drawing.Size(200, 20);
+            this.txtComboDateFormat.TabIndex = 107;
+            this.txtComboDateFormat.Leave += new System.EventHandler(this.txtComboDateFormat_Leave);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(14, 228);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(101, 13);
+            this.label7.TabIndex = 106;
+            this.label7.Text = "Combo Date Format";
             // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtComboDateFormat);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.txtDefaultDateFormat);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.txtDatePickerFormat);
+            this.Controls.Add(this.txtReportDateFormat);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.dtAccountingTo);
@@ -128,5 +212,13 @@
         private System.Windows.Forms.DateTimePicker dtAccountingTo;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.TextBox txtReportDateFormat;
+        private System.Windows.Forms.TextBox txtDatePickerFormat;
+        private System.Windows.Forms.TextBox txtDefaultDateFormat;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txtComboDateFormat;
+        private System.Windows.Forms.Label label7;
     }
 }

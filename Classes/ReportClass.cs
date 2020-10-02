@@ -42,6 +42,7 @@ namespace Applied_Accounts.Classes
         public string ReportView_Filter { get; set; }
         public string ReportView_Sort { get; set; }
         public string Report_Location { get; set; }
+        
 
         //======================================
         public ReportClass()
@@ -55,9 +56,16 @@ namespace Applied_Accounts.Classes
 
             Form _PreviewForm =  new Preview.frmPreview_Reports(this);
 
+            if(Report_Data==null)
+            {
+                MessageBox.Show("Report data is null", "Report_Data==null");
+                return;
+            }
+
+
             Report_Data.Sort = ReportView_Sort;
 
-            if (_PreviewForm == null) { MessageBox.Show("Report Name is not valid.", "ERROR"); return; }          // Return if report object not load poperly.
+            if (_PreviewForm == null) { MessageBox.Show("Report Name is not valid.", "_PreviewForm"); return; }          // Return if report object not load poperly.
 
             if (Report_Data.Count>0)
             {

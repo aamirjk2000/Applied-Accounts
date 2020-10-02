@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace Applied_Accounts
@@ -23,7 +24,7 @@ namespace Applied_Accounts
 
         public DataTable MyDataTable = new DataTable();
         public DataView MyDataView = new DataView();
-        public int MyTableID  { get; set; }
+        public int MyTableID { get; set; }
         public string MyPrimaryKeyName { get; set; }
         public long MyPrimaryKeyValue = 0;
         public bool IsSaved;
@@ -68,14 +69,14 @@ namespace Applied_Accounts
         }
         public ThisTable(DataTable _DataTable)
         {
-            if(_DataTable!=null)
+            if (_DataTable != null)
             {
                 //MessageBox.Show("Table name is not assigned", "ERROR");
                 initialize(_DataTable);
             }
         }
-        
-           // initialize the class.
+
+        // initialize the class.
         private void initialize(DataTable _DataTable)
         {
             if (_DataTable != null)
@@ -83,7 +84,7 @@ namespace Applied_Accounts
                 // Original row has data as stored in DataTable. it wwould be used as restore the original data
                 // into Text Field if user cancelled the edited field (TextBox.text).
 
-                
+
                 Active = true;
                 MyTableID = (int)Enum.Parse(typeof(Tables), _DataTable.TableName);
                 MyDataTable = _DataTable;
@@ -95,8 +96,8 @@ namespace Applied_Accounts
                 MyPrimaryKeyName = "ID";
 
                 if (_DataTable.Rows.Count > 0)              // Initialize the first record PK value
-                        { MyPrimaryKeyValue = (long)_DataTable.Rows[0][MyPrimaryKeyName]; }
-                else    { MyPrimaryKeyValue = -1; }
+                { MyPrimaryKeyValue = (long)_DataTable.Rows[0][MyPrimaryKeyName]; }
+                else { MyPrimaryKeyValue = -1; }
 
 
                 MoveTop();                                  // Table row point at first record.
@@ -116,7 +117,7 @@ namespace Applied_Accounts
         {
             return MyDataTable.NewRow();
         }
-        
+
         public DataRow GetRow(int _ID)                          // New Data Row from Table
         {
             if (_ID == -1)                                    // Get New Row if Table is empty.
@@ -127,10 +128,10 @@ namespace Applied_Accounts
                 //else {return MyDataView.ToTable().Rows[0];}         // return row
             }
             else
-            { 
-                if(MyPrimaryKeyName.Length==0) { MyPrimaryKeyName = "ID"; }                        // Assign ID Column as PK if not exist.
-                MyDataView.RowFilter = string.Concat(MyPrimaryKeyName,"=", _ID.ToString());        // Get DataRow after filter condition appled.
-                if (MyDataView.Count == 1) { return MyDataView.ToTable().Rows[0];}                 // Get a row from Table is exist.
+            {
+                if (MyPrimaryKeyName.Length == 0) { MyPrimaryKeyName = "ID"; }                        // Assign ID Column as PK if not exist.
+                MyDataView.RowFilter = string.Concat(MyPrimaryKeyName, "=", _ID.ToString());        // Get DataRow after filter condition appled.
+                if (MyDataView.Count == 1) { return MyDataView.ToTable().Rows[0]; }                 // Get a row from Table is exist.
                 else { return GetNewRow(); }                                               // Get New Row if Filter count zero rows.
             }
         }
@@ -152,7 +153,7 @@ namespace Applied_Accounts
 
             long _Result = 0;
 
-            if(MyDataTable.Rows.Count==0)
+            if (MyDataTable.Rows.Count == 0)
             {
                 _Result = 0;
             }
@@ -180,10 +181,10 @@ namespace Applied_Accounts
         }
         public string Save(DataRow _DataRow)                    // Save the record with specific Data Row.
         {
-            if(ShowSaveMessage)                     // Show Message Box ans Ask to save the record?
-            { 
-                DialogResult Ask = MessageBox.Show("Are you Sure to Save","SAVE RECORD",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
-                if(Ask==DialogResult.No) { return "Cancelled.";}
+            if (ShowSaveMessage)                     // Show Message Box ans Ask to save the record?
+            {
+                DialogResult Ask = MessageBox.Show("Are you Sure to Save", "SAVE RECORD", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (Ask == DialogResult.No) { return "Cancelled."; }
             }
 
             string _Message;                                                // Return value of this procedure.
@@ -193,11 +194,11 @@ namespace Applied_Accounts
 
             _IsError = false;
 
-            if(MyPrimaryKeyValue<=0)                                        // return if Table PK not exist.
+            if (MyPrimaryKeyValue <= 0)                                        // return if Table PK not exist.
             {
                 MessageBox.Show("Primary Key not found.", "ERROR");
-                return "Primary Key not found."; 
-            } 
+                return "Primary Key not found.";
+            }
 
 
             //MyDataView.RowFilter = string.Concat(MyPrimaryKeyName, "=", MyPrimaryKeyValue);  OLD
@@ -227,7 +228,7 @@ namespace Applied_Accounts
                     {
                         _IsError = true;
                         IsSaved = false;
-                        _Message = string.Concat("ERROR : ", MyDataView.Count.ToString().Trim(), " record found to save.") ;
+                        _Message = string.Concat("ERROR : ", MyDataView.Count.ToString().Trim(), " record found to save.");
                         break;
                     }
             }
@@ -238,7 +239,7 @@ namespace Applied_Accounts
                 {
                     _Command.Connection.Open();
                 }
-                
+
                 try
                 {
                     _Message = _Command.ExecuteNonQuery().ToString() + _Message;
@@ -253,12 +254,12 @@ namespace Applied_Accounts
                 }
             }
 
-            if(IsSaved)
+            if (IsSaved)
             {
                 Update(MyTableID);               // update Data Table After Save row in DB
             }
 
-            
+
             MyMessage = _Message;                       // Save the message to Class Message 
             return MyMessage;
         }
@@ -292,7 +293,7 @@ namespace Applied_Accounts
                     }
                 }
                 else
-                { 
+                {
                     MessageBox.Show("Deletion Canceled", "DELETE RECORD", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
@@ -302,6 +303,29 @@ namespace Applied_Accounts
             return MyMessage;
         }
 
+        public void Save_Active(long _ID)
+        {
+            bool IsActive;
+            DataView _DataView = MyDataTable.AsDataView();
+            DataRow _DataRow = MyDataTable.NewRow();
+            _DataView.RowFilter = "ID=" + _ID.ToString();
+            if (_DataView.Count == 1)
+            {
+                _DataRow = _DataView[0].Row;
+                IsActive = (bool)_DataRow["Active"];
+
+                if (IsActive)
+                {
+                    _DataRow["Active"] = false;
+                }
+                else
+                {
+                    _DataRow["Active"] = true;
+                }
+            }
+
+            Save(_DataRow, false);
+        }
         #endregion
 
         // Seek
@@ -309,11 +333,11 @@ namespace Applied_Accounts
 
         public bool Seek(int _ID)
         {
-            MyDataView.RowFilter = string.Concat(MyPrimaryKeyName,"=", _ID.ToString());
-            if (MyDataView.Count == 1) 
-                { return true;} 
-            else 
-                { return false;}
+            MyDataView.RowFilter = string.Concat(MyPrimaryKeyName, "=", _ID.ToString());
+            if (MyDataView.Count == 1)
+            { return true; }
+            else
+            { return false; }
         }
 
         public bool Seek(string _Filter)
@@ -335,7 +359,7 @@ namespace Applied_Accounts
 
         public void Next() { MoveNext(); }
 
-        public void Previous() { MovePrevious(); } 
+        public void Previous() { MovePrevious(); }
 
         public void Top() { MoveTop(); }
 
@@ -346,7 +370,7 @@ namespace Applied_Accounts
         public void MoveNext()
         {
             Row_Index = MyDataTable.Rows.IndexOf(MyDataRow) + 1;
-            if (Row_Index > (Count-1)) { Row_Index = (Count-1); }       // if index is more than total record. get last record
+            if (Row_Index > (Count - 1)) { Row_Index = (Count - 1); }       // if index is more than total record. get last record
             MyDataRow = MyDataTable.Rows[Row_Index];
         }
 
@@ -360,11 +384,11 @@ namespace Applied_Accounts
         public void MoveTop()
         {
             Row_Index = 0;
-            
-            if (MyDataTable.Rows.Count > 0)     
-                    { MyDataRow = MyDataTable.Rows[Row_Index];}
+
+            if (MyDataTable.Rows.Count > 0)
+            { MyDataRow = MyDataTable.Rows[Row_Index]; }
             else
-            
+
             { MyDataRow = GetNewRow(); }
         }
 
@@ -373,11 +397,11 @@ namespace Applied_Accounts
             if (MyDataTable.Rows.Count > 0)
             {
                 Row_Index = MyDataTable.Rows.Count - 1;
-                MyDataRow = MyDataTable.Rows[Row_Index]; 
+                MyDataRow = MyDataTable.Rows[Row_Index];
             }
             else
             {
-                Row_Index = 0 ;
+                Row_Index = 0;
                 MyDataRow = GetNewRow();
             }
         }
@@ -392,6 +416,6 @@ namespace Applied_Accounts
             MyDataRow = GetRow(Row_Index);   //MyDataTable.Rows[Row_Index];                                // Get current Row
         }
         // Data Conversion
-       
+
     }                                   // Main Class End
 }                                       // Name Space End.

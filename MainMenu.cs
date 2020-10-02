@@ -133,14 +133,7 @@ namespace Applied_Accounts
             frmGL_Project ThisForm = new frmGL_Project();
             ThisForm.Show();
         }
-
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            DateTime _DateTime = Conversion.ToMyDate("2019-07-01", Applied.DateTimeStyle.DataColumn);
-
-            MessageBox.Show(_DateTime.ToString());    
-        }
-
+        
         private void mnuTrialBalance_Click(object sender, EventArgs e)
         {
 
@@ -152,9 +145,6 @@ namespace Applied_Accounts
         {
             frmUsers ThisForm = new frmUsers(Program.User);
             ThisForm.Show();
-
-
-
         }
     }
 }

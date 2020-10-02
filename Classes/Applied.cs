@@ -29,6 +29,7 @@ namespace Applied_Accounts.Classes
             Voucher_MaxDate = (DateTime)GetValue("VouDate2", (int)KeyType.Date);
         }
 
+
         #region Interface Codes
 
         public DateTime MinVouDate()
@@ -119,7 +120,7 @@ namespace Applied_Accounts.Classes
                 _DateString = _DataView[0].Row["sValue"].ToString();
             }
 
-            return Conversion.ToMyDate(_DateString, DateTimeStyle.DataColumn);
+            return Conversion.ToDate(_DateString);
         }
 
         public static DateTime GetVouDate(string _Key)
@@ -355,6 +356,18 @@ namespace Applied_Accounts.Classes
             return ShowBrowseWin(new DataView(_DataTable), _CurrentValue);
         }
 
+        public static string Amount2Words(object _Amount)
+        {
+            InWords WordClass = new InWords(_Amount);
+            string result = WordClass.ToWords();
+            return result;
+        }
 
+        public static string Title(int _ID, DataView _DataView)                 // return Title by ID of Data Table
+        {
+            _DataView.RowFilter = "ID=" + _ID.ToString();
+            if(_DataView.Count==1) { return _DataView[0].Row["title"].ToString(); }
+            return "";
+        }
     }       // END Main Class
 }           // END NameSpace

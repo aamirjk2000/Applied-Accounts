@@ -269,7 +269,6 @@ namespace Applied_Accounts
             }
             return _DataRow;
         }
-
         public static DataTable GetTable_TB_period(DateTime _From, DateTime _To)
         {
             DataTable _DataTable = GetDataTable(Tables.View_TB_Period);
@@ -346,7 +345,10 @@ namespace Applied_Accounts
             }
             return _DataTable;
         }
-
+        public static int GetTable_ID(DataTable _DataTable)
+        {
+            return (int)((Tables)Enum.Parse(typeof(Tables), _DataTable.TableName));
+        }
     }                             // Main
 
 

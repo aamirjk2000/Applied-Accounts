@@ -58,7 +58,7 @@ namespace Applied_Accounts.Reports
                 MyDataView.RowFilter = string.Concat("Vou_No='", _Textbox.Text.Trim(), "'");
 
                 if (MyDataView.Count > 0)
-                { MyReportClass.Report_From = Conversion.ToMyDate(MyDataView[0].Row["Vou_Date"], Applied.DateTimeStyle.DataColumn); }
+                { MyReportClass.Report_From = Conversion.ToDate(MyDataView[0].Row["Vou_Date"].ToString()); }
                 
             }
             else

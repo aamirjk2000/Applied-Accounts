@@ -91,6 +91,7 @@
     <Compile Include="Classes\Connection.cs" />
     <Compile Include="Classes\Conversion.cs" />
     <Compile Include="Classes\DataSets.cs" />
+    <Compile Include="Classes\InWords.cs" />
     <Compile Include="Classes\MigrationClass.cs" />
     <Compile Include="Classes\ReportClass.cs" />
     <Compile Include="Classes\SQLite_Date.cs" />
@@ -155,6 +156,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_Trial_Balance_Period.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ds_Voucher.cs">
+      <DependentUpon>ds_Voucher.xsd</DependentUpon>
     </Compile>
     <Compile Include="Data\ds_Voucher.Designer.cs">
       <AutoGen>True</AutoGen>

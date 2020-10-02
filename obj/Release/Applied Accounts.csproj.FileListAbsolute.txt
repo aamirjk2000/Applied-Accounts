@@ -146,9 +146,6 @@ F:\Applied\Applied-Accounts\bin\Release\System.Data.SQLite.Linq.dll
 F:\Applied\Applied-Accounts\bin\Release\Connection_Class.dll
 F:\Applied\Applied-Accounts\bin\Release\Connection_Class.pdb
 F:\Applied\Applied-Accounts\bin\Release\Connection_Class.xml
-G:\Applied Accounts\Applied Accounts.exe.config
-G:\Applied Accounts\Applied Accounts.exe
-G:\Applied Accounts\Applied Accounts.pdb
 F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe.config
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.AppliedDataGrid.resources
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Components.FKeyID.resources
@@ -184,13 +181,15 @@ F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.CopyComplete
 F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe
 F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.pdb
 F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csprojAssemblyReference.cache
-G:\Applied Accounts\Applied Accounts.exe.manifest
-G:\Applied Accounts\Applied Accounts.application
 F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe.manifest
 F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.application
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmTrial_Balance.resources
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Preview.frmPreview_Trial_Balance.resources
-D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csprojAssemblyReference.cache
+G:\Applied Accounts\Applied Accounts.exe.config
+G:\Applied Accounts\Applied Accounts.exe.manifest
+G:\Applied Accounts\Applied Accounts.application
+G:\Applied Accounts\Applied Accounts.exe
+G:\Applied Accounts\Applied Accounts.pdb
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.AppliedDataGrid.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Components.FKeyID.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.MyTextBox.resources
@@ -231,3 +230,4 @@ D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.application
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.pdb
+D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csprojAssemblyReference.cache

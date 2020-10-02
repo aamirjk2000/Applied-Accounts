@@ -72,15 +72,15 @@ namespace Applied_Accounts.Forms
                 _Row["COA"] = cBoxCOA.SelectedValue;   //_DataTable.Rows[0]["COA"];
                 _Row["COA_Title"] = cBoxCOA.Text;      //_DataTable.Rows[0]["COA_Title"];
 
-                if ((long)_OBalTable.Rows[0]["Amount"] > 0)
+                if ((double)_OBalTable.Rows[0]["Amount"] > 0)
                 {
-                    _Row["DR"] = (long)_OBalTable.Rows[0]["Amount"];
+                    _Row["DR"] = (double)_OBalTable.Rows[0]["Amount"];
                     _Row["CR"] = 0;
                 }
                 else
                 {
                     _Row["DR"] = 0;
-                    _Row["CR"] = (long)_OBalTable.Rows[0]["Amount"] * -1;
+                    _Row["CR"] = (double)_OBalTable.Rows[0]["Amount"] * -1;
                 }
 
                 _DataTable.Rows.InsertAt(_Row, 0);
@@ -123,7 +123,7 @@ namespace Applied_Accounts.Forms
                 MyReportClass.Heading2 = string.Concat("Period from ", dt_From.Value.ToString("d"), " to ", dt_To.Value.ToString("d"));
                 MyReportClass.DataSet_Name = "ds_General_Ledger";
                 MyReportClass.Report_Location = "Applied_Accounts.Reports.Report_General_Ledger.rdlc";
-                MyReportClass.ReportView_Sort = "[Vou_Date],[Vou_No],[SRNO]";
+                MyReportClass.ReportView_Sort = "[Vou_Date],[Vou_No]";
                 MyReportClass.Preview();
               
             }

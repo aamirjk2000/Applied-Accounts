@@ -173,7 +173,7 @@ namespace Applied_Accounts
                 if (thisbox.Text.Length == 0)
                 {
                     DataRow thisRow = MyDataRow;
-                    Browse WinBrowse = new Browse();
+                    Browse WinBrowse = new Browse(MyDataTable.AsDataView());
                     MyDataView.RowFilter = "";
                     WinBrowse.DataGrid_Browse.IsBrowseWin = true;
                     WinBrowse.MyDataRow = MyDataRow;

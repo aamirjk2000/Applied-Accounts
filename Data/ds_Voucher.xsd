@@ -12,7 +12,7 @@
               <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="View_Voucher" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT "SRNO", "ACCOUNT", "SUPPLIER", "DR", "CR", "Description", "Vou_No", "Vou_Date" FROM "View_Voucher"</CommandText>
+                    <CommandText>SELECT "SRNO", "ACCOUNT", "SUPPLIER", "DR", "CR", "Description", "Vou_No", "Vou_Date", "COA_ID", "Supplier_ID" FROM "View_Voucher"</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -27,6 +27,8 @@
               <Mapping SourceColumn="Description" DataSetColumn="Description" />
               <Mapping SourceColumn="Vou_No" DataSetColumn="Vou_No" />
               <Mapping SourceColumn="Vou_Date" DataSetColumn="Vou_Date" />
+              <Mapping SourceColumn="COA_ID" DataSetColumn="COA_ID" />
+              <Mapping SourceColumn="Supplier_ID" DataSetColumn="Supplier_ID" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -56,8 +58,20 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DR" msprop:Generator_ColumnVarNameInTable="columnDR" msprop:Generator_ColumnPropNameInRow="DR" msprop:Generator_ColumnPropNameInTable="DRColumn" msprop:Generator_UserColumnName="DR" type="xs:long" />
-              <xs:element name="CR" msprop:Generator_ColumnVarNameInTable="columnCR" msprop:Generator_ColumnPropNameInRow="CR" msprop:Generator_ColumnPropNameInTable="CRColumn" msprop:Generator_UserColumnName="CR" type="xs:long" />
+              <xs:element name="DR" msprop:Generator_ColumnVarNameInTable="columnDR" msprop:Generator_ColumnPropNameInRow="DR" msprop:Generator_ColumnPropNameInTable="DRColumn" msprop:Generator_UserColumnName="DR">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CR" msprop:Generator_ColumnVarNameInTable="columnCR" msprop:Generator_ColumnPropNameInRow="CR" msprop:Generator_ColumnPropNameInTable="CRColumn" msprop:Generator_UserColumnName="CR">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -72,7 +86,15 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" type="xs:dateTime" />
+              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COA_ID" msprop:Generator_ColumnVarNameInTable="columnCOA_ID" msprop:Generator_ColumnPropNameInRow="COA_ID" msprop:Generator_ColumnPropNameInTable="COA_IDColumn" msprop:Generator_UserColumnName="COA_ID" type="xs:int" />
+              <xs:element name="Supplier_ID" msprop:Generator_ColumnVarNameInTable="columnSupplier_ID" msprop:Generator_ColumnPropNameInRow="Supplier_ID" msprop:Generator_ColumnPropNameInTable="Supplier_IDColumn" msprop:Generator_UserColumnName="Supplier_ID" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

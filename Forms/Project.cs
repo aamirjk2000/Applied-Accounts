@@ -51,10 +51,10 @@ namespace Applied_Accounts.Forms
 
             if (!IsDataLoad) { Load_Data((int)Tables.Projects); }   // Load Table if not loaded.
             Grid_Projects.Load_Data(MyNavigator.TableClass.MyDataTable);
-            string[] ColumnsVisiable = { "Code", "SCode", "Title", "City", "Cost"};
-            string[] ColumnsName = { "Code", "Tag", "Title", "City", "Cost"};
-            int[] ColumnsFormat = { (int)TextFormat.Codes, 0, 0, 0, (int)TextFormat.Boolean, 0, 0 };
-            int[] ColumnWidth = { 60, 75, 260, 80, 50, 50, 150 };
+            string[] ColumnsVisiable = { "Code", "SCode", "Title", "City", "Cost","Active"};
+            string[] ColumnsName = { "Code", "Tag", "Title", "City", "Cost","Active"};
+            int[] ColumnsFormat = { (int)TextFormat.Codes, 0, 0, 0, (int)TextFormat.Boolean, 0, 0, 0 };
+            int[] ColumnWidth = { 60, 75, 260, 80, 50, 50, 150, 30 };
 
             Grid_Projects.ColumnsName = ColumnsName;
             Grid_Projects.ColumnsVisiable = ColumnsVisiable;
@@ -144,6 +144,13 @@ namespace Applied_Accounts.Forms
         private void frmProject_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void P2_Leave(object sender, EventArgs e)
+        {
+            thisRow = Grid_Projects.MyDataRow;
+            MyNavigator_Get_Values(sender, e);
+            
         }
     }                       // Main
 }                           // Name space

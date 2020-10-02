@@ -1,20 +1,12 @@
 ﻿using Applied_Accounts.Classes;
 using Applied_Accounts.Data;
 using Applied_Accounts.Reports;
-using Connection_Class;
-using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
-using System.Data.SQLite;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Documents;
+using System.IO;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace Applied_Accounts.Forms
 {
@@ -22,6 +14,7 @@ namespace Applied_Accounts.Forms
     {
         private const string NumberFormat = "{0:###,###,###,##0.00}";
         private string DateFormat = Applied.GetString("DataFormat");
+        private string ComboDateFormat = Applied.GetString("Combo_DateFormat");
 
         public static VoucherClass MyVoucherClass = new VoucherClass();
         public static int MyVoucherType { get; set; }
@@ -35,14 +28,18 @@ namespace Applied_Accounts.Forms
         private DataTable tbUnits;
         private DataTable tbStocks;
         private DataTable tbEmployees;
-        //private DataTable tbLedger;
 
-        //private DataTable TablebGrid;
+        private string MyDescription;                            // For copy and past
+        private string MyRemarks;                                // for Copy and past.
 
         private readonly Color _Color1 = Color.Black;
         private readonly Color _Color2 = Color.Blue;
 
-        bool VouNoLeave = true;                                 // Enable / disable Switch of Voucher Leave Event;
+        private long Search_ID;                                  // Search ID for all search text box
+        private string Search_Title;                            // Search Title for all search ID in Table
+        private int Search_ComboID;                             // Search Value for Combo Box in All seach 
+
+        //bool VouNoLeave = true;                                 // Enable / disable Switch of Voucher Leave Event;
 
         #region Initialize
 
@@ -59,8 +56,6 @@ namespace Applied_Accounts.Forms
 
             MyVoucherClass.Vou_Type = Enum.GetName(typeof(Applied.VoucherType), MyVoucherType);
             MyVoucherClass.Vou_No = MyVoucherClass.GetVoucherTag(MyVoucherType);
-
-
             txtVouNo.Text = MyVoucherClass.Vou_No;
 
             MyRefresh();
@@ -90,13 +85,13 @@ namespace Applied_Accounts.Forms
             // DATABASE 
 
             dtVouDate.Format = DateTimePickerFormat.Custom;
-            dtVouDate.CustomFormat = DateFormat;
+            dtVouDate.CustomFormat = ComboDateFormat;
             dtVouDate.Value = DateTime.Now;
             //tVouDate.MinDate = Applied.GetDateValue("VouDate1");
             //dtVouDate.MaxDate = Applied.GetDateValue("VouDate2");
 
             dtChqDate.Format = DateTimePickerFormat.Custom;
-            dtChqDate.CustomFormat = DateFormat;
+            dtChqDate.CustomFormat = ComboDateFormat;
             dtChqDate.Value = DateTime.Now;
             //dtChqDate.MinDate = Applied.GetDateValue("MinDate");
             //dtChqDate.MaxDate = Applied.GetDateValue("MaxDate");
@@ -182,10 +177,6 @@ namespace Applied_Accounts.Forms
             btnNew.Enabled = true;
             btnDelete.Enabled = true;
             btnUndo.Enabled = true;
-
-
-
-
         }
 
 
@@ -403,9 +394,9 @@ namespace Applied_Accounts.Forms
             {
                 DataRow _GridRow = MyGridTable.NewRow();
                 int RowCount = MyGridTable.Rows.Count;
-                decimal Tot_DR = (decimal)MyDataTable.Compute("Sum(DR)", string.Empty);
-                decimal Tot_CR = (decimal)MyDataTable.Compute("Sum(CR)", string.Empty);
-                long MaxSrNo = (long)MyDataTable.Compute("Max(SRNO)", string.Empty);
+                decimal Tot_DR = MyVoucherClass.Total_DR; //(decimal)MyDataTable.Compute("Sum(DR)", string.Empty);
+                decimal Tot_CR = MyVoucherClass.Total_DR; //(decimal)MyDataTable.Compute("Sum(CR)", string.Empty);
+                long MaxSrNo = MyVoucherClass.MaxSRNO();  //(long)MyDataTable.Compute("Max(SRNO)", string.Empty);
 
                 foreach (DataRow _Row in MyDataTable.Rows)
                 {
@@ -420,6 +411,7 @@ namespace Applied_Accounts.Forms
                     _GridRow["Description"] = _Row["Description"];
 
                     MyGridTable.Rows.Add(_GridRow.ItemArray);
+                    lblWords.Text = MyVoucherClass.ToWords();
                 }
 
                 _GridRow["SRNO"] = MaxSrNo + 1;
@@ -604,107 +596,20 @@ namespace Applied_Accounts.Forms
                 return;
             }
 
-            SQLiteCommand _CmdInsert = new SQLiteCommand();
-            SQLiteCommand _CmdUpdate = new SQLiteCommand();
-            SQLiteCommand _CmdDelete = new SQLiteCommand();
+            //  SAVE    SAVE    SAVE    SAVE    SAVE    SAVE    SAVE    
 
-            DataTable _TargetTable = AppliedTable.GetDataTable((int)Tables.Ledger);
-            DataView _TargetView = new DataView(_TargetTable);
-            DataRow _TargetRow;
+            MyVoucherClass.Save();                                          // Save voucher (All Transactions) into Database Table.
 
-            string _PrimaryKeyName = "ID";
-            int _RecordID = 0;
-            long _RecordIDMax = 0;
-            decimal _DR, _CR;
-
-            int Insert_Record = 0;
-            int Update_Record = 0;
-
-            if (MyVoucherClass.Vou_No.ToUpper() == "NEW")
-            {
-                CreateNewVoucherNo();                       // Create a new Voucher Number.
-
-                for (int i = 0; i < MyDataTable.Rows.Count; i++)                // update vou No. Date and Type in Vocuehr Table
-                {
-                    MyDataTable.Rows[i]["Vou_No"] = MyVoucherClass.Vou_No;
-                    MyDataTable.Rows[i]["Vou_Date"] = MyVoucherClass.Vou_Date;
-                    MyDataTable.Rows[i]["Vou_Type"] = MyVoucherClass.Vou_Type;
-                }
-
-            }
-
-            foreach (DataRow _Row in MyDataTable.Rows)
-            {
-                _TargetRow = _TargetTable.NewRow();
-                _TargetRow.ItemArray = _Row.ItemArray;
-
-                if (_TargetRow.Table.TableName == string.Empty)
-                {
-                    MessageBox.Show("Table Name is not Defined.", "ERROR");
-                    return;
-                }
-
-                _CmdInsert = Connection_Class.SQLite.SQLiteInsert(_TargetRow, Connection.AppliedConnection());
-                _CmdUpdate = Connection_Class.SQLite.SQLiteUpdate(_TargetRow, _PrimaryKeyName, Connection.AppliedConnection());
-                //_CmdDelete = Connection_Class.SQLite.SQLiteDelete(_Row, _PrimaryKeyName, RecordID);
-
-                _RecordID = Conversion.ToInteger(_TargetRow["ID"]);
-                _DR = Convert.ToDecimal(_TargetRow["DR"]);            //Conversion.ToInteger(_Row["DR"]);
-                _CR = Convert.ToDecimal(_TargetRow["CR"]);            //Conversion.ToInteger(_Row["DR"]);
-
-                // Cheque Date should be null if cheque no is empty.
-                if (_TargetRow["Chq_No"].ToString().Trim() == string.Empty) { _TargetRow["Chq_Date"] = DBNull.Value; }
-
-                if (_RecordID < 0)
-                {
-                    // Add a new record in DataBase.
-                    if ((_DR + _CR) == 0) { return; }                                                  // Return if Transaction Amount is Zero
-                    _RecordIDMax = (long)_TargetTable.Compute("MAX(ID)", string.Empty);         // Get Maximum ID of Promary Key Value.
-                    _TargetRow["ID"] = _RecordIDMax + 1;                                        // Set Row ID as Maximum Value 
-                    _CmdInsert.Parameters["@ID"].Value = (long)_TargetRow["ID"];                // Set SQL Command Paramters Value of PK.
-                    Insert_Record = Insert_Record + _CmdInsert.ExecuteNonQuery();               // Execute SQL Command.
-                    _TargetTable = AppliedTable.GetDataTable((int)Tables.Ledger);               // Reload Target Datable due to new record insert.
-                }
-
-                if (_RecordID > 0)
-                {
-                    if ((_DR + _CR) == 0)
-                    {
-                        // Delete Record if Exist
-                    }
-
-                    _TargetView.RowFilter = string.Concat("ID=", _RecordID.ToString());
-
-                    if (_TargetView.Count == 1)
-                    {
-                        // Update record in DataBase.
-                        Update_Record = Update_Record + _CmdUpdate.ExecuteNonQuery();
-                    }
-
-                    if (_TargetView.Count > 1)
-                    {
-                        // Declare Error if Target Rows found more than one.
-                        MessageBox.Show(" Records found.", "ERROR");
-                    }
-                }
-            }
-
-            if (Insert_Record + Update_Record > 0)
-            {
-                string _SaveMessage = "";
-                if (Insert_Record > 0) { _SaveMessage += string.Concat(Insert_Record, " Record(s) INSERTED."); }
-                if (_SaveMessage.Length > 0) { _SaveMessage += Environment.NewLine; }
-                if (Update_Record > 0) { _SaveMessage += string.Concat(Update_Record, " Record(s) UPDATED."); }
-
-                MessageBox.Show(_SaveMessage, "VOUCHER | " + MyVoucherClass.Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+            if(MyVoucherClass.Voucher_Saved)
+            { 
                 MyVoucherClass = new VoucherClass(MyVoucherClass.Vou_No);   // Load Voucher again for Edit Mode.
-                MyVoucherClass.CurrentRow = MyDataTable.Rows[0];
-                DisplayRow(MyVoucherClass.CurrentRow);
+                MyVoucherClass.CurrentRow = MyDataTable.Rows[0];            // Select 1sr row as current row.
+                DisplayRow(MyVoucherClass.CurrentRow);                      // display current row into Text Boxes.
                 GetTableGrid();                                             // Update Gtid Data From Database Table;
                 Repaint();                                                  // Re-Paint Voucher form
-
+                MyVoucherClass.Voucher_Saved = false;                       // Reset voucher Saved default value.
             }
+
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -734,30 +639,32 @@ namespace Applied_Accounts.Forms
 
                 if (Conversion.ToInteger(_Row["ID"]) == Conversion.ToInteger(MyRow["ID"]))
                 {
-                    RowIndex = MyDataTable.Rows.IndexOf(_Row);
-                    MyDataTable.Rows[RowIndex].ItemArray = MyRow.ItemArray;
+                    RowIndex = MyDataTable.Rows.IndexOf(_Row);                          // Get Row Index 
+                    MyDataTable.Rows[RowIndex].ItemArray = MyRow.ItemArray;             // Copy Text boxs into Row Columns
                     break;
                 }
             }
 
+            
+            MyDescription = MyRow["Description"].ToString();                            // Copy Description
+            MyRemarks = MyRow["Remarks"].ToString();                                    // Copy Remarks
+
+            if (MyRow["SRNO"].ToString().Trim() == "1")
+            {
+                btnNext_Click(sender, e);
+            }
 
             UpdateGrid();
-
             Repaint();
 
             string _Message = string.Concat("Transaction No ", MyRow["SRNO"], " has been saved.");
             MessageBox.Show(_Message, "SAVE", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-
-
         }
         private bool Validate_Voucher()
         {
-
+            // write codes for validation of the voucher and return true if validated perfect.
             //string _NewVouNo = MyVoucherClass
-
-
-
             // Validate Voucher before save into Database.
             return true;
         }
@@ -853,94 +760,23 @@ namespace Applied_Accounts.Forms
 
         #region Codes
 
-        private void CreateNewVoucherNo()
-        {
-
-            if (MyVoucherClass.Vou_No.ToUpper() != "NEW") { return; }            // Return If Voucher is not new
-
-            MyVoucherClass.Vou_No = "";
-            MyVoucherClass.CurrentYear = Applied.GetInteger("CurrentYear");
-
-            string _VouType = "";
-
-
-            switch (MyVoucherClass.Vou_Type)
-            {
-
-                case "Journal":
-                    _VouType = "J";
-                    break;
-
-                case "Payment":
-                    _VouType = "P";
-                    break;
-
-                case "Receipt":
-                    _VouType = "R";
-                    break;
-
-                case "Revenue":
-                    _VouType = "S";
-                    break;
-
-                case "Salary":
-                    _VouType = "P";
-                    break;
-
-                case "Stock":
-                    _VouType = "I";
-                    break;
-
-                default:
-                    _VouType = "";
-                    break;
-            }
-
-            string _Year = MyVoucherClass.CurrentYear.ToString().Substring(2, 2);           // Get Year
-            string _Month = dtVouDate.Value.Month.ToString("D2");                           // Get Month
-
-            MyVoucherClass.Vou_No = string.Concat(_VouType, _Year, _Month);                 // Set Gross Voucher No.
-
-            DataTable _DataTable = AppliedTable.GetDataTable((int)Tables.View_VouNo);
-            DataView _DataView = new DataView(_DataTable);
-            _DataView.RowFilter = "Voucher='" + MyVoucherClass.Vou_No.Trim() + "'";
-            int _MaxID = 0;
-
-            if (_DataView.Count == 0) { _MaxID = 1; }
-            else
-            {
-                _MaxID = Conversion.ToInteger(_DataView[0]["MaxNo"]);
-                _MaxID = _MaxID + 1;
-
-
-                // final Set Voucehr Number for New voucehr;
-
-            }
-
-            MyVoucherClass.Vou_No = string.Concat(_VouType, _Year, _Month, "-", _MaxID.ToString("D4"));
-
-
-        }
+        
         private void DisplayRow(DataRow _DataRow)
         {
 
             if (_DataRow == null) { return; }
-            
+
+            //dtVouDate.Value = Conversion.ToDate(_DataRow["Vou_Date"].ToString());
+            //dtChqDate.Value = Conversion.ToDate(_DataRow["Chq_Date"].ToString());
+
             DateTime _Date_Chq = Conversion.ToDate(_DataRow["Chq_Date"].ToString());
 
             txtID.Text = _DataRow["ID"].ToString();
             txtVouNo.Text = _DataRow["Vou_NO"].ToString();
 
-            try
-            {
-                dtChqDate.Value = _Date_Chq;
-            }
-            catch (Exception)
-            {
-                dtVouDate.Value = dtVouDate.MinDate;
-                dtChqDate.Value = dtChqDate.MinDate;
-                //throw;
-            }
+            //try {dtChqDate.Value = _Date_Chq;} catch (Exception) {dtChqDate.Value = dtChqDate.MinDate;}
+
+            dtChqDate.Value = Conversion.ToDate(_DataRow["Chq_Date"].ToString());
 
             txtSRNO.Text = _DataRow["SRNO"].ToString();
             txtDebit.Text = string.Format("{0:#,##0.00}", double.Parse(_DataRow["DR"].ToString()));
@@ -961,6 +797,9 @@ namespace Applied_Accounts.Forms
             MyVoucherClass.Vou_Type = cboxVouType.Text;
 
             btnSaveVoucher.Enabled = Total_Equal();
+
+            if(txtChqNo.Text.Length==0) { dtChqDate.Enabled = false; } else { dtChqDate.Enabled = true; }
+
 
         }
         private bool Total_Equal()
@@ -1034,7 +873,6 @@ namespace Applied_Accounts.Forms
             //Pages.TabPages[0].BackColor = this.BackColor;
         }
 
-
         #endregion
 
         #region Leave 
@@ -1071,6 +909,7 @@ namespace Applied_Accounts.Forms
 
         private void txtChqNo_Leave(object sender, EventArgs e)
         {
+            if(txtChqNo.Text.Length==0) { dtChqDate.Enabled = false; } else { dtChqDate.Enabled = true; }
             Repaint(MyRow["Chq_No"], txtChqNo);
         }
 
@@ -1152,10 +991,6 @@ namespace Applied_Accounts.Forms
             //DataSet ReportDataSet = new ds_Voucher();
 
             PreviewClass.DataSet_Name = "ds_Voucher_Report";
-            PreviewClass.Heading1 = string.Concat("Voucher No ", MyVoucherClass.Vou_No);
-            PreviewClass.Heading2 = string.Concat("Date ", dtVouDate.Value.ToString());
-            PreviewClass.Report_Data = MyVoucherClass.VoucherTable.AsDataView();
-            PreviewClass.Report_Path = "Applied_Accounts.Reports.Report1.rdlc";
             PreviewClass.Vou_No = MyVoucherClass.Vou_No;
             PreviewClass.Vou_Date = MyVoucherClass.Vou_Date;
 
@@ -1170,32 +1005,7 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-        private void cBoxAccounts_Enter(object sender, EventArgs e)
-        {
-            if (cBoxAccounts.DataSource == null) { return; }                               // Return is Datasource are not available;
-            if (cboxVouType.SelectedValue==null) { return; }
-
-            ComboBox _cBox = (ComboBox)cBoxAccounts;
-            DataView _DataView = (DataView)_cBox.DataSource;
-            int _Vou_Type = (int)cboxVouType.SelectedValue;
-
-            if(Conversion.ToInteger(txtSRNO.Text)==1)
-            { 
-                if (_Vou_Type == (int)Applied.VoucherType.Payment)
-                {
-                    _DataView.RowFilter = "IsCashBook=1 OR IsBankbook=1";      // Show only Bank and Cash books
-                }
-                else
-                {
-                    _DataView.RowFilter = string.Empty;
-                }
-            }
-            else
-            {
-                _DataView.RowFilter = string.Empty;
-            }
-
-        }
+        #region Voucher No
 
         private void txtVouNo_Validating(object sender, CancelEventArgs e)
         {
@@ -1212,6 +1022,7 @@ namespace Applied_Accounts.Forms
 
             if (MyVoucherClass.Count_Table() > 0)                                       // If Exist Load Voucher Class
             {
+                dtVouDate.Value = MyVoucherClass.Vou_Date;
                 MessageBox.Show(string.Concat(MyDataTable.Rows.Count, " Transactions."), Voucher_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 e.Cancel = false;
             }
@@ -1228,10 +1039,6 @@ namespace Applied_Accounts.Forms
 
             switch (_TextBox.Text.Trim().ToUpper())
             {
-                //case "NEW":
-                //    MyVoucherClass = new VoucherClass();
-                //    break;
-
                 case "":
                     break;
 
@@ -1256,9 +1063,117 @@ namespace Applied_Accounts.Forms
             TextBox _TextBox = (TextBox)sender;
             if (_TextBox.Text.Length==0) { Close(); }
             if (_TextBox.Text.ToUpper() == "END") {Close(); }
+        }
 
+        #endregion
 
+        #region Copy Remarks
+
+        private void txtDescription_KeyDown(object sender, KeyEventArgs e)
+        {
+            if(e.KeyCode == Keys.F9)
+            {
+                txtDescription.Text = MyDescription;
+            }
+        }
+
+        private void txtRemarks_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F9)
+            {
+                txtRemarks.Text = MyRemarks;
+            }
+        }
+
+        #endregion
+
+        //================================== VALIDATION
+        #region Validating
+
+        #region Accounts
+
+        private void cBoxAccounts_Enter(object sender, EventArgs e)
+        {
+            if (cBoxAccounts.DataSource == null) { return; }                               // Return is Datasource are not available;
+            if (cboxVouType.SelectedValue == null) { return; }
+
+            ComboBox _cBox = (ComboBox)cBoxAccounts;
+            DataView _DataView = (DataView)_cBox.DataSource;
+            int _Vou_Type = (int)cboxVouType.SelectedValue;
+
+            if (Conversion.ToInteger(txtSRNO.Text) == 1)
+            {
+                if (_Vou_Type == (int)Applied.VoucherType.Payment)
+                {
+                    _DataView.RowFilter = "IsCashBook=1 OR IsBankbook=1";      // Show only Bank and Cash books
+                }
+                else
+                {
+                    _DataView.RowFilter = string.Empty;
+                }
+            }
+            else
+            {
+                _DataView.RowFilter = string.Empty;
+            }
 
         }
+
+
+        private void txtAccount_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = SearchID(((TextBox)sender).Text, tbAccounts);
+        }
+
+        private void txtAccount_Validated(object sender, EventArgs e)
+        {
+            cBoxAccounts.SelectedValue = Search_ComboID;
+        }
+
+
+
+        #endregion
+
+        #endregion
+
+        #region Search ID
+
+        private bool SearchID(string _Value, DataTable _DataTable)
+        {
+            // Return value for e.Cancel of Text Boox Validating
+
+            bool _Result = true;
+            long _nValue = 0;
+            
+            DataView _DataView = _DataTable.AsDataView();
+
+            if (_Value == null || _Value.Trim() == string.Empty)
+            {
+                _nValue = 0;
+            }
+            else
+            {
+                try
+                {
+                    _nValue = long.Parse(_Value);
+                }
+                catch
+                {
+                    _nValue = 0;
+                }
+            }
+            _DataView.RowFilter = "ID=" + _nValue.ToString();
+            if(_DataView.Count==1)
+            {
+                Search_ComboID = Conversion.ToInteger(_DataView[0]["ID"]);
+                Search_Title = _DataView[0]["Title"].ToString();
+                _Result = false; 
+            }
+            return _Result;
+        }
+
+        #endregion
+
+        
     }       // END Main Class
 }           // END NameSpace

@@ -31,11 +31,11 @@
         </Field>
         <Field Name="DR">
           <DataField>DR</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
         <Field Name="CR">
           <DataField>CR</DataField>
-          <rd:TypeName>System.Decimal</rd:TypeName>
+          <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
         <Field Name="Description">
           <DataField>Description</DataField>
@@ -47,12 +47,20 @@
         </Field>
         <Field Name="Vou_Date">
           <DataField>Vou_Date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="COA_ID">
+          <DataField>COA_ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+        <Field Name="Supplier_ID">
+          <DataField>Supplier_ID</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ds_Voucher</rd:DataSetName>
-        <rd:SchemaPath>F:\Applied\Applied Accounts\Applied Accounts\Data\ds_Voucher.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Applied\Applied-Accounts\Data\ds_Voucher.xsd</rd:SchemaPath>
         <rd:TableName>View_Voucher</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -71,7 +79,7 @@
                   <Width>0.41667in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>3.37501in</Width>
+                  <Width>3.89584in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
@@ -94,7 +102,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>Sr. #</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -103,7 +113,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -146,7 +158,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>ACCOUNT</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -189,7 +203,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>DR</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -232,7 +248,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value>CR</Value>
-                                  <Style />
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -313,6 +331,7 @@
                                 <TextRun>
                                   <Value>=Fields!ACCOUNT.Value</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -345,6 +364,7 @@
                                 <TextRun>
                                   <Value>=Fields!DR.Value</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
@@ -377,6 +397,7 @@
                                 <TextRun>
                                   <Value>=Fields!CR.Value</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <Format>#,0.00;(#,0.00);''</Format>
                                   </Style>
                                 </TextRun>
@@ -446,7 +467,7 @@
                                   <ToolTip>Voucher Description</ToolTip>
                                   <Style>
                                     <FontStyle>Italic</FontStyle>
-                                    <FontFamily>Times New Roman</FontFamily>
+                                    <FontFamily>Arial Narrow</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
@@ -571,9 +592,8 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=STRING.Concat("Vendor: ",Fields!SUPPLIER.Value)</Value>
+                                  <Value>=string.Concat("Vendor : ", Fields!Supplier_ID.Value, " ", Fields!SUPPLIER.Value)</Value>
                                   <Style>
-                                    <FontFamily>Calibri Light</FontFamily>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
@@ -582,6 +602,7 @@
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>SUPPLIER</rd:DefaultName>
+                          <ToolTip>="Supplier Name"</ToolTip>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -705,6 +726,7 @@
                                 <TextRun>
                                   <Value>TOTAL</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                   </Style>
                                 </TextRun>
@@ -720,7 +742,6 @@
                             </Border>
                             <BottomBorder>
                               <Color>Blue</Color>
-                              <Style>Solid</Style>
                             </BottomBorder>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
@@ -741,6 +762,7 @@
                                 <TextRun>
                                   <Value>=SUM(Fields!DR.Value)</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
@@ -778,6 +800,7 @@
                                 <TextRun>
                                   <Value>=SUM(Fields!CR.Value)</Value>
                                   <Style>
+                                    <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);'-'</Format>
                                   </Style>
@@ -830,7 +853,9 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>Vou No</Value>
-                                <Style />
+                                <Style>
+                                  <FontSize>8pt</FontSize>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style />
@@ -890,7 +915,9 @@
                             <TextRuns>
                               <TextRun>
                                 <Value>=Fields!Vou_No.Value</Value>
-                                <Style />
+                                <Style>
+                                  <FontSize>8pt</FontSize>
+                                </Style>
                               </TextRun>
                             </TextRuns>
                             <Style />
@@ -944,7 +971,7 @@
             </SortExpressions>
             <Top>0.02778in</Top>
             <Height>1.25in</Height>
-            <Width>6.48959in</Width>
+            <Width>7.01042in</Width>
             <ToolTip>Voucher Data</ToolTip>
             <Style>
               <Border>
@@ -952,15 +979,215 @@
               </Border>
             </Style>
           </Tablix>
+          <Textbox Name="Textbox5">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Prepared By</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox5</rd:DefaultName>
+            <Top>1.65972in</Top>
+            <Left>0.655in</Left>
+            <Height>0.25in</Height>
+            <Width>1.15749in</Width>
+            <ZIndex>1</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox8">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Checked By</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox8</rd:DefaultName>
+            <Top>1.65972in</Top>
+            <Left>3.04042in</Left>
+            <Height>0.25in</Height>
+            <Width>1.21875in</Width>
+            <ZIndex>2</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <VerticalAlign>Middle</VerticalAlign>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox9">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Signature</Value>
+                    <Style />
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Center</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox9</rd:DefaultName>
+            <Top>1.65972in</Top>
+            <Left>5.57167in</Left>
+            <Height>0.25in</Height>
+            <Width>1.17832in</Width>
+            <ZIndex>3</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Line Name="Line1">
+            <Top>1.66765in</Top>
+            <Left>3.04042in</Left>
+            <Height>0in</Height>
+            <Width>1.21875in</Width>
+            <ZIndex>4</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line2">
+            <Top>1.66765in</Top>
+            <Left>0.655in</Left>
+            <Height>0in</Height>
+            <Width>1.15749in</Width>
+            <ZIndex>5</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Line Name="Line3">
+            <Top>1.66765in</Top>
+            <Left>5.57167in</Left>
+            <Height>0in</Height>
+            <Width>1.17832in</Width>
+            <ZIndex>6</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="txtDateTime">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=DateTime.Now</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <Format>f</Format>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <Top>1.97917in</Top>
+            <Left>3.04042in</Left>
+            <Height>0.25in</Height>
+            <Width>3.97in</Width>
+            <ZIndex>7</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox15">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=Parameters!DevelopedBy.Value</Value>
+                    <Style>
+                      <FontStyle>Italic</FontStyle>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox15</rd:DefaultName>
+            <Top>1.97917in</Top>
+            <Height>0.25in</Height>
+            <Width>2.92583in</Width>
+            <ZIndex>8</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
         </ReportItems>
-        <Height>1.52778in</Height>
+        <Height>2.35417in</Height>
         <Style>
           <Border>
             <Style>None</Style>
           </Border>
         </Style>
       </Body>
-      <Width>6.55209in</Width>
+      <Width>7.01042in</Width>
       <Page>
         <PageHeader>
           <Height>0.59152in</Height>
@@ -989,7 +1216,7 @@
               </Paragraphs>
               <rd:DefaultName>Textbox6</rd:DefaultName>
               <Height>0.27083in</Height>
-              <Width>6.48959in</Width>
+              <Width>7.01042in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -1023,7 +1250,7 @@
               <rd:DefaultName>Textbox32</rd:DefaultName>
               <Top>0.29861in</Top>
               <Height>0.25in</Height>
-              <Width>6.48959in</Width>
+              <Width>7.01042in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -1044,117 +1271,8 @@
             <BackgroundColor>PaleTurquoise</BackgroundColor>
           </Style>
         </PageHeader>
-        <PageFooter>
-          <Height>0.59375in</Height>
-          <PrintOnFirstPage>true</PrintOnFirstPage>
-          <PrintOnLastPage>true</PrintOnLastPage>
-          <ReportItems>
-            <Textbox Name="Textbox19">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=string.Concat("Page No.",Globals!PageNumber)</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox19</rd:DefaultName>
-              <Top>0.05556in</Top>
-              <Left>4.90625in</Left>
-              <Height>0.25in</Height>
-              <Width>1.64583in</Width>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox33">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=Variables!DevelopedBy.Value</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style />
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox33</rd:DefaultName>
-              <Top>0.30556in</Top>
-              <Height>0.25in</Height>
-              <Width>2.19792in</Width>
-              <ZIndex>1</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-            <Textbox Name="Textbox34">
-              <CanGrow>true</CanGrow>
-              <KeepTogether>true</KeepTogether>
-              <Paragraphs>
-                <Paragraph>
-                  <TextRuns>
-                    <TextRun>
-                      <Value>=DateTime.Now</Value>
-                      <Style>
-                        <FontSize>8pt</FontSize>
-                      </Style>
-                    </TextRun>
-                  </TextRuns>
-                  <Style>
-                    <TextAlign>Right</TextAlign>
-                  </Style>
-                </Paragraph>
-              </Paragraphs>
-              <rd:DefaultName>Textbox34</rd:DefaultName>
-              <Top>0.30556in</Top>
-              <Left>4.90625in</Left>
-              <Height>0.25in</Height>
-              <Width>1.58333in</Width>
-              <ZIndex>2</ZIndex>
-              <Style>
-                <Border>
-                  <Style>None</Style>
-                </Border>
-                <PaddingLeft>2pt</PaddingLeft>
-                <PaddingRight>2pt</PaddingRight>
-                <PaddingTop>2pt</PaddingTop>
-                <PaddingBottom>2pt</PaddingBottom>
-              </Style>
-            </Textbox>
-          </ReportItems>
-          <Style>
-            <Border>
-              <Style>None</Style>
-            </Border>
-            <BackgroundColor>PaleTurquoise</BackgroundColor>
-          </Style>
-        </PageFooter>
+        <PageHeight>11.69in</PageHeight>
+        <PageWidth>8.27in</PageWidth>
         <LeftMargin>0.5in</LeftMargin>
         <RightMargin>0.5in</RightMargin>
         <TopMargin>0.5in</TopMargin>
@@ -1175,6 +1293,11 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
     <ReportParameter Name="PeriodHeading">
+      <DataType>String</DataType>
+      <AllowBlank>true</AllowBlank>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="DevelopedBy">
       <DataType>String</DataType>
       <AllowBlank>true</AllowBlank>
       <Prompt>ReportParameter1</Prompt>
@@ -1200,9 +1323,22 @@
           <RowIndex>0</RowIndex>
           <ParameterName>PeriodHeading</ParameterName>
         </CellDefinition>
+        <CellDefinition>
+          <ColumnIndex>3</ColumnIndex>
+          <RowIndex>0</RowIndex>
+          <ParameterName>DevelopedBy</ParameterName>
+        </CellDefinition>
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
+  <Code>Public Const MyNote = "Authored by Bob"  
+Public Const NCopies As Int32 = 2  
+Public Dim  MyVersion As String = "123.456"  
+Public Dim MyDoubleVersion As Double = 123.456 
+
+Public Shared Function Hell() As String
+        Return "APPLIED SOFTWARE HOUSE"
+End Function</Code>
   <Variables>
     <Variable Name="DevelopedBy">
       <Value>Applied Software House</Value>

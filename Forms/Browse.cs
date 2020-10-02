@@ -15,10 +15,10 @@ namespace Applied_Accounts
         public int MyID { get; set; }
 
         ////private DataRow Enter_DataRow;
-        public Browse()
-        {
-            InitializeComponent();
-        }
+        //public Browse()
+        //{
+        //    InitializeComponent();
+        //}
 
         public Browse(DataView _DataView)
         {

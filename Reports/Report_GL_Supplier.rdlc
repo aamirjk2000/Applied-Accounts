@@ -88,13 +88,13 @@
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.75in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1in</Width>
+                  <Width>0.75in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>1.59375in</Width>
+                  <Width>1.98958in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>1in</Width>
@@ -720,7 +720,6 @@
                           <PaddingBottom>2pt</PaddingBottom>
                         </Style>
                       </Textbox>
-                      <rd:Selected>true</rd:Selected>
                     </CellContents>
                   </TablixHeader>
                   <TablixMembers>
@@ -789,7 +788,7 @@
             <DataSetName>ds_GL_Supplier</DataSetName>
             <Top>0.06944in</Top>
             <Height>0.70833in</Height>
-            <Width>7.09375in</Width>
+            <Width>6.98958in</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -801,14 +800,14 @@
         <Height>0.91667in</Height>
         <Style />
       </Body>
-      <Width>7.09375in</Width>
+      <Width>6.98958in</Width>
       <Page>
         <PageHeader>
           <Height>0.93542in</Height>
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Textbox Name="Textbox3">
+            <Textbox Name="txtCompanyName1">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -828,9 +827,8 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox3</rd:DefaultName>
               <Height>0.25in</Height>
-              <Width>7.09375in</Width>
+              <Width>6.98958in</Width>
               <Style>
                 <Border>
                   <Style>None</Style>
@@ -842,7 +840,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox4">
+            <Textbox Name="txtReportHeading">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -856,10 +854,9 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox4</rd:DefaultName>
               <Top>0.31944in</Top>
               <Height>0.25in</Height>
-              <Width>7.09375in</Width>
+              <Width>6.98958in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -871,7 +868,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox5">
+            <Textbox Name="txtReportPeriod">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -887,10 +884,9 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox5</rd:DefaultName>
               <Top>0.63889in</Top>
               <Height>0.25in</Height>
-              <Width>7.09375in</Width>
+              <Width>6.98958in</Width>
               <ZIndex>2</ZIndex>
               <Style>
                 <Border>
@@ -915,7 +911,7 @@
           <PrintOnFirstPage>true</PrintOnFirstPage>
           <PrintOnLastPage>true</PrintOnLastPage>
           <ReportItems>
-            <Textbox Name="Textbox1">
+            <Textbox Name="txtDevelopedBy">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -931,7 +927,6 @@
                   <Style />
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox1</rd:DefaultName>
               <Top>0.17792in</Top>
               <Height>0.25in</Height>
               <Width>2in</Width>
@@ -945,7 +940,7 @@
                 <PaddingBottom>2pt</PaddingBottom>
               </Style>
             </Textbox>
-            <Textbox Name="Textbox2">
+            <Textbox Name="txtDateTime">
               <CanGrow>true</CanGrow>
               <KeepTogether>true</KeepTogether>
               <Paragraphs>
@@ -963,11 +958,10 @@
                   </Style>
                 </Paragraph>
               </Paragraphs>
-              <rd:DefaultName>Textbox2</rd:DefaultName>
               <Top>0.17792in</Top>
-              <Left>2.5in</Left>
+              <Left>2.47541in</Left>
               <Height>0.25in</Height>
-              <Width>4.59375in</Width>
+              <Width>4.51417in</Width>
               <ZIndex>1</ZIndex>
               <Style>
                 <Border>
@@ -986,10 +980,12 @@
             </Border>
           </Style>
         </PageFooter>
-        <LeftMargin>1in</LeftMargin>
-        <RightMargin>1in</RightMargin>
-        <TopMargin>1in</TopMargin>
-        <BottomMargin>1in</BottomMargin>
+        <PageHeight>11.69in</PageHeight>
+        <PageWidth>8.27in</PageWidth>
+        <LeftMargin>0.5in</LeftMargin>
+        <RightMargin>0.5in</RightMargin>
+        <TopMargin>0.5in</TopMargin>
+        <BottomMargin>0.5in</BottomMargin>
         <Style />
       </Page>
     </ReportSection>
@@ -1054,6 +1050,21 @@
       </CellDefinitions>
     </GridLayoutDefinition>
   </ReportParametersLayout>
+  <Code>Public Function ChangeWord(ByVal s As String) As String  
+   Dim strBuilder As New System.Text.StringBuilder(s)  
+   If s.Contains("Bike") Then  
+      strBuilder.Replace("Bike", "Bicycle")  
+      Return strBuilder.ToString()  
+      Else : Return s  
+   End If  
+End Function  	
+
+	</Code>
+  <Variables>
+    <Variable Name="Report_Variable1">
+      <Value>My Report Variable</Value>
+    </Variable>
+  </Variables>
   <rd:ReportUnitType>Inch</rd:ReportUnitType>
   <rd:ReportID>895ae76a-53d3-488a-8c02-1bca98963d90</rd:ReportID>
 </Report>

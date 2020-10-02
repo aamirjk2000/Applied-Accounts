@@ -10,12 +10,12 @@ namespace Applied_Accounts.Classes
     interface iSQLite_Date
     {
         DateTime GetDate();
-        DateTime SetDate();
+        string GetDate_DB();
     }
     class SQLite_Date : iSQLite_Date
     {
         private string MyDateTime { get; set; }
-        private DateTime MyResult;
+        private DateTime thisDateTime;
         private int _Year, _Month, _Day;
 
         public SQLite_Date(object _DateTime)
@@ -33,15 +33,13 @@ namespace Applied_Accounts.Classes
 
                 case 10:   // 2017-01-01     01-01-2017
 
-                    
-
-                    if(MyDateTime.Substring(4,1)=="-" && MyDateTime.Substring(7, 1) == "-")
+                    if (MyDateTime.Substring(4, 1) == "-" && MyDateTime.Substring(7, 1) == "-")
                     {
                         _Year = Convert.ToInt32(MyDateTime.Substring(0, 4));
                         _Month = Convert.ToInt32(MyDateTime.Substring(5, 2));
                         _Day = Convert.ToInt32(MyDateTime.Substring(8, 2));
 
-                        MyResult = new DateTime(_Year, _Month, _Day);
+                        thisDateTime = new DateTime(_Year, _Month, _Day);
                     }
 
                     if (MyDateTime.Substring(2, 1) == "-" && MyDateTime.Substring(5, 1) == "-")
@@ -50,7 +48,7 @@ namespace Applied_Accounts.Classes
                         _Month = Convert.ToInt32(MyDateTime.Substring(3, 2));
                         _Day = Convert.ToInt32(MyDateTime.Substring(5, 4));
 
-                        MyResult = new DateTime(_Year, _Month, _Day);
+                        thisDateTime = new DateTime(_Year, _Month, _Day);
                     }
 
                     break;
@@ -61,24 +59,27 @@ namespace Applied_Accounts.Classes
                     _Month = Convert.ToInt32(MyDateTime.Substring(6, 2));
                     _Day = Convert.ToInt32(MyDateTime.Substring(9, 2));
 
-                    MyResult = new DateTime(_Year, _Month, _Day);
+                    thisDateTime = new DateTime(_Year, _Month, _Day);
                     break;
 
 
                 default:
 
-                    MyResult = Convert.ToDateTime(MyDateTime);
+                    thisDateTime = Convert.ToDateTime(MyDateTime);
                     break;
+
             }
 
-            return MyResult;
+            return thisDateTime;
         }
-        public DateTime SetDate()
+
+        public string GetDate_DB()
         {
+            DateTime _DateTime = GetDate();
 
-
-            return new DateTime();
+            return _DateTime.ToString("yyyy-MM-dd");
         }
+
 
 
 

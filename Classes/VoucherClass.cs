@@ -12,9 +12,9 @@ namespace Applied_Accounts.Classes
     {
         int Count_Table();
         int Count_View();
-
+        void Save();
+        string ToWords();
     }
-
 
     public class VoucherClass : iVoucherclass
     {
@@ -43,6 +43,7 @@ namespace Applied_Accounts.Classes
         public long NewID { get; set; }
         public int Count_Table() { return VoucherTable.Rows.Count; }
         public int Count_View() { return VoucherView.Count; }
+        public bool Voucher_Saved { get; set; }
 
 
         #endregion
@@ -53,8 +54,6 @@ namespace Applied_Accounts.Classes
         {
             NewVoucher();
         }
-
-
 
         public VoucherClass(string Voucher_No)
         {
@@ -71,14 +70,14 @@ namespace Applied_Accounts.Classes
             {
                 CurrentRow = VoucherTable.Rows[0];
                 Vou_No = VoucherTable.Rows[0]["Vou_No"].ToString();
-                Vou_Date = Applied.GetDate(VoucherTable.Rows[0]["Vou_Date"].ToString());
-                Vou_Type = Vou_No.Substring(1, 1);
+                Vou_Date = Conversion.ToDate(VoucherTable.Rows[0]["Vou_Date"].ToString());   
+                Vou_Type = Vou_No.Substring(0, 1);
                 Vou_Type = GetVoucherTypeText(Vou_Type);
                 Status = "EDIT";
 
                 Total_DR = Conversion.ToMoney(VoucherTable.Compute("SUM(DR)", string.Empty).ToString());
                 Total_CR = Conversion.ToMoney(VoucherTable.Compute("SUM(CR)", string.Empty).ToString());
-
+                //MaxSRNO = (long)VoucherTable.Compute("Max(SRNO)", string.Empty);
             }
             else
             {
@@ -199,13 +198,205 @@ namespace Applied_Accounts.Classes
 
         }
 
-        private long MaxSRNO()
+        public long MaxSRNO()
         {
             long MaxSRNO = (long)VoucherTable.Compute("Max(SRNO)", string.Empty);
             return MaxSRNO + 1;
         }
 
+
+        public string ToWords()
+        {
+            InWords Words = new InWords(Total_DR);
+            return Words.ToWords();
+        }
+
         #endregion
+
+        #region SAVE
+
+        public void Save()
+        {
+            Voucher_Saved = false;
+
+            SQLiteCommand _CmdInsert = new SQLiteCommand();
+            SQLiteCommand _CmdUpdate = new SQLiteCommand();
+            SQLiteCommand _CmdDelete = new SQLiteCommand();
+
+            DataRow _TargetRow;
+
+            string _PrimaryKeyName = "ID";
+            int _RecordID = 0;
+            long _RecordIDMax = 0;
+            decimal _DR, _CR;
+
+            int Insert_Record = 0;
+            int Update_Record = 0;
+
+            if (Vou_No.ToUpper() == "NEW")
+            {
+                CreateNewVoucherNo();                                           // Create a new Voucher Number.
+
+                for (int i = 0; i < VoucherTable.Rows.Count; i++)                // update vou No. Date and Type in Vocuehr Table
+                {
+                    VoucherTable.Rows[i]["Vou_No"] = Vou_No;
+                    VoucherTable.Rows[i]["Vou_Date"] = Conversion.ToDate_DB(Vou_Date);
+                    VoucherTable.Rows[i]["Vou_Type"] = Vou_Type;
+                }
+
+            }
+
+            foreach (DataRow _Row in VoucherTable.Rows)
+            {
+                _TargetRow = VoucherTable.NewRow();
+                _TargetRow.ItemArray = _Row.ItemArray;
+
+                if (_TargetRow.Table.TableName == string.Empty)
+                {
+                    MessageBox.Show("Table Name is not Defined.", "_TargetRow.Table.TableName");
+                    return;
+                }
+
+                _CmdInsert = Connection_Class.SQLite.SQLiteInsert(_TargetRow, Connection.AppliedConnection());
+                _CmdUpdate = Connection_Class.SQLite.SQLiteUpdate(_TargetRow, _PrimaryKeyName, Connection.AppliedConnection());
+                //_CmdDelete = Connection_Class.SQLite.SQLiteDelete(_Row, _PrimaryKeyName, RecordID);
+
+                _RecordID = Conversion.ToInteger(_TargetRow["ID"]);
+                _DR = Convert.ToDecimal(_TargetRow["DR"]);            //Conversion.ToInteger(_Row["DR"]);
+                _CR = Convert.ToDecimal(_TargetRow["CR"]);            //Conversion.ToInteger(_Row["DR"]);
+
+                // Cheque Date should be null if cheque no is empty.
+                if (_TargetRow["Chq_No"].ToString().Trim() == string.Empty) { _TargetRow["Chq_Date"] = DBNull.Value; }
+
+                if (_RecordID < 0)                                                              // REcord Id if -1 (for new)
+                {
+                    // Add a new record in DataBase.
+                    if ((_DR + _CR) == 0) { return; }                                           // Return if Transaction Amount is Zero
+                    _RecordIDMax = (long)tbLedger.Compute("MAX(ID)", string.Empty);             // Get Maximum ID of Promary Key Value.
+                    _TargetRow["ID"] = _RecordIDMax + 1;                                        // Set Row ID as Maximum Value 
+                    
+
+                    if((long)_TargetRow["ID"]>0)
+                    {
+                        _CmdInsert.Parameters["@ID"].Value = (long)_TargetRow["ID"];            // Set SQL Command Paramters Value of PK.
+                        Insert_Record = Insert_Record + _CmdInsert.ExecuteNonQuery();           // Execute SQL Command.
+                        tbLedger = AppliedTable.GetDataTable((int)Tables.Ledger);               // Reload Target Datable due to new record insert.
+
+                    }
+                    else
+                    {
+                        MessageBox.Show("Primary Key value is not valid." + Keys.Return + "Record not saved.", "(long)_TargetRow['ID']>0");
+                    }
+                    
+                }
+
+                if (_RecordID > 0)
+                {
+                    if ((_DR + _CR) == 0)                                                       // if Debit and Credit both are zero
+                    {
+                        // Delete Record if Exist
+                    }
+
+                    VoucherView.RowFilter = string.Concat("ID=", _RecordID.ToString());         // Select a record in table view 
+
+                    if (VoucherView.Count == 1)                                                 // Record exist
+                    {
+                        // Update record in DataBase.
+                        Update_Record = Update_Record + _CmdUpdate.ExecuteNonQuery();           // update record in Database Table.
+                    }
+
+                    if (VoucherView.Count > 1)                                                  // if records found more than 1 is error
+                    {
+                        // Declare Error if Target Rows found more than one.
+                        MessageBox.Show(VoucherView.Count.ToString() + " Records found.", "ERROR");
+                    }
+                }
+            }
+
+            if (Insert_Record + Update_Record > 0)                                              // show Message for save the record.
+            {
+                string _SaveMessage = "";
+                if (Insert_Record > 0) { _SaveMessage += string.Concat(Insert_Record,Vou_No, Keys.Return, " Record(s) INSERTED."); }
+                if (_SaveMessage.Length > 0) { _SaveMessage += Environment.NewLine; }
+                if (Update_Record > 0) { _SaveMessage += string.Concat(Update_Record, Vou_No, Keys.Return, " Record(s) UPDATED."); }
+
+                MessageBox.Show(_SaveMessage, "VOUCHER | " + Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                Voucher_Saved = true;
+            }
+        }
+
+
+        private void CreateNewVoucherNo()                           // Create New Voucher Number.
+        {
+
+            if (Vou_No.ToUpper() != "NEW") { return; }            // Return If Voucher is not new
+
+            Vou_No = "";
+            CurrentYear = Applied.GetInteger("CurrentYear");
+
+            string _VouType = "";
+
+
+            switch (Vou_Type)
+            {
+
+                case "Journal":
+                    _VouType = "J";
+                    break;
+
+                case "Payment":
+                    _VouType = "P";
+                    break;
+
+                case "Receipt":
+                    _VouType = "R";
+                    break;
+
+                case "Revenue":
+                    _VouType = "S";
+                    break;
+
+                case "Salary":
+                    _VouType = "P";
+                    break;
+
+                case "Stock":
+                    _VouType = "I";
+                    break;
+
+                default:
+                    _VouType = "";
+                    break;
+            }
+
+            string _Year = CurrentYear.ToString().Substring(2, 2);           // Get Year
+            string _Month = Vou_Date.Month.ToString("D2");            // Get Month
+
+            Vou_No = string.Concat(_VouType, _Year, _Month);                 // Set Gross Voucher No.
+
+            DataTable _DataTable = AppliedTable.GetDataTable((int)Tables.View_VouNo);
+            DataView _DataView = new DataView(_DataTable);
+            _DataView.RowFilter = "Voucher='" + Vou_No.Trim() + "'";
+            int _MaxID = 0;
+
+            if (_DataView.Count == 0) { _MaxID = 1; }
+            else
+            {
+                _MaxID = Conversion.ToInteger(_DataView[0]["MaxNo"]);
+                _MaxID = _MaxID + 1;
+
+
+                // final Set Voucehr Number for New voucehr;
+
+            }
+
+            Vou_No = string.Concat(_VouType, _Year, _Month, "-", _MaxID.ToString("D4"));
+
+        }
+
+        #endregion
+
+
 
         #region Voucher Type
 
