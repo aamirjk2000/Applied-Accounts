@@ -26,37 +26,27 @@ namespace Applied_Accounts.Forms
         {
             InitializeComponent();
 
-
-
-            dt_Suppliers = AppliedTable.GetDataTable(Tables.Suppliers);
-            dt_COA = AppliedTable.GetDataTable(Tables.COA);
-            dt_Projects = AppliedTable.GetDataTable(Tables.Projects);
-            dt_Units = AppliedTable.GetDataTable(Tables.Units);
+            dt_Suppliers = AppliedTable.GetComboData(Tables.Suppliers);
+            dt_COA = AppliedTable.GetComboData(Tables.COA);
+            dt_Projects = AppliedTable.GetComboData(Tables.Projects);
+            dt_Units = AppliedTable.GetComboData(Tables.Units);
 
             cBoxSuppliers.DataSource = dt_Suppliers.AsDataView();
             cBoxSuppliers.DisplayMember = "Title";
             cBoxSuppliers.ValueMember = "ID";
-            ((DataView)cBoxSuppliers.DataSource).Sort = "Title";
-            ((DataView)cBoxSuppliers.DataSource).RowFilter = "Active=true";
 
             cBoxProjects.DataSource = dt_Projects.AsDataView();
             cBoxProjects.DisplayMember = "Title";
             cBoxProjects.ValueMember = "ID";
-            ((DataView)cBoxProjects.DataSource).Sort = "Title";
-            ((DataView)cBoxProjects.DataSource).RowFilter = "Active=true";
 
             cBoxCOA.DataSource = dt_COA.AsDataView();
             cBoxCOA.DisplayMember = "Title";
             cBoxCOA.ValueMember = "ID";
-            ((DataView)cBoxCOA.DataSource).Sort = "Title";
-            ((DataView)cBoxCOA.DataSource).RowFilter = "Active=true";
 
             cBoxUnits.DataSource = dt_Units.AsDataView();
             cBoxUnits.DisplayMember = "Title";
             cBoxUnits.ValueMember = "ID";
-            ((DataView)cBoxUnits.DataSource).Sort = "Title";
-            ((DataView)cBoxUnits.DataSource).RowFilter = "Active=true";
-        }
+        }   
 
         private void frmGL_Supplier_Load(object sender, EventArgs e)
         {

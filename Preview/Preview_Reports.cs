@@ -29,13 +29,11 @@ namespace Applied_Accounts.Preview
                 return;
             }
 
-            if (MyReportClass.Report_Location.Length==0)
+            if (MyReportClass.Report_Location.Length == 0)
             {
                 MessageBox.Show("Report is not specifying here", "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Close();
             }
-
-            
         }
 
 
@@ -47,21 +45,27 @@ namespace Applied_Accounts.Preview
         private void PreviewReport()
         {
 
-            if (MyReportClass.Report_Data.Count == 0)
+            if (MyReportClass.Report_Data == null || MyReportClass.Report_Data.Count == 0)
             {
                 MessageBox.Show("No Record Found...");
                 return;
             }
 
+            Text = MyReportClass.Report_Location;
+
             ReportDataSource _DataSource = new ReportDataSource(MyReportClass.DataSet_Name, MyReportClass.Report_Data);
             rpt_View.LocalReport.DataSources.Clear();
             rpt_View.LocalReport.DataSources.Add(_DataSource);          // Insert Data into Report.
+            rpt_View.LocalReport.ReportEmbeddedResource = MyReportClass.Report_Location;
+
+            if (MyReportClass.Heading1 == null) { MyReportClass.Heading1 = ""; }
+            if (MyReportClass.Heading2 == null) { MyReportClass.Heading2 = ""; }
 
             ReportParameter rpt_Parameter1 = new ReportParameter("CompanyName", MyReportClass.CompanyName);
             ReportParameter rpt_Parameter2 = new ReportParameter("ReportHeading", MyReportClass.Heading1);
             ReportParameter rpt_Parameter3 = new ReportParameter("PeriodHeading", MyReportClass.Heading2);
             ReportParameter rpt_Parameter4 = new ReportParameter("DevelopedBy", Program.Developedby);
-            ReportParameter rpt_Parameter5 = new ReportParameter("DateFormat", Program.DateTimeFormat);
+            ReportParameter rpt_Parameter5 = new ReportParameter("DateFormat", MyReportClass.Report_Date_Format);
 
             rpt_View.LocalReport.SetParameters(rpt_Parameter1);         // Insert Company Name into Repoer
             rpt_View.LocalReport.SetParameters(rpt_Parameter2);         // Insert Heading 1 into Report.

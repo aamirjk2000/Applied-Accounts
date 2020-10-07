@@ -25,7 +25,8 @@ namespace Applied_Accounts.Classes
         public DateTime Report_From { get; set; }
         public DateTime Report_To { get; set; }
         public DataView Report_Data { get; set; }
-        public string Report_Path { get; set; }
+        public string  Report_Date_Format { get => Applied.GetString("DateFormat_Report"); }
+        public string Report_Heading_Format { get => Applied.GetString("DateFormat_Heading"); }
         public string Report_Filter { get; set; }
         public string DataSet_Name { get; set; }
         public string Vou_No { get; set; }

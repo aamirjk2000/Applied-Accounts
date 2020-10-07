@@ -30,13 +30,15 @@
         {
             this.rpt_View = new Microsoft.Reporting.WinForms.ReportViewer();
             this.SuspendLayout();
-
             // 
             // rpt_View
             // 
+            this.rpt_View.BackColor = System.Drawing.Color.FloralWhite;
             this.rpt_View.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.rpt_View.LocalReport.DisplayName = "PREVIEW";
             this.rpt_View.Location = new System.Drawing.Point(0, 0);
             this.rpt_View.Name = "rpt_View";
+            this.rpt_View.PageCountMode = Microsoft.Reporting.WinForms.PageCountMode.Actual;
             this.rpt_View.ServerReport.BearerToken = null;
             this.rpt_View.Size = new System.Drawing.Size(800, 450);
             this.rpt_View.TabIndex = 0;
@@ -51,7 +53,6 @@
             this.Text = "Preview_Reports";
             this.Load += new System.EventHandler(this.Preview_Reports_Load);
             this.ResumeLayout(false);
-         
 
         }
 

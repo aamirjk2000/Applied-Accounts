@@ -36,7 +36,7 @@
             this.txtStock = new System.Windows.Forms.TextBox();
             this.txtUnit = new System.Windows.Forms.TextBox();
             this.txtProject = new System.Windows.Forms.TextBox();
-            this.txtVonder = new System.Windows.Forms.TextBox();
+            this.txtVandor = new System.Windows.Forms.TextBox();
             this.txtAccount = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnNewVoucher = new System.Windows.Forms.Button();
@@ -119,7 +119,7 @@
             this.P1.Controls.Add(this.txtStock);
             this.P1.Controls.Add(this.txtUnit);
             this.P1.Controls.Add(this.txtProject);
-            this.P1.Controls.Add(this.txtVonder);
+            this.P1.Controls.Add(this.txtVandor);
             this.P1.Controls.Add(this.txtAccount);
             this.P1.Controls.Add(this.groupBox1);
             this.P1.Controls.Add(this.btnBottom);
@@ -208,12 +208,12 @@
             this.txtProject.Size = new System.Drawing.Size(59, 20);
             this.txtProject.TabIndex = 113;
             // 
-            // txtVonder
+            // txtVandor
             // 
-            this.txtVonder.Location = new System.Drawing.Point(95, 137);
-            this.txtVonder.Name = "txtVonder";
-            this.txtVonder.Size = new System.Drawing.Size(59, 20);
-            this.txtVonder.TabIndex = 112;
+            this.txtVandor.Location = new System.Drawing.Point(95, 137);
+            this.txtVandor.Name = "txtVandor";
+            this.txtVandor.Size = new System.Drawing.Size(59, 20);
+            this.txtVandor.TabIndex = 112;
             // 
             // txtAccount
             // 
@@ -604,6 +604,7 @@
             this.cBoxEmployees.Name = "cBoxEmployees";
             this.cBoxEmployees.Size = new System.Drawing.Size(428, 21);
             this.cBoxEmployees.TabIndex = 10;
+            this.cBoxEmployees.DropDownClosed += new System.EventHandler(this.cBoxEmployees_DropDownClosed);
             this.cBoxEmployees.Leave += new System.EventHandler(this.cBoxEmployees_Leave);
             // 
             // label10
@@ -669,6 +670,7 @@
             this.cBoxStocks.Name = "cBoxStocks";
             this.cBoxStocks.Size = new System.Drawing.Size(427, 21);
             this.cBoxStocks.TabIndex = 9;
+            this.cBoxStocks.DropDownClosed += new System.EventHandler(this.cBoxStocks_DropDownClosed);
             this.cBoxStocks.Leave += new System.EventHandler(this.cBoxStocks_Leave);
             // 
             // cBoxUnits
@@ -678,6 +680,7 @@
             this.cBoxUnits.Name = "cBoxUnits";
             this.cBoxUnits.Size = new System.Drawing.Size(427, 21);
             this.cBoxUnits.TabIndex = 8;
+            this.cBoxUnits.DropDownClosed += new System.EventHandler(this.cBoxUnits_DropDownClosed);
             this.cBoxUnits.Leave += new System.EventHandler(this.cBoxUnits_Leave);
             // 
             // cBoxProjects
@@ -687,6 +690,7 @@
             this.cBoxProjects.Name = "cBoxProjects";
             this.cBoxProjects.Size = new System.Drawing.Size(427, 21);
             this.cBoxProjects.TabIndex = 7;
+            this.cBoxProjects.DropDownClosed += new System.EventHandler(this.cBoxProjects_DropDownClosed);
             this.cBoxProjects.Leave += new System.EventHandler(this.cBoxProjects_Leave);
             // 
             // cBoxSuppliers
@@ -696,6 +700,7 @@
             this.cBoxSuppliers.Name = "cBoxSuppliers";
             this.cBoxSuppliers.Size = new System.Drawing.Size(427, 21);
             this.cBoxSuppliers.TabIndex = 6;
+            this.cBoxSuppliers.DropDownClosed += new System.EventHandler(this.cBoxSuppliers_DropDownClosed);
             this.cBoxSuppliers.Leave += new System.EventHandler(this.cBoxSuppliers_Leave);
             // 
             // cBoxAccounts
@@ -705,6 +710,7 @@
             this.cBoxAccounts.Name = "cBoxAccounts";
             this.cBoxAccounts.Size = new System.Drawing.Size(427, 21);
             this.cBoxAccounts.TabIndex = 5;
+            this.cBoxAccounts.DropDownClosed += new System.EventHandler(this.cBoxAccounts_DropDownClosed);
             this.cBoxAccounts.Enter += new System.EventHandler(this.cBoxAccounts_Enter);
             this.cBoxAccounts.Leave += new System.EventHandler(this.cBoxAccounts_Leave);
             // 
@@ -910,7 +916,7 @@
         private System.Windows.Forms.TextBox txtStock;
         private System.Windows.Forms.TextBox txtUnit;
         private System.Windows.Forms.TextBox txtProject;
-        private System.Windows.Forms.TextBox txtVonder;
+        private System.Windows.Forms.TextBox txtVandor;
         private System.Windows.Forms.TextBox txtAccount;
     }
 }

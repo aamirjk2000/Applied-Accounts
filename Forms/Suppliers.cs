@@ -91,6 +91,7 @@ namespace Applied_Accounts.Forms
 
         private void MyNavigator_Get_Values(object sender, EventArgs e)
         {
+            if(thisRow==null) { return; }
             txtID.Text = thisRow["ID"].ToString();
             txtCode.Text = thisRow["Code"].ToString();
             txtTag.Text = thisRow["Scode"].ToString();
@@ -101,8 +102,15 @@ namespace Applied_Accounts.Forms
 
 
 
+
         #endregion
 
-    
+        private void P2_Enter(object sender, EventArgs e)
+        {
+            thisRow = Grid_Supplier.MyDataRow;
+            MyNavigator_Get_Values(sender, e);
+        }
+
+       
     }       // END Main Class
 }           // END Namespace

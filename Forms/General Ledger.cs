@@ -21,12 +21,12 @@ namespace Applied_Accounts.Forms
             cBoxCOA.DataSource = dt_COA;
             cBoxCOA.DisplayMember = "Title";
             cBoxCOA.ValueMember = "ID";
+            
 
         }
 
         ReportClass MyReportClass = new ReportClass();
-        DataTable dt_COA = AppliedTable.GetDataTable((int)Tables.COA);
-
+        DataTable dt_COA = AppliedTable.GetComboData(Tables.COA);
 
 
         private void frmGeneral_Ledger_Load(object sender, EventArgs e)

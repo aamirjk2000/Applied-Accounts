@@ -285,6 +285,12 @@ namespace Applied_Accounts.Data {
             
             private global::System.Data.DataColumn columnSUPPLIER;
             
+            private global::System.Data.DataColumn columnProject;
+            
+            private global::System.Data.DataColumn columnUnit;
+            
+            private global::System.Data.DataColumn columnEmployee;
+            
             private global::System.Data.DataColumn columnDR;
             
             private global::System.Data.DataColumn columnCR;
@@ -298,6 +304,12 @@ namespace Applied_Accounts.Data {
             private global::System.Data.DataColumn columnCOA_ID;
             
             private global::System.Data.DataColumn columnSupplier_ID;
+            
+            private global::System.Data.DataColumn columnProject_ID;
+            
+            private global::System.Data.DataColumn columnUnit_ID;
+            
+            private global::System.Data.DataColumn columnLedger;
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
@@ -353,6 +365,30 @@ namespace Applied_Accounts.Data {
             public global::System.Data.DataColumn SUPPLIERColumn {
                 get {
                     return this.columnSUPPLIER;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn ProjectColumn {
+                get {
+                    return this.columnProject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn UnitColumn {
+                get {
+                    return this.columnUnit;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn EmployeeColumn {
+                get {
+                    return this.columnEmployee;
                 }
             }
             
@@ -414,6 +450,30 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Project_IDColumn {
+                get {
+                    return this.columnProject_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Unit_IDColumn {
+                get {
+                    return this.columnUnit_ID;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn LedgerColumn {
+                get {
+                    return this.columnLedger;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -449,19 +509,41 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public View_VoucherRow AddView_VoucherRow(int SRNO, string ACCOUNT, string SUPPLIER, string DR, string CR, string Description, string Vou_No, string Vou_Date, int COA_ID, int Supplier_ID) {
+            public View_VoucherRow AddView_VoucherRow(
+                        int SRNO, 
+                        string ACCOUNT, 
+                        string SUPPLIER, 
+                        string Project, 
+                        string Unit, 
+                        string Employee, 
+                        string DR, 
+                        string CR, 
+                        string Description, 
+                        string Vou_No, 
+                        string Vou_Date, 
+                        int COA_ID, 
+                        int Supplier_ID, 
+                        int Project_ID, 
+                        int Unit_ID, 
+                        int Ledger) {
                 View_VoucherRow rowView_VoucherRow = ((View_VoucherRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         SRNO,
                         ACCOUNT,
                         SUPPLIER,
+                        Project,
+                        Unit,
+                        Employee,
                         DR,
                         CR,
                         Description,
                         Vou_No,
                         Vou_Date,
                         COA_ID,
-                        Supplier_ID};
+                        Supplier_ID,
+                        Project_ID,
+                        Unit_ID,
+                        Ledger};
                 rowView_VoucherRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowView_VoucherRow);
                 return rowView_VoucherRow;
@@ -487,6 +569,9 @@ namespace Applied_Accounts.Data {
                 this.columnSRNO = base.Columns["SRNO"];
                 this.columnACCOUNT = base.Columns["ACCOUNT"];
                 this.columnSUPPLIER = base.Columns["SUPPLIER"];
+                this.columnProject = base.Columns["Project"];
+                this.columnUnit = base.Columns["Unit"];
+                this.columnEmployee = base.Columns["Employee"];
                 this.columnDR = base.Columns["DR"];
                 this.columnCR = base.Columns["CR"];
                 this.columnDescription = base.Columns["Description"];
@@ -494,6 +579,9 @@ namespace Applied_Accounts.Data {
                 this.columnVou_Date = base.Columns["Vou_Date"];
                 this.columnCOA_ID = base.Columns["COA_ID"];
                 this.columnSupplier_ID = base.Columns["Supplier_ID"];
+                this.columnProject_ID = base.Columns["Project_ID"];
+                this.columnUnit_ID = base.Columns["Unit_ID"];
+                this.columnLedger = base.Columns["Ledger"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -505,6 +593,12 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnACCOUNT);
                 this.columnSUPPLIER = new global::System.Data.DataColumn("SUPPLIER", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSUPPLIER);
+                this.columnProject = new global::System.Data.DataColumn("Project", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProject);
+                this.columnUnit = new global::System.Data.DataColumn("Unit", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnit);
+                this.columnEmployee = new global::System.Data.DataColumn("Employee", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnEmployee);
                 this.columnDR = new global::System.Data.DataColumn("DR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDR);
                 this.columnCR = new global::System.Data.DataColumn("CR", typeof(string), null, global::System.Data.MappingType.Element);
@@ -519,11 +613,23 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnCOA_ID);
                 this.columnSupplier_ID = new global::System.Data.DataColumn("Supplier_ID", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSupplier_ID);
+                this.columnProject_ID = new global::System.Data.DataColumn("Project_ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProject_ID);
+                this.columnUnit_ID = new global::System.Data.DataColumn("Unit_ID", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnUnit_ID);
+                this.columnLedger = new global::System.Data.DataColumn("Ledger", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnLedger);
                 this.columnSRNO.AllowDBNull = false;
                 this.columnACCOUNT.AllowDBNull = false;
                 this.columnACCOUNT.MaxLength = 65536;
                 this.columnSUPPLIER.AllowDBNull = false;
                 this.columnSUPPLIER.MaxLength = 300;
+                this.columnProject.AllowDBNull = false;
+                this.columnProject.MaxLength = 300;
+                this.columnUnit.AllowDBNull = false;
+                this.columnUnit.MaxLength = 50;
+                this.columnEmployee.AllowDBNull = false;
+                this.columnEmployee.MaxLength = 100;
                 this.columnDR.AllowDBNull = false;
                 this.columnDR.MaxLength = 15;
                 this.columnCR.AllowDBNull = false;
@@ -709,6 +815,39 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Project {
+                get {
+                    return ((string)(this[this.tableView_Voucher.ProjectColumn]));
+                }
+                set {
+                    this[this.tableView_Voucher.ProjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Unit {
+                get {
+                    return ((string)(this[this.tableView_Voucher.UnitColumn]));
+                }
+                set {
+                    this[this.tableView_Voucher.UnitColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Employee {
+                get {
+                    return ((string)(this[this.tableView_Voucher.EmployeeColumn]));
+                }
+                set {
+                    this[this.tableView_Voucher.EmployeeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string DR {
                 get {
                     return ((string)(this[this.tableView_Voucher.DRColumn]));
@@ -796,6 +935,54 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int Project_ID {
+                get {
+                    try {
+                        return ((int)(this[this.tableView_Voucher.Project_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Project_ID\' in table \'View_Voucher\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView_Voucher.Project_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int Unit_ID {
+                get {
+                    try {
+                        return ((int)(this[this.tableView_Voucher.Unit_IDColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Unit_ID\' in table \'View_Voucher\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView_Voucher.Unit_IDColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public int Ledger {
+                get {
+                    try {
+                        return ((int)(this[this.tableView_Voucher.LedgerColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Ledger\' in table \'View_Voucher\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView_Voucher.LedgerColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public bool IsVou_DateNull() {
                 return this.IsNull(this.tableView_Voucher.Vou_DateColumn);
             }
@@ -816,6 +1003,42 @@ namespace Applied_Accounts.Data {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public void SetSupplier_IDNull() {
                 this[this.tableView_Voucher.Supplier_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsProject_IDNull() {
+                return this.IsNull(this.tableView_Voucher.Project_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetProject_IDNull() {
+                this[this.tableView_Voucher.Project_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsUnit_IDNull() {
+                return this.IsNull(this.tableView_Voucher.Unit_IDColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetUnit_IDNull() {
+                this[this.tableView_Voucher.Unit_IDColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsLedgerNull() {
+                return this.IsNull(this.tableView_Voucher.LedgerColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetLedgerNull() {
+                this[this.tableView_Voucher.LedgerColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -981,6 +1204,9 @@ namespace Applied_Accounts.Data.ds_VoucherTableAdapters {
             tableMapping.ColumnMappings.Add("SRNO", "SRNO");
             tableMapping.ColumnMappings.Add("ACCOUNT", "ACCOUNT");
             tableMapping.ColumnMappings.Add("SUPPLIER", "SUPPLIER");
+            tableMapping.ColumnMappings.Add("Project", "Project");
+            tableMapping.ColumnMappings.Add("Unit", "Unit");
+            tableMapping.ColumnMappings.Add("Employee", "Employee");
             tableMapping.ColumnMappings.Add("DR", "DR");
             tableMapping.ColumnMappings.Add("CR", "CR");
             tableMapping.ColumnMappings.Add("Description", "Description");
@@ -988,6 +1214,9 @@ namespace Applied_Accounts.Data.ds_VoucherTableAdapters {
             tableMapping.ColumnMappings.Add("Vou_Date", "Vou_Date");
             tableMapping.ColumnMappings.Add("COA_ID", "COA_ID");
             tableMapping.ColumnMappings.Add("Supplier_ID", "Supplier_ID");
+            tableMapping.ColumnMappings.Add("Project_ID", "Project_ID");
+            tableMapping.ColumnMappings.Add("Unit_ID", "Unit_ID");
+            tableMapping.ColumnMappings.Add("Ledger", "Ledger");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -1004,8 +1233,9 @@ namespace Applied_Accounts.Data.ds_VoucherTableAdapters {
             this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT \"SRNO\", \"ACCOUNT\", \"SUPPLIER\", \"DR\", \"CR\", \"Description\", \"Vou_No\", \"Vou_D" +
-                "ate\", \"COA_ID\", \"Supplier_ID\" FROM \"View_Voucher\"";
+            this._commandCollection[0].CommandText = "SELECT \"SRNO\", \"ACCOUNT\", \"SUPPLIER\", \"Project\", \"Unit\", \"Employee\", \"DR\", \"CR\", " +
+                "\"Description\", \"Vou_No\", \"Vou_Date\", \"COA_ID\", \"Supplier_ID\", \"Project_ID\", \"Uni" +
+                "t_ID\", \"Ledger\" FROM \"View_Voucher\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         

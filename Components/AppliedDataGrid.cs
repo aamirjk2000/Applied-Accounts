@@ -75,7 +75,7 @@ namespace Applied_Accounts
             for (int i = 0; i < ColumnsVisiable.Length; i++)
             {
 
-                if (ColumnsName[i] == "Active")
+                if (ColumnsName[i] == "Active")                     // Set Active Column 
                 {
                     DataGridViewCheckBoxColumn _Column = new DataGridViewCheckBoxColumn();
                     _Column.Name = ColumnsName[i];
@@ -101,15 +101,6 @@ namespace Applied_Accounts
             _Filter += string.Concat("Code like '%", txtFilter.Text, "%'" + " OR ");
             _Filter += string.Concat("SCode like '%", txtFilter.Text, "%'");
             ((DataView)_DataGrid.DataSource).RowFilter = _Filter;
-        }
-
-        private void _DataGrid_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            if (_DataGrid.SelectedRows.Count > 0)
-            {
-                MyViewRow = _DataGrid.SelectedRows[0];
-                MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
-            }
         }
 
         #region Object Load and Leave
@@ -158,38 +149,41 @@ namespace Applied_Accounts
         private void _DataGrid_Enter(object sender, EventArgs e)
         {
             // Select a record from record edit
-            AppliedDataGrid_Leave(sender, e);
+            //AppliedDataGrid_Leave(sender, e);
         }
 
         private void _DataGrid_Leave(object sender, EventArgs e)
         {
             // select a record for record edit 
-            AppliedDataGrid_Leave(sender, e);
+            //AppliedDataGrid_Leave(sender, e);
         }
 
         private void _DataGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            int _TableID = AppliedTable.GetTable_ID(MyDataRow.Table);           // Get Enum ID of Row Table
-            ThisTable _DataTable = new ThisTable(AppliedTable.GetDataTable(_TableID));
-
-            if (_DataGrid.CurrentRow != null)                                  // Grid View has not selected any row.
+            if(_DataGrid.Columns[e.ColumnIndex].Name=="Active")                     // Only Work of Active Column clock
             {
-                MyViewRow = _DataGrid.CurrentRow;
-                MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
+                int _TableID = AppliedTable.GetTable_ID(MyDataRow.Table);           // Get Enum ID of Row Table
+                ThisTable _DataTable = new ThisTable(AppliedTable.GetDataTable(_TableID));
 
-                if ((bool)MyDataRow["Active"])
+                if (_DataGrid.CurrentRow != null)                                  // Grid View has not selected any row.
                 {
-                    MyDataRow["Active"] = false;
-                }
-                else
-                {
-                    MyDataRow["Active"] = true;
-                }
+                    MyViewRow = _DataGrid.CurrentRow;
+                    MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
 
-                _DataTable.Save(MyDataRow,false);                     // Save record Active true if false or false if true.
+                        if ((bool)MyDataRow["Active"])
+                        {
+                            MyDataRow["Active"] = false;
+                        }
+                        else
+                        {
+                            MyDataRow["Active"] = true;
+                        }
+
+                        _DataTable.Save(MyDataRow, false);                     // Save record Active true if false or false if true.
+                }
             }
         }
 
-
+        
     }           // Main 
 }               // Namespace

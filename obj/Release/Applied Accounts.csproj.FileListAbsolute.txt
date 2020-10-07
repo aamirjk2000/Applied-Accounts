@@ -219,7 +219,6 @@ D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Preview.frmPreview_Tria
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Properties.Resources.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Preview.frmPreview_General_Ledger.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Preview.frmPreview_GL_Supplier.resources
-D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Reports.Preview_Voucher.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Reports.frmReport_Vouchers.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.GenerateResource.cache
 D:\Applied\Applied-Accounts\obj\Release\RdlCompile.cache
@@ -231,3 +230,4 @@ D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.pdb
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csprojAssemblyReference.cache
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Preview.Temp.Preview_Voucher.resources

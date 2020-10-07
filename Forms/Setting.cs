@@ -27,6 +27,8 @@ namespace Applied_Accounts.Forms
             txtDatePickerFormat.Text = Applied.GetString("DateFormat_Picker");
             txtComboDateFormat.Text = Applied.GetString("DateFormat_Combo");
             txtDefaultDateFormat.Text = Applied.GetString("DateFormat_Default");
+            txtReportDateFormat.Text = Applied.GetString("DateFormat_Heading");
+
         }
 
 
@@ -74,6 +76,11 @@ namespace Applied_Accounts.Forms
         private void txtComboDateFormat_Leave(object sender, EventArgs e)
         {
             Applied.SetValue("DateFormat_Combo", txtComboDateFormat.Text.Trim(), Applied.KeyType.String);
+        }
+
+        private void txtReportHeadingFormat_Leave(object sender, EventArgs e)
+        {
+            Applied.SetValue("DateFormat_Heading", txtReportHeadingFormat.Text.Trim(), Applied.KeyType.String);
         }
     }
 }

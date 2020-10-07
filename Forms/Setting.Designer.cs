@@ -43,6 +43,8 @@
             this.label6 = new System.Windows.Forms.Label();
             this.txtComboDateFormat = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtReportHeadingFormat = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -110,7 +112,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(12, 150);
+            this.label4.Location = new System.Drawing.Point(14, 150);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(100, 13);
             this.label4.TabIndex = 100;
@@ -175,11 +177,30 @@
             this.label7.TabIndex = 106;
             this.label7.Text = "Combo Date Format";
             // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(14, 258);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(108, 13);
+            this.label8.TabIndex = 108;
+            this.label8.Text = "Date Heading Format";
+            // 
+            // txtReportHeadingFormat
+            // 
+            this.txtReportHeadingFormat.Location = new System.Drawing.Point(143, 255);
+            this.txtReportHeadingFormat.Name = "txtReportHeadingFormat";
+            this.txtReportHeadingFormat.Size = new System.Drawing.Size(200, 20);
+            this.txtReportHeadingFormat.TabIndex = 109;
+            this.txtReportHeadingFormat.Leave += new System.EventHandler(this.txtReportHeadingFormat_Leave);
+            // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtReportHeadingFormat);
+            this.Controls.Add(this.label8);
             this.Controls.Add(this.txtComboDateFormat);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.txtDefaultDateFormat);
@@ -220,5 +241,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txtComboDateFormat;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtReportHeadingFormat;
     }
 }

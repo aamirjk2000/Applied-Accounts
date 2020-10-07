@@ -44,7 +44,7 @@
             this.rpt_Voucher.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.rpt_Voucher.LocalReport.ReportEmbeddedResource = "Applied_Accounts.Reports.Preview_Voucher.rdlc";
+            this.rpt_Voucher.LocalReport.ReportEmbeddedResource = "Applied_Accounts.Reports.Report_Voucher.rdlc";
             this.rpt_Voucher.Location = new System.Drawing.Point(0, 61);
             this.rpt_Voucher.Name = "rpt_Voucher";
             this.rpt_Voucher.ServerReport.BearerToken = null;

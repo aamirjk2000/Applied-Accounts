@@ -13,7 +13,6 @@ namespace Applied_Accounts
         Boolean Has_Error { get; set; }
         private DataRow thisDataRow { get => MyNavigator.TableClass.MyDataRow; }
         private DataView thisDataView { get => MyNavigator.TableClass.MyDataView; }
-        private ThisTable thisTableClas { get => MyNavigator.TableClass; }
         private DataTable Table_COA { get => MyNavigator.TableClass.MyDataTable; }
         private DataView View_COA { get => MyNavigator.TableClass.MyDataView; }
 
@@ -47,14 +46,14 @@ namespace Applied_Accounts
         private void DataGridRefresh()
         {
             
-            string[] ColumnsVisiable = { "Code", "SCode", "Title", "IsCashBook", "IsBankBook", "Notes", "OBal" };
-            string[] ColumnsName = { "Code", "Tag", "Title", "Cash", "Bank", "Notes", "Opening Balance" };
+            string[] ColumnsVisiable = { "Code", "SCode", "Title", "IsCashBook", "IsBankBook", "Notes", "OBal","Active" };
+            string[] ColumnsName = { "Code", "Tag", "Title", "Cash", "Bank", "Notes", "Opening Balance","Active" };
             int[] ColumnsFormat = { (int)TextFormat.Codes,0,0,
                                     (int)TextFormat.Boolean,
                                     (int)TextFormat.Boolean,
                                     (int)TextFormat.Numbers,
-                                    (int)TextFormat.Currency};
-            int[] ColumnWidth = { 60, 75, 260, 50, 50, 50, 80 };
+                                    (int)TextFormat.Currency,0};
+            int[] ColumnWidth = { 60, 75, 260, 50, 50, 50, 80, 40 };
 
             DataGrid_COA.ColumnsName = ColumnsName;
             DataGrid_COA.ColumnsWidth = ColumnWidth;

@@ -172,7 +172,14 @@ namespace Applied_Accounts
             return _DataTable;
 
         }
-
+        public static DataTable GetComboData(object TableID)                       // Get Table for Combo box object.
+        {
+            DataTable _DataTable = new DataTable();
+            string _TableName = Conversion.GetTableName((int)TableID);
+            string _Text = "SELECT ID,Title FROM " + _TableName + " WHERE Active ORDER BY Title ";
+            _DataTable =  GetDataTable(_Text, _TableName);
+            return _DataTable;
+        }
 
         #endregion
 
@@ -372,7 +379,8 @@ namespace Applied_Accounts
         View_Supplier_Ledger = 104,
         View_Project_Ledger = 105,
         View_Trial_Balance = 106,
-        View_TB_Period = 107
+        View_TB_Period = 107,
+        View_VoucherGrid = 108
     };
         
 }                               // Namespace

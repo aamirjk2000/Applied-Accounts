@@ -22,15 +22,12 @@ namespace Applied_Accounts
         public static string StartupPath = Application.StartupPath;
         public static string ExecutablePath = Application.ExecutablePath;
         public static string DateTimeFormat = "";
-        public static string ReportFolder = "Applied_Accounts.Reports.";
+        public static string ReportsPath = "Applied_Accounts.Reports.";
         public static string CompanyName = "";
         public static string User = "";
         public static DateTime MinDate;
         public static DateTime MaxDate;
         public static CultureInfo Culture;
-
-
-
 
         [STAThread]
         static void Main()

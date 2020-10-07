@@ -1,0 +1,20 @@
+[18:17:00.906 Verbose] - BuildManager - C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Microsoft\VisualStudio\v16.0\ReportingServices\Microsoft.ReportingServices.targets(24,2): error MSB4036: The "RdlCompile" task was not found. Check the following: 1.) The name of the task in the project file is the same as the name of the task class. 2.) The task class is "public" and implements the Microsoft.Build.Framework.ITask interface. 3.) The task is correctly declared with <UsingTask> in the project file, or in the *.tasks files located in the "C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin" directory.
+[18:17:00.907 Verbose] - BuildManager - Some of the file paths defined in the csproj under the Live Unit Testing build path are missing. Verify whether these files should be present under the Live Unit Testing build path and if necessary update the csproj definition to look these files up in a different place.
+[18:17:00.907 Verbose] - BuildManager - Item AppConfigFileDestination 'D:\Applied\Applied-Accounts\.vs\Applied Accounts\v16\lut\0\b\Applied Accounts.exe.config' evaluated via:
+AppConfigFileDestination: '$(OutDir)$(TargetFileName).config' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:304
+  OutDir: 'D:\Applied\Applied-Accounts\.vs\Applied Accounts\v16\lut\0\b\' @ D:\Applied\Applied-Accounts\Applied Accounts.csproj:0
+  TargetFileName: '$(TargetName)$(TargetExt)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:213
+    TargetName: '$(AssemblyName)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:205
+      AssemblyName: 'Applied Accounts' @ D:\Applied\Applied-Accounts\Applied Accounts.csproj:10
+    TargetExt: '.exe' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:182
+[18:17:00.907 Verbose] - BuildManager - Item _DebugSymbolsOutputPath 'D:\Applied\Applied-Accounts\.vs\Applied Accounts\v16\lut\0\b\Applied Accounts.pdb' evaluated via:
+_DebugSymbolsOutputPath: '@(_DebugSymbolsIntermediatePath->'$(OutDir)%(Filename)%(Extension)')' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:373
+  OutDir: 'D:\Applied\Applied-Accounts\.vs\Applied Accounts\v16\lut\0\b\' @ D:\Applied\Applied-Accounts\Applied Accounts.csproj:0
+[18:17:00.907 Verbose] - BuildManager - Item _ApplicationManifestFinal 'D:\Applied\Applied-Accounts\.vs\Applied Accounts\v16\lut\0\b\Applied Accounts.exe.manifest' evaluated via:
+_ApplicationManifestFinal: '$(OutDir)$(_DeploymentTargetApplicationManifestFileName)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:411
+  OutDir: 'D:\Applied\Applied-Accounts\.vs\Applied Accounts\v16\lut\0\b\' @ D:\Applied\Applied-Accounts\Applied Accounts.csproj:0
+  _DeploymentTargetApplicationManifestFileName: '$(TargetFileName).manifest' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:231
+    TargetFileName: '$(TargetName)$(TargetExt)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:213
+      TargetName: '$(AssemblyName)' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:205
+        AssemblyName: 'Applied Accounts' @ D:\Applied\Applied-Accounts\Applied Accounts.csproj:10
+      TargetExt: '.exe' @ C:\Program Files (x86)\Microsoft Visual Studio\2019\Preview\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets:182

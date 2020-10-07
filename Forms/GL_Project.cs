@@ -29,10 +29,10 @@ namespace Applied_Accounts.Forms
         {
             InitializeComponent();
 
-            dt_Suppliers = AppliedTable.GetDataTable(Tables.Suppliers);
-            dt_COA = AppliedTable.GetDataTable(Tables.COA);
-            dt_Projects = AppliedTable.GetDataTable(Tables.Projects);
-            dt_Units = AppliedTable.GetDataTable(Tables.Units);
+            dt_Suppliers = AppliedTable.GetComboData(Tables.Suppliers);
+            dt_COA = AppliedTable.GetComboData(Tables.COA);
+            dt_Projects = AppliedTable.GetComboData(Tables.Projects);
+            dt_Units = AppliedTable.GetComboData(Tables.Units);
 
             cBoxSuppliers.DataSource = dt_Suppliers;
             cBoxSuppliers.DisplayMember = "Title";

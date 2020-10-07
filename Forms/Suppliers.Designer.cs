@@ -43,17 +43,17 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.MyNavigator = new Applied_Accounts.Navigator();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.P2 = new System.Windows.Forms.TabPage();
             this.Grid_Supplier = new Applied_Accounts.AppliedDataGrid();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
+            this.P2.SuspendLayout();
             this.SuspendLayout();
             // 
             // Pages
             // 
             this.Pages.Controls.Add(this.P1);
-            this.Pages.Controls.Add(this.tabPage1);
+            this.Pages.Controls.Add(this.P2);
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
@@ -196,15 +196,16 @@
             this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
             this.MyNavigator.Load += new System.EventHandler(this.MyNavigator_Load);
             // 
-            // tabPage1
+            // P2
             // 
-            this.tabPage1.Controls.Add(this.Grid_Supplier);
-            this.tabPage1.Location = new System.Drawing.Point(4, 22);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Size = new System.Drawing.Size(768, 400);
-            this.tabPage1.TabIndex = 2;
-            this.tabPage1.Text = "tabPage1";
-            this.tabPage1.UseVisualStyleBackColor = true;
+            this.P2.Controls.Add(this.Grid_Supplier);
+            this.P2.Location = new System.Drawing.Point(4, 22);
+            this.P2.Name = "P2";
+            this.P2.Size = new System.Drawing.Size(768, 400);
+            this.P2.TabIndex = 2;
+            this.P2.Text = "List";
+            this.P2.UseVisualStyleBackColor = true;
+            this.P2.Enter += new System.EventHandler(this.P2_Enter);
             // 
             // Grid_Supplier
             // 
@@ -225,6 +226,7 @@
             this.Grid_Supplier.RecordID = ((long)(0));
             this.Grid_Supplier.Size = new System.Drawing.Size(762, 394);
             this.Grid_Supplier.TabIndex = 0;
+            this.Grid_Supplier.Load += new System.EventHandler(this.Grid_Supplier_Load);
             // 
             // frmSuppliers
             // 
@@ -237,7 +239,7 @@
             this.Pages.ResumeLayout(false);
             this.P1.ResumeLayout(false);
             this.P1.PerformLayout();
-            this.tabPage1.ResumeLayout(false);
+            this.P2.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -259,7 +261,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.TabPage tabPage1;
+        private System.Windows.Forms.TabPage P2;
         private AppliedDataGrid Grid_Supplier;
     }
 }

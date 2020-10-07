@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema id="DataSet1" targetNamespace="http://tempuri.org/DataSet1.xsd" xmlns:mstns="http://tempuri.org/DataSet1.xsd" xmlns="http://tempuri.org/DataSet1.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata" xmlns:msprop="urn:schemas-microsoft-com:xml-msprop" attributeFormDefault="qualified" elementFormDefault="qualified">
+  <xs:annotation>
+    <xs:appinfo source="urn:schemas-microsoft-com:xml-msdatasource">
+      <DataSource DefaultConnectionIndex="0" FunctionsComponentName="QueriesTableAdapter" Modifier="AutoLayout, AnsiClass, Class, Public" SchemaSerializationMode="IncludeSchema" xmlns="urn:schemas-microsoft-com:xml-msdatasource">
+        <Connections>
+          <Connection AppSettingsObjectName="Settings" AppSettingsPropertyName="ConnectionString" ConnectionStringObject="" IsAppSettingsProperty="true" Modifier="Assembly" Name="ConnectionString (Settings)" PropertyReference="ApplicationSettings.Applied_Accounts.Properties.Settings.GlobalReference.Default.ConnectionString" Provider="System.Data.Odbc" />
+        </Connections>
+        <Tables>
+          <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="View_Supplier_LedgerTableAdapter" GeneratorDataComponentClassName="View_Supplier_LedgerTableAdapter" Name="View_Supplier_Ledger" UserDataComponentName="View_Supplier_LedgerTableAdapter">
+            <MainSource>
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="View_Supplier_Ledger" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
+                <SelectCommand>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT "Vou_Date", "Vou_No", "Description", "DR", "CR", "COA", "COA_Code", "COA_TITLE", "Supplier", "Supplier_Code", "Supplier_Title", "Project", "Project_Code", "Project_Title", "Unit", "Unit_Title" FROM "View_Supplier_Ledger"</CommandText>
+                    <Parameters />
+                  </DbCommand>
+                </SelectCommand>
+              </DbSource>
+            </MainSource>
+            <Mappings>
+              <Mapping SourceColumn="Vou_Date" DataSetColumn="Vou_Date" />
+              <Mapping SourceColumn="Vou_No" DataSetColumn="Vou_No" />
+              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="DR" DataSetColumn="DR" />
+              <Mapping SourceColumn="CR" DataSetColumn="CR" />
+              <Mapping SourceColumn="COA" DataSetColumn="COA" />
+              <Mapping SourceColumn="COA_Code" DataSetColumn="COA_Code" />
+              <Mapping SourceColumn="COA_TITLE" DataSetColumn="COA_TITLE" />
+              <Mapping SourceColumn="Supplier" DataSetColumn="Supplier" />
+              <Mapping SourceColumn="Supplier_Code" DataSetColumn="Supplier_Code" />
+              <Mapping SourceColumn="Supplier_Title" DataSetColumn="Supplier_Title" />
+              <Mapping SourceColumn="Project" DataSetColumn="Project" />
+              <Mapping SourceColumn="Project_Code" DataSetColumn="Project_Code" />
+              <Mapping SourceColumn="Project_Title" DataSetColumn="Project_Title" />
+              <Mapping SourceColumn="Unit" DataSetColumn="Unit" />
+              <Mapping SourceColumn="Unit_Title" DataSetColumn="Unit_Title" />
+            </Mappings>
+            <Sources />
+          </TableAdapter>
+        </Tables>
+        <Sources />
+      </DataSource>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:element name="DataSet1" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="True" msprop:Generator_DataSetName="DataSet1" msprop:Generator_UserDSName="DataSet1">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element name="View_Supplier_Ledger" msprop:Generator_TableClassName="View_Supplier_LedgerDataTable" msprop:Generator_TableVarName="tableView_Supplier_Ledger" msprop:Generator_TablePropName="View_Supplier_Ledger" msprop:Generator_RowDeletingName="View_Supplier_LedgerRowDeleting" msprop:Generator_RowChangingName="View_Supplier_LedgerRowChanging" msprop:Generator_RowEvHandlerName="View_Supplier_LedgerRowChangeEventHandler" msprop:Generator_RowDeletedName="View_Supplier_LedgerRowDeleted" msprop:Generator_UserTableName="View_Supplier_Ledger" msprop:Generator_RowChangedName="View_Supplier_LedgerRowChanged" msprop:Generator_RowEvArgName="View_Supplier_LedgerRowChangeEvent" msprop:Generator_RowClassName="View_Supplier_LedgerRow">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Vou_No" msprop:Generator_ColumnVarNameInTable="columnVou_No" msprop:Generator_ColumnPropNameInRow="Vou_No" msprop:Generator_ColumnPropNameInTable="Vou_NoColumn" msprop:Generator_UserColumnName="Vou_No">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="12" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="200" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="DR" msprop:Generator_ColumnVarNameInTable="columnDR" msprop:Generator_ColumnPropNameInRow="DR" msprop:Generator_ColumnPropNameInTable="DRColumn" msprop:Generator_UserColumnName="DR">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CR" msprop:Generator_ColumnVarNameInTable="columnCR" msprop:Generator_ColumnPropNameInRow="CR" msprop:Generator_ColumnPropNameInTable="CRColumn" msprop:Generator_UserColumnName="CR">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COA" msprop:Generator_ColumnVarNameInTable="columnCOA" msprop:Generator_ColumnPropNameInRow="COA" msprop:Generator_ColumnPropNameInTable="COAColumn" msprop:Generator_UserColumnName="COA" type="xs:int" />
+              <xs:element name="COA_Code" msprop:Generator_ColumnVarNameInTable="columnCOA_Code" msprop:Generator_ColumnPropNameInRow="COA_Code" msprop:Generator_ColumnPropNameInTable="COA_CodeColumn" msprop:Generator_UserColumnName="COA_Code">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="65536" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="COA_TITLE" msprop:Generator_ColumnVarNameInTable="columnCOA_TITLE" msprop:Generator_ColumnPropNameInRow="COA_TITLE" msprop:Generator_ColumnPropNameInTable="COA_TITLEColumn" msprop:Generator_UserColumnName="COA_TITLE">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="65536" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Supplier" msprop:Generator_ColumnVarNameInTable="columnSupplier" msprop:Generator_ColumnPropNameInRow="Supplier" msprop:Generator_ColumnPropNameInTable="SupplierColumn" msprop:Generator_UserColumnName="Supplier" type="xs:int" minOccurs="0" />
+              <xs:element name="Supplier_Code" msprop:Generator_ColumnVarNameInTable="columnSupplier_Code" msprop:Generator_ColumnPropNameInRow="Supplier_Code" msprop:Generator_ColumnPropNameInTable="Supplier_CodeColumn" msprop:Generator_UserColumnName="Supplier_Code">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Supplier_Title" msprop:Generator_ColumnVarNameInTable="columnSupplier_Title" msprop:Generator_ColumnPropNameInRow="Supplier_Title" msprop:Generator_ColumnPropNameInTable="Supplier_TitleColumn" msprop:Generator_UserColumnName="Supplier_Title">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Project" msprop:Generator_ColumnVarNameInTable="columnProject" msprop:Generator_ColumnPropNameInRow="Project" msprop:Generator_ColumnPropNameInTable="ProjectColumn" msprop:Generator_UserColumnName="Project" type="xs:int" minOccurs="0" />
+              <xs:element name="Project_Code" msprop:Generator_ColumnVarNameInTable="columnProject_Code" msprop:Generator_ColumnPropNameInRow="Project_Code" msprop:Generator_ColumnPropNameInTable="Project_CodeColumn" msprop:Generator_UserColumnName="Project_Code">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="10" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Project_Title" msprop:Generator_ColumnVarNameInTable="columnProject_Title" msprop:Generator_ColumnPropNameInRow="Project_Title" msprop:Generator_ColumnPropNameInTable="Project_TitleColumn" msprop:Generator_UserColumnName="Project_Title">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="300" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Unit" msprop:Generator_ColumnVarNameInTable="columnUnit" msprop:Generator_ColumnPropNameInRow="Unit" msprop:Generator_ColumnPropNameInTable="UnitColumn" msprop:Generator_UserColumnName="Unit" type="xs:int" minOccurs="0" />
+              <xs:element name="Unit_Title" msprop:Generator_ColumnVarNameInTable="columnUnit_Title" msprop:Generator_ColumnPropNameInRow="Unit_Title" msprop:Generator_ColumnPropNameInTable="Unit_TitleColumn" msprop:Generator_UserColumnName="Unit_Title">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="50" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

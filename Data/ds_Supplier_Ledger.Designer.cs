@@ -20,9 +20,9 @@ namespace Applied_Accounts.Data {
     [global::System.ComponentModel.DesignerCategoryAttribute("code")]
     [global::System.ComponentModel.ToolboxItem(true)]
     [global::System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedDataSetSchema")]
-    [global::System.Xml.Serialization.XmlRootAttribute("DataSet1")]
+    [global::System.Xml.Serialization.XmlRootAttribute("ds_Supplier_Ledger")]
     [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.DataSet")]
-    public partial class DataSet1 : global::System.Data.DataSet {
+    public partial class ds_Supplier_Ledger : global::System.Data.DataSet {
         
         private View_Supplier_LedgerDataTable tableView_Supplier_Ledger;
         
@@ -30,7 +30,7 @@ namespace Applied_Accounts.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public DataSet1() {
+        public ds_Supplier_Ledger() {
             this.BeginInit();
             this.InitClass();
             global::System.ComponentModel.CollectionChangeEventHandler schemaChangedHandler = new global::System.ComponentModel.CollectionChangeEventHandler(this.SchemaChanged);
@@ -41,7 +41,7 @@ namespace Applied_Accounts.Data {
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        protected DataSet1(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
+        protected ds_Supplier_Ledger(global::System.Runtime.Serialization.SerializationInfo info, global::System.Runtime.Serialization.StreamingContext context) : 
                 base(info, context, false) {
             if ((this.IsBinarySerialized(info, context) == true)) {
                 this.InitVars(false);
@@ -127,7 +127,7 @@ namespace Applied_Accounts.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public override global::System.Data.DataSet Clone() {
-            DataSet1 cln = ((DataSet1)(base.Clone()));
+            ds_Supplier_Ledger cln = ((ds_Supplier_Ledger)(base.Clone()));
             cln.InitVars();
             cln.SchemaSerializationMode = this.SchemaSerializationMode;
             return cln;
@@ -199,9 +199,9 @@ namespace Applied_Accounts.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitClass() {
-            this.DataSetName = "DataSet1";
+            this.DataSetName = "ds_Supplier_Ledger";
             this.Prefix = "";
-            this.Namespace = "http://tempuri.org/DataSet1.xsd";
+            this.Namespace = "http://tempuri.org/ds_Supplier_Ledger.xsd";
             this.EnforceConstraints = true;
             this.SchemaSerializationMode = global::System.Data.SchemaSerializationMode.IncludeSchema;
             this.tableView_Supplier_Ledger = new View_Supplier_LedgerDataTable();
@@ -225,7 +225,7 @@ namespace Applied_Accounts.Data {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
-            DataSet1 ds = new DataSet1();
+            ds_Supplier_Ledger ds = new ds_Supplier_Ledger();
             global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
             global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
             global::System.Xml.Schema.XmlSchemaAny any = new global::System.Xml.Schema.XmlSchemaAny();
@@ -291,13 +291,19 @@ namespace Applied_Accounts.Data {
             
             private global::System.Data.DataColumn columnCOA;
             
+            private global::System.Data.DataColumn columnCOA_Code;
+            
             private global::System.Data.DataColumn columnCOA_TITLE;
             
             private global::System.Data.DataColumn columnSupplier;
             
+            private global::System.Data.DataColumn columnSupplier_Code;
+            
             private global::System.Data.DataColumn columnSupplier_Title;
             
             private global::System.Data.DataColumn columnProject;
+            
+            private global::System.Data.DataColumn columnProject_Code;
             
             private global::System.Data.DataColumn columnProject_Title;
             
@@ -388,6 +394,14 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn COA_CodeColumn {
+                get {
+                    return this.columnCOA_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn COA_TITLEColumn {
                 get {
                     return this.columnCOA_TITLE;
@@ -404,6 +418,14 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Supplier_CodeColumn {
+                get {
+                    return this.columnSupplier_Code;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public global::System.Data.DataColumn Supplier_TitleColumn {
                 get {
                     return this.columnSupplier_Title;
@@ -415,6 +437,14 @@ namespace Applied_Accounts.Data {
             public global::System.Data.DataColumn ProjectColumn {
                 get {
                     return this.columnProject;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Project_CodeColumn {
+                get {
+                    return this.columnProject_Code;
                 }
             }
             
@@ -479,7 +509,23 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public View_Supplier_LedgerRow AddView_Supplier_LedgerRow(System.DateTime Vou_Date, string Vou_No, string Description, long DR, long CR, int COA, string COA_TITLE, int Supplier, string Supplier_Title, int Project, string Project_Title, int Unit, string Unit_Title) {
+            public View_Supplier_LedgerRow AddView_Supplier_LedgerRow(
+                        System.DateTime Vou_Date, 
+                        string Vou_No, 
+                        string Description, 
+                        decimal DR, 
+                        decimal CR, 
+                        int COA, 
+                        string COA_Code, 
+                        string COA_TITLE, 
+                        int Supplier, 
+                        string Supplier_Code, 
+                        string Supplier_Title, 
+                        int Project, 
+                        string Project_Code, 
+                        string Project_Title, 
+                        int Unit, 
+                        string Unit_Title) {
                 View_Supplier_LedgerRow rowView_Supplier_LedgerRow = ((View_Supplier_LedgerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Vou_Date,
@@ -488,10 +534,13 @@ namespace Applied_Accounts.Data {
                         DR,
                         CR,
                         COA,
+                        COA_Code,
                         COA_TITLE,
                         Supplier,
+                        Supplier_Code,
                         Supplier_Title,
                         Project,
+                        Project_Code,
                         Project_Title,
                         Unit,
                         Unit_Title};
@@ -523,10 +572,13 @@ namespace Applied_Accounts.Data {
                 this.columnDR = base.Columns["DR"];
                 this.columnCR = base.Columns["CR"];
                 this.columnCOA = base.Columns["COA"];
+                this.columnCOA_Code = base.Columns["COA_Code"];
                 this.columnCOA_TITLE = base.Columns["COA_TITLE"];
                 this.columnSupplier = base.Columns["Supplier"];
+                this.columnSupplier_Code = base.Columns["Supplier_Code"];
                 this.columnSupplier_Title = base.Columns["Supplier_Title"];
                 this.columnProject = base.Columns["Project"];
+                this.columnProject_Code = base.Columns["Project_Code"];
                 this.columnProject_Title = base.Columns["Project_Title"];
                 this.columnUnit = base.Columns["Unit"];
                 this.columnUnit_Title = base.Columns["Unit_Title"];
@@ -541,27 +593,32 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnVou_No);
                 this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescription);
-                this.columnDR = new global::System.Data.DataColumn("DR", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnDR = new global::System.Data.DataColumn("DR", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDR);
-                this.columnCR = new global::System.Data.DataColumn("CR", typeof(long), null, global::System.Data.MappingType.Element);
+                this.columnCR = new global::System.Data.DataColumn("CR", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCR);
                 this.columnCOA = new global::System.Data.DataColumn("COA", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCOA);
+                this.columnCOA_Code = new global::System.Data.DataColumn("COA_Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnCOA_Code);
                 this.columnCOA_TITLE = new global::System.Data.DataColumn("COA_TITLE", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCOA_TITLE);
                 this.columnSupplier = new global::System.Data.DataColumn("Supplier", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSupplier);
+                this.columnSupplier_Code = new global::System.Data.DataColumn("Supplier_Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnSupplier_Code);
                 this.columnSupplier_Title = new global::System.Data.DataColumn("Supplier_Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnSupplier_Title);
                 this.columnProject = new global::System.Data.DataColumn("Project", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnProject);
+                this.columnProject_Code = new global::System.Data.DataColumn("Project_Code", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnProject_Code);
                 this.columnProject_Title = new global::System.Data.DataColumn("Project_Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnProject_Title);
                 this.columnUnit = new global::System.Data.DataColumn("Unit", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUnit);
                 this.columnUnit_Title = new global::System.Data.DataColumn("Unit_Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUnit_Title);
-                this.columnVou_Date.AllowDBNull = false;
                 this.columnVou_No.AllowDBNull = false;
                 this.columnVou_No.MaxLength = 12;
                 this.columnDescription.AllowDBNull = false;
@@ -569,10 +626,16 @@ namespace Applied_Accounts.Data {
                 this.columnDR.AllowDBNull = false;
                 this.columnCR.AllowDBNull = false;
                 this.columnCOA.AllowDBNull = false;
+                this.columnCOA_Code.AllowDBNull = false;
+                this.columnCOA_Code.MaxLength = 65536;
                 this.columnCOA_TITLE.AllowDBNull = false;
                 this.columnCOA_TITLE.MaxLength = 65536;
+                this.columnSupplier_Code.AllowDBNull = false;
+                this.columnSupplier_Code.MaxLength = 10;
                 this.columnSupplier_Title.AllowDBNull = false;
                 this.columnSupplier_Title.MaxLength = 300;
+                this.columnProject_Code.AllowDBNull = false;
+                this.columnProject_Code.MaxLength = 10;
                 this.columnProject_Title.AllowDBNull = false;
                 this.columnProject_Title.MaxLength = 300;
                 this.columnUnit_Title.AllowDBNull = false;
@@ -644,7 +707,7 @@ namespace Applied_Accounts.Data {
             public static global::System.Xml.Schema.XmlSchemaComplexType GetTypedTableSchema(global::System.Xml.Schema.XmlSchemaSet xs) {
                 global::System.Xml.Schema.XmlSchemaComplexType type = new global::System.Xml.Schema.XmlSchemaComplexType();
                 global::System.Xml.Schema.XmlSchemaSequence sequence = new global::System.Xml.Schema.XmlSchemaSequence();
-                DataSet1 ds = new DataSet1();
+                ds_Supplier_Ledger ds = new ds_Supplier_Ledger();
                 global::System.Xml.Schema.XmlSchemaAny any1 = new global::System.Xml.Schema.XmlSchemaAny();
                 any1.Namespace = "http://www.w3.org/2001/XMLSchema";
                 any1.MinOccurs = new decimal(0);
@@ -721,7 +784,12 @@ namespace Applied_Accounts.Data {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public System.DateTime Vou_Date {
                 get {
-                    return ((global::System.DateTime)(this[this.tableView_Supplier_Ledger.Vou_DateColumn]));
+                    try {
+                        return ((global::System.DateTime)(this[this.tableView_Supplier_Ledger.Vou_DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Vou_Date\' in table \'View_Supplier_Ledger\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableView_Supplier_Ledger.Vou_DateColumn] = value;
@@ -752,9 +820,9 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public long DR {
+            public decimal DR {
                 get {
-                    return ((long)(this[this.tableView_Supplier_Ledger.DRColumn]));
+                    return ((decimal)(this[this.tableView_Supplier_Ledger.DRColumn]));
                 }
                 set {
                     this[this.tableView_Supplier_Ledger.DRColumn] = value;
@@ -763,9 +831,9 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public long CR {
+            public decimal CR {
                 get {
-                    return ((long)(this[this.tableView_Supplier_Ledger.CRColumn]));
+                    return ((decimal)(this[this.tableView_Supplier_Ledger.CRColumn]));
                 }
                 set {
                     this[this.tableView_Supplier_Ledger.CRColumn] = value;
@@ -780,6 +848,17 @@ namespace Applied_Accounts.Data {
                 }
                 set {
                     this[this.tableView_Supplier_Ledger.COAColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string COA_Code {
+                get {
+                    return ((string)(this[this.tableView_Supplier_Ledger.COA_CodeColumn]));
+                }
+                set {
+                    this[this.tableView_Supplier_Ledger.COA_CodeColumn] = value;
                 }
             }
             
@@ -812,6 +891,17 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Supplier_Code {
+                get {
+                    return ((string)(this[this.tableView_Supplier_Ledger.Supplier_CodeColumn]));
+                }
+                set {
+                    this[this.tableView_Supplier_Ledger.Supplier_CodeColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string Supplier_Title {
                 get {
                     return ((string)(this[this.tableView_Supplier_Ledger.Supplier_TitleColumn]));
@@ -834,6 +924,17 @@ namespace Applied_Accounts.Data {
                 }
                 set {
                     this[this.tableView_Supplier_Ledger.ProjectColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Project_Code {
+                get {
+                    return ((string)(this[this.tableView_Supplier_Ledger.Project_CodeColumn]));
+                }
+                set {
+                    this[this.tableView_Supplier_Ledger.Project_CodeColumn] = value;
                 }
             }
             
@@ -873,6 +974,18 @@ namespace Applied_Accounts.Data {
                 set {
                     this[this.tableView_Supplier_Ledger.Unit_TitleColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsVou_DateNull() {
+                return this.IsNull(this.tableView_Supplier_Ledger.Vou_DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetVou_DateNull() {
+                this[this.tableView_Supplier_Ledger.Vou_DateColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -947,7 +1060,7 @@ namespace Applied_Accounts.Data {
         }
     }
 }
-namespace Applied_Accounts.Data.DataSet1TableAdapters {
+namespace Applied_Accounts.Data.ds_Supplier_LedgerTableAdapters {
     
     
     /// <summary>
@@ -1077,10 +1190,13 @@ namespace Applied_Accounts.Data.DataSet1TableAdapters {
             tableMapping.ColumnMappings.Add("DR", "DR");
             tableMapping.ColumnMappings.Add("CR", "CR");
             tableMapping.ColumnMappings.Add("COA", "COA");
+            tableMapping.ColumnMappings.Add("COA_Code", "COA_Code");
             tableMapping.ColumnMappings.Add("COA_TITLE", "COA_TITLE");
             tableMapping.ColumnMappings.Add("Supplier", "Supplier");
+            tableMapping.ColumnMappings.Add("Supplier_Code", "Supplier_Code");
             tableMapping.ColumnMappings.Add("Supplier_Title", "Supplier_Title");
             tableMapping.ColumnMappings.Add("Project", "Project");
+            tableMapping.ColumnMappings.Add("Project_Code", "Project_Code");
             tableMapping.ColumnMappings.Add("Project_Title", "Project_Title");
             tableMapping.ColumnMappings.Add("Unit", "Unit");
             tableMapping.ColumnMappings.Add("Unit_Title", "Unit_Title");
@@ -1100,9 +1216,9 @@ namespace Applied_Accounts.Data.DataSet1TableAdapters {
             this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT \"Vou_Date\", \"Vou_No\", \"Description\", \"DR\", \"CR\", \"COA\", \"COA_TITLE\", \"Supp" +
-                "lier\", \"Supplier_Title\", \"Project\", \"Project_Title\", \"Unit\", \"Unit_Title\" FROM \"" +
-                "View_Supplier_Ledger\"";
+            this._commandCollection[0].CommandText = "SELECT \"Vou_Date\", \"Vou_No\", \"Description\", \"DR\", \"CR\", \"COA\", \"COA_Code\", \"COA_T" +
+                "ITLE\", \"Supplier\", \"Supplier_Code\", \"Supplier_Title\", \"Project\", \"Project_Code\"," +
+                " \"Project_Title\", \"Unit\", \"Unit_Title\" FROM \"View_Supplier_Ledger\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
@@ -1110,7 +1226,7 @@ namespace Applied_Accounts.Data.DataSet1TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Fill, true)]
-        public virtual int Fill(DataSet1.View_Supplier_LedgerDataTable dataTable) {
+        public virtual int Fill(ds_Supplier_Ledger.View_Supplier_LedgerDataTable dataTable) {
             this.Adapter.SelectCommand = this.CommandCollection[0];
             if ((this.ClearBeforeFill == true)) {
                 dataTable.Clear();
@@ -1123,9 +1239,9 @@ namespace Applied_Accounts.Data.DataSet1TableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         [global::System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")]
         [global::System.ComponentModel.DataObjectMethodAttribute(global::System.ComponentModel.DataObjectMethodType.Select, true)]
-        public virtual DataSet1.View_Supplier_LedgerDataTable GetData() {
+        public virtual ds_Supplier_Ledger.View_Supplier_LedgerDataTable GetData() {
             this.Adapter.SelectCommand = this.CommandCollection[0];
-            DataSet1.View_Supplier_LedgerDataTable dataTable = new DataSet1.View_Supplier_LedgerDataTable();
+            ds_Supplier_Ledger.View_Supplier_LedgerDataTable dataTable = new ds_Supplier_Ledger.View_Supplier_LedgerDataTable();
             this.Adapter.Fill(dataTable);
             return dataTable;
         }
@@ -1199,7 +1315,7 @@ namespace Applied_Accounts.Data.DataSet1TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateUpdatedRows(DataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateUpdatedRows(ds_Supplier_Ledger dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1209,7 +1325,7 @@ namespace Applied_Accounts.Data.DataSet1TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateInsertedRows(DataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
+        private int UpdateInsertedRows(ds_Supplier_Ledger dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allAddedRows) {
             int result = 0;
             return result;
         }
@@ -1219,7 +1335,7 @@ namespace Applied_Accounts.Data.DataSet1TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        private int UpdateDeletedRows(DataSet1 dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
+        private int UpdateDeletedRows(ds_Supplier_Ledger dataSet, global::System.Collections.Generic.List<global::System.Data.DataRow> allChangedRows) {
             int result = 0;
             return result;
         }
@@ -1253,7 +1369,7 @@ namespace Applied_Accounts.Data.DataSet1TableAdapters {
         ///</summary>
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-        public virtual int UpdateAll(DataSet1 dataSet) {
+        public virtual int UpdateAll(ds_Supplier_Ledger dataSet) {
             if ((dataSet == null)) {
                 throw new global::System.ArgumentNullException("dataSet");
             }

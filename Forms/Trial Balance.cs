@@ -103,7 +103,7 @@ namespace Applied_Accounts.Forms
                     _DataTable = AppliedTable.GetDataTable(_SQLiteCommand);
                     MyReportClass.PreviewForm = Applied.PreviewReports.Trial_Balance;
                     MyReportClass.DataTableID = Tables.View_Trial_Balance;
-                    MyReportClass.Report_Location = Program.ReportFolder + "Report_Trial_Balance.rdlc";
+                    MyReportClass.Report_Location = Program.ReportsPath + "Report_Trial_Balance.rdlc";
                     MyReportClass.DataSet_Name = "ds_Trial_Balance";
                     MyReportClass.ReportView_Filter = "Balance <> 0";
                     MyReportClass.Heading2 = string.Concat("Position as on ", MyReportClass.Report_To.ToString(Program.DateTimeFormat));
@@ -116,7 +116,7 @@ namespace Applied_Accounts.Forms
  
                     MyReportClass.PreviewForm = Applied.PreviewReports.Trial_Balance;
                     MyReportClass.DataTableID = Tables.View_TB_Period;
-                    MyReportClass.Report_Location = Program.ReportFolder + "Report_Trial_Balance_Period.rdlc";
+                    MyReportClass.Report_Location = Program.ReportsPath + "Report_Trial_Balance_Period.rdlc";
                     MyReportClass.DataSet_Name = "ds_Trial_Balance_Period";
                     MyReportClass.ReportView_Filter = string.Empty;
                     MyReportClass.Heading2 = string.Concat("Position " +

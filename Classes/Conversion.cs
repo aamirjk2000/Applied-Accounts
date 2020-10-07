@@ -136,6 +136,13 @@ namespace Applied_Accounts.Classes
             return DateClass.GetDate_DB();                              // return date in string format yyyy-MM-dd
         }
 
+
+        public static string ToDate_DB(object _DateTime)
+        {
+            SQLite_Date DateClass = new SQLite_Date(_DateTime);
+            return DateClass.GetDate_DB();                              // return date in string format yyyy-MM-dd
+        }
+
         //public static DateTime ToMyDate(object _DateTime, object _Style)
         //{
         //    SQLite_Date DateClass = new SQLite_Date(_DateTime);

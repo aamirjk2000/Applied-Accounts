@@ -363,11 +363,32 @@ namespace Applied_Accounts.Classes
             return result;
         }
 
-        public static string Title(int _ID, DataView _DataView)                 // return Title by ID of Data Table
+        #region SEARCH Code, Tag & Title
+
+        public static string Title(long _ID, DataView _DataView)                 // return Title by ID of Data Table
         {
             _DataView.RowFilter = "ID=" + _ID.ToString();
-            if(_DataView.Count==1) { return _DataView[0].Row["title"].ToString(); }
+            if(_DataView.Count==1) { return _DataView[0].Row["title"].ToString().Trim(); }
             return "";
         }
+
+        public static string Code(long _ID, DataView _DataView)
+        {
+            _DataView.RowFilter = "ID=" + _ID.ToString();
+            if (_DataView.Count == 1) { return _DataView[0].Row["Code"].ToString().Trim(); }
+            return "";
+
+        }
+
+        public static string Tag(long _ID, DataView _DataView)
+        {
+            _DataView.RowFilter = "ID=" + _ID.ToString();
+            if (_DataView.Count == 1) { return _DataView[0].Row["SCode"].ToString().Trim(); }
+            return "";
+
+        }
+
+        #endregion
+
     }       // END Main Class
 }           // END NameSpace

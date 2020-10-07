@@ -14,6 +14,9 @@ namespace Applied_Accounts.Classes
         int Count_View();
         void Save();
         string ToWords();
+
+        DataTable GetGridTable();
+
     }
 
     public class VoucherClass : iVoucherclass
@@ -34,6 +37,7 @@ namespace Applied_Accounts.Classes
         public int Total_Transactions { get; set; }
 
         public DataTable VoucherTable = new DataTable();
+        public DataTable GridTable = new DataTable();
         public DataView VoucherView = new DataView();
         private DataTable tbLedger;
 
@@ -70,7 +74,7 @@ namespace Applied_Accounts.Classes
             {
                 CurrentRow = VoucherTable.Rows[0];
                 Vou_No = VoucherTable.Rows[0]["Vou_No"].ToString();
-                Vou_Date = Conversion.ToDate(VoucherTable.Rows[0]["Vou_Date"].ToString());   
+                Vou_Date = Conversion.ToDate(VoucherTable.Rows[0]["Vou_Date"].ToString());
                 Vou_Type = Vou_No.Substring(0, 1);
                 Vou_Type = GetVoucherTypeText(Vou_Type);
                 Status = "EDIT";
@@ -148,7 +152,7 @@ namespace Applied_Accounts.Classes
 
         public void CreateTable()
         {
-            if (Vou_No==null || Vou_No.Length == 0)
+            if (Vou_No == null || Vou_No.Length == 0)
             {
                 VoucherTable = new DataView(tbLedger.Clone()).ToTable();
                 VoucherView.Table = VoucherTable;
@@ -158,17 +162,17 @@ namespace Applied_Accounts.Classes
                 VoucherTable = new DataView(tbLedger, "Vou_No='" + Vou_No + "'", "SRNO", DataViewRowState.OriginalRows).ToTable().Copy();
                 VoucherView.Table = VoucherTable;
             }
-                
+
         }
 
-            public void AddRow()
+        public void AddRow()
         {
             CurrentRow = CreateRow(MaxSRNO());
             VoucherTable.Rows.Add(CurrentRow);
             //NewID -= 1;
 
         }
-        
+
         public DataRow CreateRow(long _SRNO)
         {
             DataRow _DataRow = VoucherTable.NewRow();
@@ -274,9 +278,9 @@ namespace Applied_Accounts.Classes
                     if ((_DR + _CR) == 0) { return; }                                           // Return if Transaction Amount is Zero
                     _RecordIDMax = (long)tbLedger.Compute("MAX(ID)", string.Empty);             // Get Maximum ID of Promary Key Value.
                     _TargetRow["ID"] = _RecordIDMax + 1;                                        // Set Row ID as Maximum Value 
-                    
 
-                    if((long)_TargetRow["ID"]>0)
+
+                    if ((long)_TargetRow["ID"] > 0)
                     {
                         _CmdInsert.Parameters["@ID"].Value = (long)_TargetRow["ID"];            // Set SQL Command Paramters Value of PK.
                         Insert_Record = Insert_Record + _CmdInsert.ExecuteNonQuery();           // Execute SQL Command.
@@ -287,7 +291,7 @@ namespace Applied_Accounts.Classes
                     {
                         MessageBox.Show("Primary Key value is not valid." + Keys.Return + "Record not saved.", "(long)_TargetRow['ID']>0");
                     }
-                    
+
                 }
 
                 if (_RecordID > 0)
@@ -316,7 +320,7 @@ namespace Applied_Accounts.Classes
             if (Insert_Record + Update_Record > 0)                                              // show Message for save the record.
             {
                 string _SaveMessage = "";
-                if (Insert_Record > 0) { _SaveMessage += string.Concat(Insert_Record,Vou_No, Keys.Return, " Record(s) INSERTED."); }
+                if (Insert_Record > 0) { _SaveMessage += string.Concat(Insert_Record, Vou_No, Keys.Return, " Record(s) INSERTED."); }
                 if (_SaveMessage.Length > 0) { _SaveMessage += Environment.NewLine; }
                 if (Update_Record > 0) { _SaveMessage += string.Concat(Update_Record, Vou_No, Keys.Return, " Record(s) UPDATED."); }
 
@@ -324,8 +328,6 @@ namespace Applied_Accounts.Classes
                 Voucher_Saved = true;
             }
         }
-
-
         private void CreateNewVoucherNo()                           // Create New Voucher Number.
         {
 
@@ -396,8 +398,6 @@ namespace Applied_Accounts.Classes
 
         #endregion
 
-
-
         #region Voucher Type
 
         public string GetVoucherTag(int _VoucherType)
@@ -424,10 +424,10 @@ namespace Applied_Accounts.Classes
 
                 default:
                     return "";
-                    
+
             }
 
-         
+
         }
 
         public string GetVoucherTypeName(int VoucherTypeID)
@@ -495,6 +495,47 @@ namespace Applied_Accounts.Classes
 
 
 
+        }
+
+
+        #endregion
+
+        #region Grid Table
+
+        public DataTable GetGridTable()
+        {
+            if (Vou_No == null) { return new DataTable(); }             // Return Empty if null
+            if (Vou_No.Length == 0) { return new DataTable(); }         // Return Empty if empty.
+
+            DataTable _Result;
+
+            string _Command = "SELECT [Ledger].[SRNO], [COA].[Title] AS [Account], " +
+                              "[Suppliers].[Title] AS [Vandor],DR AS [Debit],CR AS [Credit], " +
+                              "[Description] FROM [Ledger] " +
+                              "LEFT JOIN[COA]       ON [COA].[ID]       = [Ledger].[COA]" +
+                              "LEFT JOIN[Suppliers] ON [Suppliers].[ID] = [Ledger].[Supplier]" +
+                              "WHERE Vou_No='" + Vou_No + "'";
+
+            _Result = AppliedTable.GetDataTable(_Command);
+
+            if(_Result.Rows.Count==0) { return new DataTable(); }           // Return Empty id rows are zero
+
+
+            DataRow _GridRow = _Result.NewRow();
+            int RowCount = _Result.Rows.Count;
+            decimal Tot_DR = (decimal)_Result.Compute("Sum(Debit)", string.Empty);
+            decimal Tot_CR = (decimal)_Result.Compute("Sum(Credit)", string.Empty);
+            long MaxSrNo = (long)_Result.Compute("Max(SRNO)", string.Empty);
+
+            _GridRow["SRNO"] = MaxSrNo + 1;
+            _GridRow["Account"] = "Transactions = " + _Result.Rows.Count.ToString() ;
+            _GridRow["Vandor"] = "TOTAL";
+            _GridRow["Debit"] = Tot_DR;
+            _GridRow["Credit"] = Tot_CR;
+            _GridRow["Description"] = "";
+
+            _Result.Rows.Add(_GridRow.ItemArray);
+            return _Result;
         }
 
 

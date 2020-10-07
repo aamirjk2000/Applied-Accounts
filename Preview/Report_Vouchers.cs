@@ -20,26 +20,16 @@ namespace Applied_Accounts.Reports
             InitializeComponent();
         }
 
-        public frmReport_Vouchers(ReportClass _ReportClass)
-        {
-            InitializeComponent();
-            MyReportClass = _ReportClass;
-        }
+        //public frmReport_Vouchers(ReportClass _ReportClass)
+        //{
+        //    InitializeComponent();
+        //    MyReportClass = _ReportClass;
+        //}
 
 
         private void Report_View_Load(object sender, EventArgs e)
         {
-
-            MyDataTable = AppliedTable.GetDataTable((int)Tables.View_Voucher);
-            MyDataView = new DataView(MyDataTable);
-            MyDataView.RowFilter = string.Concat("Vou_No='Jxx-xxx'");
-
-            MyReportClass.Heading1 = "V O U C H E R   ";
-            MyReportClass.Report_Path = rpt_Voucher.LocalReport.ReportPath;
-            MyReportClass.DataSet_Name = "ds_Voucher_Report";
-            MyReportClass.Report_Data = MyDataView;
-
-
+            
             // Load default values from Applied.
             txtVouNo.Text = Applied.GetString("rptVou_VouNo");
             dt_From.Value = Applied.GetVouDate("rptVou_DateFrom");
@@ -51,43 +41,76 @@ namespace Applied_Accounts.Reports
         {
             TextBox _Textbox = (TextBox)sender;
 
-            MyDataView.RowFilter = string.Concat("Vou_No='Jxx-xxx'");
+            //MyDataView.RowFilter = string.Concat("Vou_No='Jxx-xxx'");
 
-            if (_Textbox.TextLength > 0) 
-            {
-                MyDataView.RowFilter = string.Concat("Vou_No='", _Textbox.Text.Trim(), "'");
+            //if (_Textbox.TextLength > 0) 
+            //{
+            //    MyDataView.RowFilter = string.Concat("Vou_No='", _Textbox.Text.Trim(), "'");
 
-                if (MyDataView.Count > 0)
-                { MyReportClass.Report_From = Conversion.ToDate(MyDataView[0].Row["Vou_Date"].ToString()); }
-                
-            }
-            else
-            {
-                MyDataView.RowFilter = string.Concat("Vou_No='Jxx-xxx'");
-            }
+            //    if (MyDataView.Count > 0)
+            //    { MyReportClass.Report_From = Conversion.ToDate(MyDataView[0].Row["Vou_Date"].ToString()); }
+
+            //}
+            //else
+            //{
+            //    MyDataView.RowFilter = string.Concat("Vou_No='Jxx-xxx'");
+            //}
 
         }
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            btnView_Click(sender,e);
+            btnView_Click(sender, e);
         }
 
         private void btnView_Click(object sender, EventArgs e)
         {
-            MyReportClass.Heading1 = string.Concat("Voucher: ", txtVouNo.Text," | ", "Date: ", MyReportClass.  Report_From.ToString("dd MMM yyyy"));
-            MyReportClass.Heading2 = string.Empty;
+            // Set Report Class
+
+            MyReportClass.DataSource_Filter = string.Concat("Vou_No='" + txtVouNo.Text.Trim() + "'");
+            MyReportClass.DataSource = AppliedTable.GetDataTable((int)Tables.View_Voucher,MyReportClass.DataSource_Filter);
+            MyReportClass.Report_Data = MyReportClass.DataSource.AsDataView();
+            MyReportClass.Heading1 = "V O U C H E R   ";
+            MyReportClass.Report_Location = Program.ReportsPath + "Report_Voucher.rdlc";
+            MyReportClass.DataSet_Name = "ds_Voucher";          // Set as in report Dataset name, see in report.rdlc
+            
+
+            if (MyReportClass.Report_Data.Count==0)
+            {
+                MessageBox.Show("No record found to print");
+                return;
+            }
+            else
+            {
+                MyReportClass.Vou_No = (string)MyReportClass.DataSource.Rows[0]["Vou_No"];
+                MyReportClass.Vou_Date = Conversion.ToDate(MyReportClass.DataSource.Rows[0]["Vou_Date"].ToString());
+            }
+
+            // Set Report View Object.
 
             ReportDataSource _DataSource = new ReportDataSource(MyReportClass.DataSet_Name, MyReportClass.Report_Data);
+            rpt_Voucher.LocalReport.DataSources.Clear();
+            rpt_Voucher.LocalReport.DataSources.Add(_DataSource);                                   // Insert Data into Report.
+            rpt_Voucher.LocalReport.ReportEmbeddedResource = MyReportClass.Report_Location;
+
+            MyReportClass.Heading1 = string.Concat("Voucher: ", txtVouNo.Text, " | ", "Date: ", MyReportClass.Report_From.ToString("dd MMM yyyy"));
+            MyReportClass.Heading2 = string.Empty;
+
+            if (MyReportClass.Heading1 == null) { MyReportClass.Heading1 = ""; }
+            if (MyReportClass.Heading2 == null) { MyReportClass.Heading2 = ""; }
+
             ReportParameter rpt_Parameter1 = new ReportParameter("CompanyName", MyReportClass.CompanyName);
             ReportParameter rpt_Parameter2 = new ReportParameter("ReportHeading", MyReportClass.Heading1);
-            ReportParameter rpt_Parameter3 = new ReportParameter("PeriodHeading", MyReportClass.Heading2);
+            ReportParameter rpt_Parameter3 = new ReportParameter("PeriodHeading", "");
+            ReportParameter rpt_Parameter4 = new ReportParameter("DevelopedBy", Program.Developedby);
+            ReportParameter rpt_Parameter5 = new ReportParameter("DateFormat", MyReportClass.Report_Date_Format);
 
-            rpt_Voucher.LocalReport.DataSources.Clear();
-            rpt_Voucher.LocalReport.DataSources.Add(_DataSource);
-            rpt_Voucher.LocalReport.SetParameters(rpt_Parameter1);
-            rpt_Voucher.LocalReport.SetParameters(rpt_Parameter2);
-            rpt_Voucher.LocalReport.SetParameters(rpt_Parameter3);
+            rpt_Voucher.LocalReport.SetParameters(rpt_Parameter1);         // Insert Company Name into Repoer
+            rpt_Voucher.LocalReport.SetParameters(rpt_Parameter2);         // Insert Heading 1 into Report.
+            rpt_Voucher.LocalReport.SetParameters(rpt_Parameter3);         // Insert Heading 2 into Report.
+            rpt_Voucher.LocalReport.SetParameters(rpt_Parameter4);         // Insert Developedby.
+            rpt_Voucher.LocalReport.SetParameters(rpt_Parameter5);         // Insert Date Time Foramt.
+
 
             rpt_Voucher.RefreshReport();
         }
@@ -101,7 +124,7 @@ namespace Applied_Accounts.Reports
 
         private void btnVouchers_Click(object sender, EventArgs e)
         {
-            MyReportClass.Heading1 = string.Concat("Vouchers From ",MyReportClass.Report_From.ToString("dd MMM yyyy"),
+            MyReportClass.Heading1 = string.Concat("Vouchers From ", MyReportClass.Report_From.ToString("dd MMM yyyy"),
                                                    " to ", MyReportClass.Report_To.ToString("dd MMM yyyy"));
             MyReportClass.Heading2 = string.Empty;
             MyReportClass.Report_From = dt_From.Value;
@@ -110,10 +133,10 @@ namespace Applied_Accounts.Reports
 
             MyReportClass.DataSource_Filter = string.Concat("[Vou_Date]  BETWEEN '", MyReportClass.FilterDate_From(),
                                                             "' AND '", MyReportClass.FilterDate_To(), "'");
-            
+
 
             MyReportClass.Update_SourceData();
-            
+
 
 
             ReportDataSource _DataSource = new ReportDataSource(MyReportClass.DataSet_Name, MyReportClass.DataSource);

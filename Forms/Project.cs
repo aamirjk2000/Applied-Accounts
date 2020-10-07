@@ -90,13 +90,14 @@ namespace Applied_Accounts.Forms
       
         private void MyNavigator_Set_Values(object sender, EventArgs e)
         {
+            if(cboxSupplier.SelectedValue==null) { thisRow["Client"] = 0; } else { thisRow["Client"] = cboxSupplier.SelectedValue; }
+
             thisRow["ID"] = Conversion.ToLong(txtID.Text);
             thisRow["Code"] = txtCode.Text;
             thisRow["SCode"] = txtTag.Text;
             thisRow["Title"] = txtTitle.Text;
             thisRow["Location"] = txtLocation.Text;
             thisRow["City"] = txtCity.Text;
-            thisRow["Client"] = cboxSupplier.SelectedValue;
             thisRow["Cost"] = Conversion.ToInteger(txtCost.Text);
             thisRow["Nature"] = txtNature.Text;
             thisRow["Remarks"] = txtRemarks.Text;
