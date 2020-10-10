@@ -96,6 +96,15 @@
             this.P2 = new System.Windows.Forms.TabPage();
             this.lblWords = new System.Windows.Forms.Label();
             this.Grid = new System.Windows.Forms.DataGridView();
+            this.btn1 = new System.Windows.Forms.Button();
+            this.btn2 = new System.Windows.Forms.Button();
+            this.btn3 = new System.Windows.Forms.Button();
+            this.btn4 = new System.Windows.Forms.Button();
+            this.btn5 = new System.Windows.Forms.Button();
+            this.btn6 = new System.Windows.Forms.Button();
+            this.btn9 = new System.Windows.Forms.Button();
+            this.btn8 = new System.Windows.Forms.Button();
+            this.btn7 = new System.Windows.Forms.Button();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -115,6 +124,15 @@
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.btn9);
+            this.P1.Controls.Add(this.btn8);
+            this.P1.Controls.Add(this.btn7);
+            this.P1.Controls.Add(this.btn6);
+            this.P1.Controls.Add(this.btn5);
+            this.P1.Controls.Add(this.btn4);
+            this.P1.Controls.Add(this.btn3);
+            this.P1.Controls.Add(this.btn2);
+            this.P1.Controls.Add(this.btn1);
             this.P1.Controls.Add(this.txtEmployee);
             this.P1.Controls.Add(this.txtStock);
             this.P1.Controls.Add(this.txtUnit);
@@ -193,6 +211,8 @@
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(59, 20);
             this.txtStock.TabIndex = 115;
+            this.txtStock.Validating += new System.ComponentModel.CancelEventHandler(this.txtStock_Validating);
+            this.txtStock.Validated += new System.EventHandler(this.txtStock_Validated);
             // 
             // txtUnit
             // 
@@ -200,6 +220,8 @@
             this.txtUnit.Name = "txtUnit";
             this.txtUnit.Size = new System.Drawing.Size(59, 20);
             this.txtUnit.TabIndex = 114;
+            this.txtUnit.Validating += new System.ComponentModel.CancelEventHandler(this.txtUnit_Validating);
+            this.txtUnit.Validated += new System.EventHandler(this.txtUnit_Validated);
             // 
             // txtProject
             // 
@@ -207,6 +229,8 @@
             this.txtProject.Name = "txtProject";
             this.txtProject.Size = new System.Drawing.Size(59, 20);
             this.txtProject.TabIndex = 113;
+            this.txtProject.Validating += new System.ComponentModel.CancelEventHandler(this.txtProject_Validating);
+            this.txtProject.Validated += new System.EventHandler(this.txtProject_Validated);
             // 
             // txtVandor
             // 
@@ -214,6 +238,8 @@
             this.txtVandor.Name = "txtVandor";
             this.txtVandor.Size = new System.Drawing.Size(59, 20);
             this.txtVandor.TabIndex = 112;
+            this.txtVandor.Validating += new System.ComponentModel.CancelEventHandler(this.txtVandor_Validating);
+            this.txtVandor.Validated += new System.EventHandler(this.txtVandor_Validated);
             // 
             // txtAccount
             // 
@@ -297,7 +323,7 @@
             // 
             this.btnBottom.ImageIndex = 3;
             this.btnBottom.ImageList = this.MyImages;
-            this.btnBottom.Location = new System.Drawing.Point(364, 76);
+            this.btnBottom.Location = new System.Drawing.Point(561, 76);
             this.btnBottom.Name = "btnBottom";
             this.btnBottom.Size = new System.Drawing.Size(23, 23);
             this.btnBottom.TabIndex = 110;
@@ -309,7 +335,7 @@
             // 
             this.btnTop.ImageIndex = 0;
             this.btnTop.ImageList = this.MyImages;
-            this.btnTop.Location = new System.Drawing.Point(232, 76);
+            this.btnTop.Location = new System.Drawing.Point(162, 76);
             this.btnTop.Name = "btnTop";
             this.btnTop.Size = new System.Drawing.Size(23, 23);
             this.btnTop.TabIndex = 107;
@@ -338,7 +364,7 @@
             // 
             this.btnPrevious.ImageIndex = 2;
             this.btnPrevious.ImageList = this.MyImages;
-            this.btnPrevious.Location = new System.Drawing.Point(320, 76);
+            this.btnPrevious.Location = new System.Drawing.Point(532, 76);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(23, 23);
             this.btnPrevious.TabIndex = 109;
@@ -350,7 +376,7 @@
             // 
             this.btnNext.ImageIndex = 1;
             this.btnNext.ImageList = this.MyImages;
-            this.btnNext.Location = new System.Drawing.Point(276, 76);
+            this.btnNext.Location = new System.Drawing.Point(188, 76);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(23, 23);
             this.btnNext.TabIndex = 108;
@@ -758,9 +784,9 @@
             // txtID
             // 
             this.txtID.Enabled = false;
-            this.txtID.Location = new System.Drawing.Point(500, 76);
+            this.txtID.Location = new System.Drawing.Point(657, 78);
             this.txtID.Name = "txtID";
-            this.txtID.Size = new System.Drawing.Size(87, 20);
+            this.txtID.Size = new System.Drawing.Size(63, 20);
             this.txtID.TabIndex = 100;
             // 
             // label4
@@ -793,7 +819,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(429, 79);
+            this.label1.Location = new System.Drawing.Point(590, 81);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 0;
@@ -828,6 +854,114 @@
             this.Grid.Name = "Grid";
             this.Grid.Size = new System.Drawing.Size(756, 398);
             this.Grid.TabIndex = 0;
+            // 
+            // btn1
+            // 
+            this.btn1.Enabled = false;
+            this.btn1.ImageList = this.MyImages;
+            this.btn1.Location = new System.Drawing.Point(220, 76);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(23, 23);
+            this.btn1.TabIndex = 117;
+            this.btn1.TabStop = false;
+            this.btn1.Text = "1";
+            this.btn1.UseVisualStyleBackColor = true;
+            // 
+            // btn2
+            // 
+            this.btn2.Enabled = false;
+            this.btn2.ImageList = this.MyImages;
+            this.btn2.Location = new System.Drawing.Point(255, 76);
+            this.btn2.Name = "btn2";
+            this.btn2.Size = new System.Drawing.Size(23, 23);
+            this.btn2.TabIndex = 118;
+            this.btn2.TabStop = false;
+            this.btn2.Text = "2";
+            this.btn2.UseVisualStyleBackColor = true;
+            // 
+            // btn3
+            // 
+            this.btn3.Enabled = false;
+            this.btn3.ImageList = this.MyImages;
+            this.btn3.Location = new System.Drawing.Point(290, 76);
+            this.btn3.Name = "btn3";
+            this.btn3.Size = new System.Drawing.Size(23, 23);
+            this.btn3.TabIndex = 119;
+            this.btn3.TabStop = false;
+            this.btn3.Text = "3";
+            this.btn3.UseVisualStyleBackColor = true;
+            // 
+            // btn4
+            // 
+            this.btn4.Enabled = false;
+            this.btn4.ImageList = this.MyImages;
+            this.btn4.Location = new System.Drawing.Point(325, 76);
+            this.btn4.Name = "btn4";
+            this.btn4.Size = new System.Drawing.Size(23, 23);
+            this.btn4.TabIndex = 120;
+            this.btn4.TabStop = false;
+            this.btn4.Text = "4";
+            this.btn4.UseVisualStyleBackColor = true;
+            // 
+            // btn5
+            // 
+            this.btn5.Enabled = false;
+            this.btn5.ImageList = this.MyImages;
+            this.btn5.Location = new System.Drawing.Point(360, 76);
+            this.btn5.Name = "btn5";
+            this.btn5.Size = new System.Drawing.Size(23, 23);
+            this.btn5.TabIndex = 121;
+            this.btn5.TabStop = false;
+            this.btn5.Text = "5";
+            this.btn5.UseVisualStyleBackColor = true;
+            // 
+            // btn6
+            // 
+            this.btn6.Enabled = false;
+            this.btn6.ImageList = this.MyImages;
+            this.btn6.Location = new System.Drawing.Point(395, 76);
+            this.btn6.Name = "btn6";
+            this.btn6.Size = new System.Drawing.Size(23, 23);
+            this.btn6.TabIndex = 122;
+            this.btn6.TabStop = false;
+            this.btn6.Text = "6";
+            this.btn6.UseVisualStyleBackColor = true;
+            // 
+            // btn9
+            // 
+            this.btn9.Enabled = false;
+            this.btn9.ImageList = this.MyImages;
+            this.btn9.Location = new System.Drawing.Point(500, 76);
+            this.btn9.Name = "btn9";
+            this.btn9.Size = new System.Drawing.Size(23, 23);
+            this.btn9.TabIndex = 125;
+            this.btn9.TabStop = false;
+            this.btn9.Text = "9";
+            this.btn9.UseVisualStyleBackColor = true;
+            // 
+            // btn8
+            // 
+            this.btn8.Enabled = false;
+            this.btn8.ImageList = this.MyImages;
+            this.btn8.Location = new System.Drawing.Point(465, 76);
+            this.btn8.Name = "btn8";
+            this.btn8.Size = new System.Drawing.Size(23, 23);
+            this.btn8.TabIndex = 124;
+            this.btn8.TabStop = false;
+            this.btn8.Text = "8";
+            this.btn8.UseVisualStyleBackColor = true;
+            // 
+            // btn7
+            // 
+            this.btn7.Enabled = false;
+            this.btn7.ImageList = this.MyImages;
+            this.btn7.Location = new System.Drawing.Point(430, 76);
+            this.btn7.Name = "btn7";
+            this.btn7.Size = new System.Drawing.Size(23, 23);
+            this.btn7.TabIndex = 123;
+            this.btn7.TabStop = false;
+            this.btn7.Text = "7";
+            this.btn7.UseVisualStyleBackColor = true;
             // 
             // frmVouchers
             // 
@@ -918,5 +1052,14 @@
         private System.Windows.Forms.TextBox txtProject;
         private System.Windows.Forms.TextBox txtVandor;
         private System.Windows.Forms.TextBox txtAccount;
+        private System.Windows.Forms.Button btn9;
+        private System.Windows.Forms.Button btn8;
+        private System.Windows.Forms.Button btn7;
+        private System.Windows.Forms.Button btn6;
+        private System.Windows.Forms.Button btn5;
+        private System.Windows.Forms.Button btn4;
+        private System.Windows.Forms.Button btn3;
+        private System.Windows.Forms.Button btn2;
+        private System.Windows.Forms.Button btn1;
     }
 }

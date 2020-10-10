@@ -14,18 +14,24 @@ namespace Applied_Accounts
         public bool IsSelect { get; set; }
         public int MyID { get; set; }
 
-        ////private DataRow Enter_DataRow;
-        //public Browse()
-        //{
-        //    InitializeComponent();
-        //}
-
         public Browse(DataView _DataView)
         {
             InitializeComponent();
             MyDataView = _DataView;
             MyDataView.RowFilter = "";
             MyRefresh();
+        }
+
+        public Browse(DataView _DataView, string _CurrentValue)
+        {
+            InitializeComponent();
+            MyDataView = _DataView;
+            MyDataView.RowFilter = "";
+            MyRefresh();
+
+            
+
+            //DataGrid_Browse._DataGrid.SelectedRows[0];
         }
 
         public void MyRefresh()
@@ -85,7 +91,8 @@ namespace Applied_Accounts
         private void Select_Row()
         {
             MyDataRow = DataGrid_Browse.MyDataRow;
-            MyID =  Conversion.ToInteger(MyDataRow["ID"].ToString());
+            if (MyDataRow != null)
+            { MyID = Conversion.ToInteger(MyDataRow["ID"].ToString()); }
         }
     }           // Main
 }               // NameSpace

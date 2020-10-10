@@ -171,6 +171,13 @@ namespace Applied_Accounts.Classes
             return _DateTime.ToString(Program.DateTimeFormat);
         }
 
+        public static string ToPrintDate(string _Value)
+        {
+            if (_Value.Length == 0) { return ""; }
+            DateTime _DateTime = ToDate(_Value);
+            return _DateTime.ToString(Program.DateTimeFormat);
+        }
+
 
         #endregion
 
@@ -218,9 +225,22 @@ namespace Applied_Accounts.Classes
 
         #endregion
 
+        #region Double
+        public static double ToDouble(object _Value)                        // Convert Interger to Long
+        {
+            double _Result;
+            _Result = Convert.ToDouble(_Value);
+            return _Result;
+        }
+
+
+        #endregion
+
+
+
         #region Convert into Words
 
-       
+
 
         #endregion
 

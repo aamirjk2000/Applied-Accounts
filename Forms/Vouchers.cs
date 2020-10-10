@@ -1,14 +1,10 @@
 ﻿using Applied_Accounts.Classes;
-using Applied_Accounts.Data;
 using Applied_Accounts.Preview;
-using Applied_Accounts.Reports;
-using Microsoft.Reporting.WinForms;
+using Applied_Accounts.Preview.Temp;
 using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.IO;
-using System.Windows.Controls;
 using System.Windows.Forms;
 
 namespace Applied_Accounts.Forms
@@ -87,13 +83,13 @@ namespace Applied_Accounts.Forms
             dtVouDate.Format = DateTimePickerFormat.Custom;
             dtVouDate.CustomFormat = ComboDateFormat;
             dtVouDate.Value = DateTime.Now;
-            
+
             dtChqDate.Format = DateTimePickerFormat.Custom;
             dtChqDate.CustomFormat = ComboDateFormat;
             dtChqDate.Value = DateTime.Now;
-            
+
             MyVoucherClass.CurrentYear = Applied.GetInteger("CurrentYear");
-            
+
             SetComboBox(true);
 
         }
@@ -167,7 +163,7 @@ namespace Applied_Accounts.Forms
             btnDelete.Enabled = true;
             btnUndo.Enabled = true;
 
-            
+
         }
 
         private void Repaint(object _RowValue, object _Object2)
@@ -218,7 +214,7 @@ namespace Applied_Accounts.Forms
                     break;
             }
 
-            
+
 
         }
 
@@ -369,7 +365,7 @@ namespace Applied_Accounts.Forms
         private void SetGrid()
         {
 
-            if(((DataTable)Grid.DataSource).Rows.Count==0) { return; }
+            if (((DataTable)Grid.DataSource).Rows.Count == 0) { return; }
 
             Grid.AllowUserToAddRows = false;
             Grid.AllowUserToDeleteRows = false;
@@ -398,10 +394,10 @@ namespace Applied_Accounts.Forms
 
             Grid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             Grid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            
+
 
         }
-       
+
         private void P2_Enter(object sender, EventArgs e)
         {
             MyVoucherClass.GetGridTable();
@@ -547,7 +543,7 @@ namespace Applied_Accounts.Forms
                 Repaint();                                                  // Re-Paint Voucher form
                 MyVoucherClass.Voucher_Saved = false;                       // Reset voucher Saved default value.
                 Grid.DataSource = MyVoucherClass.GetGridTable();            // Load Voucher into Grid Data source
-                
+
             }
 
         }
@@ -585,20 +581,21 @@ namespace Applied_Accounts.Forms
                 }
             }
 
+            MyDescription = MyRow["Description"].ToString();                            // Copy Description F9 for past 
+            MyRemarks = MyRow["Remarks"].ToString();                                    // Copy Remarks     F9 for past
 
-            MyDescription = MyRow["Description"].ToString();                            // Copy Description
-            MyRemarks = MyRow["Remarks"].ToString();                                    // Copy Remarks
+            string _Message = string.Concat("Transaction No ", MyRow["SRNO"], " has been saved.");
+            MessageBox.Show(_Message, "SAVE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            // Codes after save the row and finish message
+
 
             if (MyRow["SRNO"].ToString().Trim() == "1")
             {
                 btnNext_Click(sender, e);
             }
 
-            
             Repaint();
-
-            string _Message = string.Concat("Transaction No ", MyRow["SRNO"], " has been saved.");
-            MessageBox.Show(_Message, "SAVE", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
         }
         private bool Validate_Voucher()
@@ -887,22 +884,7 @@ namespace Applied_Accounts.Forms
 
         private void btnPrint_Click(object sender, EventArgs e)
         {
-            ReportClass PreviewClass = new ReportClass();                                       // Initialize Report Class
-            PreviewClass.DataSet_Name = "ds_Voucher";                                    // Dataset for the report
-            PreviewClass.Vou_No = MyVoucherClass.Vou_No;                                        // Print Voucher No in report
-            PreviewClass.Vou_Date = MyVoucherClass.Vou_Date;                                    // DAte of Voucher
-            PreviewClass.Report_Location = Program.ReportsPath + "Report_Voucher.rdlc";         // Report Name 
-            PreviewClass.DataSource_Filter = "Vou_No='" + MyVoucherClass.Vou_No + "'";          // Filter for the Data Source
-            PreviewClass.DataSource = AppliedTable.GetDataTable(Tables.View_Voucher, PreviewClass.DataSource_Filter);
-            PreviewClass.Report_Data = PreviewClass.DataSource.AsDataView();                    // Data for the report.
-            PreviewClass.Heading1 = MyVoucherClass.Vou_Type + " Voucher";
-            PreviewClass.Heading2 = MyVoucherClass.Vou_No + " | " + MyVoucherClass.Vou_Date.ToString(PreviewClass.Report_Heading_Format);
-
-
-            //================================================================================== PREVIEW REPORT.
-            frmPreview_Reports PreviewVoucher = new frmPreview_Reports(PreviewClass);           // Window form for the report.
-            PreviewVoucher.ShowDialog();                                                        // Show Window form.
-
+            MyVoucherClass.Preview_Voucher();
         }
 
         #endregion
@@ -1021,24 +1003,105 @@ namespace Applied_Accounts.Forms
 
         }
 
-
         private void txtAccount_Validating(object sender, CancelEventArgs e)
         {
-            e.Cancel = SearchID(((System.Windows.Forms.TextBox)sender).Text, tbAccounts);
-            e.Cancel = SearchCode(((System.Windows.Forms.TextBox)sender).Text, tbAccounts);
-            e.Cancel = SearchTag(((System.Windows.Forms.TextBox)sender).Text, tbAccounts);
+            e.Cancel = MyValidating(sender, tbAccounts);
         }
 
         private void txtAccount_Validated(object sender, EventArgs e)
         {
-            cBoxAccounts.SelectedValue = Search_ComboID;
+            if (((TextBox)sender).Text.Length > 0)
+            {
+                cBoxAccounts.SelectedValue = Search_ComboID;
+            }
         }
 
 
+        #endregion
+
+        #region Supplier
+
+        private void txtVandor_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = MyValidating(sender, tbSuppliers);
+        }
+
+        private void txtVandor_Validated(object sender, EventArgs e)
+        {
+            if (((TextBox)sender).Text.Length > 0)
+            {
+                cBoxSuppliers.SelectedValue = Search_ComboID;
+            }
+        }
 
         #endregion
 
+        #region project
+
+        private void txtProject_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = MyValidating(sender, tbProjects);
+        }
+
+        private void txtProject_Validated(object sender, EventArgs e)
+        {
+            if (((TextBox)sender).Text.Length > 0)
+            {
+                cBoxProjects.SelectedValue = Search_ComboID;
+            }
+        }
+
         #endregion
+
+        #region Unit
+
+        private void txtUnit_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = MyValidating(sender, tbUnits);
+        }
+
+        private void txtUnit_Validated(object sender, EventArgs e)
+        {
+            if (((TextBox)sender).Text.Length > 0)
+            {
+                cBoxUnits.SelectedValue = Search_ComboID;
+            }
+        }
+
+        #endregion
+
+        #region Stock
+
+        private void txtStock_Validating(object sender, CancelEventArgs e)
+        {
+            e.Cancel = MyValidating(sender, tbStocks);
+        }
+
+        private void txtStock_Validated(object sender, EventArgs e)
+        {
+            if (((TextBox)sender).Text.Length > 0)
+            {
+                cBoxStocks.SelectedValue = Search_ComboID;
+            }
+        }
+
+        #endregion
+
+
+
+        private bool MyValidating(object sender, DataTable _DataTable)
+        {
+            if (((TextBox)sender).Text.Length == 0) { return false; }      // Text Box is empty, do not validate
+
+
+            bool IsSearch1 = SearchID(((TextBox)sender).Text, _DataTable);
+            bool IsSearch2 = SearchCode(((TextBox)sender).Text, _DataTable);
+            bool IsSearch3 = SearchTag(((TextBox)sender).Text, _DataTable);
+            if (IsSearch1 || IsSearch2 || IsSearch3) { return false; } else { return true; }
+        }
+
+        #endregion
+        //=================================== END VALIDATING
 
         #region Search ID / Code / Tag
 
@@ -1046,7 +1109,7 @@ namespace Applied_Accounts.Forms
         {
             // Return value for e.Cancel of Text Boox Validating
 
-            bool _Result = true;
+            bool _Result = false;
             long _nValue = 0;
 
             DataView _DataView = _DataTable.AsDataView();
@@ -1066,12 +1129,12 @@ namespace Applied_Accounts.Forms
                     _nValue = 0;
                 }
             }
-            _DataView.RowFilter = "ID=" + _nValue.ToString();
+            _DataView.RowFilter = "ID=" + _nValue.ToString().Trim();
             if (_DataView.Count == 1)
             {
                 Search_ComboID = Conversion.ToInteger(_DataView[0]["ID"]);
                 Search_Title = _DataView[0]["Title"].ToString();
-                _Result = false;
+                _Result = true;
             }
             return _Result;
         }
@@ -1080,32 +1143,16 @@ namespace Applied_Accounts.Forms
         {
             // Return value for e.Cancel of Text Boox Validating
 
-            bool _Result = true;
-            long _nValue = 0;
+            bool _Result = false;
 
             DataView _DataView = _DataTable.AsDataView();
 
-            if (_Value == null || _Value.Trim() == string.Empty)
-            {
-                _nValue = 0;
-            }
-            else
-            {
-                try
-                {
-                    _nValue = long.Parse(_Value);
-                }
-                catch
-                {
-                    _nValue = 0;
-                }
-            }
-            _DataView.RowFilter = "Code=" + _nValue.ToString();
+            _DataView.RowFilter = "Code='" + _Value.ToString().Trim() + "'";
             if (_DataView.Count == 1)
             {
                 Search_ComboID = Conversion.ToInteger(_DataView[0]["ID"]);
                 Search_Title = _DataView[0]["Title"].ToString();
-                _Result = false;
+                _Result = true;
             }
             return _Result;
         }
@@ -1114,32 +1161,16 @@ namespace Applied_Accounts.Forms
         {
             // Return value for e.Cancel of Text Boox Validating
 
-            bool _Result = true;
-            long _nValue = 0;
+            bool _Result = false;
 
             DataView _DataView = _DataTable.AsDataView();
 
-            if (_Value == null || _Value.Trim() == string.Empty)
-            {
-                _nValue = 0;
-            }
-            else
-            {
-                try
-                {
-                    _nValue = long.Parse(_Value);
-                }
-                catch
-                {
-                    _nValue = 0;
-                }
-            }
-            _DataView.RowFilter = "SCode=" + _nValue.ToString();
+            _DataView.RowFilter = "SCode='" + _Value.ToString().Trim() + "'";
             if (_DataView.Count == 1)
             {
                 Search_ComboID = Conversion.ToInteger(_DataView[0]["ID"]);
                 Search_Title = _DataView[0]["Title"].ToString();
-                _Result = false;
+                _Result = true;
             }
             return _Result;
         }
@@ -1147,8 +1178,12 @@ namespace Applied_Accounts.Forms
 
 
 
+
+
+
+
         #endregion
 
-        
+
     }       // END Main Class
 }           // END NameSpace

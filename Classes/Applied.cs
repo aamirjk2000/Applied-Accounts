@@ -231,8 +231,8 @@ namespace Applied_Accounts.Classes
 
             if(_Record_Exist)
             {
-                _CommandUpdate.ExecuteNonQuery();
-                //_Message = _CommandUpdate.ExecuteNonQuery().ToString() + " Updated";
+                //int rec = _CommandUpdate.ExecuteNonQuery();
+                _Message = _CommandUpdate.ExecuteNonQuery().ToString() + " Updated";
             }
             else 
             {

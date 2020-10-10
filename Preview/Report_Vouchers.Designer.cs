@@ -75,7 +75,7 @@
             this.btnView.Location = new System.Drawing.Point(207, 20);
             this.btnView.Name = "btnView";
             this.btnView.Size = new System.Drawing.Size(75, 23);
-            this.btnView.TabIndex = 3;
+            this.btnView.TabIndex = 1;
             this.btnView.Text = "PREVIEW";
             this.btnView.UseVisualStyleBackColor = true;
             this.btnView.Click += new System.EventHandler(this.btnView_Click);

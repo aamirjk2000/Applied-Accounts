@@ -25,7 +25,7 @@ namespace Applied_Accounts.Classes
         public DateTime Report_From { get; set; }
         public DateTime Report_To { get; set; }
         public DataView Report_Data { get; set; }
-        public string  Report_Date_Format { get => Applied.GetString("DateFormat_Report"); }
+        public string Report_Date_Format { get => Applied.GetString("DateFormat_Report"); }
         public string Report_Heading_Format { get => Applied.GetString("DateFormat_Heading"); }
         public string Report_Filter { get; set; }
         public string DataSet_Name { get; set; }
@@ -43,7 +43,7 @@ namespace Applied_Accounts.Classes
         public string ReportView_Filter { get; set; }
         public string ReportView_Sort { get; set; }
         public string Report_Location { get; set; }
-        
+
 
         //======================================
         public ReportClass()
@@ -55,9 +55,9 @@ namespace Applied_Accounts.Classes
         public void Preview()
         {
 
-            Form _PreviewForm =  new Preview.frmPreview_Reports(this);
+            Form _PreviewForm = new Preview.frmPreview_Reports(this);
 
-            if(Report_Data==null)
+            if (Report_Data == null)
             {
                 MessageBox.Show("Report data is null", "Report_Data==null");
                 return;
@@ -68,9 +68,9 @@ namespace Applied_Accounts.Classes
 
             if (_PreviewForm == null) { MessageBox.Show("Report Name is not valid.", "_PreviewForm"); return; }          // Return if report object not load poperly.
 
-            if (Report_Data.Count>0)
+            if (Report_Data.Count > 0)
             {
-                
+
                 _PreviewForm.ShowDialog();
             }
             else
@@ -95,24 +95,41 @@ namespace Applied_Accounts.Classes
         }
         public void Update_ReportData()
         {
-            if(DataSource!=null)
+            if (DataSource != null)
             {
-                if(DataSource.Rows.Count>0)
+                if (DataSource.Rows.Count > 0)
                 {
                     Report_Data = DataSource.AsDataView();
                     Report_Data.RowFilter = ReportView_Filter;
                     Report_Data.Sort = ReportView_Sort;
                 }
             }
-            
+
         }
         public int Count()                               // Count Table Row
         {
-            if(DataSource==null)
+            if (DataSource == null)
             {
                 return Report_Data.Count;
             }
             return 0;
         }
+
+        public string Min(string _Column)
+        {
+            if (Report_Data.Count > 0)
+            { return (string)Report_Data.ToTable().Compute("Min(" + _Column + ")", string.Empty); }
+            return "";
+
+        }
+
+        public string Max(string _Column)
+        {
+            if (Report_Data.Count > 0)
+            { return (string)Report_Data.ToTable().Compute("Max(" + _Column + ")", string.Empty); }
+            return "";
+
+        }
+        
     }
 }

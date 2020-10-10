@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Applied_Accounts.Preview;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SQLite;
 using System.Globalization;
@@ -14,9 +16,8 @@ namespace Applied_Accounts.Classes
         int Count_View();
         void Save();
         string ToWords();
-
         DataTable GetGridTable();
-
+        void Preview_Voucher();
     }
 
     public class VoucherClass : iVoucherclass
@@ -518,7 +519,7 @@ namespace Applied_Accounts.Classes
 
             _Result = AppliedTable.GetDataTable(_Command);
 
-            if(_Result.Rows.Count==0) { return new DataTable(); }           // Return Empty id rows are zero
+            if (_Result.Rows.Count == 0) { return new DataTable(); }           // Return Empty id rows are zero
 
 
             DataRow _GridRow = _Result.NewRow();
@@ -528,7 +529,7 @@ namespace Applied_Accounts.Classes
             long MaxSrNo = (long)_Result.Compute("Max(SRNO)", string.Empty);
 
             _GridRow["SRNO"] = MaxSrNo + 1;
-            _GridRow["Account"] = "Transactions = " + _Result.Rows.Count.ToString() ;
+            _GridRow["Account"] = "Transactions = " + _Result.Rows.Count.ToString();
             _GridRow["Vandor"] = "TOTAL";
             _GridRow["Debit"] = Tot_DR;
             _GridRow["Credit"] = Tot_CR;
@@ -540,6 +541,86 @@ namespace Applied_Accounts.Classes
 
 
         #endregion
+
+        public void Preview_Voucher()
+        {
+            Preview_Voucher(string.Concat("Vou_No='", Vou_No, "'"));
+        }
+
+        public void Preview_Voucher(string _DataFilter)
+        {
+
+            if (_DataFilter.Length == 0)
+            {
+                _DataFilter = "Vou_Date ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'"; 
+            }   
+
+            ReportClass PreviewClass = new ReportClass();                                       // Initialize Report Class
+            PreviewClass.DataSet_Name = "ds_Voucher";                                           // Dataset for the report
+            PreviewClass.Vou_No = Vou_No;                                                       // Print Voucher No in report
+            PreviewClass.Vou_Date = Vou_Date;                                                   // DAte of Voucher
+            PreviewClass.Report_Location = Program.ReportsPath + "Report_Voucher.rdlc";         // Report Name 
+            PreviewClass.DataSource_Filter = _DataFilter;                                       // Filter for the Data Source
+            PreviewClass.DataSource = AppliedTable.GetDataTable(Tables.View_Voucher, PreviewClass.DataSource_Filter);
+            PreviewClass.Report_Data = PreviewClass.DataSource.AsDataView();                    // Data for the report.
+            if (PreviewClass.Report_Data.Count > 0)                                             // Voucher class has voucher record.
+            {
+                string MinDate = PreviewClass.Min("Vou_Date");
+                string MaxDate = PreviewClass.Max("Vou_Date");
+
+                string MinVou = PreviewClass.Min("Vou_No");
+                string MaxVou = PreviewClass.Max("Vou_No");
+
+                PreviewClass.Report_From = Conversion.ToDate(MinDate);
+                PreviewClass.Report_To = Conversion.ToDate(MaxDate);
+
+                if (MinVou.Trim() == MaxVou.Trim())
+                {
+                    PreviewClass.Heading1 = Vou_No + " | " + Conversion.ToPrintDate(MinDate);
+                    PreviewClass.Heading2 = Vou_Type + " Voucher";
+                }
+                else
+                {
+                    PreviewClass.Heading1 = "Vouchers from " + Conversion.ToPrintDate(MinDate) + " to " + Conversion.ToPrintDate(MaxDate);
+                    PreviewClass.Heading2 = Vou_Type + " Voucher";
+
+                }
+
+
+
+                PreviewClass.Report_From = PreviewClass.Vou_Date;
+                
+
+                frmPreview_Reports PreviewVoucher = new frmPreview_Reports(PreviewClass);           // Window form for the report.
+                PreviewVoucher.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("No Record found.");
+            }
+        }
+
+
+        //public static void Preview_Voucher(VoucherClass _VoucherClass)
+        //{
+
+        //    ReportClass PreviewClass = new ReportClass();                                       // Initialize Report Class
+        //    PreviewClass.DataSet_Name = "ds_Voucher";                                           // Dataset for the report
+        //    PreviewClass.Vou_No = _VoucherClass.Vou_No;                                         // Print Voucher No in report
+        //    PreviewClass.Vou_Date = _VoucherClass.Vou_Date;                                     // DAte of Voucher
+        //    PreviewClass.Report_Location = Program.ReportsPath + "Report_Voucher.rdlc";         // Report Name 
+        //    PreviewClass.DataSource_Filter = "Vou_No='" + _VoucherClass.Vou_No + "'";           // Filter for the Data Source
+        //    PreviewClass.DataSource = AppliedTable.GetDataTable(Tables.View_Voucher, PreviewClass.DataSource_Filter);
+        //    PreviewClass.Report_Data = PreviewClass.DataSource.AsDataView();                    // Data for the report.
+        //    PreviewClass.Heading1 = _VoucherClass.Vou_No + " | " + _VoucherClass.Vou_Date.ToString(PreviewClass.Report_Heading_Format);
+        //    PreviewClass.Heading2 = _VoucherClass.Vou_Type + " Voucher";
+
+        //    //================================================================================== PREVIEW REPORT.
+        //    frmPreview_Reports PreviewVoucher = new frmPreview_Reports(PreviewClass);           // Window form for the report.
+        //    PreviewVoucher.ShowDialog();                                                        // Show Window form.
+        //}
+
+
 
     }       // END Main Class
 }           // END NameSpace

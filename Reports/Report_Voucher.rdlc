@@ -226,13 +226,15 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>DR</Value>
+                                  <Value>Debit</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox4</rd:DefaultName>
@@ -271,13 +273,15 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>CR</Value>
+                                  <Value>Credit</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox10</rd:DefaultName>
@@ -326,7 +330,7 @@
                                 </TextRun>
                               </TextRuns>
                               <Style>
-                                <TextAlign>Left</TextAlign>
+                                <TextAlign>Center</TextAlign>
                               </Style>
                             </Paragraph>
                           </Paragraphs>
@@ -393,7 +397,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>DR</rd:DefaultName>
@@ -426,7 +432,9 @@
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>CR</rd:DefaultName>
@@ -616,7 +624,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=string.Concat("Vendor : ", Fields!Supplier_ID.Value, " ", Fields!SUPPLIER.Value)</Value>
+                                  <Value>=string.Concat("Vendor : ", Fields!SUPPLIER.Value, " (", Fields!Supplier_ID.Value.ToString(), ")")</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -744,7 +752,7 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!Project.Value</Value>
+                                  <Value>=string.Concat("Project : " + Fields!Project.Value + " (",+Fields!Project_ID.Value.ToString(),")")</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                   </Style>
@@ -842,7 +850,9 @@
                               <TextRuns>
                                 <TextRun>
                                   <Value />
-                                  <Style />
+                                  <Style>
+                                    <Color>Navy</Color>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
                               <Style />
@@ -858,6 +868,7 @@
                               <Color>Blue</Color>
                               <Style>Solid</Style>
                             </BottomBorder>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -879,6 +890,7 @@
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
+                                    <Color>Navy</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -894,6 +906,7 @@
                             <BottomBorder>
                               <Color>Blue</Color>
                             </BottomBorder>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -916,10 +929,13 @@
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);'-'</Format>
+                                    <Color>Navy</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>DR1</rd:DefaultName>
@@ -932,6 +948,7 @@
                               <Color>Blue</Color>
                               <Style>Solid</Style>
                             </BottomBorder>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -954,10 +971,13 @@
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
                                     <Format>#,0.00;(#,0.00);'-'</Format>
+                                    <Color>Navy</Color>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox14</rd:DefaultName>
@@ -970,6 +990,7 @@
                               <Color>Blue</Color>
                               <Style>Solid</Style>
                             </BottomBorder>
+                            <BackgroundColor>WhiteSmoke</BackgroundColor>
                             <PaddingLeft>2pt</PaddingLeft>
                             <PaddingRight>2pt</PaddingRight>
                             <PaddingTop>2pt</PaddingTop>
@@ -1043,6 +1064,7 @@
                     <TablixMember />
                   </TablixMembers>
                   <KeepWithGroup>After</KeepWithGroup>
+                  <RepeatOnNewPage>true</RepeatOnNewPage>
                 </TablixMember>
                 <TablixMember>
                   <Group Name="Vou_No">
@@ -1103,7 +1125,11 @@
                             <Hidden>=IIF(TRIM(Fields!SUPPLIER.Value)="",TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
-                        <TablixMember />
+                        <TablixMember>
+                          <Visibility>
+                            <Hidden>=iif(TRIM(Fields!Project.Value)="",TRUE,FALSE)</Hidden>
+                          </Visibility>
+                        </TablixMember>
                       </TablixMembers>
                     </TablixMember>
                     <TablixMember>
@@ -1150,7 +1176,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox5</rd:DefaultName>
-            <Top>1.65972in</Top>
+            <Top>1.90972in</Top>
             <Left>0.655in</Left>
             <Height>0.25in</Height>
             <Width>1.15749in</Width>
@@ -1185,7 +1211,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox8</rd:DefaultName>
-            <Top>1.65972in</Top>
+            <Top>1.90972in</Top>
             <Left>3.04042in</Left>
             <Height>0.25in</Height>
             <Width>1.21875in</Width>
@@ -1220,7 +1246,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox9</rd:DefaultName>
-            <Top>1.65972in</Top>
+            <Top>1.90972in</Top>
             <Left>5.57167in</Left>
             <Height>0.25in</Height>
             <Width>1.17832in</Width>
@@ -1236,7 +1262,7 @@
             </Style>
           </Textbox>
           <Line Name="Line1">
-            <Top>1.66765in</Top>
+            <Top>1.91765in</Top>
             <Left>3.04042in</Left>
             <Height>0in</Height>
             <Width>1.21875in</Width>
@@ -1248,7 +1274,7 @@
             </Style>
           </Line>
           <Line Name="Line2">
-            <Top>1.66765in</Top>
+            <Top>1.91765in</Top>
             <Left>0.655in</Left>
             <Height>0in</Height>
             <Width>1.15749in</Width>
@@ -1260,7 +1286,7 @@
             </Style>
           </Line>
           <Line Name="Line3">
-            <Top>1.66765in</Top>
+            <Top>1.91765in</Top>
             <Left>5.57167in</Left>
             <Height>0in</Height>
             <Width>1.17832in</Width>
@@ -1290,7 +1316,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>1.97917in</Top>
+            <Top>2.22917in</Top>
             <Left>3.04042in</Left>
             <Height>0.25in</Height>
             <Width>3.97in</Width>
@@ -1323,7 +1349,7 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox15</rd:DefaultName>
-            <Top>1.97917in</Top>
+            <Top>2.22917in</Top>
             <Height>0.25in</Height>
             <Width>2.92583in</Width>
             <ZIndex>8</ZIndex>
@@ -1338,7 +1364,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>2.35417in</Height>
+        <Height>2.61459in</Height>
         <Style>
           <Border>
             <Style>None</Style>

@@ -72,15 +72,15 @@ namespace Applied_Accounts.Forms
                 _Row["COA"] = cBoxCOA.SelectedValue;   //_DataTable.Rows[0]["COA"];
                 _Row["COA_Title"] = cBoxCOA.Text;      //_DataTable.Rows[0]["COA_Title"];
 
-                if ((double)_OBalTable.Rows[0]["Amount"] > 0)
+                if (Conversion.ToDouble(_OBalTable.Rows[0]["Amount"]) > 0)
                 {
-                    _Row["DR"] = (double)_OBalTable.Rows[0]["Amount"];
+                    _Row["DR"] =  Conversion.ToDouble(_OBalTable.Rows[0]["Amount"]);
                     _Row["CR"] = 0;
                 }
                 else
                 {
                     _Row["DR"] = 0;
-                    _Row["CR"] = (double)_OBalTable.Rows[0]["Amount"] * -1;
+                    _Row["CR"] = Conversion.ToDouble(_OBalTable.Rows[0]["Amount"]) * -1;
                 }
 
                 _DataTable.Rows.InsertAt(_Row, 0);

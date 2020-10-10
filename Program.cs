@@ -16,12 +16,12 @@ namespace Applied_Accounts
         /// </summary>
         /// 
 
-        public const string Developedby = "Applied Software House";
+        public const string Developedby = "Power by : Applied Software House";
         public const string Author = "Muhammad Aamir Jahangir Khan";
         public static object MySession = null;
         public static string StartupPath = Application.StartupPath;
         public static string ExecutablePath = Application.ExecutablePath;
-        public static string DateTimeFormat = "";
+        public static string DateTimeFormat = "dd-MM-yyyy";
         public static string ReportsPath = "Applied_Accounts.Reports.";
         public static string CompanyName = "";
         public static string User = "";
