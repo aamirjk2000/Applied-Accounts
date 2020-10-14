@@ -51,9 +51,9 @@ namespace Applied_Accounts.Forms
             InitializeComponent();
 
             MyVoucherClass.Vou_Type = Enum.GetName(typeof(Applied.VoucherType), MyVoucherType);
-            MyVoucherClass.Vou_No = MyVoucherClass.GetVoucherTag(MyVoucherType);
+            MyVoucherClass.Vou_No = "NEW";
+            //MyVoucherClass.Vou_No = MyVoucherClass.GetVoucherTag(MyVoucherType);
             txtVouNo.Text = MyVoucherClass.Vou_No;
-
             MyRefresh();
         }
 
@@ -72,12 +72,12 @@ namespace Applied_Accounts.Forms
 
             //LOAD DATATABLE FROM DATABASE.
             //
-            tbAccounts = AppliedTable.GetDataTable((int)Tables.COA);
-            tbSuppliers = AppliedTable.GetDataTable((int)Tables.Suppliers);
-            tbProjects = AppliedTable.GetDataTable((int)Tables.Projects);
-            tbUnits = AppliedTable.GetDataTable((int)Tables.Units);
-            tbStocks = AppliedTable.GetDataTable((int)Tables.Stock);
-            tbEmployees = AppliedTable.GetDataTable((int)Tables.Employees);
+            tbAccounts = AppliedTable.GetComboData((int)Tables.COA);
+            tbSuppliers = AppliedTable.GetComboData((int)Tables.Suppliers);
+            tbProjects = AppliedTable.GetComboData((int)Tables.Projects);
+            tbUnits = AppliedTable.GetComboData((int)Tables.Units);
+            tbStocks = AppliedTable.GetComboData((int)Tables.Stock);
+            tbEmployees = AppliedTable.GetComboData((int)Tables.Employees);
             // DATABASE 
 
             dtVouDate.Format = DateTimePickerFormat.Custom;
@@ -172,9 +172,7 @@ namespace Applied_Accounts.Forms
             {
                 case "ComboBox":
 
-                    System.Windows.Forms.ComboBox _CBox = (System.Windows.Forms.ComboBox)_Object2;
-
-                    //if (cboxVouType.Enabled) { _CBox.Enabled = false; return; }      // Disable if voucher Type is enable
+                    ComboBox _CBox = (ComboBox)_Object2;
 
                     _CBox.Enabled = true;
 
@@ -192,13 +190,12 @@ namespace Applied_Accounts.Forms
 
                 case "TextBox":
 
-                    System.Windows.Forms.TextBox _TextBox = (System.Windows.Forms.TextBox)_Object2;
+                    TextBox _TextBox = (TextBox)_Object2;
 
                     _TextBox.Enabled = true;
 
                     if (_RowValue == null | _RowValue == DBNull.Value) { break; }
-
-                    //if (((string)_RowValue).Trim() == _TextBox.Text.Trim())
+                    
                     if (_RowValue.ToString().Trim() == _TextBox.Text.Trim())
                     {
                         _TextBox.ForeColor = _Color1;
@@ -213,16 +210,12 @@ namespace Applied_Accounts.Forms
                 default:
                     break;
             }
-
-
-
         }
 
         private void cboxVouType_SelectedIndexChanged(object sender, EventArgs e)
         {
             SetTitle();                     // Display window title as per voucher type.
         }
-
 
         #endregion
 
@@ -336,26 +329,32 @@ namespace Applied_Accounts.Forms
         }
         private void cBoxAccounts_DropDownClosed(object sender, EventArgs e)
         {
+            if (cBoxProjects.SelectedValue == null) { return; }
             txtAccount.Text = Applied.Code((long)cBoxAccounts.SelectedValue, tbAccounts.AsDataView());
         }
         private void cBoxSuppliers_DropDownClosed(object sender, EventArgs e)
         {
+            if (cBoxProjects.SelectedValue == null) { return; }
             txtVandor.Text = Applied.Code((long)cBoxSuppliers.SelectedValue, tbSuppliers.AsDataView());
         }
         private void cBoxProjects_DropDownClosed(object sender, EventArgs e)
         {
+            if(cBoxProjects.SelectedValue==null) { return; }
             txtProject.Text = Applied.Code((long)cBoxProjects.SelectedValue, tbProjects.AsDataView());
         }
         private void cBoxUnits_DropDownClosed(object sender, EventArgs e)
         {
+            if (cBoxProjects.SelectedValue == null) { return; }
             txtUnit.Text = Applied.Code((long)cBoxUnits.SelectedValue, tbUnits.AsDataView());
         }
         private void cBoxStocks_DropDownClosed(object sender, EventArgs e)
         {
+            if (cBoxProjects.SelectedValue == null) { return; }
             txtStock.Text = Applied.Code((long)cBoxStocks.SelectedValue, tbStocks.AsDataView());
         }
         private void cBoxEmployees_DropDownClosed(object sender, EventArgs e)
         {
+            if (cBoxProjects.SelectedValue == null) { return; }
             txtEmployee.Text = Applied.Code((long)cBoxEmployees.SelectedValue, tbEmployees.AsDataView());
         }
 
@@ -408,54 +407,33 @@ namespace Applied_Accounts.Forms
 
         #region Browse Widnows
 
+        #region Button Click
         private void btnAccounts_Click(object sender, EventArgs e)
         {
             cBoxAccounts.SelectedValue = Applied.ShowBrowseWin(tbAccounts, cBoxAccounts.SelectedValue);
-
-            //Browse _Browse = new Browse(new DataView(tbAccounts));
-            //_Browse.ShowDialog();
-            //cBoxAccounts.SelectedValue = _Browse.MyID;
         }
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
             cBoxSuppliers.SelectedValue = Applied.ShowBrowseWin(tbSuppliers, cBoxSuppliers.SelectedValue);
-
-            //Browse _Browse = new Browse(new DataView(tbSuppliers));
-            //_Browse.ShowDialog();
-            //cBoxSuppliers.SelectedValue = _Browse.MyID;
         }
         private void btnProjects_Click(object sender, EventArgs e)
         {
             cBoxProjects.SelectedValue = Applied.ShowBrowseWin(tbProjects, cBoxProjects.SelectedValue);
-
-            //Browse _Browse = new Browse(new DataView(tbProjects));
-            //_Browse.ShowDialog();
-            //cBoxProjects.SelectedValue = _Browse.MyID;
         }
         private void btnUnits_Click(object sender, EventArgs e)
         {
             cBoxUnits.SelectedValue = Applied.ShowBrowseWin(tbUnits, cBoxUnits.SelectedValue);
-
-            //Browse _Browse = new Browse(new DataView(tbUnits));
-            //_Browse.ShowDialog();
-            //cBoxUnits.SelectedValue = _Browse.MyID;
         }
         private void btnStocks_Click(object sender, EventArgs e)
         {
             cBoxStocks.SelectedValue = Applied.ShowBrowseWin(tbStocks, cBoxStocks.SelectedValue);
-
-            //Browse _Browse = new Browse(new DataView(tbStocks));
-            //_Browse.ShowDialog();
-            //cBoxStocks.SelectedValue = _Browse.MyID;
         }
         private void btnEmployees_Click(object sender, EventArgs e)
         {
             cBoxEmployees.SelectedValue = Applied.ShowBrowseWin(tbEmployees, cBoxEmployees.SelectedValue);
-
-            //Browse _Browse = new Browse(new DataView(tbEmployees));
-            //_Browse.ShowDialog();
-            //cBoxEmployees.SelectedValue = _Browse.MyID;
         }
+        #endregion
+
 
         #endregion
 
@@ -638,16 +616,6 @@ namespace Applied_Accounts.Forms
         {
             e.Handled = Applied.IsNumeric(sender, e);
         }
-
-        #endregion
-
-        #region Voucher No Textbox
-
-        private void txtVouNo_Enter(object sender, EventArgs e)
-        {
-        }
-
-
 
         #endregion
 
@@ -842,12 +810,6 @@ namespace Applied_Accounts.Forms
 
         #region SR No
 
-
-        private void txtSRNO_Enter(object sender, EventArgs e)
-        {
-
-        }
-
         private void txtSRNO_Validated(object sender, EventArgs e)
         {
             DisplayRow(MyRow);
@@ -856,7 +818,7 @@ namespace Applied_Accounts.Forms
 
         private void txtSRNO_Validating(object sender, CancelEventArgs e)
         {
-            System.Windows.Forms.TextBox _TextBox = (System.Windows.Forms.TextBox)sender;
+            TextBox _TextBox = (TextBox)sender;
 
             if (_TextBox.Text.Length == 0) { return; }
 
@@ -889,25 +851,37 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
+        #region New Voucher
+
+        private void GetVoucher(string _VouNo)
+        {
+            
+            string Voucher_No = _VouNo.ToUpper().Trim();
+
+            if (Voucher_No.Length == 0) { return; }                                             // Close this form in Leave event
+            if (Voucher_No == "-1") { Voucher_No = "NEW"; }
+            if (Voucher_No == "NEW") { MyVoucherClass = new VoucherClass(); return; }           // Create new Voucher in Leave Event
+            if (Voucher_No == "END") { return; }                                                // Create new Voucher in Leave Event
+
+            MyVoucherClass = new VoucherClass(Voucher_No);                                      // Load Voucher into Class (Memory)
+
+        }
+
+
+        #endregion
+
         #region Voucher No
 
         private void txtVouNo_Validating(object sender, CancelEventArgs e)
         {
-            System.Windows.Forms.TextBox _TextBox = (System.Windows.Forms.TextBox)sender;
-            string Voucher_No = _TextBox.Text.Trim();
+            TextBox _TextBox = (TextBox)sender;
+            GetVoucher(_TextBox.Text);
 
-            if (_TextBox.Text.Length == 0) { e.Cancel = false; return; }                 // Close this form in Leave event
-            if (_TextBox.Text.ToUpper() == "NEW") { e.Cancel = false; MyVoucherClass = new VoucherClass(); return; }         // Create new Voucher in Leave Event
-            if (_TextBox.Text.ToUpper() == "END") { e.Cancel = false; return; }         // Create new Voucher in Leave Event
-
-            MyVoucherClass = new VoucherClass(Voucher_No);                               // Load Voucher into Class (Memory)
-
-            if (Voucher_No.Trim().Length == 0) { return; }
 
             if (MyVoucherClass.Count_Table() > 0)                                       // If Exist Load Voucher Class
             {
                 dtVouDate.Value = MyVoucherClass.Vou_Date;
-                MessageBox.Show(string.Concat(MyDataTable.Rows.Count, " Transactions."), Voucher_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(string.Concat(MyDataTable.Rows.Count, " Transactions."), MyVoucherClass.Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 e.Cancel = false;
             }
             else
@@ -1174,6 +1148,7 @@ namespace Applied_Accounts.Forms
             }
             return _Result;
         }
+
 
 
 

@@ -115,7 +115,9 @@ namespace Applied_Accounts
         #region Row
         public DataRow GetNewRow()                              // Get New Row
         {
-            return MyDataTable.NewRow();
+            DataRow _Row = MyDataTable.NewRow();
+            _Row["ID"] = -1;
+            return _Row;
         }
 
         public DataRow GetRow(int _ID)                          // New Data Row from Table
@@ -123,9 +125,6 @@ namespace Applied_Accounts
             if (_ID == -1)                                    // Get New Row if Table is empty.
             {
                 return GetNewRow();
-
-                //if (Count == 0) {return GetNewRow(); }      // retuern new row if table is empty
-                //else {return MyDataView.ToTable().Rows[0];}         // return row
             }
             else
             {

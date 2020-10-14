@@ -321,9 +321,9 @@ namespace Applied_Accounts.Classes
             if (Insert_Record + Update_Record > 0)                                              // show Message for save the record.
             {
                 string _SaveMessage = "";
-                if (Insert_Record > 0) { _SaveMessage += string.Concat(Insert_Record, Vou_No, Keys.Return, " Record(s) INSERTED."); }
+                if (Insert_Record > 0) {_SaveMessage += string.Concat(Insert_Record, " Record(s) INSERTED.", "\n Voucher | ",Vou_No ); }
                 if (_SaveMessage.Length > 0) { _SaveMessage += Environment.NewLine; }
-                if (Update_Record > 0) { _SaveMessage += string.Concat(Update_Record, Vou_No, Keys.Return, " Record(s) UPDATED."); }
+                if (Update_Record > 0) { _SaveMessage += string.Concat(Update_Record, " Record(s) UPDATED.", "\n Voucher | ", Vou_No); }
 
                 MessageBox.Show(_SaveMessage, "VOUCHER | " + Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Voucher_Saved = true;
@@ -601,25 +601,7 @@ namespace Applied_Accounts.Classes
         }
 
 
-        //public static void Preview_Voucher(VoucherClass _VoucherClass)
-        //{
-
-        //    ReportClass PreviewClass = new ReportClass();                                       // Initialize Report Class
-        //    PreviewClass.DataSet_Name = "ds_Voucher";                                           // Dataset for the report
-        //    PreviewClass.Vou_No = _VoucherClass.Vou_No;                                         // Print Voucher No in report
-        //    PreviewClass.Vou_Date = _VoucherClass.Vou_Date;                                     // DAte of Voucher
-        //    PreviewClass.Report_Location = Program.ReportsPath + "Report_Voucher.rdlc";         // Report Name 
-        //    PreviewClass.DataSource_Filter = "Vou_No='" + _VoucherClass.Vou_No + "'";           // Filter for the Data Source
-        //    PreviewClass.DataSource = AppliedTable.GetDataTable(Tables.View_Voucher, PreviewClass.DataSource_Filter);
-        //    PreviewClass.Report_Data = PreviewClass.DataSource.AsDataView();                    // Data for the report.
-        //    PreviewClass.Heading1 = _VoucherClass.Vou_No + " | " + _VoucherClass.Vou_Date.ToString(PreviewClass.Report_Heading_Format);
-        //    PreviewClass.Heading2 = _VoucherClass.Vou_Type + " Voucher";
-
-        //    //================================================================================== PREVIEW REPORT.
-        //    frmPreview_Reports PreviewVoucher = new frmPreview_Reports(PreviewClass);           // Window form for the report.
-        //    PreviewVoucher.ShowDialog();                                                        // Show Window form.
-        //}
-
+      
 
 
     }       // END Main Class

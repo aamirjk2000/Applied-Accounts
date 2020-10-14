@@ -131,7 +131,8 @@ namespace Applied_Accounts.Forms
             thisRow["Cost"] =  1;
             thisRow["Nature"] = "";
             thisRow["Remarks"] = "";
-            MyNavigator_Set_Values(sender, e);
+            thisRow["Active"] = true;
+            MyNavigator_Get_Values(sender, e);
             txtCode.Focus();
         }
 

@@ -32,6 +32,16 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVouchers));
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
+            this.btn9 = new System.Windows.Forms.Button();
+            this.MyImages = new System.Windows.Forms.ImageList(this.components);
+            this.btn8 = new System.Windows.Forms.Button();
+            this.btn7 = new System.Windows.Forms.Button();
+            this.btn6 = new System.Windows.Forms.Button();
+            this.btn5 = new System.Windows.Forms.Button();
+            this.btn4 = new System.Windows.Forms.Button();
+            this.btn3 = new System.Windows.Forms.Button();
+            this.btn2 = new System.Windows.Forms.Button();
+            this.btn1 = new System.Windows.Forms.Button();
             this.txtEmployee = new System.Windows.Forms.TextBox();
             this.txtStock = new System.Windows.Forms.TextBox();
             this.txtUnit = new System.Windows.Forms.TextBox();
@@ -42,7 +52,6 @@
             this.btnNewVoucher = new System.Windows.Forms.Button();
             this.btnSaveVoucher = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
-            this.MyImages = new System.Windows.Forms.ImageList(this.components);
             this.btnBottom = new System.Windows.Forms.Button();
             this.btnTop = new System.Windows.Forms.Button();
             this.txtRefNo = new System.Windows.Forms.TextBox();
@@ -96,15 +105,6 @@
             this.P2 = new System.Windows.Forms.TabPage();
             this.lblWords = new System.Windows.Forms.Label();
             this.Grid = new System.Windows.Forms.DataGridView();
-            this.btn1 = new System.Windows.Forms.Button();
-            this.btn2 = new System.Windows.Forms.Button();
-            this.btn3 = new System.Windows.Forms.Button();
-            this.btn4 = new System.Windows.Forms.Button();
-            this.btn5 = new System.Windows.Forms.Button();
-            this.btn6 = new System.Windows.Forms.Button();
-            this.btn9 = new System.Windows.Forms.Button();
-            this.btn8 = new System.Windows.Forms.Button();
-            this.btn7 = new System.Windows.Forms.Button();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -197,6 +197,135 @@
             this.P1.TabIndex = 0;
             this.P1.Text = "TRANSACTION";
             this.P1.UseVisualStyleBackColor = true;
+            // 
+            // btn9
+            // 
+            this.btn9.Enabled = false;
+            this.btn9.ImageList = this.MyImages;
+            this.btn9.Location = new System.Drawing.Point(500, 76);
+            this.btn9.Name = "btn9";
+            this.btn9.Size = new System.Drawing.Size(23, 23);
+            this.btn9.TabIndex = 125;
+            this.btn9.TabStop = false;
+            this.btn9.Text = "9";
+            this.btn9.UseVisualStyleBackColor = true;
+            // 
+            // MyImages
+            // 
+            this.MyImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("MyImages.ImageStream")));
+            this.MyImages.TransparentColor = System.Drawing.Color.Transparent;
+            this.MyImages.Images.SetKeyName(0, "TOP.png");
+            this.MyImages.Images.SetKeyName(1, "NEXT.png");
+            this.MyImages.Images.SetKeyName(2, "BACK.png");
+            this.MyImages.Images.SetKeyName(3, "BOTTOM.png");
+            this.MyImages.Images.SetKeyName(4, "TOPD.png");
+            this.MyImages.Images.SetKeyName(5, "NextD.png");
+            this.MyImages.Images.SetKeyName(6, "BACKD.png");
+            this.MyImages.Images.SetKeyName(7, "BOTTOMD.png");
+            this.MyImages.Images.SetKeyName(8, "New.png");
+            this.MyImages.Images.SetKeyName(9, "Save.png");
+            this.MyImages.Images.SetKeyName(10, "Delete.png");
+            this.MyImages.Images.SetKeyName(11, "Exit.png");
+            this.MyImages.Images.SetKeyName(12, "Files.png");
+            this.MyImages.Images.SetKeyName(13, "OK.png");
+            this.MyImages.Images.SetKeyName(14, "UNDO.png");
+            this.MyImages.Images.SetKeyName(15, "Printer.png");
+            // 
+            // btn8
+            // 
+            this.btn8.Enabled = false;
+            this.btn8.ImageList = this.MyImages;
+            this.btn8.Location = new System.Drawing.Point(465, 76);
+            this.btn8.Name = "btn8";
+            this.btn8.Size = new System.Drawing.Size(23, 23);
+            this.btn8.TabIndex = 124;
+            this.btn8.TabStop = false;
+            this.btn8.Text = "8";
+            this.btn8.UseVisualStyleBackColor = true;
+            // 
+            // btn7
+            // 
+            this.btn7.Enabled = false;
+            this.btn7.ImageList = this.MyImages;
+            this.btn7.Location = new System.Drawing.Point(430, 76);
+            this.btn7.Name = "btn7";
+            this.btn7.Size = new System.Drawing.Size(23, 23);
+            this.btn7.TabIndex = 123;
+            this.btn7.TabStop = false;
+            this.btn7.Text = "7";
+            this.btn7.UseVisualStyleBackColor = true;
+            // 
+            // btn6
+            // 
+            this.btn6.Enabled = false;
+            this.btn6.ImageList = this.MyImages;
+            this.btn6.Location = new System.Drawing.Point(395, 76);
+            this.btn6.Name = "btn6";
+            this.btn6.Size = new System.Drawing.Size(23, 23);
+            this.btn6.TabIndex = 122;
+            this.btn6.TabStop = false;
+            this.btn6.Text = "6";
+            this.btn6.UseVisualStyleBackColor = true;
+            // 
+            // btn5
+            // 
+            this.btn5.Enabled = false;
+            this.btn5.ImageList = this.MyImages;
+            this.btn5.Location = new System.Drawing.Point(360, 76);
+            this.btn5.Name = "btn5";
+            this.btn5.Size = new System.Drawing.Size(23, 23);
+            this.btn5.TabIndex = 121;
+            this.btn5.TabStop = false;
+            this.btn5.Text = "5";
+            this.btn5.UseVisualStyleBackColor = true;
+            // 
+            // btn4
+            // 
+            this.btn4.Enabled = false;
+            this.btn4.ImageList = this.MyImages;
+            this.btn4.Location = new System.Drawing.Point(325, 76);
+            this.btn4.Name = "btn4";
+            this.btn4.Size = new System.Drawing.Size(23, 23);
+            this.btn4.TabIndex = 120;
+            this.btn4.TabStop = false;
+            this.btn4.Text = "4";
+            this.btn4.UseVisualStyleBackColor = true;
+            // 
+            // btn3
+            // 
+            this.btn3.Enabled = false;
+            this.btn3.ImageList = this.MyImages;
+            this.btn3.Location = new System.Drawing.Point(290, 76);
+            this.btn3.Name = "btn3";
+            this.btn3.Size = new System.Drawing.Size(23, 23);
+            this.btn3.TabIndex = 119;
+            this.btn3.TabStop = false;
+            this.btn3.Text = "3";
+            this.btn3.UseVisualStyleBackColor = true;
+            // 
+            // btn2
+            // 
+            this.btn2.Enabled = false;
+            this.btn2.ImageList = this.MyImages;
+            this.btn2.Location = new System.Drawing.Point(255, 76);
+            this.btn2.Name = "btn2";
+            this.btn2.Size = new System.Drawing.Size(23, 23);
+            this.btn2.TabIndex = 118;
+            this.btn2.TabStop = false;
+            this.btn2.Text = "2";
+            this.btn2.UseVisualStyleBackColor = true;
+            // 
+            // btn1
+            // 
+            this.btn1.Enabled = false;
+            this.btn1.ImageList = this.MyImages;
+            this.btn1.Location = new System.Drawing.Point(220, 76);
+            this.btn1.Name = "btn1";
+            this.btn1.Size = new System.Drawing.Size(23, 23);
+            this.btn1.TabIndex = 117;
+            this.btn1.TabStop = false;
+            this.btn1.Text = "1";
+            this.btn1.UseVisualStyleBackColor = true;
             // 
             // txtEmployee
             // 
@@ -297,27 +426,6 @@
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // MyImages
-            // 
-            this.MyImages.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("MyImages.ImageStream")));
-            this.MyImages.TransparentColor = System.Drawing.Color.Transparent;
-            this.MyImages.Images.SetKeyName(0, "TOP.png");
-            this.MyImages.Images.SetKeyName(1, "NEXT.png");
-            this.MyImages.Images.SetKeyName(2, "BACK.png");
-            this.MyImages.Images.SetKeyName(3, "BOTTOM.png");
-            this.MyImages.Images.SetKeyName(4, "TOPD.png");
-            this.MyImages.Images.SetKeyName(5, "NextD.png");
-            this.MyImages.Images.SetKeyName(6, "BACKD.png");
-            this.MyImages.Images.SetKeyName(7, "BOTTOMD.png");
-            this.MyImages.Images.SetKeyName(8, "New.png");
-            this.MyImages.Images.SetKeyName(9, "Save.png");
-            this.MyImages.Images.SetKeyName(10, "Delete.png");
-            this.MyImages.Images.SetKeyName(11, "Exit.png");
-            this.MyImages.Images.SetKeyName(12, "Files.png");
-            this.MyImages.Images.SetKeyName(13, "OK.png");
-            this.MyImages.Images.SetKeyName(14, "UNDO.png");
-            this.MyImages.Images.SetKeyName(15, "Printer.png");
             // 
             // btnBottom
             // 
@@ -684,7 +792,6 @@
             this.txtSRNO.Name = "txtSRNO";
             this.txtSRNO.Size = new System.Drawing.Size(59, 20);
             this.txtSRNO.TabIndex = 4;
-            this.txtSRNO.Enter += new System.EventHandler(this.txtSRNO_Enter);
             this.txtSRNO.Leave += new System.EventHandler(this.txtSRNO_Leave);
             this.txtSRNO.Validating += new System.ComponentModel.CancelEventHandler(this.txtSRNO_Validating);
             this.txtSRNO.Validated += new System.EventHandler(this.txtSRNO_Validated);
@@ -776,7 +883,7 @@
             this.txtVouNo.Name = "txtVouNo";
             this.txtVouNo.Size = new System.Drawing.Size(87, 20);
             this.txtVouNo.TabIndex = 1;
-            this.txtVouNo.Enter += new System.EventHandler(this.txtVouNo_Enter);
+            this.txtVouNo.Text = "NEW";
             this.txtVouNo.Leave += new System.EventHandler(this.txtVouNo_Leave);
             this.txtVouNo.Validating += new System.ComponentModel.CancelEventHandler(this.txtVouNo_Validating);
             this.txtVouNo.Validated += new System.EventHandler(this.txtVouNo_Validated);
@@ -854,114 +961,6 @@
             this.Grid.Name = "Grid";
             this.Grid.Size = new System.Drawing.Size(756, 398);
             this.Grid.TabIndex = 0;
-            // 
-            // btn1
-            // 
-            this.btn1.Enabled = false;
-            this.btn1.ImageList = this.MyImages;
-            this.btn1.Location = new System.Drawing.Point(220, 76);
-            this.btn1.Name = "btn1";
-            this.btn1.Size = new System.Drawing.Size(23, 23);
-            this.btn1.TabIndex = 117;
-            this.btn1.TabStop = false;
-            this.btn1.Text = "1";
-            this.btn1.UseVisualStyleBackColor = true;
-            // 
-            // btn2
-            // 
-            this.btn2.Enabled = false;
-            this.btn2.ImageList = this.MyImages;
-            this.btn2.Location = new System.Drawing.Point(255, 76);
-            this.btn2.Name = "btn2";
-            this.btn2.Size = new System.Drawing.Size(23, 23);
-            this.btn2.TabIndex = 118;
-            this.btn2.TabStop = false;
-            this.btn2.Text = "2";
-            this.btn2.UseVisualStyleBackColor = true;
-            // 
-            // btn3
-            // 
-            this.btn3.Enabled = false;
-            this.btn3.ImageList = this.MyImages;
-            this.btn3.Location = new System.Drawing.Point(290, 76);
-            this.btn3.Name = "btn3";
-            this.btn3.Size = new System.Drawing.Size(23, 23);
-            this.btn3.TabIndex = 119;
-            this.btn3.TabStop = false;
-            this.btn3.Text = "3";
-            this.btn3.UseVisualStyleBackColor = true;
-            // 
-            // btn4
-            // 
-            this.btn4.Enabled = false;
-            this.btn4.ImageList = this.MyImages;
-            this.btn4.Location = new System.Drawing.Point(325, 76);
-            this.btn4.Name = "btn4";
-            this.btn4.Size = new System.Drawing.Size(23, 23);
-            this.btn4.TabIndex = 120;
-            this.btn4.TabStop = false;
-            this.btn4.Text = "4";
-            this.btn4.UseVisualStyleBackColor = true;
-            // 
-            // btn5
-            // 
-            this.btn5.Enabled = false;
-            this.btn5.ImageList = this.MyImages;
-            this.btn5.Location = new System.Drawing.Point(360, 76);
-            this.btn5.Name = "btn5";
-            this.btn5.Size = new System.Drawing.Size(23, 23);
-            this.btn5.TabIndex = 121;
-            this.btn5.TabStop = false;
-            this.btn5.Text = "5";
-            this.btn5.UseVisualStyleBackColor = true;
-            // 
-            // btn6
-            // 
-            this.btn6.Enabled = false;
-            this.btn6.ImageList = this.MyImages;
-            this.btn6.Location = new System.Drawing.Point(395, 76);
-            this.btn6.Name = "btn6";
-            this.btn6.Size = new System.Drawing.Size(23, 23);
-            this.btn6.TabIndex = 122;
-            this.btn6.TabStop = false;
-            this.btn6.Text = "6";
-            this.btn6.UseVisualStyleBackColor = true;
-            // 
-            // btn9
-            // 
-            this.btn9.Enabled = false;
-            this.btn9.ImageList = this.MyImages;
-            this.btn9.Location = new System.Drawing.Point(500, 76);
-            this.btn9.Name = "btn9";
-            this.btn9.Size = new System.Drawing.Size(23, 23);
-            this.btn9.TabIndex = 125;
-            this.btn9.TabStop = false;
-            this.btn9.Text = "9";
-            this.btn9.UseVisualStyleBackColor = true;
-            // 
-            // btn8
-            // 
-            this.btn8.Enabled = false;
-            this.btn8.ImageList = this.MyImages;
-            this.btn8.Location = new System.Drawing.Point(465, 76);
-            this.btn8.Name = "btn8";
-            this.btn8.Size = new System.Drawing.Size(23, 23);
-            this.btn8.TabIndex = 124;
-            this.btn8.TabStop = false;
-            this.btn8.Text = "8";
-            this.btn8.UseVisualStyleBackColor = true;
-            // 
-            // btn7
-            // 
-            this.btn7.Enabled = false;
-            this.btn7.ImageList = this.MyImages;
-            this.btn7.Location = new System.Drawing.Point(430, 76);
-            this.btn7.Name = "btn7";
-            this.btn7.Size = new System.Drawing.Size(23, 23);
-            this.btn7.TabIndex = 123;
-            this.btn7.TabStop = false;
-            this.btn7.Text = "7";
-            this.btn7.UseVisualStyleBackColor = true;
             // 
             // frmVouchers
             // 
