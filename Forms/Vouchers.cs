@@ -955,7 +955,7 @@ namespace Applied_Accounts.Forms
             if (cBoxAccounts.DataSource == null) { return; }                               // Return is Datasource are not available;
             if (cboxVouType.SelectedValue == null) { return; }
 
-            System.Windows.Forms.ComboBox _cBox = (System.Windows.Forms.ComboBox)cBoxAccounts;
+            ComboBox _cBox = (ComboBox)cBoxAccounts;
             DataView _DataView = (DataView)_cBox.DataSource;
             int _Vou_Type = (int)cboxVouType.SelectedValue;
 

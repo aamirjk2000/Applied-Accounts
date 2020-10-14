@@ -110,7 +110,7 @@
                   <Width>0.8in</Width>
                 </TablixColumn>
                 <TablixColumn>
-                  <Width>2.51666in</Width>
+                  <Width>3.02708in</Width>
                 </TablixColumn>
                 <TablixColumn>
                   <Width>0.8in</Width>
@@ -338,7 +338,10 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=Fields!COA_TITLE.Value</Value>
+                                  <Value>=string.Concat(
+Fields!COA_Code.Value.ToString(),
+" -&gt; ",
+Fields!COA_TITLE.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
                                     <FontWeight>Bold</FontWeight>
@@ -562,6 +565,7 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
+                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -669,7 +673,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -923,7 +926,7 @@
               <TablixMembers>
                 <TablixMember>
                   <TablixHeader>
-                    <Size>0.66667in</Size>
+                    <Size>0.15625in</Size>
                     <CellContents>
                       <Textbox Name="Textbox130">
                         <CanGrow>true</CanGrow>
@@ -973,7 +976,7 @@
                     </SortExpression>
                   </SortExpressions>
                   <TablixHeader>
-                    <Size>0.66667in</Size>
+                    <Size>0.15625in</Size>
                     <CellContents>
                       <Textbox Name="COA_Code">
                         <CanGrow>true</CanGrow>
@@ -994,6 +997,9 @@
                           </Paragraph>
                         </Paragraphs>
                         <rd:DefaultName>COA_Code</rd:DefaultName>
+                        <Visibility>
+                          <Hidden>true</Hidden>
+                        </Visibility>
                         <Style>
                           <Border>
                             <Color>LightGrey</Color>

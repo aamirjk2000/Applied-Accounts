@@ -66,8 +66,10 @@ namespace Applied_Accounts.Forms
             if (_OBalTable.Rows.Count > 0)
             {
                 DataRow _Row = _DataTable.NewRow();
+                DateTime _OpnDate = MyReportClass.Report_From.AddDays(-1);
+
                 _Row["Vou_No"] = 0;
-                _Row["Vou_Date"] = MyReportClass.Report_From.AddDays(-1).ToString(Program.DateTimeFormat);
+                _Row["Vou_Date"] = Conversion.ToDate_DB(_OpnDate);
                 _Row["Description"] = "Opening Balacne ";
                 _Row["COA"] = cBoxCOA.SelectedValue;   //_DataTable.Rows[0]["COA"];
                 _Row["COA_Title"] = cBoxCOA.Text;      //_DataTable.Rows[0]["COA_Title"];

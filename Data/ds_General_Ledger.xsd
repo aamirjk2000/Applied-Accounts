@@ -12,7 +12,7 @@
               <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="View_General_Ledger" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT "Vou_No", "Vou_Date", "COA", "COA_Title", "Description", "DR", "CR" FROM "View_General_Ledger"</CommandText>
+                    <CommandText>SELECT "Vou_No", "Vou_Date", "COA", "COA_Title", "Description", "DR", "CR", "RefNo", "Chq_No", "Remarks" FROM "View_General_Ledger"</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -26,6 +26,9 @@
               <Mapping SourceColumn="Description" DataSetColumn="Description" />
               <Mapping SourceColumn="DR" DataSetColumn="DR" />
               <Mapping SourceColumn="CR" DataSetColumn="CR" />
+              <Mapping SourceColumn="RefNo" DataSetColumn="RefNo" />
+              <Mapping SourceColumn="Chq_No" DataSetColumn="Chq_No" />
+              <Mapping SourceColumn="Remarks" DataSetColumn="Remarks" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -47,7 +50,13 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" type="xs:dateTime" />
+              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="COA" msprop:Generator_ColumnVarNameInTable="columnCOA" msprop:Generator_ColumnPropNameInRow="COA" msprop:Generator_ColumnPropNameInTable="COAColumn" msprop:Generator_UserColumnName="COA" type="xs:int" />
               <xs:element name="COA_Title" msprop:Generator_ColumnVarNameInTable="columnCOA_Title" msprop:Generator_ColumnPropNameInRow="COA_Title" msprop:Generator_ColumnPropNameInTable="COA_TitleColumn" msprop:Generator_UserColumnName="COA_Title">
                 <xs:simpleType>
@@ -74,6 +83,27 @@
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="RefNo" msprop:Generator_ColumnVarNameInTable="columnRefNo" msprop:Generator_ColumnPropNameInRow="RefNo" msprop:Generator_ColumnPropNameInTable="RefNoColumn" msprop:Generator_UserColumnName="RefNo" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Chq_No" msprop:Generator_ColumnVarNameInTable="columnChq_No" msprop:Generator_ColumnPropNameInRow="Chq_No" msprop:Generator_ColumnPropNameInTable="Chq_NoColumn" msprop:Generator_UserColumnName="Chq_No" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="20" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="500" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>

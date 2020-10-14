@@ -176,7 +176,7 @@ namespace Applied_Accounts
         {
             DataTable _DataTable = new DataTable();
             string _TableName = Conversion.GetTableName((int)TableID);
-            string _Text = "SELECT ID,Title,Code,SCode FROM " + _TableName + " WHERE Active ORDER BY Title ";
+            string _Text = "SELECT * FROM " + _TableName + " WHERE Active ORDER BY Title ";
             _DataTable =  GetDataTable(_Text, _TableName);
             return _DataTable;
         }

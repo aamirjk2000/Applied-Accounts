@@ -293,6 +293,12 @@ namespace Applied_Accounts.Data {
             
             private global::System.Data.DataColumn columnCR;
             
+            private global::System.Data.DataColumn columnRefNo;
+            
+            private global::System.Data.DataColumn columnChq_No;
+            
+            private global::System.Data.DataColumn columnRemarks;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public View_General_LedgerDataTable() {
@@ -384,6 +390,30 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RefNoColumn {
+                get {
+                    return this.columnRefNo;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn Chq_NoColumn {
+                get {
+                    return this.columnChq_No;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public global::System.Data.DataColumn RemarksColumn {
+                get {
+                    return this.columnRemarks;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -419,7 +449,7 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public View_General_LedgerRow AddView_General_LedgerRow(string Vou_No, System.DateTime Vou_Date, int COA, string COA_Title, string Description, string DR, string CR) {
+            public View_General_LedgerRow AddView_General_LedgerRow(string Vou_No, string Vou_Date, int COA, string COA_Title, string Description, string DR, string CR, string RefNo, string Chq_No, string Remarks) {
                 View_General_LedgerRow rowView_General_LedgerRow = ((View_General_LedgerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Vou_No,
@@ -428,7 +458,10 @@ namespace Applied_Accounts.Data {
                         COA_Title,
                         Description,
                         DR,
-                        CR};
+                        CR,
+                        RefNo,
+                        Chq_No,
+                        Remarks};
                 rowView_General_LedgerRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowView_General_LedgerRow);
                 return rowView_General_LedgerRow;
@@ -458,6 +491,9 @@ namespace Applied_Accounts.Data {
                 this.columnDescription = base.Columns["Description"];
                 this.columnDR = base.Columns["DR"];
                 this.columnCR = base.Columns["CR"];
+                this.columnRefNo = base.Columns["RefNo"];
+                this.columnChq_No = base.Columns["Chq_No"];
+                this.columnRemarks = base.Columns["Remarks"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -465,7 +501,7 @@ namespace Applied_Accounts.Data {
             private void InitClass() {
                 this.columnVou_No = new global::System.Data.DataColumn("Vou_No", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVou_No);
-                this.columnVou_Date = new global::System.Data.DataColumn("Vou_Date", typeof(global::System.DateTime), null, global::System.Data.MappingType.Element);
+                this.columnVou_Date = new global::System.Data.DataColumn("Vou_Date", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVou_Date);
                 this.columnCOA = new global::System.Data.DataColumn("COA", typeof(int), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCOA);
@@ -477,9 +513,15 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnDR);
                 this.columnCR = new global::System.Data.DataColumn("CR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCR);
+                this.columnRefNo = new global::System.Data.DataColumn("RefNo", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRefNo);
+                this.columnChq_No = new global::System.Data.DataColumn("Chq_No", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnChq_No);
+                this.columnRemarks = new global::System.Data.DataColumn("Remarks", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnRemarks);
                 this.columnVou_No.AllowDBNull = false;
                 this.columnVou_No.MaxLength = 12;
-                this.columnVou_Date.AllowDBNull = false;
+                this.columnVou_Date.MaxLength = 255;
                 this.columnCOA.AllowDBNull = false;
                 this.columnCOA_Title.AllowDBNull = false;
                 this.columnCOA_Title.MaxLength = 65536;
@@ -489,6 +531,9 @@ namespace Applied_Accounts.Data {
                 this.columnDR.MaxLength = 15;
                 this.columnCR.AllowDBNull = false;
                 this.columnCR.MaxLength = 15;
+                this.columnRefNo.MaxLength = 20;
+                this.columnChq_No.MaxLength = 20;
+                this.columnRemarks.MaxLength = 500;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -642,9 +687,14 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public System.DateTime Vou_Date {
+            public string Vou_Date {
                 get {
-                    return ((global::System.DateTime)(this[this.tableView_General_Ledger.Vou_DateColumn]));
+                    try {
+                        return ((string)(this[this.tableView_General_Ledger.Vou_DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Vou_Date\' in table \'View_General_Ledger\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableView_General_Ledger.Vou_DateColumn] = value;
@@ -704,6 +754,102 @@ namespace Applied_Accounts.Data {
                 set {
                     this[this.tableView_General_Ledger.CRColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string RefNo {
+                get {
+                    try {
+                        return ((string)(this[this.tableView_General_Ledger.RefNoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'RefNo\' in table \'View_General_Ledger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView_General_Ledger.RefNoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Chq_No {
+                get {
+                    try {
+                        return ((string)(this[this.tableView_General_Ledger.Chq_NoColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Chq_No\' in table \'View_General_Ledger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView_General_Ledger.Chq_NoColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public string Remarks {
+                get {
+                    try {
+                        return ((string)(this[this.tableView_General_Ledger.RemarksColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Remarks\' in table \'View_General_Ledger\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tableView_General_Ledger.RemarksColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsVou_DateNull() {
+                return this.IsNull(this.tableView_General_Ledger.Vou_DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetVou_DateNull() {
+                this[this.tableView_General_Ledger.Vou_DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRefNoNull() {
+                return this.IsNull(this.tableView_General_Ledger.RefNoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRefNoNull() {
+                this[this.tableView_General_Ledger.RefNoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsChq_NoNull() {
+                return this.IsNull(this.tableView_General_Ledger.Chq_NoColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetChq_NoNull() {
+                this[this.tableView_General_Ledger.Chq_NoColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsRemarksNull() {
+                return this.IsNull(this.tableView_General_Ledger.RemarksColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetRemarksNull() {
+                this[this.tableView_General_Ledger.RemarksColumn] = global::System.Convert.DBNull;
             }
         }
         
@@ -873,6 +1019,9 @@ namespace Applied_Accounts.Data.ds_General_LedgerTableAdapters {
             tableMapping.ColumnMappings.Add("Description", "Description");
             tableMapping.ColumnMappings.Add("DR", "DR");
             tableMapping.ColumnMappings.Add("CR", "CR");
+            tableMapping.ColumnMappings.Add("RefNo", "RefNo");
+            tableMapping.ColumnMappings.Add("Chq_No", "Chq_No");
+            tableMapping.ColumnMappings.Add("Remarks", "Remarks");
             this._adapter.TableMappings.Add(tableMapping);
         }
         
@@ -889,8 +1038,8 @@ namespace Applied_Accounts.Data.ds_General_LedgerTableAdapters {
             this._commandCollection = new global::System.Data.Odbc.OdbcCommand[1];
             this._commandCollection[0] = new global::System.Data.Odbc.OdbcCommand();
             this._commandCollection[0].Connection = this.Connection;
-            this._commandCollection[0].CommandText = "SELECT \"Vou_No\", \"Vou_Date\", \"COA\", \"COA_Title\", \"Description\", \"DR\", \"CR\" FROM \"" +
-                "View_General_Ledger\"";
+            this._commandCollection[0].CommandText = "SELECT \"Vou_No\", \"Vou_Date\", \"COA\", \"COA_Title\", \"Description\", \"DR\", \"CR\", \"RefN" +
+                "o\", \"Chq_No\", \"Remarks\" FROM \"View_General_Ledger\"";
             this._commandCollection[0].CommandType = global::System.Data.CommandType.Text;
         }
         
