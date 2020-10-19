@@ -24,6 +24,8 @@ namespace Applied_Accounts
             _Users = AppliedTable.GetDataTable(Tables.Users).AsDataView();
             Attempt = 0;
             Sucessful = false;
+            lblVersion.Text = Application.ProductVersion;
+
         }
 
         private void btnLogin_Click(object sender, System.EventArgs e)

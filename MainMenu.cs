@@ -3,6 +3,7 @@ using System;
 using System.Windows.Forms;
 using Applied_Accounts.Classes;
 using Applied_Accounts.Reports;
+using System.Windows;
 //using System.Windows;
 
 namespace Applied_Accounts
@@ -24,6 +25,7 @@ namespace Applied_Accounts
 
         private void frmMainMenu_Activated(object sender, EventArgs e)
         {
+            Text = lblCompanyName.Text.Trim();
             lbl_DevelopedBy.Text = Program.Developedby;
             lbl_Author.Text = Program.Author;
             lbl_GUID.Text = Program.MySession.ToString();
@@ -31,7 +33,9 @@ namespace Applied_Accounts
             lblDBPath.Text = Properties.Settings.Default.DBFile;
             lblAppPath.Text = Program.ExecutablePath;
             lblStartPath.Text = Program.StartupPath;
-            Text = lblCompanyName.Text.Trim();
+            lblversion.Text = System.Windows.Forms.Application.ProductVersion;
+            
+
         }
         private void mnuExit_Click(object sender, EventArgs e)
         {

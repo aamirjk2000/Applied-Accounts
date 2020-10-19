@@ -273,7 +273,7 @@ namespace Applied_Accounts.Classes
                 // Cheque Date should be null if cheque no is empty.
                 if (_TargetRow["Chq_No"].ToString().Trim() == string.Empty) { _TargetRow["Chq_Date"] = DBNull.Value; }
 
-                if (_RecordID < 0)                                                              // REcord Id if -1 (for new)
+                if (_RecordID < 0)                                                              // Record Id if -1 (for new)
                 {
                     // Add a new record in DataBase.
                     if ((_DR + _CR) == 0) { return; }                                           // Return if Transaction Amount is Zero
@@ -329,6 +329,9 @@ namespace Applied_Accounts.Classes
                 Voucher_Saved = true;
             }
         }
+
+
+        //------------------------------------------------------------ GET NEW VOUCHER NUMBER
         private void CreateNewVoucherNo()                           // Create New Voucher Number.
         {
 
@@ -338,7 +341,6 @@ namespace Applied_Accounts.Classes
             CurrentYear = Applied.GetInteger("CurrentYear");
 
             string _VouType = "";
-
 
             switch (Vou_Type)
             {
@@ -373,7 +375,7 @@ namespace Applied_Accounts.Classes
             }
 
             string _Year = CurrentYear.ToString().Substring(2, 2);           // Get Year
-            string _Month = Vou_Date.Month.ToString("D2");            // Get Month
+            string _Month = Vou_Date.Month.ToString("D2");                   // Get Month
 
             Vou_No = string.Concat(_VouType, _Year, _Month);                 // Set Gross Voucher No.
 
@@ -576,7 +578,8 @@ namespace Applied_Accounts.Classes
 
                 if (MinVou.Trim() == MaxVou.Trim())
                 {
-                    PreviewClass.Heading1 = Vou_No + " | " + Conversion.ToPrintDate(MinDate);
+                    //PreviewClass.Heading1 = Vou_No + " | " + Conversion.ToPrintDate(MinDate);
+                    PreviewClass.Heading1 = Vou_Type + " Voucher";
                     PreviewClass.Heading2 = Vou_Type + " Voucher";
                 }
                 else
@@ -585,8 +588,6 @@ namespace Applied_Accounts.Classes
                     PreviewClass.Heading2 = Vou_Type + " Voucher";
 
                 }
-
-
 
                 PreviewClass.Report_From = PreviewClass.Vou_Date;
                 

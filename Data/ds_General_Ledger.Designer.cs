@@ -449,7 +449,7 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public View_General_LedgerRow AddView_General_LedgerRow(string Vou_No, string Vou_Date, int COA, string COA_Title, string Description, string DR, string CR, string RefNo, string Chq_No, string Remarks) {
+            public View_General_LedgerRow AddView_General_LedgerRow(string Vou_No, string Vou_Date, int COA, string COA_Title, string Description, long DR, long CR, string RefNo, string Chq_No, string Remarks) {
                 View_General_LedgerRow rowView_General_LedgerRow = ((View_General_LedgerRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         Vou_No,
@@ -509,9 +509,9 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnCOA_Title);
                 this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDescription);
-                this.columnDR = new global::System.Data.DataColumn("DR", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnDR = new global::System.Data.DataColumn("DR", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnDR);
-                this.columnCR = new global::System.Data.DataColumn("CR", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnCR = new global::System.Data.DataColumn("CR", typeof(long), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCR);
                 this.columnRefNo = new global::System.Data.DataColumn("RefNo", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnRefNo);
@@ -521,16 +521,13 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnRemarks);
                 this.columnVou_No.AllowDBNull = false;
                 this.columnVou_No.MaxLength = 12;
-                this.columnVou_Date.MaxLength = 255;
                 this.columnCOA.AllowDBNull = false;
                 this.columnCOA_Title.AllowDBNull = false;
                 this.columnCOA_Title.MaxLength = 65536;
                 this.columnDescription.AllowDBNull = false;
                 this.columnDescription.MaxLength = 200;
                 this.columnDR.AllowDBNull = false;
-                this.columnDR.MaxLength = 15;
                 this.columnCR.AllowDBNull = false;
-                this.columnCR.MaxLength = 15;
                 this.columnRefNo.MaxLength = 20;
                 this.columnChq_No.MaxLength = 20;
                 this.columnRemarks.MaxLength = 500;
@@ -736,9 +733,9 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string DR {
+            public long DR {
                 get {
-                    return ((string)(this[this.tableView_General_Ledger.DRColumn]));
+                    return ((long)(this[this.tableView_General_Ledger.DRColumn]));
                 }
                 set {
                     this[this.tableView_General_Ledger.DRColumn] = value;
@@ -747,9 +744,9 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string CR {
+            public long CR {
                 get {
-                    return ((string)(this[this.tableView_General_Ledger.CRColumn]));
+                    return ((long)(this[this.tableView_General_Ledger.CRColumn]));
                 }
                 set {
                     this[this.tableView_General_Ledger.CRColumn] = value;

@@ -28,6 +28,9 @@ namespace Applied_Accounts.Forms
         private DataTable tbStocks;
         private DataTable tbEmployees;
 
+
+        private string MyCheque_No;                              // For copy and past
+        private string MyCheque_Date;                          // For copy and past
         private string MyDescription;                            // For copy and past
         private string MyRemarks;                                // for Copy and past.
 
@@ -559,6 +562,10 @@ namespace Applied_Accounts.Forms
                 }
             }
 
+
+            MyCheque_No = MyRow["Chq_No"].ToString();
+            MyCheque_Date = MyRow["Chq_Date"].ToString();
+
             MyDescription = MyRow["Description"].ToString();                            // Copy Description F9 for past 
             MyRemarks = MyRow["Remarks"].ToString();                                    // Copy Remarks     F9 for past
 
@@ -943,6 +950,18 @@ namespace Applied_Accounts.Forms
             }
         }
 
+        private void txtChqNo_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F9)
+            {
+                txtChqNo.Text = MyCheque_No;
+                dtChqDate.Value = Conversion.ToDate(MyCheque_Date);
+                txtDescription.Text = MyDescription;
+                txtRemarks.Text = MyRemarks;
+            }
+        }
+
+
         #endregion
 
         //================================== VALIDATION
@@ -1075,7 +1094,17 @@ namespace Applied_Accounts.Forms
         }
 
         #endregion
+
+
+
+
+
+
         //=================================== END VALIDATING
+
+
+       
+
 
         #region Search ID / Code / Tag
 
@@ -1157,8 +1186,9 @@ namespace Applied_Accounts.Forms
 
 
 
+
         #endregion
 
-
+      
     }       // END Main Class
 }           // END NameSpace

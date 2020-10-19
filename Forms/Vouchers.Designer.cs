@@ -658,6 +658,7 @@
             this.txtChqNo.Name = "txtChqNo";
             this.txtChqNo.Size = new System.Drawing.Size(150, 20);
             this.txtChqNo.TabIndex = 12;
+            this.txtChqNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChqNo_KeyDown);
             this.txtChqNo.Leave += new System.EventHandler(this.txtChqNo_Leave);
             // 
             // label15

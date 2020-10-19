@@ -23,7 +23,7 @@
         </Field>
         <Field Name="Vou_Date">
           <DataField>Vou_Date</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.DateTime</rd:TypeName>
         </Field>
         <Field Name="COA">
           <DataField>COA</DataField>
@@ -39,11 +39,11 @@
         </Field>
         <Field Name="DR">
           <DataField>DR</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
         <Field Name="CR">
           <DataField>CR</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
+          <rd:TypeName>System.Int64</rd:TypeName>
         </Field>
         <Field Name="RefNo">
           <DataField>RefNo</DataField>
@@ -419,10 +419,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>=CDATE(Fields!Vou_Date.Value)</Value>
+                                  <Value>=CDATE(Fields!Vou_Date.Value).ToString(Parameters!DateFormat.Value)</Value>
                                   <Style>
                                     <FontSize>8pt</FontSize>
-                                    <Format>=Parameters!DateFormat.Value</Format>
                                   </Style>
                                 </TextRun>
                               </TextRuns>
@@ -637,7 +636,6 @@ Fields!RefNo.Value)</Value>
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -1065,7 +1063,7 @@ Fields!RefNo.Value)</Value>
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Parameters!DevelopedBy.Value</Value>
+                      <Value>=Parameters!DevelopedBy.Value + " " + Parameters!DateFormat.Value</Value>
                       <Style>
                         <FontSize>7pt</FontSize>
                       </Style>

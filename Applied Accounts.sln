@@ -20,6 +20,12 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
+		BuildVersion_AssemblyInfoFilename = MainMenu.cs
 		SolutionGuid = {E514F5A1-9C7F-453B-90DC-D42A37129455}
+		BuildVersion_StartDate = 2020/10/1
+		BuildVersion_UpdateAssemblyVersion = True
+		BuildVersion_UpdateFileVersion = True
+		BuildVersion_UseGlobalSettings = True
+		BuildVersion_UseUniversalClock = True
 	EndGlobalSection
 EndGlobal

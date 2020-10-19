@@ -198,9 +198,7 @@ namespace Applied_Accounts
                 MessageBox.Show("Primary Key not found.", "ERROR");
                 return "Primary Key not found.";
             }
-
-
-            //MyDataView.RowFilter = string.Concat(MyPrimaryKeyName, "=", MyPrimaryKeyValue);  OLD
+            
             Filter = MyPrimaryKeyName + "=" + MyPrimaryKeyValue.ToString();      // NEW  Applied Filter in View
 
             switch (MyDataView.Count)
@@ -234,6 +232,8 @@ namespace Applied_Accounts
 
             if (!_IsError)
             {
+                string Error_Message = "";
+
                 if (_Command.Connection.State == ConnectionState.Closed)
                 {
                     _Command.Connection.Open();
@@ -248,18 +248,23 @@ namespace Applied_Accounts
                 catch (Exception ex)
                 {
                     IsSaved = false;
-                    _Message = ex.Message;
-                    MessageBox.Show(ex.Message);
+                    Error_Message = ex.Message;
+                }
+                finally
+                {
+                    if (IsSaved)
+                    {
+                        Update(MyTableID);               // update Data Table After Save row in DB
+                        MyMessage = _Message;
+                    }
+                    else
+                    {
+                        MessageBox.Show(Error_Message,"ERROR");
+                        MyMessage = Error_Message;           // Save the message to Class Message 
+                    }
+                    
                 }
             }
-
-            if (IsSaved)
-            {
-                Update(MyTableID);               // update Data Table After Save row in DB
-            }
-
-
-            MyMessage = _Message;                       // Save the message to Class Message 
             return MyMessage;
         }
         public string Delete(int ID)
@@ -407,12 +412,12 @@ namespace Applied_Accounts
 
         #endregion
 
-        public void Update(int _TableID)                                           // Update MyTable from DB
+        public void Update(int _TableID)                                            // Update MyTable from DB
         {
-            MyDataTable = AppliedTable.GetDataTable(_TableID);         // Refill Data Table from Data Server.
-            MyDataView = MyDataTable.AsDataView();
+            MyDataTable = AppliedTable.GetDataTable(_TableID);                      // Refill Data Table from Data Server.
+            MyDataView = MyDataTable.AsDataView();                                  // Rebuild Table View from updated Table
             Row_Index = MyDataTable.Rows.IndexOf(MyDataRow);                        // Set current Row
-            MyDataRow = GetRow(Row_Index);   //MyDataTable.Rows[Row_Index];                                // Get current Row
+            MyDataRow = GetRow(Row_Index);                                          // Get current Row
         }
         // Data Conversion
 

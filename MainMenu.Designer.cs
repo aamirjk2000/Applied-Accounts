@@ -83,6 +83,7 @@
             this.lblDBPath = new System.Windows.Forms.Label();
             this.lblAppPath = new System.Windows.Forms.Label();
             this.lblStartPath = new System.Windows.Forms.Label();
+            this.lblversion = new System.Windows.Forms.Label();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -419,7 +420,6 @@
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.testToolStripMenuItem.Text = "Test";
-            
             // 
             // mnuExit
             // 
@@ -430,7 +430,6 @@
             // 
             // toolStripTextBox1
             // 
-            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
             // 
@@ -504,11 +503,21 @@
             this.lblStartPath.TabIndex = 7;
             this.lblStartPath.Text = "Start";
             // 
+            // lblversion
+            // 
+            this.lblversion.AutoSize = true;
+            this.lblversion.Location = new System.Drawing.Point(685, 428);
+            this.lblversion.Name = "lblversion";
+            this.lblversion.Size = new System.Drawing.Size(62, 13);
+            this.lblversion.TabIndex = 8;
+            this.lblversion.Text = "Version test";
+            // 
             // frmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.lblversion);
             this.Controls.Add(this.lblStartPath);
             this.Controls.Add(this.lblAppPath);
             this.Controls.Add(this.lblDBPath);
@@ -587,6 +596,7 @@
         private System.Windows.Forms.Label lblStartPath;
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuPWChange;
+        private System.Windows.Forms.Label lblversion;
     }
 }
 

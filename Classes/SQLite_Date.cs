@@ -55,13 +55,27 @@ namespace Applied_Accounts.Classes
 
                 case 19:  // 2017-01-01 00:00:00
 
-                    _Year = Convert.ToInt32(MyDateTime.Substring(1, 4));
-                    _Month = Convert.ToInt32(MyDateTime.Substring(6, 2));
-                    _Day = Convert.ToInt32(MyDateTime.Substring(9, 2));
+                    try
+                    {
+                        thisDateTime = DateTime.Parse(MyDateTime);
 
-                    thisDateTime = new DateTime(_Year, _Month, _Day);
-                    break;
+                        if(thisDateTime==null)
+                        {
+                            _Year = Convert.ToInt32(MyDateTime.Substring(1, 4));
+                            _Month = Convert.ToInt32(MyDateTime.Substring(6, 2));
+                            _Day = Convert.ToInt32(MyDateTime.Substring(9, 2));
 
+                            thisDateTime = new DateTime(_Year, _Month, _Day);
+                        }
+                        break;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                        break;
+                        //throw;
+                    }
 
                 default:
 

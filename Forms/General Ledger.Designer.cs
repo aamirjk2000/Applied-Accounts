@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGeneral_Ledger));
             this.label3 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnPreview = new System.Windows.Forms.Button();
@@ -37,6 +39,7 @@
             this.cBoxCOA = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // label3
@@ -51,21 +54,24 @@
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Location = new System.Drawing.Point(530, 102);
+            this.btnExit.ImageIndex = 1;
+            this.btnExit.ImageList = this.imageList1;
+            this.btnExit.Location = new System.Drawing.Point(577, 141);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(59, 54);
             this.btnExit.TabIndex = 17;
-            this.btnExit.Text = "Exit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
             // 
             // btnPreview
             // 
-            this.btnPreview.Location = new System.Drawing.Point(530, 68);
+            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPreview.ImageIndex = 0;
+            this.btnPreview.ImageList = this.imageList1;
+            this.btnPreview.Location = new System.Drawing.Point(515, 141);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnPreview.Size = new System.Drawing.Size(56, 53);
             this.btnPreview.TabIndex = 16;
-            this.btnPreview.Text = "Preview";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click_1);
             // 
@@ -122,11 +128,18 @@
             this.label1.TabIndex = 10;
             this.label1.Text = "Ledger Account";
             // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "PREVIEW.BMP");
+            this.imageList1.Images.SetKeyName(1, "exit-48.png");
+            // 
             // frmGeneral_Ledger
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(665, 137);
+            this.ClientSize = new System.Drawing.Size(648, 207);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPreview);
@@ -155,5 +168,6 @@
         private System.Windows.Forms.ComboBox cBoxCOA;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ImageList imageList1;
     }
 }

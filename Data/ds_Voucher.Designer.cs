@@ -634,8 +634,7 @@ namespace Applied_Accounts.Data {
                 this.columnDR.MaxLength = 15;
                 this.columnCR.AllowDBNull = false;
                 this.columnCR.MaxLength = 15;
-                this.columnDescription.AllowDBNull = false;
-                this.columnDescription.MaxLength = 200;
+                this.columnDescription.MaxLength = 255;
                 this.columnVou_No.AllowDBNull = false;
                 this.columnVou_No.MaxLength = 12;
                 this.columnVou_Date.MaxLength = 255;
@@ -872,7 +871,12 @@ namespace Applied_Accounts.Data {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string Description {
                 get {
-                    return ((string)(this[this.tableView_Voucher.DescriptionColumn]));
+                    try {
+                        return ((string)(this[this.tableView_Voucher.DescriptionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'View_Voucher\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableView_Voucher.DescriptionColumn] = value;
@@ -979,6 +983,18 @@ namespace Applied_Accounts.Data {
                 set {
                     this[this.tableView_Voucher.LedgerColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDescriptionNull() {
+                return this.IsNull(this.tableView_Voucher.DescriptionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDescriptionNull() {
+                this[this.tableView_Voucher.DescriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
