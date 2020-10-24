@@ -50,6 +50,7 @@
             this.DataGrid_COA = new Applied_Accounts.AppliedDataGrid();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.chkActive = new System.Windows.Forms.CheckBox();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -70,6 +71,7 @@
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.chkActive);
             this.P1.Controls.Add(this.txtNote);
             this.P1.Controls.Add(this.TitleNotes);
             this.P1.Controls.Add(this.txtCode);
@@ -168,7 +170,7 @@
             this.MyNavigator.Location = new System.Drawing.Point(106, 363);
             this.MyNavigator.Name = "MyNavigator";
             this.MyNavigator.Size = new System.Drawing.Size(454, 25);
-            this.MyNavigator.TabIndex = 12;
+            this.MyNavigator.TabIndex = 13;
             this.MyNavigator.Get_Values += new System.EventHandler(this.MyNavigator_Get_Values);
             this.MyNavigator.Set_Values += new System.EventHandler(this.MyNavigator_Set_Values);
             this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
@@ -296,6 +298,16 @@
             this.lblMessage.TabIndex = 13;
             this.lblMessage.Text = "Message";
             // 
+            // chkActive
+            // 
+            this.chkActive.AutoSize = true;
+            this.chkActive.Location = new System.Drawing.Point(122, 230);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(56, 17);
+            this.chkActive.TabIndex = 12;
+            this.chkActive.Text = "Active";
+            this.chkActive.UseVisualStyleBackColor = true;
+            // 
             // frmCOA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -340,5 +352,6 @@
         private MyTextBox txtCode;
         private System.Windows.Forms.TextBox TitleNotes;
         private System.Windows.Forms.TextBox txtNote;
+        private System.Windows.Forms.CheckBox chkActive;
     }
 }

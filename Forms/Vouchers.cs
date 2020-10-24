@@ -1,6 +1,4 @@
 ﻿using Applied_Accounts.Classes;
-using Applied_Accounts.Preview;
-using Applied_Accounts.Preview.Temp;
 using System;
 using System.ComponentModel;
 using System.Data;
@@ -198,7 +196,7 @@ namespace Applied_Accounts.Forms
                     _TextBox.Enabled = true;
 
                     if (_RowValue == null | _RowValue == DBNull.Value) { break; }
-                    
+
                     if (_RowValue.ToString().Trim() == _TextBox.Text.Trim())
                     {
                         _TextBox.ForeColor = _Color1;
@@ -330,36 +328,56 @@ namespace Applied_Accounts.Forms
 
 
         }
-        private void cBoxAccounts_DropDownClosed(object sender, EventArgs e)
+
+        private void cBoxAccounts_TextChanged(object sender, EventArgs e)
         {
-            if (cBoxProjects.SelectedValue == null) { return; }
+            if (cBoxAccounts.Text.Length == 0) { return; }
+            if (cBoxAccounts.SelectedValue == null) { return; }
             txtAccount.Text = Applied.Code((long)cBoxAccounts.SelectedValue, tbAccounts.AsDataView());
         }
-        private void cBoxSuppliers_DropDownClosed(object sender, EventArgs e)
+
+        private void cBoxSuppliers_TextChanged(object sender, EventArgs e)
         {
-            if (cBoxProjects.SelectedValue == null) { return; }
+            if (cBoxSuppliers.Text.Length == 0) { return; }
+            if (cBoxSuppliers.SelectedValue == null) { return; }
             txtVandor.Text = Applied.Code((long)cBoxSuppliers.SelectedValue, tbSuppliers.AsDataView());
         }
-        private void cBoxProjects_DropDownClosed(object sender, EventArgs e)
+
+        private void cBoxProjects_TextChanged(object sender, EventArgs e)
         {
-            if(cBoxProjects.SelectedValue==null) { return; }
+            if (cBoxProjects.Text.Length == 0) { return; }
+            if (cBoxProjects.SelectedValue == null) { return; }
             txtProject.Text = Applied.Code((long)cBoxProjects.SelectedValue, tbProjects.AsDataView());
         }
-        private void cBoxUnits_DropDownClosed(object sender, EventArgs e)
+
+        private void cBoxUnits_TextChanged(object sender, EventArgs e)
         {
-            if (cBoxProjects.SelectedValue == null) { return; }
+            if (cBoxUnits.Text.Length == 0) { return; }
+            if (cBoxUnits.SelectedValue == null) { return; }
             txtUnit.Text = Applied.Code((long)cBoxUnits.SelectedValue, tbUnits.AsDataView());
+
         }
-        private void cBoxStocks_DropDownClosed(object sender, EventArgs e)
+
+        private void cBoxStocks_TextChanged(object sender, EventArgs e)
         {
-            if (cBoxProjects.SelectedValue == null) { return; }
+            if (cBoxStocks.Text.Length == 0) { return; }
+            if (cBoxStocks.SelectedValue == null) { return; }
             txtStock.Text = Applied.Code((long)cBoxStocks.SelectedValue, tbStocks.AsDataView());
+
         }
-        private void cBoxEmployees_DropDownClosed(object sender, EventArgs e)
+
+        private void cBoxEmployees_TextChanged(object sender, EventArgs e)
         {
-            if (cBoxProjects.SelectedValue == null) { return; }
+            if (cBoxEmployees.Text.Length == 0) { return; }
+            if (cBoxEmployees.SelectedValue == null) { return; }
             txtEmployee.Text = Applied.Code((long)cBoxEmployees.SelectedValue, tbEmployees.AsDataView());
+
         }
+
+        //==================================================================
+
+
+
 
         #endregion
 
@@ -504,13 +522,9 @@ namespace Applied_Accounts.Forms
         #region Save Button
         private void btnSaveVoucher_Click(object sender, EventArgs e)
         {
-            // Validte the Voucher before Save
+            // Validte the Voucher before Save                              // future plan
+            // Type Codes here.................
 
-            if (!Validate_Voucher())
-            {
-                MessageBox.Show("Voucher is not being validated to Save.");
-                return;
-            }
 
             //  SAVE    SAVE    SAVE    SAVE    SAVE    SAVE    SAVE    
 
@@ -537,11 +551,56 @@ namespace Applied_Accounts.Forms
             MyRow["Vou_Type"] = MyVoucherClass.Vou_Type;
             MyRow["SRNO"] = Conversion.ToInteger(txtSRNO.Text);
             MyRow["COA"] = Conversion.ToInteger(cBoxAccounts.SelectedValue);
-            MyRow["Supplier"] = Conversion.ToInteger(cBoxSuppliers.SelectedValue);
-            MyRow["Project"] = Conversion.ToInteger(cBoxProjects.SelectedValue);
-            MyRow["Stock"] = Conversion.ToInteger(cBoxStocks.SelectedValue);
-            MyRow["Unit"] = Conversion.ToInteger(cBoxUnits.SelectedValue);
-            MyRow["Employee"] = Conversion.ToInteger(cBoxEmployees.SelectedValue);
+
+            if (cBoxSuppliers.Text.Length > 0)
+            {
+                MyRow["Supplier"] = Conversion.ToInteger(cBoxSuppliers.SelectedValue);
+            }
+            else
+            {
+                MyRow["Supplier"] = DBNull.Value;
+            }
+
+            if (cBoxProjects.Text.Length > 0)
+            {
+                MyRow["Project"] = Conversion.ToInteger(cBoxProjects.SelectedValue);
+            }
+            else
+            {
+                MyRow["Project"] = DBNull.Value;
+            }
+
+
+            if (cBoxStocks.Text.Length > 0)
+            {
+                MyRow["Stock"] = Conversion.ToInteger(cBoxStocks.SelectedValue);
+            }
+            else
+            {
+                MyRow["Stock"] = DBNull.Value;
+            }
+
+            if (cBoxUnits.Text.Length > 0)
+            {
+
+                MyRow["Unit"] = Conversion.ToInteger(cBoxUnits.SelectedValue);
+            }
+            else
+            {
+                MyRow["Unit"] = DBNull.Value;
+            }
+
+
+            if (cBoxEmployees.Text.Length > 0)
+            {
+                MyRow["Employee"] = Conversion.ToInteger(cBoxEmployees.SelectedValue);
+            }
+            else
+            {
+                MyRow["Employee"] = DBNull.Value;
+            }
+
+
             MyRow["RefNo"] = txtRefNo.Text;
             MyRow["Chq_No"] = txtChqNo.Text;
             MyRow["Chq_Date"] = dtChqDate.Value.ToString();
@@ -550,6 +609,15 @@ namespace Applied_Accounts.Forms
             MyRow["Description"] = txtDescription.Text.Trim();
             MyRow["Remarks"] = txtRemarks.Text.Trim();
 
+
+
+
+            if (!Validate_Voucher())
+            {
+                lblMessage.Text = "Transaction No. " + MyRow["SRNO"].ToString() + " not saved.";
+                return;
+            }
+
             foreach (DataRow _Row in MyDataTable.Rows)
             {
                 int RowIndex = 1;
@@ -557,14 +625,14 @@ namespace Applied_Accounts.Forms
                 if (Conversion.ToInteger(_Row["ID"]) == Conversion.ToInteger(MyRow["ID"]))
                 {
                     RowIndex = MyDataTable.Rows.IndexOf(_Row);                          // Get Row Index 
-                    MyDataTable.Rows[RowIndex].ItemArray = MyRow.ItemArray;             // Copy Text boxs into Row Columns
+                    MyDataTable.Rows[RowIndex].ItemArray = MyRow.ItemArray;             // Copy Text boxs into Data Row Columns (Save)
                     break;
                 }
             }
 
 
-            MyCheque_No = MyRow["Chq_No"].ToString();
-            MyCheque_Date = MyRow["Chq_Date"].ToString();
+            MyCheque_No = MyRow["Chq_No"].ToString();                                   // Copy Description F9 for past 
+            MyCheque_Date = MyRow["Chq_Date"].ToString();                               // Copy Description F9 for past 
 
             MyDescription = MyRow["Description"].ToString();                            // Copy Description F9 for past 
             MyRemarks = MyRow["Remarks"].ToString();                                    // Copy Remarks     F9 for past
@@ -585,10 +653,100 @@ namespace Applied_Accounts.Forms
         }
         private bool Validate_Voucher()
         {
-            // write codes for validation of the voucher and return true if validated perfect.
-            //string _NewVouNo = MyVoucherClass
-            // Validate Voucher before save into Database.
-            return true;
+            bool _Result = false;
+            bool _Seek_COA = false;
+            bool _Seek_Project = false;
+            bool _Seek_Supplier = false;
+            bool _Seek_Unit = false;
+            bool _Seek_Stock = false;
+            bool _Seek_Employee = false;
+
+            if (Applied.Code((long)MyRow["COA"], tbAccounts.AsDataView()) == "")
+            { _Seek_COA = false; }
+            else { _Seek_COA = true; }
+
+
+            if (MyRow["Project"] != DBNull.Value)
+            {
+                if ((long)MyRow["Project"] > 0)
+                {
+                    if (Applied.Code((long)MyRow["Project"], tbProjects.AsDataView()) == "")
+                    { _Seek_Project = false; }
+                    else { _Seek_Project = true; }
+                }
+                else { _Seek_Project = true; }
+            }
+            else { _Seek_Project = true; }
+
+            if (MyRow["Supplier"] != DBNull.Value)
+            {
+                if ((long)MyRow["Supplier"] > 0)
+                {
+                    if (Applied.Code((long)MyRow["Supplier"], tbSuppliers.AsDataView()) == "")
+                    { _Seek_Supplier = false; }
+                    else { _Seek_Supplier = true; }
+                }
+                else { _Seek_Supplier = true; }
+            }
+            else { _Seek_Supplier = true; }
+
+            if (MyRow["Unit"] != DBNull.Value)
+            {
+                if ((long)MyRow["Unit"] > 0)
+                {
+                    if (Applied.Code((long)MyRow["Unit"], tbUnits.AsDataView()) == "")
+                    { _Seek_Unit = false; }
+                    else { _Seek_Unit = true; }
+                }
+                else { _Seek_Unit = true; }
+            }
+            else { _Seek_Unit = true; }
+
+            if (MyRow["Stock"] != DBNull.Value)
+            {
+                if ((long)MyRow["Stock"] > 0)
+                {
+                    if (Applied.Code((long)MyRow["Stock"], tbStocks.AsDataView()) == "")
+                    { _Seek_Stock = false; }
+                    else { _Seek_Stock = true; }
+                }
+                else { _Seek_Stock = true; }
+            }
+            else { _Seek_Stock = true; }
+
+            if (MyRow["Employee"] != DBNull.Value)
+            {
+                if ((long)MyRow["Employee"] > 0)
+                {
+                    if (Applied.Code((long)MyRow["Employee"], tbEmployees.AsDataView()) == "")
+                    { _Seek_Employee = false; }
+                    else { _Seek_Employee = true; }
+                }
+                else { _Seek_Employee = true; }
+            }
+            else { _Seek_Employee = true; }
+
+
+            if (_Seek_COA && _Seek_Project && _Seek_Supplier && _Seek_Unit && _Seek_Stock && _Seek_Employee)
+            { _Result = true; }
+
+            if (!_Result)
+            {
+                System.Text.StringBuilder _Message = new System.Text.StringBuilder();
+                if (!_Seek_COA) { _Message.Append("Accounts is not valid. "); txtAccount.Focus(); }
+                if (!_Seek_Project) { _Message.Append("Project is not valid. "); txtProject.Focus(); }
+                if (!_Seek_Supplier) { _Message.Append("Supplier is not valid. "); txtVandor.Focus(); }
+                if (!_Seek_Unit) { _Message.Append("Unit is not valid. "); txtUnit.Focus(); }
+                if (!_Seek_Stock) { _Message.Append("Stock is not valid. "); txtStock.Focus(); }
+                if (!_Seek_Employee) { _Message.Append("Employee is not valid. "); txtEmployee.Focus(); }
+
+                MessageBox.Show(_Message.ToString(), MyVoucherClass.Vou_No.ToString() + " Validation");
+
+            }
+
+
+
+            return _Result;
         }
 
         #endregion
@@ -660,18 +818,31 @@ namespace Applied_Accounts.Forms
             btnSaveVoucher.Enabled = Total_Equal();
 
             if (txtChqNo.Text.Length == 0) { dtChqDate.Enabled = false; } else { dtChqDate.Enabled = true; }
+            
             if (cBoxAccounts.SelectedValue != null)
             { txtAccount.Text = Applied.Code((long)cBoxAccounts.SelectedValue, tbAccounts.AsDataView()); }
+            else { txtAccount.Text = ""; }
+            
             if (cBoxProjects.SelectedValue != null)
             { txtProject.Text = Applied.Code((long)cBoxProjects.SelectedValue, tbProjects.AsDataView()); }
+            else { txtProject.Text = ""; }
+
             if (cBoxSuppliers.SelectedValue != null)
             { txtVandor.Text = Applied.Code((long)cBoxSuppliers.SelectedValue, tbSuppliers.AsDataView()); }
+            else { txtVandor.Text = ""; }
+
             if (cBoxStocks.SelectedValue != null)
             { txtStock.Text = Applied.Code((long)cBoxStocks.SelectedValue, tbStocks.AsDataView()); }
+            else { txtStock.Text = ""; }
+
             if (cBoxUnits.SelectedValue != null)
             { txtUnit.Text = Applied.Code((long)cBoxUnits.SelectedValue, tbUnits.AsDataView()); }
+            else { txtUnit.Text = ""; }
+
             if (cBoxEmployees.SelectedValue != null)
             { txtEmployee.Text = Applied.Code((long)cBoxEmployees.SelectedValue, tbEmployees.AsDataView()); }
+            else { txtEmployee.Text = ""; }
+
 
         }
         private bool Total_Equal()
@@ -751,6 +922,7 @@ namespace Applied_Accounts.Forms
 
         private void cBoxAccounts_Leave(object sender, EventArgs e)
         {
+            ((DataView)cBoxAccounts.DataSource).RowFilter = string.Empty;
             Repaint(MyRow["COA"], cBoxAccounts);
         }
 
@@ -862,7 +1034,7 @@ namespace Applied_Accounts.Forms
 
         private void GetVoucher(string _VouNo)
         {
-            
+
             string Voucher_No = _VouNo.ToUpper().Trim();
 
             if (Voucher_No.Length == 0) { return; }                                             // Close this form in Leave event
@@ -1016,11 +1188,21 @@ namespace Applied_Accounts.Forms
 
         private void txtVandor_Validating(object sender, CancelEventArgs e)
         {
+            if (Conversion.ToInteger(txtVandor.Text) == 0)
+            {
+                cBoxSuppliers.SelectedValue = 0;
+                cBoxSuppliers.Text = "";
+                e.Cancel = false;
+                return;
+            }
+
             e.Cancel = MyValidating(sender, tbSuppliers);
         }
 
         private void txtVandor_Validated(object sender, EventArgs e)
         {
+            
+
             if (((TextBox)sender).Text.Length > 0)
             {
                 cBoxSuppliers.SelectedValue = Search_ComboID;
@@ -1033,6 +1215,13 @@ namespace Applied_Accounts.Forms
 
         private void txtProject_Validating(object sender, CancelEventArgs e)
         {
+            if (Conversion.ToInteger(txtProject.Text) == 0)
+            {
+                cBoxProjects.SelectedValue = 0;
+                cBoxProjects.Text = "";
+                e.Cancel = false;
+                return;
+            }
             e.Cancel = MyValidating(sender, tbProjects);
         }
 
@@ -1050,6 +1239,14 @@ namespace Applied_Accounts.Forms
 
         private void txtUnit_Validating(object sender, CancelEventArgs e)
         {
+            if (Conversion.ToInteger(txtUnit.Text) == 0)
+            {
+                cBoxUnits.SelectedValue = 0;
+                cBoxUnits.Text = "";
+                e.Cancel = false;
+                return;
+            }
+
             e.Cancel = MyValidating(sender, tbUnits);
         }
 
@@ -1067,6 +1264,15 @@ namespace Applied_Accounts.Forms
 
         private void txtStock_Validating(object sender, CancelEventArgs e)
         {
+            if (Conversion.ToInteger(txtStock.Text) == 0)
+            {
+                cBoxStocks.SelectedValue = 0;
+                cBoxStocks.Text = "";
+                e.Cancel = false;
+                return;
+            }
+
+
             e.Cancel = MyValidating(sender, tbStocks);
         }
 
@@ -1080,7 +1286,26 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
+        #region Employee
+        private void txtEmployee_Validating(object sender, CancelEventArgs e)
+        {
+            if (Conversion.ToInteger(txtEmployee.Text) == 0)
+            {
+                cBoxEmployees.SelectedValue = 0;
+                cBoxEmployees.Text = "";
+                e.Cancel = false;
+                return;
+            }
+        }
+        private void txtEmployee_Validated(object sender, EventArgs e)
+        {
+            if (((TextBox)sender).Text.Length > 0)
+            {
+                cBoxEmployees.SelectedValue = Search_ComboID;
+            }
+        }
 
+        #endregion
 
         private bool MyValidating(object sender, DataTable _DataTable)
         {
@@ -1095,15 +1320,7 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-
-
-
-
-
         //=================================== END VALIDATING
-
-
-       
 
 
         #region Search ID / Code / Tag
@@ -1187,8 +1404,13 @@ namespace Applied_Accounts.Forms
 
 
 
+
+
+
+
+
         #endregion
 
-      
+        
     }       // END Main Class
 }           // END NameSpace

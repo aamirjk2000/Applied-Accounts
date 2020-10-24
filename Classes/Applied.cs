@@ -342,16 +342,16 @@ namespace Applied_Accounts.Classes
             return e.Handled;
         }
 
-        public static int ShowBrowseWin(DataView _DataView, object _CurrentValue )
+        public static long ShowBrowseWin(DataView _DataView, object _CurrentValue )
         {
             Browse BrowseWindow = new Browse(_DataView);
             BrowseWindow.ShowDialog();
-            int _Result = Conversion.ToInteger(_CurrentValue);
+            long _Result = Conversion.ToInteger(_CurrentValue);
             if (BrowseWindow.IsSelect) { _Result = BrowseWindow.MyID;}
             return _Result;
         }
 
-        public static int ShowBrowseWin(DataTable _DataTable, object _CurrentValue)
+        public static long ShowBrowseWin(DataTable _DataTable, object _CurrentValue)
         {
             return ShowBrowseWin(new DataView(_DataTable), _CurrentValue);
         }
@@ -377,7 +377,6 @@ namespace Applied_Accounts.Classes
             _DataView.RowFilter = "ID=" + _ID.ToString();
             if (_DataView.Count == 1) { return _DataView[0].Row["Code"].ToString().Trim(); }
             return "";
-
         }
 
         public static string Tag(long _ID, DataView _DataView)

@@ -85,7 +85,8 @@
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(687, 358);
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Location = new System.Drawing.Point(676, 358);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 12;
@@ -140,7 +141,7 @@
             // chkActive
             // 
             this.chkActive.AutoSize = true;
-            this.chkActive.Location = new System.Drawing.Point(19, 335);
+            this.chkActive.Location = new System.Drawing.Point(22, 158);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(56, 17);
             this.chkActive.TabIndex = 5;
@@ -185,6 +186,7 @@
             // 
             // MyNavigator
             // 
+            this.MyNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MyNavigator.Location = new System.Drawing.Point(7, 358);
             this.MyNavigator.Name = "MyNavigator";
             this.MyNavigator.Size = new System.Drawing.Size(534, 36);

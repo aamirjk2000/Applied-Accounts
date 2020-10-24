@@ -602,8 +602,5 @@ namespace Applied_Accounts.Classes
         }
 
 
-      
-
-
     }       // END Main Class
 }           // END NameSpace

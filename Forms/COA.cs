@@ -59,16 +59,16 @@ namespace Applied_Accounts
             DataGrid_COA.ColumnsWidth = ColumnWidth;
             DataGrid_COA.ColumnsVisiable = ColumnsVisiable;
             DataGrid_COA.ColumnsFormat = ColumnsFormat;
-            DataGrid_COA._DataGrid.DataSource = View_COA;
+            DataGrid_COA.BrowseGrid.DataSource = View_COA;
             DataGrid_COA.Set_Columns();
 
-            DataGrid_COA._DataGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            DataGrid_COA._DataGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            DataGrid_COA._DataGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            DataGrid_COA._DataGrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            DataGrid_COA._DataGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            DataGrid_COA._DataGrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DataGrid_COA._DataGrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DataGrid_COA.BrowseGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DataGrid_COA.BrowseGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DataGrid_COA.BrowseGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            DataGrid_COA.BrowseGrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataGrid_COA.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            DataGrid_COA.BrowseGrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DataGrid_COA.BrowseGrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
         }
 
@@ -107,10 +107,9 @@ namespace Applied_Accounts
 
             TitleNotes.Text = AppliedTable.GetTitle(txtNote.Text, (int)Tables.Notes);
 
-            //decimal IsBank = (decimal)thisDataRow["IsBankBook"];
-            //decimal IsCash = (decimal)thisDataRow["IsCashBook"];
             chkBank.Checked = Conversion.ToBoolean(thisDataRow["IsBankBook"].ToString());
             chkCash.Checked = Conversion.ToBoolean(thisDataRow["IsCashBook"].ToString());
+            chkActive.Checked = Conversion.ToBoolean(thisDataRow["Active"].ToString());
 
         }
         private void MyNavigator_Set_Values(object sender, EventArgs e)
@@ -123,6 +122,7 @@ namespace Applied_Accounts
             thisDataRow["Notes"] = txtNote.Text;
             thisDataRow["IsBankBook"] = Conversion.ToBoolean(chkBank.Checked);
             thisDataRow["IsCashBook"] = Conversion.ToBoolean(chkCash.Checked);
+            thisDataRow["Active"] = Conversion.ToBoolean(chkActive.Checked);
             thisDataRow["OBal"] = Conversion.ToInteger(txtOBal.Text);
 
         }

@@ -276,6 +276,24 @@ namespace Applied_Accounts
             }
             return _DataRow;
         }
+
+        public static bool SearchID(long _Value, DataRow _DataRow)
+        {
+            bool _Result = false;
+            DataView _DataView = _DataRow.Table.AsDataView();   //new DataView(_DataTable);
+            _DataView.RowFilter = string.Concat("ID=", _Value.ToString() );
+            if (_DataView.Count == 1)
+            {
+                _Result = true;
+            }
+            else
+            {
+                _Result = false;
+
+            }
+            return _Result;
+        }
+
         public static DataTable GetTable_TB_period(DateTime _From, DateTime _To)
         {
             DataTable _DataTable = GetDataTable(Tables.View_TB_Period);

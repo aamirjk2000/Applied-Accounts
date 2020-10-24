@@ -112,9 +112,8 @@ namespace Applied_Accounts.Classes
         }
         public static int ToInteger(object _Value)
         {
+            if (_Value == DBNull.Value) { return 0; }
             if (_Value == null) { return 0; }
-            //if ((string)_Value == string.Empty) { return 0; }
-
             return int.Parse(_Value.ToString());
         }
 

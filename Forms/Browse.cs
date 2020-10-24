@@ -12,7 +12,7 @@ namespace Applied_Accounts
         public DataRow MyDataRow { get; set; }
         public string MyTitle { get; set; } 
         public bool IsSelect { get; set; }
-        public int MyID { get; set; }
+        public long MyID { get; set; }
 
         public Browse(DataView _DataView)
         {
@@ -28,10 +28,6 @@ namespace Applied_Accounts
             MyDataView = _DataView;
             MyDataView.RowFilter = "";
             MyRefresh();
-
-            
-
-            //DataGrid_Browse._DataGrid.SelectedRows[0];
         }
 
         public void MyRefresh()
@@ -57,26 +53,27 @@ namespace Applied_Accounts
                 DataGrid_Browse.ColumnsVisiable = ColumnsVisiable;
                 DataGrid_Browse.ColumnsFormat = ColumnsFormat;
                 DataGrid_Browse.MyDataView = MyDataView;
-                DataGrid_Browse._DataGrid.DataSource = DataGrid_Browse.MyDataView;
+                DataGrid_Browse.BrowseGrid.DataSource = DataGrid_Browse.MyDataView;
                 DataGrid_Browse.Set_Columns();
 
-                DataGrid_Browse._DataGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                DataGrid_Browse._DataGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                DataGrid_Browse._DataGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                DataGrid_Browse.BrowseGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                DataGrid_Browse.BrowseGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                DataGrid_Browse.BrowseGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             }
         }
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
             IsSelect = true;
-            if(MyDataView.Count==0)
+            if (MyDataView.Count == 0)
             {
-                MyDataRow = MyDataView.Table.NewRow();
+                MyDataRow = MyDataView.Table.NewRow();                  // Select a row from browse grid record.
                 MyID = -1;
             }
             else
             {
-                Select_Row();
+                MyDataRow = DataGrid_Browse.MyDataRow;                    // Select a row from browse grid record.
+                MyID = (long)MyDataRow["ID"];
             }
             Close();
         }
@@ -88,11 +85,6 @@ namespace Applied_Accounts
             Close();
         }
 
-        private void Select_Row()
-        {
-            MyDataRow = DataGrid_Browse.MyDataRow;
-            if (MyDataRow != null)
-            { MyID = Conversion.ToInteger(MyDataRow["ID"].ToString()); }
-        }
+        
     }           // Main
 }               // NameSpace

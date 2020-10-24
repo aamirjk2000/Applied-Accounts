@@ -115,6 +115,7 @@ namespace Applied_Accounts
         #region Row
         public DataRow GetNewRow()                              // Get New Row
         {
+            if(MyDataTable==null) { MessageBox.Show("Error thisTable.GetBewRow()");  return null; }
             DataRow _Row = MyDataTable.NewRow();
             _Row["ID"] = -1;
             return _Row;
@@ -180,55 +181,50 @@ namespace Applied_Accounts
         }
         public string Save(DataRow _DataRow)                    // Save the record with specific Data Row.
         {
-            if (ShowSaveMessage)                     // Show Message Box ans Ask to save the record?
-            {
-                DialogResult Ask = MessageBox.Show("Are you Sure to Save", "SAVE RECORD", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (Ask == DialogResult.No) { return "Cancelled."; }
-            }
+            string _Message;                                                                // Return value of this procedure.
+            bool _IsError = false; ;                                                        // If error found = true otherwsie false.
+            string[] _MessageBoxText = { "", "" };                                          // Prompt Message Text for save record.
 
-            string _Message;                                                // Return value of this procedure.
-            bool _IsError;                                                  // If error found = true otherwsie false.
-            IsSaved = false;                                                // If Data Row saved then true else false. Default is false.
-            MyPrimaryKeyValue = (long)_DataRow[MyPrimaryKeyName];           // Set Primary Key Value
+            IsSaved = false;                                                                // If Data Row saved then true else false
 
-            _IsError = false;
-
-            if (MyPrimaryKeyValue <= 0)                                        // return if Table PK not exist.
+            #region Primary Key
+            MyPrimaryKeyValue = (long)_DataRow[MyPrimaryKeyName];                           // Set Primary Key Value
+            if (MyPrimaryKeyValue <= 0)                                     // return if Table PK not exist.
             {
                 MessageBox.Show("Primary Key not found.", "ERROR");
                 return "Primary Key not found.";
             }
-            
-            Filter = MyPrimaryKeyName + "=" + MyPrimaryKeyValue.ToString();      // NEW  Applied Filter in View
+            #endregion
 
-            switch (MyDataView.Count)
+
+            bool IsExist = AppliedTable.SearchID(MyPrimaryKeyValue, _DataRow);              // Check the record is exist in Table?
+            if (!IsExist)
             {
-                case 0:
-                    {
-                        _Command = Connection_Class.SQLite.SQLiteInsert(_DataRow, Connection.AppliedConnection());
-                        _Message = " Recorda(s) Inserted.";
-                        _IsError = false;
-                        IsSaved = true;
-                        break;
-                    }
-
-                case 1:
-                    {
-                        _Command = Connection_Class.SQLite.SQLiteUpdate(_DataRow, MyPrimaryKeyName, Connection.AppliedConnection());
-                        _Message = " Recorda(s) Updated.";
-                        _IsError = false;
-                        IsSaved = true;
-                        break;
-                    }
-
-                default:
-                    {
-                        _IsError = true;
-                        IsSaved = false;
-                        _Message = string.Concat("ERROR : ", MyDataView.Count.ToString().Trim(), " record found to save.");
-                        break;
-                    }
+                _Command = Connection_Class.SQLite.SQLiteInsert(_DataRow, Connection.AppliedConnection());
+                _Message = " Recorda(s) Inserted.";
+                _MessageBoxText[0] = "Are you sure to Insert ?";
+                _MessageBoxText[1] = "SAVE RECORD";
             }
+            else
+            {
+                _Command = Connection_Class.SQLite.SQLiteUpdate(_DataRow, MyPrimaryKeyName, Connection.AppliedConnection());
+                _Message = " Recorda(s) Updated.";
+                _MessageBoxText[0] = "Are you sure to Edit ?";
+                _MessageBoxText[1] = "EDIT RECORD";
+            }
+
+            #region Show Message
+
+            if (ShowSaveMessage)                     // Show Message Box ans Ask to save the record?
+            {
+                DialogResult Ask = MessageBox.Show(_MessageBoxText[0], _MessageBoxText[1], MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (Ask == DialogResult.No) 
+                { return "Cancelled."; }
+            }
+
+            #endregion
+
+
 
             if (!_IsError)
             {
@@ -243,6 +239,7 @@ namespace Applied_Accounts
                 {
                     _Message = _Command.ExecuteNonQuery().ToString() + _Message;
                     _Command.Connection.Close();
+                    MyDataRow = _DataRow;
                     IsSaved = true;
                 }
                 catch (Exception ex)
@@ -254,7 +251,7 @@ namespace Applied_Accounts
                 {
                     if (IsSaved)
                     {
-                        Update(MyTableID);               // update Data Table After Save row in DB
+                        Update(MyTableID);               // Update Data Table After Save row in DB
                         MyMessage = _Message;
                     }
                     else

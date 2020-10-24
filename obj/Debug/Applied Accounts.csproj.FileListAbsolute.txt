@@ -44,6 +44,7 @@ G:\Applied Accounts\Applied Accounts.exe.manifest
 G:\Applied Accounts\Applied Accounts.application
 G:\Applied Accounts\Applied Accounts.exe
 G:\Applied Accounts\Applied Accounts.pdb
+D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csprojAssemblyReference.cache
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.AppliedDataGrid.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Components.FKeyID.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.MyTextBox.resources
@@ -84,4 +85,4 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.application
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
-D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csprojAssemblyReference.cache
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmUnits.resources

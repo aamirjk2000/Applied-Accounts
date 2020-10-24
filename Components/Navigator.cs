@@ -13,17 +13,22 @@ namespace Applied_Accounts
         //public event EventHandler Before_Save;                // Invoke before save the record.
         public event EventHandler After_Save;                   // Invoke when Record has been saved after Validation is true.
         public event EventHandler After_Delete;                 // Invoke after delete the record.
-        
+        public BindingManagerBase TableBinding;                 // Binding Manager for navigation of records.
 
         public long MyID;
         public string MyMessage;
         public bool IsValided;
         public int MyTableID;
+        int NewRecordPosition = 0;
 
 
         //======================================== Do not Delete these two lines.
         private ThisTable tableClass;
         internal ThisTable TableClass { get => tableClass; set => tableClass = value; }
+
+        public DataTable MyDataTable { get => tableClass.MyDataTable; }
+        public DataView MyDataView { get => tableClass.MyDataView; }
+
         //======================================== Do not Delete these two lines.
 
 
@@ -43,10 +48,8 @@ namespace Applied_Accounts
 
         public void InitializeClass(DataTable _DataTable)
         {
-            //if (TableClass==null) { TableClass = new ThisTable(_DataTable); } 
-            //else { TableClass.MyDataTable = _DataTable; }
-
             TableClass = new ThisTable(_DataTable);
+            TableBinding = BindingContext[TableClass.MyDataView];
 
             if (TableClass.Count > 0)                   // If Data Table has some records.
             {
@@ -72,7 +75,7 @@ namespace Applied_Accounts
                 TableClass.MyPrimaryKeyValue = -1;
                 Buttons_Display(1);             // Enable or Disable buttons for table is empty
             }
-            
+
         }
 
         #endregion
@@ -81,88 +84,88 @@ namespace Applied_Accounts
         //================================================================ buttons codes
         private void btnTop_Click(object sender, EventArgs e)
         {
-            if (TableClass.MyDataTable.Rows.Count>0)
-            { 
+            if (TableClass.MyDataTable.Rows.Count > 0)
+            {
                 TableClass.MyDataRow = TableClass.MyDataTable.Rows[0];
                 TableClass.OriginalRow = TableClass.MyDataRow;
             }
             else
-            { 
+            {
                 TableClass.MyDataRow = TableClass.GetNewRow();
                 TableClass.OriginalRow = TableClass.MyDataRow;
             }
-            Get_Values.Invoke(sender,e);
+            Get_Values.Invoke(sender, e);
+
+            TableBinding.Position = 0;
+
+
         }
         private void btnPrior_Click(object sender, EventArgs e)
         {
-            //if (TableClass.MyDataTable.Rows.Count > 0)
-            //{
-            //    TableClass.Row_Index -= 1;
-            //    if (TableClass.Row_Index < 0) { TableClass.Row_Index = 0; }
-            //    TableClass.MyDataRow = TableClass.MyDataTable.Rows[TableClass.Row_Index];
-            //    TableClass.OriginalRow = TableClass.MyDataRow;
-            //}
-            //else
-            //{ 
-            //    TableClass.MyDataRow = TableClass.GetNewRow();
-            //    TableClass.OriginalRow = TableClass.MyDataRow;
-            //}
-
             TableClass.Previous();
             Get_Values.Invoke(sender, e);
+            TableBinding.Position -= 1;
         }
         private void btnNext_Click(object sender, EventArgs e)
         {
             TableClass.MoveNext();
-
-            //if ((TableClass.MyDataTable.Rows.Count -1) >= 0)
-            //{
-                
-
-            //    //TableClass.Row_Index += 1; 
-            //    //if(TableClass.Row_Index > TableClass.Count-1) { TableClass.Row_Index = TableClass.Count-1; }
-            //    //TableClass.MyDataRow = TableClass.MyDataTable.Rows[TableClass.Row_Index];
-            //    //TableClass.OriginalRow = TableClass.MyDataRow;
-            //}
-            //else
-            //{ 
-            //    TableClass.MyDataRow = TableClass.GetNewRow();
-            //    TableClass.OriginalRow = TableClass.MyDataRow;
-            //}
-
             Get_Values.Invoke(sender, e);
-
+            TableBinding.Position += 1;
         }
         private void btnLast_Click(object sender, EventArgs e)
         {
             if (TableClass.MyDataTable.Rows.Count > 0)
-            { 
-                TableClass.MyDataRow = TableClass.MyDataTable.Rows[TableClass.MyDataTable.Rows.Count-1];
+            {
+                TableClass.MyDataRow = TableClass.MyDataTable.Rows[TableClass.MyDataTable.Rows.Count - 1];
                 TableClass.OriginalRow = TableClass.MyDataRow;
             }
             else
-            { 
+            {
                 TableClass.MyDataRow = TableClass.GetNewRow();
                 TableClass.OriginalRow = TableClass.MyDataRow;
             }
             Get_Values.Invoke(sender, e);
+
+            TableBinding.Position = TableBinding.Count - 1;
+
         }
         private void btnNew_Click(object sender, EventArgs e)
         {
+
             TableClass.MyDataRow = TableClass.GetNewRow();
             TableClass.OriginalRow = TableClass.MyDataRow;
+            TableClass.MyDataView.AddNew();
+
+            NewRecordPosition = TableBinding.Count - 1;
+            
+
+            TableClass.MyDataView[NewRecordPosition]["ID"] = -1;
+
+            if (TableClass.MyDataTable.Columns.Contains("Active"))
+            {
+                if (tableClass.MyDataView[NewRecordPosition]["Active"] == DBNull.Value)
+                {
+                    TableClass.MyDataView[NewRecordPosition]["Active"] = true;              // Assign true value is DB is null;
+                }
+            }
 
             New_Record.Invoke(sender, e);
             Get_Values.Invoke(sender, e);
-            
+
+            TableBinding.Position = NewRecordPosition;
+
         }
         private void BtnSave_Click(object sender, EventArgs e)              // Save Record
         {
-           
+
             Set_Values.Invoke(sender, e);
             Before_Save(sender, e);
 
-            if ((long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName]==-1)
+            DataRow NewRow = ((DataRowView)TableClass.MyDataView[NewRecordPosition]).Row;
+            TableClass.MyDataRow = NewRow;
+
+
+            if ((long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName] == -1)
             {
                 TableClass.MyDataRow[TableClass.MyPrimaryKeyName] = TableClass.GetMaxID() + 1;              // Get Maximum ID
                 TableClass.MyPrimaryKeyValue = (long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName];
@@ -170,17 +173,17 @@ namespace Applied_Accounts
 
             MyMessage = TableClass.Save();
 
-            if(TableClass.IsSaved)
+            if (TableClass.IsSaved)
             {
                 MyMessage = TableClass.MyMessage;
                 MessageBox.Show(MyMessage, "RECORD SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TableClass.OriginalRow = TableClass.MyDataRow;
                 After_Save.Invoke(sender, e);
 
-                if(TableClass.Count>1) { Buttons_Display(3); }
+                if (TableClass.Count > 1) { Buttons_Display(3); }
                 else { Buttons_Display(4); }
-                Get_Values.Invoke(sender, e);           // Invoke Get Value Prcedure
-                TableClass.Update(MyTableID);          // Update Datatable from DB after save row
+                Get_Values.Invoke(sender, e);                      // Invoke Get Value Prcedure
+                TableClass.Update(tableClass.MyTableID);           // Update Datatable from DB after save row
 
                 TableClass.Row_Index = tableClass.MyDataTable.Rows.IndexOf(TableClass.MyDataRow);
 
@@ -229,7 +232,7 @@ namespace Applied_Accounts
             switch (_Value)
             {
                 case 1:                                     // Disable butons if table has not row.
-                    btnTop.Enabled = false;                 
+                    btnTop.Enabled = false;
                     btnNext.Enabled = false;
                     btnPrior.Enabled = false;
                     btnLast.Enabled = false;
@@ -273,7 +276,7 @@ namespace Applied_Accounts
                     break;
 
                 default:
-                    btnTop.Enabled = true;                 
+                    btnTop.Enabled = true;
                     btnNext.Enabled = true;
                     btnPrior.Enabled = true;
                     btnLast.Enabled = true;
@@ -287,6 +290,6 @@ namespace Applied_Accounts
 
         #endregion
 
-        
+
     }       // Main
 }           // Namespace

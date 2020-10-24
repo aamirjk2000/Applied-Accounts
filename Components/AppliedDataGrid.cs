@@ -36,7 +36,7 @@ namespace Applied_Accounts
                 Active = true;
                 MyDataView = new DataView(_DataTable);
                 MyDataRow = _DataTable.Rows[0];
-                _DataGrid.DataSource = MyDataView;
+                BrowseGrid.DataSource = MyDataView;
             }
             else
             {
@@ -48,12 +48,12 @@ namespace Applied_Accounts
             #region Active
             if (Active)
             {
-                _DataGrid.Enabled = true;
+                BrowseGrid.Enabled = true;
                 txtFilter.Enabled = true;
             }
             else
             {
-                _DataGrid.Enabled = false;
+                BrowseGrid.Enabled = false;
                 txtFilter.Enabled = false;
             }
             #endregion
@@ -64,13 +64,13 @@ namespace Applied_Accounts
 
             IsPressEnter = false;
 
-            _DataGrid.DataSource = MyDataView;
-            _DataGrid.ReadOnly = true;
-            _DataGrid.AllowUserToAddRows = false;
-            _DataGrid.AllowUserToDeleteRows = false;
+            BrowseGrid.DataSource = MyDataView;
+            BrowseGrid.ReadOnly = true;
+            BrowseGrid.AllowUserToAddRows = false;
+            BrowseGrid.AllowUserToDeleteRows = false;
 
-            _DataGrid.AutoGenerateColumns = false;
-            _DataGrid.Columns.Clear();
+            BrowseGrid.AutoGenerateColumns = false;
+            BrowseGrid.Columns.Clear();
 
             for (int i = 0; i < ColumnsVisiable.Length; i++)
             {
@@ -80,17 +80,17 @@ namespace Applied_Accounts
                     DataGridViewCheckBoxColumn _Column = new DataGridViewCheckBoxColumn();
                     _Column.Name = ColumnsName[i];
                     _Column.HeaderText = ColumnsName[i];
-                    _DataGrid.Columns.Add(_Column);
+                    BrowseGrid.Columns.Add(_Column);
 
                 }
                 else
                 {
-                    _DataGrid.Columns.Add(ColumnsVisiable[i], ColumnsName[i]);
+                    BrowseGrid.Columns.Add(ColumnsVisiable[i], ColumnsName[i]);
                 }
 
-                _DataGrid.Columns[ColumnsVisiable[i]].Width = ColumnsWidth[i];
-                _DataGrid.Columns[ColumnsVisiable[i]].DataPropertyName = ColumnsVisiable[i];
-                _DataGrid.Columns[ColumnsVisiable[i]].DefaultCellStyle.Format = AppliedClass.Get_Format(ColumnsFormat[i]);
+                BrowseGrid.Columns[ColumnsVisiable[i]].Width = ColumnsWidth[i];
+                BrowseGrid.Columns[ColumnsVisiable[i]].DataPropertyName = ColumnsVisiable[i];
+                BrowseGrid.Columns[ColumnsVisiable[i]].DefaultCellStyle.Format = AppliedClass.Get_Format(ColumnsFormat[i]);
             }
         }
 
@@ -100,26 +100,26 @@ namespace Applied_Accounts
             _Filter = string.Concat("Title like '%", txtFilter.Text, "%'" + " OR ");
             _Filter += string.Concat("Code like '%", txtFilter.Text, "%'" + " OR ");
             _Filter += string.Concat("SCode like '%", txtFilter.Text, "%'");
-            ((DataView)_DataGrid.DataSource).RowFilter = _Filter;
+            ((DataView)BrowseGrid.DataSource).RowFilter = _Filter;
         }
 
         #region Object Load and Leave
 
         private void AppliedDataGrid_Leave(object sender, EventArgs e)
         {
-            if (((DataView)_DataGrid.DataSource).Table.Rows.Count == 0)                 // If Table does not have any record (Empty Table)
+            if (((DataView)BrowseGrid.DataSource).Table.Rows.Count == 0)                 // If Table does not have any record (Empty Table)
             {
                 MyViewRow = null;
-                MyDataRow = ((DataView)_DataGrid.DataSource).Table.NewRow();
+                MyDataRow = ((DataView)BrowseGrid.DataSource).Table.NewRow();
             }
-            if (_DataGrid.CurrentRow != null)                                           // Grid View has not selected any row.
+            if (BrowseGrid.CurrentRow != null)                                           // Grid View has not selected any row.
             {
-                MyViewRow = _DataGrid.CurrentRow;
+                MyViewRow = BrowseGrid.CurrentRow;
                 MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
             }
             else                                                                        // Grod View has select a row.
             {
-                MyViewRow = _DataGrid.Rows[0];                                          // Select first Row of DataGrid
+                MyViewRow = BrowseGrid.Rows[0];                                          // Select first Row of DataGrid
                 MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
             }
         }
@@ -130,7 +130,7 @@ namespace Applied_Accounts
         {
             int _TableID = (int)Enum.Parse(typeof(Tables), MyDataView.Table.TableName);
             MyDataView = AppliedTable.GetDataTable(_TableID).AsDataView();
-            _DataGrid.DataSource = MyDataView;
+            BrowseGrid.DataSource = MyDataView;
         }
 
 
@@ -143,31 +143,27 @@ namespace Applied_Accounts
         private void txtFilter_TextChanged(object sender, EventArgs e)
         {
             Data_Filter();
-            _DataGrid.Refresh();
+            BrowseGrid.Refresh();
         }
+               
 
-        private void _DataGrid_Enter(object sender, EventArgs e)
+        private void AppliedDataGrid_Leave_1(object sender, EventArgs e)
         {
-            // Select a record from record edit
-            //AppliedDataGrid_Leave(sender, e);
-        }
+            DataGridViewRow _DataRow = BrowseGrid.CurrentRow;
+            MyDataRow = ((DataRowView)_DataRow.DataBoundItem).Row;
 
-        private void _DataGrid_Leave(object sender, EventArgs e)
-        {
-            // select a record for record edit 
-            //AppliedDataGrid_Leave(sender, e);
         }
 
         private void _DataGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if(_DataGrid.Columns[e.ColumnIndex].Name=="Active")                     // Only Work of Active Column clock
+            if(BrowseGrid.Columns[e.ColumnIndex].Name=="Active")                     // Only Work of Active Column clock
             {
                 int _TableID = AppliedTable.GetTable_ID(MyDataRow.Table);           // Get Enum ID of Row Table
                 ThisTable _DataTable = new ThisTable(AppliedTable.GetDataTable(_TableID));
 
-                if (_DataGrid.CurrentRow != null)                                  // Grid View has not selected any row.
+                if (BrowseGrid.CurrentRow != null)                                  // Grid View has not selected any row.
                 {
-                    MyViewRow = _DataGrid.CurrentRow;
+                    MyViewRow = BrowseGrid.CurrentRow;
                     MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
 
                         if ((bool)MyDataRow["Active"])

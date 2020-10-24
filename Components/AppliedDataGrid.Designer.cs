@@ -30,30 +30,29 @@ namespace Applied_Accounts
         /// </summary>
         private void InitializeComponent()
         {
-            this._DataGrid = new System.Windows.Forms.DataGridView();
+            this.BrowseGrid = new System.Windows.Forms.DataGridView();
             this.txtFilter = new System.Windows.Forms.TextBox();
             this.btnClear = new System.Windows.Forms.Button();
             this.lblFilter = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this._DataGrid)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BrowseGrid)).BeginInit();
             this.SuspendLayout();
             // 
-            // _DataGrid
+            // BrowseGrid
             // 
-            this._DataGrid.AllowUserToAddRows = false;
-            this._DataGrid.AllowUserToDeleteRows = false;
-            this._DataGrid.AllowUserToResizeColumns = false;
-            this._DataGrid.AllowUserToResizeRows = false;
-            this._DataGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.BrowseGrid.AllowUserToAddRows = false;
+            this.BrowseGrid.AllowUserToDeleteRows = false;
+            this.BrowseGrid.AllowUserToResizeColumns = false;
+            this.BrowseGrid.AllowUserToResizeRows = false;
+            this.BrowseGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this._DataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this._DataGrid.Location = new System.Drawing.Point(3, 3);
-            this._DataGrid.Name = "_DataGrid";
-            this._DataGrid.Size = new System.Drawing.Size(484, 296);
-            this._DataGrid.TabIndex = 0;
-            this._DataGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this._DataGrid_CellMouseClick);
-            this._DataGrid.Enter += new System.EventHandler(this._DataGrid_Enter);
-            this._DataGrid.Leave += new System.EventHandler(this._DataGrid_Leave);
+            this.BrowseGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.BrowseGrid.Location = new System.Drawing.Point(3, 3);
+            this.BrowseGrid.Name = "BrowseGrid";
+            this.BrowseGrid.Size = new System.Drawing.Size(484, 296);
+            this.BrowseGrid.TabIndex = 0;
+            this.BrowseGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this._DataGrid_CellMouseClick);
+            
             // 
             // txtFilter
             // 
@@ -95,10 +94,11 @@ namespace Applied_Accounts
             this.Controls.Add(this.lblFilter);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.txtFilter);
-            this.Controls.Add(this._DataGrid);
+            this.Controls.Add(this.BrowseGrid);
             this.Name = "AppliedDataGrid";
             this.Size = new System.Drawing.Size(490, 331);
-            ((System.ComponentModel.ISupportInitialize)(this._DataGrid)).EndInit();
+            this.Leave += new System.EventHandler(this.AppliedDataGrid_Leave_1);
+            ((System.ComponentModel.ISupportInitialize)(this.BrowseGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -106,7 +106,7 @@ namespace Applied_Accounts
 
         #endregion
 
-        public System.Windows.Forms.DataGridView _DataGrid;
+        public System.Windows.Forms.DataGridView BrowseGrid;
         private System.Windows.Forms.TextBox txtFilter;
         private System.Windows.Forms.Label lblFilter;
         private System.Windows.Forms.Button btnClear;

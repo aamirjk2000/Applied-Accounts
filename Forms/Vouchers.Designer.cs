@@ -105,6 +105,7 @@
             this.P2 = new System.Windows.Forms.TabPage();
             this.lblWords = new System.Windows.Forms.Label();
             this.Grid = new System.Windows.Forms.DataGridView();
+            this.lblMessage = new System.Windows.Forms.Label();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -333,6 +334,8 @@
             this.txtEmployee.Name = "txtEmployee";
             this.txtEmployee.Size = new System.Drawing.Size(59, 20);
             this.txtEmployee.TabIndex = 116;
+            this.txtEmployee.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmployee_Validating);
+            this.txtEmployee.Validated += new System.EventHandler(this.txtEmployee_Validated);
             // 
             // txtStock
             // 
@@ -739,7 +742,7 @@
             this.cBoxEmployees.Name = "cBoxEmployees";
             this.cBoxEmployees.Size = new System.Drawing.Size(428, 21);
             this.cBoxEmployees.TabIndex = 10;
-            this.cBoxEmployees.DropDownClosed += new System.EventHandler(this.cBoxEmployees_DropDownClosed);
+            this.cBoxEmployees.TextChanged += new System.EventHandler(this.cBoxEmployees_TextChanged);
             this.cBoxEmployees.Leave += new System.EventHandler(this.cBoxEmployees_Leave);
             // 
             // label10
@@ -804,7 +807,7 @@
             this.cBoxStocks.Name = "cBoxStocks";
             this.cBoxStocks.Size = new System.Drawing.Size(427, 21);
             this.cBoxStocks.TabIndex = 9;
-            this.cBoxStocks.DropDownClosed += new System.EventHandler(this.cBoxStocks_DropDownClosed);
+            this.cBoxStocks.TextChanged += new System.EventHandler(this.cBoxStocks_TextChanged);
             this.cBoxStocks.Leave += new System.EventHandler(this.cBoxStocks_Leave);
             // 
             // cBoxUnits
@@ -814,7 +817,7 @@
             this.cBoxUnits.Name = "cBoxUnits";
             this.cBoxUnits.Size = new System.Drawing.Size(427, 21);
             this.cBoxUnits.TabIndex = 8;
-            this.cBoxUnits.DropDownClosed += new System.EventHandler(this.cBoxUnits_DropDownClosed);
+            this.cBoxUnits.TextChanged += new System.EventHandler(this.cBoxUnits_TextChanged);
             this.cBoxUnits.Leave += new System.EventHandler(this.cBoxUnits_Leave);
             // 
             // cBoxProjects
@@ -824,7 +827,7 @@
             this.cBoxProjects.Name = "cBoxProjects";
             this.cBoxProjects.Size = new System.Drawing.Size(427, 21);
             this.cBoxProjects.TabIndex = 7;
-            this.cBoxProjects.DropDownClosed += new System.EventHandler(this.cBoxProjects_DropDownClosed);
+            this.cBoxProjects.TextChanged += new System.EventHandler(this.cBoxProjects_TextChanged);
             this.cBoxProjects.Leave += new System.EventHandler(this.cBoxProjects_Leave);
             // 
             // cBoxSuppliers
@@ -834,7 +837,7 @@
             this.cBoxSuppliers.Name = "cBoxSuppliers";
             this.cBoxSuppliers.Size = new System.Drawing.Size(427, 21);
             this.cBoxSuppliers.TabIndex = 6;
-            this.cBoxSuppliers.DropDownClosed += new System.EventHandler(this.cBoxSuppliers_DropDownClosed);
+            this.cBoxSuppliers.TextChanged += new System.EventHandler(this.cBoxSuppliers_TextChanged);
             this.cBoxSuppliers.Leave += new System.EventHandler(this.cBoxSuppliers_Leave);
             // 
             // cBoxAccounts
@@ -844,7 +847,7 @@
             this.cBoxAccounts.Name = "cBoxAccounts";
             this.cBoxAccounts.Size = new System.Drawing.Size(427, 21);
             this.cBoxAccounts.TabIndex = 5;
-            this.cBoxAccounts.DropDownClosed += new System.EventHandler(this.cBoxAccounts_DropDownClosed);
+            this.cBoxAccounts.TextChanged += new System.EventHandler(this.cBoxAccounts_TextChanged);
             this.cBoxAccounts.Enter += new System.EventHandler(this.cBoxAccounts_Enter);
             this.cBoxAccounts.Leave += new System.EventHandler(this.cBoxAccounts_Leave);
             // 
@@ -963,11 +966,20 @@
             this.Grid.Size = new System.Drawing.Size(756, 398);
             this.Grid.TabIndex = 0;
             // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Location = new System.Drawing.Point(16, 479);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(0, 13);
+            this.lblMessage.TabIndex = 1;
+            // 
             // frmVouchers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 495);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.Pages);
             this.Name = "frmVouchers";
             this.Text = "Voucher";
@@ -981,6 +993,7 @@
             this.P2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1061,5 +1074,6 @@
         private System.Windows.Forms.Button btn3;
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn1;
+        private System.Windows.Forms.Label lblMessage;
     }
 }
