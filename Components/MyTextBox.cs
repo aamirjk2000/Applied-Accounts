@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Applied_Accounts.Classes;
+using System;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -7,7 +8,7 @@ using System.Windows.Forms;
 
 namespace Applied_Accounts
 {
-    public partial class MyTextBox : TextBox
+    public partial class MyTextBox : System.Windows.Forms.TextBox
     {
         public DataRow MyRow { get; set; }                  // Text Box value is Part of this Row.
         public DataView MyDataView { get; set; }            // Teax Box value seach in DataView
@@ -18,7 +19,10 @@ namespace Applied_Accounts
         public bool Allowe_Duplicate { get; set; }
         public string PrimaryKey { get; set; }
         public string ColumnName { get; set; }
-
+        public bool Mode_Edit { get; set; }
+        public bool Mode_Add { get; set; }
+        public bool Mode_Delete { get; set; }
+        public int Text_Mode { get; set; }
 
         string Message_Required = "Code is required.";
         string Message_Length = "Code must be 6 Digits. (Like 101001)";
@@ -26,6 +30,7 @@ namespace Applied_Accounts
         string Message_Validated = "Code value has been validated.";
 
         public event EventHandler Get_Row;
+        //public event EventHandler Text_Validated;
 
         public MyTextBox()
         {
@@ -39,47 +44,9 @@ namespace Applied_Accounts
         private void Validation(object sender, CancelEventArgs e)
         //private bool DoValidation(object sender, CancelEventArgs e)
         {
-            TextBox thisbox = (TextBox)sender;
-            bool IsCancel = false;
-
-            if (string.IsNullOrEmpty(thisbox.Text.Trim()))                          // Text Box value is null or empty
-            {
-                thisbox.Text = MyRow[ColumnName].ToString();
-                thisbox.ForeColor = System.Drawing.Color.PaleVioletRed;
-                IsCancel = true;
-                MyMessage = Message_Required;
-            }
-            else if (thisbox.Text.Length != MaxDigit)                               // Text box Length is fixed for 6 Digit
-            {
-                thisbox.Text = MyRow[ColumnName].ToString();                            
-                thisbox.ForeColor = Color.MediumVioletRed;
-                IsCancel = true;
-                MyMessage = Message_Length;
-            }
-            else if (IsChars(thisbox.Text))                                         // If any Charactors Found.
-            {
-                thisbox.Text = MyRow[ColumnName].ToString();
-                thisbox.ForeColor = Color.Blue;
-                IsCancel = true;
-                MyMessage = Message_Charts;
-            }
-            else if(Seek(thisbox.Text))
-            {
-                    thisbox.Text = MyRow[ColumnName].ToString();
-                    thisbox.ForeColor = Color.Green;
-                    IsCancel = true;
-                    MyMessage = Message_Charts;
-            }
-
-            else                                                                    // Valation is true 
-            {
-                thisbox.ForeColor = thisColor;
-                MyMessage = Message_Validated;
-                IsCancel = false;
-            }
-
-
-            e.Cancel = IsCancel;
+            if (Mode_Edit) { e.Cancel = Mode_Edit_Event(sender); return; }
+            if (Mode_Add) { e.Cancel = Mode_Add_Event(sender); return; }
+            if (Mode_Delete) { e.Cancel = Mode_Delete_Event(sender); return; }
         }
 
         public void GetRow(object sender, System.EventArgs e)
@@ -95,7 +62,7 @@ namespace Applied_Accounts
 
             foreach (char _Char in _Text)
             {
-                if(!Allowed_Chars.Contains(_Char.ToString()))
+                if (!Allowed_Chars.Contains(_Char.ToString()))
                 {
                     _Result = true;
                 }
@@ -103,28 +70,134 @@ namespace Applied_Accounts
             return _Result;
         }
 
-        private bool Seek(string _Code)
+
+        #region Validation Edit Add Delete
+
+        private bool Mode_Edit_Event(object sender)
         {
-            bool _Result = false;
+            TextBox thisbox = ((MyTextBox)sender).ThisBox;
+            bool IsCancel = false;
 
-            MyDataView.RowFilter = string.Concat(ColumnName,"='", _Code.Trim(), "'");       // Table View filter
-            if (MyDataView.Count != 0)
+            if (string.IsNullOrEmpty(thisbox.Text.Trim()))                          // Text Box value is null or empty
             {
-                long _ViewID = (long)(MyDataView[0].Row[PrimaryKey]);
-                long _RowID = (long)MyRow[PrimaryKey];
-                _Result = true;                                             // Code foud in Table view
-
-                if(_ViewID==_RowID)
-                {
-                    _Result = false;                                        // Code found in same row.
-                }
-            }   
-            else
-            {
-                _Result = false;                                            // Code not found in table view
+                thisbox.Text = MyRow[ColumnName].ToString();
+                thisbox.ForeColor = Color.PaleVioletRed;
+                IsCancel = true;
+                MyMessage = Message_Required;
             }
-            return _Result;                                                 // return result.
+            else if (thisbox.Text.Length != MaxDigit)                               // Text box Length is fixed for 6 Digit
+            {
+                thisbox.Text = MyRow[ColumnName].ToString();
+                thisbox.ForeColor = Color.MediumVioletRed;
+                IsCancel = true;
+                MyMessage = Message_Length;
+            }
+            else if (IsChars(thisbox.Text))                                         // If any Charactors Found.
+            {
+                thisbox.Text = MyRow[ColumnName].ToString();
+                thisbox.ForeColor = Color.Blue;
+                IsCancel = true;
+                MyMessage = Message_Charts;
+            }
+            else if (string.Equals(Applied.Code(thisbox.Text.Trim(), MyDataView).Trim(), thisbox.Text.Trim()))                                             // code Seek in the Data table.
+            {
+                thisbox.Text = MyRow[ColumnName].ToString();
+                thisbox.ForeColor = Color.Green;
+                IsCancel = false;
+                MyMessage = Message_Charts;
+            }
+
+            //else                                                                    // Valation is true 
+            //{
+            //    thisbox.ForeColor = thisColor;
+            //    MyMessage = Message_Validated;
+            //    IsCancel = false;
+            //}
+            return IsCancel;
         }
 
+        private bool Mode_Add_Event(object sender)
+        {
+            TextBox thisbox = ((MyTextBox)sender).ThisBox;
+            bool IsCancel = false;
+
+            if (string.IsNullOrEmpty(thisbox.Text.Trim()))                          // Text Box value is null or empty
+            {
+                thisbox.Text = MyRow[ColumnName].ToString();
+                thisbox.ForeColor = Color.PaleVioletRed;
+                IsCancel = true;
+                MyMessage = Message_Required;
+            }
+            else if (thisbox.Text.Length != MaxDigit)                               // Text box Length is fixed for 6 Digit
+            {
+                thisbox.Text = MyRow[ColumnName].ToString();
+                thisbox.ForeColor = Color.MediumVioletRed;
+                IsCancel = true;
+                MyMessage = Message_Length;
+            }
+            else if (IsChars(thisbox.Text))                                         // If any Charactors Found.
+            {
+                thisbox.Text = MyRow[ColumnName].ToString();
+                thisbox.ForeColor = Color.Blue;
+                IsCancel = true;
+                MyMessage = Message_Charts;
+            }
+            else if (string.Equals(Applied.Code(thisbox.Text.Trim(), MyDataView).Trim(), thisbox.Text.Trim()))                                             // code Seek in the Data table.
+            {
+                thisbox.Text = MyRow[ColumnName].ToString();
+                thisbox.ForeColor = Color.Purple;
+                IsCancel = true;
+                MyMessage = Message_Charts;
+            }
+
+            else                                                                    // Valation is true 
+            {
+                thisbox.ForeColor = Color.Green;
+                MyMessage = Message_Validated;
+                IsCancel = false;
+            }
+            return IsCancel;
+        }
+
+        private bool Mode_Delete_Event(object sender)
+        {
+            return Mode_Edit_Event(sender);
+        }
+
+        public void Set_Modes(object _Modes)
+        {
+            switch (_Modes)
+            {
+                case 1:
+                    Mode_Add = false;
+                    Mode_Edit = true;
+                    Mode_Delete = false;
+                    break;
+
+                case 2:
+                    Mode_Add = true;
+                    Mode_Edit = false;
+                    Mode_Delete = false;
+                    break;
+
+                case 3:
+                    Mode_Add = false;
+                    Mode_Edit = false;
+                    Mode_Delete = true;
+                    break;
+
+                default:
+                    break;
+            }
+        }
+
+      
+
+        #endregion
+
+        private void MyTextBox_Validated(object sender, EventArgs e)
+        {
+            //this.Text_Validated(sender,e);
+        }
     }               // Main 
 }                   // Namespace

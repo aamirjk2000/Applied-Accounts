@@ -96,9 +96,12 @@ namespace Applied_Accounts.Classes
         {
             if (_Value == "") { return 0; }
             if (_Value == string.Empty) { return 0; }
-            //else { return Convert.ToInt32(_Value); }
 
-            return Convert.ToInt32(_Value);
+            if (!Applied.IsChar(_Value,"0123456789"))
+            {
+                return Convert.ToInt32(_Value);
+            }
+            return 0;
         }
         public static int ToInteger(long _Value)
         {
@@ -114,7 +117,13 @@ namespace Applied_Accounts.Classes
         {
             if (_Value == DBNull.Value) { return 0; }
             if (_Value == null) { return 0; }
-            return int.Parse(_Value.ToString());
+
+            if (!Applied.IsChar(_Value.ToString(), "0123456789"))
+            {
+                return Convert.ToInt32(_Value);
+                //return int.Parse(_Value.ToString());
+            }
+            return 0; 
         }
 
 

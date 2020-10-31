@@ -221,7 +221,6 @@
             this.MyNavigator.Name = "MyNavigator";
             this.MyNavigator.Size = new System.Drawing.Size(453, 31);
             this.MyNavigator.TabIndex = 5;
-            this.MyNavigator.Get_Values += new System.EventHandler(this.Navigator_Get_Values);
             this.MyNavigator.Set_Values += new System.EventHandler(this.Navigator_Set_Vakues);
             this.MyNavigator.New_Record += new System.EventHandler(this.Navigator_New_Record);
             //this.MyNavigator.Before_Save += new System.EventHandler(this.Navigator_Before_Save);

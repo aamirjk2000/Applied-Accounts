@@ -84,6 +84,7 @@
             this.lblAppPath = new System.Windows.Forms.Label();
             this.lblStartPath = new System.Windows.Forms.Label();
             this.lblversion = new System.Windows.Forms.Label();
+            this.btnWallpaper = new System.Windows.Forms.Button();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -420,6 +421,7 @@
             this.testToolStripMenuItem.Name = "testToolStripMenuItem";
             this.testToolStripMenuItem.Size = new System.Drawing.Size(213, 22);
             this.testToolStripMenuItem.Text = "Test";
+            this.testToolStripMenuItem.Click += new System.EventHandler(this.testToolStripMenuItem_Click);
             // 
             // mnuExit
             // 
@@ -430,13 +432,14 @@
             // 
             // toolStripTextBox1
             // 
+            this.toolStripTextBox1.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBox1.Name = "toolStripTextBox1";
             this.toolStripTextBox1.Size = new System.Drawing.Size(100, 23);
             // 
             // lbl_DevelopedBy
             // 
-            this.lbl_DevelopedBy.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_DevelopedBy.AutoSize = true;
+            this.lbl_DevelopedBy.BackColor = System.Drawing.Color.Transparent;
             this.lbl_DevelopedBy.Location = new System.Drawing.Point(12, 74);
             this.lbl_DevelopedBy.Name = "lbl_DevelopedBy";
             this.lbl_DevelopedBy.Size = new System.Drawing.Size(71, 13);
@@ -446,8 +449,8 @@
             // 
             // lbl_Author
             // 
-            this.lbl_Author.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lbl_Author.AutoSize = true;
+            this.lbl_Author.BackColor = System.Drawing.Color.Transparent;
             this.lbl_Author.Location = new System.Drawing.Point(12, 91);
             this.lbl_Author.Name = "lbl_Author";
             this.lbl_Author.Size = new System.Drawing.Size(38, 13);
@@ -457,7 +460,9 @@
             // 
             // lbl_GUID
             // 
+            this.lbl_GUID.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_GUID.AutoSize = true;
+            this.lbl_GUID.BackColor = System.Drawing.Color.Transparent;
             this.lbl_GUID.Location = new System.Drawing.Point(12, 428);
             this.lbl_GUID.Name = "lbl_GUID";
             this.lbl_GUID.Size = new System.Drawing.Size(44, 13);
@@ -478,7 +483,9 @@
             // 
             // lblDBPath
             // 
+            this.lblDBPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblDBPath.AutoSize = true;
+            this.lblDBPath.BackColor = System.Drawing.Color.Transparent;
             this.lblDBPath.Location = new System.Drawing.Point(12, 407);
             this.lblDBPath.Name = "lblDBPath";
             this.lblDBPath.Size = new System.Drawing.Size(47, 13);
@@ -487,7 +494,9 @@
             // 
             // lblAppPath
             // 
+            this.lblAppPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblAppPath.AutoSize = true;
+            this.lblAppPath.BackColor = System.Drawing.Color.Transparent;
             this.lblAppPath.Location = new System.Drawing.Point(12, 385);
             this.lblAppPath.Name = "lblAppPath";
             this.lblAppPath.Size = new System.Drawing.Size(59, 13);
@@ -496,7 +505,9 @@
             // 
             // lblStartPath
             // 
+            this.lblStartPath.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblStartPath.AutoSize = true;
+            this.lblStartPath.BackColor = System.Drawing.Color.Transparent;
             this.lblStartPath.Location = new System.Drawing.Point(12, 364);
             this.lblStartPath.Name = "lblStartPath";
             this.lblStartPath.Size = new System.Drawing.Size(29, 13);
@@ -505,18 +516,32 @@
             // 
             // lblversion
             // 
+            this.lblversion.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.lblversion.AutoSize = true;
+            this.lblversion.BackColor = System.Drawing.Color.Transparent;
             this.lblversion.Location = new System.Drawing.Point(685, 428);
             this.lblversion.Name = "lblversion";
             this.lblversion.Size = new System.Drawing.Size(62, 13);
             this.lblversion.TabIndex = 8;
             this.lblversion.Text = "Version test";
             // 
+            // btnWallpaper
+            // 
+            this.btnWallpaper.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnWallpaper.Location = new System.Drawing.Point(768, 43);
+            this.btnWallpaper.Name = "btnWallpaper";
+            this.btnWallpaper.Size = new System.Drawing.Size(20, 20);
+            this.btnWallpaper.TabIndex = 9;
+            this.btnWallpaper.UseVisualStyleBackColor = true;
+            this.btnWallpaper.Click += new System.EventHandler(this.btnWallpaper_Click);
+            // 
             // frmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnWallpaper);
             this.Controls.Add(this.lblversion);
             this.Controls.Add(this.lblStartPath);
             this.Controls.Add(this.lblAppPath);
@@ -597,6 +622,7 @@
         private System.Windows.Forms.ToolStripMenuItem testToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem mnuPWChange;
         private System.Windows.Forms.Label lblversion;
+        private System.Windows.Forms.Button btnWallpaper;
     }
 }
 

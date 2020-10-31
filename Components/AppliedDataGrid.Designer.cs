@@ -39,10 +39,6 @@ namespace Applied_Accounts
             // 
             // BrowseGrid
             // 
-            this.BrowseGrid.AllowUserToAddRows = false;
-            this.BrowseGrid.AllowUserToDeleteRows = false;
-            this.BrowseGrid.AllowUserToResizeColumns = false;
-            this.BrowseGrid.AllowUserToResizeRows = false;
             this.BrowseGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -52,7 +48,6 @@ namespace Applied_Accounts
             this.BrowseGrid.Size = new System.Drawing.Size(484, 296);
             this.BrowseGrid.TabIndex = 0;
             this.BrowseGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this._DataGrid_CellMouseClick);
-            
             // 
             // txtFilter
             // 

@@ -4,6 +4,7 @@ using System.Data;
 using System.IO;
 using System.Windows.Forms;
 using System.Data.SQLite;
+using Microsoft.Win32;
 
 namespace Applied_Accounts.Classes
 {
@@ -309,9 +310,16 @@ namespace Applied_Accounts.Classes
             YYYY_MMM_DD
         }
 
+        public enum Modes
+        {
+            New = 1,
+            Edit = 2,
+            Delete
+        }
 
         #endregion
 
+        #region Is ? Functions
 
         public static bool IsFileExist(string _FileName)
         {
@@ -341,6 +349,26 @@ namespace Applied_Accounts.Classes
 
             return e.Handled;
         }
+
+        public static bool IsChar(string _Text, string _ValidChars)
+        {
+            bool _Result = false;
+            char[] _Chars = _Text.ToCharArray();
+
+            foreach (char _Char in _Text)
+            {
+                if (!_ValidChars.Contains(_Char.ToString()))
+                {
+                    _Result = true;
+                }
+            }
+            return _Result;
+        }
+
+
+        #endregion
+
+
 
         public static long ShowBrowseWin(DataView _DataView, object _CurrentValue )
         {
@@ -372,12 +400,40 @@ namespace Applied_Accounts.Classes
             return "";
         }
 
+        public static string Title(string _Code, DataView _DataView)                 // return Title by ID of Data Table
+        {
+            _DataView.RowFilter = "Code='" + _Code.Trim() + "'";
+            if (_DataView.Count == 1) { return _DataView[0].Row["Title"].ToString().Trim(); }
+            return "";
+        }
+
         public static string Code(long _ID, DataView _DataView)
         {
             _DataView.RowFilter = "ID=" + _ID.ToString();
             if (_DataView.Count == 1) { return _DataView[0].Row["Code"].ToString().Trim(); }
             return "";
         }
+
+        public static string Code(string _Code, DataView _DataView)
+        {
+            if(_DataView==null) { return ""; }
+
+            _DataView.RowFilter = "Code='" + _Code.ToString() + "'";
+            if (_DataView.Count == 1) { return _DataView[0].Row["Code"].ToString().Trim(); }
+            return "";
+        }
+
+        public static long Code2ID(string _Code, DataView _DataView)
+        {
+            if (_DataView == null) { return 0; }
+
+            _DataView.RowFilter = "Code='" + _Code.ToString() + "'";
+            if (_DataView.Count == 1) { return Conversion.ToLong(_DataView[0].Row["ID"].ToString()); }
+            return 0;
+        }
+
+
+
 
         public static string Tag(long _ID, DataView _DataView)
         {

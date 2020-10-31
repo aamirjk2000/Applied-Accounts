@@ -2,52 +2,53 @@
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Reflection;
+using System.Runtime.Remoting;
 using System.Windows.Forms;
+using static Applied_Accounts.Classes.Applied;
 
 namespace Applied_Accounts
 {
     public partial class frmCOA : Form
     {
-        
-        
-        Boolean Has_Error { get; set; }
-        private DataRow thisDataRow { get => MyNavigator.TableClass.MyDataRow; }
-        private DataView thisDataView { get => MyNavigator.TableClass.MyDataView; }
-        private DataTable Table_COA { get => MyNavigator.TableClass.MyDataTable; }
-        private DataView View_COA { get => MyNavigator.TableClass.MyDataView; }
+
+        private DataTable MyDataTable = AppliedTable.GetDataTable(Tables.COA);
+        private DataView MyTableView { get => MyNavigator.MyDataView; }
+
+        private Code_Validation Code_Validate = new Code_Validation();
+        private DataTable tb_Notes = AppliedTable.GetDataTable(Tables.Notes);
 
 
         public frmCOA()
         {
             InitializeComponent();
-            MyNavigator.TableClass = new ThisTable(Tables.COA);
-            MyNavigator.InitializeClass(Table_COA);
+            MyNavigator.InitializeClass(MyDataTable);
+
+            DataBinding();                      // Data Binding with form objects
+            Load_Grid();                        // Load Data in Data Grid.
+
         }
 
-
-        #region Load 
-
-        private void COA_Load(object sender, EventArgs e)
+        private void DataBinding()
         {
-            MyRefresh();
+            txtID.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "ID", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtCode.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Code", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtTag.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "SCode", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtTitle.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Title", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtNote.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Notes", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtOBal.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "OBal", true, DataSourceUpdateMode.OnPropertyChanged));
+            chkCash.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "IsCashBook", true, DataSourceUpdateMode.OnValidation));
+            chkBank.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "IsBankBook", true, DataSourceUpdateMode.OnValidation));
+            chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnValidation));
+
+
+
         }
 
-        private void Table_Load()
+        private void Load_Grid()
         {
-            //Table_COA = AppliedTable.GetDataTable((int)Tables.COA);
-            //View_COA = new DataView(Table_COA);
-            MyNavigator.TableClass = new ThisTable(Table_COA);              // Set Table for Navigator 
-            MyNavigator.MyTableID = (int)Tables.COA;
-        }
-
-        #endregion
-
-        #region DataGrid    
-        private void DataGridRefresh()
-        {
-            
-            string[] ColumnsVisiable = { "Code", "SCode", "Title", "IsCashBook", "IsBankBook", "Notes", "OBal","Active" };
-            string[] ColumnsName = { "Code", "Tag", "Title", "Cash", "Bank", "Notes", "Opening Balance","Active" };
+            string[] ColumnsVisiable = { "Code", "SCode", "Title", "IsCashBook", "IsBankBook", "Notes", "OBal", "Active" };
+            string[] ColumnsName = { "Code", "Tag", "Title", "Cash", "Bank", "Notes", "Opening Balance", "Active" };
             int[] ColumnsFormat = { (int)TextFormat.Codes,0,0,
                                     (int)TextFormat.Boolean,
                                     (int)TextFormat.Boolean,
@@ -55,189 +56,139 @@ namespace Applied_Accounts
                                     (int)TextFormat.Currency,0};
             int[] ColumnWidth = { 60, 75, 260, 50, 50, 50, 80, 40 };
 
-            DataGrid_COA.ColumnsName = ColumnsName;
-            DataGrid_COA.ColumnsWidth = ColumnWidth;
-            DataGrid_COA.ColumnsVisiable = ColumnsVisiable;
-            DataGrid_COA.ColumnsFormat = ColumnsFormat;
-            DataGrid_COA.BrowseGrid.DataSource = View_COA;
-            DataGrid_COA.Set_Columns();
+            MyDataGrid.ColumnsName = ColumnsName;
+            MyDataGrid.ColumnsWidth = ColumnWidth;
+            MyDataGrid.ColumnsVisiable = ColumnsVisiable;
+            MyDataGrid.ColumnsFormat = ColumnsFormat;
+            MyDataGrid.BrowseGrid.DataSource = MyDataTable;
+            MyDataGrid.Set_Columns();
 
-            DataGrid_COA.BrowseGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            DataGrid_COA.BrowseGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            DataGrid_COA.BrowseGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            DataGrid_COA.BrowseGrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            DataGrid_COA.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            DataGrid_COA.BrowseGrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DataGrid_COA.BrowseGrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            MyDataGrid.BrowseGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            MyDataGrid.BrowseGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            MyDataGrid.BrowseGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            MyDataGrid.BrowseGrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            MyDataGrid.BrowseGrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            MyDataGrid.BrowseGrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
 
+
+        #region Load 
+
+        private void COA_Load(object sender, EventArgs e)
+        {
         }
 
         #endregion
-        
-        private void MyRefresh()
-        {
-            Table_Load();
-
-            if (MyNavigator.TableClass != null)
-            {
-                DataGridRefresh();
-                MyNavigator_Get_Values(null, null);
-            }
-        }
-        private void Defaults()
-        {
-            if (txtID.Text.Length == 0) { txtID.Text = "0"; }
-            if (txtNote.Text.Length == 0) { txtNote.Text = "0"; }
-            if (txtOBal.Text.Length == 0) { txtOBal.Text = "0"; }
-        }
-
-
-        #region Data Get and Set
-
-
-        //======================================================================== Procedures of Navigator
-        private void MyNavigator_Get_Values(object sender, EventArgs e)
-        {
-            txtID.Text = thisDataRow["ID"].ToString();
-            txtCode.Text = thisDataRow["Code"].ToString();
-            txtSCode.Text = thisDataRow["SCode"].ToString();
-            txtTitle.Text = thisDataRow["Title"].ToString();
-            txtNote.Text = thisDataRow["Notes"].ToString();
-            txtOBal.Text = thisDataRow["OBal"].ToString();
-
-            TitleNotes.Text = AppliedTable.GetTitle(txtNote.Text, (int)Tables.Notes);
-
-            chkBank.Checked = Conversion.ToBoolean(thisDataRow["IsBankBook"].ToString());
-            chkCash.Checked = Conversion.ToBoolean(thisDataRow["IsCashBook"].ToString());
-            chkActive.Checked = Conversion.ToBoolean(thisDataRow["Active"].ToString());
-
-        }
-        private void MyNavigator_Set_Values(object sender, EventArgs e)
-        {
-            Defaults();
-            thisDataRow["ID"] =  Conversion.ToInteger(txtID.Text);
-            thisDataRow["Code"] = txtCode.Text;                 // User Control Text
-            thisDataRow["SCode"] = txtSCode.Text;
-            thisDataRow["Title"] = txtTitle.Text;
-            thisDataRow["Notes"] = txtNote.Text;
-            thisDataRow["IsBankBook"] = Conversion.ToBoolean(chkBank.Checked);
-            thisDataRow["IsCashBook"] = Conversion.ToBoolean(chkCash.Checked);
-            thisDataRow["Active"] = Conversion.ToBoolean(chkActive.Checked);
-            thisDataRow["OBal"] = Conversion.ToInteger(txtOBal.Text);
-
-        }
-
-        #endregion
-
-        #region  Navigation Buttons
-
-        private void MyNavigator_New_Record(object sender, EventArgs e)
-        {
-            thisDataRow["ID"] = -1;
-            thisDataRow["SCode"] = "";
-            thisDataRow["Code"] = "";
-            thisDataRow["Title"] = "";
-            thisDataRow["IsCashBook"] = 0;
-            thisDataRow["IsBankBook"] = 0;
-            thisDataRow["Notes"] = 0;
-            thisDataRow["OBal"] = 0;
-
-            MessageBox.Show("New Record.");
-            Defaults();
-            txtCode.Focus();
-        }
-        private void MyNavigator_Before_Save(object sender, EventArgs e)
-        {
-        }
-        private void MyNavigator_After_Save(object sender, EventArgs e)
-        {
-            MyNavigator_Get_Values(sender, e);
-            int _PKey = Convert.ToInt32(MyNavigator.TableClass.MyPrimaryKeyValue);
-            MyRefresh();
-            MyNavigator.TableClass.MyDataRow = MyNavigator.TableClass.GetRow(_PKey);
-            MyNavigator_Get_Values(sender, e);
-        }
-        private void MyNavigator_After_Delete(object sender, EventArgs e)
-        {
-            Table_Load();
-        }
-
-        #endregion
-
-        #region Buttons
-
-        private void DataRow_Validate()
-        {
-            // Validate the Datarow before save in Databas.Data Table
-
-            Has_Error = false;
-            string[] _Messages = new string[10];
-            _Messages[0] = "Error | Record Id is not define properly.";
-            _Messages[1] = "Error | Account note is not degine properly.";
-            _Messages[2] = "Error | Chart of Account Code is not define properly.";
-            _Messages[3] = "Error | Chart of Account Tag is not define properly.";
-            _Messages[4] = "Error | Chart of Account's Title is not define properly.";
-
-            _Messages[5] = "Error | ";
-            _Messages[6] = "Error | ";
-
-            lblMessage.ForeColor = System.Drawing.Color.Red;
-
-            if (Convert.ToInt32(thisDataRow["ID"]) == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[0]; }
-            if (Convert.ToInt32(thisDataRow["Notes"]) == 0) { Has_Error = true; txtNote.Focus(); lblMessage.Text = _Messages[1]; }
-            if (thisDataRow["Code"].ToString().Length == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[2]; }
-            if (thisDataRow["SCode"].ToString().Length == 0) { Has_Error = true; txtCode.Focus(); lblMessage.Text = _Messages[3]; }
-            if (thisDataRow["Title"].ToString().Length == 0) { Has_Error = true; txtTitle.Focus(); lblMessage.Text = _Messages[4]; }
-
-        }
-
-        private void MyCode_Get_Row(object sender, EventArgs e)
-        {
-            txtCode.MyRow = thisDataRow;
-            txtCode.MyDataView = thisDataView;
-        }
         private void txtNote_Validating(object sender, CancelEventArgs e)
         {
-            Classes.Validation thisValidation = new Classes.Validation((TextBox)sender, (int)Tables.Notes);
-            e.Cancel = thisValidation.TextValidation();
-            lblMessage.Text = thisValidation.Message;
+            //Classes.Validation thisValidation = new Classes.Validation((TextBox)sender, (int)Tables.Notes);
+            //e.Cancel = thisValidation.TextValidation();
+            //lblMessage.Text = thisValidation.Message;
         }
-        
+
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
         }
-        private void btnSave_Click(object sender, EventArgs e)
+
+        #region Navigator Codes
+
+        private void MyNavigator_After_Delete(object sender, EventArgs e)
         {
 
-            DataRow_Validate();                                                     // Validate the Data Row.
-
-            if (!Has_Error)                                                         // If Data Row Validated true then save.
-            {
-                string _Message = MyNavigator.TableClass.Save();                   // Save DataRow to Database 
-                MessageBox.Show(_Message);
-                lblMessage.Text = _Message;
-                lblMessage.ForeColor = System.Drawing.Color.Black;
-            }
         }
 
+        #region SAVE Before and After
+
+        private void MyNavigator_Before_Save(object sender, EventArgs e)
+        {
+            DataRow _Row = ((DataRowView)MyNavigator.TableBinding.Current).Row;
+
+            if (MyNavigator.Current_Mode == Applied.Modes.New)
+            {
+
+                if (string.Equals(Applied.Code(txtCode.Text, MyDataTable.AsDataView()).Trim(), txtCode.Text.Trim()))
+                {
+                    MyNavigator.NewRow_Valid = false;
+                    MyNavigator.MyMessage = "Code is already exist.";
+                    txtCode.Text = "";
+                    txtCode.Focus();
+                    return;
+                }
+
+            }
+
+
+            if (!string.Equals(Applied.Code(txtNote.Text, tb_Notes.AsDataView()), txtNote.Text.Trim()))
+            {
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Account Note is not exist.";
+                txtNote.Text = "";
+                return;
+            }
+            else
+            {
+                MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Notes"] = Applied.Code2ID(txtNote.Text, tb_Notes.AsDataView());
+            }
+
+            if (txtTitle.Text.Length == 0)                                                  // Check title must be some 
+            {
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Null value in Title is not allowed. Enter some text.";
+                txtTitle.Focus();
+                return;
+
+            }
+
+
+
+
+            // Set DEfault values is Data Columns value is null
+            if (_Row["IsBankbook"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["IsBankBook"] = false; }
+            if (_Row["IsCashbook"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["IsCashBook"] = false; }
+            if (_Row["OBal"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["OBal"] = 0; }
+            if (_Row["Active"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Active"] = true; }
+
+
+        }
+
+        private void MyNavigator_After_Save(object sender, EventArgs e)
+        {
+        }
 
         #endregion
 
-        #region DataGrid
-
-        private void DataGrid_COA_Load(object sender, EventArgs e)
+        private void MyNavigator_New_Record(object sender, EventArgs e)
         {
-            DataGrid_COA.Load_Data(MyNavigator.TableClass.MyDataTable);
+            txtCode.Focus();
         }
 
-        private void DataGrid_COA_Leave(object sender, EventArgs e)
+        private void txtCode_Validating(object sender, CancelEventArgs e)
         {
-            MyNavigator.TableClass.MyDataRow = DataGrid_COA.MyDataRow;
-            MyNavigator_Get_Values(sender, e);
+
+
         }
 
-       
+        private void txtCode_Enter(object sender, EventArgs e)
+        {
+            txtCode.DataBindings.Clear();
+        }
+
+        private void txtCode_Leave(object sender, EventArgs e)
+        {
+            txtCode.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Code", true, DataSourceUpdateMode.OnPropertyChanged));
+        }
+
+        private void txtNote_TextChanged(object sender, EventArgs e)
+        {
+            int _NoteID = Conversion.ToInteger(((TextBox)sender).Text);
+            txtNotesTitle.Text = Applied.Title(((TextBox)sender).Text, tb_Notes.AsDataView());
+        }
+
+
+
+
         #endregion
 
         //=======================================

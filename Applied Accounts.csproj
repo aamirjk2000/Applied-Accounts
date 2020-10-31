@@ -56,10 +56,10 @@
     <ApplicationIcon>Safe-Open.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>5F549BA898587966D654318C1DB325BE724D12C4</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>38E723C0C648F66762D51C320B43E848B503F6CD</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>Applied Accounts_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>Applied Accounts_1_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -88,6 +88,7 @@
     <Compile Include="Classes\Applied.cs" />
     <Compile Include="Classes\AppliedClass.cs" />
     <Compile Include="Classes\AppliedTable.cs" />
+    <Compile Include="Classes\Code_Validation.cs" />
     <Compile Include="Classes\Connection.cs" />
     <Compile Include="Classes\Conversion.cs" />
     <Compile Include="Classes\DataSets.cs" />
@@ -127,11 +128,6 @@
     </Compile>
     <Compile Include="Components\SearchID.Designer.cs">
       <DependentUpon>SearchID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="DataSet1.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="Data\ds_Project_Ledger.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -413,13 +409,14 @@
     <EmbeddedResource Include="Reports\Report_GL_Projects_Account.rdlc" />
     <EmbeddedResource Include="Reports\Report_GL_Projects_Supplier.rdlc" />
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="Preview\Temp\Preview_General_Ledger.resx">
       <DependentUpon>Preview_General_Ledger.cs</DependentUpon>
@@ -438,18 +435,8 @@
     <EmbeddedResource Include="Preview\Report_Vouchers.resx">
       <DependentUpon>Report_Vouchers.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Applied Accounts_1_TemporaryKey.pfx" />
     <None Include="Applied Accounts_TemporaryKey.pfx" />
-    <None Include="DataSet1.xsc">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
-    <None Include="DataSet1.xsd">
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>DataSet1.Designer.cs</LastGenOutput>
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="DataSet1.xss">
-      <DependentUpon>DataSet1.xsd</DependentUpon>
-    </None>
     <None Include="Data\ds_Project_Ledger.xsc">
       <DependentUpon>ds_Project_Ledger.xsd</DependentUpon>
     </None>
@@ -530,7 +517,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Accounting.ico" />
     <Content Include="Icons\Accounting.ico" />
     <Content Include="Icons\Accounting.png" />
     <Content Include="Icons\AppliedLogo.jpg" />
@@ -579,10 +565,13 @@
       <Version>14.0.1016.290</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite">
-      <Version>1.0.113.1</Version>
+      <Version>1.0.113.5</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="MIS\" />
+    <Folder Include="Wallpaper\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>

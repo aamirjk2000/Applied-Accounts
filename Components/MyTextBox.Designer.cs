@@ -16,14 +16,14 @@ namespace Applied_Accounts
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
-                components.Dispose();
-            }
-            base.Dispose(disposing);
-        }
+        //protected override void Dispose(bool disposing)
+        //{
+        //    if (disposing && (components != null))
+        //    {
+        //        components.Dispose();
+        //    }
+        //    base.Dispose(disposing);
+        //}
 
         #region Component Designer generated code
 
@@ -34,18 +34,21 @@ namespace Applied_Accounts
         private void InitializeComponent()
         {
             this.ThisBox = new System.Windows.Forms.TextBox();
-            this.SuspendLayout();
-            
+            this.ThisBox.SuspendLayout();
+            // 
+            // ThisBox
+            // 
             this.ThisBox.Location = new System.Drawing.Point(0, 0);
             this.ThisBox.Name = "ThisBox";
             this.ThisBox.Size = new System.Drawing.Size(100, 20);
             this.ThisBox.TabIndex = 0;
-            //
-            // Event Handler
-            //
-            this.Enter += new System.EventHandler(this.GetRow);
-            this.Validating += new System.ComponentModel.CancelEventHandler(this.Validation);
-            this.ResumeLayout(false);
+            // 
+            // MyTextBox
+            // 
+            this.ThisBox.Enter += new System.EventHandler(this.GetRow);
+            this.ThisBox.Validating += new System.ComponentModel.CancelEventHandler(this.Validation);
+            this.ThisBox.Validated += new System.EventHandler(this.MyTextBox_Validated);
+            this.ThisBox.ResumeLayout(false);
 
         }
         

@@ -64,7 +64,7 @@ namespace Applied_Accounts
 
             IsPressEnter = false;
 
-            BrowseGrid.DataSource = MyDataView;
+            //BrowseGrid.DataSource = MyDataView;
             BrowseGrid.ReadOnly = true;
             BrowseGrid.AllowUserToAddRows = false;
             BrowseGrid.AllowUserToDeleteRows = false;
@@ -107,6 +107,9 @@ namespace Applied_Accounts
 
         private void AppliedDataGrid_Leave(object sender, EventArgs e)
         {
+            if(BrowseGrid.DataSource==null) { return; }
+
+
             if (((DataView)BrowseGrid.DataSource).Table.Rows.Count == 0)                 // If Table does not have any record (Empty Table)
             {
                 MyViewRow = null;

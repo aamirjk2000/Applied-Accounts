@@ -118,6 +118,11 @@ namespace Applied_Accounts
             if(MyDataTable==null) { MessageBox.Show("Error thisTable.GetBewRow()");  return null; }
             DataRow _Row = MyDataTable.NewRow();
             _Row["ID"] = -1;
+
+            if(MyDataTable.Columns.Contains("Active"))
+            {
+                _Row["Active"] = true;
+            }
             return _Row;
         }
 

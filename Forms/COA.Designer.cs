@@ -30,14 +30,15 @@
         {
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
+            this.txtCode = new System.Windows.Forms.TextBox();
+            this.MyNavigator = new Applied_Accounts.Navigator();
+            this.chkActive = new System.Windows.Forms.CheckBox();
             this.txtNote = new System.Windows.Forms.TextBox();
-            this.TitleNotes = new System.Windows.Forms.TextBox();
-            this.txtCode = new Applied_Accounts.MyTextBox();
+            this.txtNotesTitle = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
-            this.txtSCode = new System.Windows.Forms.TextBox();
+            this.txtTag = new System.Windows.Forms.TextBox();
             this.chkCash = new System.Windows.Forms.CheckBox();
             this.chkBank = new System.Windows.Forms.CheckBox();
-            this.MyNavigator = new Applied_Accounts.Navigator();
             this.label4 = new System.Windows.Forms.Label();
             this.txtOBal = new System.Windows.Forms.TextBox();
             this.txtTitle = new System.Windows.Forms.TextBox();
@@ -47,10 +48,9 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P2 = new System.Windows.Forms.TabPage();
-            this.DataGrid_COA = new Applied_Accounts.AppliedDataGrid();
+            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
-            this.chkActive = new System.Windows.Forms.CheckBox();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -66,20 +66,20 @@
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
-            this.Pages.Size = new System.Drawing.Size(714, 429);
+            this.Pages.Size = new System.Drawing.Size(720, 467);
             this.Pages.TabIndex = 0;
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.txtCode);
+            this.P1.Controls.Add(this.MyNavigator);
             this.P1.Controls.Add(this.chkActive);
             this.P1.Controls.Add(this.txtNote);
-            this.P1.Controls.Add(this.TitleNotes);
-            this.P1.Controls.Add(this.txtCode);
+            this.P1.Controls.Add(this.txtNotesTitle);
             this.P1.Controls.Add(this.label5);
-            this.P1.Controls.Add(this.txtSCode);
+            this.P1.Controls.Add(this.txtTag);
             this.P1.Controls.Add(this.chkCash);
             this.P1.Controls.Add(this.chkBank);
-            this.P1.Controls.Add(this.MyNavigator);
             this.P1.Controls.Add(this.label4);
             this.P1.Controls.Add(this.txtOBal);
             this.P1.Controls.Add(this.txtTitle);
@@ -91,10 +91,38 @@
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
-            this.P1.Size = new System.Drawing.Size(706, 403);
+            this.P1.Size = new System.Drawing.Size(712, 441);
             this.P1.TabIndex = 0;
             this.P1.Text = "Record";
             this.P1.UseVisualStyleBackColor = true;
+            // 
+            // txtCode
+            // 
+            this.txtCode.Location = new System.Drawing.Point(122, 55);
+            this.txtCode.Name = "txtCode";
+            this.txtCode.Size = new System.Drawing.Size(100, 20);
+            this.txtCode.TabIndex = 5;
+            // 
+            // MyNavigator
+            // 
+            this.MyNavigator.Location = new System.Drawing.Point(55, 398);
+            this.MyNavigator.Name = "MyNavigator";
+            this.MyNavigator.Size = new System.Drawing.Size(579, 26);
+            this.MyNavigator.TabIndex = 19;
+            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
+            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
+            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
+            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
+            // 
+            // chkActive
+            // 
+            this.chkActive.AutoSize = true;
+            this.chkActive.Location = new System.Drawing.Point(122, 230);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(56, 17);
+            this.chkActive.TabIndex = 12;
+            this.chkActive.Text = "Active";
+            this.chkActive.UseVisualStyleBackColor = true;
             // 
             // txtNote
             // 
@@ -102,32 +130,16 @@
             this.txtNote.Name = "txtNote";
             this.txtNote.Size = new System.Drawing.Size(100, 20);
             this.txtNote.TabIndex = 8;
+            this.txtNote.TextChanged += new System.EventHandler(this.txtNote_TextChanged);
             this.txtNote.Validating += new System.ComponentModel.CancelEventHandler(this.txtNote_Validating);
             // 
-            // TitleNotes
+            // txtNotesTitle
             // 
-            this.TitleNotes.Location = new System.Drawing.Point(231, 107);
-            this.TitleNotes.Name = "TitleNotes";
-            this.TitleNotes.ReadOnly = true;
-            this.TitleNotes.Size = new System.Drawing.Size(241, 20);
-            this.TitleNotes.TabIndex = 18;
-            // 
-            // txtCode
-            // 
-            this.txtCode.Allowe_Duplicate = false;
-            this.txtCode.Allowed_Chars = "0123456789-";
-            this.txtCode.ColumnName = "Code";
-            this.txtCode.Location = new System.Drawing.Point(122, 55);
-            this.txtCode.MaxDigit = 6;
-            this.txtCode.MyDataView = null;
-            this.txtCode.MyMessage = null;
-            this.txtCode.MyRow = null;
-            this.txtCode.Name = "txtCode";
-            this.txtCode.PrimaryKey = "ID";
-            this.txtCode.Size = new System.Drawing.Size(100, 20);
-            this.txtCode.TabIndex = 5;
-            this.txtCode.thisColor = System.Drawing.SystemColors.WindowText;
-            this.txtCode.Get_Row += new System.EventHandler(this.MyCode_Get_Row);
+            this.txtNotesTitle.Location = new System.Drawing.Point(231, 107);
+            this.txtNotesTitle.Name = "txtNotesTitle";
+            this.txtNotesTitle.ReadOnly = true;
+            this.txtNotesTitle.Size = new System.Drawing.Size(241, 20);
+            this.txtNotesTitle.TabIndex = 18;
             // 
             // label5
             // 
@@ -138,12 +150,12 @@
             this.label5.TabIndex = 17;
             this.label5.Text = "Tag";
             // 
-            // txtSCode
+            // txtTag
             // 
-            this.txtSCode.Location = new System.Drawing.Point(260, 55);
-            this.txtSCode.Name = "txtSCode";
-            this.txtSCode.Size = new System.Drawing.Size(100, 20);
-            this.txtSCode.TabIndex = 6;
+            this.txtTag.Location = new System.Drawing.Point(260, 55);
+            this.txtTag.Name = "txtTag";
+            this.txtTag.Size = new System.Drawing.Size(100, 20);
+            this.txtTag.TabIndex = 6;
             // 
             // chkCash
             // 
@@ -164,18 +176,6 @@
             this.chkBank.TabIndex = 10;
             this.chkBank.Text = "Is it Bank Account ?";
             this.chkBank.UseVisualStyleBackColor = true;
-            // 
-            // MyNavigator
-            // 
-            this.MyNavigator.Location = new System.Drawing.Point(106, 363);
-            this.MyNavigator.Name = "MyNavigator";
-            this.MyNavigator.Size = new System.Drawing.Size(454, 25);
-            this.MyNavigator.TabIndex = 13;
-            this.MyNavigator.Get_Values += new System.EventHandler(this.MyNavigator_Get_Values);
-            this.MyNavigator.Set_Values += new System.EventHandler(this.MyNavigator_Set_Values);
-            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
-            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
             // 
             // label4
             // 
@@ -246,41 +246,39 @@
             // 
             // P2
             // 
-            this.P2.Controls.Add(this.DataGrid_COA);
+            this.P2.Controls.Add(this.MyDataGrid);
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
             this.P2.Padding = new System.Windows.Forms.Padding(3);
-            this.P2.Size = new System.Drawing.Size(706, 403);
+            this.P2.Size = new System.Drawing.Size(712, 441);
             this.P2.TabIndex = 1;
             this.P2.Text = "List";
             this.P2.UseVisualStyleBackColor = true;
             // 
-            // DataGrid_COA
+            // MyDataGrid
             // 
-            this.DataGrid_COA.Active = false;
-            this.DataGrid_COA.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.DataGrid_COA.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.DataGrid_COA.ColumnsFormat = null;
-            this.DataGrid_COA.ColumnsName = null;
-            this.DataGrid_COA.ColumnsVisiable = null;
-            this.DataGrid_COA.ColumnsWidth = null;
-            this.DataGrid_COA.IsBrowseWin = false;
-            this.DataGrid_COA.IsPressEnter = false;
-            this.DataGrid_COA.Location = new System.Drawing.Point(6, 6);
-            this.DataGrid_COA.MyDataRow = null;
-            this.DataGrid_COA.MyDataView = null;
-            this.DataGrid_COA.MyViewRow = null;
-            this.DataGrid_COA.Name = "DataGrid_COA";
-            this.DataGrid_COA.RecordID = ((long)(0));
-            this.DataGrid_COA.Size = new System.Drawing.Size(694, 391);
-            this.DataGrid_COA.TabIndex = 1;
-            this.DataGrid_COA.Load += new System.EventHandler(this.DataGrid_COA_Load);
-            this.DataGrid_COA.Leave += new System.EventHandler(this.DataGrid_COA_Leave);
+            this.MyDataGrid.Active = false;
+            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MyDataGrid.ColumnsFormat = null;
+            this.MyDataGrid.ColumnsName = null;
+            this.MyDataGrid.ColumnsVisiable = null;
+            this.MyDataGrid.ColumnsWidth = null;
+            this.MyDataGrid.IsBrowseWin = false;
+            this.MyDataGrid.IsPressEnter = false;
+            this.MyDataGrid.Location = new System.Drawing.Point(6, 6);
+            this.MyDataGrid.MyDataRow = null;
+            this.MyDataGrid.MyDataView = null;
+            this.MyDataGrid.MyViewRow = null;
+            this.MyDataGrid.Name = "MyDataGrid";
+            this.MyDataGrid.RecordID = ((long)(0));
+            this.MyDataGrid.Size = new System.Drawing.Size(694, 391);
+            this.MyDataGrid.TabIndex = 1;
             // 
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Location = new System.Drawing.Point(641, 453);
+            this.btnExit.Location = new System.Drawing.Point(657, 491);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 1;
@@ -292,27 +290,17 @@
             // 
             this.lblMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lblMessage.AutoSize = true;
-            this.lblMessage.Location = new System.Drawing.Point(13, 463);
+            this.lblMessage.Location = new System.Drawing.Point(13, 501);
             this.lblMessage.Name = "lblMessage";
             this.lblMessage.Size = new System.Drawing.Size(50, 13);
             this.lblMessage.TabIndex = 13;
             this.lblMessage.Text = "Message";
             // 
-            // chkActive
-            // 
-            this.chkActive.AutoSize = true;
-            this.chkActive.Location = new System.Drawing.Point(122, 230);
-            this.chkActive.Name = "chkActive";
-            this.chkActive.Size = new System.Drawing.Size(56, 17);
-            this.chkActive.TabIndex = 12;
-            this.chkActive.Text = "Active";
-            this.chkActive.UseVisualStyleBackColor = true;
-            // 
             // frmCOA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(732, 488);
+            this.ClientSize = new System.Drawing.Size(748, 526);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.Pages);
@@ -343,15 +331,15 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label lblMessage;
-        private Navigator MyNavigator;
         private System.Windows.Forms.CheckBox chkCash;
         private System.Windows.Forms.CheckBox chkBank;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox txtSCode;
-        private AppliedDataGrid DataGrid_COA;
-        private MyTextBox txtCode;
-        private System.Windows.Forms.TextBox TitleNotes;
+        private System.Windows.Forms.TextBox txtTag;
+        private AppliedDataGrid MyDataGrid;
+        private System.Windows.Forms.TextBox txtNotesTitle;
         private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.CheckBox chkActive;
+        private Navigator MyNavigator;
+        private System.Windows.Forms.TextBox txtCode;
     }
 }

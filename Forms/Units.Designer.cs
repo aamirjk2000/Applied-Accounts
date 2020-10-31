@@ -283,13 +283,13 @@ namespace Applied_Accounts.Forms
             this.MyDataGrid.ColumnsWidth = null;
             this.MyDataGrid.IsBrowseWin = false;
             this.MyDataGrid.IsPressEnter = false;
-            this.MyDataGrid.Location = new System.Drawing.Point(6, 60);
+            this.MyDataGrid.Location = new System.Drawing.Point(6, 6);
             this.MyDataGrid.MyDataRow = null;
             this.MyDataGrid.MyDataView = null;
             this.MyDataGrid.MyViewRow = null;
             this.MyDataGrid.Name = "MyDataGrid";
             this.MyDataGrid.RecordID = ((long)(0));
-            this.MyDataGrid.Size = new System.Drawing.Size(652, 334);
+            this.MyDataGrid.Size = new System.Drawing.Size(652, 301);
             this.MyDataGrid.TabIndex = 0;
             // 
             // frmUnits

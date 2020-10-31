@@ -28,9 +28,9 @@ namespace Applied_Accounts
         
         public static OleDbConnection ExcelConnection(string _ExcelFileName)
         {
-#pragma warning disable CS0219 // The variable 'ExcelVersion' is assigned but its value is never used
+
             string ExcelVersion = "Excel 12.0;HDR=YES;IMEX=1;";
-#pragma warning restore CS0219 // The variable 'ExcelVersion' is assigned but its value is never used
+
             OleDbConnection oledbConn;
             oledbConn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + _ExcelFileName + ";Extended Properties='Excel 12.0;HDR=YES;IMEX=1;';");
             return oledbConn;

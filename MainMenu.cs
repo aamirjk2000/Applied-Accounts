@@ -4,6 +4,8 @@ using System.Windows.Forms;
 using Applied_Accounts.Classes;
 using Applied_Accounts.Reports;
 using System.Windows;
+using System.IO;
+using System.Drawing;
 //using System.Windows;
 
 namespace Applied_Accounts
@@ -12,13 +14,13 @@ namespace Applied_Accounts
     {
         public frmMainMenu()
         {
-                InitializeComponent();
+            InitializeComponent();
         }
 
 
         private void frmMainMenu_Load(object sender, EventArgs e)
         {
-            
+
 
         }
 
@@ -34,7 +36,7 @@ namespace Applied_Accounts
             lblAppPath.Text = Program.ExecutablePath;
             lblStartPath.Text = Program.StartupPath;
             lblversion.Text = System.Windows.Forms.Application.ProductVersion;
-            
+
 
         }
         private void mnuExit_Click(object sender, EventArgs e)
@@ -54,7 +56,7 @@ namespace Applied_Accounts
             ThisForm.Show();
         }
 
-       
+
         private void mnuAccNotes_Click_1(object sender, EventArgs e)
         {
             frmAccNotes ThisForm = new frmAccNotes();
@@ -138,7 +140,7 @@ namespace Applied_Accounts
             frmGL_Project ThisForm = new frmGL_Project();
             ThisForm.Show();
         }
-        
+
         private void mnuTrialBalance_Click(object sender, EventArgs e)
         {
 
@@ -150,6 +152,38 @@ namespace Applied_Accounts
         {
             frmUsers ThisForm = new frmUsers(Program.User);
             ThisForm.Show();
+        }
+
+        private void btnWallpaper_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog fd = new OpenFileDialog();
+            fd.DefaultExt = "*.*";
+            fd.FileName = Properties.Settings.Default.WallPaper;
+
+            if (File.Exists(fd.FileName))
+            {
+                Path.GetDirectoryName(fd.FileName);
+                fd.InitialDirectory = Path.GetDirectoryName(fd.FileName);
+            }
+            else
+            { 
+                fd.InitialDirectory = "C:\\";
+                fd.FileName = "";
+            }
+
+            fd.ShowDialog();
+            Properties.Settings.Default.WallPaper = fd.FileName;
+            Properties.Settings.Default.Save();
+
+            BackgroundImage = Image.FromFile(Properties.Settings.Default.WallPaper);
+
+
+        }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+
         }
     }
 }
