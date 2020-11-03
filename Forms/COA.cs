@@ -23,7 +23,6 @@ namespace Applied_Accounts
         {
             InitializeComponent();
             MyNavigator.InitializeClass(MyDataTable);
-
             DataBinding();                      // Data Binding with form objects
             Load_Grid();                        // Load Data in Data Grid.
 
@@ -60,7 +59,7 @@ namespace Applied_Accounts
             MyDataGrid.ColumnsWidth = ColumnWidth;
             MyDataGrid.ColumnsVisiable = ColumnsVisiable;
             MyDataGrid.ColumnsFormat = ColumnsFormat;
-            MyDataGrid.BrowseGrid.DataSource = MyDataTable;
+            MyDataGrid.Load_Data(MyDataTable);
             MyDataGrid.Set_Columns();
 
             MyDataGrid.BrowseGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -105,7 +104,7 @@ namespace Applied_Accounts
         {
             DataRow _Row = ((DataRowView)MyNavigator.TableBinding.Current).Row;
 
-            if (MyNavigator.Current_Mode == Applied.Modes.New)
+            if (MyNavigator.Current_Mode == (int)Applied.Modes.New)
             {
 
                 if (string.Equals(Applied.Code(txtCode.Text, MyDataTable.AsDataView()).Trim(), txtCode.Text.Trim()))
@@ -119,6 +118,13 @@ namespace Applied_Accounts
 
             }
 
+            if (txtTitle.Text.Length == 0)
+            {
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Account Title must be enter.";
+                txtTitle.Focus();
+                return;
+            }
 
             if (!string.Equals(Applied.Code(txtNote.Text, tb_Notes.AsDataView()), txtNote.Text.Trim()))
             {

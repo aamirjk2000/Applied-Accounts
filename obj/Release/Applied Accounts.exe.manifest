@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Safe-Open.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Applied Accounts" version="2020.10.20.12" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Applied Accounts" version="2020.11.2.15" language="neutral" processorArchitecture="msil" />
     <commandLine file="Applied Accounts.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,26 +43,26 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="1282520">
-      <assemblyIdentity name="Applied Accounts" version="2020.10.20.12" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="1289688">
+      <assemblyIdentity name="Applied Accounts" version="2020.11.2.15" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>xPd4/Kqu/z9AaZ8XBkXtfuVKzk6iRjoUebO1CbxgGvE=</dsig:DigestValue>
+        <dsig:DigestValue>0TIWk1KKDHlUMEFgobb8fxSyomhi6xKAYdelJukzgVk=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Connection_Class.dll" size="89600">
-      <assemblyIdentity name="Connection_Class" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Connection_Class.dll" size="91648">
+      <assemblyIdentity name="Connection_Class" version="2020.10.31.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>iVlnSswkRDdxKo4FheKZOE/sgmOZdaReEpKCaFaT+lQ=</dsig:DigestValue>
+        <dsig:DigestValue>FeUDxw31poS0O0gbqFymiKX0xD4BUjn5YKcqcPAI8OY=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -678,22 +678,13 @@
       </hash>
     </dependentAssembly>
   </dependency>
-  <file name="Accounting.ico" size="6346">
+  <file name="Applied Accounts.exe.config" size="1439">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>3M9b6EnqHU0pStPLxwDNwnYW2gp85p/0iRsWZYJEh+U=</dsig:DigestValue>
-    </hash>
-  </file>
-  <file name="Applied Accounts.exe.config" size="1763">
-    <hash>
-      <dsig:Transforms>
-        <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
-      </dsig:Transforms>
-      <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>4y0duVlBGQ5iuMllh60OEgmKOztjqmTUSDAQ6L3ld6I=</dsig:DigestValue>
+      <dsig:DigestValue>uMXCXUgPkOktjjvBk1u77mTJNiSJzOdgfEvyq8un0Q4=</dsig:DigestValue>
     </hash>
   </file>
   <file name="Icons\Accounting.ico" size="6346">

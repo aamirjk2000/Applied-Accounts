@@ -18,13 +18,13 @@ namespace Applied_Accounts
 
         public static DataTable GetDataTable(int TableID)
         {
-            if(TableID>0)               // ID is zero
-            { 
+            if (TableID > 0)               // ID is zero
+            {
                 DataTable _DataTable = new DataTable();
-                
+
                 string _TableName = Conversion.GetTableName(TableID);
                 string _Text = "SELECT * FROM " + _TableName;
-                
+
 
                 SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
                 SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
@@ -45,7 +45,7 @@ namespace Applied_Accounts
                 }
                 finally
                 {
-                    if(try_OK==false)
+                    if (try_OK == false)
                     {
                         frmDBSetting ThisForm = new frmDBSetting();
                         ThisForm.Show();
@@ -160,7 +160,7 @@ namespace Applied_Accounts
             DataTable _DataTable = new DataTable();
 
             if (_SQLCommand == null) { return _DataTable; }     // Return empty Table when command is null;
-            if(_SQLCommand.CommandText.Length>0)                // Get Data in Table when Command Text is present
+            if (_SQLCommand.CommandText.Length > 0)                // Get Data in Table when Command Text is present
             {
                 SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
                 DataSet _DataSet = new DataSet();
@@ -177,7 +177,7 @@ namespace Applied_Accounts
             DataTable _DataTable = new DataTable();
             string _TableName = Conversion.GetTableName((int)TableID);
             string _Text = "SELECT * FROM " + _TableName + " WHERE Active ORDER BY Title ";
-            _DataTable =  GetDataTable(_Text, _TableName);
+            _DataTable = GetDataTable(_Text, _TableName);
             return _DataTable;
         }
 
@@ -263,7 +263,7 @@ namespace Applied_Accounts
             DataView _DataView = new DataView(_DataTable);
             string _Code = _TextBox.Text.Trim();
             _DataView.RowFilter = string.Concat("Code='", _Code, "'");
-            if(_DataView.Count==1)
+            if (_DataView.Count == 1)
             {
                 _DataRow = _DataView.ToTable().Rows[0];
             }
@@ -276,12 +276,11 @@ namespace Applied_Accounts
             }
             return _DataRow;
         }
-
         public static bool SearchID(long _Value, DataRow _DataRow)
         {
             bool _Result = false;
             DataView _DataView = _DataRow.Table.AsDataView();   //new DataView(_DataTable);
-            _DataView.RowFilter = string.Concat("ID=", _Value.ToString() );
+            _DataView.RowFilter = string.Concat("ID=", _Value.ToString());
             if (_DataView.Count == 1)
             {
                 _Result = true;
@@ -293,30 +292,29 @@ namespace Applied_Accounts
             }
             return _Result;
         }
-
         public static DataTable GetTable_TB_period(DateTime _From, DateTime _To)
         {
             DataTable _DataTable = GetDataTable(Tables.View_TB_Period);
             DataView _DataView = _DataTable.AsDataView();
             DataTable _Ledger = GetDataTable(Tables.Ledger);
             DataTable _COA = GetDataTable(Tables.COA);
-            DataRow _AddRow; 
+            DataRow _AddRow;
             //decimal _DR, _CR, _Balance;
             int _Index;
 
             if (_Ledger.Rows.Count == 0) { return new DataTable(); }   // return empty if ledger is empty.
 
             _DataTable.Clear();
-            
-            foreach(DataRow _Row in _Ledger.Rows)
+
+            foreach (DataRow _Row in _Ledger.Rows)
             {
                 _DataView.RowFilter = string.Concat("[COA]=", (long)_Row["COA"]);
-                if(_DataView.Count==0)
+                if (_DataView.Count == 0)
                 {
                     _AddRow = _DataTable.NewRow();
                     _AddRow["COA"] = _Row["COA"];
                     _AddRow["Code"] = "";
-                    _AddRow["Title"] = GetTitle(Conversion.ToInteger(_Row["COA"]),_COA);
+                    _AddRow["Title"] = GetTitle(Conversion.ToInteger(_Row["COA"]), _COA);
 
                     if ((DateTime)_Row["Vou_Date"] < _From)
                     {
@@ -324,7 +322,7 @@ namespace Applied_Accounts
                         _AddRow["Debit"] = 0;
                         _AddRow["Credit"] = 0;
                     }
-                    if ((DateTime)_Row["Vou_Date"] >= _From && (DateTime)_Row["Vou_Date"]<= _To)
+                    if ((DateTime)_Row["Vou_Date"] >= _From && (DateTime)_Row["Vou_Date"] <= _To)
                     {
                         _AddRow["OBAL"] = 0;
                         _AddRow["Debit"] = (decimal)_Row["DR"];
@@ -332,14 +330,14 @@ namespace Applied_Accounts
                     }
 
                     _AddRow["BALANCE"] = Conversion.ToMoney(_AddRow["OBAL"])
-                                        + Conversion.ToMoney(_AddRow["Debit"]) 
+                                        + Conversion.ToMoney(_AddRow["Debit"])
                                         - Conversion.ToMoney(_AddRow["Credit"]);
 
                     _DataTable.Rows.Add(_AddRow);
                     continue;
                 }
 
-                if(_DataView.Count>0)
+                if (_DataView.Count > 0)
                 {
                     _Index = _DataTable.Rows.IndexOf(_DataView[0].Row);
                     //_DR = Conversion.ToMoney(_DataView[0].Row["Debit"]);
@@ -350,21 +348,21 @@ namespace Applied_Accounts
 
                     if ((DateTime)_Row["Vou_Date"] < _From)
                     {
-                        _DataTable.Rows[_Index]["OBAL"] =+ (Conversion.ToMoney(_Row["DR"])
-                                                         -  Conversion.ToMoney(_Row["CR"]));
+                        _DataTable.Rows[_Index]["OBAL"] = +(Conversion.ToMoney(_Row["DR"])
+                                                         - Conversion.ToMoney(_Row["CR"]));
                     }
-                    if ((DateTime)_Row["Vou_Date"] >= _From && 
+                    if ((DateTime)_Row["Vou_Date"] >= _From &&
                         (DateTime)_Row["Vou_Date"] <= _To)
                     {
 
 
-                        _DataTable.Rows[_Index]["Debit"] =+Conversion.ToMoney(_Row["DR"]);
-                        _DataTable.Rows[_Index]["Credit"] =+Conversion.ToMoney(_Row["CR"]);
+                        _DataTable.Rows[_Index]["Debit"] = +Conversion.ToMoney(_Row["DR"]);
+                        _DataTable.Rows[_Index]["Credit"] = +Conversion.ToMoney(_Row["CR"]);
                     }
-                        _DataTable.Rows[_Index]["Balance"]
-                                        = Conversion.ToMoney(_DataTable.Rows[_Index]["OBAL"])
-                                        + Conversion.ToMoney(_DataTable.Rows[_Index]["DEBIT"])
-                                        - Conversion.ToMoney(_DataTable.Rows[_Index]["CREDIT"]);
+                    _DataTable.Rows[_Index]["Balance"]
+                                    = Conversion.ToMoney(_DataTable.Rows[_Index]["OBAL"])
+                                    + Conversion.ToMoney(_DataTable.Rows[_Index]["DEBIT"])
+                                    - Conversion.ToMoney(_DataTable.Rows[_Index]["CREDIT"]);
                 }
 
             }
@@ -374,31 +372,78 @@ namespace Applied_Accounts
         {
             return (int)((Tables)Enum.Parse(typeof(Tables), _DataTable.TableName));
         }
-    }                             // Main
+        public static int DeleteRow(DataRow _Row, bool ShowMessage)
+        {
+            long _ID = Conversion.ToLong(_Row["ID"]);
+
+            if (_ID < 0) { return -1; }
 
 
-    public enum Tables
-    {
-        COA = 1,
-        Notes = 2,
-        COA_Type = 3,
-        Suppliers = 4,
-        Projects = 5,
-        Units = 6,
-        Employees = 7,
-        Stock = 8,
-        Applied = 9,
-        Ledger = 10,
-        Users = 11,
+            SQLiteCommand DELCommand = new SQLiteCommand("DELETE FROM [Ledger] WHERE ID=@ID ", Connection.AppliedConnection());
+            DELCommand.Parameters.AddWithValue("@ID", _ID);
 
-        View_Voucher = 101,
-        View_VouNo = 102,
-        View_General_Ledger = 103,
-        View_Supplier_Ledger = 104,
-        View_Project_Ledger = 105,
-        View_Trial_Balance = 106,
-        View_TB_Period = 107,
-        View_VoucherGrid = 108
-    };
+            string _Message = "Are you Sure to DELETE \n " + "Voucerh Serial No. " + _Row["SRNO"].ToString();
+            int _RowEfected = 0;
+
+
+            if (ShowMessage)
+            {
+                DialogResult _YesNo =
+                MessageBox.Show(_Message, "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (_YesNo == DialogResult.Yes)
+                {
+                    _RowEfected = DELCommand.ExecuteNonQuery();
+                }
+            }
+            else
+            {
+                _RowEfected = DELCommand.ExecuteNonQuery();
+            }
+
+
+            if (ShowMessage)
+            {
+
+                if (_RowEfected == 0)
+                {
+                    MessageBox.Show(_Row["SRNO"].ToString() + " Not Deleted", "ERROR");
+                    return -1;
+
+                }
+                else
+                {
+                    MessageBox.Show(_Row["SRNO"].ToString() + " Deleted", "ERROR");
+                }
+            }
         
+            return _RowEfected;
+        }
+
+}                             // Main
+
+
+public enum Tables
+{
+    COA = 1,
+    Notes = 2,
+    COA_Type = 3,
+    Suppliers = 4,
+    Projects = 5,
+    Units = 6,
+    Employees = 7,
+    Stock = 8,
+    Applied = 9,
+    Ledger = 10,
+    Users = 11,
+
+    View_Voucher = 101,
+    View_VouNo = 102,
+    View_General_Ledger = 103,
+    View_Supplier_Ledger = 104,
+    View_Project_Ledger = 105,
+    View_Trial_Balance = 106,
+    View_TB_Period = 107,
+    View_VoucherGrid = 108
+};
+
 }                               // Namespace

@@ -14,21 +14,59 @@ namespace Applied_Accounts.Forms
     public partial class frmSuppliers : Form
     {
 
-        private DataRow thisRow { get => MyNavigator.TableClass.MyDataRow; set => MyNavigator.TableClass.MyDataRow= value; }
-        private bool IsDataLoad = false;
+        private DataTable MyDataTable = AppliedTable.GetDataTable(Tables.Suppliers);
+        
 
         #region initialize
 
         public frmSuppliers()
         {
             InitializeComponent();
+            MyNavigator.InitializeClass(MyDataTable);
+            DataBinding();                      // Data Binding with form objects
+            Load_Grid();                        // Load Data in Data Grid.
+
         }
 
-        public frmSuppliers(int _DataTableID)
+        private void DataBinding()
         {
-            InitializeComponent();
-            Load_Data(_DataTableID);
+            txtID.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "ID", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtCode.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Code", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtTag.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "SCode", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtTitle.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Title", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtPerson.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Person", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtContact.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Contact", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtAddress.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Address", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtCity.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "City", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtCountry.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Country", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtNTN.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "NTN", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtSTN.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "STN", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtCNIC.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "CNIC", true, DataSourceUpdateMode.OnPropertyChanged));
+            chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnValidation));
         }
+
+        private void Load_Grid()
+        {
+            string[] ColumnsVisiable = { "Code", "SCode", "Title", "Contact", "Active" };
+            string[] ColumnsName = { "Code", "Tag", "Title", "Contact", "Active" };
+            int[] ColumnsFormat = { (int)TextFormat.Codes, 0, 0, 0, 0 };
+                                    
+            int[] ColumnWidth = { 60, 60, 260, 75, 40 };
+
+            MyDataGrid.ColumnsName = ColumnsName;
+            MyDataGrid.ColumnsWidth = ColumnWidth;
+            MyDataGrid.ColumnsVisiable = ColumnsVisiable;
+            MyDataGrid.ColumnsFormat = ColumnsFormat;
+            MyDataGrid.Load_Data(MyDataTable);
+            MyDataGrid.Set_Columns();
+
+            MyDataGrid.BrowseGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            MyDataGrid.BrowseGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            MyDataGrid.BrowseGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            MyDataGrid.BrowseGrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+        }
+
 
         #endregion
 
@@ -38,79 +76,54 @@ namespace Applied_Accounts.Forms
         private void Load_Data(int _TableID)
         {
             DataTable _DataTable = AppliedTable.GetDataTable(_TableID);
-            Grid_Supplier.MyDataView = new DataView(_DataTable);
+            MyDataGrid.MyDataView = new DataView(_DataTable);
             MyNavigator.InitializeClass(_DataTable);
-            IsDataLoad = true;                                      // prevent again loading data.
+            
         }
-
-
-        private void Grid_Supplier_Load(object sender, EventArgs e)
-        {
-            if(!IsDataLoad) { Load_Data((int)Tables.Suppliers); }   // Load Table if not loaded.
-            Grid_Supplier.Load_Data(MyNavigator.TableClass.MyDataTable);
-            string[] ColumnsVisiable = { "Code", "SCode", "Title", "Contact", "Active", "City","Email" };
-            string[] ColumnsName = { "Code", "Tag", "Title", "Contact", "Active", "City", "Email" };
-            int[] ColumnsFormat = { (int)TextFormat.Codes, 0, 0, 0, (int)TextFormat.Boolean, 0,0 };
-            int[] ColumnWidth = { 60, 75, 260, 80, 50, 50,150 };
-
-            Grid_Supplier.ColumnsName = ColumnsName;
-            Grid_Supplier.ColumnsVisiable = ColumnsVisiable;
-            Grid_Supplier.ColumnsFormat = ColumnsFormat;
-            Grid_Supplier.ColumnsWidth = ColumnWidth;
-            Grid_Supplier.Set_Columns();
-        }
-
-
-        private void MyNavigator_Load(object sender, EventArgs e)
-        {
-            if (!IsDataLoad) { Load_Data((int)Tables.Suppliers); }  // Load Table if not loaded.
-            MyNavigator_Get_Values(sender, e);
-        }
+        
         #endregion
 
         #region Navigators buttons
 
         private void MyNavigator_After_Delete(object sender, EventArgs e) {}
+        private void MyNavigator_Before_Save(object sender, EventArgs e)
+        {
+            DataRow _Row = ((DataRowView)MyNavigator.TableBinding.Current).Row;
+
+            if (MyNavigator.Current_Mode == (int)Applied.Modes.New)
+            {
+
+                if (string.Equals(Applied.Code(txtCode.Text, MyDataTable.AsDataView()).Trim(), txtCode.Text.Trim()))
+                {
+                    MyNavigator.NewRow_Valid = false;
+                    MyNavigator.MyMessage = "Code is already exist.";
+                    txtCode.Text = "";
+                    txtCode.Focus();
+                    return;
+                }
+
+            }
+
+            if(txtTitle.Text.Length==0)
+            {
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Supplier Name must be enter.";
+                txtTitle.Focus();
+                return;
+            }
+
+            if (_Row["Active"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Active"] = true; }
+            if (_Row["Nature"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Nature"] = 1; }
+
+        }
+        
         private void MyNavigator_After_Save(object sender, EventArgs e) {}
-        private void MyNavigator_Before_Save(object sender, EventArgs e) {}
         private void MyNavigator_New_Record(object sender, EventArgs e) {}
         private void btnExit_Click(object sender, EventArgs e) { Close(); }
         #endregion
 
-        #region  Text Box Values Get and Set
-
-        private void MyNavigator_Set_Values(object sender, EventArgs e)
-        {
-            thisRow["ID"] = Conversion.ToInteger(txtID.Text);
-            thisRow["Code"] = txtCode.Text.ToString();
-            thisRow["SCode"] = txtTag.Text.ToString();
-            thisRow["title"] = txtTitle.Text.ToString();
-            thisRow["BusinessTitle"] = txtBusiness.Text.ToString();
-            thisRow["Active"] = AppliedClass.ConvertDigit(chkActive.Checked);
-        }
-
-        private void MyNavigator_Get_Values(object sender, EventArgs e)
-        {
-            if(thisRow==null) { return; }
-            txtID.Text = thisRow["ID"].ToString();
-            txtCode.Text = thisRow["Code"].ToString();
-            txtTag.Text = thisRow["Scode"].ToString();
-            txtTitle.Text = thisRow["Title"].ToString();
-            txtBusiness.Text = thisRow["BusinessTitle"].ToString();
-            chkActive.Checked = AppliedClass.Convertbool(thisRow["ID"].ToString());
-        }
-
-
-
-
-        #endregion
-
-        private void P2_Enter(object sender, EventArgs e)
-        {
-            thisRow = Grid_Supplier.MyDataRow;
-            MyNavigator_Get_Values(sender, e);
-        }
-
        
+
+        
     }       // END Main Class
 }           // END Namespace

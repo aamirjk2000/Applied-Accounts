@@ -22,11 +22,7 @@ namespace Applied_Accounts.Classes
 
     public class VoucherClass : iVoucherclass
     {
-
-
-
         #region Variables
-
 
         public string Vou_No { get; set; }
         public DateTime Vou_Date { get; set; }
@@ -38,6 +34,7 @@ namespace Applied_Accounts.Classes
         public int Total_Transactions { get; set; }
 
         public DataTable VoucherTable = new DataTable();
+        public DataTable DeleteTable = new DataTable();
         public DataTable GridTable = new DataTable();
         public DataView VoucherView = new DataView();
         private DataTable tbLedger;
@@ -49,6 +46,7 @@ namespace Applied_Accounts.Classes
         public int Count_Table() { return VoucherTable.Rows.Count; }
         public int Count_View() { return VoucherView.Count; }
         public bool Voucher_Saved { get; set; }
+        public int Total_RowID { get; set; }
 
 
         #endregion
@@ -155,7 +153,9 @@ namespace Applied_Accounts.Classes
         {
             if (Vou_No == null || Vou_No.Length == 0)
             {
-                VoucherTable = new DataView(tbLedger.Clone()).ToTable();
+                //VoucherTable = new DataView(tbLedger.Clone()).ToTable();
+                VoucherTable = tbLedger.Clone();
+                DataTable _Tem = tbLedger.Clone();
                 VoucherView.Table = VoucherTable;
             }
             else
@@ -163,6 +163,8 @@ namespace Applied_Accounts.Classes
                 VoucherTable = new DataView(tbLedger, "Vou_No='" + Vou_No + "'", "SRNO", DataViewRowState.OriginalRows).ToTable().Copy();
                 VoucherView.Table = VoucherTable;
             }
+
+            DeleteTable = VoucherTable.Clone();
 
         }
 
@@ -237,6 +239,7 @@ namespace Applied_Accounts.Classes
 
             int Insert_Record = 0;
             int Update_Record = 0;
+            int Delete_Record = 0;
 
             if (Vou_No.ToUpper() == "NEW")
             {
@@ -264,7 +267,6 @@ namespace Applied_Accounts.Classes
 
                 _CmdInsert = Connection_Class.SQLite.SQLiteInsert(_TargetRow, Connection.AppliedConnection());
                 _CmdUpdate = Connection_Class.SQLite.SQLiteUpdate(_TargetRow, _PrimaryKeyName, Connection.AppliedConnection());
-                //_CmdDelete = Connection_Class.SQLite.SQLiteDelete(_Row, _PrimaryKeyName, RecordID);
 
                 _RecordID = Conversion.ToInteger(_TargetRow["ID"]);
                 _DR = Convert.ToDecimal(_TargetRow["DR"]);            //Conversion.ToInteger(_Row["DR"]);
@@ -299,31 +301,36 @@ namespace Applied_Accounts.Classes
                 {
                     if ((_DR + _CR) == 0)                                                       // if Debit and Credit both are zero
                     {
-                        // Delete Record if Exist
+                        Delete_Record += AppliedTable.DeleteRow(_TargetRow, true);
                     }
 
                     VoucherView.RowFilter = string.Concat("ID=", _RecordID.ToString());         // Select a record in table view 
 
-                    if (VoucherView.Count == 1)                                                 // Record exist
-                    {
-                        // Update record in DataBase.
-                        Update_Record = Update_Record + _CmdUpdate.ExecuteNonQuery();           // update record in Database Table.
-                    }
-
+                    
                     if (VoucherView.Count > 1)                                                  // if records found more than 1 is error
                     {
-                        // Declare Error if Target Rows found more than one.
+                        Delete_Record += AppliedTable.DeleteRow(_TargetRow, true);
                         MessageBox.Show(VoucherView.Count.ToString() + " Records found.", "ERROR");
                     }
                 }
             }
 
-            if (Insert_Record + Update_Record > 0)                                              // show Message for save the record.
+            foreach (DataRow _Row in DeleteTable.Rows)
+            {
+                Delete_Record += AppliedTable.DeleteRow(_Row, true);
+            }
+
+            
+
+
+            if (Insert_Record + Update_Record + Delete_Record > 0)                                              // show Message for save the record.
             {
                 string _SaveMessage = "";
-                if (Insert_Record > 0) {_SaveMessage += string.Concat(Insert_Record, " Record(s) INSERTED.", "\n Voucher | ",Vou_No ); }
+                if (Insert_Record > 0) { _SaveMessage += string.Concat(Insert_Record, " Record(s) INSERTED. \n"); }
                 if (_SaveMessage.Length > 0) { _SaveMessage += Environment.NewLine; }
-                if (Update_Record > 0) { _SaveMessage += string.Concat(Update_Record, " Record(s) UPDATED.", "\n Voucher | ", Vou_No); }
+                if (Update_Record > 0) { _SaveMessage += string.Concat(Update_Record, " Record(s) UPDATED. \n"); }
+                if (_SaveMessage.Length > 0) { _SaveMessage += Environment.NewLine; }
+                if (Update_Record > 0) { _SaveMessage += string.Concat(Delete_Record, " Record(s) DELETEED.\n "); }
 
                 MessageBox.Show(_SaveMessage, "VOUCHER | " + Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Voucher_Saved = true;
@@ -517,18 +524,34 @@ namespace Applied_Accounts.Classes
                               "[Description] FROM [Ledger] " +
                               "LEFT JOIN[COA]       ON [COA].[ID]       = [Ledger].[COA]" +
                               "LEFT JOIN[Suppliers] ON [Suppliers].[ID] = [Ledger].[Supplier]" +
-                              "WHERE Vou_No='" + Vou_No + "'";
+                              "WHERE Vou_No=''";
 
             _Result = AppliedTable.GetDataTable(_Command);
 
-            if (_Result.Rows.Count == 0) { return new DataTable(); }           // Return Empty id rows are zero
-
-
+            DataView tb_COA = AppliedTable.GetDataTable(Tables.COA).AsDataView();               // Table COA for Account Title
+            DataView tb_Vendor = AppliedTable.GetDataTable(Tables.Suppliers).AsDataView();      // Table Supplier for Account Title
             DataRow _GridRow = _Result.NewRow();
+            
+            foreach (DataRow _Row in VoucherTable.Rows)
+            {
+                _GridRow["SRNO"] = _Row["SRNO"];
+                _GridRow["Account"] = Applied.Title(Conversion.ToLong(_Row["COA"]),tb_COA);
+                _GridRow["Vandor"] = Applied.Title(Conversion.ToLong(_Row["Supplier"]), tb_COA);
+                _GridRow["Debit"] = _Row["DR"];
+                _GridRow["Credit"] = _Row["CR"];
+                _GridRow["Description"] = _Row["Description"];
+                _Result.Rows.Add(_GridRow.ItemArray);
+            }
+
+            tb_COA.Dispose();
+
+            _GridRow = _Result.NewRow();                        // Assign for Total Row in Grid.
             int RowCount = _Result.Rows.Count;
             decimal Tot_DR = (decimal)_Result.Compute("Sum(Debit)", string.Empty);
             decimal Tot_CR = (decimal)_Result.Compute("Sum(Credit)", string.Empty);
             long MaxSrNo = (long)_Result.Compute("Max(SRNO)", string.Empty);
+
+            Total_RowID = Conversion.ToInteger(MaxSrNo) ;
 
             _GridRow["SRNO"] = MaxSrNo + 1;
             _GridRow["Account"] = "Transactions = " + _Result.Rows.Count.ToString();
@@ -538,10 +561,9 @@ namespace Applied_Accounts.Classes
             _GridRow["Description"] = "";
 
             _Result.Rows.Add(_GridRow.ItemArray);
+
             return _Result;
         }
-
-
         #endregion
 
         public void Preview_Voucher()
@@ -554,8 +576,8 @@ namespace Applied_Accounts.Classes
 
             if (_DataFilter.Length == 0)
             {
-                _DataFilter = "Vou_Date ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'"; 
-            }   
+                _DataFilter = "Vou_Date ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'";
+            }
 
             ReportClass PreviewClass = new ReportClass();                                       // Initialize Report Class
             PreviewClass.DataSet_Name = "ds_Voucher";                                           // Dataset for the report
@@ -590,7 +612,7 @@ namespace Applied_Accounts.Classes
                 }
 
                 PreviewClass.Report_From = PreviewClass.Vou_Date;
-                
+
 
                 frmPreview_Reports PreviewVoucher = new frmPreview_Reports(PreviewClass);           // Window form for the report.
                 PreviewVoucher.ShowDialog();

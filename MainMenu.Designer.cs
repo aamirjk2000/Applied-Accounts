@@ -85,6 +85,8 @@
             this.lblStartPath = new System.Windows.Forms.Label();
             this.lblversion = new System.Windows.Forms.Label();
             this.btnWallpaper = new System.Windows.Forms.Button();
+            this.mnuUtility = new System.Windows.Forms.ToolStripMenuItem();
+            this.mnuDELVoucher = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -96,6 +98,7 @@
             this.mnuReport,
             this.mnuSettings,
             this.mnuExit,
+            this.mnuUtility,
             this.toolStripTextBox1});
             this.mnuMain.Location = new System.Drawing.Point(0, 0);
             this.mnuMain.Name = "mnuMain";
@@ -124,73 +127,73 @@
             // mnuCOA
             // 
             this.mnuCOA.Name = "mnuCOA";
-            this.mnuCOA.Size = new System.Drawing.Size(170, 22);
+            this.mnuCOA.Size = new System.Drawing.Size(180, 22);
             this.mnuCOA.Text = "Chart of Accounts";
             this.mnuCOA.Click += new System.EventHandler(this.mnuCOA_Click);
             // 
             // mnuAccNotes
             // 
             this.mnuAccNotes.Name = "mnuAccNotes";
-            this.mnuAccNotes.Size = new System.Drawing.Size(170, 22);
+            this.mnuAccNotes.Size = new System.Drawing.Size(180, 22);
             this.mnuAccNotes.Text = "Accounts Notes";
             this.mnuAccNotes.Click += new System.EventHandler(this.mnuAccNotes_Click_1);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuSupplier
             // 
             this.mnuSupplier.Name = "mnuSupplier";
-            this.mnuSupplier.Size = new System.Drawing.Size(170, 22);
+            this.mnuSupplier.Size = new System.Drawing.Size(180, 22);
             this.mnuSupplier.Text = "Clients / Suppliers";
             this.mnuSupplier.Click += new System.EventHandler(this.mnuSupplier_Click);
             // 
             // mnuProjects
             // 
             this.mnuProjects.Name = "mnuProjects";
-            this.mnuProjects.Size = new System.Drawing.Size(170, 22);
+            this.mnuProjects.Size = new System.Drawing.Size(180, 22);
             this.mnuProjects.Text = "Projects";
             this.mnuProjects.Click += new System.EventHandler(this.mnuProjects_Click);
             // 
             // mnuUnits
             // 
             this.mnuUnits.Name = "mnuUnits";
-            this.mnuUnits.Size = new System.Drawing.Size(170, 22);
+            this.mnuUnits.Size = new System.Drawing.Size(180, 22);
             this.mnuUnits.Text = "Units";
             this.mnuUnits.Click += new System.EventHandler(this.mnuUnits_Click);
             // 
             // mnuEmployees
             // 
             this.mnuEmployees.Name = "mnuEmployees";
-            this.mnuEmployees.Size = new System.Drawing.Size(170, 22);
+            this.mnuEmployees.Size = new System.Drawing.Size(180, 22);
             this.mnuEmployees.Text = "Employees";
             this.mnuEmployees.Click += new System.EventHandler(this.mnuEmployees_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuMigration
             // 
             this.mnuMigration.Name = "mnuMigration";
-            this.mnuMigration.Size = new System.Drawing.Size(170, 22);
+            this.mnuMigration.Size = new System.Drawing.Size(180, 22);
             this.mnuMigration.Text = "Migration of Data";
             this.mnuMigration.Click += new System.EventHandler(this.mnuMigration_Click);
             // 
             // mnuSetting
             // 
             this.mnuSetting.Name = "mnuSetting";
-            this.mnuSetting.Size = new System.Drawing.Size(170, 22);
+            this.mnuSetting.Size = new System.Drawing.Size(180, 22);
             this.mnuSetting.Text = "Setting";
             this.mnuSetting.Click += new System.EventHandler(this.mnuSetting_Click);
             // 
             // mnuPWChange
             // 
             this.mnuPWChange.Name = "mnuPWChange";
-            this.mnuPWChange.Size = new System.Drawing.Size(170, 22);
+            this.mnuPWChange.Size = new System.Drawing.Size(180, 22);
             this.mnuPWChange.Text = "Password Change";
             this.mnuPWChange.Click += new System.EventHandler(this.mnuPWChange_Click);
             // 
@@ -215,68 +218,68 @@
             // mnuJV
             // 
             this.mnuJV.Name = "mnuJV";
-            this.mnuJV.Size = new System.Drawing.Size(170, 22);
+            this.mnuJV.Size = new System.Drawing.Size(180, 22);
             this.mnuJV.Text = "Journal Voucher";
             this.mnuJV.Click += new System.EventHandler(this.mnuJV_Click);
             // 
             // mnuPV
             // 
             this.mnuPV.Name = "mnuPV";
-            this.mnuPV.Size = new System.Drawing.Size(170, 22);
+            this.mnuPV.Size = new System.Drawing.Size(180, 22);
             this.mnuPV.Text = "Payment Voucher";
             this.mnuPV.Click += new System.EventHandler(this.mnuPV_Click);
             // 
             // mnuRV
             // 
             this.mnuRV.Name = "mnuRV";
-            this.mnuRV.Size = new System.Drawing.Size(170, 22);
+            this.mnuRV.Size = new System.Drawing.Size(180, 22);
             this.mnuRV.Text = "Receipt Voucher";
             this.mnuRV.Click += new System.EventHandler(this.mnuRV_Click);
             // 
             // mnuSalesVoucher
             // 
             this.mnuSalesVoucher.Name = "mnuSalesVoucher";
-            this.mnuSalesVoucher.Size = new System.Drawing.Size(170, 22);
+            this.mnuSalesVoucher.Size = new System.Drawing.Size(180, 22);
             this.mnuSalesVoucher.Text = "Sales Voucher";
             // 
             // mnuSalaryVoucher
             // 
             this.mnuSalaryVoucher.Name = "mnuSalaryVoucher";
-            this.mnuSalaryVoucher.Size = new System.Drawing.Size(170, 22);
+            this.mnuSalaryVoucher.Size = new System.Drawing.Size(180, 22);
             this.mnuSalaryVoucher.Text = "Salary voucher";
             // 
             // mnuStockVoucher
             // 
             this.mnuStockVoucher.Name = "mnuStockVoucher";
-            this.mnuStockVoucher.Size = new System.Drawing.Size(170, 22);
+            this.mnuStockVoucher.Size = new System.Drawing.Size(180, 22);
             this.mnuStockVoucher.Text = "Inventory Voucher";
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuStockPurchase
             // 
             this.mnuStockPurchase.Name = "mnuStockPurchase";
-            this.mnuStockPurchase.Size = new System.Drawing.Size(170, 22);
+            this.mnuStockPurchase.Size = new System.Drawing.Size(180, 22);
             this.mnuStockPurchase.Text = "Stock Purchased";
             // 
             // mnuSalesInvoice
             // 
             this.mnuSalesInvoice.Name = "mnuSalesInvoice";
-            this.mnuSalesInvoice.Size = new System.Drawing.Size(170, 22);
+            this.mnuSalesInvoice.Size = new System.Drawing.Size(180, 22);
             this.mnuSalesInvoice.Text = "Sales Invoice";
             // 
             // toolStripSeparator7
             // 
             this.toolStripSeparator7.Name = "toolStripSeparator7";
-            this.toolStripSeparator7.Size = new System.Drawing.Size(167, 6);
+            this.toolStripSeparator7.Size = new System.Drawing.Size(177, 6);
             // 
             // mnuSalary
             // 
             this.mnuSalary.Name = "mnuSalary";
-            this.mnuSalary.Size = new System.Drawing.Size(170, 22);
+            this.mnuSalary.Size = new System.Drawing.Size(180, 22);
             this.mnuSalary.Text = "Monthly Salary";
             // 
             // mnuReport
@@ -535,6 +538,20 @@
             this.btnWallpaper.UseVisualStyleBackColor = true;
             this.btnWallpaper.Click += new System.EventHandler(this.btnWallpaper_Click);
             // 
+            // mnuUtility
+            // 
+            this.mnuUtility.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnuDELVoucher});
+            this.mnuUtility.Name = "mnuUtility";
+            this.mnuUtility.Size = new System.Drawing.Size(53, 23);
+            this.mnuUtility.Text = "Unility";
+            // 
+            // mnuDELVoucher
+            // 
+            this.mnuDELVoucher.Name = "mnuDELVoucher";
+            this.mnuDELVoucher.Size = new System.Drawing.Size(180, 22);
+            this.mnuDELVoucher.Text = "Delete Voucher";
+            // 
             // frmMainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -623,6 +640,8 @@
         private System.Windows.Forms.ToolStripMenuItem mnuPWChange;
         private System.Windows.Forms.Label lblversion;
         private System.Windows.Forms.Button btnWallpaper;
+        private System.Windows.Forms.ToolStripMenuItem mnuUtility;
+        private System.Windows.Forms.ToolStripMenuItem mnuDELVoucher;
     }
 }
 

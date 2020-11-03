@@ -29,7 +29,7 @@ namespace Applied_Accounts
         public static OleDbConnection ExcelConnection(string _ExcelFileName)
         {
 
-            string ExcelVersion = "Excel 12.0;HDR=YES;IMEX=1;";
+            //string ExcelVersion = "Excel 12.0;HDR=YES;IMEX=1;";
 
             OleDbConnection oledbConn;
             oledbConn = new OleDbConnection(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=" + _ExcelFileName + ";Extended Properties='Excel 12.0;HDR=YES;IMEX=1;';");

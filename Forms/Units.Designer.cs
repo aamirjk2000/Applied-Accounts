@@ -125,8 +125,6 @@ namespace Applied_Accounts.Forms
             this.MyNavigator.Name = "MyNavigator";
             this.MyNavigator.Size = new System.Drawing.Size(475, 24);
             this.MyNavigator.TabIndex = 17;
-            this.MyNavigator.Get_Values += new System.EventHandler(this.MyNavigator_Get_Values);
-            this.MyNavigator.Set_Values += new System.EventHandler(this.MyNavigator_Set_Values);
             this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
             this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
             this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);

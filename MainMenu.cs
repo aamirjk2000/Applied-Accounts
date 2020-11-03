@@ -65,7 +65,7 @@ namespace Applied_Accounts
 
         private void mnuSupplier_Click(object sender, EventArgs e)
         {
-            frmSuppliers ThisForm = new frmSuppliers((int)Tables.Suppliers);
+            frmSuppliers ThisForm = new frmSuppliers();
             ThisForm.Show();
         }
 

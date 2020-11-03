@@ -31,8 +31,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmProject));
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
+            this.chkActive = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.MyNavigator = new Applied_Accounts.Navigator();
             this.label9 = new System.Windows.Forms.Label();
             this.Cost = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
@@ -53,9 +53,10 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P2 = new System.Windows.Forms.TabPage();
-            this.Grid_Projects = new Applied_Accounts.AppliedDataGrid();
             this.lblMessage = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
+            this.MyNavigator = new Applied_Accounts.Navigator();
+            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -73,6 +74,7 @@
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.chkActive);
             this.P1.Controls.Add(this.label10);
             this.P1.Controls.Add(this.MyNavigator);
             this.P1.Controls.Add(this.label9);
@@ -102,6 +104,16 @@
             this.P1.Text = "Record";
             this.P1.UseVisualStyleBackColor = true;
             // 
+            // chkActive
+            // 
+            this.chkActive.AutoSize = true;
+            this.chkActive.Location = new System.Drawing.Point(79, 336);
+            this.chkActive.Name = "chkActive";
+            this.chkActive.Size = new System.Drawing.Size(56, 17);
+            this.chkActive.TabIndex = 20;
+            this.chkActive.Text = "Active";
+            this.chkActive.UseVisualStyleBackColor = true;
+            // 
             // label10
             // 
             this.label10.AutoSize = true;
@@ -110,21 +122,6 @@
             this.label10.Size = new System.Drawing.Size(49, 13);
             this.label10.TabIndex = 19;
             this.label10.Text = "Remarks";
-            // 
-            // MyNavigator
-            // 
-            this.MyNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.MyNavigator.Location = new System.Drawing.Point(79, 361);
-            this.MyNavigator.Name = "MyNavigator";
-            this.MyNavigator.Size = new System.Drawing.Size(457, 24);
-            this.MyNavigator.TabIndex = 0;
-            this.MyNavigator.Get_Values += new System.EventHandler(this.MyNavigator_Get_Values);
-            this.MyNavigator.Set_Values += new System.EventHandler(this.MyNavigator_Set_Values);
-            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
-            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
-            this.MyNavigator.Load += new System.EventHandler(this.MyNavigator_Load);
             // 
             // label9
             // 
@@ -176,7 +173,7 @@
             this.txtRemarks.Location = new System.Drawing.Point(79, 240);
             this.txtRemarks.Multiline = true;
             this.txtRemarks.Name = "txtRemarks";
-            this.txtRemarks.Size = new System.Drawing.Size(457, 115);
+            this.txtRemarks.Size = new System.Drawing.Size(457, 89);
             this.txtRemarks.TabIndex = 13;
             // 
             // cboxSupplier
@@ -283,7 +280,7 @@
             // 
             // P2
             // 
-            this.P2.Controls.Add(this.Grid_Projects);
+            this.P2.Controls.Add(this.MyDataGrid);
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
             this.P2.Padding = new System.Windows.Forms.Padding(3);
@@ -291,28 +288,6 @@
             this.P2.TabIndex = 1;
             this.P2.Text = "List";
             this.P2.UseVisualStyleBackColor = true;
-            this.P2.Leave += new System.EventHandler(this.P2_Leave);
-            // 
-            // Grid_Projects
-            // 
-            this.Grid_Projects.Active = false;
-            this.Grid_Projects.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Grid_Projects.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Grid_Projects.ColumnsFormat = null;
-            this.Grid_Projects.ColumnsName = null;
-            this.Grid_Projects.ColumnsVisiable = null;
-            this.Grid_Projects.ColumnsWidth = null;
-            this.Grid_Projects.IsBrowseWin = false;
-            this.Grid_Projects.IsPressEnter = false;
-            this.Grid_Projects.Location = new System.Drawing.Point(6, 6);
-            this.Grid_Projects.MyDataRow = null;
-            this.Grid_Projects.MyDataView = null;
-            this.Grid_Projects.MyViewRow = null;
-            this.Grid_Projects.Name = "Grid_Projects";
-            this.Grid_Projects.RecordID = ((long)(0));
-            this.Grid_Projects.Size = new System.Drawing.Size(559, 384);
-            this.Grid_Projects.TabIndex = 0;
-            this.Grid_Projects.Load += new System.EventHandler(this.Grid_Load);
             // 
             // lblMessage
             // 
@@ -335,6 +310,40 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // MyNavigator
+            // 
+            this.MyNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.MyNavigator.Current_Mode = 0;
+            this.MyNavigator.Location = new System.Drawing.Point(10, 363);
+            this.MyNavigator.Name = "MyNavigator";
+            this.MyNavigator.Size = new System.Drawing.Size(549, 24);
+            this.MyNavigator.TabIndex = 0;
+            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
+            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
+            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
+            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
+            // 
+            // MyDataGrid
+            // 
+            this.MyDataGrid.Active = false;
+            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MyDataGrid.ColumnsFormat = null;
+            this.MyDataGrid.ColumnsName = null;
+            this.MyDataGrid.ColumnsVisiable = null;
+            this.MyDataGrid.ColumnsWidth = null;
+            this.MyDataGrid.IsBrowseWin = false;
+            this.MyDataGrid.IsPressEnter = false;
+            this.MyDataGrid.Location = new System.Drawing.Point(6, 6);
+            this.MyDataGrid.MyDataRow = null;
+            this.MyDataGrid.MyDataView = null;
+            this.MyDataGrid.MyViewRow = null;
+            this.MyDataGrid.Name = "MyDataGrid";
+            this.MyDataGrid.RecordID = ((long)(0));
+            this.MyDataGrid.Size = new System.Drawing.Size(559, 384);
+            this.MyDataGrid.TabIndex = 0;
+            // 
             // frmProject
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -345,7 +354,6 @@
             this.Controls.Add(this.Pages);
             this.Name = "frmProject";
             this.Text = "Project";
-            this.Load += new System.EventHandler(this.frmProject_Load);
             this.Pages.ResumeLayout(false);
             this.P1.ResumeLayout(false);
             this.P1.PerformLayout();
@@ -381,8 +389,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TabPage P2;
-        private AppliedDataGrid Grid_Projects;
+        private AppliedDataGrid MyDataGrid;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.CheckBox chkActive;
     }
 }

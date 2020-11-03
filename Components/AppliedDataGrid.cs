@@ -12,7 +12,6 @@ namespace Applied_Accounts
         {
             InitializeComponent();
             IsBrowseWin = false;
-
         }
 
         //public event EventHandler RecordLeaved;
@@ -34,7 +33,7 @@ namespace Applied_Accounts
             if (_DataTable.Rows.Count > 0)
             {
                 Active = true;
-                MyDataView = new DataView(_DataTable);
+                MyDataView = _DataTable.AsDataView();
                 MyDataRow = _DataTable.Rows[0];
                 BrowseGrid.DataSource = MyDataView;
             }
@@ -100,15 +99,19 @@ namespace Applied_Accounts
             _Filter = string.Concat("Title like '%", txtFilter.Text, "%'" + " OR ");
             _Filter += string.Concat("Code like '%", txtFilter.Text, "%'" + " OR ");
             _Filter += string.Concat("SCode like '%", txtFilter.Text, "%'");
-            ((DataView)BrowseGrid.DataSource).RowFilter = _Filter;
+
+            MyDataView.RowFilter = _Filter;
+
+
+            //((DataView)BrowseGrid.DataSource).RowFilter = _Filter;
         }
 
         #region Object Load and Leave
 
         private void AppliedDataGrid_Leave(object sender, EventArgs e)
         {
+            if(BrowseGrid==null) { return; }
             if(BrowseGrid.DataSource==null) { return; }
-
 
             if (((DataView)BrowseGrid.DataSource).Table.Rows.Count == 0)                 // If Table does not have any record (Empty Table)
             {
@@ -152,6 +155,7 @@ namespace Applied_Accounts
 
         private void AppliedDataGrid_Leave_1(object sender, EventArgs e)
         {
+            if(MyDataRow==null) { return; }
             DataGridViewRow _DataRow = BrowseGrid.CurrentRow;
             MyDataRow = ((DataRowView)_DataRow.DataBoundItem).Row;
 

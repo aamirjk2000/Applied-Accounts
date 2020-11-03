@@ -7,8 +7,6 @@ namespace Applied_Accounts
     public partial class Navigator : UserControl
     {
 
-        public event EventHandler Get_Values;                   // Get Values from Row to Text Box 
-        public event EventHandler Set_Values;                   // Set Values from Text Box to Data Row
         public event EventHandler New_Record;                   // Invoke when new button press.
         public event EventHandler Before_Save;                  // Invoke before save the record.
         public event EventHandler After_Save;                   // Invoke when Record has been saved after Validation is true.
@@ -18,15 +16,15 @@ namespace Applied_Accounts
         public DataRow OriginalRow;
         public DataRow NewRow;
         private Code_Validation Code_Validate;
-        
 
+
+        public int Current_Mode { get; set; }
         public long MyID;
         public string MyMessage;
         public bool IsValided;
         public int MyTableID;
         public int NewRecordPosition = 0;
         public int Cancel_Position = 0;
-        public int Current_Mode {get; set;;
         public bool NewRow_Valid = true;
 
 
@@ -37,7 +35,6 @@ namespace Applied_Accounts
         public DataView MyDataView { get => TableClass.MyDataView; }
 
         //======================================== Do not Delete these two lines.
-
 
         #region Initialize Class
 
@@ -146,7 +143,6 @@ namespace Applied_Accounts
         private void BtnSave_Click(object sender, EventArgs e)              // Save Record
         {
 
-            //Set_Values.Invoke(sender, e);
             Before_Save(sender, e);
 
 
@@ -156,8 +152,15 @@ namespace Applied_Accounts
                 return;
             }
 
-            DataRow NewRow = ((DataRowView)TableClass.MyDataView[NewRecordPosition]).Row;
-            TableClass.MyDataRow = NewRow;
+
+            if(Current_Mode == (int)Applied.Modes.New)
+            {
+                TableClass.MyDataRow = TableClass.MyDataView[NewRecordPosition].Row;
+            }
+            else
+            {
+                TableClass.MyDataRow = ((DataRowView)TableBinding.Current).Row;
+            }
 
 
             if ((long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName] == -1)
@@ -170,6 +173,7 @@ namespace Applied_Accounts
 
             if (TableClass.IsSaved)
             {
+                Current_Mode = (int)Applied.Modes.Edit;
                 MyMessage = TableClass.MyMessage;
                 MessageBox.Show(MyMessage, "RECORD SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 TableClass.OriginalRow = TableClass.MyDataRow;
@@ -177,11 +181,8 @@ namespace Applied_Accounts
 
                 if (TableClass.Count > 1) { Buttons_Display(3); }
                 else { Buttons_Display(4); }
-                //Get_Values.Invoke(sender, e);                      // Invoke Get Value Prcedure
                 TableClass.Update(TableClass.MyTableID);           // Update Datatable from DB after save row
-
                 TableClass.Row_Index = TableClass.MyDataTable.Rows.IndexOf(TableClass.MyDataRow);
-
             }
             else
             {
@@ -298,14 +299,10 @@ namespace Applied_Accounts
             }
         }
 
-
-
-
         #endregion
 
         private void txtPointer_Validating(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            //Code_Validate = new Code_Validation((TextBox)sender, MyDataTable);
             TextBox _TextBox = (TextBox)sender;
 
             if (!Applied.IsChar(_TextBox.Text, "0123456789"))
@@ -320,24 +317,15 @@ namespace Applied_Accounts
 
             //====================
 
-            //Code_Validate.Current_Mode = (int)Applied.Modes.Edit;
-            //Code_Validate.Input_char = "0123456789";
-            //Code_Validate.chkLength = true;
-            //Code_Validate.Length = 6;
-            //if (Code_Validate.Validating())
-            //{
-
-            //if (Current_Mode == (int)Applied.Modes.Edit)
-            //{
             DataView _DataView = MyDataTable.AsDataView();
             DataRowView _RowView;
 
-            _DataView.RowFilter = "Code='" + Code_Validate.GetText() + "'";
+            _DataView.RowFilter = "Code='" + txtPointer.Text.Trim() + "'";
             if (_DataView.Count == 1)
             {
                 _RowView = _DataView[0];
                 TableBinding.Position = MyDataTable.Rows.IndexOf(_RowView.Row);         // Get Point
-                txtPointer.Text = TableBinding.Position.ToString();
+                txtPointer.Text = (TableBinding.Position + 1).ToString();
                 MyMessage = "Code found in List";
                 _DataView.RowFilter = string.Empty;
             }
@@ -348,7 +336,7 @@ namespace Applied_Accounts
 
                 return;
             }
-            //}
+            
         }
     }       // Main
 }           // Namespace

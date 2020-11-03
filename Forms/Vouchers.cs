@@ -17,6 +17,7 @@ namespace Applied_Accounts.Forms
         public static int MyVoucherType { get; set; }
         public DataRow MyRow { get => MyVoucherClass.CurrentRow; set => MyVoucherClass.CurrentRow = value; }
         public DataTable MyDataTable { get => MyVoucherClass.VoucherTable; set => MyVoucherClass.VoucherTable = value; }
+        public DataTable MyDeleteTable { get => MyVoucherClass.DeleteTable; set => MyVoucherClass.DeleteTable = value; }
         public DataTable MyGridTable { get => MyVoucherClass.GetGridTable(); }
 
         private DataTable tbAccounts;
@@ -25,7 +26,6 @@ namespace Applied_Accounts.Forms
         private DataTable tbUnits;
         private DataTable tbStocks;
         private DataTable tbEmployees;
-
 
         private string MyCheque_No;                              // For copy and past
         private string MyCheque_Date;                          // For copy and past
@@ -142,6 +142,10 @@ namespace Applied_Accounts.Forms
         {
             bool IsEqual = Total_Equal();                   // Check Voucher DR & CR Balance are equal and Show Save and prinmt button
 
+
+
+
+
             Repaint(MyRow["COA"], cBoxAccounts);
             Repaint(MyRow["Supplier"], cBoxSuppliers);
             Repaint(MyRow["Project"], cBoxProjects);
@@ -163,6 +167,8 @@ namespace Applied_Accounts.Forms
             btnNew.Enabled = true;
             btnDelete.Enabled = true;
             btnUndo.Enabled = true;
+
+
 
 
         }
@@ -415,7 +421,6 @@ namespace Applied_Accounts.Forms
             Grid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             Grid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
 
-
         }
 
         private void P2_Enter(object sender, EventArgs e)
@@ -424,6 +429,12 @@ namespace Applied_Accounts.Forms
             Grid.DataSource = MyGridTable;
             SetGrid();
         }
+
+        private void Grid_Enter(object sender, EventArgs e)
+        {
+            Grid.Rows[MyVoucherClass.Total_RowID].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+        }
+
         #endregion
 
         #region Browse Widnows
@@ -525,7 +536,6 @@ namespace Applied_Accounts.Forms
             // Validte the Voucher before Save                              // future plan
             // Type Codes here.................
 
-
             //  SAVE    SAVE    SAVE    SAVE    SAVE    SAVE    SAVE    
 
             MyVoucherClass.Save();                                          // Save voucher (All Transactions) into Database Table.
@@ -538,79 +548,31 @@ namespace Applied_Accounts.Forms
                 Repaint();                                                  // Re-Paint Voucher form
                 MyVoucherClass.Voucher_Saved = false;                       // Reset voucher Saved default value.
                 Grid.DataSource = MyVoucherClass.GetGridTable();            // Load Voucher into Grid Data source
-
             }
 
         }
         private void btnSave_Click(object sender, EventArgs e)
         {
-
             MyRow["ID"] = Conversion.ToLong(txtID.Text);
             MyRow["Vou_no"] = MyVoucherClass.Vou_No;
             MyRow["Vou_Date"] = MyVoucherClass.Vou_Date;
             MyRow["Vou_Type"] = MyVoucherClass.Vou_Type;
             MyRow["SRNO"] = Conversion.ToInteger(txtSRNO.Text);
             MyRow["COA"] = Conversion.ToInteger(cBoxAccounts.SelectedValue);
-
-            if (cBoxSuppliers.Text.Length > 0)
-            {
-                MyRow["Supplier"] = Conversion.ToInteger(cBoxSuppliers.SelectedValue);
-            }
-            else
-            {
-                MyRow["Supplier"] = DBNull.Value;
-            }
-
-            if (cBoxProjects.Text.Length > 0)
-            {
-                MyRow["Project"] = Conversion.ToInteger(cBoxProjects.SelectedValue);
-            }
-            else
-            {
-                MyRow["Project"] = DBNull.Value;
-            }
-
-
-            if (cBoxStocks.Text.Length > 0)
-            {
-                MyRow["Stock"] = Conversion.ToInteger(cBoxStocks.SelectedValue);
-            }
-            else
-            {
-                MyRow["Stock"] = DBNull.Value;
-            }
-
-            if (cBoxUnits.Text.Length > 0)
-            {
-
-                MyRow["Unit"] = Conversion.ToInteger(cBoxUnits.SelectedValue);
-            }
-            else
-            {
-                MyRow["Unit"] = DBNull.Value;
-            }
-
-
-            if (cBoxEmployees.Text.Length > 0)
-            {
-                MyRow["Employee"] = Conversion.ToInteger(cBoxEmployees.SelectedValue);
-            }
-            else
-            {
-                MyRow["Employee"] = DBNull.Value;
-            }
-
-
+            MyRow["Supplier"] = Conversion.ToDBInteger(cBoxSuppliers.SelectedValue);
+            MyRow["Project"] = Conversion.ToDBInteger(cBoxProjects.SelectedValue);
+            MyRow["Stock"] = Conversion.ToDBInteger(cBoxStocks.SelectedValue);
+            MyRow["Unit"] = Conversion.ToDBInteger(cBoxUnits.SelectedValue);
+            MyRow["Employee"] = Conversion.ToDBInteger(cBoxEmployees.SelectedValue);
             MyRow["RefNo"] = txtRefNo.Text;
-            MyRow["Chq_No"] = txtChqNo.Text;
+            MyRow["Chq_No"] = Conversion.ToDBInteger(txtChqNo.Text); ;
             MyRow["Chq_Date"] = dtChqDate.Value.ToString();
             MyRow["DR"] = Conversion.ToMoney(txtDebit.Text);
             MyRow["CR"] = Conversion.ToMoney(txtCredit.Text);
             MyRow["Description"] = txtDescription.Text.Trim();
             MyRow["Remarks"] = txtRemarks.Text.Trim();
 
-
-
+            if (MyRow["Chq_No"] == DBNull.Value) { MyRow["Chq_Date"] = DBNull.Value; }   // Date Null value if cheque no is null;
 
             if (!Validate_Voucher())
             {
@@ -633,7 +595,6 @@ namespace Applied_Accounts.Forms
 
             MyCheque_No = MyRow["Chq_No"].ToString();                                   // Copy Description F9 for past 
             MyCheque_Date = MyRow["Chq_Date"].ToString();                               // Copy Description F9 for past 
-
             MyDescription = MyRow["Description"].ToString();                            // Copy Description F9 for past 
             MyRemarks = MyRow["Remarks"].ToString();                                    // Copy Remarks     F9 for past
 
@@ -642,12 +603,12 @@ namespace Applied_Accounts.Forms
 
             // Codes after save the row and finish message
 
-
             if (MyRow["SRNO"].ToString().Trim() == "1")
             {
                 btnNext_Click(sender, e);
             }
 
+            Grid.DataSource = MyVoucherClass.GetGridTable();
             Repaint();
 
         }
@@ -818,11 +779,11 @@ namespace Applied_Accounts.Forms
             btnSaveVoucher.Enabled = Total_Equal();
 
             if (txtChqNo.Text.Length == 0) { dtChqDate.Enabled = false; } else { dtChqDate.Enabled = true; }
-            
+
             if (cBoxAccounts.SelectedValue != null)
             { txtAccount.Text = Applied.Code((long)cBoxAccounts.SelectedValue, tbAccounts.AsDataView()); }
             else { txtAccount.Text = ""; }
-            
+
             if (cBoxProjects.SelectedValue != null)
             { txtProject.Text = Applied.Code((long)cBoxProjects.SelectedValue, tbProjects.AsDataView()); }
             else { txtProject.Text = ""; }
@@ -1188,6 +1149,13 @@ namespace Applied_Accounts.Forms
 
         private void txtVandor_Validating(object sender, CancelEventArgs e)
         {
+            if (txtVandor.Text.Length == 0)
+            {
+                cBoxSuppliers.SelectedValue = 0;
+                cBoxSuppliers.Text = "";
+                return;
+            }
+
             if (Conversion.ToInteger(txtVandor.Text) == 0)
             {
                 cBoxSuppliers.SelectedValue = 0;
@@ -1201,7 +1169,7 @@ namespace Applied_Accounts.Forms
 
         private void txtVandor_Validated(object sender, EventArgs e)
         {
-            
+
 
             if (((TextBox)sender).Text.Length > 0)
             {
@@ -1312,9 +1280,9 @@ namespace Applied_Accounts.Forms
             if (((TextBox)sender).Text.Length == 0) { return false; }      // Text Box is empty, do not validate
 
 
-            bool IsSearch1 = SearchID(((TextBox)sender).Text, _DataTable);
-            bool IsSearch2 = SearchCode(((TextBox)sender).Text, _DataTable);
-            bool IsSearch3 = SearchTag(((TextBox)sender).Text, _DataTable);
+            bool IsSearch1 = SearchID(((TextBox)sender).Text, _DataTable);              // Seek Id in Table
+            bool IsSearch2 = SearchCode(((TextBox)sender).Text, _DataTable);            // Seek Code in Table
+            bool IsSearch3 = SearchTag(((TextBox)sender).Text, _DataTable);             // Seek SCode in table
             if (IsSearch1 || IsSearch2 || IsSearch3) { return false; } else { return true; }
         }
 
@@ -1358,7 +1326,6 @@ namespace Applied_Accounts.Forms
             }
             return _Result;
         }
-
         private bool SearchCode(string _Value, DataTable _DataTable)
         {
             // Return value for e.Cancel of Text Boox Validating
@@ -1376,7 +1343,6 @@ namespace Applied_Accounts.Forms
             }
             return _Result;
         }
-
         private bool SearchTag(string _Value, DataTable _DataTable)
         {
             // Return value for e.Cancel of Text Boox Validating
@@ -1395,19 +1361,130 @@ namespace Applied_Accounts.Forms
             return _Result;
         }
 
+        #endregion
+
+        #region ROW Select Buttons
+
+        private void btn1_Click(object sender, EventArgs e)
+        {
+            DataView _Temp = new DataView(MyDataTable);
+            _Temp.RowFilter = "SRNO=1";
+
+            if (_Temp.Count == 1) { MyRow = ((DataRowView)_Temp[0]).Row; DisplayRow(MyRow); }
+        }
+
+        private void btn2_Click(object sender, EventArgs e)
+        {
+            DataView _Temp = new DataView(MyDataTable);
+            _Temp.RowFilter = "SRNO=2";
+
+            if (_Temp.Count == 1) { MyRow = ((DataRowView)_Temp[0]).Row; DisplayRow(MyRow); }
+        }
+
+        #endregion
+
+        #region DELETE Button
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
 
 
+            MyRow["ID"] = Conversion.ToLong(txtID.Text);
+            MyRow["Vou_no"] = MyVoucherClass.Vou_No;
+            MyRow["Vou_Date"] = MyVoucherClass.Vou_Date;
+            MyRow["Vou_Type"] = MyVoucherClass.Vou_Type;
+            MyRow["SRNO"] = Conversion.ToInteger(txtSRNO.Text);
+            MyRow["COA"] = Conversion.ToInteger(cBoxAccounts.SelectedValue);
+            MyRow["Supplier"] = Conversion.ToDBInteger(cBoxSuppliers.SelectedValue);
+            MyRow["Project"] = Conversion.ToDBInteger(cBoxProjects.SelectedValue);
+            MyRow["Stock"] = Conversion.ToDBInteger(cBoxStocks.SelectedValue);
+            MyRow["Unit"] = Conversion.ToDBInteger(cBoxUnits.SelectedValue);
+            MyRow["Employee"] = Conversion.ToDBInteger(cBoxEmployees.SelectedValue);
+            MyRow["RefNo"] = txtRefNo.Text;
+            MyRow["Chq_No"] = Conversion.ToDBInteger(txtChqNo.Text); ;
+            MyRow["Chq_Date"] = dtChqDate.Value.ToString();
+            MyRow["DR"] = Conversion.ToMoney(txtDebit.Text);
+            MyRow["CR"] = Conversion.ToMoney(txtCredit.Text);
+            MyRow["Description"] = txtDescription.Text.Trim();
+            MyRow["Remarks"] = txtRemarks.Text.Trim();
+
+            long _ID = Conversion.ToLong(MyRow["ID"]);
+
+            object[] RowValues = MyRow.ItemArray;
+
+            DialogResult _YesNo;
+            string _Message = "Are you sure to DELETE \n Voucher Serial No. " + MyRow["SRNO"].ToString();
+            _YesNo = MessageBox.Show(_Message, "", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (_YesNo == DialogResult.Yes)
+            {
+                int RowIndex = 0;
+
+                if (MyDeleteTable.Rows.Count == 0)
+                {
+                    MyDeleteTable.Rows.Add(MyRow.ItemArray);
+                }
+                else
+                {
+                    foreach (DataRow _Row in MyDeleteTable.Rows)
+                    {
+                        RowIndex = 1;
+
+                        if (Conversion.ToInteger(_Row["ID"]) == _ID)
+                        {
+                            RowIndex = MyDeleteTable.Rows.IndexOf(_Row);               // Get Row Index 
+                            MyDeleteTable.Rows[RowIndex].ItemArray = MyRow.ItemArray;
+                            break;
+                        }
+                    }
+                }
 
 
+                foreach (DataRow _Row in MyDataTable.Rows)                          // Delete Row in Data Table
+                {
+                    RowIndex = 1;
 
 
+                    if (Conversion.ToInteger(_Row["ID"]) == _ID)
+                    {
 
+                        RowIndex = MyDataTable.Rows.IndexOf(_Row);               // Get Row Index 
+                        if (RowIndex == -1)
+                        {
+                            MessageBox.Show("Data Table does not have the deleted row");
+                            break;
+                        }
+                        else
+                        {
+                            MyDataTable.Rows[RowIndex].ItemArray = MyRow.ItemArray;
+                            RowIndex = MyDataTable.Rows.IndexOf(_Row);               // Get Row Index 
+                            MyDataTable.Rows[RowIndex].Delete();                     // Copy Text boxs into Data Row Columns (Save)
+                            break;
+                        }
 
+                    }
 
+                }
 
+                long SRNO_Reset = 1;
+                foreach (DataRow _Row in MyDataTable.Rows)                          // Reset Serial No. of Voucher
+                {
+                    if ((long)_Row["SRNO"] != SRNO_Reset)                        // Reset Serial Number of Voucher in ROW DELETE Process.
+                    {
+                        _Row["SRNO"] = SRNO_Reset;
+                    }
 
+                    SRNO_Reset += 1;
+                }
 
+                _Message = string.Concat("Transaction No ", RowValues[5].ToString(), " has been marked Deleted.");
+                MessageBox.Show(_Message, "DELETE", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            }
+
+            Grid.DataSource = MyVoucherClass.GetGridTable();
+            btnNext_Click(sender, e);
+            Repaint();
+        }
 
         #endregion
 

@@ -117,21 +117,32 @@ namespace Applied_Accounts.Classes
         {
             if (_Value == DBNull.Value) { return 0; }
             if (_Value == null) { return 0; }
-
-            if (!Applied.IsChar(_Value.ToString(), "0123456789"))
+            if(_Value.ToString().Length==0) { return 0; }
+            if (!Applied.IsChar(_Value.ToString(), "-0123456789"))
             {
                 return Convert.ToInt32(_Value);
-                //return int.Parse(_Value.ToString());
             }
             return 0; 
         }
 
+        public static object ToDBInteger(object _Value)
+        {
+            if (_Value == DBNull.Value) { return DBNull.Value; }
+            if (_Value == null) { return DBNull.Value; }
+            if (_Value.ToString().Length == 0) { return DBNull.Value; }
+            if(_Value.ToString()=="0") { return DBNull.Value; }
+            if (!Applied.IsChar(_Value.ToString(), "0123456789"))
+            {
+                return Convert.ToInt32(_Value);
+            }
+            return DBNull.Value;
+        }
 
         #endregion
 
         #region Date
 
-       
+
         public static DateTime ToDate(string _DateTime)
         {
             SQLite_Date DateClass = new SQLite_Date(_DateTime);

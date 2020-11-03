@@ -306,7 +306,7 @@
             // 
             // btn2
             // 
-            this.btn2.Enabled = false;
+            this.btn2.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.btn2.ImageList = this.MyImages;
             this.btn2.Location = new System.Drawing.Point(255, 76);
             this.btn2.Name = "btn2";
@@ -314,11 +314,12 @@
             this.btn2.TabIndex = 118;
             this.btn2.TabStop = false;
             this.btn2.Text = "2";
-            this.btn2.UseVisualStyleBackColor = true;
+            this.btn2.UseVisualStyleBackColor = false;
+            this.btn2.Click += new System.EventHandler(this.btn2_Click);
             // 
             // btn1
             // 
-            this.btn1.Enabled = false;
+            this.btn1.BackColor = System.Drawing.Color.PaleGoldenrod;
             this.btn1.ImageList = this.MyImages;
             this.btn1.Location = new System.Drawing.Point(220, 76);
             this.btn1.Name = "btn1";
@@ -326,7 +327,8 @@
             this.btn1.TabIndex = 117;
             this.btn1.TabStop = false;
             this.btn1.Text = "1";
-            this.btn1.UseVisualStyleBackColor = true;
+            this.btn1.UseVisualStyleBackColor = false;
+            this.btn1.Click += new System.EventHandler(this.btn1_Click);
             // 
             // txtEmployee
             // 
@@ -619,6 +621,7 @@
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnNew
             // 
@@ -965,6 +968,7 @@
             this.Grid.Name = "Grid";
             this.Grid.Size = new System.Drawing.Size(756, 398);
             this.Grid.TabIndex = 0;
+            this.Grid.Enter += new System.EventHandler(this.Grid_Enter);
             // 
             // lblMessage
             // 

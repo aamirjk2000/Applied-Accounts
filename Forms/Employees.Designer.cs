@@ -53,11 +53,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
-            this.btnExit = new System.Windows.Forms.Button();
             this.MyNavigator = new Applied_Accounts.Navigator();
-            this.Grid_Employees = new Applied_Accounts.AppliedDataGrid();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
+            this.lblMessage = new System.Windows.Forms.Label();
+            this.btnExit = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -70,7 +70,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(627, 393);
+            this.tabControl1.Size = new System.Drawing.Size(625, 393);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -102,7 +102,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(619, 367);
+            this.tabPage1.Size = new System.Drawing.Size(617, 367);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Record";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -294,25 +294,57 @@
             this.label2.TabIndex = 1;
             this.label2.Text = "ID";
             // 
+            // MyNavigator
+            // 
+            this.MyNavigator.Current_Mode = 0;
+            this.MyNavigator.Location = new System.Drawing.Point(30, 327);
+            this.MyNavigator.Name = "MyNavigator";
+            this.MyNavigator.Size = new System.Drawing.Size(557, 24);
+            this.MyNavigator.TabIndex = 0;
+            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
+            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
+            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
+            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
+            // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.Grid_Employees);
+            this.tabPage2.Controls.Add(this.MyDataGrid);
             this.tabPage2.Location = new System.Drawing.Point(4, 22);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(619, 367);
+            this.tabPage2.Size = new System.Drawing.Size(617, 367);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "L I S T";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // MyDataGrid
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(13, 425);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(50, 13);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "Message";
+            this.MyDataGrid.Active = false;
+            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MyDataGrid.ColumnsFormat = null;
+            this.MyDataGrid.ColumnsName = null;
+            this.MyDataGrid.ColumnsVisiable = null;
+            this.MyDataGrid.ColumnsWidth = null;
+            this.MyDataGrid.IsBrowseWin = false;
+            this.MyDataGrid.IsPressEnter = false;
+            this.MyDataGrid.Location = new System.Drawing.Point(6, 6);
+            this.MyDataGrid.MyDataRow = null;
+            this.MyDataGrid.MyDataView = null;
+            this.MyDataGrid.MyViewRow = null;
+            this.MyDataGrid.Name = "MyDataGrid";
+            this.MyDataGrid.RecordID = ((long)(0));
+            this.MyDataGrid.Size = new System.Drawing.Size(607, 355);
+            this.MyDataGrid.TabIndex = 0;
+            // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Location = new System.Drawing.Point(13, 425);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(50, 13);
+            this.lblMessage.TabIndex = 1;
+            this.lblMessage.Text = "Message";
             // 
             // btnExit
             // 
@@ -324,46 +356,13 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // MyNavigator
-            // 
-            this.MyNavigator.Location = new System.Drawing.Point(99, 325);
-            this.MyNavigator.Name = "MyNavigator";
-            this.MyNavigator.Size = new System.Drawing.Size(454, 24);
-            this.MyNavigator.TabIndex = 0;
-            this.MyNavigator.Get_Values += new System.EventHandler(this.MyNavigator_Get_Values);
-            this.MyNavigator.Set_Values += new System.EventHandler(this.MyNavigator_Set_Values);
-            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
-            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
-            this.MyNavigator.Load += new System.EventHandler(this.MyNavigator_Load);
-            // 
-            // Grid_Employees
-            // 
-            this.Grid_Employees.Active = false;
-            this.Grid_Employees.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.Grid_Employees.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Grid_Employees.ColumnsFormat = null;
-            this.Grid_Employees.ColumnsName = null;
-            this.Grid_Employees.ColumnsVisiable = null;
-            this.Grid_Employees.ColumnsWidth = null;
-            this.Grid_Employees.IsBrowseWin = false;
-            this.Grid_Employees.IsPressEnter = false;
-            this.Grid_Employees.Location = new System.Drawing.Point(6, 6);
-            this.Grid_Employees.MyDataRow = null;
-            this.Grid_Employees.MyDataView = null;
-            this.Grid_Employees.Name = "Grid_Employees";
-            this.Grid_Employees.RecordID = ((long)(0));
-            this.Grid_Employees.Size = new System.Drawing.Size(607, 355);
-            this.Grid_Employees.TabIndex = 0;
-            this.Grid_Employees.Load += new System.EventHandler(this.Grid_Units_Load);
-            // 
             // frmEmployees
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(650, 450);
+            this.ClientSize = new System.Drawing.Size(649, 450);
             this.Controls.Add(this.btnExit);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.tabControl1);
             this.Name = "frmEmployees";
             this.Text = "Employees";
@@ -381,8 +380,8 @@
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.Label label1;
-        private AppliedDataGrid Grid_Employees;
+        private System.Windows.Forms.Label lblMessage;
+        private AppliedDataGrid MyDataGrid;
         private System.Windows.Forms.Button btnExit;
         private Navigator MyNavigator;
         private System.Windows.Forms.TextBox txtRemarks;
