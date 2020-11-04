@@ -33,7 +33,6 @@ namespace Applied_Accounts.Forms
             this.P1 = new System.Windows.Forms.TabPage();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.MyNavigator = new Applied_Accounts.Navigator();
             this.label8 = new System.Windows.Forms.Label();
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.txtSize = new System.Windows.Forms.TextBox();
@@ -51,6 +50,8 @@ namespace Applied_Accounts.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P2 = new System.Windows.Forms.TabPage();
+            this.lblMessage = new System.Windows.Forms.Label();
+            this.MyNavigator = new Applied_Accounts.Navigator();
             this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
@@ -67,13 +68,12 @@ namespace Applied_Accounts.Forms
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
-            this.Pages.Size = new System.Drawing.Size(672, 339);
+            this.Pages.Size = new System.Drawing.Size(672, 338);
             this.Pages.TabIndex = 0;
             // 
             // P1
             // 
             this.P1.Controls.Add(this.chkActive);
-            this.P1.Controls.Add(this.button1);
             this.P1.Controls.Add(this.MyNavigator);
             this.P1.Controls.Add(this.label8);
             this.P1.Controls.Add(this.txtRemarks);
@@ -94,7 +94,7 @@ namespace Applied_Accounts.Forms
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
-            this.P1.Size = new System.Drawing.Size(664, 313);
+            this.P1.Size = new System.Drawing.Size(664, 312);
             this.P1.TabIndex = 0;
             this.P1.Text = "Record";
             this.P1.UseVisualStyleBackColor = true;
@@ -111,24 +111,13 @@ namespace Applied_Accounts.Forms
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(556, 275);
+            this.button1.Location = new System.Drawing.Point(603, 352);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 18;
             this.button1.Text = "Exit";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // MyNavigator
-            // 
-            this.MyNavigator.Location = new System.Drawing.Point(42, 274);
-            this.MyNavigator.Name = "MyNavigator";
-            this.MyNavigator.Size = new System.Drawing.Size(475, 24);
-            this.MyNavigator.TabIndex = 17;
-            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
-            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
-            this.MyNavigator.Load += new System.EventHandler(this.MyNavigator_Load);
             // 
             // label8
             // 
@@ -265,10 +254,31 @@ namespace Applied_Accounts.Forms
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
             this.P2.Padding = new System.Windows.Forms.Padding(3);
-            this.P2.Size = new System.Drawing.Size(664, 313);
+            this.P2.Size = new System.Drawing.Size(664, 312);
             this.P2.TabIndex = 1;
             this.P2.Text = "List";
             this.P2.UseVisualStyleBackColor = true;
+            // 
+            // lblMessage
+            // 
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Location = new System.Drawing.Point(13, 361);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(50, 13);
+            this.lblMessage.TabIndex = 19;
+            this.lblMessage.Text = "Message";
+            // 
+            // MyNavigator
+            // 
+            this.MyNavigator.Current_Mode = 0;
+            this.MyNavigator.Location = new System.Drawing.Point(42, 274);
+            this.MyNavigator.Name = "MyNavigator";
+            this.MyNavigator.Size = new System.Drawing.Size(561, 24);
+            this.MyNavigator.TabIndex = 17;
+            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
+            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
+            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
+            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
             // 
             // MyDataGrid
             // 
@@ -294,8 +304,10 @@ namespace Applied_Accounts.Forms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 363);
+            this.ClientSize = new System.Drawing.Size(690, 384);
+            this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.Pages);
+            this.Controls.Add(this.button1);
             this.Name = "frmUnits";
             this.Text = "Units";
             this.Pages.ResumeLayout(false);
@@ -303,6 +315,7 @@ namespace Applied_Accounts.Forms
             this.P1.PerformLayout();
             this.P2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -331,5 +344,6 @@ namespace Applied_Accounts.Forms
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkActive;
+        private System.Windows.Forms.Label lblMessage;
     }
 }

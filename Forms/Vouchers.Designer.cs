@@ -862,6 +862,7 @@
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
             this.label5.Text = "Sr. No.";
+            this.label5.DoubleClick += new System.EventHandler(this.label5_DoubleClick);
             // 
             // dtVouDate
             // 

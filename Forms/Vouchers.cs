@@ -133,18 +133,11 @@ namespace Applied_Accounts.Forms
                 default:
                     break;
             }
-
-
-
         }
 
         private void Repaint()
         {
             bool IsEqual = Total_Equal();                   // Check Voucher DR & CR Balance are equal and Show Save and prinmt button
-
-
-
-
 
             Repaint(MyRow["COA"], cBoxAccounts);
             Repaint(MyRow["Supplier"], cBoxSuppliers);
@@ -428,11 +421,28 @@ namespace Applied_Accounts.Forms
             MyVoucherClass.GetGridTable();
             Grid.DataSource = MyGridTable;
             SetGrid();
+
+            Grid_Enter(sender, e);              // Assign Total Row color
         }
 
         private void Grid_Enter(object sender, EventArgs e)
         {
-            Grid.Rows[MyVoucherClass.Total_RowID].DefaultCellStyle.BackColor = Color.LightSteelBlue;
+            MyVoucherClass.Total_RowID = Grid.Rows.Count - 1;
+
+            decimal TOT_DR = (decimal)Grid.Rows[MyVoucherClass.Total_RowID].Cells["Debit"].Value;
+            decimal TOT_CR = (decimal)Grid.Rows[MyVoucherClass.Total_RowID].Cells["Credit"].Value;
+
+
+            if (TOT_DR.Equals(TOT_CR))
+            {
+                Grid.Rows[MyVoucherClass.Total_RowID].DefaultCellStyle.BackColor = Color.LightSkyBlue;
+                Grid.Rows[MyVoucherClass.Total_RowID].DefaultCellStyle.ForeColor = Color.MidnightBlue;
+            }
+            else
+            {
+                Grid.Rows[MyVoucherClass.Total_RowID].DefaultCellStyle.BackColor = Color.Red;
+                Grid.Rows[MyVoucherClass.Total_RowID].DefaultCellStyle.ForeColor = Color.Gold;
+            }
         }
 
         #endregion
@@ -1486,8 +1496,23 @@ namespace Applied_Accounts.Forms
             Repaint();
         }
 
+
         #endregion
 
-        
+        private void label5_DoubleClick(object sender, EventArgs e)
+        {
+            DialogResult _YesNo =
+            MessageBox.Show("Reset Serail Numbers", "SERIAL NO", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (_YesNo == DialogResult.Yes)
+            {
+                int SRNO_Reset = 1;
+
+                foreach (DataRow _Row in MyVoucherClass.VoucherTable.Rows)
+                {
+                    _Row["SRNO"] = SRNO_Reset;
+                    SRNO_Reset += 1;
+                }
+            }
+        }
     }       // END Main Class
 }           // END NameSpace

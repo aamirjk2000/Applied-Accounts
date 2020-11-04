@@ -77,7 +77,7 @@ namespace Applied_Accounts
 
         private void mnuUnits_Click(object sender, EventArgs e)
         {
-            frmUnits ThisForm = new frmUnits((int)Tables.Units);
+            frmUnits ThisForm = new frmUnits();
             ThisForm.Show();
         }
 

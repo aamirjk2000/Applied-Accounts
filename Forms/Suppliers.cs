@@ -67,20 +67,6 @@ namespace Applied_Accounts.Forms
             MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
-
-        #endregion
-
-        #region Load
-
-
-        private void Load_Data(int _TableID)
-        {
-            DataTable _DataTable = AppliedTable.GetDataTable(_TableID);
-            MyDataGrid.MyDataView = new DataView(_DataTable);
-            MyNavigator.InitializeClass(_DataTable);
-            
-        }
-        
         #endregion
 
         #region Navigators buttons

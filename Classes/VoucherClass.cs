@@ -254,6 +254,41 @@ namespace Applied_Accounts.Classes
 
             }
 
+            #region DELETE Row
+
+            if (DeleteTable.Rows.Count > 0)
+            {
+                foreach (DataRow _Row in DeleteTable.Rows)
+                {
+                    Delete_Record += AppliedTable.DeleteRow(_Row, true);
+
+                }
+            }
+
+            foreach (DataRow _Row in VoucherTable.Rows)                                     // Delete if Net Amount is Zero
+            {
+                if ((decimal)_Row["DR"] + (decimal)_Row["CR"] == 0)
+                {
+                    Delete_Record += AppliedTable.DeleteRow(_Row, true);
+                }
+
+            }
+
+
+            if (Delete_Record > 0)                                                         // Reset Serial No.
+            {
+                int SRNO_Reset = 1;
+                foreach (DataRow _Row in VoucherTable.Rows)
+                {
+                    VoucherTable.Rows[VoucherTable.Rows.IndexOf(_Row)]["SRNO"] = SRNO_Reset;
+                    SRNO_Reset += 1;
+                }
+            }
+
+            #endregion
+
+            #region Save Rows
+
             foreach (DataRow _Row in VoucherTable.Rows)
             {
                 _TargetRow = VoucherTable.NewRow();
@@ -274,6 +309,7 @@ namespace Applied_Accounts.Classes
 
                 // Cheque Date should be null if cheque no is empty.
                 if (_TargetRow["Chq_No"].ToString().Trim() == string.Empty) { _TargetRow["Chq_Date"] = DBNull.Value; }
+                if (_TargetRow["Remarks"].ToString().Length == 0) { _TargetRow["Remarks"] = DBNull.Value; }
 
                 if (_RecordID < 0)                                                              // Record Id if -1 (for new)
                 {
@@ -299,31 +335,16 @@ namespace Applied_Accounts.Classes
 
                 if (_RecordID > 0)
                 {
-                    if ((_DR + _CR) == 0)                                                       // if Debit and Credit both are zero
-                    {
-                        Delete_Record += AppliedTable.DeleteRow(_TargetRow, true);
-                    }
+                    Update_Record = Update_Record + _CmdUpdate.ExecuteNonQuery();               // Update Voucher No.
 
-                    VoucherView.RowFilter = string.Concat("ID=", _RecordID.ToString());         // Select a record in table view 
-
-                    
-                    if (VoucherView.Count > 1)                                                  // if records found more than 1 is error
-                    {
-                        Delete_Record += AppliedTable.DeleteRow(_TargetRow, true);
-                        MessageBox.Show(VoucherView.Count.ToString() + " Records found.", "ERROR");
-                    }
                 }
+
             }
-
-            foreach (DataRow _Row in DeleteTable.Rows)
-            {
-                Delete_Record += AppliedTable.DeleteRow(_Row, true);
-            }
-
-            
+            #region SHOW SAVE MESSAGE.
 
 
-            if (Insert_Record + Update_Record + Delete_Record > 0)                                              // show Message for save the record.
+            //=============================================================  // show Message for save the record.
+            if (Insert_Record + Update_Record + Delete_Record > 0)
             {
                 string _SaveMessage = "";
                 if (Insert_Record > 0) { _SaveMessage += string.Concat(Insert_Record, " Record(s) INSERTED. \n"); }
@@ -335,6 +356,11 @@ namespace Applied_Accounts.Classes
                 MessageBox.Show(_SaveMessage, "VOUCHER | " + Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
                 Voucher_Saved = true;
             }
+
+            #endregion
+
+
+            #endregion
         }
 
 
@@ -531,11 +557,11 @@ namespace Applied_Accounts.Classes
             DataView tb_COA = AppliedTable.GetDataTable(Tables.COA).AsDataView();               // Table COA for Account Title
             DataView tb_Vendor = AppliedTable.GetDataTable(Tables.Suppliers).AsDataView();      // Table Supplier for Account Title
             DataRow _GridRow = _Result.NewRow();
-            
+
             foreach (DataRow _Row in VoucherTable.Rows)
             {
                 _GridRow["SRNO"] = _Row["SRNO"];
-                _GridRow["Account"] = Applied.Title(Conversion.ToLong(_Row["COA"]),tb_COA);
+                _GridRow["Account"] = Applied.Title(Conversion.ToLong(_Row["COA"]), tb_COA);
                 _GridRow["Vandor"] = Applied.Title(Conversion.ToLong(_Row["Supplier"]), tb_COA);
                 _GridRow["Debit"] = _Row["DR"];
                 _GridRow["Credit"] = _Row["CR"];
@@ -551,7 +577,7 @@ namespace Applied_Accounts.Classes
             decimal Tot_CR = (decimal)_Result.Compute("Sum(Credit)", string.Empty);
             long MaxSrNo = (long)_Result.Compute("Max(SRNO)", string.Empty);
 
-            Total_RowID = Conversion.ToInteger(MaxSrNo) ;
+            Total_RowID = Conversion.ToInteger(MaxSrNo);
 
             _GridRow["SRNO"] = MaxSrNo + 1;
             _GridRow["Account"] = "Transactions = " + _Result.Rows.Count.ToString();
