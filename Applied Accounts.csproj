@@ -168,6 +168,18 @@
     <Compile Include="Forms\Accounts_Notes.Designer.cs">
       <DependentUpon>Accounts_Notes.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Booking\Booking.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Booking\Booking.Designer.cs">
+      <DependentUpon>Booking.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Booking\Instalments.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Booking\Instalments.Designer.cs">
+      <DependentUpon>Instalments.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Browse.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -179,6 +191,12 @@
     </Compile>
     <Compile Include="Forms\COA.Designer.cs">
       <DependentUpon>COA.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\COAB.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\COAB.Designer.cs">
+      <DependentUpon>COAB.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\DBSetting.cs">
       <SubType>Form</SubType>
@@ -257,6 +275,12 @@
     </Compile>
     <Compile Include="Forms\Vouchers.Designer.cs">
       <DependentUpon>Vouchers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Voucher_Delete.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Voucher_Delete.Designer.cs">
+      <DependentUpon>Voucher_Delete.cs</DependentUpon>
     </Compile>
     <Compile Include="GlobalSuppressions.cs" />
     <Compile Include="Login.cs">
@@ -340,11 +364,20 @@
     <EmbeddedResource Include="Forms\Accounts_Notes.resx">
       <DependentUpon>Accounts_Notes.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Booking\Booking.resx">
+      <DependentUpon>Booking.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Booking\Instalments.resx">
+      <DependentUpon>Instalments.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Browse.resx">
       <DependentUpon>Browse.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\COA.resx">
       <DependentUpon>COA.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\COAB.resx">
+      <DependentUpon>COAB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DBSetting.resx">
       <DependentUpon>DBSetting.cs</DependentUpon>
@@ -384,6 +417,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Vouchers.resx">
       <DependentUpon>Vouchers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Voucher_Delete.resx">
+      <DependentUpon>Voucher_Delete.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
@@ -528,6 +564,7 @@
     <Content Include="Icons\Delete.png" />
     <Content Include="Icons\exit-48.png" />
     <Content Include="Icons\Exit.png" />
+    <None Include="Icons\Exit2.png" />
     <Content Include="Icons\Files.png" />
     <Content Include="Icons\Logo.png" />
     <Content Include="Icons\New.png" />
@@ -540,6 +577,7 @@
     <Content Include="Icons\TOP.png" />
     <Content Include="Icons\TOPD.png" />
     <Content Include="Icons\UNDO.png" />
+    <None Include="Resources\Exit.png" />
     <Content Include="Safe-Open.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -575,7 +613,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" />
+      <UserProperties BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

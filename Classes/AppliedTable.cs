@@ -115,7 +115,7 @@ namespace Applied_Accounts
             {
                 DataTable _DataTable;  // = new DataTable();
                 string _TableName = Conversion.GetTableName(_TableID);
-                string _Text = "Select * from " + _TableName + " WHERE " + Filter.ToString();
+                string _Text = "SELECT * FROM " + _TableName + " WHERE " + Filter.ToString();
                 SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
                 SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
                 DataSet _DataSet = new DataSet();
@@ -244,6 +244,22 @@ namespace Applied_Accounts
                 MessageBox.Show("Data Set not found", "ERROR");
                 return new DataSet();
             }
+        }
+
+        public static DataSet GetDataSet(string _DataSetName, int[] _Tables)
+        {
+            DataSet _DataSet = new DataSet(_DataSetName);
+
+            foreach(int _TableID in _Tables)
+            {
+                string _TableName = Conversion.GetTableName(_TableID);
+                string _Text = "SELECT * FROM " + _TableName + ";";
+
+                SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
+                SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
+                _Adapter.Fill(_DataSet, _TableName);
+            }
+            return _DataSet;
         }
         public static DataTable GetDBView(int TableID, string _Filter)
         {
@@ -435,6 +451,10 @@ public enum Tables
     Applied = 9,
     Ledger = 10,
     Users = 11,
+    COAB=12,
+    Bookings=13,
+    Instalments=14,
+
 
     View_Voucher = 101,
     View_VouNo = 102,

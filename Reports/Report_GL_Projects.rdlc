@@ -88,7 +88,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ds_Project_Ledger</rd:DataSetName>
-        <rd:SchemaPath>F:\Applied\Applied-Accounts\Data\ds_Project_Ledger.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Applied\Applied-Accounts\Data\ds_Project_Ledger.xsd</rd:SchemaPath>
         <rd:TableName>View_Project_Ledger</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>

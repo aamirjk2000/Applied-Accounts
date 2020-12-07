@@ -31,8 +31,14 @@ namespace Applied_Accounts.Forms
         {
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
+            this.cBoxProject = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtFloor = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtBlock = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
             this.chkActive = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.MyNavigator = new Applied_Accounts.Navigator();
             this.label8 = new System.Windows.Forms.Label();
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.txtSize = new System.Windows.Forms.TextBox();
@@ -50,9 +56,10 @@ namespace Applied_Accounts.Forms
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.P2 = new System.Windows.Forms.TabPage();
-            this.lblMessage = new System.Windows.Forms.Label();
-            this.MyNavigator = new Applied_Accounts.Navigator();
             this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
+            this.button1 = new System.Windows.Forms.Button();
+            this.lblMessage = new System.Windows.Forms.Label();
+            this.button2 = new System.Windows.Forms.Button();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -68,11 +75,17 @@ namespace Applied_Accounts.Forms
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
-            this.Pages.Size = new System.Drawing.Size(672, 338);
+            this.Pages.Size = new System.Drawing.Size(672, 384);
             this.Pages.TabIndex = 0;
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.cBoxProject);
+            this.P1.Controls.Add(this.label11);
+            this.P1.Controls.Add(this.txtFloor);
+            this.P1.Controls.Add(this.label10);
+            this.P1.Controls.Add(this.txtBlock);
+            this.P1.Controls.Add(this.label9);
             this.P1.Controls.Add(this.chkActive);
             this.P1.Controls.Add(this.MyNavigator);
             this.P1.Controls.Add(this.label8);
@@ -94,35 +107,86 @@ namespace Applied_Accounts.Forms
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
-            this.P1.Size = new System.Drawing.Size(664, 312);
+            this.P1.Size = new System.Drawing.Size(664, 358);
             this.P1.TabIndex = 0;
             this.P1.Text = "Record";
             this.P1.UseVisualStyleBackColor = true;
             // 
+            // cBoxProject
+            // 
+            this.cBoxProject.FormattingEnabled = true;
+            this.cBoxProject.Location = new System.Drawing.Point(127, 144);
+            this.cBoxProject.Name = "cBoxProject";
+            this.cBoxProject.Size = new System.Drawing.Size(390, 21);
+            this.cBoxProject.TabIndex = 11;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(42, 144);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(40, 13);
+            this.label11.TabIndex = 22;
+            this.label11.Text = "Project";
+            // 
+            // txtFloor
+            // 
+            this.txtFloor.Location = new System.Drawing.Point(274, 206);
+            this.txtFloor.Name = "txtFloor";
+            this.txtFloor.Size = new System.Drawing.Size(100, 20);
+            this.txtFloor.TabIndex = 15;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(234, 209);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(30, 13);
+            this.label10.TabIndex = 21;
+            this.label10.Text = "Floor";
+            // 
+            // txtBlock
+            // 
+            this.txtBlock.Location = new System.Drawing.Point(274, 177);
+            this.txtBlock.Name = "txtBlock";
+            this.txtBlock.Size = new System.Drawing.Size(100, 20);
+            this.txtBlock.TabIndex = 13;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(234, 183);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(34, 13);
+            this.label9.TabIndex = 20;
+            this.label9.Text = "Block";
+            // 
             // chkActive
             // 
             this.chkActive.AutoSize = true;
-            this.chkActive.Location = new System.Drawing.Point(524, 224);
+            this.chkActive.Location = new System.Drawing.Point(547, 261);
             this.chkActive.Name = "chkActive";
             this.chkActive.Size = new System.Drawing.Size(56, 17);
-            this.chkActive.TabIndex = 19;
+            this.chkActive.TabIndex = 18;
             this.chkActive.Text = "Active";
             this.chkActive.UseVisualStyleBackColor = true;
             // 
-            // button1
+            // MyNavigator
             // 
-            this.button1.Location = new System.Drawing.Point(603, 352);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 18;
-            this.button1.Text = "Exit";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.btnExit_Click);
+            this.MyNavigator.Current_Mode = 0;
+            this.MyNavigator.Location = new System.Drawing.Point(42, 315);
+            this.MyNavigator.Name = "MyNavigator";
+            this.MyNavigator.Size = new System.Drawing.Size(561, 24);
+            this.MyNavigator.TabIndex = 18;
+            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
+            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
+            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
+            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
             // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(39, 224);
+            this.label8.Location = new System.Drawing.Point(39, 261);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 13);
             this.label8.TabIndex = 16;
@@ -130,31 +194,31 @@ namespace Applied_Accounts.Forms
             // 
             // txtRemarks
             // 
-            this.txtRemarks.Location = new System.Drawing.Point(127, 221);
+            this.txtRemarks.Location = new System.Drawing.Point(127, 258);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(390, 20);
-            this.txtRemarks.TabIndex = 14;
+            this.txtRemarks.TabIndex = 17;
             // 
             // txtSize
             // 
-            this.txtSize.Location = new System.Drawing.Point(127, 193);
+            this.txtSize.Location = new System.Drawing.Point(127, 230);
             this.txtSize.Name = "txtSize";
             this.txtSize.Size = new System.Drawing.Size(100, 20);
-            this.txtSize.TabIndex = 13;
+            this.txtSize.TabIndex = 16;
             // 
             // txtLocation
             // 
-            this.txtLocation.Location = new System.Drawing.Point(127, 166);
+            this.txtLocation.Location = new System.Drawing.Point(127, 203);
             this.txtLocation.Name = "txtLocation";
             this.txtLocation.Size = new System.Drawing.Size(100, 20);
-            this.txtLocation.TabIndex = 12;
+            this.txtLocation.TabIndex = 14;
             // 
             // txtType
             // 
-            this.txtType.Location = new System.Drawing.Point(127, 140);
+            this.txtType.Location = new System.Drawing.Point(127, 177);
             this.txtType.Name = "txtType";
             this.txtType.Size = new System.Drawing.Size(100, 20);
-            this.txtType.TabIndex = 11;
+            this.txtType.TabIndex = 12;
             // 
             // txtTitle
             // 
@@ -188,7 +252,7 @@ namespace Applied_Accounts.Forms
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(39, 196);
+            this.label7.Location = new System.Drawing.Point(39, 233);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 13);
             this.label7.TabIndex = 6;
@@ -197,7 +261,7 @@ namespace Applied_Accounts.Forms
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(39, 169);
+            this.label6.Location = new System.Drawing.Point(39, 206);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(70, 13);
             this.label6.TabIndex = 5;
@@ -206,7 +270,7 @@ namespace Applied_Accounts.Forms
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(39, 143);
+            this.label5.Location = new System.Drawing.Point(39, 180);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(53, 13);
             this.label5.TabIndex = 4;
@@ -254,31 +318,10 @@ namespace Applied_Accounts.Forms
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
             this.P2.Padding = new System.Windows.Forms.Padding(3);
-            this.P2.Size = new System.Drawing.Size(664, 312);
+            this.P2.Size = new System.Drawing.Size(664, 358);
             this.P2.TabIndex = 1;
             this.P2.Text = "List";
             this.P2.UseVisualStyleBackColor = true;
-            // 
-            // lblMessage
-            // 
-            this.lblMessage.AutoSize = true;
-            this.lblMessage.Location = new System.Drawing.Point(13, 361);
-            this.lblMessage.Name = "lblMessage";
-            this.lblMessage.Size = new System.Drawing.Size(50, 13);
-            this.lblMessage.TabIndex = 19;
-            this.lblMessage.Text = "Message";
-            // 
-            // MyNavigator
-            // 
-            this.MyNavigator.Current_Mode = 0;
-            this.MyNavigator.Location = new System.Drawing.Point(42, 274);
-            this.MyNavigator.Name = "MyNavigator";
-            this.MyNavigator.Size = new System.Drawing.Size(561, 24);
-            this.MyNavigator.TabIndex = 17;
-            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
-            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
-            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
             // 
             // MyDataGrid
             // 
@@ -300,11 +343,43 @@ namespace Applied_Accounts.Forms
             this.MyDataGrid.Size = new System.Drawing.Size(652, 301);
             this.MyDataGrid.TabIndex = 0;
             // 
+            // button1
+            // 
+            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.button1.Image = global::Applied_Accounts.Properties.Resources.Exit2;
+            this.button1.Location = new System.Drawing.Point(644, 397);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(34, 32);
+            this.button1.TabIndex = 19;
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // lblMessage
+            // 
+            this.lblMessage.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lblMessage.AutoSize = true;
+            this.lblMessage.Location = new System.Drawing.Point(13, 408);
+            this.lblMessage.Name = "lblMessage";
+            this.lblMessage.Size = new System.Drawing.Size(50, 13);
+            this.lblMessage.TabIndex = 19;
+            this.lblMessage.Text = "Message";
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(563, 402);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.TabIndex = 20;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // frmUnits
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(690, 384);
+            this.ClientSize = new System.Drawing.Size(690, 430);
+            this.Controls.Add(this.button2);
             this.Controls.Add(this.lblMessage);
             this.Controls.Add(this.Pages);
             this.Controls.Add(this.button1);
@@ -345,5 +420,12 @@ namespace Applied_Accounts.Forms
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox chkActive;
         private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.TextBox txtBlock;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtFloor;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cBoxProject;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Button button2;
     }
 }

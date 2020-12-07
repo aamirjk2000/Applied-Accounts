@@ -1,11 +1,7 @@
 ﻿using Applied_Accounts.Preview;
 using System;
-using System.ComponentModel.DataAnnotations;
 using System.Data;
 using System.Data.SQLite;
-using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
-using System.Threading;
 using System.Windows.Forms;
 
 namespace Applied_Accounts.Classes
@@ -47,6 +43,7 @@ namespace Applied_Accounts.Classes
         public int Count_View() { return VoucherView.Count; }
         public bool Voucher_Saved { get; set; }
         public int Total_RowID { get; set; }
+        public object SqliteCommand { get; private set; }
 
 
         #endregion
@@ -648,6 +645,68 @@ namespace Applied_Accounts.Classes
                 MessageBox.Show("No Record found.");
             }
         }
+
+        #region Delete Voucher
+
+        public void Delete(string Voucher_No)
+        {
+            DialogResult YesNo;
+
+            YesNo = MessageBox.Show("Are you sure to Delete Voucher No \n" + Voucher_No, "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (YesNo == DialogResult.Yes)
+            {
+                DataView _DataView = tbLedger.AsDataView();
+                _DataView.RowFilter = "Vou_No='" + Voucher_No + "'";
+                int REC_No = _DataView.Count;
+
+                if (REC_No == 0)
+                {
+                    MessageBox.Show("No Record found to Delete...", "DELETE", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    DialogResult YesNo1 = MessageBox.Show(_DataView.Count.ToString() + " Record Found.", "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                    if (YesNo1 == DialogResult.Yes)
+                    {
+                        SQLiteCommand DEL_command = new SQLiteCommand("", Connection.AppliedConnection());
+                        DEL_command.CommandText = "DELETE FROM [Ledger] WHERE Vou_No = @Vou_No";
+                        DEL_command.Parameters.AddWithValue("@Vou_No", Voucher_No);
+
+                        bool IsDeleted = false;
+                        int Rec_Effected = DEL_command.ExecuteNonQuery();                       // Delete Query executed.
+
+                        if (Rec_Effected == 0)
+                        {
+                            IsDeleted = false;
+                            MessageBox.Show(Voucher_No + " has NOT been deleted.");
+                            return;
+                        }
+
+
+                        if (Rec_Effected==REC_No)
+                        {
+                            IsDeleted = true;
+                            MessageBox.Show(Voucher_No + " has been deleted sucessfully");
+                        }
+                        else
+                        {
+                            IsDeleted = true;
+                            MessageBox.Show(Rec_Effected.ToString() + " have been deleted, but some thing is wrong.");
+                        }
+
+                        if(IsDeleted)
+                        {
+                            tbLedger = AppliedTable.GetDataTable(Tables.Ledger);                // Update Ledger after delete voucher
+                        }
+                    }
+                }
+            }
+        }
+
+        #endregion
+
 
 
     }       // END Main Class

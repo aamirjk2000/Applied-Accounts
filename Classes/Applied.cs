@@ -314,7 +314,8 @@ namespace Applied_Accounts.Classes
         {
             New = 1,
             Edit = 2,
-            Delete
+            Empty = 3,
+            Delete = 4
         }
 
         #endregion

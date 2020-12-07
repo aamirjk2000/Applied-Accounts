@@ -53,14 +53,16 @@ namespace Applied_Accounts
         public void InitializeClass(DataTable _DataTable)
         {
             TableClass = new ThisTable(_DataTable);
-
             MyBindingSource.DataSource = TableClass.MyDataView;
             TableBinding = BindingContext[MyBindingSource];
-            txtPointer.Text = (TableBinding.Position + 1).ToString();
-            OriginalRow = ((DataRowView)TableBinding.Current).Row;
+
 
             if (TableClass.Count > 0)                   // If Data Table has some records.
             {
+
+                txtPointer.Text = (TableBinding.Position + 1).ToString();
+                OriginalRow = ((DataRowView)TableBinding.Current).Row;
+
                 TableClass.MyDataRow = TableClass.MyDataTable.Rows[0];
                 TableClass.MyMessage = "Initialized the Table Class";
                 TableClass.MyPrimaryKeyName = "ID";
@@ -82,8 +84,19 @@ namespace Applied_Accounts
                 TableClass.MyMessage = "Initialized the Table Class";
                 TableClass.MyPrimaryKeyName = "ID";
                 TableClass.MyPrimaryKeyValue = -1;
-                Buttons_Display(1);             // Enable or Disable buttons for table is empty
+                txtPointer.Text = "Zero";
+                OriginalRow = TableClass.MyDataRow;
+                MyMessage = "No Record found.";
+                Buttons_Display((int)NavButtons.First);             // Enable or Disable buttons for table is empty
             }
+
+        }
+
+        public void InitializeClass(DataSet _DataSet)
+        {
+            TableClass = new ThisTable(_DataSet);
+            MyBindingSource.DataSource = TableClass.MyDataView;
+            TableBinding = BindingContext[MyBindingSource];
 
         }
 
@@ -138,37 +151,58 @@ namespace Applied_Accounts
             OriginalRow = ((DataRowView)TableBinding.Current).Row;
             Buttons_Display(2);                                  // Enable or Disable buttons for New voucher profile
             Current_Mode = (int)Applied.Modes.New;               // Row is new
-            
+
         }
         private void BtnSave_Click(object sender, EventArgs e)              // Save Record
         {
 
+            if(MyDataTable.Rows.Count==0) { Current_Mode = (int)Applied.Modes.Empty; }
+
             Before_Save(sender, e);
 
-
-            if (!NewRow_Valid)
+            if (!NewRow_Valid)                              // Validation check from Before_Save Event
             {
                 MessageBox.Show(MyMessage, "ERROR");
                 return;
             }
 
-
-            if(Current_Mode == (int)Applied.Modes.New)
+            // New Record Added
+            if (Current_Mode == (int)Applied.Modes.New)
             {
                 TableClass.MyDataRow = TableClass.MyDataView[NewRecordPosition].Row;
             }
-            else
+
+            // Edit Mode
+            if (Current_Mode == (int)Applied.Modes.Edit)
             {
                 TableClass.MyDataRow = ((DataRowView)TableBinding.Current).Row;
             }
 
+            // Table has not record
+            //if (Current_Mode == (int)Applied.Modes.Empty)
+            //{
+            //    TableClass.MyDataRow = MyDataTable.NewRow();
+                
+            //    TableClass.MyDataRow["ID"] = -1;
 
+            //    if (TableClass.MyDataTable.Columns.Contains("Active"))
+            //    {
+            //        if (TableClass.MyDataRow["Active"] == DBNull.Value)
+            //        {
+            //            TableClass.MyDataRow["Active"] = true;              // Assign true value is DB is null;
+            //        }
+            //    }
+            //}
+
+
+            /// Get ID number if value is -1
             if ((long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName] == -1)
             {
                 TableClass.MyDataRow[TableClass.MyPrimaryKeyName] = TableClass.GetMaxID() + 1;              // Get Maximum ID
                 TableClass.MyPrimaryKeyValue = (long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName];
             }
 
+            /// Save Record.
             MyMessage = TableClass.Save();
 
             if (TableClass.IsSaved)
@@ -190,7 +224,7 @@ namespace Applied_Accounts
                 MessageBox.Show(MyMessage, "RECORD NOT SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
 
-            Buttons_Display(-1);
+            Buttons_Display((int)NavButtons.Records);
 
         }
         private void btnDel_Click(object sender, EventArgs e)
@@ -232,24 +266,34 @@ namespace Applied_Accounts
 
         #region Events
 
+        enum NavButtons
+        {
+            First = 1,
+            Edit = 2,
+            Records = 3,
+            OneRow = 4,
+            SaveRow = 5,
+            Add
+        }
+
 
         public void Buttons_Display(int _Value)
         {
             switch (_Value)
             {
-                case 1:                                     // Disable butons if table has not row.
+                case (int)NavButtons.First:                                     // Disable butons if table has not row.
                     btnTop.Enabled = false;
                     btnNext.Enabled = false;
                     btnPrior.Enabled = false;
                     btnLast.Enabled = false;
-                    btnNew.Enabled = true;
-                    btnSave.Enabled = false;
+                    btnNew.Enabled = false;
+                    btnSave.Enabled = true;
                     btnDel.Enabled = false;
                     btnCancel.Enabled = false;
                     txtPointer.Enabled = false;
                     break;
 
-                case 2:                                    // New Record is in edit mode
+                case (int)NavButtons.Edit:                                    // New Record is in edit mode
                     btnTop.Enabled = false;
                     btnNext.Enabled = false;
                     btnPrior.Enabled = false;
@@ -261,7 +305,7 @@ namespace Applied_Accounts
                     txtPointer.Enabled = false;
                     break;
 
-                case 3:                                    // Table has records more than 1
+                case (int)NavButtons.Records:                                    // Table has records more than 1
                     btnTop.Enabled = true;
                     btnNext.Enabled = true;
                     btnPrior.Enabled = true;
@@ -273,7 +317,7 @@ namespace Applied_Accounts
                     txtPointer.Enabled = true;
                     break;
 
-                case 4:                                    // Table has 1 record.
+                case (int)NavButtons.OneRow:                                    // Table has 1 record.
                     btnTop.Enabled = false;
                     btnNext.Enabled = false;
                     btnPrior.Enabled = false;
@@ -281,6 +325,18 @@ namespace Applied_Accounts
                     btnNew.Enabled = true;
                     btnSave.Enabled = false;
                     btnDel.Enabled = true;
+                    btnCancel.Enabled = true;
+                    txtPointer.Enabled = false;
+                    break;
+
+                case (int)NavButtons.SaveRow:                                    // Table has 1 record.
+                    btnTop.Enabled = false;
+                    btnNext.Enabled = false;
+                    btnPrior.Enabled = false;
+                    btnLast.Enabled = false;
+                    btnNew.Enabled = false;
+                    btnSave.Enabled = true;
+                    btnDel.Enabled = false;
                     btnCancel.Enabled = true;
                     txtPointer.Enabled = false;
                     break;
@@ -336,7 +392,7 @@ namespace Applied_Accounts
 
                 return;
             }
-            
+
         }
     }       // Main
 }           // Namespace

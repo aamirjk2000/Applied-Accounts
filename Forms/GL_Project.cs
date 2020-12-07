@@ -112,7 +112,7 @@ namespace Applied_Accounts.Forms
             if (chkSuppliers.Checked) { ReportFilter += string.Concat(" AND Supplier=", MyReportClass.ID_Supplier); }
             if (chkUnits.Checked) { ReportFilter += string.Concat(" AND Unit=", MyReportClass.ID_Unit); }
             MyReportClass.ReportView_Filter = ReportFilter;
-            MyReportClass.ReportView_Sort = "[Project],[Supplier],[COA],[Vou_Date],[Unit]";
+            MyReportClass.ReportView_Sort = "[Vou_Date],[Project],[Supplier],[COA],[Unit]";
             MyReportClass.Update_ReportData();
             MyReportClass.Preview();                                    // Preview Report
         }

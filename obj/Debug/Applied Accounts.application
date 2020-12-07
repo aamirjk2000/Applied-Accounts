@@ -7,14 +7,14 @@
     <framework targetVersion="4.7" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Applied Accounts.exe.manifest" size="51029">
+    <dependentAssembly dependencyType="install" codebase="Applied Accounts.exe.manifest" size="51031">
       <assemblyIdentity name="Applied Accounts.exe" version="2020.07.23.1" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>oRYzQVSA/KWuBkX9AAhfTlfA8W1t/Evd53o4vREVZro=</dsig:DigestValue>
+        <dsig:DigestValue>KFZlQ1RQQMsJsFCZgvYtwscE/PMvWEQWlRHTUwqbx2I=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

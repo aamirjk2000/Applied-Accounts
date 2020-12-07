@@ -86,3 +86,7 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csprojAssemblyReference.cache
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmCOAB.resources
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.Booking.frmBooking.resources
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.Booking.frmInstalments.resources
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmVoucher_Delete.resources

@@ -102,7 +102,6 @@ namespace Applied_Accounts.Forms
             if (_Row["Nature"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Nature"] = 1; }
 
         }
-        
         private void MyNavigator_After_Save(object sender, EventArgs e) {}
         private void MyNavigator_New_Record(object sender, EventArgs e) {}
         private void btnExit_Click(object sender, EventArgs e) { Close(); }

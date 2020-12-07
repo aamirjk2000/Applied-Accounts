@@ -7,7 +7,7 @@ namespace Applied_Accounts.Forms
 {
     public partial class frmProject : Form
     {
-        private DataTable MyDataTable = AppliedTable.GetDataTable(Tables.Employees);
+        private DataTable MyDataTable = AppliedTable.GetDataTable(Tables.Projects);
 
         #region Initialize
 

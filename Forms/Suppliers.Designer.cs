@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSuppliers));
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
             this.txtCNIC = new System.Windows.Forms.TextBox();
@@ -46,7 +47,6 @@
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.btnExit = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.txtBusiness = new System.Windows.Forms.TextBox();
             this.txtTag = new System.Windows.Forms.TextBox();
@@ -61,6 +61,8 @@
             this.MyNavigator = new Applied_Accounts.Navigator();
             this.P2 = new System.Windows.Forms.TabPage();
             this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.label14 = new System.Windows.Forms.Label();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -68,12 +70,15 @@
             // 
             // Pages
             // 
+            this.Pages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Pages.Controls.Add(this.P1);
             this.Pages.Controls.Add(this.P2);
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
-            this.Pages.Size = new System.Drawing.Size(584, 426);
+            this.Pages.Size = new System.Drawing.Size(584, 386);
             this.Pages.TabIndex = 0;
             // 
             // P1
@@ -94,7 +99,6 @@
             this.P1.Controls.Add(this.label8);
             this.P1.Controls.Add(this.label7);
             this.P1.Controls.Add(this.label6);
-            this.P1.Controls.Add(this.btnExit);
             this.P1.Controls.Add(this.label5);
             this.P1.Controls.Add(this.txtBusiness);
             this.P1.Controls.Add(this.txtTag);
@@ -110,14 +114,14 @@
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
-            this.P1.Size = new System.Drawing.Size(576, 400);
+            this.P1.Size = new System.Drawing.Size(576, 360);
             this.P1.TabIndex = 0;
             this.P1.Text = "Record";
             this.P1.UseVisualStyleBackColor = true;
             // 
             // txtCNIC
             // 
-            this.txtCNIC.Location = new System.Drawing.Point(161, 264);
+            this.txtCNIC.Location = new System.Drawing.Point(161, 267);
             this.txtCNIC.Name = "txtCNIC";
             this.txtCNIC.Size = new System.Drawing.Size(100, 20);
             this.txtCNIC.TabIndex = 28;
@@ -244,17 +248,6 @@
             this.label6.TabIndex = 13;
             this.label6.Text = "Person";
             // 
-            // btnExit
-            // 
-            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.Location = new System.Drawing.Point(22, 371);
-            this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(532, 23);
-            this.btnExit.TabIndex = 12;
-            this.btnExit.Text = "E X I T";
-            this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -349,7 +342,7 @@
             // 
             this.MyNavigator.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.MyNavigator.Current_Mode = 0;
-            this.MyNavigator.Location = new System.Drawing.Point(22, 345);
+            this.MyNavigator.Location = new System.Drawing.Point(22, 318);
             this.MyNavigator.Name = "MyNavigator";
             this.MyNavigator.Size = new System.Drawing.Size(534, 36);
             this.MyNavigator.TabIndex = 0;
@@ -363,7 +356,7 @@
             this.P2.Controls.Add(this.MyDataGrid);
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
-            this.P2.Size = new System.Drawing.Size(576, 400);
+            this.P2.Size = new System.Drawing.Size(576, 360);
             this.P2.TabIndex = 2;
             this.P2.Text = "List";
             this.P2.UseVisualStyleBackColor = true;
@@ -388,12 +381,34 @@
             this.MyDataGrid.Size = new System.Drawing.Size(563, 394);
             this.MyDataGrid.TabIndex = 0;
             // 
+            // btnExit
+            // 
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
+            this.btnExit.Location = new System.Drawing.Point(563, 400);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(33, 30);
+            this.btnExit.TabIndex = 12;
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(13, 409);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(50, 13);
+            this.label14.TabIndex = 13;
+            this.label14.Text = "Message";
+            // 
             // frmSuppliers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(608, 450);
+            this.ClientSize = new System.Drawing.Size(603, 438);
+            this.Controls.Add(this.label14);
             this.Controls.Add(this.Pages);
+            this.Controls.Add(this.btnExit);
             this.Name = "frmSuppliers";
             this.Text = "Suppliers";
             this.Pages.ResumeLayout(false);
@@ -401,6 +416,7 @@
             this.P1.PerformLayout();
             this.P2.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -439,5 +455,6 @@
         private System.Windows.Forms.TextBox txtAddress;
         private System.Windows.Forms.TextBox txtContact;
         private System.Windows.Forms.TextBox txtPerson;
+        private System.Windows.Forms.Label label14;
     }
 }

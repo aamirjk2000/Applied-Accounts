@@ -634,11 +634,9 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnUnit_Code);
                 this.columnUnit_Title = new global::System.Data.DataColumn("Unit_Title", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnUnit_Title);
-                this.columnVou_Date.AllowDBNull = false;
                 this.columnVou_No.AllowDBNull = false;
                 this.columnVou_No.MaxLength = 12;
-                this.columnDescription.AllowDBNull = false;
-                this.columnDescription.MaxLength = 200;
+                this.columnDescription.MaxLength = 255;
                 this.columnDR.AllowDBNull = false;
                 this.columnCR.AllowDBNull = false;
                 this.columnProject_Code.AllowDBNull = false;
@@ -802,7 +800,12 @@ namespace Applied_Accounts.Data {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public System.DateTime Vou_Date {
                 get {
-                    return ((global::System.DateTime)(this[this.tableView_Project_Ledger.Vou_DateColumn]));
+                    try {
+                        return ((global::System.DateTime)(this[this.tableView_Project_Ledger.Vou_DateColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Vou_Date\' in table \'View_Project_Ledger\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableView_Project_Ledger.Vou_DateColumn] = value;
@@ -824,7 +827,12 @@ namespace Applied_Accounts.Data {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
             public string Description {
                 get {
-                    return ((string)(this[this.tableView_Project_Ledger.DescriptionColumn]));
+                    try {
+                        return ((string)(this[this.tableView_Project_Ledger.DescriptionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'View_Project_Ledger\' is DBNull.", e);
+                    }
                 }
                 set {
                     this[this.tableView_Project_Ledger.DescriptionColumn] = value;
@@ -998,6 +1006,30 @@ namespace Applied_Accounts.Data {
                 set {
                     this[this.tableView_Project_Ledger.Unit_TitleColumn] = value;
                 }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsVou_DateNull() {
+                return this.IsNull(this.tableView_Project_Ledger.Vou_DateColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetVou_DateNull() {
+                this[this.tableView_Project_Ledger.Vou_DateColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public bool IsDescriptionNull() {
+                return this.IsNull(this.tableView_Project_Ledger.DescriptionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
+            public void SetDescriptionNull() {
+                this[this.tableView_Project_Ledger.DescriptionColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1220,7 +1252,7 @@ namespace Applied_Accounts.Data.ds_Project_LedgerTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.Odbc.OdbcConnection();
-            this._connection.ConnectionString = global::Applied_Accounts.Properties.Settings.Default.ConnectionString;
+            this._connection.ConnectionString = global::Applied_Accounts.Properties.Settings.Default.ConnectionString1;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

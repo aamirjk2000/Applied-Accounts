@@ -6,6 +6,7 @@ using Applied_Accounts.Reports;
 using System.Windows;
 using System.IO;
 using System.Drawing;
+using Applied_Accounts.Forms.Booking;
 //using System.Windows;
 
 namespace Applied_Accounts
@@ -23,8 +24,6 @@ namespace Applied_Accounts
 
 
         }
-
-
         private void frmMainMenu_Activated(object sender, EventArgs e)
         {
             Text = lblCompanyName.Text.Trim();
@@ -43,117 +42,102 @@ namespace Applied_Accounts
         {
             Close();
         }
-
         private void dataBaseSettingToolStripMenuItem_Click(object sender, EventArgs e)
         {
             frmDBSetting ThisForm = new frmDBSetting();
             ThisForm.Show();
         }
-
         private void mnuCOA_Click(object sender, EventArgs e)
         {
             frmCOA ThisForm = new frmCOA();
             ThisForm.Show();
         }
-
-
         private void mnuAccNotes_Click_1(object sender, EventArgs e)
         {
             frmAccNotes ThisForm = new frmAccNotes();
             ThisForm.Show();
         }
-
         private void mnuSupplier_Click(object sender, EventArgs e)
         {
             frmSuppliers ThisForm = new frmSuppliers();
             ThisForm.Show();
         }
-
         private void mnuProjects_Click(object sender, EventArgs e)
         {
             frmProject ThisForm = new frmProject();
             ThisForm.Show();
         }
-
         private void mnuUnits_Click(object sender, EventArgs e)
         {
             frmUnits ThisForm = new frmUnits();
             ThisForm.Show();
         }
-
+        private void mnuCOAB_Click(object sender, EventArgs e)
+        {
+            frmCOAB ThisForm = new frmCOAB();
+            ThisForm.Show();
+        }
         private void mnuEmployees_Click(object sender, EventArgs e)
         {
             frmEmployees ThisForm = new frmEmployees();
             ThisForm.Show();
         }
-
         private void mnuJV_Click(object sender, EventArgs e)
         {
             frmVouchers ThisForm = new frmVouchers((int)Applied.VoucherType.Journal);
             ThisForm.Show();
         }
-
         private void mnuPV_Click(object sender, EventArgs e)
         {
             frmVouchers ThisForm = new frmVouchers((int)Applied.VoucherType.Payment);
             ThisForm.Show();
         }
-
         private void mnuRV_Click(object sender, EventArgs e)
         {
             frmVouchers ThisForm = new frmVouchers((int)Applied.VoucherType.Receipt);
             ThisForm.Show();
         }
-
         private void mnuMigration_Click(object sender, EventArgs e)
         {
             frmMigration ThisForm = new frmMigration();
             ThisForm.Show();
         }
-
         private void mnuRptGL_Click(object sender, EventArgs e)
         {
             frmGeneral_Ledger ThisForm = new frmGeneral_Ledger();
             ThisForm.Show();
         }
-
         private void mnuSetting_Click(object sender, EventArgs e)
         {
             frmSetting ThisForm = new frmSetting();
             ThisForm.Show();
         }
-
         private void mnuVouchers_Click(object sender, EventArgs e)
         {
             frmReport_Vouchers ThisForm = new frmReport_Vouchers();
             ThisForm.Show();
         }
-
         private void mnuSupplierLedger_Click(object sender, EventArgs e)
         {
             frmGL_Supplier ThisForm = new frmGL_Supplier();
             ThisForm.Show();
         }
-
         private void mnuProjectLedger_Click(object sender, EventArgs e)
         {
             frmGL_Project ThisForm = new frmGL_Project();
             ThisForm.Show();
         }
-
         private void mnuTrialBalance_Click(object sender, EventArgs e)
         {
 
             frmTrial_Balance ThisForm = new frmTrial_Balance();
             ThisForm.Show();
         }
-
         private void mnuPWChange_Click(object sender, EventArgs e)
         {
             frmUsers ThisForm = new frmUsers(Program.User);
             ThisForm.Show();
         }
-
         private void btnWallpaper_Click(object sender, EventArgs e)
         {
             OpenFileDialog fd = new OpenFileDialog();
@@ -179,11 +163,21 @@ namespace Applied_Accounts
 
 
         }
-
-        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        private void mnuBooking_Click(object sender, EventArgs e)
         {
-            
+            frmBooking ThisForm = new frmBooking();
+            ThisForm.Show();
+        }
+        private void mnuInstalments_Click(object sender, EventArgs e)
+        {
+            frmInstalments Thisform = new frmInstalments();
+            Thisform.Show();
+        }
 
+        private void mnuDELVoucher_Click(object sender, EventArgs e)
+        {
+            frmVoucher_Delete Thisform = new frmVoucher_Delete();
+            Thisform.Show();
         }
     }
 }

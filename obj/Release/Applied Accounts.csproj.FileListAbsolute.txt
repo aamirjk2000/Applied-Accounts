@@ -291,3 +291,7 @@ D:\Applied\Applied-Accounts\bin\Release\Connection_Class.dll
 D:\Applied\Applied-Accounts\bin\Release\Connection_Class.pdb
 D:\Applied\Applied-Accounts\bin\Release\Connection_Class.xml
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmUnits.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmCOAB.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.Booking.frmBooking.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.Booking.frmInstalments.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmVoucher_Delete.resources

@@ -22,6 +22,7 @@ namespace Applied_Accounts
         #region Variables
 
 
+        public DataSet MyDataSet = new DataSet();
         public DataTable MyDataTable = new DataTable();
         public DataView MyDataView = new DataView();
         public int MyTableID { get; set; }
@@ -75,6 +76,19 @@ namespace Applied_Accounts
                 initialize(_DataTable);
             }
         }
+
+        public ThisTable(DataSet _DataSet)
+        {
+
+            DataTable _DataTable = _DataSet.Tables[0];
+
+            if (_DataTable != null)
+            {
+                //MessageBox.Show("Table name is not assigned", "ERROR");
+                initialize(_DataTable);
+            }
+        }
+
 
         // initialize the class.
         private void initialize(DataTable _DataTable)
