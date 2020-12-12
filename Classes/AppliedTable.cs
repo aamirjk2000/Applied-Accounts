@@ -224,7 +224,9 @@ namespace Applied_Accounts
             return _Title;
         }
 
-        #endregion  
+        #endregion
+
+        #region DataSet
 
         public static DataSet GetDataSet(int TableID)
         {
@@ -245,12 +247,11 @@ namespace Applied_Accounts
                 return new DataSet();
             }
         }
-
         public static DataSet GetDataSet(string _DataSetName, int[] _Tables)
         {
             DataSet _DataSet = new DataSet(_DataSetName);
 
-            foreach(int _TableID in _Tables)
+            foreach (int _TableID in _Tables)
             {
                 string _TableName = Conversion.GetTableName(_TableID);
                 string _Text = "SELECT * FROM " + _TableName + ";";
@@ -261,6 +262,8 @@ namespace Applied_Accounts
             }
             return _DataSet;
         }
+        #endregion
+
         public static DataTable GetDBView(int TableID, string _Filter)
         {
             string _TableName = Conversion.GetTableName(TableID);
@@ -431,39 +434,104 @@ namespace Applied_Accounts
                     MessageBox.Show(_Row["SRNO"].ToString() + " Deleted", "ERROR");
                 }
             }
-        
+
             return _RowEfected;
         }
 
-}                             // Main
+        public static object[] SearchText(TextBox _Value, DataTable _DataTable)
+        {
+            object[] _Result = { (long)0, "", "","", false };
+
+            string _String = _Value.Text.Trim();
+            long _long = 0;
+
+            DataView _DataView = _DataTable.AsDataView();
+
+            if (_Value == null || _DataTable == null )              // If Parameters are nill pass zero value
+            {
+                _Result[0] = 0;
+            }
+
+            if(String.IsNullOrEmpty(_String))
+            {
+                _Result[0] = 0;
+            }
+            else
+            {
+                try
+                {
+                    _long = long.Parse(_String);
+                }
+                catch
+                {
+                    _long = 0;
+                }
+            }
+
+            _DataView.RowFilter = "ID=" + _long.ToString().Trim();
+            if (_DataView.Count == 1)
+            {
+                _Result[0] = Conversion.ToLong(_DataView[0]["ID"]);
+                _Result[1] = _DataView[0]["Code"].ToString();
+                _Result[2] = _DataView[0]["SCode"].ToString();
+                _Result[3] = _DataView[0]["Title"].ToString();
+                _Result[4] = true;
+
+                return _Result;
+            }
+
+            _DataView.RowFilter = "Code='" + _String.ToString().Trim() + "'";
+            if (_DataView.Count == 1)
+            {
+                _Result[0] = Conversion.ToLong(_DataView[0]["ID"]);
+                _Result[1] = _DataView[0]["Code"].ToString();
+                _Result[2] = _DataView[0]["SCode"].ToString();
+                _Result[3] = _DataView[0]["Title"].ToString();
+                _Result[4] = true;
+
+                return _Result;
+            }
+
+            _DataView.RowFilter = "SCode='" + _String.ToString().Trim() + "'";
+            if (_DataView.Count == 1)
+            {
+                _Result[0] = Conversion.ToLong(_DataView[0]["ID"]);
+                _Result[1] = _DataView[0]["Code"].ToString();
+                _Result[2] = _DataView[0]["SCode"].ToString();
+                _Result[3] = _DataView[0]["Title"].ToString();
+                _Result[4] = true;
+            }
+
+            return _Result;
+        }
 
 
-public enum Tables
-{
-    COA = 1,
-    Notes = 2,
-    COA_Type = 3,
-    Suppliers = 4,
-    Projects = 5,
-    Units = 6,
-    Employees = 7,
-    Stock = 8,
-    Applied = 9,
-    Ledger = 10,
-    Users = 11,
-    COAB=12,
-    Bookings=13,
-    Instalments=14,
+    }                             // Main
 
+    public enum Tables
+    {
+        COA = 1,
+        Notes = 2,
+        COA_Type = 3,
+        Suppliers = 4,
+        Projects = 5,
+        Units = 6,
+        Employees = 7,
+        Stock = 8,
+        Applied = 9,
+        Ledger = 10,
+        Users = 11,
+        COAB = 12,
+        Booking = 13,
+        Instalments = 14,
 
-    View_Voucher = 101,
-    View_VouNo = 102,
-    View_General_Ledger = 103,
-    View_Supplier_Ledger = 104,
-    View_Project_Ledger = 105,
-    View_Trial_Balance = 106,
-    View_TB_Period = 107,
-    View_VoucherGrid = 108
-};
-
+        View_Voucher = 101,
+        View_VouNo = 102,
+        View_General_Ledger = 103,
+        View_Supplier_Ledger = 104,
+        View_Project_Ledger = 105,
+        View_Trial_Balance = 106,
+        View_TB_Period = 107,
+        View_VoucherGrid = 108
+    };
 }                               // Namespace

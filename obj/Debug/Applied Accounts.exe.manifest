@@ -4,7 +4,7 @@
   <description asmv2:iconFile="Safe-Open.ico" xmlns="urn:schemas-microsoft-com:asm.v1" />
   <application />
   <entryPoint>
-    <assemblyIdentity name="Applied Accounts" version="2020.11.30.17" language="neutral" processorArchitecture="msil" />
+    <assemblyIdentity name="Applied Accounts" version="2020.12.12.17" language="neutral" processorArchitecture="msil" />
     <commandLine file="Applied Accounts.exe" parameters="" />
   </entryPoint>
   <trustInfo>
@@ -43,14 +43,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="1414616">
-      <assemblyIdentity name="Applied Accounts" version="2020.11.30.17" language="neutral" processorArchitecture="msil" />
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Applied Accounts.exe" size="1424344">
+      <assemblyIdentity name="Applied Accounts" version="2020.12.12.17" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>mh8r9yOyJBX4DVMMqlrTPmqeTu9nk+30IBJ12C6Jlmg=</dsig:DigestValue>
+        <dsig:DigestValue>b0g0zavvjr9DAWS+nGtxMuaoaUQHOpnxkRHLgvOIVug=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

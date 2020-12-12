@@ -182,6 +182,8 @@ namespace Applied_Accounts
                 _Result = (long)MyDataTable.Compute("MAX(ID)", string.Empty);
             }
 
+            if(_Result==-1) { _Result = 0; }  // Zero when table is empty.
+
             return _Result;
         }
         public string Save()                                    // Save the record with Current Data Row
@@ -208,7 +210,7 @@ namespace Applied_Accounts
 
             #region Primary Key
             MyPrimaryKeyValue = (long)_DataRow[MyPrimaryKeyName];                           // Set Primary Key Value
-            if (MyPrimaryKeyValue <= 0)                                     // return if Table PK not exist.
+            if (MyPrimaryKeyValue <= 0)                                                     // return if Table PK not exist.
             {
                 MessageBox.Show("Primary Key not found.", "ERROR");
                 return "Primary Key not found.";

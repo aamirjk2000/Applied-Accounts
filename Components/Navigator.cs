@@ -178,26 +178,12 @@ namespace Applied_Accounts
                 TableClass.MyDataRow = ((DataRowView)TableBinding.Current).Row;
             }
 
-            // Table has not record
-            //if (Current_Mode == (int)Applied.Modes.Empty)
-            //{
-            //    TableClass.MyDataRow = MyDataTable.NewRow();
-                
-            //    TableClass.MyDataRow["ID"] = -1;
-
-            //    if (TableClass.MyDataTable.Columns.Contains("Active"))
-            //    {
-            //        if (TableClass.MyDataRow["Active"] == DBNull.Value)
-            //        {
-            //            TableClass.MyDataRow["Active"] = true;              // Assign true value is DB is null;
-            //        }
-            //    }
-            //}
-
 
             /// Get ID number if value is -1
             if ((long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName] == -1)
             {
+
+
                 TableClass.MyDataRow[TableClass.MyPrimaryKeyName] = TableClass.GetMaxID() + 1;              // Get Maximum ID
                 TableClass.MyPrimaryKeyValue = (long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName];
             }
@@ -286,7 +272,7 @@ namespace Applied_Accounts
                     btnNext.Enabled = false;
                     btnPrior.Enabled = false;
                     btnLast.Enabled = false;
-                    btnNew.Enabled = false;
+                    btnNew.Enabled = true;
                     btnSave.Enabled = true;
                     btnDel.Enabled = false;
                     btnCancel.Enabled = false;
