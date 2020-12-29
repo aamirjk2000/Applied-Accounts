@@ -335,7 +335,7 @@
             this.txtEmployee.Location = new System.Drawing.Point(95, 246);
             this.txtEmployee.Name = "txtEmployee";
             this.txtEmployee.Size = new System.Drawing.Size(59, 20);
-            this.txtEmployee.TabIndex = 116;
+            this.txtEmployee.TabIndex = 10;
             this.txtEmployee.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmployee_Validating);
             this.txtEmployee.Validated += new System.EventHandler(this.txtEmployee_Validated);
             // 
@@ -344,7 +344,7 @@
             this.txtStock.Location = new System.Drawing.Point(95, 218);
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(59, 20);
-            this.txtStock.TabIndex = 115;
+            this.txtStock.TabIndex = 9;
             this.txtStock.Validating += new System.ComponentModel.CancelEventHandler(this.txtStock_Validating);
             this.txtStock.Validated += new System.EventHandler(this.txtStock_Validated);
             // 
@@ -353,7 +353,7 @@
             this.txtUnit.Location = new System.Drawing.Point(95, 191);
             this.txtUnit.Name = "txtUnit";
             this.txtUnit.Size = new System.Drawing.Size(59, 20);
-            this.txtUnit.TabIndex = 114;
+            this.txtUnit.TabIndex = 8;
             this.txtUnit.Validating += new System.ComponentModel.CancelEventHandler(this.txtUnit_Validating);
             this.txtUnit.Validated += new System.EventHandler(this.txtUnit_Validated);
             // 
@@ -362,7 +362,7 @@
             this.txtProject.Location = new System.Drawing.Point(95, 164);
             this.txtProject.Name = "txtProject";
             this.txtProject.Size = new System.Drawing.Size(59, 20);
-            this.txtProject.TabIndex = 113;
+            this.txtProject.TabIndex = 7;
             this.txtProject.Validating += new System.ComponentModel.CancelEventHandler(this.txtProject_Validating);
             this.txtProject.Validated += new System.EventHandler(this.txtProject_Validated);
             // 
@@ -371,7 +371,7 @@
             this.txtVandor.Location = new System.Drawing.Point(95, 137);
             this.txtVandor.Name = "txtVandor";
             this.txtVandor.Size = new System.Drawing.Size(59, 20);
-            this.txtVandor.TabIndex = 112;
+            this.txtVandor.TabIndex = 6;
             this.txtVandor.Validating += new System.ComponentModel.CancelEventHandler(this.txtVandor_Validating);
             this.txtVandor.Validated += new System.EventHandler(this.txtVandor_Validated);
             // 
@@ -380,7 +380,7 @@
             this.txtAccount.Location = new System.Drawing.Point(95, 111);
             this.txtAccount.Name = "txtAccount";
             this.txtAccount.Size = new System.Drawing.Size(59, 20);
-            this.txtAccount.TabIndex = 111;
+            this.txtAccount.TabIndex = 5;
             this.txtAccount.Validating += new System.ComponentModel.CancelEventHandler(this.txtAccount_Validating);
             this.txtAccount.Validated += new System.EventHandler(this.txtAccount_Validated);
             // 
@@ -393,7 +393,7 @@
             this.groupBox1.Location = new System.Drawing.Point(594, 280);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(149, 131);
-            this.groupBox1.TabIndex = 101;
+            this.groupBox1.TabIndex = 105;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "VOUCHER";
             // 
@@ -403,7 +403,7 @@
             this.btnNewVoucher.Location = new System.Drawing.Point(26, 25);
             this.btnNewVoucher.Name = "btnNewVoucher";
             this.btnNewVoucher.Size = new System.Drawing.Size(100, 23);
-            this.btnNewVoucher.TabIndex = 35;
+            this.btnNewVoucher.TabIndex = 106;
             this.btnNewVoucher.Text = "New Voucher";
             this.btnNewVoucher.UseVisualStyleBackColor = true;
             this.btnNewVoucher.Click += new System.EventHandler(this.btnNewVoucher_Click);
@@ -413,7 +413,7 @@
             this.btnSaveVoucher.Location = new System.Drawing.Point(26, 92);
             this.btnSaveVoucher.Name = "btnSaveVoucher";
             this.btnSaveVoucher.Size = new System.Drawing.Size(100, 23);
-            this.btnSaveVoucher.TabIndex = 37;
+            this.btnSaveVoucher.TabIndex = 108;
             this.btnSaveVoucher.Text = "Save Voucher";
             this.btnSaveVoucher.UseVisualStyleBackColor = false;
             this.btnSaveVoucher.Click += new System.EventHandler(this.btnSaveVoucher_Click);
@@ -426,7 +426,7 @@
             this.btnPrint.Location = new System.Drawing.Point(26, 56);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(100, 23);
-            this.btnPrint.TabIndex = 36;
+            this.btnPrint.TabIndex = 107;
             this.btnPrint.Text = "P R I N T";
             this.btnPrint.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnPrint.UseVisualStyleBackColor = true;
@@ -461,7 +461,7 @@
             this.txtRefNo.Location = new System.Drawing.Point(95, 274);
             this.txtRefNo.Name = "txtRefNo";
             this.txtRefNo.Size = new System.Drawing.Size(150, 20);
-            this.txtRefNo.TabIndex = 11;
+            this.txtRefNo.TabIndex = 17;
             this.txtRefNo.Leave += new System.EventHandler(this.txtRefNo_Leave);
             // 
             // label18
@@ -568,7 +568,7 @@
             this.txtRemarks.Location = new System.Drawing.Point(95, 391);
             this.txtRemarks.Name = "txtRemarks";
             this.txtRemarks.Size = new System.Drawing.Size(495, 20);
-            this.txtRemarks.TabIndex = 17;
+            this.txtRemarks.TabIndex = 23;
             this.txtRemarks.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtRemarks_KeyDown);
             // 
             // txtDescription
@@ -576,7 +576,7 @@
             this.txtDescription.Location = new System.Drawing.Point(95, 361);
             this.txtDescription.Name = "txtDescription";
             this.txtDescription.Size = new System.Drawing.Size(495, 20);
-            this.txtDescription.TabIndex = 16;
+            this.txtDescription.TabIndex = 22;
             this.txtDescription.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtDescription_KeyDown);
             // 
             // label17
@@ -604,7 +604,7 @@
             this.btnUndo.Location = new System.Drawing.Point(643, 237);
             this.btnUndo.Name = "btnUndo";
             this.btnUndo.Size = new System.Drawing.Size(77, 30);
-            this.btnUndo.TabIndex = 34;
+            this.btnUndo.TabIndex = 104;
             this.btnUndo.Text = "Undo";
             this.btnUndo.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnUndo.UseVisualStyleBackColor = true;
@@ -617,7 +617,7 @@
             this.btnDelete.Location = new System.Drawing.Point(643, 195);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(77, 30);
-            this.btnDelete.TabIndex = 33;
+            this.btnDelete.TabIndex = 103;
             this.btnDelete.Text = "Delete";
             this.btnDelete.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -630,7 +630,7 @@
             this.btnNew.Location = new System.Drawing.Point(643, 153);
             this.btnNew.Name = "btnNew";
             this.btnNew.Size = new System.Drawing.Size(77, 30);
-            this.btnNew.TabIndex = 32;
+            this.btnNew.TabIndex = 102;
             this.btnNew.Text = "New";
             this.btnNew.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnNew.UseVisualStyleBackColor = true;
@@ -643,7 +643,7 @@
             this.btnSave.Location = new System.Drawing.Point(643, 111);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(77, 30);
-            this.btnSave.TabIndex = 31;
+            this.btnSave.TabIndex = 101;
             this.btnSave.Text = "Save";
             this.btnSave.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSave.UseVisualStyleBackColor = true;
@@ -656,14 +656,14 @@
             this.dtChqDate.Location = new System.Drawing.Point(95, 331);
             this.dtChqDate.Name = "dtChqDate";
             this.dtChqDate.Size = new System.Drawing.Size(149, 20);
-            this.dtChqDate.TabIndex = 13;
+            this.dtChqDate.TabIndex = 19;
             // 
             // txtChqNo
             // 
             this.txtChqNo.Location = new System.Drawing.Point(95, 304);
             this.txtChqNo.Name = "txtChqNo";
             this.txtChqNo.Size = new System.Drawing.Size(150, 20);
-            this.txtChqNo.TabIndex = 12;
+            this.txtChqNo.TabIndex = 18;
             this.txtChqNo.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtChqNo_KeyDown);
             this.txtChqNo.Leave += new System.EventHandler(this.txtChqNo_Leave);
             // 
@@ -711,7 +711,7 @@
             this.txtCredit.Location = new System.Drawing.Point(438, 314);
             this.txtCredit.Name = "txtCredit";
             this.txtCredit.Size = new System.Drawing.Size(150, 26);
-            this.txtCredit.TabIndex = 15;
+            this.txtCredit.TabIndex = 21;
             this.txtCredit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCredit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtCredit_KeyPress);
             this.txtCredit.Leave += new System.EventHandler(this.txtCredit_Leave);
@@ -724,7 +724,7 @@
             this.txtDebit.Location = new System.Drawing.Point(438, 282);
             this.txtDebit.Name = "txtDebit";
             this.txtDebit.Size = new System.Drawing.Size(150, 26);
-            this.txtDebit.TabIndex = 14;
+            this.txtDebit.TabIndex = 20;
             this.txtDebit.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtDebit.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtDebit_KeyPress);
             this.txtDebit.Leave += new System.EventHandler(this.txtDebit_Leave);
@@ -732,7 +732,7 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(21, 255);
+            this.label11.Location = new System.Drawing.Point(21, 249);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(53, 13);
             this.label11.TabIndex = 22;
@@ -744,14 +744,15 @@
             this.cBoxEmployees.Location = new System.Drawing.Point(160, 245);
             this.cBoxEmployees.Name = "cBoxEmployees";
             this.cBoxEmployees.Size = new System.Drawing.Size(428, 21);
-            this.cBoxEmployees.TabIndex = 10;
+            this.cBoxEmployees.TabIndex = 16;
+            this.cBoxEmployees.TabStop = false;
             this.cBoxEmployees.TextChanged += new System.EventHandler(this.cBoxEmployees_TextChanged);
             this.cBoxEmployees.Leave += new System.EventHandler(this.cBoxEmployees_Leave);
             // 
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(21, 227);
+            this.label10.Location = new System.Drawing.Point(21, 223);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(35, 13);
             this.label10.TabIndex = 20;
@@ -760,7 +761,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(21, 200);
+            this.label9.Location = new System.Drawing.Point(21, 196);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(31, 13);
             this.label9.TabIndex = 19;
@@ -769,7 +770,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(21, 173);
+            this.label8.Location = new System.Drawing.Point(21, 168);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(40, 13);
             this.label8.TabIndex = 18;
@@ -778,7 +779,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(21, 145);
+            this.label7.Location = new System.Drawing.Point(21, 142);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(41, 13);
             this.label7.TabIndex = 17;
@@ -809,7 +810,8 @@
             this.cBoxStocks.Location = new System.Drawing.Point(160, 218);
             this.cBoxStocks.Name = "cBoxStocks";
             this.cBoxStocks.Size = new System.Drawing.Size(427, 21);
-            this.cBoxStocks.TabIndex = 9;
+            this.cBoxStocks.TabIndex = 15;
+            this.cBoxStocks.TabStop = false;
             this.cBoxStocks.TextChanged += new System.EventHandler(this.cBoxStocks_TextChanged);
             this.cBoxStocks.Leave += new System.EventHandler(this.cBoxStocks_Leave);
             // 
@@ -819,7 +821,8 @@
             this.cBoxUnits.Location = new System.Drawing.Point(160, 191);
             this.cBoxUnits.Name = "cBoxUnits";
             this.cBoxUnits.Size = new System.Drawing.Size(427, 21);
-            this.cBoxUnits.TabIndex = 8;
+            this.cBoxUnits.TabIndex = 14;
+            this.cBoxUnits.TabStop = false;
             this.cBoxUnits.TextChanged += new System.EventHandler(this.cBoxUnits_TextChanged);
             this.cBoxUnits.Leave += new System.EventHandler(this.cBoxUnits_Leave);
             // 
@@ -829,7 +832,8 @@
             this.cBoxProjects.Location = new System.Drawing.Point(160, 164);
             this.cBoxProjects.Name = "cBoxProjects";
             this.cBoxProjects.Size = new System.Drawing.Size(427, 21);
-            this.cBoxProjects.TabIndex = 7;
+            this.cBoxProjects.TabIndex = 13;
+            this.cBoxProjects.TabStop = false;
             this.cBoxProjects.TextChanged += new System.EventHandler(this.cBoxProjects_TextChanged);
             this.cBoxProjects.Leave += new System.EventHandler(this.cBoxProjects_Leave);
             // 
@@ -839,7 +843,8 @@
             this.cBoxSuppliers.Location = new System.Drawing.Point(160, 137);
             this.cBoxSuppliers.Name = "cBoxSuppliers";
             this.cBoxSuppliers.Size = new System.Drawing.Size(427, 21);
-            this.cBoxSuppliers.TabIndex = 6;
+            this.cBoxSuppliers.TabIndex = 12;
+            this.cBoxSuppliers.TabStop = false;
             this.cBoxSuppliers.TextChanged += new System.EventHandler(this.cBoxSuppliers_TextChanged);
             this.cBoxSuppliers.Leave += new System.EventHandler(this.cBoxSuppliers_Leave);
             // 
@@ -849,7 +854,8 @@
             this.cBoxAccounts.Location = new System.Drawing.Point(160, 110);
             this.cBoxAccounts.Name = "cBoxAccounts";
             this.cBoxAccounts.Size = new System.Drawing.Size(427, 21);
-            this.cBoxAccounts.TabIndex = 5;
+            this.cBoxAccounts.TabIndex = 11;
+            this.cBoxAccounts.TabStop = false;
             this.cBoxAccounts.TextChanged += new System.EventHandler(this.cBoxAccounts_TextChanged);
             this.cBoxAccounts.Enter += new System.EventHandler(this.cBoxAccounts_Enter);
             this.cBoxAccounts.Leave += new System.EventHandler(this.cBoxAccounts_Leave);
@@ -857,7 +863,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(21, 79);
+            this.label5.Location = new System.Drawing.Point(21, 80);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(40, 13);
             this.label5.TabIndex = 9;
@@ -866,28 +872,25 @@
             // 
             // dtVouDate
             // 
-            this.dtVouDate.CustomFormat = "dd-MMM-yyyy";
-            this.dtVouDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtVouDate.Location = new System.Drawing.Point(267, 24);
+            this.dtVouDate.Location = new System.Drawing.Point(484, 25);
             this.dtVouDate.Name = "dtVouDate";
             this.dtVouDate.Size = new System.Drawing.Size(104, 20);
-            this.dtVouDate.TabIndex = 2;
+            this.dtVouDate.TabIndex = 3;
             this.dtVouDate.Validating += new System.ComponentModel.CancelEventHandler(this.dtVouDate_Validating);
             // 
             // cboxVouType
             // 
             this.cboxVouType.FormattingEnabled = true;
-            this.cboxVouType.Location = new System.Drawing.Point(469, 24);
+            this.cboxVouType.Location = new System.Drawing.Point(273, 24);
             this.cboxVouType.Name = "cboxVouType";
             this.cboxVouType.Size = new System.Drawing.Size(119, 21);
-            this.cboxVouType.TabIndex = 3;
+            this.cboxVouType.TabIndex = 2;
             this.cboxVouType.SelectedIndexChanged += new System.EventHandler(this.cboxVouType_SelectedIndexChanged);
             this.cboxVouType.Leave += new System.EventHandler(this.cboxVouType_Leave);
-            this.cboxVouType.Validated += new System.EventHandler(this.cboxVouType_Validated);
             // 
             // txtVouNo
             // 
-            this.txtVouNo.Location = new System.Drawing.Point(95, 24);
+            this.txtVouNo.Location = new System.Drawing.Point(95, 25);
             this.txtVouNo.Name = "txtVouNo";
             this.txtVouNo.Size = new System.Drawing.Size(87, 20);
             this.txtVouNo.TabIndex = 1;
@@ -907,7 +910,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(389, 27);
+            this.label4.Location = new System.Drawing.Point(193, 29);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(74, 13);
             this.label4.TabIndex = 3;
@@ -916,7 +919,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(192, 27);
+            this.label3.Location = new System.Drawing.Point(409, 29);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(52, 13);
             this.label3.TabIndex = 2;
@@ -925,7 +928,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(26, 27);
+            this.label2.Location = new System.Drawing.Point(26, 29);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 1;
@@ -934,7 +937,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(590, 81);
+            this.label1.Location = new System.Drawing.Point(590, 82);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(61, 13);
             this.label1.TabIndex = 0;

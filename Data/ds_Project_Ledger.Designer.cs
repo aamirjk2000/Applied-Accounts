@@ -1252,7 +1252,7 @@ namespace Applied_Accounts.Data.ds_Project_LedgerTableAdapters {
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
         private void InitConnection() {
             this._connection = new global::System.Data.Odbc.OdbcConnection();
-            this._connection.ConnectionString = global::Applied_Accounts.Properties.Settings.Default.ConnectionString1;
+            this._connection.ConnectionString = global::Applied_Accounts.Properties.Settings.Default.ConnectionString;
         }
         
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]

@@ -27,7 +27,7 @@
               <Mapping SourceColumn="Employee" DataSetColumn="Employee" />
               <Mapping SourceColumn="DR" DataSetColumn="DR" />
               <Mapping SourceColumn="CR" DataSetColumn="CR" />
-              <Mapping SourceColumn="Description" DataSetColumn="Description" />
+              <Mapping SourceColumn="Descriptions" DataSetColumn="Descriptions" />
               <Mapping SourceColumn="Vou_No" DataSetColumn="Vou_No" />
               <Mapping SourceColumn="Vou_Date" DataSetColumn="Vou_Date" />
               <Mapping SourceColumn="COA_ID" DataSetColumn="COA_ID" />
@@ -46,7 +46,7 @@
   <xs:element name="ds_Voucher" msdata:IsDataSet="true" msdata:UseCurrentLocale="true" msprop:EnableTableAdapterManager="true" msprop:Generator_DataSetName="ds_Voucher" msprop:Generator_UserDSName="ds_Voucher">
     <xs:complexType>
       <xs:choice minOccurs="0" maxOccurs="unbounded">
-        <xs:element name="View_Voucher" msprop:Generator_TableClassName="View_VoucherDataTable" msprop:Generator_TableVarName="tableView_Voucher" msprop:Generator_TablePropName="View_Voucher" msprop:Generator_RowDeletingName="View_VoucherRowDeleting" msprop:Generator_RowChangingName="View_VoucherRowChanging" msprop:Generator_RowEvHandlerName="View_VoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="View_VoucherRowDeleted" msprop:Generator_UserTableName="View_Voucher" msprop:Generator_RowChangedName="View_VoucherRowChanged" msprop:Generator_RowEvArgName="View_VoucherRowChangeEvent" msprop:Generator_RowClassName="View_VoucherRow">
+        <xs:element name="View_Voucher" msprop:Generator_TableClassName="View_VoucherDataTable" msprop:Generator_TableVarName="tableView_Voucher" msprop:Generator_RowChangedName="View_VoucherRowChanged" msprop:Generator_TablePropName="View_Voucher" msprop:Generator_RowDeletingName="View_VoucherRowDeleting" msprop:Generator_RowChangingName="View_VoucherRowChanging" msprop:Generator_RowEvHandlerName="View_VoucherRowChangeEventHandler" msprop:Generator_RowDeletedName="View_VoucherRowDeleted" msprop:Generator_RowClassName="View_VoucherRow" msprop:Generator_UserTableName="View_Voucher" msprop:Generator_RowEvArgName="View_VoucherRowChangeEvent">
           <xs:complexType>
             <xs:sequence>
               <xs:element name="SRNO" msprop:Generator_ColumnVarNameInTable="columnSRNO" msprop:Generator_ColumnPropNameInRow="SRNO" msprop:Generator_ColumnPropNameInTable="SRNOColumn" msprop:Generator_UserColumnName="SRNO" type="xs:int" />
@@ -99,7 +99,7 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
+              <xs:element name="Descriptions" msprop:Generator_ColumnVarNameInTable="columnDescriptions" msprop:Generator_ColumnPropNameInRow="Descriptions" msprop:Generator_ColumnPropNameInTable="DescriptionsColumn" msprop:Generator_UserColumnName="Descriptions" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
                     <xs:maxLength value="255" />

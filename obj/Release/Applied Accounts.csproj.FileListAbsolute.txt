@@ -186,8 +186,6 @@ F:\Applied\Applied-Accounts\obj\Release\Applied Accounts.application
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmTrial_Balance.resources
 F:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Preview.frmPreview_Trial_Balance.resources
 G:\Applied Accounts\Applied Accounts.exe.config
-G:\Applied Accounts\Applied Accounts.exe.manifest
-G:\Applied Accounts\Applied Accounts.application
 G:\Applied Accounts\Applied Accounts.exe
 G:\Applied Accounts\Applied Accounts.pdb
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.AppliedDataGrid.resources
@@ -224,8 +222,6 @@ D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.GenerateResource
 D:\Applied\Applied-Accounts\obj\Release\RdlCompile.cache
 D:\Applied\Applied-Accounts\obj\Release\RdlCompile.compiled
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.CoreCompileInputs.cache
-D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe.manifest
-D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.application
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.pdb

@@ -56,25 +56,5 @@ namespace Applied_Accounts.Properties {
                 this["WallPaper"] = value;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Dsn=Applied_Firdous")]
-        public string ConnectionFirdous {
-            get {
-                return ((string)(this["ConnectionFirdous"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Dsn=SQLite3 Datasource")]
-        public string ConnectionString1 {
-            get {
-                return ((string)(this["ConnectionString1"]));
-            }
-        }
     }
 }

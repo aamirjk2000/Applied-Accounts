@@ -295,7 +295,7 @@ namespace Applied_Accounts.Data {
             
             private global::System.Data.DataColumn columnCR;
             
-            private global::System.Data.DataColumn columnDescription;
+            private global::System.Data.DataColumn columnDescriptions;
             
             private global::System.Data.DataColumn columnVou_No;
             
@@ -410,9 +410,9 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public global::System.Data.DataColumn DescriptionColumn {
+            public global::System.Data.DataColumn DescriptionsColumn {
                 get {
-                    return this.columnDescription;
+                    return this.columnDescriptions;
                 }
             }
             
@@ -518,7 +518,7 @@ namespace Applied_Accounts.Data {
                         string Employee, 
                         string DR, 
                         string CR, 
-                        string Description, 
+                        string Descriptions, 
                         string Vou_No, 
                         string Vou_Date, 
                         int COA_ID, 
@@ -536,7 +536,7 @@ namespace Applied_Accounts.Data {
                         Employee,
                         DR,
                         CR,
-                        Description,
+                        Descriptions,
                         Vou_No,
                         Vou_Date,
                         COA_ID,
@@ -574,7 +574,7 @@ namespace Applied_Accounts.Data {
                 this.columnEmployee = base.Columns["Employee"];
                 this.columnDR = base.Columns["DR"];
                 this.columnCR = base.Columns["CR"];
-                this.columnDescription = base.Columns["Description"];
+                this.columnDescriptions = base.Columns["Descriptions"];
                 this.columnVou_No = base.Columns["Vou_No"];
                 this.columnVou_Date = base.Columns["Vou_Date"];
                 this.columnCOA_ID = base.Columns["COA_ID"];
@@ -603,8 +603,8 @@ namespace Applied_Accounts.Data {
                 base.Columns.Add(this.columnDR);
                 this.columnCR = new global::System.Data.DataColumn("CR", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnCR);
-                this.columnDescription = new global::System.Data.DataColumn("Description", typeof(string), null, global::System.Data.MappingType.Element);
-                base.Columns.Add(this.columnDescription);
+                this.columnDescriptions = new global::System.Data.DataColumn("Descriptions", typeof(string), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnDescriptions);
                 this.columnVou_No = new global::System.Data.DataColumn("Vou_No", typeof(string), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnVou_No);
                 this.columnVou_Date = new global::System.Data.DataColumn("Vou_Date", typeof(string), null, global::System.Data.MappingType.Element);
@@ -634,7 +634,7 @@ namespace Applied_Accounts.Data {
                 this.columnDR.MaxLength = 15;
                 this.columnCR.AllowDBNull = false;
                 this.columnCR.MaxLength = 15;
-                this.columnDescription.MaxLength = 255;
+                this.columnDescriptions.MaxLength = 255;
                 this.columnVou_No.AllowDBNull = false;
                 this.columnVou_No.MaxLength = 12;
                 this.columnVou_Date.MaxLength = 255;
@@ -869,17 +869,17 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public string Description {
+            public string Descriptions {
                 get {
                     try {
-                        return ((string)(this[this.tableView_Voucher.DescriptionColumn]));
+                        return ((string)(this[this.tableView_Voucher.DescriptionsColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
-                        throw new global::System.Data.StrongTypingException("The value for column \'Description\' in table \'View_Voucher\' is DBNull.", e);
+                        throw new global::System.Data.StrongTypingException("The value for column \'Descriptions\' in table \'View_Voucher\' is DBNull.", e);
                     }
                 }
                 set {
-                    this[this.tableView_Voucher.DescriptionColumn] = value;
+                    this[this.tableView_Voucher.DescriptionsColumn] = value;
                 }
             }
             
@@ -987,14 +987,14 @@ namespace Applied_Accounts.Data {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public bool IsDescriptionNull() {
-                return this.IsNull(this.tableView_Voucher.DescriptionColumn);
+            public bool IsDescriptionsNull() {
+                return this.IsNull(this.tableView_Voucher.DescriptionsColumn);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "16.0.0.0")]
-            public void SetDescriptionNull() {
-                this[this.tableView_Voucher.DescriptionColumn] = global::System.Convert.DBNull;
+            public void SetDescriptionsNull() {
+                this[this.tableView_Voucher.DescriptionsColumn] = global::System.Convert.DBNull;
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1225,7 +1225,7 @@ namespace Applied_Accounts.Data.ds_VoucherTableAdapters {
             tableMapping.ColumnMappings.Add("Employee", "Employee");
             tableMapping.ColumnMappings.Add("DR", "DR");
             tableMapping.ColumnMappings.Add("CR", "CR");
-            tableMapping.ColumnMappings.Add("Description", "Description");
+            tableMapping.ColumnMappings.Add("Descriptions", "Descriptions");
             tableMapping.ColumnMappings.Add("Vou_No", "Vou_No");
             tableMapping.ColumnMappings.Add("Vou_Date", "Vou_Date");
             tableMapping.ColumnMappings.Add("COA_ID", "COA_ID");

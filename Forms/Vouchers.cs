@@ -27,16 +27,17 @@ namespace Applied_Accounts.Forms
         private DataTable tbStocks;
         private DataTable tbEmployees;
 
-        private string MyCheque_No;                              // For copy and past
-        private string MyCheque_Date;                          // For copy and past
-        private string MyDescription;                            // For copy and past
-        private string MyRemarks;                                // for Copy and past.
+        private string MyCheque_No;                                 // For copy and past
+        private string MyCheque_Date;                               // For copy and past
+        private string MyDescription;                               // For copy and past
+        private string MyRemarks;                                   // for Copy and past.
 
         private readonly Color _Color1 = Color.Black;
         private readonly Color _Color2 = Color.Blue;
 
         private string Search_Title = "";                           // Search Title for all search ID in Table
         private int Search_ComboID = 0;                             // Search Value for Combo Box in All seach 
+        private bool InitializingNow = true;
 
         #region Initialize
 
@@ -44,6 +45,7 @@ namespace Applied_Accounts.Forms
         {
             InitializeComponent();
             MyRefresh();
+            InitializingNow = false;
         }
 
         public frmVouchers(int _VoucherType)
@@ -53,9 +55,9 @@ namespace Applied_Accounts.Forms
 
             MyVoucherClass.Vou_Type = Enum.GetName(typeof(Applied.VoucherType), MyVoucherType);
             MyVoucherClass.Vou_No = "NEW";
-            //MyVoucherClass.Vou_No = MyVoucherClass.GetVoucherTag(MyVoucherType);
             txtVouNo.Text = MyVoucherClass.Vou_No;
             MyRefresh();
+            InitializingNow = false;                            // Object has completed the initialized process.
         }
 
         private void Voucher_Load(object sender, EventArgs e)
@@ -99,6 +101,7 @@ namespace Applied_Accounts.Forms
         {
 
             switch (cboxVouType.SelectedValue)
+
             {
                 case Applied.VoucherType.Journal:
                     Text = "Journal Voucher";
@@ -214,6 +217,8 @@ namespace Applied_Accounts.Forms
 
         private void cboxVouType_SelectedIndexChanged(object sender, EventArgs e)
         {
+            cboxVouType.Text = MyVoucherClass.Vou_Type;
+
             SetTitle();                     // Display window title as per voucher type.
         }
 
@@ -949,13 +954,6 @@ namespace Applied_Accounts.Forms
 
         }
 
-        private void cboxVouType_Validated(object sender, EventArgs e)
-        {
-            txtSRNO.Focus();
-        }
-
-
-
         #endregion
 
         #region SR No
@@ -1013,6 +1011,7 @@ namespace Applied_Accounts.Forms
             if (Voucher_No == "NEW") { MyVoucherClass = new VoucherClass(); return; }           // Create new Voucher in Leave Event
             if (Voucher_No == "END") { return; }                                                // Create new Voucher in Leave Event
 
+
             MyVoucherClass = new VoucherClass(Voucher_No);                                      // Load Voucher into Class (Memory)
 
         }
@@ -1025,13 +1024,18 @@ namespace Applied_Accounts.Forms
         private void txtVouNo_Validating(object sender, CancelEventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
-            GetVoucher(_TextBox.Text);
-
+            GetVoucher(_TextBox.Text);                                                  // Initialize the Voucher ********
+            MyVoucherClass.Vou_Type = cboxVouType.Text;
 
             if (MyVoucherClass.Count_Table() > 0)                                       // If Exist Load Voucher Class
             {
                 dtVouDate.Value = MyVoucherClass.Vou_Date;
-                MessageBox.Show(string.Concat(MyDataTable.Rows.Count, " Transactions."), MyVoucherClass.Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                if (MyVoucherClass.Vou_No != "NEW")
+                {
+                    MessageBox.Show(string.Concat(MyDataTable.Rows.Count, " Transactions."), MyVoucherClass.Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                }
                 e.Cancel = false;
             }
             else
@@ -1064,6 +1068,7 @@ namespace Applied_Accounts.Forms
                     }
                     break;
             }
+            cboxVouType.Focus();
         }
 
         private void txtVouNo_Leave(object sender, EventArgs e)
@@ -1114,6 +1119,7 @@ namespace Applied_Accounts.Forms
 
         private void cBoxAccounts_Enter(object sender, EventArgs e)
         {
+            if (InitializingNow) { return; }
             if (cBoxAccounts.DataSource == null) { return; }                               // Return is Datasource are not available;
             if (cboxVouType.SelectedValue == null) { return; }
 
@@ -1141,11 +1147,13 @@ namespace Applied_Accounts.Forms
 
         private void txtAccount_Validating(object sender, CancelEventArgs e)
         {
+            if (InitializingNow) { return; }
             e.Cancel = MyValidating(sender, tbAccounts);
         }
 
         private void txtAccount_Validated(object sender, EventArgs e)
         {
+            if (InitializingNow) { return; }
             if (((TextBox)sender).Text.Length > 0)
             {
                 cBoxAccounts.SelectedValue = Search_ComboID;
@@ -1499,6 +1507,8 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
+        #region Reset Serial No.
+
         private void label5_DoubleClick(object sender, EventArgs e)
         {
             DialogResult _YesNo =
@@ -1514,5 +1524,9 @@ namespace Applied_Accounts.Forms
                 }
             }
         }
+
+        #endregion
+
+
     }       // END Main Class
 }           // END NameSpace

@@ -67,13 +67,15 @@ namespace Applied_Accounts
             IsSelect = true;
             if (MyDataView.Count == 0)
             {
-                MyDataRow = MyDataView.Table.NewRow();                  // Select a row from browse grid record.
+                MyDataRow = MyDataView.Table.NewRow();                                              // Select a row from browse grid record.
                 MyID = -1;
             }
             else
             {
-                MyDataRow = DataGrid_Browse.MyDataRow;                    // Select a row from browse grid record.
-                MyID = (long)MyDataRow["ID"];
+                MyDataRow = DataGrid_Browse.MyDataRow;                                              // Select a row from browse grid record.
+                string _Value = DataGrid_Browse.BrowseGrid.CurrentRow.Cells[0].Value.ToString();
+                //   Conversion.ToLong(MyDataRow["ID"]
+                MyID =  Applied.Code2ID(_Value, MyDataView);
             }
             Close();
         }

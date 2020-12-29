@@ -1024,7 +1024,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -1378,22 +1377,22 @@
                         <TablixMember />
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=IIF(TRIM(Fields!Description.Value)="",TRUE,FALSE)</Hidden>
+                            <Hidden>=IIF(String.IsNullOrEmpty(TRIM(Fields!Description.Value)),TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=IIF(TRIM(Fields!SUPPLIER.Value)="",TRUE,FALSE)</Hidden>
+                            <Hidden>=IIF(String.IsNullOrEmpty(TRIM(Fields!SUPPLIER.Value)),TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=iif(TRIM(Fields!Project.Value)="",TRUE,FALSE)</Hidden>
+                            <Hidden>=iif(String.IsNullOrEmpty(TRIM(Fields!Project.Value)),TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=iif(TRIM(Fields!Unit.Value)="",TRUE,FALSE)</Hidden>
+                            <Hidden>=iif(String.IsNullOrEmpty(TRIM(Fields!Unit.Value)),TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
                       </TablixMembers>

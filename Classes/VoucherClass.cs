@@ -339,7 +339,6 @@ namespace Applied_Accounts.Classes
             }
             #region SHOW SAVE MESSAGE.
 
-
             //=============================================================  // show Message for save the record.
             if (Insert_Record + Update_Record + Delete_Record > 0)
             {
