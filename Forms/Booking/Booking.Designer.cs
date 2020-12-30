@@ -29,6 +29,7 @@ namespace Applied_Accounts.Forms.Booking
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -66,32 +67,37 @@ namespace Applied_Accounts.Forms.Booking
             this.P2 = new System.Windows.Forms.TabPage();
             this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.P3 = new System.Windows.Forms.TabPage();
-            this.label19 = new System.Windows.Forms.Label();
-            this.txtRecID = new System.Windows.Forms.TextBox();
-            this.txtRemarks2 = new System.Windows.Forms.TextBox();
-            this.label18 = new System.Windows.Forms.Label();
-            this.txtAmount = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
+            this.cBoxBooking = new System.Windows.Forms.ComboBox();
+            this.button3 = new System.Windows.Forms.Button();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cBoxSchedule = new System.Windows.Forms.ComboBox();
+            this.Panal = new System.Windows.Forms.Panel();
             this.cBoxInstalments = new System.Windows.Forms.ComboBox();
-            this.label14 = new System.Windows.Forms.Label();
+            this.txtAmount = new System.Windows.Forms.TextBox();
             this.dt_Instalment = new System.Windows.Forms.DateTimePicker();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label18 = new System.Windows.Forms.Label();
+            this.txtRemarks2 = new System.Windows.Forms.TextBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.Grid_Instalment = new System.Windows.Forms.DataGridView();
             this.clm_Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clm_Account = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clm_Amount = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clm_Remarks = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.txtBooking = new System.Windows.Forms.TextBox();
             this.label15 = new System.Windows.Forms.Label();
+            this.label19 = new System.Windows.Forms.Label();
+            this.txtRecID = new System.Windows.Forms.TextBox();
             this.label13 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnSave = new System.Windows.Forms.Button();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
             this.P3.SuspendLayout();
+            this.Panal.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Instalment)).BeginInit();
             this.SuspendLayout();
             // 
@@ -357,13 +363,16 @@ namespace Applied_Accounts.Forms.Booking
             // 
             // Pages
             // 
+            this.Pages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.Pages.Controls.Add(this.P1);
             this.Pages.Controls.Add(this.P2);
             this.Pages.Controls.Add(this.P3);
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
-            this.Pages.Size = new System.Drawing.Size(598, 385);
+            this.Pages.Size = new System.Drawing.Size(737, 436);
             this.Pages.TabIndex = 33;
             // 
             // P1
@@ -403,7 +412,7 @@ namespace Applied_Accounts.Forms.Booking
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
-            this.P1.Size = new System.Drawing.Size(590, 359);
+            this.P1.Size = new System.Drawing.Size(729, 410);
             this.P1.TabIndex = 0;
             this.P1.Text = "RECORD";
             this.P1.UseVisualStyleBackColor = true;
@@ -411,7 +420,7 @@ namespace Applied_Accounts.Forms.Booking
             // MyNavigator
             // 
             this.MyNavigator.Current_Mode = 0;
-            this.MyNavigator.Location = new System.Drawing.Point(11, 326);
+            this.MyNavigator.Location = new System.Drawing.Point(90, 371);
             this.MyNavigator.Name = "MyNavigator";
             this.MyNavigator.Size = new System.Drawing.Size(569, 24);
             this.MyNavigator.TabIndex = 32;
@@ -426,7 +435,7 @@ namespace Applied_Accounts.Forms.Booking
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
             this.P2.Padding = new System.Windows.Forms.Padding(3);
-            this.P2.Size = new System.Drawing.Size(590, 359);
+            this.P2.Size = new System.Drawing.Size(729, 410);
             this.P2.TabIndex = 1;
             this.P2.Text = "Booking";
             this.P2.UseVisualStyleBackColor = true;
@@ -448,90 +457,78 @@ namespace Applied_Accounts.Forms.Booking
             this.MyDataGrid.MyViewRow = null;
             this.MyDataGrid.Name = "MyDataGrid";
             this.MyDataGrid.RecordID = ((long)(0));
-            this.MyDataGrid.Size = new System.Drawing.Size(581, 350);
+            this.MyDataGrid.Size = new System.Drawing.Size(720, 401);
             this.MyDataGrid.TabIndex = 0;
             // 
             // P3
             // 
-            this.P3.Controls.Add(this.label19);
-            this.P3.Controls.Add(this.txtRecID);
-            this.P3.Controls.Add(this.txtRemarks2);
-            this.P3.Controls.Add(this.label18);
-            this.P3.Controls.Add(this.txtAmount);
-            this.P3.Controls.Add(this.label17);
-            this.P3.Controls.Add(this.label16);
-            this.P3.Controls.Add(this.cBoxInstalments);
-            this.P3.Controls.Add(this.label14);
-            this.P3.Controls.Add(this.dt_Instalment);
+            this.P3.Controls.Add(this.cBoxBooking);
+            this.P3.Controls.Add(this.button3);
+            this.P3.Controls.Add(this.label20);
+            this.P3.Controls.Add(this.cBoxSchedule);
+            this.P3.Controls.Add(this.Panal);
             this.P3.Controls.Add(this.Grid_Instalment);
-            this.P3.Controls.Add(this.txtBooking);
             this.P3.Controls.Add(this.label15);
-            this.P3.Controls.Add(this.btnDelete);
-            this.P3.Controls.Add(this.btnSave);
             this.P3.Location = new System.Drawing.Point(4, 22);
             this.P3.Name = "P3";
             this.P3.Padding = new System.Windows.Forms.Padding(3);
-            this.P3.Size = new System.Drawing.Size(590, 359);
+            this.P3.Size = new System.Drawing.Size(729, 410);
             this.P3.TabIndex = 2;
             this.P3.Text = "Instalments";
             this.P3.UseVisualStyleBackColor = true;
+            this.P3.Enter += new System.EventHandler(this.P3_Enter);
             // 
-            // label19
+            // cBoxBooking
             // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(375, 16);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(41, 13);
-            this.label19.TabIndex = 18;
-            this.label19.Text = "Rec ID";
+            this.cBoxBooking.FormattingEnabled = true;
+            this.cBoxBooking.Location = new System.Drawing.Point(58, 10);
+            this.cBoxBooking.Name = "cBoxBooking";
+            this.cBoxBooking.Size = new System.Drawing.Size(214, 21);
+            this.cBoxBooking.TabIndex = 1;
             // 
-            // txtRecID
+            // button3
             // 
-            this.txtRecID.Location = new System.Drawing.Point(422, 13);
-            this.txtRecID.Name = "txtRecID";
-            this.txtRecID.Size = new System.Drawing.Size(48, 20);
-            this.txtRecID.TabIndex = 17;
+            this.button3.Location = new System.Drawing.Point(644, 10);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.TabIndex = 3;
+            this.button3.Text = "A D D";
+            this.button3.UseVisualStyleBackColor = true;
             // 
-            // txtRemarks2
+            // label20
             // 
-            this.txtRemarks2.Location = new System.Drawing.Point(311, 59);
-            this.txtRemarks2.Name = "txtRemarks2";
-            this.txtRemarks2.Size = new System.Drawing.Size(273, 20);
-            this.txtRemarks2.TabIndex = 14;
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(283, 13);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(103, 13);
+            this.label20.TabIndex = 21;
+            this.label20.Text = "Instalment Schedule";
             // 
-            // label18
+            // cBoxSchedule
             // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(308, 43);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(49, 13);
-            this.label18.TabIndex = 13;
-            this.label18.Text = "Remarks";
+            this.cBoxSchedule.FormattingEnabled = true;
+            this.cBoxSchedule.Location = new System.Drawing.Point(392, 10);
+            this.cBoxSchedule.Name = "cBoxSchedule";
+            this.cBoxSchedule.Size = new System.Drawing.Size(246, 21);
+            this.cBoxSchedule.TabIndex = 2;
             // 
-            // txtAmount
+            // Panal
             // 
-            this.txtAmount.Location = new System.Drawing.Point(196, 60);
-            this.txtAmount.Name = "txtAmount";
-            this.txtAmount.Size = new System.Drawing.Size(108, 20);
-            this.txtAmount.TabIndex = 12;
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(202, 43);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(43, 13);
-            this.label17.TabIndex = 11;
-            this.label17.Text = "Amount";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(6, 43);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(47, 13);
-            this.label16.TabIndex = 10;
-            this.label16.Text = "Account";
+            this.Panal.BackColor = System.Drawing.Color.SeaShell;
+            this.Panal.Controls.Add(this.cBoxInstalments);
+            this.Panal.Controls.Add(this.txtAmount);
+            this.Panal.Controls.Add(this.dt_Instalment);
+            this.Panal.Controls.Add(this.label16);
+            this.Panal.Controls.Add(this.label18);
+            this.Panal.Controls.Add(this.txtRemarks2);
+            this.Panal.Controls.Add(this.label14);
+            this.Panal.Controls.Add(this.label17);
+            this.Panal.Controls.Add(this.btnSave);
+            this.Panal.Controls.Add(this.btnDelete);
+            this.Panal.Location = new System.Drawing.Point(6, 39);
+            this.Panal.Name = "Panal";
+            this.Panal.Size = new System.Drawing.Size(720, 51);
+            this.Panal.TabIndex = 4;
             // 
             // cBoxInstalments
             // 
@@ -549,28 +546,87 @@ namespace Applied_Accounts.Forms.Booking
             "Electric Meter ",
             "Gas Meter",
             "Other Charges"});
-            this.cBoxInstalments.Location = new System.Drawing.Point(6, 60);
+            this.cBoxInstalments.Location = new System.Drawing.Point(3, 23);
             this.cBoxInstalments.Name = "cBoxInstalments";
-            this.cBoxInstalments.Size = new System.Drawing.Size(184, 21);
-            this.cBoxInstalments.TabIndex = 9;
+            this.cBoxInstalments.Size = new System.Drawing.Size(158, 21);
+            this.cBoxInstalments.TabIndex = 1;
             // 
-            // label14
+            // txtAmount
             // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(171, 16);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(81, 13);
-            this.label14.TabIndex = 8;
-            this.label14.Text = "Instalment Date";
+            this.txtAmount.Location = new System.Drawing.Point(272, 23);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(108, 20);
+            this.txtAmount.TabIndex = 3;
             // 
             // dt_Instalment
             // 
             this.dt_Instalment.CustomFormat = "DD-mmm-yyyy";
             this.dt_Instalment.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dt_Instalment.Location = new System.Drawing.Point(258, 13);
+            this.dt_Instalment.Location = new System.Drawing.Point(167, 23);
             this.dt_Instalment.Name = "dt_Instalment";
             this.dt_Instalment.Size = new System.Drawing.Size(99, 20);
-            this.dt_Instalment.TabIndex = 7;
+            this.dt_Instalment.TabIndex = 2;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(3, 7);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(47, 13);
+            this.label16.TabIndex = 10;
+            this.label16.Text = "Account";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(383, 7);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(49, 13);
+            this.label18.TabIndex = 13;
+            this.label18.Text = "Remarks";
+            // 
+            // txtRemarks2
+            // 
+            this.txtRemarks2.Location = new System.Drawing.Point(386, 23);
+            this.txtRemarks2.Name = "txtRemarks2";
+            this.txtRemarks2.Size = new System.Drawing.Size(249, 20);
+            this.txtRemarks2.TabIndex = 4;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(161, 7);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(81, 13);
+            this.label14.TabIndex = 8;
+            this.label14.Text = "Instalment Date";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(277, 7);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(43, 13);
+            this.label17.TabIndex = 11;
+            this.label17.Text = "Amount";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Image = global::Applied_Accounts.Properties.Resources.Save;
+            this.btnSave.Location = new System.Drawing.Point(641, 20);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(31, 23);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.UseVisualStyleBackColor = true;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.Delete;
+            this.btnDelete.Location = new System.Drawing.Point(678, 20);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(35, 23);
+            this.btnDelete.TabIndex = 6;
+            this.btnDelete.UseVisualStyleBackColor = true;
             // 
             // Grid_Instalment
             // 
@@ -579,44 +635,52 @@ namespace Applied_Accounts.Forms.Booking
             this.Grid_Instalment.AllowUserToOrderColumns = true;
             this.Grid_Instalment.AllowUserToResizeColumns = false;
             this.Grid_Instalment.AllowUserToResizeRows = false;
+            this.Grid_Instalment.BackgroundColor = System.Drawing.SystemColors.ControlLight;
+            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
+            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.BlanchedAlmond;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.Maroon;
+            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.Grid_Instalment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.Grid_Instalment.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Grid_Instalment.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.clm_Date,
             this.clm_Account,
             this.clm_Amount,
             this.clm_Remarks});
-            this.Grid_Instalment.Location = new System.Drawing.Point(6, 86);
+            this.Grid_Instalment.ImeMode = System.Windows.Forms.ImeMode.Off;
+            this.Grid_Instalment.Location = new System.Drawing.Point(9, 96);
             this.Grid_Instalment.Name = "Grid_Instalment";
-            this.Grid_Instalment.Size = new System.Drawing.Size(578, 267);
+            this.Grid_Instalment.ReadOnly = true;
+            this.Grid_Instalment.Size = new System.Drawing.Size(717, 308);
             this.Grid_Instalment.TabIndex = 6;
             // 
             // clm_Date
             // 
             this.clm_Date.HeaderText = "Date";
             this.clm_Date.Name = "clm_Date";
+            this.clm_Date.ReadOnly = true;
             // 
             // clm_Account
             // 
             this.clm_Account.HeaderText = "Account";
             this.clm_Account.Name = "clm_Account";
+            this.clm_Account.ReadOnly = true;
             // 
             // clm_Amount
             // 
             this.clm_Amount.HeaderText = "Amount";
             this.clm_Amount.Name = "clm_Amount";
+            this.clm_Amount.ReadOnly = true;
             // 
             // clm_Remarks
             // 
             this.clm_Remarks.HeaderText = "Remarks";
             this.clm_Remarks.Name = "clm_Remarks";
-            this.clm_Remarks.Width = 220;
-            // 
-            // txtBooking
-            // 
-            this.txtBooking.Location = new System.Drawing.Point(64, 13);
-            this.txtBooking.Name = "txtBooking";
-            this.txtBooking.Size = new System.Drawing.Size(100, 20);
-            this.txtBooking.TabIndex = 4;
+            this.clm_Remarks.ReadOnly = true;
+            this.clm_Remarks.Width = 350;
             // 
             // label15
             // 
@@ -627,11 +691,27 @@ namespace Applied_Accounts.Forms.Booking
             this.label15.TabIndex = 2;
             this.label15.Text = "Booking";
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(565, 465);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(41, 13);
+            this.label19.TabIndex = 18;
+            this.label19.Text = "Rec ID";
+            // 
+            // txtRecID
+            // 
+            this.txtRecID.Location = new System.Drawing.Point(612, 460);
+            this.txtRecID.Name = "txtRecID";
+            this.txtRecID.Size = new System.Drawing.Size(55, 20);
+            this.txtRecID.TabIndex = 17;
+            // 
             // label13
             // 
             this.label13.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(19, 411);
+            this.label13.Location = new System.Drawing.Point(19, 466);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 13);
             this.label13.TabIndex = 34;
@@ -639,8 +719,9 @@ namespace Applied_Accounts.Forms.Booking
             // 
             // button2
             // 
+            this.button2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.button2.Image = global::Applied_Accounts.Properties.Resources.PRINT;
-            this.button2.Location = new System.Drawing.Point(540, 403);
+            this.button2.Location = new System.Drawing.Point(684, 458);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(31, 23);
             this.button2.TabIndex = 36;
@@ -650,37 +731,21 @@ namespace Applied_Accounts.Forms.Booking
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExit.Image = global::Applied_Accounts.Properties.Resources.Exit2;
-            this.btnExit.Location = new System.Drawing.Point(577, 399);
+            this.btnExit.Location = new System.Drawing.Point(721, 454);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(29, 30);
             this.btnExit.TabIndex = 35;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // btnDelete
-            // 
-            this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.Delete;
-            this.btnDelete.Location = new System.Drawing.Point(525, 10);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(35, 23);
-            this.btnDelete.TabIndex = 16;
-            this.btnDelete.UseVisualStyleBackColor = true;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Image = global::Applied_Accounts.Properties.Resources.Save;
-            this.btnSave.Location = new System.Drawing.Point(488, 11);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(31, 23);
-            this.btnSave.TabIndex = 15;
-            this.btnSave.UseVisualStyleBackColor = true;
-            // 
             // frmBooking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 436);
+            this.ClientSize = new System.Drawing.Size(761, 491);
             this.Controls.Add(this.button2);
+            this.Controls.Add(this.txtRecID);
+            this.Controls.Add(this.label19);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.Pages);
@@ -692,6 +757,8 @@ namespace Applied_Accounts.Forms.Booking
             this.P2.ResumeLayout(false);
             this.P3.ResumeLayout(false);
             this.P3.PerformLayout();
+            this.Panal.ResumeLayout(false);
+            this.Panal.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Instalment)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -740,7 +807,6 @@ namespace Applied_Accounts.Forms.Booking
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.TabPage P3;
         private System.Windows.Forms.DataGridView Grid_Instalment;
-        private System.Windows.Forms.TextBox txtBooking;
         private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label label19;
         private System.Windows.Forms.TextBox txtRecID;
@@ -754,10 +820,15 @@ namespace Applied_Accounts.Forms.Booking
         private System.Windows.Forms.ComboBox cBoxInstalments;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DateTimePicker dt_Instalment;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.ComboBox cBoxSchedule;
+        private System.Windows.Forms.Panel Panal;
         private System.Windows.Forms.DataGridViewTextBoxColumn clm_Date;
         private System.Windows.Forms.DataGridViewTextBoxColumn clm_Account;
         private System.Windows.Forms.DataGridViewTextBoxColumn clm_Amount;
         private System.Windows.Forms.DataGridViewTextBoxColumn clm_Remarks;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.ComboBox cBoxBooking;
     }
 }

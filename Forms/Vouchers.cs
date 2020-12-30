@@ -335,7 +335,6 @@ namespace Applied_Accounts.Forms
 
         private void cBoxAccounts_TextChanged(object sender, EventArgs e)
         {
-            if (InitializingNow) { return; }
             if (cBoxAccounts.Text.Length == 0) { return; }
             if (cBoxAccounts.SelectedValue == null) { return; }
             txtAccount.Text = Applied.Code((long)cBoxAccounts.SelectedValue, tbAccounts.AsDataView());
@@ -343,7 +342,6 @@ namespace Applied_Accounts.Forms
 
         private void cBoxSuppliers_TextChanged(object sender, EventArgs e)
         {
-            if(InitializingNow) { return; }
             if (cBoxSuppliers.Text.Length == 0) { return; }
             if (cBoxSuppliers.SelectedValue == null) { return; }
             txtVandor.Text = Applied.Code((long)cBoxSuppliers.SelectedValue, tbSuppliers.AsDataView());
@@ -351,7 +349,6 @@ namespace Applied_Accounts.Forms
 
         private void cBoxProjects_TextChanged(object sender, EventArgs e)
         {
-            if (InitializingNow) { return; }
             if (cBoxProjects.Text.Length == 0) { return; }
             if (cBoxProjects.SelectedValue == null) { return; }
             txtProject.Text = Applied.Code((long)cBoxProjects.SelectedValue, tbProjects.AsDataView());
@@ -359,7 +356,6 @@ namespace Applied_Accounts.Forms
 
         private void cBoxUnits_TextChanged(object sender, EventArgs e)
         {
-            if (InitializingNow) { return; }
             if (cBoxUnits.Text.Length == 0) { return; }
             if (cBoxUnits.SelectedValue == null) { return; }
             txtUnit.Text = Applied.Code((long)cBoxUnits.SelectedValue, tbUnits.AsDataView());
@@ -368,7 +364,6 @@ namespace Applied_Accounts.Forms
 
         private void cBoxStocks_TextChanged(object sender, EventArgs e)
         {
-            if (InitializingNow) { return; }
             if (cBoxStocks.Text.Length == 0) { return; }
             if (cBoxStocks.SelectedValue == null) { return; }
             txtStock.Text = Applied.Code((long)cBoxStocks.SelectedValue, tbStocks.AsDataView());
@@ -377,7 +372,6 @@ namespace Applied_Accounts.Forms
 
         private void cBoxEmployees_TextChanged(object sender, EventArgs e)
         {
-            if (InitializingNow) { return; }
             if (cBoxEmployees.Text.Length == 0) { return; }
             if (cBoxEmployees.SelectedValue == null) { return; }
             txtEmployee.Text = Applied.Code((long)cBoxEmployees.SelectedValue, tbEmployees.AsDataView());

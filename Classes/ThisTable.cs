@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Applied_Accounts.Classes;
+using System;
 using System.Data;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Data.SQLite;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
@@ -209,7 +211,7 @@ namespace Applied_Accounts
             IsSaved = false;                                                                // If Data Row saved then true else false
 
             #region Primary Key
-            MyPrimaryKeyValue = (long)_DataRow[MyPrimaryKeyName];                           // Set Primary Key Value
+            MyPrimaryKeyValue = Conversion.ToLong(_DataRow[MyPrimaryKeyName]);                           // Set Primary Key Value
             if (MyPrimaryKeyValue <= 0)                                                     // return if Table PK not exist.
             {
                 MessageBox.Show("Primary Key not found.", "ERROR");

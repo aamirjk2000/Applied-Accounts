@@ -11,6 +11,8 @@ namespace Applied_Accounts.Forms.Booking
         private DataTable tb_Suppliers = AppliedTable.GetDataTable(Tables.Suppliers);
         private DataTable tb_Units = AppliedTable.GetDataTable(Tables.Units);
         private DataTable tb_Projects = AppliedTable.GetDataTable(Tables.Projects);
+        private DataTable tb_ScheduleTitle = AppliedTable.GetDataTable(Tables.View_Schedule_Title);
+        private DataTable tb_bookingTitle = AppliedTable.GetDataTable(Tables.View_Booking_Title);
 
         #region Intitialize
 
@@ -28,14 +30,19 @@ namespace Applied_Accounts.Forms.Booking
             cBoxUnit.DataSource = tb_Units;
             cBoxClient.DataSource = tb_Suppliers;
             cBoxProject.DataSource = tb_Projects;
+            cBoxSchedule.DataSource = tb_ScheduleTitle;
+            cBoxBooking.DataSource = tb_bookingTitle;
 
             cBoxUnit.DisplayMember = "Title";
             cBoxClient.DisplayMember = "Title";
             cBoxProject.DisplayMember = "Title";
+            cBoxSchedule.DisplayMember = "Title";
+            cBoxBooking.DisplayMember = "Title";
 
             cBoxUnit.ValueMember = "ID";
             cBoxClient.ValueMember = "ID";
             cBoxProject.ValueMember = "ID";
+            cBoxBooking.ValueMember = "ID";
 
         }
 
@@ -77,6 +84,18 @@ namespace Applied_Accounts.Forms.Booking
             MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
+
+        private void Load_Tables()
+        {
+            tb_Booking = AppliedTable.GetDataTable(Tables.Booking);
+            tb_Suppliers = AppliedTable.GetDataTable(Tables.Suppliers);
+            tb_Units = AppliedTable.GetDataTable(Tables.Units);
+            tb_Projects = AppliedTable.GetDataTable(Tables.Projects);
+            tb_ScheduleTitle = AppliedTable.GetDataTable(Tables.View_Schedule_Title);
+            tb_bookingTitle = AppliedTable.GetDataTable(Tables.View_Booking_Title);
+        }
+
+
         #endregion
 
         #region Navigator Codes
@@ -88,7 +107,8 @@ namespace Applied_Accounts.Forms.Booking
 
         private void MyNavigator_After_Save(object sender, EventArgs e)
         {
-
+            Load_Tables();
+            Refresh();
         }
 
         private void MyNavigator_Before_Save(object sender, EventArgs e)
@@ -107,8 +127,6 @@ namespace Applied_Accounts.Forms.Booking
 
         #endregion
 
-        
-
         #region TextBox Text Changed
 
         private void txtUnit_TextChanged(object sender, EventArgs e)
@@ -122,7 +140,7 @@ namespace Applied_Accounts.Forms.Booking
             string _Title = _SearchValue[3].ToString();
             bool _Istrue = (bool)_SearchValue[4];
 
-            if(_Istrue)
+            if (_Istrue)
             {
                 cBoxUnit.Text = _Title;
                 cBoxUnit.SelectedValue = _ID;
@@ -134,7 +152,7 @@ namespace Applied_Accounts.Forms.Booking
             object[] _SearchValue = { (long)0, "", "", "", false };
             _SearchValue = AppliedTable.SearchText((TextBox)sender, tb_Units);
 
-            long _ID = (long)_SearchValue[0];
+            long _ID = Conversion.ToLong(_SearchValue[0]);
             string _Code = _SearchValue[1].ToString();
             string _SCode = _SearchValue[2].ToString();
             string _Title = _SearchValue[3].ToString();
@@ -191,5 +209,9 @@ namespace Applied_Accounts.Forms.Booking
             Close();
         }
 
+        private void P3_Enter(object sender, EventArgs e)
+        {
+            cBoxBooking.SelectedValue = Conversion.ToLong(txtID.Text);
+        }
     }           // End Class
 }               // END 

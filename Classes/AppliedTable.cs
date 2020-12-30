@@ -440,19 +440,19 @@ namespace Applied_Accounts
 
         public static object[] SearchText(TextBox _Value, DataTable _DataTable)
         {
-            object[] _Result = { (long)0, "", "","", false };
+            object[] _Result = { (long)0, "", "", "", false };
 
             string _String = _Value.Text.Trim();
             long _long = 0;
 
             DataView _DataView = _DataTable.AsDataView();
 
-            if (_Value == null || _DataTable == null )              // If Parameters are nill pass zero value
+            if (_Value == null || _DataTable == null)              // If Parameters are nill pass zero value
             {
                 _Result[0] = 0;
             }
 
-            if(String.IsNullOrEmpty(_String))
+            if (String.IsNullOrEmpty(_String))
             {
                 _Result[0] = 0;
             }
@@ -524,6 +524,7 @@ namespace Applied_Accounts
         COAB = 12,
         Booking = 13,
         Instalments = 14,
+        Schedule = 15,
 
         View_Voucher = 101,
         View_VouNo = 102,
@@ -532,6 +533,8 @@ namespace Applied_Accounts
         View_Project_Ledger = 105,
         View_Trial_Balance = 106,
         View_TB_Period = 107,
-        View_VoucherGrid = 108
+        View_VoucherGrid = 108,
+        View_Schedule_Title = 109,
+        View_Booking_Title = 110
     };
 }                               // Namespace

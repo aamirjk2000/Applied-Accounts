@@ -135,7 +135,8 @@ namespace Applied_Accounts
             Cancel_Position = TableBinding.Position;                                    // Save current posision for Jump on event of cancled.
             MyBindingSource.AddNew();
 
-            NewRecordPosition = TableBinding.Count - 1;
+            NewRecordPosition = ((DataView)MyBindingSource.DataSource).Count -1;
+            //NewRecordPosition = TableBinding.Count - 1;
             TableBinding.Position = NewRecordPosition;
 
             TableClass.MyDataView[NewRecordPosition]["ID"] = -1;
@@ -180,10 +181,8 @@ namespace Applied_Accounts
 
 
             /// Get ID number if value is -1
-            if ((long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName] == -1)
+            if ((Conversion.ToLong(TableClass.MyDataRow[TableClass.MyPrimaryKeyName])) == -1)
             {
-
-
                 TableClass.MyDataRow[TableClass.MyPrimaryKeyName] = TableClass.GetMaxID() + 1;              // Get Maximum ID
                 TableClass.MyPrimaryKeyValue = (long)TableClass.MyDataRow[TableClass.MyPrimaryKeyName];
             }

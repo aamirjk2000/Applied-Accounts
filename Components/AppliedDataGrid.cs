@@ -110,8 +110,8 @@ namespace Applied_Accounts
 
         private void AppliedDataGrid_Leave(object sender, EventArgs e)
         {
-            if(BrowseGrid==null) { return; }
-            if(BrowseGrid.DataSource==null) { return; }
+            if (BrowseGrid == null) { return; }
+            if (BrowseGrid.DataSource == null) { return; }
 
             if (((DataView)BrowseGrid.DataSource).Table.Rows.Count == 0)                 // If Table does not have any record (Empty Table)
             {
@@ -151,19 +151,21 @@ namespace Applied_Accounts
             Data_Filter();
             BrowseGrid.Refresh();
         }
-               
 
         private void AppliedDataGrid_Leave_1(object sender, EventArgs e)
         {
-            if(MyDataRow==null) { return; }
+            if (MyDataRow == null) { return; }
             DataGridViewRow _DataRow = BrowseGrid.CurrentRow;
-            MyDataRow = ((DataRowView)_DataRow.DataBoundItem).Row;
-
+            
+            if (_DataRow != null)
+            {
+                MyDataRow = ((DataRowView)_DataRow.DataBoundItem).Row;
+            }
         }
 
         private void _DataGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
         {
-            if(BrowseGrid.Columns[e.ColumnIndex].Name=="Active")                     // Only Work of Active Column clock
+            if (BrowseGrid.Columns[e.ColumnIndex].Name == "Active")                     // Only Work of Active Column clock
             {
                 int _TableID = AppliedTable.GetTable_ID(MyDataRow.Table);           // Get Enum ID of Row Table
                 ThisTable _DataTable = new ThisTable(AppliedTable.GetDataTable(_TableID));
@@ -173,20 +175,18 @@ namespace Applied_Accounts
                     MyViewRow = BrowseGrid.CurrentRow;
                     MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
 
-                        if ((bool)MyDataRow["Active"])
-                        {
-                            MyDataRow["Active"] = false;
-                        }
-                        else
-                        {
-                            MyDataRow["Active"] = true;
-                        }
+                    if ((bool)MyDataRow["Active"])
+                    {
+                        MyDataRow["Active"] = false;
+                    }
+                    else
+                    {
+                        MyDataRow["Active"] = true;
+                    }
 
-                        _DataTable.Save(MyDataRow, false);                     // Save record Active true if false or false if true.
+                    _DataTable.Save(MyDataRow, false);                     // Save record Active true if false or false if true.
                 }
             }
         }
-
-        
     }           // Main 
 }               // Namespace
