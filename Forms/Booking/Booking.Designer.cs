@@ -63,12 +63,10 @@ namespace Applied_Accounts.Forms.Booking
             this.label12 = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
-            this.MyNavigator = new Applied_Accounts.Navigator();
             this.P2 = new System.Windows.Forms.TabPage();
-            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.P3 = new System.Windows.Forms.TabPage();
             this.cBoxBooking = new System.Windows.Forms.ComboBox();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.cBoxSchedule = new System.Windows.Forms.ComboBox();
             this.Panal = new System.Windows.Forms.Panel();
@@ -93,6 +91,8 @@ namespace Applied_Accounts.Forms.Booking
             this.label13 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.MyNavigator = new Applied_Accounts.Navigator();
+            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -319,6 +319,7 @@ namespace Applied_Accounts.Forms.Booking
             this.btnUnit.TabIndex = 26;
             this.btnUnit.Text = "...";
             this.btnUnit.UseVisualStyleBackColor = true;
+            this.btnUnit.Click += new System.EventHandler(this.btnUnit_Click);
             // 
             // btnClient
             // 
@@ -328,6 +329,7 @@ namespace Applied_Accounts.Forms.Booking
             this.btnClient.TabIndex = 27;
             this.btnClient.Text = "...";
             this.btnClient.UseVisualStyleBackColor = true;
+            this.btnClient.Click += new System.EventHandler(this.btnClient_Click);
             // 
             // button1
             // 
@@ -337,6 +339,7 @@ namespace Applied_Accounts.Forms.Booking
             this.button1.TabIndex = 28;
             this.button1.Text = "...";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // dtBooking
             // 
@@ -417,18 +420,6 @@ namespace Applied_Accounts.Forms.Booking
             this.P1.Text = "RECORD";
             this.P1.UseVisualStyleBackColor = true;
             // 
-            // MyNavigator
-            // 
-            this.MyNavigator.Current_Mode = 0;
-            this.MyNavigator.Location = new System.Drawing.Point(90, 371);
-            this.MyNavigator.Name = "MyNavigator";
-            this.MyNavigator.Size = new System.Drawing.Size(569, 24);
-            this.MyNavigator.TabIndex = 32;
-            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
-            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
-            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
-            // 
             // P2
             // 
             this.P2.Controls.Add(this.MyDataGrid);
@@ -440,30 +431,10 @@ namespace Applied_Accounts.Forms.Booking
             this.P2.Text = "Booking";
             this.P2.UseVisualStyleBackColor = true;
             // 
-            // MyDataGrid
-            // 
-            this.MyDataGrid.Active = false;
-            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MyDataGrid.ColumnsFormat = null;
-            this.MyDataGrid.ColumnsName = null;
-            this.MyDataGrid.ColumnsVisiable = null;
-            this.MyDataGrid.ColumnsWidth = null;
-            this.MyDataGrid.IsBrowseWin = false;
-            this.MyDataGrid.IsPressEnter = false;
-            this.MyDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.MyDataGrid.MyDataRow = null;
-            this.MyDataGrid.MyDataView = null;
-            this.MyDataGrid.MyViewRow = null;
-            this.MyDataGrid.Name = "MyDataGrid";
-            this.MyDataGrid.RecordID = ((long)(0));
-            this.MyDataGrid.Size = new System.Drawing.Size(720, 401);
-            this.MyDataGrid.TabIndex = 0;
-            // 
             // P3
             // 
             this.P3.Controls.Add(this.cBoxBooking);
-            this.P3.Controls.Add(this.button3);
+            this.P3.Controls.Add(this.btnAdd);
             this.P3.Controls.Add(this.label20);
             this.P3.Controls.Add(this.cBoxSchedule);
             this.P3.Controls.Add(this.Panal);
@@ -486,14 +457,15 @@ namespace Applied_Accounts.Forms.Booking
             this.cBoxBooking.Size = new System.Drawing.Size(214, 21);
             this.cBoxBooking.TabIndex = 1;
             // 
-            // button3
+            // btnAdd
             // 
-            this.button3.Location = new System.Drawing.Point(644, 10);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "A D D";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnAdd.Location = new System.Drawing.Point(644, 10);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(75, 23);
+            this.btnAdd.TabIndex = 3;
+            this.btnAdd.Text = "A D D";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // label20
             // 
@@ -738,6 +710,38 @@ namespace Applied_Accounts.Forms.Booking
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // MyNavigator
+            // 
+            this.MyNavigator.Current_Mode = 0;
+            this.MyNavigator.Location = new System.Drawing.Point(90, 371);
+            this.MyNavigator.Name = "MyNavigator";
+            this.MyNavigator.Size = new System.Drawing.Size(569, 24);
+            this.MyNavigator.TabIndex = 32;
+            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
+            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
+            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
+            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
+            // 
+            // MyDataGrid
+            // 
+            this.MyDataGrid.Active = false;
+            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MyDataGrid.ColumnsFormat = null;
+            this.MyDataGrid.ColumnsName = null;
+            this.MyDataGrid.ColumnsVisiable = null;
+            this.MyDataGrid.ColumnsWidth = null;
+            this.MyDataGrid.IsBrowseWin = false;
+            this.MyDataGrid.IsPressEnter = false;
+            this.MyDataGrid.Location = new System.Drawing.Point(3, 3);
+            this.MyDataGrid.MyDataRow = null;
+            this.MyDataGrid.MyDataView = null;
+            this.MyDataGrid.MyViewRow = null;
+            this.MyDataGrid.Name = "MyDataGrid";
+            this.MyDataGrid.RecordID = ((long)(0));
+            this.MyDataGrid.Size = new System.Drawing.Size(720, 401);
+            this.MyDataGrid.TabIndex = 0;
+            // 
             // frmBooking
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -821,7 +825,7 @@ namespace Applied_Accounts.Forms.Booking
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.DateTimePicker dt_Instalment;
         private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.ComboBox cBoxSchedule;
         private System.Windows.Forms.Panel Panal;

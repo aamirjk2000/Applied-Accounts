@@ -8,11 +8,12 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Applied_Accounts</RootNamespace>
     <AssemblyName>Applied Accounts</AssemblyName>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>E:\APPLIED\ALLIED21\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -25,11 +26,10 @@
     <MapFileExtensions>true</MapFileExtensions>
     <MinimumRequiredVersion>2020.07.23.1</MinimumRequiredVersion>
     <ApplicationRevision>1</ApplicationRevision>
-    <ApplicationVersion>2020.07.23.%2a</ApplicationVersion>
+    <ApplicationVersion>2021.01.01.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -45,7 +45,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>G:\Applied Accounts\</OutputPath>
+    <OutputPath>C:\Output\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -72,8 +72,9 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Connection_Class">
-      <HintPath>..\Connection Class\Connection_Class_DLL\obj\Release\Connection_Class.dll</HintPath>
+    <Reference Include="Connection_Class, Version=2020.10.31.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Classes\Connection_Class.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -132,6 +133,12 @@
     </Compile>
     <Compile Include="Components\SearchID.Designer.cs">
       <DependentUpon>SearchID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Components\WinBrowse.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Components\WinBrowse.Designer.cs">
+      <DependentUpon>WinBrowse.cs</DependentUpon>
     </Compile>
     <Compile Include="Data\ds_Project_Ledger.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -365,6 +372,9 @@
     <EmbeddedResource Include="Components\SearchID.resx">
       <DependentUpon>SearchID.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Components\WinBrowse.resx">
+      <DependentUpon>WinBrowse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accounts_Notes.resx">
       <DependentUpon>Accounts_Notes.cs</DependentUpon>
     </EmbeddedResource>
@@ -556,6 +566,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Classes\Connection_Class.dll" />
     <Content Include="Icons\Accounting.ico" />
     <Content Include="Icons\Accounting.png" />
     <Content Include="Icons\AppliedLogo.jpg" />
@@ -617,7 +628,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="False" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

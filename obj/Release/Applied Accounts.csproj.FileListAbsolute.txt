@@ -291,3 +291,7 @@ D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmCOAB.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.Booking.frmBooking.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.Booking.frmInstalments.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmVoucher_Delete.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Components.WinBrowse.resources
+C:\Output\Release\Applied Accounts.exe.config
+C:\Output\Release\Applied Accounts.exe
+C:\Output\Release\Applied Accounts.pdb

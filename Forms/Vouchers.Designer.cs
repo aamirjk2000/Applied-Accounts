@@ -106,6 +106,7 @@
             this.lblWords = new System.Windows.Forms.Label();
             this.Grid = new System.Windows.Forms.DataGridView();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.myTextBox1 = new Applied_Accounts.MyTextBox();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -125,6 +126,7 @@
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.myTextBox1);
             this.P1.Controls.Add(this.btn9);
             this.P1.Controls.Add(this.btn8);
             this.P1.Controls.Add(this.btn7);
@@ -982,6 +984,26 @@
             this.lblMessage.Size = new System.Drawing.Size(0, 13);
             this.lblMessage.TabIndex = 1;
             // 
+            // myTextBox1
+            // 
+            this.myTextBox1.Allowe_Duplicate = false;
+            this.myTextBox1.Allowed_Chars = "0123456789-";
+            this.myTextBox1.ColumnName = "Code";
+            this.myTextBox1.Location = new System.Drawing.Point(602, 118);
+            this.myTextBox1.MaxDigit = 0;
+            this.myTextBox1.Mode_Add = false;
+            this.myTextBox1.Mode_Delete = false;
+            this.myTextBox1.Mode_Edit = false;
+            this.myTextBox1.MyDataView = null;
+            this.myTextBox1.MyMessage = null;
+            this.myTextBox1.MyRow = null;
+            this.myTextBox1.Name = "myTextBox1";
+            this.myTextBox1.PrimaryKey = "ID";
+            this.myTextBox1.Size = new System.Drawing.Size(100, 20);
+            this.myTextBox1.TabIndex = 126;
+            this.myTextBox1.Text_Mode = 0;
+            this.myTextBox1.thisColor = System.Drawing.SystemColors.WindowText;
+            // 
             // frmVouchers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1083,5 +1105,6 @@
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Label lblMessage;
+        private MyTextBox myTextBox1;
     }
 }

@@ -1,7 +1,7 @@
 {
   "version": 3,
   "targets": {
-    ".NETFramework,Version=v4.6.1": {
+    ".NETFramework,Version=v4.7": {
       "EntityFramework/6.3.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -228,7 +228,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.6.1/win": {
+    ".NETFramework,Version=v4.7/win": {
       "EntityFramework/6.3.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -455,7 +455,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.6.1/win-x64": {
+    ".NETFramework,Version=v4.7/win-x64": {
       "EntityFramework/6.3.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -682,7 +682,7 @@
         }
       }
     },
-    ".NETFramework,Version=v4.6.1/win-x86": {
+    ".NETFramework,Version=v4.7/win-x86": {
       "EntityFramework/6.3.0": {
         "type": "package",
         "frameworkAssemblies": [
@@ -1191,7 +1191,7 @@
     }
   },
   "projectFileDependencyGroups": {
-    ".NETFramework,Version=v4.6.1": [
+    ".NETFramework,Version=v4.7": [
       "Microsoft.ReportViewer.WinForms.v12 >= 12.0.0.1",
       "Microsoft.ReportingServices.ReportViewerControl.WinForms >= 150.1404.0",
       "Microsoft.SqlServer.Types >= 14.0.1016.290",
@@ -1199,37 +1199,37 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Desktop\\.nuget\\packages\\": {}
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Applied\\Applied_Source\\Applied Accounts.csproj",
+      "projectUniqueName": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
       "projectName": "Applied Accounts",
-      "projectPath": "C:\\Applied\\Applied_Source\\Applied Accounts.csproj",
-      "packagesPath": "C:\\Users\\Desktop\\.nuget\\packages\\",
-      "outputPath": "C:\\Applied\\Applied_Source\\obj\\",
+      "projectPath": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "D:\\Applied\\Applied-Accounts\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\Desktop\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
-        "net461"
+        "net47"
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net461": {
+        "net47": {
           "projectReferences": {}
         }
       }
     },
     "frameworks": {
-      "net461": {
+      "net47": {
         "dependencies": {
           "Microsoft.ReportViewer.WinForms.v12": {
             "target": "Package",

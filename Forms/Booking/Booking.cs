@@ -42,6 +42,7 @@ namespace Applied_Accounts.Forms.Booking
             cBoxUnit.ValueMember = "ID";
             cBoxClient.ValueMember = "ID";
             cBoxProject.ValueMember = "ID";
+            cBoxSchedule.ValueMember = "Code";
             cBoxBooking.ValueMember = "ID";
 
         }
@@ -213,5 +214,66 @@ namespace Applied_Accounts.Forms.Booking
         {
             cBoxBooking.SelectedValue = Conversion.ToLong(txtID.Text);
         }
+
+        #region Browse Windows
+
+        private void btnUnit_Click(object sender, EventArgs e)
+        {
+            cBoxUnit.SelectedValue = Applied.ShowBrowseWin(tb_Units, cBoxUnit.SelectedValue);
+        }
+
+        private void btnClient_Click(object sender, EventArgs e)
+        {
+            cBoxClient.SelectedValue = Applied.ShowBrowseWin(tb_Suppliers, cBoxClient.SelectedValue);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            cBoxProject.SelectedValue = Applied.ShowBrowseWin(tb_Projects, cBoxProject.SelectedValue);
+        }
+
+        #endregion
+
+        #region Schedule Add 
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            string _Code = cBoxSchedule.SelectedValue.ToString();
+            int _Booking = 0 ;
+            int _Schedule = 0;
+
+            DataTable tb_Schedule = AppliedTable.GetDataTable(Tables.Schedule, "Code='" + _Code + "'");
+            MessageBox.Show(tb_Schedule.Rows.Count.ToString());
+            DataView _Dataview = tb_Booking.AsDataView();
+            DataRow _DataRow = tb_Booking.NewRow();
+
+            if (tb_Schedule.Rows.Count > 0)
+            {
+                foreach (var _Row in tb_Schedule.Rows)
+                {
+                    // filter booking ID and Schedule ID
+                    _Dataview.RowFilter = "Booking=" + _Booking.ToString() + " AND Schedule=" + _Schedule.ToString();
+
+
+                    if(_Dataview.Count>0)
+                    {
+
+
+
+                    }
+
+                    else
+                    {
+
+                    }
+
+
+
+                }
+            }
+        }
+
+
+        #endregion
     }           // End Class
 }               // END 
