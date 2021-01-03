@@ -118,7 +118,7 @@ namespace Applied_Accounts.Classes
         public string Min(string _Column)
         {
             if (Report_Data.Count > 0)
-            { return (string)Report_Data.ToTable().Compute("Min(" + _Column + ")", string.Empty); }
+            { return Report_Data.ToTable().Compute("Min(" + _Column + ")", string.Empty).ToString(); }
             return "";
 
         }
@@ -126,7 +126,7 @@ namespace Applied_Accounts.Classes
         public string Max(string _Column)
         {
             if (Report_Data.Count > 0)
-            { return (string)Report_Data.ToTable().Compute("Max(" + _Column + ")", string.Empty); }
+            { return Report_Data.ToTable().Compute("Max(" + _Column + ")", string.Empty).ToString(); }
             return "";
 
         }

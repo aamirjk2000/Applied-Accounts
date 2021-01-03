@@ -4,6 +4,9 @@
 
     partial class ds_Voucher
     {
+        partial class View_VoucherDataTable
+        {
+        }
     }
 }
 

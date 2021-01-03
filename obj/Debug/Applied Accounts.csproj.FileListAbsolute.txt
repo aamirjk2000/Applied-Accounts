@@ -134,3 +134,4 @@ C:\Applied\Applied_Source\obj\Debug\Applied Accounts.pdb
 C:\Applied\Applied_Source\obj\Debug\Applied Accounts.csproj.CoreCompileInputs.cache
 C:\Applied\Applied_Source\obj\Debug\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Components.WinBrowse.resources
+C:\Applied\Applied_Source\obj\Debug\Applied_Accounts.Components.WinBrowse.resources

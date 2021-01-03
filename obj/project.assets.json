@@ -20,7 +20,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1404.0": {
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.SqlServer.Types": "14.0.0"
@@ -192,15 +192,15 @@
           "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
         }
       },
-      "System.Data.SQLite/1.0.113.5": {
+      "System.Data.SQLite/1.0.113.7": {
         "type": "package",
         "dependencies": {
-          "System.Data.SQLite.Core": "1.0.113.5",
+          "System.Data.SQLite.Core": "1.0.113.7",
           "System.Data.SQLite.EF6": "1.0.113",
           "System.Data.SQLite.Linq": "1.0.113"
         }
       },
-      "System.Data.SQLite.Core/1.0.113.5": {
+      "System.Data.SQLite.Core/1.0.113.7": {
         "type": "package",
         "dependencies": {
           "Stub.System.Data.SQLite.Core.NetFramework": "1.0.113.3"
@@ -247,7 +247,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1404.0": {
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.SqlServer.Types": "14.0.0"
@@ -419,15 +419,15 @@
           "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
         }
       },
-      "System.Data.SQLite/1.0.113.5": {
+      "System.Data.SQLite/1.0.113.7": {
         "type": "package",
         "dependencies": {
-          "System.Data.SQLite.Core": "1.0.113.5",
+          "System.Data.SQLite.Core": "1.0.113.7",
           "System.Data.SQLite.EF6": "1.0.113",
           "System.Data.SQLite.Linq": "1.0.113"
         }
       },
-      "System.Data.SQLite.Core/1.0.113.5": {
+      "System.Data.SQLite.Core/1.0.113.7": {
         "type": "package",
         "dependencies": {
           "Stub.System.Data.SQLite.Core.NetFramework": "1.0.113.3"
@@ -474,7 +474,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1404.0": {
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.SqlServer.Types": "14.0.0"
@@ -646,15 +646,15 @@
           "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
         }
       },
-      "System.Data.SQLite/1.0.113.5": {
+      "System.Data.SQLite/1.0.113.7": {
         "type": "package",
         "dependencies": {
-          "System.Data.SQLite.Core": "1.0.113.5",
+          "System.Data.SQLite.Core": "1.0.113.7",
           "System.Data.SQLite.EF6": "1.0.113",
           "System.Data.SQLite.Linq": "1.0.113"
         }
       },
-      "System.Data.SQLite.Core/1.0.113.5": {
+      "System.Data.SQLite.Core/1.0.113.7": {
         "type": "package",
         "dependencies": {
           "Stub.System.Data.SQLite.Core.NetFramework": "1.0.113.3"
@@ -701,7 +701,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1404.0": {
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.SqlServer.Types": "14.0.0"
@@ -873,15 +873,15 @@
           "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
         }
       },
-      "System.Data.SQLite/1.0.113.5": {
+      "System.Data.SQLite/1.0.113.7": {
         "type": "package",
         "dependencies": {
-          "System.Data.SQLite.Core": "1.0.113.5",
+          "System.Data.SQLite.Core": "1.0.113.7",
           "System.Data.SQLite.EF6": "1.0.113",
           "System.Data.SQLite.Linq": "1.0.113"
         }
       },
-      "System.Data.SQLite.Core/1.0.113.5": {
+      "System.Data.SQLite.Core/1.0.113.7": {
         "type": "package",
         "dependencies": {
           "Stub.System.Data.SQLite.Core.NetFramework": "1.0.113.3"
@@ -962,10 +962,10 @@
         "tools/netcoreapp3.0/any/ef6.runtimeconfig.json"
       ]
     },
-    "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1404.0": {
-      "sha512": "IOfEkS7QWdepp6P4ViGgmNy47CcdKqL8PHmF6+9d2UHdfzSI7SaRXDESQ5mgFrutorcZqTeg1yoxRinsSNHyvQ==",
+    "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
+      "sha512": "CLqux9ERNfgB8TBXuWGUtITuU7JNZhoAzPe6XxzXiLGCsNhBenzRBVh4x0GxEwl2/kUL4i4u+0RMFpf2k2vFVg==",
       "type": "package",
-      "path": "microsoft.reportingservices.reportviewercontrol.winforms/150.1404.0",
+      "path": "microsoft.reportingservices.reportviewercontrol.winforms/150.1427.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1020,7 +1020,7 @@
         "lib/net40/zh-CHT/Microsoft.ReportViewer.WinForms.resources.dll",
         "license/License_ReportViewer.rtf",
         "license/ThirdPartyNotices_ReportViewer.txt",
-        "microsoft.reportingservices.reportviewercontrol.winforms.150.1404.0.nupkg.sha512",
+        "microsoft.reportingservices.reportviewercontrol.winforms.150.1427.0.nupkg.sha512",
         "microsoft.reportingservices.reportviewercontrol.winforms.nuspec"
       ]
     },
@@ -1104,25 +1104,25 @@
         "stub.system.data.sqlite.core.netframework.nuspec"
       ]
     },
-    "System.Data.SQLite/1.0.113.5": {
-      "sha512": "PK66cWfVusMf3vdLL6LdfWbKGgLWGWmv2egGqTP1eq05hNxszCth7spDgErzL9GHQreRb2l9SH9e3dnAz+i+hA==",
+    "System.Data.SQLite/1.0.113.7": {
+      "sha512": "PQ9cXfM4R2iEztZb5EuO0RvXhK64fYK3GK9NfKIUj/rLcpTAIkxduEid/PJAV1KOAuP7NStCZORNeMYJStHJOA==",
       "type": "package",
-      "path": "system.data.sqlite/1.0.113.5",
+      "path": "system.data.sqlite/1.0.113.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "system.data.sqlite.1.0.113.5.nupkg.sha512",
+        "system.data.sqlite.1.0.113.7.nupkg.sha512",
         "system.data.sqlite.nuspec"
       ]
     },
-    "System.Data.SQLite.Core/1.0.113.5": {
-      "sha512": "FXdVYYu1RydxsOE6yNAHJVJ6GCDEBO58soebjhOnL5bn0pCV3YW2UoODa6Apq7vATKc5xlmULnl+uF7zn8H5ug==",
+    "System.Data.SQLite.Core/1.0.113.7": {
+      "sha512": "2DKMIxfZpIVzdMfx1dj9qvTm+0m0Mx6sN6CZXMQDNytU7Sk/JKo0Ox6mvHAicfHrQgqZbUZMzMMtLXD0kwmFfg==",
       "type": "package",
-      "path": "system.data.sqlite.core/1.0.113.5",
+      "path": "system.data.sqlite.core/1.0.113.7",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
-        "system.data.sqlite.core.1.0.113.5.nupkg.sha512",
+        "system.data.sqlite.core.1.0.113.7.nupkg.sha512",
         "system.data.sqlite.core.nuspec"
       ]
     },
@@ -1193,26 +1193,26 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7": [
       "Microsoft.ReportViewer.WinForms.v12 >= 12.0.0.1",
-      "Microsoft.ReportingServices.ReportViewerControl.WinForms >= 150.1404.0",
+      "Microsoft.ReportingServices.ReportViewerControl.WinForms >= 150.1427.0",
       "Microsoft.SqlServer.Types >= 14.0.1016.290",
-      "System.Data.SQLite >= 1.0.113.5"
+      "System.Data.SQLite >= 1.0.113.7"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Administrator\\.nuget\\packages\\": {}
+    "C:\\Users\\Desktop\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
+      "projectUniqueName": "C:\\Applied\\Applied_Source\\Applied Accounts.csproj",
       "projectName": "Applied Accounts",
-      "projectPath": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
-      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-      "outputPath": "D:\\Applied\\Applied-Accounts\\obj\\",
+      "projectPath": "C:\\Applied\\Applied_Source\\Applied Accounts.csproj",
+      "packagesPath": "C:\\Users\\Desktop\\.nuget\\packages\\",
+      "outputPath": "C:\\Applied\\Applied_Source\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
       "configFilePaths": [
-        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Desktop\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1237,7 +1237,7 @@
           },
           "Microsoft.ReportingServices.ReportViewerControl.WinForms": {
             "target": "Package",
-            "version": "[150.1404.0, )"
+            "version": "[150.1427.0, )"
           },
           "Microsoft.SqlServer.Types": {
             "target": "Package",
@@ -1245,7 +1245,7 @@
           },
           "System.Data.SQLite": {
             "target": "Package",
-            "version": "[1.0.113.5, )"
+            "version": "[1.0.113.7, )"
           }
         }
       }
