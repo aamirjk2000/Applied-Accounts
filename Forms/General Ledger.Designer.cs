@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGeneral_Ledger));
             this.label3 = new System.Windows.Forms.Label();
             this.btnExit = new System.Windows.Forms.Button();
+            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.btnPreview = new System.Windows.Forms.Button();
             this.dt_To = new System.Windows.Forms.DateTimePicker();
             this.dt_From = new System.Windows.Forms.DateTimePicker();
@@ -39,7 +40,6 @@
             this.cBoxCOA = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.SuspendLayout();
             // 
             // label3
@@ -62,6 +62,13 @@
             this.btnExit.TabIndex = 17;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
+            // 
+            // imageList1
+            // 
+            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+            this.imageList1.Images.SetKeyName(0, "PREVIEW.BMP");
+            this.imageList1.Images.SetKeyName(1, "exit-48.png");
             // 
             // btnPreview
             // 
@@ -101,6 +108,7 @@
             this.btnBrowseSupplier.TabIndex = 13;
             this.btnBrowseSupplier.Text = "...";
             this.btnBrowseSupplier.UseVisualStyleBackColor = true;
+            this.btnBrowseSupplier.Click += new System.EventHandler(this.btnBrowseSupplier_Click_1);
             // 
             // cBoxCOA
             // 
@@ -127,13 +135,6 @@
             this.label1.Size = new System.Drawing.Size(83, 13);
             this.label1.TabIndex = 10;
             this.label1.Text = "Ledger Account";
-            // 
-            // imageList1
-            // 
-            this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-            this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-            this.imageList1.Images.SetKeyName(0, "PREVIEW.BMP");
-            this.imageList1.Images.SetKeyName(1, "exit-48.png");
             // 
             // frmGeneral_Ledger
             // 

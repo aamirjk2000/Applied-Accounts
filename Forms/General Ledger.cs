@@ -14,6 +14,12 @@ namespace Applied_Accounts.Forms
 {
     public partial class frmGeneral_Ledger : Form
     {
+        private ReportClass MyReportClass = new ReportClass();
+        private DataTable dt_COA = AppliedTable.GetComboData(Tables.COA);
+
+        #region Initialize
+
+
         public frmGeneral_Ledger()
         {
             InitializeComponent();
@@ -25,10 +31,7 @@ namespace Applied_Accounts.Forms
 
         }
 
-        ReportClass MyReportClass = new ReportClass();
-        DataTable dt_COA = AppliedTable.GetComboData(Tables.COA);
-
-
+       
         private void frmGeneral_Ledger_Load(object sender, EventArgs e)
         {
 
@@ -37,7 +40,9 @@ namespace Applied_Accounts.Forms
             dt_To.Value = Applied.GetDate("rptGL_dtTo");
 
         }
-       
+
+
+        #endregion
 
         private void btnBrowseSupplier_Click(object sender, EventArgs e)
         {
@@ -129,6 +134,11 @@ namespace Applied_Accounts.Forms
                 MyReportClass.Preview();
               
             }
+        }
+
+        private void btnBrowseSupplier_Click_1(object sender, EventArgs e)
+        {
+           cBoxCOA.SelectedValue = Applied.ShowBrowseWin(dt_COA, cBoxCOA.SelectedValue);
         }
     }
 }

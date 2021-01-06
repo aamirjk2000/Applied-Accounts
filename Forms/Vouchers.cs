@@ -579,8 +579,8 @@ namespace Applied_Accounts.Forms
             MyRow["Stock"] = Conversion.ToDBInteger(cBoxStocks.SelectedValue);
             MyRow["Unit"] = Conversion.ToDBInteger(cBoxUnits.SelectedValue);
             MyRow["Employee"] = Conversion.ToDBInteger(cBoxEmployees.SelectedValue);
-            MyRow["RefNo"] = txtRefNo.Text;
-            MyRow["Chq_No"] = Conversion.ToDBInteger(txtChqNo.Text); ;
+            MyRow["RefNo"] = txtRefNo.Text.Trim();
+            MyRow["Chq_No"] = txtChqNo.Text.Trim(); ;
             MyRow["Chq_Date"] = dtChqDate.Value.ToString();
             MyRow["DR"] = Conversion.ToMoney(txtDebit.Text);
             MyRow["CR"] = Conversion.ToMoney(txtCredit.Text);
