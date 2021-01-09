@@ -245,6 +245,12 @@
     <Compile Include="Forms\Migration.Designer.cs">
       <DependentUpon>Migration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\POrder.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\POrder.Designer.cs">
+      <DependentUpon>POrder.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Project.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -410,6 +416,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Migration.resx">
       <DependentUpon>Migration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\POrder.resx">
+      <DependentUpon>POrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Project.resx">
       <DependentUpon>Project.cs</DependentUpon>
@@ -628,7 +637,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="False" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

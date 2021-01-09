@@ -665,7 +665,9 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>="Cheque # " + Fields!Chq_No.Value +
+                                  <Value>=
+iif(string.IsNullOrEmpty(Fields!Chq_No.Value),"",  
+"Cheque # " + Fields!Chq_No.Value) +
 iif(string.IsNullOrWhiteSpace(Fields!RefNo.Value),"",
 " Ref # " + Fields!RefNo.Value)</Value>
                                   <Style>
@@ -1122,9 +1124,10 @@ iif(string.IsNullOrWhiteSpace(Fields!RefNo.Value),"",
                     <TablixMember />
                     <TablixMember>
                       <Visibility>
-                        <Hidden>= iif(
-string.IsNullOrEmpty(Fields!Chq_No.Value),
-TRUE,FALSE)</Hidden>
+                        <Hidden>=iif(
+string.IsNullOrEmpty(Fields!Chq_No.Value) AND 
+string.IsNullOrEmpty(Fields!RefNo.Value), TRUE, FALSE
+)</Hidden>
                       </Visibility>
                     </TablixMember>
                   </TablixMembers>

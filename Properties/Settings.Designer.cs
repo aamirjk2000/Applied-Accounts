@@ -56,5 +56,17 @@ namespace Applied_Accounts.Properties {
                 this["WallPaper"] = value;
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
+        [global::System.Configuration.DefaultSettingValueAttribute("Dsn=SQLite3 Datasource;database=G:\\Data\\FORDOUS.db;stepapi=0;syncpragma=NORMAL;no" +
+            "txn=0;timeout=100000;shortnames=0;longnames=0;nocreat=0;nowchar=0;fksupport=0;oe" +
+            "mcp=0;bigint=0;jdconv=0")]
+        public string G__Data_FORDOUS_dbConnectionString {
+            get {
+                return ((string)(this["G__Data_FORDOUS_dbConnectionString"]));
+            }
+        }
     }
 }
