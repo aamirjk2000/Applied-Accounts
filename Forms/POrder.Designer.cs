@@ -32,6 +32,8 @@ namespace Applied_Accounts.Forms
             this.components = new System.ComponentModel.Container();
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
+            this.txtTest = new System.Windows.Forms.TextBox();
+            this.txtAmount2 = new Applied_Accounts.MyTextBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.MyNavigator = new Applied_Accounts.Navigator();
             this.txtRemarks = new System.Windows.Forms.TextBox();
@@ -46,7 +48,7 @@ namespace Applied_Accounts.Forms
             this.txtID = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
+            this.lblSupplier = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -57,7 +59,6 @@ namespace Applied_Accounts.Forms
             this.btnExit = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.textNum1 = new Applied_Accounts.Components.TextNum(this.components);
-            this.txtAmount2 = new Applied_Accounts.MyTextBox();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -93,12 +94,13 @@ namespace Applied_Accounts.Forms
             this.P1.Controls.Add(this.txtID);
             this.P1.Controls.Add(this.label8);
             this.P1.Controls.Add(this.label7);
-            this.P1.Controls.Add(this.label6);
+            this.P1.Controls.Add(this.lblSupplier);
             this.P1.Controls.Add(this.label5);
             this.P1.Controls.Add(this.label4);
             this.P1.Controls.Add(this.label3);
             this.P1.Controls.Add(this.label2);
             this.P1.Controls.Add(this.label1);
+            this.P1.Controls.Add(this.txtTest);
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
@@ -106,6 +108,36 @@ namespace Applied_Accounts.Forms
             this.P1.TabIndex = 0;
             this.P1.Text = "Record";
             this.P1.UseVisualStyleBackColor = true;
+            // 
+            // txtTest
+            // 
+            this.txtTest.Enabled = false;
+            this.txtTest.Location = new System.Drawing.Point(92, 77);
+            this.txtTest.Name = "txtTest";
+            this.txtTest.Size = new System.Drawing.Size(72, 20);
+            this.txtTest.TabIndex = 21;
+            this.txtTest.TabStop = false;
+            this.txtTest.TextChanged += new System.EventHandler(this.txtTest_TextChanged);
+            // 
+            // txtAmount2
+            // 
+            this.txtAmount2.Allowe_Duplicate = false;
+            this.txtAmount2.Allowed_Chars = "0123456789-";
+            this.txtAmount2.ColumnName = "Code";
+            this.txtAmount2.Location = new System.Drawing.Point(198, 103);
+            this.txtAmount2.MaxDigit = 0;
+            this.txtAmount2.Mode_Add = false;
+            this.txtAmount2.Mode_Delete = false;
+            this.txtAmount2.Mode_Edit = false;
+            this.txtAmount2.MyDataView = null;
+            this.txtAmount2.MyMessage = null;
+            this.txtAmount2.MyRow = null;
+            this.txtAmount2.Name = "txtAmount2";
+            this.txtAmount2.PrimaryKey = "ID";
+            this.txtAmount2.Size = new System.Drawing.Size(100, 20);
+            this.txtAmount2.TabIndex = 17;
+            this.txtAmount2.Text_Mode = 0;
+            this.txtAmount2.thisColor = System.Drawing.SystemColors.WindowText;
             // 
             // chkActive
             // 
@@ -161,6 +193,7 @@ namespace Applied_Accounts.Forms
             this.cBoxSuppliers.Name = "cBoxSuppliers";
             this.cBoxSuppliers.Size = new System.Drawing.Size(389, 21);
             this.cBoxSuppliers.TabIndex = 14;
+            this.cBoxSuppliers.TextChanged += new System.EventHandler(this.cBoxSuppliers_TextChanged);
             // 
             // txtSupplier
             // 
@@ -224,14 +257,14 @@ namespace Applied_Accounts.Forms
             this.label7.TabIndex = 6;
             this.label7.Text = "Amount";
             // 
-            // label6
+            // lblSupplier
             // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(18, 80);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(45, 13);
-            this.label6.TabIndex = 5;
-            this.label6.Text = "Supplier";
+            this.lblSupplier.AutoSize = true;
+            this.lblSupplier.Location = new System.Drawing.Point(18, 80);
+            this.lblSupplier.Name = "lblSupplier";
+            this.lblSupplier.Size = new System.Drawing.Size(45, 13);
+            this.lblSupplier.TabIndex = 5;
+            this.lblSupplier.Text = "Supplier";
             // 
             // label5
             // 
@@ -330,26 +363,6 @@ namespace Applied_Accounts.Forms
             this.label9.TabIndex = 2;
             this.label9.Text = "label9";
             // 
-            // txtAmount2
-            // 
-            this.txtAmount2.Allowe_Duplicate = false;
-            this.txtAmount2.Allowed_Chars = "0123456789-";
-            this.txtAmount2.ColumnName = "Code";
-            this.txtAmount2.Location = new System.Drawing.Point(198, 103);
-            this.txtAmount2.MaxDigit = 0;
-            this.txtAmount2.Mode_Add = false;
-            this.txtAmount2.Mode_Delete = false;
-            this.txtAmount2.Mode_Edit = false;
-            this.txtAmount2.MyDataView = null;
-            this.txtAmount2.MyMessage = null;
-            this.txtAmount2.MyRow = null;
-            this.txtAmount2.Name = "txtAmount2";
-            this.txtAmount2.PrimaryKey = "ID";
-            this.txtAmount2.Size = new System.Drawing.Size(100, 20);
-            this.txtAmount2.TabIndex = 17;
-            this.txtAmount2.Text_Mode = 0;
-            this.txtAmount2.thisColor = System.Drawing.SystemColors.WindowText;
-            // 
             // frmPOrder
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -360,6 +373,7 @@ namespace Applied_Accounts.Forms
             this.Controls.Add(this.Pages);
             this.Name = "frmPOrder";
             this.Text = "POrder";
+            this.Load += new System.EventHandler(this.frmPOrder_Load);
             this.Pages.ResumeLayout(false);
             this.P1.ResumeLayout(false);
             this.P1.PerformLayout();
@@ -386,7 +400,7 @@ namespace Applied_Accounts.Forms
         private System.Windows.Forms.TextBox txtID;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label lblSupplier;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label3;
@@ -399,5 +413,6 @@ namespace Applied_Accounts.Forms
         private System.Windows.Forms.CheckBox chkActive;
         private Components.TextNum textNum1;
         private MyTextBox txtAmount2;
+        private System.Windows.Forms.TextBox txtTest;
     }
 }

@@ -88,9 +88,9 @@ namespace Applied_Accounts.Forms
             #endregion
 
             string ReportFilter = string.Concat("Supplier=", MyReportClass.ID_Supplier);
-            if (chkCOA.Checked) { ReportFilter += string.Concat(" AND COA=", MyReportClass.ID_COA); }
-            if (chkProject.Checked) { ReportFilter += string.Concat(" AND Project=", MyReportClass.ID_Project); }
-            if (chkUnit.Checked) { ReportFilter += string.Concat(" AND Unit=", MyReportClass.ID_Unit); }
+            if (!chkCOA.Checked) { ReportFilter += string.Concat(" AND COA=", MyReportClass.ID_COA); }
+            if (!chkProject.Checked) { ReportFilter += string.Concat(" AND Project=", MyReportClass.ID_Project); }
+            if (!chkUnit.Checked) { ReportFilter += string.Concat(" AND Unit=", MyReportClass.ID_Unit); }
             MyReportClass.ReportView_Filter = ReportFilter;
             MyReportClass.ReportView_Sort = "[Vou_Date],[Vou_No],[Supplier],[COA],[Project],[Unit]";
             MyReportClass.Update_ReportData();
@@ -173,6 +173,26 @@ namespace Applied_Accounts.Forms
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnSupplier_Click(object sender, EventArgs e)
+        {
+            cBoxSuppliers.SelectedValue = Applied.ShowBrowseWin(dt_Suppliers, cBoxSuppliers.SelectedValue);
+        }
+
+        private void btnAccount_Click(object sender, EventArgs e)
+        {
+            cBoxCOA.SelectedValue = Applied.ShowBrowseWin(dt_COA, cBoxCOA.SelectedValue);
+        }
+
+        private void btnProject_Click(object sender, EventArgs e)
+        {
+            cBoxProjects.SelectedValue = Applied.ShowBrowseWin(dt_Projects, cBoxProjects.SelectedValue);
+        }
+
+        private void btnUnit_Click(object sender, EventArgs e)
+        {
+            cBoxUnits.SelectedValue = Applied.ShowBrowseWin(dt_Units, cBoxUnits.SelectedValue);
         }
     }
 }

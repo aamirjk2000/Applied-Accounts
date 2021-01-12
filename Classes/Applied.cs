@@ -19,6 +19,8 @@ namespace Applied_Accounts.Classes
 
         public class Applied : IApplied
         {
+        
+
         //private CultureInfo Culture { get; set; } aamir   
         private DateTime Voucher_MinDate { get; set; }
         private DateTime Voucher_MaxDate { get; set; }
@@ -433,6 +435,7 @@ namespace Applied_Accounts.Classes
             return 0;
         }
 
+       
 
 
 

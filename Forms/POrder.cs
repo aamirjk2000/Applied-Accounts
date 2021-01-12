@@ -19,37 +19,45 @@ namespace Applied_Accounts.Forms
         private DataTable dt_Suppliers = AppliedTable.GetComboData(Tables.Suppliers);
 
         private DataTable MyDataTable { get => dt_POrder; }
+        
+        private bool InitializingNow = true;
+
+        
 
         #region Initializing
 
         public frmPOrder()
         {
             InitializeComponent();
+            cBoxSuppliers.DataSource = dt_Suppliers;
+            cBoxSuppliers.DisplayMember = "Title";
+            cBoxSuppliers.ValueMember = "ID";
+
             MyNavigator.InitializeClass(MyDataTable);
             DataBinding();                      // Data Binding with form objects
             Load_Grid();                        // Load Data in Data Grid.
 
-
-
-            cBoxSuppliers.DataSource = dt_Suppliers;
-            cBoxSuppliers.DisplayMember = "Title";
-            cBoxSuppliers.ValueMember = "Code";
+            InitializingNow = false;             // Objects has been initialized 
         }
 
+        private void frmPOrder_Load(object sender, EventArgs e)
+        {
+            
+
+        }
 
         private void DataBinding()
         {
             dtPODate.Value = DateTime.Now;
-
             txtID.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "ID", true, DataSourceUpdateMode.OnPropertyChanged));
             txtCode.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Code", true, DataSourceUpdateMode.OnPropertyChanged));
             txtTag.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "SCode", true, DataSourceUpdateMode.OnPropertyChanged));
             txtTitle.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Title", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtSupplier.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Supplier", true, DataSourceUpdateMode.OnPropertyChanged));
             txtRemarks.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged));
             txtAmount.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Amount", true, DataSourceUpdateMode.OnPropertyChanged));
             chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnValidation));
             dtPODate.DataBindings.Add(new Binding("Value", MyNavigator.MyBindingSource, "PODate", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtTest.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Supplier", true, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void Load_Grid()
@@ -143,5 +151,30 @@ namespace Applied_Accounts.Forms
         }
 
         #endregion
+
+        #region Supplier
+
+        private void cBoxSuppliers_TextChanged(object sender, EventArgs e)
+        {
+            if (InitializingNow) { return; }
+            if (cBoxSuppliers.Text.Length == 0) { return; }
+            if (cBoxSuppliers.SelectedValue == null) { return; }
+            txtSupplier.Text = Applied.Code((long)cBoxSuppliers.SelectedValue, dt_Suppliers.AsDataView());
+            //txtSupplier.Tag = cBoxSuppliers.SelectedValue.ToString();
+            txtTest.Text = cBoxSuppliers.SelectedValue.ToString();
+
+        }
+
+        private void txtTest_TextChanged(object sender, EventArgs e)
+        {
+            
+            txtSupplier.Text = Applied.Code(Conversion.ToLong(txtTest.Text.ToString()), dt_Suppliers.AsDataView());
+            cBoxSuppliers.SelectedValue = Conversion.ToLong(txtTest.Text);
+        }
+
+
+        #endregion
+
+
     }
 }

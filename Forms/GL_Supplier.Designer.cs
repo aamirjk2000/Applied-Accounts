@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmGL_Supplier));
             this.cBoxSuppliers = new System.Windows.Forms.ComboBox();
             this.cBoxCOA = new System.Windows.Forms.ComboBox();
             this.cBoxProjects = new System.Windows.Forms.ComboBox();
@@ -43,16 +42,13 @@
             this.dt_To = new System.Windows.Forms.DateTimePicker();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSupplier = new System.Windows.Forms.Button();
+            this.btnAccount = new System.Windows.Forms.Button();
+            this.btnProject = new System.Windows.Forms.Button();
+            this.btnUnit = new System.Windows.Forms.Button();
             this.chkUnit = new System.Windows.Forms.CheckBox();
             this.chkProject = new System.Windows.Forms.CheckBox();
             this.chkCOA = new System.Windows.Forms.CheckBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cBoxSuppliers
@@ -161,122 +157,106 @@
             // 
             // btnPreview
             // 
-            this.btnPreview.Image = ((System.Drawing.Image)(resources.GetObject("btnPreview.Image")));
-            this.btnPreview.Location = new System.Drawing.Point(397, 236);
+            this.btnPreview.Image = global::Applied_Accounts.Properties.Resources.PRINT;
+            this.btnPreview.Location = new System.Drawing.Point(507, 154);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(65, 65);
+            this.btnPreview.Size = new System.Drawing.Size(30, 30);
             this.btnPreview.TabIndex = 12;
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Image = ((System.Drawing.Image)(resources.GetObject("btnExit.Image")));
-            this.btnExit.Location = new System.Drawing.Point(474, 236);
+            this.btnExit.Image = global::Applied_Accounts.Properties.Resources.Exit2;
+            this.btnExit.Location = new System.Drawing.Point(545, 154);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(65, 65);
+            this.btnExit.Size = new System.Drawing.Size(30, 30);
             this.btnExit.TabIndex = 13;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
-            // button1
+            // btnSupplier
             // 
-            this.button1.Location = new System.Drawing.Point(507, 27);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(32, 23);
-            this.button1.TabIndex = 14;
-            this.button1.Text = "...";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnSupplier.Location = new System.Drawing.Point(507, 27);
+            this.btnSupplier.Name = "btnSupplier";
+            this.btnSupplier.Size = new System.Drawing.Size(32, 23);
+            this.btnSupplier.TabIndex = 14;
+            this.btnSupplier.Text = "...";
+            this.btnSupplier.UseVisualStyleBackColor = true;
+            this.btnSupplier.Click += new System.EventHandler(this.btnSupplier_Click);
             // 
-            // button2
+            // btnAccount
             // 
-            this.button2.Location = new System.Drawing.Point(507, 54);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(32, 23);
-            this.button2.TabIndex = 15;
-            this.button2.Text = "...";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnAccount.Location = new System.Drawing.Point(507, 54);
+            this.btnAccount.Name = "btnAccount";
+            this.btnAccount.Size = new System.Drawing.Size(32, 23);
+            this.btnAccount.TabIndex = 15;
+            this.btnAccount.Text = "...";
+            this.btnAccount.UseVisualStyleBackColor = true;
+            this.btnAccount.Click += new System.EventHandler(this.btnAccount_Click);
             // 
-            // button3
+            // btnProject
             // 
-            this.button3.Location = new System.Drawing.Point(507, 84);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(32, 23);
-            this.button3.TabIndex = 16;
-            this.button3.Text = "...";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnProject.Location = new System.Drawing.Point(507, 84);
+            this.btnProject.Name = "btnProject";
+            this.btnProject.Size = new System.Drawing.Size(32, 23);
+            this.btnProject.TabIndex = 16;
+            this.btnProject.Text = "...";
+            this.btnProject.UseVisualStyleBackColor = true;
+            this.btnProject.Click += new System.EventHandler(this.btnProject_Click);
             // 
-            // button4
+            // btnUnit
             // 
-            this.button4.Location = new System.Drawing.Point(507, 115);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(32, 23);
-            this.button4.TabIndex = 17;
-            this.button4.Text = "...";
-            this.button4.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.chkUnit);
-            this.groupBox1.Controls.Add(this.chkProject);
-            this.groupBox1.Controls.Add(this.chkCOA);
-            this.groupBox1.Location = new System.Drawing.Point(128, 176);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(411, 45);
-            this.groupBox1.TabIndex = 18;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Include in Report";
+            this.btnUnit.Location = new System.Drawing.Point(507, 115);
+            this.btnUnit.Name = "btnUnit";
+            this.btnUnit.Size = new System.Drawing.Size(32, 23);
+            this.btnUnit.TabIndex = 17;
+            this.btnUnit.Text = "...";
+            this.btnUnit.UseVisualStyleBackColor = true;
+            this.btnUnit.Click += new System.EventHandler(this.btnUnit_Click);
             // 
             // chkUnit
             // 
             this.chkUnit.AutoSize = true;
-            this.chkUnit.Location = new System.Drawing.Point(258, 19);
+            this.chkUnit.Location = new System.Drawing.Point(545, 117);
             this.chkUnit.Name = "chkUnit";
-            this.chkUnit.Size = new System.Drawing.Size(86, 17);
+            this.chkUnit.Size = new System.Drawing.Size(37, 17);
             this.chkUnit.TabIndex = 2;
-            this.chkUnit.Text = "Project Units";
+            this.chkUnit.Text = "All";
             this.chkUnit.UseVisualStyleBackColor = true;
             // 
             // chkProject
             // 
             this.chkProject.AutoSize = true;
-            this.chkProject.Location = new System.Drawing.Point(161, 19);
+            this.chkProject.Location = new System.Drawing.Point(545, 86);
             this.chkProject.Name = "chkProject";
-            this.chkProject.Size = new System.Drawing.Size(59, 17);
+            this.chkProject.Size = new System.Drawing.Size(37, 17);
             this.chkProject.TabIndex = 1;
-            this.chkProject.Text = "Project";
+            this.chkProject.Text = "All";
             this.chkProject.UseVisualStyleBackColor = true;
             // 
             // chkCOA
             // 
             this.chkCOA.AutoSize = true;
-            this.chkCOA.Location = new System.Drawing.Point(39, 19);
+            this.chkCOA.Location = new System.Drawing.Point(545, 58);
             this.chkCOA.Name = "chkCOA";
-            this.chkCOA.Size = new System.Drawing.Size(102, 17);
+            this.chkCOA.Size = new System.Drawing.Size(37, 17);
             this.chkCOA.TabIndex = 0;
-            this.chkCOA.Text = "Ledger Account";
+            this.chkCOA.Text = "All";
             this.chkCOA.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(26, 195);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(74, 13);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Report Format";
             // 
             // frmGL_Supplier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(555, 306);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.ClientSize = new System.Drawing.Size(595, 190);
+            this.Controls.Add(this.chkCOA);
+            this.Controls.Add(this.chkProject);
+            this.Controls.Add(this.chkUnit);
+            this.Controls.Add(this.btnUnit);
+            this.Controls.Add(this.btnProject);
+            this.Controls.Add(this.btnAccount);
+            this.Controls.Add(this.btnSupplier);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.dt_To);
@@ -295,8 +275,6 @@
             this.Text = "General Ledger (Supplier)";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmGL_Supplier_FormClosed);
             this.Load += new System.EventHandler(this.frmGL_Supplier_Load);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -318,14 +296,12 @@
         private System.Windows.Forms.DateTimePicker dt_To;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.Button btnExit;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnSupplier;
+        private System.Windows.Forms.Button btnAccount;
+        private System.Windows.Forms.Button btnProject;
+        private System.Windows.Forms.Button btnUnit;
         private System.Windows.Forms.CheckBox chkUnit;
         private System.Windows.Forms.CheckBox chkProject;
         private System.Windows.Forms.CheckBox chkCOA;
-        private System.Windows.Forms.Label label7;
     }
 }
