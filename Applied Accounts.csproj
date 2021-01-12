@@ -134,6 +134,12 @@
     <Compile Include="Components\SearchID.Designer.cs">
       <DependentUpon>SearchID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Components\TextNum.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Components\TextNum.Designer.cs">
+      <DependentUpon>TextNum.cs</DependentUpon>
+    </Compile>
     <Compile Include="Components\WinBrowse.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -377,6 +383,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\SearchID.resx">
       <DependentUpon>SearchID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Components\TextNum.resx">
+      <DependentUpon>TextNum.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Components\WinBrowse.resx">
       <DependentUpon>WinBrowse.cs</DependentUpon>
@@ -637,7 +646,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" />
+      <UserProperties BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

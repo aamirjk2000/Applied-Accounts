@@ -30,18 +30,23 @@ namespace Applied_Accounts
 
         public void Load_Data(DataTable _DataTable)
         {
+            BrowseGrid.DataSource = _DataTable.AsDataView();
+
+
             if (_DataTable.Rows.Count > 0)
             {
                 Active = true;
-                MyDataView = _DataTable.AsDataView();
+                //MyDataView = _DataTable.AsDataView();
+                //BrowseGrid.DataSource = MyDataView;
                 MyDataRow = _DataTable.Rows[0];
-                BrowseGrid.DataSource = MyDataView;
+                
             }
             else
             {
                 Active = false;
-                MyDataView = new DataView();
+                //MyDataView = new DataView();
                 MyDataRow = _DataTable.NewRow();
+
             }
 
             #region Active

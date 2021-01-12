@@ -160,8 +160,6 @@ namespace Applied_Accounts
             Properties.Settings.Default.Save();
 
             BackgroundImage = Image.FromFile(Properties.Settings.Default.WallPaper);
-
-
         }
         private void mnuBooking_Click(object sender, EventArgs e)
         {
@@ -177,6 +175,12 @@ namespace Applied_Accounts
         private void mnuDELVoucher_Click(object sender, EventArgs e)
         {
             frmVoucher_Delete Thisform = new frmVoucher_Delete();
+            Thisform.Show();
+        }
+
+        private void mnuPOrder_Click(object sender, EventArgs e)
+        {
+            frmPOrder Thisform = new frmPOrder();
             Thisform.Show();
         }
     }

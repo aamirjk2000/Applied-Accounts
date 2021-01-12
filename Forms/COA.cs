@@ -13,11 +13,12 @@ namespace Applied_Accounts
     {
 
         private DataTable MyDataTable = AppliedTable.GetDataTable(Tables.COA);
-        private DataView MyTableView { get => MyNavigator.MyDataView; }
+        //private DataView MyTableView { get => MyNavigator.MyDataView; }
 
         private Code_Validation Code_Validate = new Code_Validation();
         private DataTable tb_Notes = AppliedTable.GetDataTable(Tables.Notes);
 
+        #region Initialize
 
         public frmCOA()
         {
@@ -71,6 +72,7 @@ namespace Applied_Accounts
             MyDataGrid.BrowseGrid.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
+        #endregion
 
         #region Load 
 

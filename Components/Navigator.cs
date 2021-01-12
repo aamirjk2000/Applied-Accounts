@@ -15,7 +15,7 @@ namespace Applied_Accounts
         public BindingSource MyBindingSource = new BindingSource();                // DataSource of Binding source;
         public DataRow OriginalRow;
         public DataRow NewRow;
-        private Code_Validation Code_Validate;
+        //private Code_Validation Code_Validate;
 
 
         public int Current_Mode { get; set; }
@@ -106,24 +106,28 @@ namespace Applied_Accounts
         //================================================================ buttons codes
         private void btnTop_Click(object sender, EventArgs e)
         {
+            if (MyDataTable.Rows.Count == 0) { return; }
             TableBinding.Position = 0;
             txtPointer.Text = (TableBinding.Position + 1).ToString();
             OriginalRow = ((DataRowView)TableBinding.Current).Row;
         }
         private void btnPrior_Click(object sender, EventArgs e)
         {
+            if (MyDataTable.Rows.Count == 0) { return; }
             TableBinding.Position -= 1;
             txtPointer.Text = (TableBinding.Position + 1).ToString();
             OriginalRow = ((DataRowView)TableBinding.Current).Row;
         }
         private void btnNext_Click(object sender, EventArgs e)
         {
+            if (MyDataTable.Rows.Count == 0) { return; }
             TableBinding.Position += 1;
             txtPointer.Text = (TableBinding.Position + 1).ToString();
             OriginalRow = ((DataRowView)TableBinding.Current).Row;
         }
         private void btnLast_Click(object sender, EventArgs e)
         {
+            if (MyDataTable.Rows.Count == 0) { return; }
             TableBinding.Position = TableBinding.Count - 1;
             txtPointer.Text = (TableBinding.Position + 1).ToString();
             OriginalRow = ((DataRowView)TableBinding.Current).Row;

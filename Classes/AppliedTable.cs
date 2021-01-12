@@ -525,6 +525,7 @@ namespace Applied_Accounts
         Booking = 13,
         Instalments = 14,
         Schedule = 15,
+        POrder = 16,
 
         View_Voucher = 101,
         View_VouNo = 102,
