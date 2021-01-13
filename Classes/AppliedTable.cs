@@ -188,8 +188,6 @@ namespace Applied_Accounts
         public static string GetTitle(string _Code, int _DataTableID)
         {
             string _Title = "";
-            //DataTable _DataTable = ;
-            //DataView _DataView = new DataView(_DataTable);
             DataView _DataView = GetDataTable(_DataTableID).AsDataView();
             _DataView.RowFilter = string.Concat("Code='", _Code, "'");
             if (_DataView.Count == 1)
@@ -197,6 +195,7 @@ namespace Applied_Accounts
                 _Title = (_DataView.ToTable().Rows[0])["Title"].ToString();
 
             }
+            _DataView.Dispose();
             return _Title;
         }
         public static string GetTitle(int _ID, int _DataTableID)
@@ -209,6 +208,7 @@ namespace Applied_Accounts
                 _Title = (_DataView.ToTable().Rows[0])["Title"].ToString();
 
             }
+            _DataView.Dispose();
             return _Title;
         }
         public static string GetTitle(int _ID, DataTable _DataTable)
@@ -221,6 +221,7 @@ namespace Applied_Accounts
                 _Title = ((DataRow)_DataView.ToTable().Rows[0])["Title"].ToString();
 
             }
+            _DataView.Dispose();
             return _Title;
         }
 
@@ -437,7 +438,6 @@ namespace Applied_Accounts
 
             return _RowEfected;
         }
-
         public static object[] SearchText(TextBox _Value, DataTable _DataTable)
         {
             object[] _Result = { (long)0, "", "", "", false };
@@ -536,6 +536,11 @@ namespace Applied_Accounts
         View_TB_Period = 107,
         View_VoucherGrid = 108,
         View_Schedule_Title = 109,
-        View_Booking_Title = 110
+        View_Booking_Title = 110,
+
+        Grid_POrder = 111
+
+
+
     };
 }                               // Namespace

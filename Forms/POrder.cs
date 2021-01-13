@@ -17,8 +17,9 @@ namespace Applied_Accounts.Forms
     {
         private DataTable dt_POrder = AppliedTable.GetDataTable(Tables.POrder);
         private DataTable dt_Suppliers = AppliedTable.GetComboData(Tables.Suppliers);
+        private DataTable GridData_POrder = AppliedTable.GetComboData(Tables.Grid_POrder);
 
-        private DataTable MyDataTable { get => dt_POrder; }
+        
         
         private bool InitializingNow = true;
 
@@ -33,7 +34,7 @@ namespace Applied_Accounts.Forms
             cBoxSuppliers.DisplayMember = "Title";
             cBoxSuppliers.ValueMember = "ID";
 
-            MyNavigator.InitializeClass(MyDataTable);
+            MyNavigator.InitializeClass(dt_POrder);
             DataBinding();                      // Data Binding with form objects
             Load_Grid();                        // Load Data in Data Grid.
 
@@ -72,7 +73,7 @@ namespace Applied_Accounts.Forms
             MyDataGrid.ColumnsWidth = ColumnWidth;
             MyDataGrid.ColumnsVisiable = ColumnsVisiable;
             MyDataGrid.ColumnsFormat = ColumnsFormat;
-            MyDataGrid.Load_Data(MyDataTable);
+            MyDataGrid.Load_Data(GridData_POrder);
             MyDataGrid.Set_Columns();
 
             MyDataGrid.BrowseGrid.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
@@ -106,10 +107,21 @@ namespace Applied_Accounts.Forms
         {
             DataRow _Row = ((DataRowView)MyNavigator.TableBinding.Current).Row;
 
+            // Date if Empty
+            if (string.IsNullOrEmpty(_Row["PODate"].ToString()))
+            {
+                MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["PODate"] = DateTime.Now;
+            }
+
+            // Active if empty
+            if (_Row["Active"] == DBNull.Value)
+            { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Active"] = true; }
+
+
             if (MyNavigator.Current_Mode == (int)Applied.Modes.New)
             {
 
-                if (string.Equals(Applied.Code(txtCode.Text, MyDataTable.AsDataView()).Trim(), txtCode.Text.Trim()))
+                if (string.Equals(Applied.Code(txtCode.Text, dt_POrder.AsDataView()).Trim(), txtCode.Text.Trim()))
                 {
                     MyNavigator.NewRow_Valid = false;
                     MyNavigator.MyMessage = "Code is already exist.";
@@ -119,7 +131,8 @@ namespace Applied_Accounts.Forms
                 }
             }
 
-            if (txtTitle.Text.Length == 0)                                                  // Check title must be some 
+            // Title should be some value
+            if (string.IsNullOrWhiteSpace(_Row["Title"].ToString()))        
             {
                 MyNavigator.NewRow_Valid = false;
                 MyNavigator.MyMessage = "Null value in Title is not allowed. Enter some text.";
@@ -127,27 +140,40 @@ namespace Applied_Accounts.Forms
                 return;
             }
 
-            // Date if Empty
-            if(string.IsNullOrEmpty(_Row["PODate"].ToString())) 
+            // Amount Zero
+            if (Conversion.ToMoney(_Row["Amount"].ToString())==0) 
             {
-                MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["PODate"] = DateTime.Now;
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Amount is Zero, not allowed";
+                txtAmount.Focus();
+                return;
             }
 
-            // Active if empty
-            if (_Row["Active"] == DBNull.Value) 
-            { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Active"] = true; }
-
+            // Supplier value is null
+            if(Conversion.ToLong(_Row["Supplier"])<=0)
+            {
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Supplier is not assigned.";
+                txtAmount.Focus();
+                return;
+            }
         }
+
         private void MyNavigator_After_Save(object sender, EventArgs e)
         {
             dt_POrder = AppliedTable.GetDataTable(Tables.POrder);
-            //MyDataGrid.MyDataView = dt_POrder.AsDataView();
-            //MyDataGrid.Refresh();
+            GridData_POrder = AppliedTable.GetDataTable(Tables.Grid_POrder);
+            Load_Grid();
         }
 
         private void MyNavigator_After_Delete(object sender, EventArgs e)
         {
-           
+            dt_POrder = AppliedTable.GetDataTable(Tables.POrder);
+            GridData_POrder = AppliedTable.GetDataTable(Tables.Grid_POrder);
+            Load_Grid();
+
+
+            
         }
 
         #endregion

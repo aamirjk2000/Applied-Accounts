@@ -32,7 +32,6 @@ namespace Applied_Accounts.Forms
             this.components = new System.ComponentModel.Container();
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
-            this.txtTest = new System.Windows.Forms.TextBox();
             this.txtAmount2 = new Applied_Accounts.MyTextBox();
             this.chkActive = new System.Windows.Forms.CheckBox();
             this.MyNavigator = new Applied_Accounts.Navigator();
@@ -54,6 +53,7 @@ namespace Applied_Accounts.Forms
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtTest = new System.Windows.Forms.TextBox();
             this.P2 = new System.Windows.Forms.TabPage();
             this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.btnExit = new System.Windows.Forms.Button();
@@ -108,16 +108,6 @@ namespace Applied_Accounts.Forms
             this.P1.TabIndex = 0;
             this.P1.Text = "Record";
             this.P1.UseVisualStyleBackColor = true;
-            // 
-            // txtTest
-            // 
-            this.txtTest.Enabled = false;
-            this.txtTest.Location = new System.Drawing.Point(92, 77);
-            this.txtTest.Name = "txtTest";
-            this.txtTest.Size = new System.Drawing.Size(72, 20);
-            this.txtTest.TabIndex = 21;
-            this.txtTest.TabStop = false;
-            this.txtTest.TextChanged += new System.EventHandler(this.txtTest_TextChanged);
             // 
             // txtAmount2
             // 
@@ -178,7 +168,7 @@ namespace Applied_Accounts.Forms
             // 
             // btnBrowse
             // 
-            this.btnBrowse.Location = new System.Drawing.Point(593, 74);
+            this.btnBrowse.Location = new System.Drawing.Point(593, 75);
             this.btnBrowse.Name = "btnBrowse";
             this.btnBrowse.Size = new System.Drawing.Size(23, 23);
             this.btnBrowse.TabIndex = 15;
@@ -189,7 +179,7 @@ namespace Applied_Accounts.Forms
             // cBoxSuppliers
             // 
             this.cBoxSuppliers.FormattingEnabled = true;
-            this.cBoxSuppliers.Location = new System.Drawing.Point(198, 76);
+            this.cBoxSuppliers.Location = new System.Drawing.Point(198, 77);
             this.cBoxSuppliers.Name = "cBoxSuppliers";
             this.cBoxSuppliers.Size = new System.Drawing.Size(389, 21);
             this.cBoxSuppliers.TabIndex = 14;
@@ -310,6 +300,16 @@ namespace Applied_Accounts.Forms
             this.label1.Size = new System.Drawing.Size(18, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "ID";
+            // 
+            // txtTest
+            // 
+            this.txtTest.Enabled = false;
+            this.txtTest.Location = new System.Drawing.Point(92, 77);
+            this.txtTest.Name = "txtTest";
+            this.txtTest.Size = new System.Drawing.Size(72, 20);
+            this.txtTest.TabIndex = 21;
+            this.txtTest.TabStop = false;
+            this.txtTest.TextChanged += new System.EventHandler(this.txtTest_TextChanged);
             // 
             // P2
             // 
