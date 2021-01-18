@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmVouchers));
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
+            this.cBoxPOrder = new System.Windows.Forms.ComboBox();
             this.btn9 = new System.Windows.Forms.Button();
             this.MyImages = new System.Windows.Forms.ImageList(this.components);
             this.btn8 = new System.Windows.Forms.Button();
@@ -106,6 +107,7 @@
             this.lblWords = new System.Windows.Forms.Label();
             this.Grid = new System.Windows.Forms.DataGridView();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.btnCopy = new System.Windows.Forms.Button();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -125,6 +127,8 @@
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.btnCopy);
+            this.P1.Controls.Add(this.cBoxPOrder);
             this.P1.Controls.Add(this.btn9);
             this.P1.Controls.Add(this.btn8);
             this.P1.Controls.Add(this.btn7);
@@ -198,6 +202,14 @@
             this.P1.TabIndex = 0;
             this.P1.Text = "TRANSACTION";
             this.P1.UseVisualStyleBackColor = true;
+            // 
+            // cBoxPOrder
+            // 
+            this.cBoxPOrder.FormattingEnabled = true;
+            this.cBoxPOrder.Location = new System.Drawing.Point(251, 274);
+            this.cBoxPOrder.Name = "cBoxPOrder";
+            this.cBoxPOrder.Size = new System.Drawing.Size(87, 21);
+            this.cBoxPOrder.TabIndex = 126;
             // 
             // btn9
             // 
@@ -688,7 +700,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(355, 323);
+            this.label13.Location = new System.Drawing.Point(372, 323);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(62, 13);
             this.label13.TabIndex = 26;
@@ -697,7 +709,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(355, 291);
+            this.label12.Location = new System.Drawing.Point(383, 291);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(51, 13);
             this.label12.TabIndex = 25;
@@ -982,6 +994,16 @@
             this.lblMessage.Size = new System.Drawing.Size(0, 13);
             this.lblMessage.TabIndex = 1;
             // 
+            // btnCopy
+            // 
+            this.btnCopy.Location = new System.Drawing.Point(251, 304);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(87, 23);
+            this.btnCopy.TabIndex = 127;
+            this.btnCopy.Text = "Copy";
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
             // frmVouchers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1083,5 +1105,7 @@
         private System.Windows.Forms.Button btn2;
         private System.Windows.Forms.Button btn1;
         private System.Windows.Forms.Label lblMessage;
+        private System.Windows.Forms.ComboBox cBoxPOrder;
+        private System.Windows.Forms.Button btnCopy;
     }
 }

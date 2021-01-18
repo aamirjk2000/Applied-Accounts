@@ -26,9 +26,12 @@ namespace Applied_Accounts.Forms
         private DataTable tbUnits;
         private DataTable tbStocks;
         private DataTable tbEmployees;
+        private DataTable tbPOrder;
 
         private string MyCheque_No;                                 // For copy and past
         private string MyCheque_Date;                               // For copy and past
+        private string MyRefNo;                                     // For copy and past
+        private string MyPOrder;                                    // For copy and past
         private string MyDescription;                               // For copy and past
         private string MyRemarks;                                   // for Copy and past.
 
@@ -81,6 +84,7 @@ namespace Applied_Accounts.Forms
             tbUnits = AppliedTable.GetComboData((int)Tables.Units);
             tbStocks = AppliedTable.GetComboData((int)Tables.Stock);
             tbEmployees = AppliedTable.GetComboData((int)Tables.Employees);
+            tbPOrder = AppliedTable.GetComboData((int)Tables.POrder);
             // DATABASE 
 
             dtVouDate.Format = DateTimePickerFormat.Custom;
@@ -148,6 +152,7 @@ namespace Applied_Accounts.Forms
             Repaint(MyRow["Unit"], cBoxUnits);
             Repaint(MyRow["Stock"], cBoxStocks);
             Repaint(MyRow["Employee"], cBoxEmployees);
+            Repaint(MyRow["POrder"], cBoxPOrder);
 
             Repaint(MyRow["RefNo"], txtRefNo);
             Repaint(MyRow["Chq_No"], txtChqNo);
@@ -163,9 +168,6 @@ namespace Applied_Accounts.Forms
             btnNew.Enabled = true;
             btnDelete.Enabled = true;
             btnUndo.Enabled = true;
-
-
-
 
         }
 
@@ -277,6 +279,15 @@ namespace Applied_Accounts.Forms
                     cBoxEmployees.ValueMember = "ID";
                 }
                 else { cBoxEmployees.Enabled = false; }
+
+                if (tbPOrder.Rows.Count > 0)
+                {
+                    cBoxPOrder.DataSource = tbPOrder.AsDataView();
+                    cBoxPOrder.DisplayMember = "Code";
+                    cBoxPOrder.ValueMember = "ID";
+                }
+                else { cBoxPOrder.Enabled = false; }
+
             }
             else
             {
@@ -579,6 +590,7 @@ namespace Applied_Accounts.Forms
             MyRow["Stock"] = Conversion.ToDBInteger(cBoxStocks.SelectedValue);
             MyRow["Unit"] = Conversion.ToDBInteger(cBoxUnits.SelectedValue);
             MyRow["Employee"] = Conversion.ToDBInteger(cBoxEmployees.SelectedValue);
+            MyRow["POrder"] = Conversion.ToDBInteger(cBoxPOrder.SelectedValue);
             MyRow["RefNo"] = txtRefNo.Text.Trim();
             MyRow["Chq_No"] = txtChqNo.Text.Trim(); ;
             MyRow["Chq_Date"] = dtChqDate.Value.ToString();
@@ -587,7 +599,11 @@ namespace Applied_Accounts.Forms
             MyRow["Description"] = txtDescription.Text.Trim();
             MyRow["Remarks"] = txtRemarks.Text.Trim();
 
+            object _POrderID = Conversion.ToDBInteger(cBoxPOrder.SelectedValue);
+
+            if(_POrderID==null || _POrderID == DBNull.Value) { _POrderID = 0; }
             if (MyRow["Chq_No"] == DBNull.Value) { MyRow["Chq_Date"] = DBNull.Value; }   // Date Null value if cheque no is null;
+            if ((int)_POrderID == 0) { MyRow["POrder"] = DBNull.Value; }   // Purchase Order Save as DB Null.
 
             if (!Validate_Voucher())
             {
@@ -607,11 +623,12 @@ namespace Applied_Accounts.Forms
                 }
             }
 
-
-            MyCheque_No = MyRow["Chq_No"].ToString();                                   // Copy Description F9 for past 
-            MyCheque_Date = MyRow["Chq_Date"].ToString();                               // Copy Description F9 for past 
-            MyDescription = MyRow["Description"].ToString();                            // Copy Description F9 for past 
-            MyRemarks = MyRow["Remarks"].ToString();                                    // Copy Remarks     F9 for past
+            MyCheque_No = MyRow["Chq_No"].ToString();                                   // Copy Description  F9 for past 
+            MyCheque_Date = MyRow["Chq_Date"].ToString();                               // Copy Description  F9 for past 
+            MyRefNo = MyRow["RefNo"].ToString();                                        // Copy Reference No F9 for Past
+            MyPOrder = MyRow["POrder"].ToString();                                      // Copy Pur.Order No F9 for Past
+            MyDescription = MyRow["Description"].ToString();                            // Copy Description  F9 for past 
+            MyRemarks = MyRow["Remarks"].ToString();                                    // Copy Remarks      F9 for past
 
             string _Message = string.Concat("Transaction No ", MyRow["SRNO"], " has been saved.");
             MessageBox.Show(_Message, "SAVE", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -719,9 +736,6 @@ namespace Applied_Accounts.Forms
                 MessageBox.Show(_Message.ToString(), MyVoucherClass.Vou_No.ToString() + " Validation");
 
             }
-
-
-
             return _Result;
         }
 
@@ -787,6 +801,7 @@ namespace Applied_Accounts.Forms
             cBoxStocks.SelectedValue = _DataRow["Stock"];
             cBoxUnits.SelectedValue = _DataRow["Unit"];
             cBoxEmployees.SelectedValue = _DataRow["Employee"];
+            cBoxPOrder.SelectedValue = _DataRow["POrder"];
 
             MyVoucherClass.Vou_No = _DataRow["Vou_NO"].ToString();
             MyVoucherClass.Vou_Type = cboxVouType.Text;
@@ -1525,8 +1540,20 @@ namespace Applied_Accounts.Forms
             }
         }
 
+
         #endregion
 
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            // Fill Text Box from last copy values of object when press this button
 
+            txtChqNo.Text = MyCheque_No;
+            dtChqDate.Value = Conversion.ToDate(MyCheque_Date);
+            txtRefNo.Text = MyRefNo;
+            txtDescription.Text = MyDescription;
+            txtRemarks.Text = MyRemarks;
+            cBoxPOrder.SelectedValue = Conversion.ToLong(MyPOrder);
+
+        }
     }       // END Main Class
 }           // END NameSpace

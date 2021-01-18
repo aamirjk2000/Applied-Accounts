@@ -12,7 +12,7 @@
               <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="View_General_Ledger" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
                   <DbCommand CommandType="Text" ModifiedByUser="false">
-                    <CommandText>SELECT "Vou_No", "Vou_Date", "COA", "COA_Title", "Description", "DR", "CR", "RefNo", "Chq_No", "Remarks" FROM "View_General_Ledger"</CommandText>
+                    <CommandText>SELECT "Vou_No", "Vou_Date", "COA", "COA_Title", "Description", "DR", "CR", "RefNo", "Chq_No", "Chq_Date", "POrder", "Remarks" FROM "View_General_Ledger"</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -28,6 +28,8 @@
               <Mapping SourceColumn="CR" DataSetColumn="CR" />
               <Mapping SourceColumn="RefNo" DataSetColumn="RefNo" />
               <Mapping SourceColumn="Chq_No" DataSetColumn="Chq_No" />
+              <Mapping SourceColumn="Chq_Date" DataSetColumn="Chq_Date" />
+              <Mapping SourceColumn="POrder" DataSetColumn="POrder" />
               <Mapping SourceColumn="Remarks" DataSetColumn="Remarks" />
             </Mappings>
             <Sources />
@@ -50,7 +52,13 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" type="xs:string" minOccurs="0" />
+              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="COA" msprop:Generator_ColumnVarNameInTable="columnCOA" msprop:Generator_ColumnPropNameInRow="COA" msprop:Generator_ColumnPropNameInTable="COAColumn" msprop:Generator_UserColumnName="COA" type="xs:int" />
               <xs:element name="COA_Title" msprop:Generator_ColumnVarNameInTable="columnCOA_Title" msprop:Generator_ColumnPropNameInRow="COA_Title" msprop:Generator_ColumnPropNameInTable="COA_TitleColumn" msprop:Generator_UserColumnName="COA_Title">
                 <xs:simpleType>
@@ -66,8 +74,20 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="DR" msprop:Generator_ColumnVarNameInTable="columnDR" msprop:Generator_ColumnPropNameInRow="DR" msprop:Generator_ColumnPropNameInTable="DRColumn" msprop:Generator_UserColumnName="DR" type="xs:long" />
-              <xs:element name="CR" msprop:Generator_ColumnVarNameInTable="columnCR" msprop:Generator_ColumnPropNameInRow="CR" msprop:Generator_ColumnPropNameInTable="CRColumn" msprop:Generator_UserColumnName="CR" type="xs:long" />
+              <xs:element name="DR" msprop:Generator_ColumnVarNameInTable="columnDR" msprop:Generator_ColumnPropNameInRow="DR" msprop:Generator_ColumnPropNameInTable="DRColumn" msprop:Generator_UserColumnName="DR">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="CR" msprop:Generator_ColumnVarNameInTable="columnCR" msprop:Generator_ColumnPropNameInRow="CR" msprop:Generator_ColumnPropNameInTable="CRColumn" msprop:Generator_UserColumnName="CR">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="15" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="RefNo" msprop:Generator_ColumnVarNameInTable="columnRefNo" msprop:Generator_ColumnPropNameInRow="RefNo" msprop:Generator_ColumnPropNameInTable="RefNoColumn" msprop:Generator_UserColumnName="RefNo" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -82,6 +102,8 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="Chq_Date" msprop:Generator_ColumnVarNameInTable="columnChq_Date" msprop:Generator_ColumnPropNameInRow="Chq_Date" msprop:Generator_ColumnPropNameInTable="Chq_DateColumn" msprop:Generator_UserColumnName="Chq_Date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="POrder" msprop:Generator_ColumnVarNameInTable="columnPOrder" msprop:Generator_ColumnPropNameInRow="POrder" msprop:Generator_ColumnPropNameInTable="POrderColumn" msprop:Generator_UserColumnName="POrder" type="xs:int" minOccurs="0" />
               <xs:element name="Remarks" msprop:Generator_ColumnVarNameInTable="columnRemarks" msprop:Generator_ColumnPropNameInRow="Remarks" msprop:Generator_ColumnPropNameInTable="RemarksColumn" msprop:Generator_UserColumnName="Remarks" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">

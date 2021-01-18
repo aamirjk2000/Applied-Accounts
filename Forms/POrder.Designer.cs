@@ -29,7 +29,6 @@ namespace Applied_Accounts.Forms
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
             this.txtAmount2 = new Applied_Accounts.MyTextBox();
@@ -58,7 +57,6 @@ namespace Applied_Accounts.Forms
             this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.btnExit = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
-            this.textNum1 = new Applied_Accounts.Components.TextNum(this.components);
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -196,7 +194,7 @@ namespace Applied_Accounts.Forms
             // 
             this.txtTitle.Location = new System.Drawing.Point(92, 51);
             this.txtTitle.Name = "txtTitle";
-            this.txtTitle.Size = new System.Drawing.Size(495, 20);
+            this.txtTitle.Size = new System.Drawing.Size(524, 20);
             this.txtTitle.TabIndex = 12;
             // 
             // dtPODate
@@ -411,7 +409,6 @@ namespace Applied_Accounts.Forms
         private Navigator MyNavigator;
         private AppliedDataGrid MyDataGrid;
         private System.Windows.Forms.CheckBox chkActive;
-        private Components.TextNum textNum1;
         private MyTextBox txtAmount2;
         private System.Windows.Forms.TextBox txtTest;
     }

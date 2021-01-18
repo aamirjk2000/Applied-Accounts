@@ -9,10 +9,10 @@
         <Tables>
           <TableAdapter BaseClass="System.ComponentModel.Component" DataAccessorModifier="AutoLayout, AnsiClass, Class, Public" DataAccessorName="View_VoucherTableAdapter" GeneratorDataComponentClassName="View_VoucherTableAdapter" Name="View_Voucher" UserDataComponentName="View_VoucherTableAdapter">
             <MainSource>
-              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="View_Voucher" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="false" UserGetMethodName="GetData" UserSourceName="Fill">
+              <DbSource ConnectionRef="ConnectionString (Settings)" DbObjectName="View_Voucher" DbObjectType="View" FillMethodModifier="Public" FillMethodName="Fill" GenerateMethods="Both" GenerateShortCommands="false" GeneratorGetMethodName="GetData" GeneratorSourceName="Fill" GetMethodModifier="Public" GetMethodName="GetData" QueryType="Rowset" ScalarCallRetval="System.Object, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" UseOptimisticConcurrency="true" UserGetMethodName="GetData" UserSourceName="Fill">
                 <SelectCommand>
-                  <DbCommand CommandType="Text" ModifiedByUser="true">
-                    <CommandText>SELECT "SRNO", "ACCOUNT", "SUPPLIER", "Project", "Unit", "Employee", "DR", "CR", "Description", "Vou_No", "Vou_Date", "Chq_Date", "Chq_No", "RefNo", "COA_ID", "Supplier_ID", "Project_ID", "Unit_ID", "Ledger" FROM "View_Voucher"</CommandText>
+                  <DbCommand CommandType="Text" ModifiedByUser="false">
+                    <CommandText>SELECT "SRNO", "ACCOUNT", "SUPPLIER", "Project", "Unit", "Employee", "DR", "CR", "Description", "Vou_No", "Vou_Date", "Chq_Date", "Chq_No", "RefNo", "POrder", "COA_ID", "Supplier_ID", "Project_ID", "Unit_ID", "Ledger" FROM "View_Voucher"</CommandText>
                     <Parameters />
                   </DbCommand>
                 </SelectCommand>
@@ -32,12 +32,13 @@
               <Mapping SourceColumn="Vou_Date" DataSetColumn="Vou_Date" />
               <Mapping SourceColumn="Chq_Date" DataSetColumn="Chq_Date" />
               <Mapping SourceColumn="Chq_No" DataSetColumn="Chq_No" />
+              <Mapping SourceColumn="RefNo" DataSetColumn="RefNo" />
+              <Mapping SourceColumn="POrder" DataSetColumn="POrder" />
               <Mapping SourceColumn="COA_ID" DataSetColumn="COA_ID" />
               <Mapping SourceColumn="Supplier_ID" DataSetColumn="Supplier_ID" />
               <Mapping SourceColumn="Project_ID" DataSetColumn="Project_ID" />
               <Mapping SourceColumn="Unit_ID" DataSetColumn="Unit_ID" />
               <Mapping SourceColumn="Ledger" DataSetColumn="Ledger" />
-              <Mapping SourceColumn="RefNo" DataSetColumn="RefNo" />
             </Mappings>
             <Sources />
           </TableAdapter>
@@ -102,10 +103,10 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description">
+              <xs:element name="Description" msprop:Generator_ColumnVarNameInTable="columnDescription" msprop:Generator_ColumnPropNameInRow="Description" msprop:Generator_ColumnPropNameInTable="DescriptionColumn" msprop:Generator_UserColumnName="Description" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
-                    <xs:maxLength value="200" />
+                    <xs:maxLength value="255" />
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
@@ -116,8 +117,20 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" type="xs:dateTime" />
-              <xs:element name="Chq_Date" msprop:Generator_ColumnVarNameInTable="columnChq_Date" msprop:Generator_ColumnPropNameInRow="Chq_Date" msprop:Generator_ColumnPropNameInTable="Chq_DateColumn" msprop:Generator_UserColumnName="Chq_Date" type="xs:dateTime" minOccurs="0" />
+              <xs:element name="Vou_Date" msprop:Generator_ColumnVarNameInTable="columnVou_Date" msprop:Generator_ColumnPropNameInRow="Vou_Date" msprop:Generator_ColumnPropNameInTable="Vou_DateColumn" msprop:Generator_UserColumnName="Vou_Date" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
+              <xs:element name="Chq_Date" msprop:Generator_ColumnVarNameInTable="columnChq_Date" msprop:Generator_ColumnPropNameInRow="Chq_Date" msprop:Generator_ColumnPropNameInTable="Chq_DateColumn" msprop:Generator_UserColumnName="Chq_Date" minOccurs="0">
+                <xs:simpleType>
+                  <xs:restriction base="xs:string">
+                    <xs:maxLength value="255" />
+                  </xs:restriction>
+                </xs:simpleType>
+              </xs:element>
               <xs:element name="Chq_No" msprop:Generator_ColumnVarNameInTable="columnChq_No" msprop:Generator_ColumnPropNameInRow="Chq_No" msprop:Generator_ColumnPropNameInTable="Chq_NoColumn" msprop:Generator_UserColumnName="Chq_No" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -125,11 +138,6 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
-              <xs:element name="COA_ID" msprop:Generator_ColumnVarNameInTable="columnCOA_ID" msprop:Generator_ColumnPropNameInRow="COA_ID" msprop:Generator_ColumnPropNameInTable="COA_IDColumn" msprop:Generator_UserColumnName="COA_ID" type="xs:int" />
-              <xs:element name="Supplier_ID" msprop:Generator_ColumnVarNameInTable="columnSupplier_ID" msprop:Generator_ColumnPropNameInRow="Supplier_ID" msprop:Generator_ColumnPropNameInTable="Supplier_IDColumn" msprop:Generator_UserColumnName="Supplier_ID" type="xs:int" minOccurs="0" />
-              <xs:element name="Project_ID" msprop:Generator_ColumnVarNameInTable="columnProject_ID" msprop:Generator_ColumnPropNameInRow="Project_ID" msprop:Generator_ColumnPropNameInTable="Project_IDColumn" msprop:Generator_UserColumnName="Project_ID" type="xs:int" minOccurs="0" />
-              <xs:element name="Unit_ID" msprop:Generator_ColumnVarNameInTable="columnUnit_ID" msprop:Generator_ColumnPropNameInRow="Unit_ID" msprop:Generator_ColumnPropNameInTable="Unit_IDColumn" msprop:Generator_UserColumnName="Unit_ID" type="xs:int" minOccurs="0" />
-              <xs:element name="Ledger" msprop:Generator_ColumnVarNameInTable="columnLedger" msprop:Generator_ColumnPropNameInRow="Ledger" msprop:Generator_ColumnPropNameInTable="LedgerColumn" msprop:Generator_UserColumnName="Ledger" type="xs:int" minOccurs="0" />
               <xs:element name="RefNo" msprop:Generator_ColumnVarNameInTable="columnRefNo" msprop:Generator_ColumnPropNameInRow="RefNo" msprop:Generator_ColumnPropNameInTable="RefNoColumn" msprop:Generator_UserColumnName="RefNo" minOccurs="0">
                 <xs:simpleType>
                   <xs:restriction base="xs:string">
@@ -137,6 +145,12 @@
                   </xs:restriction>
                 </xs:simpleType>
               </xs:element>
+              <xs:element name="POrder" msprop:Generator_ColumnVarNameInTable="columnPOrder" msprop:Generator_ColumnPropNameInRow="POrder" msprop:Generator_ColumnPropNameInTable="POrderColumn" msprop:Generator_UserColumnName="POrder" type="xs:int" minOccurs="0" />
+              <xs:element name="COA_ID" msprop:Generator_ColumnVarNameInTable="columnCOA_ID" msprop:Generator_ColumnPropNameInRow="COA_ID" msprop:Generator_ColumnPropNameInTable="COA_IDColumn" msprop:Generator_UserColumnName="COA_ID" type="xs:int" />
+              <xs:element name="Supplier_ID" msprop:Generator_ColumnVarNameInTable="columnSupplier_ID" msprop:Generator_ColumnPropNameInRow="Supplier_ID" msprop:Generator_ColumnPropNameInTable="Supplier_IDColumn" msprop:Generator_UserColumnName="Supplier_ID" type="xs:int" minOccurs="0" />
+              <xs:element name="Project_ID" msprop:Generator_ColumnVarNameInTable="columnProject_ID" msprop:Generator_ColumnPropNameInRow="Project_ID" msprop:Generator_ColumnPropNameInTable="Project_IDColumn" msprop:Generator_UserColumnName="Project_ID" type="xs:int" minOccurs="0" />
+              <xs:element name="Unit_ID" msprop:Generator_ColumnVarNameInTable="columnUnit_ID" msprop:Generator_ColumnPropNameInRow="Unit_ID" msprop:Generator_ColumnPropNameInTable="Unit_IDColumn" msprop:Generator_UserColumnName="Unit_ID" type="xs:int" minOccurs="0" />
+              <xs:element name="Ledger" msprop:Generator_ColumnVarNameInTable="columnLedger" msprop:Generator_ColumnPropNameInRow="Ledger" msprop:Generator_ColumnPropNameInTable="LedgerColumn" msprop:Generator_UserColumnName="Ledger" type="xs:int" minOccurs="0" />
             </xs:sequence>
           </xs:complexType>
         </xs:element>

@@ -96,7 +96,7 @@
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ds_Voucher</rd:DataSetName>
-        <rd:SchemaPath>C:\Applied\Applied_Source\Data\ds_Voucher.xsd</rd:SchemaPath>
+        <rd:SchemaPath>D:\Applied\Applied-Accounts\Data\ds_Voucher.xsd</rd:SchemaPath>
         <rd:TableName>View_Voucher</rd:TableName>
         <rd:TableAdapterFillMethod>Fill</rd:TableAdapterFillMethod>
         <rd:TableAdapterGetDataMethod>GetData</rd:TableAdapterGetDataMethod>
@@ -702,7 +702,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox35">
+                        <Textbox Name="Textbox8">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -716,7 +716,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox35</rd:DefaultName>
+                          <rd:DefaultName>Textbox8</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -732,16 +732,17 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="txtCheque">
+                        <Textbox Name="RefNo">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value>="Cheque # " + Fields!Chq_No.Value + " Dated " 
-+ CDate(Fields!Chq_Date.Value).ToString(Parameters!DateFormat.Value)
-+ iif(string.IsNullOrEmpty(Fields!RefNo.Value),"", " Ref # " + Fields!RefNo.Value)</Value>
+                                  <Value>=iif(string.IsNullOrWhiteSpace(Fields!Chq_No.Value),"",
+"Cheque #" + Fields!Chq_No.Value + " Dated " + Fields!Chq_Date.Value)
++iif(string.IsNullOrWhiteSpace(Fields!RefNo.Value),"",
+" Ref No. " + Fields!RefNo.Value)</Value>
                                   <Style>
                                     <FontStyle>Italic</FontStyle>
                                     <FontFamily>Arial Narrow</FontFamily>
@@ -752,6 +753,38 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
+                          <rd:DefaultName>RefNo</rd:DefaultName>
+                          <Style>
+                            <Border>
+                              <Color>LightGrey</Color>
+                              <Style>Solid</Style>
+                            </Border>
+                            <PaddingLeft>2pt</PaddingLeft>
+                            <PaddingRight>2pt</PaddingRight>
+                            <PaddingTop>2pt</PaddingTop>
+                            <PaddingBottom>2pt</PaddingBottom>
+                          </Style>
+                        </Textbox>
+                        <rd:Selected>true</rd:Selected>
+                      </CellContents>
+                    </TablixCell>
+                    <TablixCell>
+                      <CellContents>
+                        <Textbox Name="Textbox10">
+                          <CanGrow>true</CanGrow>
+                          <KeepTogether>true</KeepTogether>
+                          <Paragraphs>
+                            <Paragraph>
+                              <TextRuns>
+                                <TextRun>
+                                  <Value />
+                                  <Style />
+                                </TextRun>
+                              </TextRuns>
+                              <Style />
+                            </Paragraph>
+                          </Paragraphs>
+                          <rd:DefaultName>Textbox10</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -767,7 +800,7 @@
                     </TablixCell>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox37">
+                        <Textbox Name="Textbox11">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -781,37 +814,7 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox37</rd:DefaultName>
-                          <Style>
-                            <Border>
-                              <Color>LightGrey</Color>
-                              <Style>Solid</Style>
-                            </Border>
-                            <PaddingLeft>2pt</PaddingLeft>
-                            <PaddingRight>2pt</PaddingRight>
-                            <PaddingTop>2pt</PaddingTop>
-                            <PaddingBottom>2pt</PaddingBottom>
-                          </Style>
-                        </Textbox>
-                      </CellContents>
-                    </TablixCell>
-                    <TablixCell>
-                      <CellContents>
-                        <Textbox Name="Textbox38">
-                          <CanGrow>true</CanGrow>
-                          <KeepTogether>true</KeepTogether>
-                          <Paragraphs>
-                            <Paragraph>
-                              <TextRuns>
-                                <TextRun>
-                                  <Value />
-                                  <Style />
-                                </TextRun>
-                              </TextRuns>
-                              <Style />
-                            </Paragraph>
-                          </Paragraphs>
-                          <rd:DefaultName>Textbox38</rd:DefaultName>
+                          <rd:DefaultName>Textbox11</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -1506,7 +1509,7 @@
                         </TablixMember>
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=iif(String.IsNullOrEmpty(TRIM(Fields!Chq_No.Value)),TRUE,FALSE)</Hidden>
+                            <Hidden>=if(string.IsNullOrWhiteSpace(Fields!Chq_No.Value+Fields!RefNo.Value),TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
                         <TablixMember>
@@ -1569,7 +1572,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>2.78472in</Top>
+            <Top>3.42014in</Top>
             <Left>0.655in</Left>
             <Height>0.25in</Height>
             <Width>1.15749in</Width>
@@ -1603,7 +1606,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>2.78472in</Top>
+            <Top>3.42014in</Top>
             <Left>3.04042in</Left>
             <Height>0.25in</Height>
             <Width>1.21875in</Width>
@@ -1637,7 +1640,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>2.78472in</Top>
+            <Top>3.40972in</Top>
             <Left>5.57167in</Left>
             <Height>0.25in</Height>
             <Width>1.17832in</Width>
@@ -1653,7 +1656,7 @@
             </Style>
           </Textbox>
           <Line Name="Line1">
-            <Top>2.75in</Top>
+            <Top>3.38542in</Top>
             <Left>3.04042in</Left>
             <Height>0in</Height>
             <Width>1.21875in</Width>
@@ -1665,7 +1668,7 @@
             </Style>
           </Line>
           <Line Name="Line2">
-            <Top>2.75in</Top>
+            <Top>3.38542in</Top>
             <Left>0.655in</Left>
             <Height>0in</Height>
             <Width>1.15749in</Width>
@@ -1677,7 +1680,7 @@
             </Style>
           </Line>
           <Line Name="Line3">
-            <Top>2.75in</Top>
+            <Top>3.38542in</Top>
             <Left>5.57167in</Left>
             <Height>0in</Height>
             <Width>1.17832in</Width>
@@ -1707,7 +1710,7 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <Top>3.10417in</Top>
+            <Top>3.75in</Top>
             <Left>3.04042in</Left>
             <Height>0.25in</Height>
             <Width>3.97in</Width>
@@ -1739,7 +1742,7 @@
                 <Style />
               </Paragraph>
             </Paragraphs>
-            <Top>3.10417in</Top>
+            <Top>3.75in</Top>
             <Height>0.25in</Height>
             <Width>2.92583in</Width>
             <ZIndex>8</ZIndex>
@@ -1754,7 +1757,7 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>3.44792in</Height>
+        <Height>4.06251in</Height>
         <Style>
           <Border>
             <Style>None</Style>

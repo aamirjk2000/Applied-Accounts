@@ -36,17 +36,12 @@ namespace Applied_Accounts
             if (_DataTable.Rows.Count > 0)
             {
                 Active = true;
-                //MyDataView = _DataTable.AsDataView();
-                //BrowseGrid.DataSource = MyDataView;
                 MyDataRow = _DataTable.Rows[0];
-                
             }
             else
             {
                 Active = false;
-                //MyDataView = new DataView();
                 MyDataRow = _DataTable.NewRow();
-
             }
 
             #region Active
@@ -92,9 +87,12 @@ namespace Applied_Accounts
                     BrowseGrid.Columns.Add(ColumnsVisiable[i], ColumnsName[i]);
                 }
 
+                string _Format = AppliedClass.Get_Format(ColumnsFormat[i]);
+
+
                 BrowseGrid.Columns[ColumnsVisiable[i]].Width = ColumnsWidth[i];
                 BrowseGrid.Columns[ColumnsVisiable[i]].DataPropertyName = ColumnsVisiable[i];
-                BrowseGrid.Columns[ColumnsVisiable[i]].DefaultCellStyle.Format = AppliedClass.Get_Format(ColumnsFormat[i]);
+                BrowseGrid.Columns[ColumnsVisiable[i]].DefaultCellStyle.Format = _Format ;
             }
         }
 

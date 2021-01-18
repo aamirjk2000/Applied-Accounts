@@ -12,14 +12,14 @@ namespace Applied_Accounts.Classes
     {
         DateTime MinVouDate();
         DateTime MaxVouDate();
-        
+
 
     }
 
 
-        public class Applied : IApplied
-        {
-        
+    public class Applied : IApplied
+    {
+
 
         //private CultureInfo Culture { get; set; } aamir   
         private DateTime Voucher_MinDate { get; set; }
@@ -50,13 +50,18 @@ namespace Applied_Accounts.Classes
 
         #region Get Values;
 
+        public static object GetValue(string _Key, KeyType _KeyType)
+        {
+            return (_Key, (int)_KeyType);
+        }
+
         public static object GetValue(string _Key, int _KeyType)
         {
-            
+
             DataTable _DataTable = AppliedTable.GetDataTable((int)Tables.Applied);
             DataView _DataView = new DataView(_DataTable);
 
-            if(_DataView.Count==0) { return null; }
+            if (_DataView.Count == 0) { return null; }
 
             _DataView.RowFilter = string.Concat("Key='", _Key, "'");
 
@@ -97,7 +102,7 @@ namespace Applied_Accounts.Classes
                 }
             }
 
-                return null;
+            return null;
         }
 
         public static string GetString(string _Key)
@@ -118,7 +123,7 @@ namespace Applied_Accounts.Classes
 
             _DataView.RowFilter = string.Concat("Key='", _Key, "'");
 
-            if (_DataView.Count == 1) 
+            if (_DataView.Count == 1)
             {
                 _DateString = _DataView[0].Row["sValue"].ToString();
             }
@@ -131,9 +136,9 @@ namespace Applied_Accounts.Classes
             // Control Voucher Date should be in Date boundry
             DateTime _DateTime = GetDate(_Key);
             DateTime _MinDate = Applied.GetDate("VouDate1");
-            DateTime _MaxDate= Applied.GetDate("VouDate2");
-            if(_DateTime<_MinDate) { _DateTime = _MinDate; }
-            if(_DateTime>_MaxDate) { _DateTime = _MaxDate; }
+            DateTime _MaxDate = Applied.GetDate("VouDate2");
+            if (_DateTime < _MinDate) { _DateTime = _MinDate; }
+            if (_DateTime > _MaxDate) { _DateTime = _MaxDate; }
             return _DateTime;
         }
 
@@ -150,7 +155,7 @@ namespace Applied_Accounts.Classes
 
         public static string SetValue(string _Key, object _Value, object _KeyType)
         {
-            if(_Value==null) { return "null value found"; }
+            if (_Value == null) { return "null value found"; }
 
             SQLiteCommand _CommandInsert = new SQLiteCommand("", Connection.AppliedConnection());
             SQLiteCommand _CommandUpdate = new SQLiteCommand("", Connection.AppliedConnection());
@@ -165,32 +170,32 @@ namespace Applied_Accounts.Classes
 
             DataView _DataView = AppliedTable.GetDataTable((int)Tables.Applied).AsDataView();
             _DataView.RowFilter = string.Concat("Key='", _Key.Trim(), "'");
-            if(_DataView.Count==0) 
+            if (_DataView.Count == 0)
             {
                 _Record_Exist = false;
                 _DataView.RowFilter = string.Empty;
                 RecID = (long)_DataView.Table.Compute("MAx(ID)", string.Empty) + 1;
                 _CommandInsert.Parameters.AddWithValue("@ID", RecID);
-            } 
-            else 
+            }
+            else
             {
                 _Record_Exist = true;
                 RecID = Conversion.ToLong(_DataView[0]["ID"].ToString());
                 _CommandUpdate.Parameters.AddWithValue("@ID", RecID);
             }
 
-            
+
             _CommandInsert.Parameters.AddWithValue("@Key", _Key);
             _CommandInsert.Parameters.AddWithValue("@nValue", 0);
             _CommandInsert.Parameters.AddWithValue("@sValue", "");
             _CommandInsert.Parameters.AddWithValue("@bValue", false);
 
-            
+
             _CommandUpdate.Parameters.AddWithValue("@Key", _Key);
             _CommandUpdate.Parameters.AddWithValue("@nValue", 0);
             _CommandUpdate.Parameters.AddWithValue("@sValue", "");
             _CommandUpdate.Parameters.AddWithValue("@bValue", false);
-            
+
 
             switch (_KeyType)
             {
@@ -200,13 +205,13 @@ namespace Applied_Accounts.Classes
                     break;
 
                 case KeyType.Integer:
-                    if(_Value.GetType()==Type.GetType("System.Int64"))
+                    if (_Value.GetType() == Type.GetType("System.Int64"))
                     {
                         _CommandInsert.Parameters["@nValue"].Value = (long)_Value;
                         _CommandUpdate.Parameters["@nValue"].Value = (long)_Value;
                     }
                     if (_Value.GetType() == Type.GetType("System.Int32"))
-                    { 
+                    {
                         _CommandInsert.Parameters["@nValue"].Value = (int)_Value;
                         _CommandUpdate.Parameters["@nValue"].Value = (int)_Value;
                     }
@@ -232,12 +237,12 @@ namespace Applied_Accounts.Classes
                     break;
             }
 
-            if(_Record_Exist)
+            if (_Record_Exist)
             {
                 //int rec = _CommandUpdate.ExecuteNonQuery();
                 _Message = _CommandUpdate.ExecuteNonQuery().ToString() + " Updated";
             }
-            else 
+            else
             {
                 _Message = _CommandInsert.ExecuteNonQuery().ToString() + "Inserted";
             }
@@ -252,7 +257,7 @@ namespace Applied_Accounts.Classes
         {
             // Gate Datetime format for SQLite Data Column  YYYY-MM-DD
 
-            if(_Value.GetType()==typeof(System.DateTime))
+            if (_Value.GetType() == typeof(System.DateTime))
             {
                 DateTime _DateTime = (DateTime)_Value;
                 return _DateTime.ToString("yyyy-MM-dd");
@@ -278,7 +283,7 @@ namespace Applied_Accounts.Classes
             Integer = 2,
             Boolean = 3,
             Date = 4,
-            DateTime =5
+            DateTime = 5
         }
 
         public enum VoucherType                 // Type of Voucehrs.
@@ -330,9 +335,9 @@ namespace Applied_Accounts.Classes
             {
                 return true;
             }
-            else 
-            { 
-                return false; 
+            else
+            {
+                return false;
             }
         }
 
@@ -373,12 +378,12 @@ namespace Applied_Accounts.Classes
 
 
 
-        public static long ShowBrowseWin(DataView _DataView, object _CurrentValue )
+        public static long ShowBrowseWin(DataView _DataView, object _CurrentValue)
         {
             Browse BrowseWindow = new Browse(_DataView);
             BrowseWindow.ShowDialog();
             long _Result = Conversion.ToInteger(_CurrentValue);
-            if (BrowseWindow.IsSelect) { _Result = BrowseWindow.MyID;}
+            if (BrowseWindow.IsSelect) { _Result = BrowseWindow.MyID; }
             return _Result;
         }
 
@@ -399,7 +404,7 @@ namespace Applied_Accounts.Classes
         public static string Title(long _ID, DataView _DataView)                 // return Title by ID of Data Table
         {
             _DataView.RowFilter = "ID=" + _ID.ToString();
-            if(_DataView.Count==1) { return _DataView[0].Row["title"].ToString().Trim(); }
+            if (_DataView.Count == 1) { return _DataView[0].Row["title"].ToString().Trim(); }
             return "";
         }
 
@@ -419,7 +424,7 @@ namespace Applied_Accounts.Classes
 
         public static string Code(string _Code, DataView _DataView)
         {
-            if(_DataView==null) { return ""; }
+            if (_DataView == null) { return ""; }
 
             _DataView.RowFilter = "Code='" + _Code.ToString() + "'";
             if (_DataView.Count == 1) { return _DataView[0].Row["Code"].ToString().Trim(); }
@@ -435,7 +440,7 @@ namespace Applied_Accounts.Classes
             return 0;
         }
 
-       
+
 
 
 

@@ -60,7 +60,7 @@ namespace Applied_Accounts.Forms.Booking
             txtTag.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "SCode", true, DataSourceUpdateMode.OnPropertyChanged));
             txtTitle.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Title", true, DataSourceUpdateMode.OnPropertyChanged));
             txtUnit.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
-            
+
             txtProject.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
             dtBooking.DataBindings.Add(new Binding("Value", MyNavigator.MyBindingSource, "Book_Date", true, DataSourceUpdateMode.OnPropertyChanged));
             txtSale.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Sale_Price", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -75,11 +75,11 @@ namespace Applied_Accounts.Forms.Booking
 
         private void Load_Grid()
         {
-            string[] ColumnsVisiable = { "Code", "Client", "Title", "Booking_Date", "Active" };
-            string[] ColumnsName = { "Code", "Client", "Title", "Booking On", "Active" };
-            int[] ColumnsFormat = { (int)TextFormat.Codes, 0, 0, (int)TextFormat.Date, 0 };
+            string[] ColumnsVisiable = { "Code", "Supplier", "Project", "Unit", "Book_Date", "Active" };
+            string[] ColumnsName = { "Code", "Client", "Project", "Unit", "Booking On", "Active" };
+            int[] ColumnsFormat = { (int)TextFormat.Codes, 0, 0,0, (int)TextFormat.Date, 0 };
 
-            int[] ColumnWidth = { 60, 60, 260, 75, 40 };
+            int[] ColumnWidth = { 50, 160, 160, 160, 80, 40 };
 
             MyDataGrid.ColumnsName = ColumnsName;
             MyDataGrid.ColumnsWidth = ColumnWidth;
@@ -92,21 +92,24 @@ namespace Applied_Accounts.Forms.Booking
             MyDataGrid.BrowseGrid.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             MyDataGrid.BrowseGrid.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             MyDataGrid.BrowseGrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-            MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            MyDataGrid.BrowseGrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+
+            //MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Format = null;
+
         }
 
 
         private void Load_Tables()
         {
             tb_Booking = AppliedTable.GetDataTable(Tables.Booking);
+            tb_GridBooking = AppliedTable.GetDataTable(Tables.Grid_Booking);
             tb_Suppliers = AppliedTable.GetDataTable(Tables.Suppliers);
             tb_Units = AppliedTable.GetDataTable(Tables.Units);
             tb_Projects = AppliedTable.GetDataTable(Tables.Projects);
             tb_ScheduleTitle = AppliedTable.GetDataTable(Tables.View_Schedule_Title);
             tb_bookingTitle = AppliedTable.GetDataTable(Tables.View_Booking_Title);
-            tb_GridBooking = AppliedTable.GetDataTable(Tables.Grid_Booking);
         }
-
 
         #endregion
 
@@ -114,21 +117,52 @@ namespace Applied_Accounts.Forms.Booking
 
         private void MyNavigator_After_Delete(object sender, EventArgs e)
         {
-
+            tb_Booking = AppliedTable.GetDataTable(Tables.Booking);
+            tb_GridBooking = AppliedTable.GetDataTable(Tables.Grid_Booking);
+            Refresh();
         }
 
         private void MyNavigator_After_Save(object sender, EventArgs e)
         {
-            Load_Tables();
+            tb_Booking = AppliedTable.GetDataTable(Tables.Booking);
+            tb_GridBooking = AppliedTable.GetDataTable(Tables.Grid_Booking);
             Refresh();
         }
 
         private void MyNavigator_Before_Save(object sender, EventArgs e)
         {
+            DataRow _Row = MyNavigator.MyDataRow;
+
             if (dtBooking.Value == null)
             {
                 MessageBox.Show("Booking Date is not mentioned.");
                 dtBooking.Focus();
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(_Row["Client"].ToString()))
+            {
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Client is not assigned.";
+                txtClient.Text = "";
+                txtClient.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(_Row["Project"].ToString()))
+            {
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Supplier is not assigned.";
+                txtProject.Text = "";
+                txtProject.Focus();
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(_Row["Unit"].ToString()))
+            {
+                MyNavigator.NewRow_Valid = false;
+                MyNavigator.MyMessage = "Unit is not assigned.";
+                txtUnit.Text = "";
+                txtUnit.Focus();
+                return;
             }
         }
 
@@ -235,7 +269,7 @@ namespace Applied_Accounts.Forms.Booking
         private void btnAdd_Click(object sender, EventArgs e)
         {
             string _Code = cBoxSchedule.SelectedValue.ToString();
-            int _Booking = 0 ;
+            int _Booking = 0;
             int _Schedule = 0;
 
             DataTable tb_Schedule = AppliedTable.GetDataTable(Tables.Schedule, "Code='" + _Code + "'");
@@ -251,7 +285,7 @@ namespace Applied_Accounts.Forms.Booking
                     _Dataview.RowFilter = "Booking=" + _Booking.ToString() + " AND Schedule=" + _Schedule.ToString();
 
 
-                    if(_Dataview.Count>0)
+                    if (_Dataview.Count > 0)
                     {
 
 
@@ -285,7 +319,7 @@ namespace Applied_Accounts.Forms.Booking
 
 
 
-        
+
 
         private void cBoxProject_TextChanged(object sender, EventArgs e)
         {

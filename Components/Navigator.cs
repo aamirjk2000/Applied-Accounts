@@ -33,6 +33,8 @@ namespace Applied_Accounts
         internal ThisTable TableClass;
         public DataTable MyDataTable { get => TableClass.MyDataTable; }
         public DataView MyDataView { get => TableClass.MyDataView; }
+        public DataRow MyDataRow { get => TableClass.MyDataRow; }
+
 
         //======================================== Do not Delete these two lines.
 
@@ -140,7 +142,6 @@ namespace Applied_Accounts
             MyBindingSource.AddNew();
 
             NewRecordPosition = ((DataView)MyBindingSource.DataSource).Count -1;
-            //NewRecordPosition = TableBinding.Count - 1;
             TableBinding.Position = NewRecordPosition;
 
             TableClass.MyDataView[NewRecordPosition]["ID"] = -1;
@@ -161,7 +162,7 @@ namespace Applied_Accounts
         private void BtnSave_Click(object sender, EventArgs e)              // Save Record
         {
 
-            if(MyDataTable.Rows.Count==0) { Current_Mode = (int)Applied.Modes.Empty; }
+            if(MyDataTable.Rows.Count==0) { Current_Mode = (int)Applied.Modes.Empty; }   // DataTable has no report
 
             Before_Save(sender, e);
 
