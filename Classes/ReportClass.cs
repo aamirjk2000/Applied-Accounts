@@ -44,6 +44,13 @@ namespace Applied_Accounts.Classes
         public string ReportView_Sort { get; set; }
         public string Report_Location { get; set; }
 
+        public string Title_COA { get; set; }
+        public string Title_Supplier { get; set; }
+        public string Title_Project { get; set; }
+        public string Title_Unit { get; set; }
+        public string Title_Employee { get; set; }
+
+
 
         //======================================
         public ReportClass()

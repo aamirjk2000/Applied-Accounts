@@ -36,6 +36,8 @@
             this.dt_To = new System.Windows.Forms.DateTimePicker();
             this.btnPreview = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.cBoxProject = new System.Windows.Forms.ComboBox();
+            this.lblProject = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label1
@@ -78,8 +80,9 @@
             "Trial Balance - Employee"});
             this.cBoxReportFormat.Location = new System.Drawing.Point(122, 58);
             this.cBoxReportFormat.Name = "cBoxReportFormat";
-            this.cBoxReportFormat.Size = new System.Drawing.Size(242, 21);
+            this.cBoxReportFormat.Size = new System.Drawing.Size(294, 21);
             this.cBoxReportFormat.TabIndex = 3;
+            this.cBoxReportFormat.SelectedIndexChanged += new System.EventHandler(this.cBoxReportFormat_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -101,29 +104,50 @@
             // 
             // btnPreview
             // 
-            this.btnPreview.Location = new System.Drawing.Point(199, 115);
+            this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnPreview.Image = global::Applied_Accounts.Properties.Resources.PRINT;
+            this.btnPreview.Location = new System.Drawing.Point(350, 158);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(75, 23);
+            this.btnPreview.Size = new System.Drawing.Size(30, 30);
             this.btnPreview.TabIndex = 6;
-            this.btnPreview.Text = "PREVIEW";
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(289, 115);
+            this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExit.Image = global::Applied_Accounts.Properties.Resources.Exit2;
+            this.btnExit.Location = new System.Drawing.Point(386, 158);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.Size = new System.Drawing.Size(30, 30);
             this.btnExit.TabIndex = 7;
-            this.btnExit.Text = "EXIT";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // cBoxProject
+            // 
+            this.cBoxProject.FormattingEnabled = true;
+            this.cBoxProject.Location = new System.Drawing.Point(122, 86);
+            this.cBoxProject.Name = "cBoxProject";
+            this.cBoxProject.Size = new System.Drawing.Size(294, 21);
+            this.cBoxProject.TabIndex = 8;
+            // 
+            // lblProject
+            // 
+            this.lblProject.AutoSize = true;
+            this.lblProject.Location = new System.Drawing.Point(24, 89);
+            this.lblProject.Name = "lblProject";
+            this.lblProject.Size = new System.Drawing.Size(40, 13);
+            this.lblProject.TabIndex = 9;
+            this.lblProject.Text = "Project";
             // 
             // frmTrial_Balance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(392, 164);
+            this.ClientSize = new System.Drawing.Size(428, 193);
+            this.Controls.Add(this.lblProject);
+            this.Controls.Add(this.cBoxProject);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPreview);
             this.Controls.Add(this.dt_To);
@@ -151,5 +175,7 @@
         private System.Windows.Forms.DateTimePicker dt_To;
         private System.Windows.Forms.Button btnPreview;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.ComboBox cBoxProject;
+        private System.Windows.Forms.Label lblProject;
     }
 }

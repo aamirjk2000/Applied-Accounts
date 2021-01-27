@@ -537,9 +537,12 @@ namespace Applied_Accounts
         View_VoucherGrid = 108,
         View_Schedule_Title = 109,
         View_Booking_Title = 110,
+        View_TB_Projects = 111,
+        View_TB_Project_Supplier = 112,
 
-        Grid_POrder = 111,
-        Grid_Booking = 112,
+        Grid_POrder = 201,
+        Grid_Booking = 202,
+
 
 
 

@@ -306,6 +306,7 @@ namespace Applied_Accounts.Classes
             General_Voucher,
             Trial_Balance,
             Trial_Balance_Period,
+            Trial_Project
         }
 
         public enum DateTimeStyle

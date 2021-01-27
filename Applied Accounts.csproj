@@ -179,6 +179,16 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_Voucher.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Data\ds_TB_Project.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_TB_Project.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\ds_TB_Project_Supplier.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_TB_Project_Supplier.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Accounts_Notes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -471,6 +481,8 @@
     <EmbeddedResource Include="Preview\Temp\Preview_Trial_Balance.resx">
       <DependentUpon>Preview_Trial_Balance.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reports\Report_TB_Project_Supplier.rdlc" />
+    <EmbeddedResource Include="Reports\Report_TB_Project.rdlc" />
     <EmbeddedResource Include="Reports\Report_Trial_Balance_Period.rdlc" />
     <EmbeddedResource Include="Reports\Report_Trial_Balance.rdlc" />
     <EmbeddedResource Include="Reports\Report_GL_Projects_Unit.rdlc" />
@@ -570,6 +582,28 @@
     <None Include="Data\ds_Voucher.xss">
       <DependentUpon>ds_Voucher.xsd</DependentUpon>
     </None>
+    <None Include="Data\ds_TB_Project.xsc">
+      <DependentUpon>ds_TB_Project.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_TB_Project.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_TB_Project.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Data\ds_TB_Project.xss">
+      <DependentUpon>ds_TB_Project.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_TB_Project_Supplier.xsc">
+      <DependentUpon>ds_TB_Project_Supplier.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_TB_Project_Supplier.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_TB_Project_Supplier.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Data\ds_TB_Project_Supplier.xss">
+      <DependentUpon>ds_TB_Project_Supplier.xsd</DependentUpon>
+    </None>
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -647,7 +681,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" />
+      <UserProperties BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="False" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
