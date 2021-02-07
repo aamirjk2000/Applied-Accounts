@@ -15,7 +15,7 @@ namespace Applied_Accounts.Forms
     {
         DataTable tb_Ledger;
         DataTable Voucher_list;
-        DataView Grid_ViewData;
+        //DataView Grid_ViewData;
 
         private string CommandText0 = "SELECT DISTINCT(Vou_No) AS[Vou_No] FROM[Ledger];";
         private string CommandText1 = "SELECT SRNO,ACCOUNT,PROJECT,DR,CR,DESCRIPTION FROM [View_Voucher]";

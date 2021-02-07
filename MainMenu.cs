@@ -183,5 +183,12 @@ namespace Applied_Accounts
             frmPOrder Thisform = new frmPOrder();
             Thisform.Show();
         }
+
+        private void mnuStockVoucher_Click(object sender, EventArgs e)
+        {
+            frmVouchers1 Thisform = new frmVouchers1();
+            Thisform.Show();
+
+        }
     }
 }

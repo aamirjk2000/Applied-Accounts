@@ -22,6 +22,7 @@ namespace Applied_Accounts
         public static string StartupPath = Application.StartupPath;
         public static string ExecutablePath = Application.ExecutablePath;
         public static string DateTimeFormat = "dd-MM-yyyy";
+        public static string NumberFormat = ",##0";
         public static string ReportsPath = "Applied_Accounts.Reports.";
         public static string CompanyName = "";
         public static string User = "";

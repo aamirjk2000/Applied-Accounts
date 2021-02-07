@@ -1,0 +1,3 @@
+﻿
+Web site to install RDLC report designer.
+https://marketplace.visualstudio.com/items?itemName=ProBITools.MicrosoftRdlcReportDesignerforVisualStudio-18001

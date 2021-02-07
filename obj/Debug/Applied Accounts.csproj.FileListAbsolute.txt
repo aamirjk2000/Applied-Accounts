@@ -87,9 +87,6 @@ C:\Applied\Applied_Source\obj\Debug\Applied Accounts.pdb
 C:\Applied\Applied_Source\obj\Debug\Applied Accounts.csproj.CoreCompileInputs.cache
 C:\Applied\Applied_Source\obj\Debug\Applied Accounts.csproj.CopyComplete
 C:\Applied\Applied_Source\obj\Debug\Applied_Accounts.Components.WinBrowse.resources
-C:\Output\Release\Applied Accounts.exe.config
-C:\Output\Release\Applied Accounts.exe
-C:\Output\Release\Applied Accounts.pdb
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.AppliedDataGrid.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Components.FKeyID.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.MyTextBox.resources
@@ -184,3 +181,54 @@ C:\Applied\Backup\Applied_Source\obj\Debug\Applied Accounts.csproj.CoreCompileIn
 C:\Applied\Backup\Applied_Source\obj\Debug\Applied Accounts.csproj.CopyComplete
 C:\Applied\Backup\Applied_Source\obj\Debug\Applied Accounts.exe
 C:\Applied\Backup\Applied_Source\obj\Debug\Applied Accounts.pdb
+C:\Output\Release\Applied Accounts.exe.config
+C:\Output\Release\Applied Accounts.exe
+C:\Output\Release\Applied Accounts.pdb
+C:\Applied\obj\Debug\Applied_Accounts.AppliedDataGrid.resources
+C:\Applied\obj\Debug\Applied_Accounts.Components.FKeyID.resources
+C:\Applied\obj\Debug\Applied_Accounts.MyTextBox.resources
+C:\Applied\obj\Debug\Applied_Accounts.Navigator.resources
+C:\Applied\obj\Debug\Applied_Accounts.SearchID.resources
+C:\Applied\obj\Debug\Applied_Accounts.Components.TextNum.resources
+C:\Applied\obj\Debug\Applied_Accounts.Components.WinBrowse.resources
+C:\Applied\obj\Debug\Applied_Accounts.frmAccNotes.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.Booking.frmBooking.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.Booking.frmInstalments.resources
+C:\Applied\obj\Debug\Applied_Accounts.Browse.resources
+C:\Applied\obj\Debug\Applied_Accounts.frmCOA.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmCOAB.resources
+C:\Applied\obj\Debug\Applied_Accounts.frmDBSetting.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmEmployees.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmGeneral_Ledger.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmGL_Project.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmGL_Supplier.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmMigration.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmPOrder.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmProject.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmSetting.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmSuppliers.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmTrial_Balance.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmUnits.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmUsers.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmVouchers1.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmVouchers.resources
+C:\Applied\obj\Debug\Applied_Accounts.Forms.frmVoucher_Delete.resources
+C:\Applied\obj\Debug\Applied_Accounts.frmLogin.resources
+C:\Applied\obj\Debug\Applied_Accounts.frmMainMenu.resources
+C:\Applied\obj\Debug\Applied_Accounts.Preview.Preview.resources
+C:\Applied\obj\Debug\Applied_Accounts.Preview.frmPreview_GL_Project.resources
+C:\Applied\obj\Debug\Applied_Accounts.Preview.frmPreview_Reports.resources
+C:\Applied\obj\Debug\Applied_Accounts.Preview.frmPreview_Trial_Balance.resources
+C:\Applied\obj\Debug\Applied_Accounts.Properties.Resources.resources
+C:\Applied\obj\Debug\Applied_Accounts.Preview.frmPreview_General_Ledger.resources
+C:\Applied\obj\Debug\Applied_Accounts.Preview.frmPreview_GL_Supplier.resources
+C:\Applied\obj\Debug\Applied_Accounts.Preview.Temp.Preview_Voucher.resources
+C:\Applied\obj\Debug\Applied_Accounts.Reports.frmReport_Vouchers.resources
+C:\Applied\obj\Debug\Applied Accounts.csproj.GenerateResource.cache
+C:\Applied\obj\Debug\RdlCompile.cache
+C:\Applied\obj\Debug\RdlCompile.compiled
+C:\Applied\obj\Debug\Applied Accounts.csproj.CoreCompileInputs.cache
+C:\Applied\obj\Debug\Applied Accounts.csproj.CopyComplete
+C:\Applied\obj\Debug\Applied Accounts.exe
+C:\Applied\obj\Debug\Applied Accounts.pdb
+C:\Applied\obj\Debug\Applied Accounts.csprojAssemblyReference.cache

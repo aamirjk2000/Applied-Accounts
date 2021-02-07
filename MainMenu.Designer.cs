@@ -51,6 +51,7 @@
             this.mnuSalaryVoucher = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStockVoucher = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.mnuPOrder = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuStockPurchase = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuSalesInvoice = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
@@ -93,7 +94,6 @@
             this.lblStartPath = new System.Windows.Forms.Label();
             this.lblversion = new System.Windows.Forms.Label();
             this.btnWallpaper = new System.Windows.Forms.Button();
-            this.mnuPOrder = new System.Windows.Forms.ToolStripMenuItem();
             this.mnuMain.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -270,11 +270,19 @@
             this.mnuStockVoucher.Name = "mnuStockVoucher";
             this.mnuStockVoucher.Size = new System.Drawing.Size(180, 22);
             this.mnuStockVoucher.Text = "Inventory Voucher";
+            this.mnuStockVoucher.Click += new System.EventHandler(this.mnuStockVoucher_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
             this.toolStripSeparator6.Size = new System.Drawing.Size(177, 6);
+            // 
+            // mnuPOrder
+            // 
+            this.mnuPOrder.Name = "mnuPOrder";
+            this.mnuPOrder.Size = new System.Drawing.Size(180, 22);
+            this.mnuPOrder.Text = "Purchase Order";
+            this.mnuPOrder.Click += new System.EventHandler(this.mnuPOrder_Click);
             // 
             // mnuStockPurchase
             // 
@@ -610,13 +618,6 @@
             this.btnWallpaper.TabIndex = 9;
             this.btnWallpaper.UseVisualStyleBackColor = true;
             this.btnWallpaper.Click += new System.EventHandler(this.btnWallpaper_Click);
-            // 
-            // mnuPOrder
-            // 
-            this.mnuPOrder.Name = "mnuPOrder";
-            this.mnuPOrder.Size = new System.Drawing.Size(180, 22);
-            this.mnuPOrder.Text = "Purchase Order";
-            this.mnuPOrder.Click += new System.EventHandler(this.mnuPOrder_Click);
             // 
             // frmMainMenu
             // 

@@ -303,6 +303,12 @@
     <Compile Include="Forms\Users.Designer.cs">
       <DependentUpon>Users.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Voucher1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Voucher1.Designer.cs">
+      <DependentUpon>Voucher1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Vouchers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -457,6 +463,9 @@
     <EmbeddedResource Include="Forms\Users.resx">
       <DependentUpon>Users.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Voucher1.resx">
+      <DependentUpon>Voucher1.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\Vouchers.resx">
       <DependentUpon>Vouchers.cs</DependentUpon>
     </EmbeddedResource>
@@ -604,6 +613,7 @@
     <None Include="Data\ds_TB_Project_Supplier.xss">
       <DependentUpon>ds_TB_Project_Supplier.xsd</DependentUpon>
     </None>
+    <None Include="Help\Microsoft.RdlcDesigner.vsix" />
     <None Include="Properties\app.manifest" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -620,6 +630,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Classes\Connection_Class.dll" />
+    <Content Include="Help\DevelopmentTools.txt" />
     <Content Include="Icons\Accounting.ico" />
     <Content Include="Icons\Accounting.png" />
     <Content Include="Icons\AppliedLogo.jpg" />
