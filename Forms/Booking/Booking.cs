@@ -68,8 +68,9 @@ namespace Applied_Accounts.Forms.Booking
             txtRemarks.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged));
             chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnValidation));
 
-            //txtClient.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Client", true, DataSourceUpdateMode.OnPropertyChanged));
             ID_Client.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Client", true, DataSourceUpdateMode.OnPropertyChanged));
+            ID_Project.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
+            ID_Unit.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
 
         }
 
@@ -94,8 +95,6 @@ namespace Applied_Accounts.Forms.Booking
             MyDataGrid.BrowseGrid.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
             MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
             MyDataGrid.BrowseGrid.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-
-            //MyDataGrid.BrowseGrid.Columns[4].DefaultCellStyle.Format = null;
 
         }
 
@@ -370,5 +369,7 @@ namespace Applied_Accounts.Forms.Booking
         {
             Load_Tables();
         }
+
+      
     }           // End Class
 }               // END 

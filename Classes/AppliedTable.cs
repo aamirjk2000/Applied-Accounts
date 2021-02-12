@@ -505,7 +505,6 @@ namespace Applied_Accounts
             return _Result;
         }
 
-
     }                             // Main
 
     public enum Tables
@@ -542,9 +541,6 @@ namespace Applied_Accounts
 
         Grid_POrder = 201,
         Grid_Booking = 202,
-
-
-
 
     };
 }                               // Namespace

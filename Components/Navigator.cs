@@ -11,7 +11,7 @@ namespace Applied_Accounts
         public event EventHandler Before_Save;                  // Invoke before save the record.
         public event EventHandler After_Save;                   // Invoke when Record has been saved after Validation is true.
         public event EventHandler After_Delete;                 // Invoke after delete the record.
-        public BindingManagerBase TableBinding;                 // Binding Manager for navigation of records.
+        public BindingManagerBase TableBinding;                                     // Binding Manager for navigation of records.
         public BindingSource MyBindingSource = new BindingSource();                // DataSource of Binding source;
         public DataRow OriginalRow;
         public DataRow NewRow;
@@ -161,8 +161,9 @@ namespace Applied_Accounts
         }
         private void BtnSave_Click(object sender, EventArgs e)              // Save Record
         {
+            TableClass.MyDataRow = OriginalRow;
 
-            if(MyDataTable.Rows.Count==0) { Current_Mode = (int)Applied.Modes.Empty; }   // DataTable has no report
+            if (MyDataTable.Rows.Count==0) { Current_Mode = (int)Applied.Modes.Empty; }   // DataTable has no report
 
             Before_Save(sender, e);
 
@@ -183,7 +184,6 @@ namespace Applied_Accounts
             {
                 TableClass.MyDataRow = ((DataRowView)TableBinding.Current).Row;
             }
-
 
             /// Get ID number if value is -1
             if ((Conversion.ToLong(TableClass.MyDataRow[TableClass.MyPrimaryKeyName])) == -1)

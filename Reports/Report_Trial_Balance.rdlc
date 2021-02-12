@@ -128,7 +128,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -183,7 +182,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -238,7 +236,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -304,7 +301,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                   </TablixCells>
@@ -790,7 +786,10 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Now.ToString("dddd, dd MMMM yyyy hh:mm tt")</Value>
+                      <Value>=Now.ToString("dddd, dd MMMM yyyy hh:mm tt")
++ " | Page " 
++ Globals!PageNumber.ToString() 
++ "/" + Globals!TotalPages.ToString()</Value>
                       <Style>
                         <FontSize>7pt</FontSize>
                       </Style>

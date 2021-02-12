@@ -1274,7 +1274,7 @@ string.IsNullOrEmpty(Fields!RefNo.Value), TRUE, FALSE
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Parameters!DevelopedBy.Value + " " + Parameters!DateFormat.Value</Value>
+                      <Value>=Parameters!DevelopedBy.Value</Value>
                       <Style>
                         <FontSize>7pt</FontSize>
                       </Style>
@@ -1308,7 +1308,10 @@ string.IsNullOrEmpty(Fields!RefNo.Value), TRUE, FALSE
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Today.ToLongDateString + " " + Today.ToLongTimeString</Value>
+                      <Value>=Now.ToString("dddd, dd MMMM yyyy hh:mm tt")
++ " | Page " 
++ Globals!PageNumber.ToString() 
++ "/" + Globals!TotalPages.ToString()</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                       </Style>

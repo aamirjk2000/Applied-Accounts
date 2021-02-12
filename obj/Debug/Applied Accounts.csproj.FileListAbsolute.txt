@@ -232,3 +232,4 @@ C:\Applied\obj\Debug\Applied Accounts.csproj.CopyComplete
 C:\Applied\obj\Debug\Applied Accounts.exe
 C:\Applied\obj\Debug\Applied Accounts.pdb
 C:\Applied\obj\Debug\Applied Accounts.csprojAssemblyReference.cache
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmVouchers1.resources

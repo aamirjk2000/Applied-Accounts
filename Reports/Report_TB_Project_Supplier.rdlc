@@ -590,7 +590,6 @@
                             <PaddingBottom>2pt</PaddingBottom>
                           </Style>
                         </Textbox>
-                        <rd:Selected>true</rd:Selected>
                       </CellContents>
                     </TablixCell>
                     <TablixCell>
@@ -688,7 +687,7 @@
         <Height>1.36111in</Height>
         <Style />
       </Body>
-      <Width>7.23958in</Width>
+      <Width>7.05208in</Width>
       <Page>
         <PageHeader>
           <Height>1.00222in</Height>
@@ -845,7 +844,10 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Now.ToString("dddd, dd MMMM yyyy hh:mm tt")</Value>
+                      <Value>=Now.ToString("dddd, dd MMMM yyyy hh:mm tt")
++ " | Page " 
++ Globals!PageNumber.ToString() 
++ "/" + Globals!TotalPages.ToString()</Value>
                       <Style>
                         <FontSize>7pt</FontSize>
                       </Style>

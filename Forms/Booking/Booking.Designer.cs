@@ -63,7 +63,12 @@ namespace Applied_Accounts.Forms.Booking
             this.label12 = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
             this.P1 = new System.Windows.Forms.TabPage();
+            this.MyNavigator = new Applied_Accounts.Navigator();
+            this.ID_Client = new System.Windows.Forms.TextBox();
+            this.ID_Project = new System.Windows.Forms.TextBox();
+            this.ID_Unit = new System.Windows.Forms.TextBox();
             this.P2 = new System.Windows.Forms.TabPage();
+            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.P3 = new System.Windows.Forms.TabPage();
             this.cBoxBooking = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
@@ -91,11 +96,6 @@ namespace Applied_Accounts.Forms.Booking
             this.label13 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
-            this.ID_Client = new System.Windows.Forms.TextBox();
-            this.ID_Project = new System.Windows.Forms.TextBox();
-            this.ID_Unit = new System.Windows.Forms.TextBox();
-            this.MyNavigator = new Applied_Accounts.Navigator();
-            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -428,6 +428,45 @@ namespace Applied_Accounts.Forms.Booking
             this.P1.Text = "RECORD";
             this.P1.UseVisualStyleBackColor = true;
             // 
+            // MyNavigator
+            // 
+            this.MyNavigator.Current_Mode = 0;
+            this.MyNavigator.Location = new System.Drawing.Point(90, 371);
+            this.MyNavigator.Name = "MyNavigator";
+            this.MyNavigator.Size = new System.Drawing.Size(533, 24);
+            this.MyNavigator.TabIndex = 101;
+            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
+            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
+            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
+            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
+            // 
+            // ID_Client
+            // 
+            this.ID_Client.Location = new System.Drawing.Point(90, 71);
+            this.ID_Client.Name = "ID_Client";
+            this.ID_Client.ReadOnly = true;
+            this.ID_Client.Size = new System.Drawing.Size(52, 20);
+            this.ID_Client.TabIndex = 102;
+            this.ID_Client.TextChanged += new System.EventHandler(this.ID_Client_TextChanged);
+            // 
+            // ID_Project
+            // 
+            this.ID_Project.Location = new System.Drawing.Point(90, 97);
+            this.ID_Project.Name = "ID_Project";
+            this.ID_Project.ReadOnly = true;
+            this.ID_Project.Size = new System.Drawing.Size(52, 20);
+            this.ID_Project.TabIndex = 103;
+            this.ID_Project.TextChanged += new System.EventHandler(this.ID_Project_TextChanged);
+            // 
+            // ID_Unit
+            // 
+            this.ID_Unit.Location = new System.Drawing.Point(90, 124);
+            this.ID_Unit.Name = "ID_Unit";
+            this.ID_Unit.ReadOnly = true;
+            this.ID_Unit.Size = new System.Drawing.Size(52, 20);
+            this.ID_Unit.TabIndex = 104;
+            this.ID_Unit.TextChanged += new System.EventHandler(this.ID_Unit_TextChanged);
+            // 
             // P2
             // 
             this.P2.Controls.Add(this.MyDataGrid);
@@ -438,6 +477,27 @@ namespace Applied_Accounts.Forms.Booking
             this.P2.TabIndex = 1;
             this.P2.Text = "Booking";
             this.P2.UseVisualStyleBackColor = true;
+            // 
+            // MyDataGrid
+            // 
+            this.MyDataGrid.Active = false;
+            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MyDataGrid.ColumnsFormat = null;
+            this.MyDataGrid.ColumnsName = null;
+            this.MyDataGrid.ColumnsVisiable = null;
+            this.MyDataGrid.ColumnsWidth = null;
+            this.MyDataGrid.IsBrowseWin = false;
+            this.MyDataGrid.IsPressEnter = false;
+            this.MyDataGrid.Location = new System.Drawing.Point(3, 3);
+            this.MyDataGrid.MyDataRow = null;
+            this.MyDataGrid.MyDataView = null;
+            this.MyDataGrid.MyViewRow = null;
+            this.MyDataGrid.Name = "MyDataGrid";
+            this.MyDataGrid.RecordID = ((long)(0));
+            this.MyDataGrid.Size = new System.Drawing.Size(720, 401);
+            this.MyDataGrid.TabIndex = 0;
+            this.MyDataGrid.Enter += new System.EventHandler(this.MyDataGrid_Enter);
             // 
             // P3
             // 
@@ -717,66 +777,6 @@ namespace Applied_Accounts.Forms.Booking
             this.btnExit.TabIndex = 35;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
-            // 
-            // ID_Client
-            // 
-            this.ID_Client.Location = new System.Drawing.Point(90, 71);
-            this.ID_Client.Name = "ID_Client";
-            this.ID_Client.ReadOnly = true;
-            this.ID_Client.Size = new System.Drawing.Size(52, 20);
-            this.ID_Client.TabIndex = 102;
-            this.ID_Client.TextChanged += new System.EventHandler(this.ID_Client_TextChanged);
-            // 
-            // ID_Project
-            // 
-            this.ID_Project.Location = new System.Drawing.Point(90, 97);
-            this.ID_Project.Name = "ID_Project";
-            this.ID_Project.ReadOnly = true;
-            this.ID_Project.Size = new System.Drawing.Size(52, 20);
-            this.ID_Project.TabIndex = 103;
-            this.ID_Project.TextChanged += new System.EventHandler(this.ID_Project_TextChanged);
-            // 
-            // ID_Unit
-            // 
-            this.ID_Unit.Location = new System.Drawing.Point(90, 124);
-            this.ID_Unit.Name = "ID_Unit";
-            this.ID_Unit.ReadOnly = true;
-            this.ID_Unit.Size = new System.Drawing.Size(52, 20);
-            this.ID_Unit.TabIndex = 104;
-            this.ID_Unit.TextChanged += new System.EventHandler(this.ID_Unit_TextChanged);
-            // 
-            // MyNavigator
-            // 
-            this.MyNavigator.Current_Mode = 0;
-            this.MyNavigator.Location = new System.Drawing.Point(90, 371);
-            this.MyNavigator.Name = "MyNavigator";
-            this.MyNavigator.Size = new System.Drawing.Size(533, 24);
-            this.MyNavigator.TabIndex = 101;
-            this.MyNavigator.New_Record += new System.EventHandler(this.MyNavigator_New_Record);
-            this.MyNavigator.Before_Save += new System.EventHandler(this.MyNavigator_Before_Save);
-            this.MyNavigator.After_Save += new System.EventHandler(this.MyNavigator_After_Save);
-            this.MyNavigator.After_Delete += new System.EventHandler(this.MyNavigator_After_Delete);
-            // 
-            // MyDataGrid
-            // 
-            this.MyDataGrid.Active = false;
-            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MyDataGrid.ColumnsFormat = null;
-            this.MyDataGrid.ColumnsName = null;
-            this.MyDataGrid.ColumnsVisiable = null;
-            this.MyDataGrid.ColumnsWidth = null;
-            this.MyDataGrid.IsBrowseWin = false;
-            this.MyDataGrid.IsPressEnter = false;
-            this.MyDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.MyDataGrid.MyDataRow = null;
-            this.MyDataGrid.MyDataView = null;
-            this.MyDataGrid.MyViewRow = null;
-            this.MyDataGrid.Name = "MyDataGrid";
-            this.MyDataGrid.RecordID = ((long)(0));
-            this.MyDataGrid.Size = new System.Drawing.Size(720, 401);
-            this.MyDataGrid.TabIndex = 0;
-            this.MyDataGrid.Enter += new System.EventHandler(this.MyDataGrid_Enter);
             // 
             // frmBooking
             // 

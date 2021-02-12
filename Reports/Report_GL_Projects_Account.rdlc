@@ -1350,7 +1350,10 @@ string.IsNullOrEmpty(Fields!RefNo.Value), TRUE, FALSE
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=Now.ToString("dddd, dd MMMM yyyy hh:mm tt")</Value>
+                      <Value>=Now.ToString("dddd, dd MMMM yyyy hh:mm tt")
++ " | Page " 
++ Globals!PageNumber.ToString() 
++ "/" + Globals!TotalPages.ToString()</Value>
                       <Style>
                         <FontSize>8pt</FontSize>
                       </Style>

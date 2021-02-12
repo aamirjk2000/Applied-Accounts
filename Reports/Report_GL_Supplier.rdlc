@@ -1367,7 +1367,10 @@
                 <Paragraph>
                   <TextRuns>
                     <TextRun>
-                      <Value>=DateTime.Now</Value>
+                      <Value>=Now.ToString("dddd, dd MMMM yyyy hh:mm tt")
++ " | Page " 
++ Globals!PageNumber.ToString() 
++ "/" + Globals!TotalPages.ToString()</Value>
                       <Style>
                         <FontSize>6pt</FontSize>
                         <Format>f</Format>
