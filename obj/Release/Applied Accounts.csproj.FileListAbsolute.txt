@@ -340,3 +340,6 @@ C:\Applied\Applied_Source\obj\Release\Applied Accounts.csproj.CoreCompileInputs.
 C:\Applied\Applied_Source\obj\Release\Applied Accounts.csproj.CopyComplete
 C:\Applied\Applied_Source\obj\Release\Applied Accounts.exe
 C:\Applied\Applied_Source\obj\Release\Applied Accounts.pdb
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Components.TextNum.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmPOrder.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmVouchers1.resources

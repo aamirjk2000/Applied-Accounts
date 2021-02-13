@@ -104,6 +104,7 @@
     <Compile Include="Classes\ThisTable.cs" />
     <Compile Include="Classes\Validation.cs" />
     <Compile Include="Classes\VoucherClass.cs" />
+    <Compile Include="Classes\VoucherClass1.cs" />
     <Compile Include="Components\AppliedDataGrid.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -692,7 +693,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="False" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>
