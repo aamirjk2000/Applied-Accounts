@@ -343,3 +343,51 @@ C:\Applied\Applied_Source\obj\Release\Applied Accounts.pdb
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Components.TextNum.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmPOrder.resources
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmVouchers1.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.csprojAssemblyReference.cache
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.AppliedDataGrid.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Components.FKeyID.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.MyTextBox.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Navigator.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.SearchID.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Components.TextNum.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Components.WinBrowse.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.frmAccNotes.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.Booking.frmBooking.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.Booking.frmInstalments.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Browse.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.frmCOA.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmCOAB.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.frmDBSetting.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmEmployees.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmGeneral_Ledger.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmGL_Project.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmGL_Supplier.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmMigration.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmPOrder.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmProject.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmSetting.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmSuppliers.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmTrial_Balance.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmUnits.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmUsers.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmVouchers1.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmVouchers.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Forms.frmVoucher_Delete.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.frmLogin.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.frmMainMenu.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Preview.Preview.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Preview.frmPreview_GL_Project.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Preview.frmPreview_Reports.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Preview.frmPreview_Trial_Balance.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Properties.Resources.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Preview.frmPreview_General_Ledger.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Preview.frmPreview_GL_Supplier.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Preview.Temp.Preview_Voucher.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied_Accounts.Reports.frmReport_Vouchers.resources
+C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.csproj.GenerateResource.cache
+C:\Applied\Backup\Applied_Source\obj\Release\RdlCompile.cache
+C:\Applied\Backup\Applied_Source\obj\Release\RdlCompile.compiled
+C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.csproj.CoreCompileInputs.cache
+C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.csproj.CopyComplete
+C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.exe
+C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.pdb

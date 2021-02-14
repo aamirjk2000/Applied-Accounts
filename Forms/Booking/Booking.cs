@@ -67,13 +67,11 @@ namespace Applied_Accounts.Forms.Booking
             chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnValidation));
 
             ID_Client.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Client", true, DataSourceUpdateMode.OnPropertyChanged));
-<<<<<<< HEAD
+
             ID_Project.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
             ID_Unit.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
-=======
             txtUnit.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
             txtProject.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
->>>>>>> Firdous 14-02-2021
 
         }
 

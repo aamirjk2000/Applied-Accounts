@@ -564,6 +564,8 @@ namespace Applied_Accounts.Forms
 
             //  SAVE    SAVE    SAVE    SAVE    SAVE    SAVE    SAVE    
 
+            btnSave.Enabled = false;
+
             MyVoucherClass.Save();                                          // Save voucher (All Transactions) into Database Table.
 
             if (MyVoucherClass.Voucher_Saved)
@@ -575,6 +577,8 @@ namespace Applied_Accounts.Forms
                 MyVoucherClass.Voucher_Saved = false;                       // Reset voucher Saved default value.
                 Grid.DataSource = MyVoucherClass.GetGridTable();            // Load Voucher into Grid Data source
             }
+
+            btnSave.Enabled = true;
 
         }
         private void btnSave_Click(object sender, EventArgs e)
