@@ -15,7 +15,6 @@ namespace Applied_Accounts
     {
 
         #region  Get DataTable
-
         public static DataTable GetDataTable(int TableID)
         {
             if (TableID > 0)               // ID is zero
@@ -24,7 +23,6 @@ namespace Applied_Accounts
 
                 string _TableName = Conversion.GetTableName(TableID);
                 string _Text = "SELECT * FROM " + _TableName;
-
 
                 SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
                 SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);

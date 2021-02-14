@@ -59,9 +59,7 @@ namespace Applied_Accounts.Forms.Booking
             txtCode.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Code", true, DataSourceUpdateMode.OnPropertyChanged));
             txtTag.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "SCode", true, DataSourceUpdateMode.OnPropertyChanged));
             txtTitle.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Title", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtUnit.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
 
-            txtProject.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
             dtBooking.DataBindings.Add(new Binding("Value", MyNavigator.MyBindingSource, "Book_Date", true, DataSourceUpdateMode.OnPropertyChanged));
             txtSale.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Sale_Price", true, DataSourceUpdateMode.OnPropertyChanged));
             txtDiscount.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Discount", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -69,8 +67,13 @@ namespace Applied_Accounts.Forms.Booking
             chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnValidation));
 
             ID_Client.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Client", true, DataSourceUpdateMode.OnPropertyChanged));
+<<<<<<< HEAD
             ID_Project.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
             ID_Unit.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
+=======
+            txtUnit.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtProject.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
+>>>>>>> Firdous 14-02-2021
 
         }
 

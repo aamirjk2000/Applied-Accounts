@@ -1,25 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj": {}
+    "C:\\Applied\\Backup\\Applied_Source\\Applied Accounts.csproj": {}
   },
   "projects": {
-    "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj": {
+    "C:\\Applied\\Backup\\Applied_Source\\Applied Accounts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
+        "projectUniqueName": "C:\\Applied\\Backup\\Applied_Source\\Applied Accounts.csproj",
         "projectName": "Applied Accounts",
-        "projectPath": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
-        "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "D:\\Applied\\Applied-Accounts\\obj\\",
+        "projectPath": "C:\\Applied\\Backup\\Applied_Source\\Applied Accounts.csproj",
+        "packagesPath": "C:\\Users\\Desktop\\.nuget\\packages\\",
+        "outputPath": "C:\\Applied\\Backup\\Applied_Source\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Users\\Desktop\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
