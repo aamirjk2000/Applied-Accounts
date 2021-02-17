@@ -190,6 +190,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_TB_Project_Supplier.xsd</DependentUpon>
     </Compile>
+    <Compile Include="Data\ds_Voucher1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ds_Voucher1.xsd</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Accounts_Notes.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -613,6 +618,17 @@
     </None>
     <None Include="Data\ds_TB_Project_Supplier.xss">
       <DependentUpon>ds_TB_Project_Supplier.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_Voucher1.xsc">
+      <DependentUpon>ds_Voucher1.xsd</DependentUpon>
+    </None>
+    <None Include="Data\ds_Voucher1.xsd">
+      <SubType>Designer</SubType>
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>ds_Voucher1.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Data\ds_Voucher1.xss">
+      <DependentUpon>ds_Voucher1.xsd</DependentUpon>
     </None>
     <None Include="Help\Microsoft.RdlcDesigner.vsix" />
     <None Include="Properties\app.manifest" />
