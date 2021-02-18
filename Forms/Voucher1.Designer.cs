@@ -334,6 +334,9 @@ namespace Applied_Accounts.Forms
             this.txtCR.Name = "txtCR";
             this.txtCR.Size = new System.Drawing.Size(140, 26);
             this.txtCR.TabIndex = 13;
+            this.txtCR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCR.TextChanged += new System.EventHandler(this.txtCR_TextChanged);
+            this.txtCR.Leave += new System.EventHandler(this.txtCR_Leave);
             // 
             // txtDR
             // 
@@ -343,6 +346,9 @@ namespace Applied_Accounts.Forms
             this.txtDR.Name = "txtDR";
             this.txtDR.Size = new System.Drawing.Size(140, 26);
             this.txtDR.TabIndex = 12;
+            this.txtDR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDR.TextChanged += new System.EventHandler(this.txtDR_TextChanged);
+            this.txtDR.Leave += new System.EventHandler(this.txtDR_Leave);
             // 
             // cBoxPOrder
             // 
@@ -614,6 +620,8 @@ namespace Applied_Accounts.Forms
             this.txtSRNO.Size = new System.Drawing.Size(100, 20);
             this.txtSRNO.TabIndex = 1;
             this.txtSRNO.Enter += new System.EventHandler(this.txtSRNO_Enter);
+            this.txtSRNO.Leave += new System.EventHandler(this.txtSRNO_Leave);
+            this.txtSRNO.Validating += new System.ComponentModel.CancelEventHandler(this.txtSRNO_Validating);
             // 
             // label18
             // 
@@ -770,7 +778,6 @@ namespace Applied_Accounts.Forms
             this.txtVou_No.Name = "txtVou_No";
             this.txtVou_No.Size = new System.Drawing.Size(100, 20);
             this.txtVou_No.TabIndex = 1;
-            this.txtVou_No.Text = "P1007-0006";
             this.txtVou_No.Leave += new System.EventHandler(this.txtVou_No_Leave);
             this.txtVou_No.Validating += new System.ComponentModel.CancelEventHandler(this.txtVou_No_Validating);
             this.txtVou_No.Validated += new System.EventHandler(this.txtVou_No_Validated);

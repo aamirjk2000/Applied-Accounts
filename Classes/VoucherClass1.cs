@@ -41,7 +41,7 @@ namespace Applied_Accounts.Classes
         public int Count { get => tb_Voucher.Rows.Count; }
 
         public Array Vou_Types = Enum.GetValues(typeof(Applied.VoucherType));
-        public Boolean Voucher_Loaded = false;
+        public bool Voucher_Loaded = false;
 
 
         // DATA BINDING >>>>
@@ -62,7 +62,7 @@ namespace Applied_Accounts.Classes
 
             Load_Tables();
 
-            Vou_No = "NEW";
+            Vou_No = "J0319-0007";
             Vou_Date = DateTime.Now;
             Vou_Type = string.Empty;
             Vou_Status = "New";
@@ -86,7 +86,7 @@ namespace Applied_Accounts.Classes
             tb_Units = AppliedTable.GetDataTable(Tables.Units);
             tb_POrder = AppliedTable.GetDataTable(Tables.POrder);
             tb_Stocks = AppliedTable.GetDataTable(Tables.Stock);
-            tb_Employees = AppliedTable.GetComboData(Tables.Employees);
+            tb_Employees = AppliedTable.GetDataTable(Tables.Employees);
 
             tb_Voucher = AppliedTable.GetDataTable(Tables.Ledger).Clone();
             tb_Voucher_Delete = tb_Voucher.Clone();

@@ -80,7 +80,6 @@ namespace Applied_Accounts
                 return new DataTable();
             }
         }
-
         public static DataTable GetDataTable(object TableID, int ID)
         {
             int _TableID = (int)TableID;

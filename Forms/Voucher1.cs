@@ -15,6 +15,9 @@ namespace Applied_Accounts.Forms
 {
     public partial class frmVouchers1 : Form
     {
+        private const string NumberFormat = "{0:###,###,###,##0.00}";
+        private string DateFormat = Applied.GetString("DataFormat");
+        private string ComboDateFormat = Applied.GetString("DateFormat_Combo");
 
         private string MyCheque_No;                                 // For copy and past
         private string MyCheque_Date;                               // For copy and past
@@ -41,7 +44,7 @@ namespace Applied_Accounts.Forms
         private BindingManagerBase TableBinding;
         //private BindingSource MyDataSource = new BindingSource();
         private DataViewManager MyDataSource;
-
+        private decimal Total_DR, Total_CR;
 
         private Boolean Vou_Found;
 
@@ -62,7 +65,7 @@ namespace Applied_Accounts.Forms
             // Binding Setup
 
             MyDataSource = MyVoucherClass.ds_Voucher.DefaultViewManager;
-            TableBinding = BindingContext[MyDataSource,"Ledger"];
+            TableBinding = BindingContext[MyDataSource, "Ledger"];
             // ======================= END
 
             Set_ComboBox();                                 // Combo box setting DisplayMemebr, ValueMembers & DataSource
@@ -75,12 +78,13 @@ namespace Applied_Accounts.Forms
         {
             //if(MyDataSource==null) { return; }
 
-            cBoxAccount.DataSource = MyDataSource; 
+            cBoxAccount.DataSource = MyDataSource;
             cBoxSupplier.DataSource = MyDataSource;
             cBoxProject.DataSource = MyDataSource;
             cBoxUnit.DataSource = MyDataSource;
             cBoxStock.DataSource = MyDataSource;
             cBoxEmployee.DataSource = MyDataSource;
+            cBoxPOrder.DataSource = tb_POrder.AsDataView();
 
             cBoxAccount.DisplayMember = "COA.Title";
             cBoxSupplier.DisplayMember = "Suppliers.Title";
@@ -88,7 +92,7 @@ namespace Applied_Accounts.Forms
             cBoxUnit.DisplayMember = "Units.Title";
             cBoxStock.DisplayMember = "Stock.Title";
             cBoxEmployee.DisplayMember = "Employees.Title";
-            cBoxPOrder.DisplayMember = "Porder.Title";
+            cBoxPOrder.DisplayMember = "Title";
 
             cBoxAccount.ValueMember = "COA.ID";
             cBoxSupplier.ValueMember = "Suppliers.ID";
@@ -96,16 +100,24 @@ namespace Applied_Accounts.Forms
             cBoxUnit.ValueMember = "Units.ID";
             cBoxStock.ValueMember = "Stock.ID";
             cBoxEmployee.ValueMember = "Employees.ID";
-            cBoxPOrder.ValueMember = "POrder.ID";
+            cBoxPOrder.ValueMember = "ID";
 
-            cBoxPOrder.DataSource = tb_POrder.AsDataView();
             cBoxVouType.DataSource = MyVoucherClass.Vou_Types;
+
+            dt_VoucherDate.Format = DateTimePickerFormat.Custom;
+            dt_ChqDate.Format = DateTimePickerFormat.Custom;
+
+            dt_VoucherDate.CustomFormat = ComboDateFormat;
+            dt_ChqDate.CustomFormat = ComboDateFormat;
 
         }
 
         private void frmVouchers1_Load(object sender, EventArgs e)
         {
-            txtVou_No.Text = "New";
+            txtVou_No.Text = MyVoucherClass.Vou_No;
+            dt_VoucherDate.Value = MyVoucherClass.Vou_Date;
+            cBoxVouType.Text = MyVoucherClass.Vou_Type;
+
             txtVou_No.Focus();
 
         }
@@ -230,32 +242,17 @@ namespace Applied_Accounts.Forms
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
-            // If you are not at the end of the list, move to the next item
-            // in the BindingSource.
-            if (TableBinding.Position - 1 < 0)
-                TableBinding.Position -= 1;
-
-            // Otherwise, move back to the first item.
-            else
-                TableBinding.Position = 0;
-
-            // Force the form to repaint.
+            if (TableBinding.Position - 1 >= 0) { TableBinding.Position -= 1; }
+            else { TableBinding.Position = 0; }
             this.Invalidate();
 
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-            // If you are not at the end of the list, move to the next item
-            // in the BindingSource.
-            if (TableBinding.Position + 1 < TableBinding.Count)
-                TableBinding.Position += 1;
 
-            // Otherwise, move back to the first item.
-            else
-                TableBinding.Position = 0;
-
-            // Force the form to repaint.
+            if (TableBinding.Position + 1 < TableBinding.Count) { TableBinding.Position += 1; }
+            else { TableBinding.Position = TableBinding.Count; }
             this.Invalidate();
         }
 
@@ -285,11 +282,31 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
+        #region Serial No Text box
+
         private void txtSRNO_Enter(object sender, EventArgs e)
         {
-            //MessageBox.Show(MyBindingSource.DataSource.ToString());            
+            txtSRNO.DataBindings.Clear();
         }
 
+        private void txtSRNO_Leave(object sender, EventArgs e)
+        {
+            txtSRNO.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
+            grp_Action.Visible = IsBalance();
+
+
+        }
+
+        private void txtSRNO_Validating(object sender, CancelEventArgs e)
+        {
+            DataView _DataView = MyDataSource.DataSet.Tables["Ledger"].AsDataView();
+            _DataView.RowFilter = "SrNo=" + Conversion.ToInteger(txtSRNO.Text.Trim());
+            if (_DataView.Count == 1) { TableBinding.Position = _DataView.Table.Rows.IndexOf(_DataView.Table.Rows[0]); }
+            else { e.Cancel = true; }
+        }
+
+
+        #endregion
 
         #region Textbox_ID Text Change
 
@@ -322,7 +339,7 @@ namespace Applied_Accounts.Forms
             cBoxEmployee.SelectedValue = Conversion.ToLong(txtEmployeeID.Text);
         }
 
-        
+
 
 
 
@@ -331,18 +348,79 @@ namespace Applied_Accounts.Forms
         #region Combo Box Index Change
         private void cBoxAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(cBoxAccount.SelectedValue!=null)
-            {
-                txtAccountID.Text = cBoxAccount.SelectedValue.ToString();
-            }
-            
+            if (cBoxAccount.SelectedValue != null) { txtAccountID.Text = cBoxAccount.SelectedValue.ToString(); }
+            if (cBoxProject.SelectedValue != null) { txtProjectID.Text = cBoxProject.SelectedValue.ToString(); }
+            if (cBoxSupplier.SelectedValue != null) { txtSupplierID.Text = cBoxSupplier.SelectedValue.ToString(); }
+            if (cBoxUnit.SelectedValue != null) { txtUnitID.Text = cBoxUnit.SelectedValue.ToString(); }
+            if (cBoxStock.SelectedValue != null) { txtStockID.Text = cBoxStock.SelectedValue.ToString(); }
+            if (cBoxEmployee.SelectedValue != null) { txtEmployeeID.Text = cBoxEmployee.SelectedValue.ToString(); }
         }
-
 
 
         private void cBoxPOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
             //cBoxEmployee.SelectedValue = Conversion.ToLong(txtEmployeeID.Text);
+        }
+
+
+
+        #endregion
+
+        #region DEBIT & CREDIT
+
+
+        private void txtDR_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCR_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtDR_Leave(object sender, EventArgs e)
+        {
+            decimal _Amount = Conversion.ToMoney(txtDR.Text);
+            if (_Amount > 0)
+            {
+                txtCR.Text = "";
+                txtDR.Text = string.Format(NumberFormat, decimal.Parse(txtDR.Text));
+            }
+            else
+            {
+                txtDR.Text = string.Empty;
+            }
+
+            grp_Action.Visible = IsBalance();
+        }
+
+        private void txtCR_Leave(object sender, EventArgs e)
+        {
+            decimal _Amount = Conversion.ToMoney(txtCR.Text);
+            if (_Amount > 0)
+            {
+                txtDR.Text = "";
+                txtCR.Text = string.Format(NumberFormat, decimal.Parse(txtCR.Text));
+            }
+            else
+            {
+                txtCR.Text = string.Empty;
+            }
+
+            grp_Action.Visible = IsBalance();
+        }
+
+        private bool IsBalance()
+        {
+            bool _Result = false;
+
+            Total_DR = (decimal)MyDataSource.DataSet.Tables["Ledger"].Compute("SUM(DR)", string.Empty);
+            Total_CR = (decimal)MyDataSource.DataSet.Tables["Ledger"].Compute("SUM(CR)", string.Empty);
+
+            if (Total_DR == Total_CR) { _Result = true; }
+
+            return _Result;
         }
 
         #endregion
