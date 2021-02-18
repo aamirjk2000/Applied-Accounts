@@ -30,7 +30,7 @@ namespace Applied_Accounts.Forms
         private void InitializeComponent()
         {
             this.P2 = new System.Windows.Forms.TabPage();
-            this.grid_Voucher = new System.Windows.Forms.DataGridView();
+            this.Grid_Voucher = new System.Windows.Forms.DataGridView();
             this.P1 = new System.Windows.Forms.TabPage();
             this.grp_Action = new System.Windows.Forms.GroupBox();
             this.button13 = new System.Windows.Forms.Button();
@@ -100,7 +100,7 @@ namespace Applied_Accounts.Forms
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
             this.P2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.grid_Voucher)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
             this.grp_Action.SuspendLayout();
             this.grp_Transactions.SuspendLayout();
@@ -110,7 +110,7 @@ namespace Applied_Accounts.Forms
             // 
             // P2
             // 
-            this.P2.Controls.Add(this.grid_Voucher);
+            this.P2.Controls.Add(this.Grid_Voucher);
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
             this.P2.Padding = new System.Windows.Forms.Padding(3);
@@ -119,13 +119,13 @@ namespace Applied_Accounts.Forms
             this.P2.Text = "TRANSACTIONS";
             this.P2.UseVisualStyleBackColor = true;
             // 
-            // grid_Voucher
+            // Grid_Voucher
             // 
-            this.grid_Voucher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.grid_Voucher.Location = new System.Drawing.Point(6, 6);
-            this.grid_Voucher.Name = "grid_Voucher";
-            this.grid_Voucher.Size = new System.Drawing.Size(685, 549);
-            this.grid_Voucher.TabIndex = 0;
+            this.Grid_Voucher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.Grid_Voucher.Location = new System.Drawing.Point(6, 6);
+            this.Grid_Voucher.Name = "Grid_Voucher";
+            this.Grid_Voucher.Size = new System.Drawing.Size(685, 549);
+            this.Grid_Voucher.TabIndex = 0;
             // 
             // P1
             // 
@@ -261,6 +261,7 @@ namespace Applied_Accounts.Forms
             this.btnBottom.TabStop = false;
             this.btnBottom.Text = ">>";
             this.btnBottom.UseVisualStyleBackColor = true;
+            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
             // 
             // btnNext
             // 
@@ -271,6 +272,7 @@ namespace Applied_Accounts.Forms
             this.btnNext.TabStop = false;
             this.btnNext.Text = ">";
             this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
             // 
             // btnPrevious
             // 
@@ -281,6 +283,7 @@ namespace Applied_Accounts.Forms
             this.btnPrevious.TabStop = false;
             this.btnPrevious.Text = "<";
             this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
             // 
             // btnTop
             // 
@@ -291,6 +294,7 @@ namespace Applied_Accounts.Forms
             this.btnTop.TabStop = false;
             this.btnTop.Text = "<<";
             this.btnTop.UseVisualStyleBackColor = true;
+            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
             // 
             // btnNew
             // 
@@ -330,6 +334,9 @@ namespace Applied_Accounts.Forms
             this.txtCR.Name = "txtCR";
             this.txtCR.Size = new System.Drawing.Size(140, 26);
             this.txtCR.TabIndex = 13;
+            this.txtCR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCR.TextChanged += new System.EventHandler(this.txtCR_TextChanged);
+            this.txtCR.Leave += new System.EventHandler(this.txtCR_Leave);
             // 
             // txtDR
             // 
@@ -339,6 +346,9 @@ namespace Applied_Accounts.Forms
             this.txtDR.Name = "txtDR";
             this.txtDR.Size = new System.Drawing.Size(140, 26);
             this.txtDR.TabIndex = 12;
+            this.txtDR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDR.TextChanged += new System.EventHandler(this.txtDR_TextChanged);
+            this.txtDR.Leave += new System.EventHandler(this.txtDR_Leave);
             // 
             // cBoxPOrder
             // 
@@ -348,6 +358,7 @@ namespace Applied_Accounts.Forms
             this.cBoxPOrder.Name = "cBoxPOrder";
             this.cBoxPOrder.Size = new System.Drawing.Size(121, 21);
             this.cBoxPOrder.TabIndex = 11;
+            this.cBoxPOrder.SelectedIndexChanged += new System.EventHandler(this.cBoxPOrder_SelectedIndexChanged);
             // 
             // btnEmployees
             // 
@@ -462,6 +473,7 @@ namespace Applied_Accounts.Forms
             this.cBoxAccount.Size = new System.Drawing.Size(380, 21);
             this.cBoxAccount.TabIndex = 130;
             this.cBoxAccount.TabStop = false;
+            this.cBoxAccount.SelectedIndexChanged += new System.EventHandler(this.cBoxAccount_SelectedIndexChanged);
             // 
             // txtEmployeeID
             // 
@@ -471,6 +483,7 @@ namespace Applied_Accounts.Forms
             this.txtEmployeeID.Size = new System.Drawing.Size(40, 20);
             this.txtEmployeeID.TabIndex = 129;
             this.txtEmployeeID.TabStop = false;
+            this.txtEmployeeID.TextChanged += new System.EventHandler(this.txtEmployeeID_TextChanged);
             // 
             // txtStockID
             // 
@@ -480,6 +493,7 @@ namespace Applied_Accounts.Forms
             this.txtStockID.Size = new System.Drawing.Size(40, 20);
             this.txtStockID.TabIndex = 128;
             this.txtStockID.TabStop = false;
+            this.txtStockID.TextChanged += new System.EventHandler(this.txtStockID_TextChanged);
             // 
             // txtUnitID
             // 
@@ -489,6 +503,7 @@ namespace Applied_Accounts.Forms
             this.txtUnitID.Size = new System.Drawing.Size(40, 20);
             this.txtUnitID.TabIndex = 127;
             this.txtUnitID.TabStop = false;
+            this.txtUnitID.TextChanged += new System.EventHandler(this.txtUnitID_TextChanged);
             // 
             // txtProjectID
             // 
@@ -498,6 +513,7 @@ namespace Applied_Accounts.Forms
             this.txtProjectID.Size = new System.Drawing.Size(40, 20);
             this.txtProjectID.TabIndex = 126;
             this.txtProjectID.TabStop = false;
+            this.txtProjectID.TextChanged += new System.EventHandler(this.txtProjectID_TextChanged);
             // 
             // txtSupplierID
             // 
@@ -507,6 +523,7 @@ namespace Applied_Accounts.Forms
             this.txtSupplierID.Size = new System.Drawing.Size(40, 20);
             this.txtSupplierID.TabIndex = 125;
             this.txtSupplierID.TabStop = false;
+            this.txtSupplierID.TextChanged += new System.EventHandler(this.txtSupplierID_TextChanged);
             // 
             // txtAccountID
             // 
@@ -516,6 +533,7 @@ namespace Applied_Accounts.Forms
             this.txtAccountID.Size = new System.Drawing.Size(40, 20);
             this.txtAccountID.TabIndex = 124;
             this.txtAccountID.TabStop = false;
+            this.txtAccountID.TextChanged += new System.EventHandler(this.txtAccountID_TextChanged);
             // 
             // txtRemarks
             // 
@@ -601,6 +619,9 @@ namespace Applied_Accounts.Forms
             this.txtSRNO.Name = "txtSRNO";
             this.txtSRNO.Size = new System.Drawing.Size(100, 20);
             this.txtSRNO.TabIndex = 1;
+            this.txtSRNO.Enter += new System.EventHandler(this.txtSRNO_Enter);
+            this.txtSRNO.Leave += new System.EventHandler(this.txtSRNO_Leave);
+            this.txtSRNO.Validating += new System.ComponentModel.CancelEventHandler(this.txtSRNO_Validating);
             // 
             // label18
             // 
@@ -811,7 +832,7 @@ namespace Applied_Accounts.Forms
             this.Text = "Voucher1";
             this.Load += new System.EventHandler(this.frmVouchers1_Load);
             this.P2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.grid_Voucher)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).EndInit();
             this.P1.ResumeLayout(false);
             this.P1.PerformLayout();
             this.grp_Action.ResumeLayout(false);
@@ -827,7 +848,7 @@ namespace Applied_Accounts.Forms
         #endregion
 
         private System.Windows.Forms.TabPage P2;
-        private System.Windows.Forms.DataGridView grid_Voucher;
+        private System.Windows.Forms.DataGridView Grid_Voucher;
         private System.Windows.Forms.TabPage P1;
         private System.Windows.Forms.GroupBox grp_Action;
         private System.Windows.Forms.Button button13;

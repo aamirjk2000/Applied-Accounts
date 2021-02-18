@@ -173,9 +173,20 @@ namespace Applied_Accounts
         public static DataTable GetComboData(object TableID)                       // Get Table for Combo box object.
         {
             DataTable _DataTable = new DataTable();
+            DataRow _Row;
             string _TableName = Conversion.GetTableName((int)TableID);
             string _Text = "SELECT * FROM " + _TableName + " WHERE Active ORDER BY Title ";
             _DataTable = GetDataTable(_Text, _TableName);
+
+            // Add a one record Title "Select"
+
+            _Row = _DataTable.NewRow();
+            _Row["ID"] = 0;
+            _Row["Title"] = "_Select";
+            _DataTable.Rows.Add(_Row);
+
+            //===============================
+
             return _DataTable;
         }
 
@@ -505,6 +516,8 @@ namespace Applied_Accounts
 
     }                             // Main
 
+
+
     public enum Tables
     {
         COA = 1,
@@ -536,7 +549,7 @@ namespace Applied_Accounts
         View_Booking_Title = 110,
         View_TB_Projects = 111,
         View_TB_Project_Supplier = 112,
-        vIEW_Vou_Nos = 113,
+        View_Vou_Nos = 113,
 
         Grid_POrder = 201,
         Grid_Booking = 202,
