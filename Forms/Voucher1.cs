@@ -3,7 +3,7 @@ using Applied_Accounts.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
+
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -46,7 +46,8 @@ namespace Applied_Accounts.Forms
         private DataViewManager MyDataSource;
         private decimal Total_DR, Total_CR;
 
-        private Boolean Vou_Found;
+        private bool Vou_Found;
+        private bool Intialiaion = true;
 
         #region Initialization
 
@@ -71,6 +72,7 @@ namespace Applied_Accounts.Forms
             Set_ComboBox();                                 // Combo box setting DisplayMemebr, ValueMembers & DataSource
             Set_DataBinding();
             Set_DataGrid();
+            Intialiaion = true;                              // All Objects have been initialized.
 
         }
 
@@ -340,14 +342,12 @@ namespace Applied_Accounts.Forms
         }
 
 
-
-
-
         #endregion
 
         #region Combo Box Index Change
         private void cBoxAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(Intialiaion) { return; }
             if (cBoxAccount.SelectedValue != null) { txtAccountID.Text = cBoxAccount.SelectedValue.ToString(); }
             if (cBoxProject.SelectedValue != null) { txtProjectID.Text = cBoxProject.SelectedValue.ToString(); }
             if (cBoxSupplier.SelectedValue != null) { txtSupplierID.Text = cBoxSupplier.SelectedValue.ToString(); }
@@ -359,6 +359,7 @@ namespace Applied_Accounts.Forms
 
         private void cBoxPOrder_SelectedIndexChanged(object sender, EventArgs e)
         {
+
             //cBoxEmployee.SelectedValue = Conversion.ToLong(txtEmployeeID.Text);
         }
 
