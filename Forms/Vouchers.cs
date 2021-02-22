@@ -1316,7 +1316,6 @@ namespace Applied_Accounts.Forms
         {
             if (((TextBox)sender).Text.Length == 0) { return false; }      // Text Box is empty, do not validate
 
-
             bool IsSearch1 = SearchID(((TextBox)sender).Text, _DataTable);              // Seek Id in Table
             bool IsSearch2 = SearchCode(((TextBox)sender).Text, _DataTable);            // Seek Code in Table
             bool IsSearch3 = SearchTag(((TextBox)sender).Text, _DataTable);             // Seek SCode in table

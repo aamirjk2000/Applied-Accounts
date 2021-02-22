@@ -449,6 +449,7 @@ namespace Applied_Accounts
         }
         public static object[] SearchText(TextBox _Value, DataTable _DataTable)
         {
+            // Get a variables of Table Row
             object[] _Result = { (long)0, "", "", "", false };
 
             string _String = _Value.Text.Trim();

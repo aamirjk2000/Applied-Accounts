@@ -577,6 +577,8 @@ namespace Applied_Accounts.Forms
             this.txtEmployee.Name = "txtEmployee";
             this.txtEmployee.Size = new System.Drawing.Size(40, 20);
             this.txtEmployee.TabIndex = 7;
+            this.txtEmployee.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmployee_Validating);
+            this.txtEmployee.Validated += new System.EventHandler(this.txtEmployee_Validated);
             // 
             // txtStock
             // 
@@ -584,6 +586,8 @@ namespace Applied_Accounts.Forms
             this.txtStock.Name = "txtStock";
             this.txtStock.Size = new System.Drawing.Size(40, 20);
             this.txtStock.TabIndex = 6;
+            this.txtStock.Validating += new System.ComponentModel.CancelEventHandler(this.txtStock_Validating);
+            this.txtStock.Validated += new System.EventHandler(this.txtStock_Validated);
             // 
             // txtUnit
             // 
@@ -591,6 +595,8 @@ namespace Applied_Accounts.Forms
             this.txtUnit.Name = "txtUnit";
             this.txtUnit.Size = new System.Drawing.Size(40, 20);
             this.txtUnit.TabIndex = 5;
+            this.txtUnit.Validating += new System.ComponentModel.CancelEventHandler(this.txtUnit_Validating);
+            this.txtUnit.Validated += new System.EventHandler(this.txtUnit_Validated);
             // 
             // txtProject
             // 
@@ -598,6 +604,8 @@ namespace Applied_Accounts.Forms
             this.txtProject.Name = "txtProject";
             this.txtProject.Size = new System.Drawing.Size(40, 20);
             this.txtProject.TabIndex = 4;
+            this.txtProject.Validating += new System.ComponentModel.CancelEventHandler(this.txtProject_Validating);
+            this.txtProject.Validated += new System.EventHandler(this.txtProject_Validated);
             // 
             // txtSupplier
             // 
@@ -605,6 +613,8 @@ namespace Applied_Accounts.Forms
             this.txtSupplier.Name = "txtSupplier";
             this.txtSupplier.Size = new System.Drawing.Size(40, 20);
             this.txtSupplier.TabIndex = 3;
+            this.txtSupplier.Validating += new System.ComponentModel.CancelEventHandler(this.txtSupplier_Validating);
+            this.txtSupplier.Validated += new System.EventHandler(this.txtSupplier_Validated);
             // 
             // txtCOA
             // 
@@ -612,6 +622,8 @@ namespace Applied_Accounts.Forms
             this.txtCOA.Name = "txtCOA";
             this.txtCOA.Size = new System.Drawing.Size(40, 20);
             this.txtCOA.TabIndex = 2;
+            this.txtCOA.Validating += new System.ComponentModel.CancelEventHandler(this.txtCOA_Validating);
+            this.txtCOA.Validated += new System.EventHandler(this.txtCOA_Validated);
             // 
             // txtSRNO
             // 

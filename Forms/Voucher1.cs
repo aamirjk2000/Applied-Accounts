@@ -18,6 +18,7 @@ namespace Applied_Accounts.Forms
         private const string NumberFormat = "{0:###,###,###,##0.00}";
         private string DateFormat = Applied.GetString("DataFormat");
         private string ComboDateFormat = Applied.GetString("DateFormat_Combo");
+        private TextBox_Validation MyValidation = new TextBox_Validation();
 
         private string MyCheque_No;                                 // For copy and past
         private string MyCheque_Date;                               // For copy and past
@@ -39,15 +40,15 @@ namespace Applied_Accounts.Forms
         private DataTable tb_voucher_Delete { get => MyVoucherClass.tb_Voucher_Delete; }
         private DataTable tb_GridData { get => MyVoucherClass.tb_GridData; }
 
-        //private BindingSource MyBindingSource { get => MyVoucherClass.MyBindingSource; }
-
         private BindingManagerBase TableBinding;
-        //private BindingSource MyDataSource = new BindingSource();
         private DataViewManager MyDataSource;
-        private decimal Total_DR, Total_CR;
+        
+        private decimal Total_DR, Total_CR;                     // Store Total Amount of DE & CR 
 
         private bool Vou_Found;
-        private bool Intialiaion = true;
+        private bool Intializaion = true;
+        private bool IsNullAllowed = false;
+
 
         #region Initialization
 
@@ -72,7 +73,7 @@ namespace Applied_Accounts.Forms
             Set_ComboBox();                                 // Combo box setting DisplayMemebr, ValueMembers & DataSource
             Set_DataBinding();
             Set_DataGrid();
-            Intialiaion = true;                              // All Objects have been initialized.
+            Intializaion = false;                              // All Objects have been initialized.
 
         }
 
@@ -280,6 +281,18 @@ namespace Applied_Accounts.Forms
             Grid_Voucher.Columns[6].Width = 80;
         }
 
+        private bool IsBalance()
+        {
+            bool _Result = false;
+
+            Total_DR = (decimal)MyDataSource.DataSet.Tables["Ledger"].Compute("SUM(DR)", string.Empty);
+            Total_CR = (decimal)MyDataSource.DataSet.Tables["Ledger"].Compute("SUM(CR)", string.Empty);
+
+            if (Total_DR == Total_CR) { _Result = true; }
+
+            return _Result;
+        }
+
 
 
         #endregion
@@ -347,7 +360,7 @@ namespace Applied_Accounts.Forms
         #region Combo Box Index Change
         private void cBoxAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(Intialiaion) { return; }
+            if(Intializaion) { return; }
             if (cBoxAccount.SelectedValue != null) { txtAccountID.Text = cBoxAccount.SelectedValue.ToString(); }
             if (cBoxProject.SelectedValue != null) { txtProjectID.Text = cBoxProject.SelectedValue.ToString(); }
             if (cBoxSupplier.SelectedValue != null) { txtSupplierID.Text = cBoxSupplier.SelectedValue.ToString(); }
@@ -412,16 +425,75 @@ namespace Applied_Accounts.Forms
             grp_Action.Visible = IsBalance();
         }
 
-        private bool IsBalance()
+        #endregion
+
+        
+        #region Text Box Validation
+
+        private void txtCOA_Validating(object sender, CancelEventArgs e)
         {
-            bool _Result = false;
+            if (Intializaion) { return; }                           // return if objects initializing.
+            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
+            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Accounts);
+        }
+        private void txtCOA_Validated(object sender, EventArgs e)
+        {
+            txtAccountID.Text = MyValidation.Search_ComboID.ToString();
+        }
 
-            Total_DR = (decimal)MyDataSource.DataSet.Tables["Ledger"].Compute("SUM(DR)", string.Empty);
-            Total_CR = (decimal)MyDataSource.DataSet.Tables["Ledger"].Compute("SUM(CR)", string.Empty);
+        private void txtSupplier_Validating(object sender, CancelEventArgs e)
+        {
+            if (Intializaion) { return; }                           // return if objects initializing.
+            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
+            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Suppliers);
+        }
+        private void txtSupplier_Validated(object sender, EventArgs e)
+        {
+            txtSupplierID.Text = MyValidation.Search_ComboID.ToString();
+        }
 
-            if (Total_DR == Total_CR) { _Result = true; }
+        private void txtProject_Validating(object sender, CancelEventArgs e)
+        {
+            if (Intializaion) { return; }                           // return if objects initializing.
+            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
+            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Projects);
+        }
+        private void txtProject_Validated(object sender, EventArgs e)
+        {
+            txtProjectID.Text = MyValidation.Search_ComboID.ToString();
+        }
 
-            return _Result;
+        private void txtUnit_Validating(object sender, CancelEventArgs e)
+        {
+            if (Intializaion) { return; }                           // return if objects initializing.
+            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
+            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Units);
+        }
+        private void txtUnit_Validated(object sender, EventArgs e)
+        {
+            txtUnitID.Text = MyValidation.Search_ComboID.ToString();
+        }
+
+        private void txtStock_Validating(object sender, CancelEventArgs e)
+        {
+            if (Intializaion) { return; }                           // return if objects initializing.
+            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
+            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Stock);
+        }
+        private void txtStock_Validated(object sender, EventArgs e)
+        {
+            txtStockID.Text = MyValidation.Search_ComboID.ToString();
+        }
+
+        private void txtEmployee_Validating(object sender, CancelEventArgs e)
+        {
+            if (Intializaion) { return; }                           // return if objects initializing.
+            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
+            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Employees);
+        }
+        private void txtEmployee_Validated(object sender, EventArgs e)
+        {
+            txtEmployeeID.Text = MyValidation.Search_ComboID.ToString();
         }
 
         #endregion
