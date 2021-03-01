@@ -1,24 +1,23 @@
 ﻿using Applied_Accounts.Classes;
-using Applied_Accounts.Data;
+using Microsoft.ReportingServices.Diagnostics.Internal;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
-
 using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Entity.Migrations.Builders;
+using System.Windows;
 using System.Windows.Forms;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Applied_Accounts.Forms
 {
     public partial class frmVouchers1 : Form
     {
-        private const string NumberFormat = "{0:###,###,###,##0.00}";
+        private const string NumberFormat = "#,###.00;(#,###.00);-";
         private string DateFormat = Applied.GetString("DataFormat");
         private string ComboDateFormat = Applied.GetString("DateFormat_Combo");
-        private TextBox_Validation MyValidation = new TextBox_Validation();
+
+        public static TextBox_Validation MyValidation = new TextBox_Validation();
+        public static VoucherClass1 MyVoucherClass = new VoucherClass1();
 
         private string MyCheque_No;                                 // For copy and past
         private string MyCheque_Date;                               // For copy and past
@@ -27,26 +26,25 @@ namespace Applied_Accounts.Forms
         private string MyDescription;                               // For copy and past
         private string MyRemarks;                                   // for Copy and past.
 
-        public static VoucherClass1 MyVoucherClass = new VoucherClass1();
-
-        private DataTable tb_Accounts { get => MyVoucherClass.tb_Accounts; }
-        private DataTable tb_Suppliers { get => MyVoucherClass.tb_Suppliers; }
-        private DataTable tb_Projects { get => MyVoucherClass.tb_Projects; }
-        private DataTable tb_Units { get => MyVoucherClass.tb_Units; }
-        private DataTable tb_Stock { get => MyVoucherClass.tb_Stocks; }
-        private DataTable tb_Employees { get => MyVoucherClass.tb_Employees; }
-        private DataTable tb_POrder { get => MyVoucherClass.tb_POrder; }
+        private DataTable tb_Accounts { get => MyVoucherClass.ds_Voucher.Tables["COA"]; }
+        private DataTable tb_Suppliers { get => MyVoucherClass.ds_Voucher.Tables["Suppliers"]; }
+        private DataTable tb_Projects { get => MyVoucherClass.ds_Voucher.Tables["Projects"]; }
+        private DataTable tb_Units { get => MyVoucherClass.ds_Voucher.Tables["Units"]; }
+        private DataTable tb_Stock { get => MyVoucherClass.ds_Voucher.Tables["Stock"]; }
+        private DataTable tb_Employees { get => MyVoucherClass.ds_Voucher.Tables["Employees"]; }
+        private DataTable tb_POrder { get => MyVoucherClass.ds_Voucher.Tables["POrder"]; }
         private DataTable tb_Voucher { get => MyVoucherClass.tb_Voucher; }
         private DataTable tb_voucher_Delete { get => MyVoucherClass.tb_Voucher_Delete; }
         private DataTable tb_GridData { get => MyVoucherClass.tb_GridData; }
 
         private BindingManagerBase TableBinding;
-        private DataViewManager MyDataSource;
-        
+        private System.Data.DataSet MyDataSource;
+
+
         private decimal Total_DR, Total_CR;                     // Store Total Amount of DE & CR 
 
         private bool Vou_Found;
-        private bool Intializaion = true;
+        private bool Initializaion = true;
         private bool IsNullAllowed = false;
 
 
@@ -66,14 +64,18 @@ namespace Applied_Accounts.Forms
 
             // Binding Setup
 
-            MyDataSource = MyVoucherClass.ds_Voucher.DefaultViewManager;
-            TableBinding = BindingContext[MyDataSource, "Ledger"];
+            MyDataSource = MyVoucherClass.ds_Voucher;
+            TableBinding = BindingContext[MyVoucherClass.tb_Voucher];
+
+            TableBinding.PositionChanged += new EventHandler(TableBinding_PositionChange);
+            TableBinding.CurrentChanged += new EventHandler(TableBinding_CurrentChange);
+
             // ======================= END
 
             Set_ComboBox();                                 // Combo box setting DisplayMemebr, ValueMembers & DataSource
             Set_DataBinding();
             Set_DataGrid();
-            Intializaion = false;                              // All Objects have been initialized.
+            Initializaion = false;                              // All Objects have been initialized.
 
         }
 
@@ -87,7 +89,7 @@ namespace Applied_Accounts.Forms
             cBoxUnit.DataSource = MyDataSource;
             cBoxStock.DataSource = MyDataSource;
             cBoxEmployee.DataSource = MyDataSource;
-            cBoxPOrder.DataSource = tb_POrder.AsDataView();
+            cBoxPOrder.DataSource = MyDataSource;
 
             cBoxAccount.DisplayMember = "COA.Title";
             cBoxSupplier.DisplayMember = "Suppliers.Title";
@@ -103,7 +105,7 @@ namespace Applied_Accounts.Forms
             cBoxUnit.ValueMember = "Units.ID";
             cBoxStock.ValueMember = "Stock.ID";
             cBoxEmployee.ValueMember = "Employees.ID";
-            cBoxPOrder.ValueMember = "ID";
+            cBoxPOrder.ValueMember = "POrder.ID";
 
             cBoxVouType.DataSource = MyVoucherClass.Vou_Types;
 
@@ -143,30 +145,44 @@ namespace Applied_Accounts.Forms
 
         private void Set_DataBinding()
         {
-            txtSRNO.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtAccountID.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.COA", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtSupplierID.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.Supplier", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtProjectID.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.Project", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtUnitID.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.Unit", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtStockID.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.Stock", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtEmployeeID.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.Employee", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtSRNO.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtAccountID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "COA", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtSupplierID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Supplier", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtProjectID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtUnitID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtStockID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Stock", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtEmployeeID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Employee", true, DataSourceUpdateMode.OnPropertyChanged));
 
-            txtRefNo.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.RefNo", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtChqNo.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.Chq_No", true, DataSourceUpdateMode.OnPropertyChanged));
-            dt_ChqDate.DataBindings.Add(new Binding("Value", MyDataSource, "Ledger.Chq_Date", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtDR.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.DR", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtCR.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.CR", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtDescription.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.Description", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtRemarks.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.Remarks", true, DataSourceUpdateMode.OnPropertyChanged));
-
-            txtEmployee.DataBindings.Add("Text", txtEmployeeID, "Text");
+            txtRefNo.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "RefNo", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtChqNo.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Chq_No", true, DataSourceUpdateMode.OnPropertyChanged));
+            dt_ChqDate.DataBindings.Add(new Binding("Value", MyVoucherClass.tb_Voucher, "Chq_Date", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtDR.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "DR", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtCR.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "CR", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtDescription.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Description", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtRemarks.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged));
 
         }
 
 
+        private void TableBinding_PositionChange(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TableBinding_CurrentChange(object sender, EventArgs e)
+        {
+
+        }
+
+
+        private void frmVouchers1_Paint(object sender, PaintEventArgs e)
+        {
+            PositionChange();
+        }
+
         #endregion
 
-        #region Voucher Validation 
+        #region Voucher No Validation 
 
         private void txtVou_No_Validating(object sender, CancelEventArgs e)
         {
@@ -189,6 +205,11 @@ namespace Applied_Accounts.Forms
             }
         }
 
+
+
+
+
+
         private void txtVou_No_Validated(object sender, EventArgs e)
         {
             if (Vou_Found)
@@ -199,9 +220,15 @@ namespace Applied_Accounts.Forms
                     txtVou_No.Text = MyVoucherClass.Vou_No;
                     dt_VoucherDate.Value = MyVoucherClass.Vou_Date;
                     cBoxVouType.Text = MyVoucherClass.Vou_Type;
+
                     MyVoucherClass.Vou_Status = "Edit";
                     MyVoucherClass.Load_GridData();
                     grp_Transactions.Visible = true;
+                    MyValidation.Voucher_Type = MyVoucherClass.Vou_Type;
+
+                    txtCOA.Text = Applied.ID2Code((long)tb_Voucher.Rows[0]["ID"], tb_Accounts.AsDataView());
+
+
                 }
                 else
                 {
@@ -236,33 +263,75 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-        #region Navigation Buttons
+        #region Position Changed
 
+        private void PositionChange()
+        {
+            decimal _DR = Conversion.ToMoney(txtDR.Text);
+            decimal _CR = Conversion.ToMoney(txtCR.Text);
+            txtDR.Text = _DR.ToString(NumberFormat);
+            txtCR.Text = _CR.ToString(NumberFormat);
+
+            txtCOA.Text = Applied.ID2Code(Conversion.ToLong(txtAccountID.Text), tb_Accounts.AsDataView());
+            txtSupplier.Text = Applied.ID2Code(Conversion.ToLong(txtSupplierID.Text), tb_Suppliers.AsDataView());
+            txtProject.Text = Applied.ID2Code(Conversion.ToLong(txtProjectID.Text), tb_Projects.AsDataView());
+            txtUnit.Text = Applied.ID2Code(Conversion.ToLong(txtUnitID.Text), tb_Units.AsDataView());
+            txtStock.Text = Applied.ID2Code(Conversion.ToLong(txtStockID.Text), tb_Stock.AsDataView());
+            txtEmployee.Text = Applied.ID2Code(Conversion.ToLong(txtAccountID.Text), tb_Employees.AsDataView());
+
+            cBoxAccount.SelectedValue = Applied.Code2ID(txtCOA.Text, tb_Accounts.AsDataView());
+            cBoxSupplier.SelectedValue = Applied.Code2ID(txtSupplier.Text, tb_Suppliers.AsDataView());
+            cBoxProject.SelectedValue = Applied.Code2ID(txtProject.Text, tb_Projects.AsDataView());
+            cBoxUnit.SelectedValue = Applied.Code2ID(txtUnit.Text, tb_Units.AsDataView());
+            cBoxStock.SelectedValue = Applied.Code2ID(txtStock.Text, tb_Stock.AsDataView());
+            cBoxEmployee.SelectedValue = Applied.Code2ID(txtEmployee.Text, tb_Employees.AsDataView());
+
+            grp_Action.Visible = IsBalance();
+        }
+
+        #endregion
+
+        #region Navigation Buttons
         private void btnTop_Click(object sender, EventArgs e)
         {
+            Save_Values();
             TableBinding.Position = 0;
+            PositionChange();
         }
 
         private void btnPrevious_Click(object sender, EventArgs e)
         {
+            Save_Values();
             if (TableBinding.Position - 1 >= 0) { TableBinding.Position -= 1; }
             else { TableBinding.Position = 0; }
-            this.Invalidate();
+            PositionChange();
 
         }
 
         private void btnNext_Click(object sender, EventArgs e)
         {
-
+            Save_Values();
             if (TableBinding.Position + 1 < TableBinding.Count) { TableBinding.Position += 1; }
             else { TableBinding.Position = TableBinding.Count; }
-            this.Invalidate();
+            PositionChange();
         }
 
         private void btnBottom_Click(object sender, EventArgs e)
         {
+            Save_Values();
             TableBinding.Position = TableBinding.Count - 1;
+            PositionChange();
+        }
 
+        private void Save_Values()
+        {
+            int i = TableBinding.Position;
+            MyCheque_No = tb_Voucher.Rows[i]["Chq_no"].ToString();
+            MyCheque_Date = tb_Voucher.Rows[i]["Chq_Date"].ToString();
+            MyRefNo = tb_Voucher.Rows[i]["RefNo"].ToString();
+            MyPOrder = tb_Voucher.Rows[i]["POrder"].ToString();
+            MyDescription = tb_Voucher.Rows[i]["Description"].ToString();
+            MyRemarks = tb_Voucher.Rows[i]["Remarks"].ToString();
         }
 
         #endregion
@@ -285,10 +354,14 @@ namespace Applied_Accounts.Forms
         {
             bool _Result = false;
 
-            Total_DR = (decimal)MyDataSource.DataSet.Tables["Ledger"].Compute("SUM(DR)", string.Empty);
-            Total_CR = (decimal)MyDataSource.DataSet.Tables["Ledger"].Compute("SUM(CR)", string.Empty);
+            if (tb_Voucher.Rows.Count >= 2)
+            {
+                Total_DR = (decimal)tb_Voucher.Compute("SUM(DR)", string.Empty);
+                Total_CR = (decimal)tb_Voucher.Compute("SUM(CR)", string.Empty);
 
-            if (Total_DR == Total_CR) { _Result = true; }
+                if (Total_DR == Total_CR) { _Result = true; }
+            }
+            else { _Result = false; }
 
             return _Result;
         }
@@ -306,76 +379,20 @@ namespace Applied_Accounts.Forms
 
         private void txtSRNO_Leave(object sender, EventArgs e)
         {
-            txtSRNO.DataBindings.Add(new Binding("Text", MyDataSource, "Ledger.SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtSRNO.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
             grp_Action.Visible = IsBalance();
+            PositionChange();
 
 
         }
 
         private void txtSRNO_Validating(object sender, CancelEventArgs e)
         {
-            DataView _DataView = MyDataSource.DataSet.Tables["Ledger"].AsDataView();
+            DataView _DataView = MyDataSource.Tables["Ledger"].AsDataView();
             _DataView.RowFilter = "SrNo=" + Conversion.ToInteger(txtSRNO.Text.Trim());
             if (_DataView.Count == 1) { TableBinding.Position = _DataView.Table.Rows.IndexOf(_DataView.Table.Rows[0]); }
             else { e.Cancel = true; }
         }
-
-
-        #endregion
-
-        #region Textbox_ID Text Change
-
-        private void txtAccountID_TextChanged(object sender, EventArgs e)
-        {
-            cBoxAccount.SelectedValue = Conversion.ToLong(txtAccountID.Text);
-        }
-
-        private void txtProjectID_TextChanged(object sender, EventArgs e)
-        {
-            cBoxProject.SelectedValue = Conversion.ToLong(txtProjectID.Text);
-        }
-        private void txtSupplierID_TextChanged(object sender, EventArgs e)
-        {
-            cBoxSupplier.SelectedValue = Conversion.ToLong(txtSupplierID.Text);
-        }
-
-        private void txtUnitID_TextChanged(object sender, EventArgs e)
-        {
-            cBoxUnit.SelectedValue = Conversion.ToLong(txtUnitID.Text);
-        }
-
-        private void txtStockID_TextChanged(object sender, EventArgs e)
-        {
-            cBoxStock.SelectedValue = Conversion.ToLong(txtStockID.Text);
-        }
-
-        private void txtEmployeeID_TextChanged(object sender, EventArgs e)
-        {
-            cBoxEmployee.SelectedValue = Conversion.ToLong(txtEmployeeID.Text);
-        }
-
-
-        #endregion
-
-        #region Combo Box Index Change
-        private void cBoxAccount_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if(Intializaion) { return; }
-            if (cBoxAccount.SelectedValue != null) { txtAccountID.Text = cBoxAccount.SelectedValue.ToString(); }
-            if (cBoxProject.SelectedValue != null) { txtProjectID.Text = cBoxProject.SelectedValue.ToString(); }
-            if (cBoxSupplier.SelectedValue != null) { txtSupplierID.Text = cBoxSupplier.SelectedValue.ToString(); }
-            if (cBoxUnit.SelectedValue != null) { txtUnitID.Text = cBoxUnit.SelectedValue.ToString(); }
-            if (cBoxStock.SelectedValue != null) { txtStockID.Text = cBoxStock.SelectedValue.ToString(); }
-            if (cBoxEmployee.SelectedValue != null) { txtEmployeeID.Text = cBoxEmployee.SelectedValue.ToString(); }
-        }
-
-
-        private void cBoxPOrder_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
-            //cBoxEmployee.SelectedValue = Conversion.ToLong(txtEmployeeID.Text);
-        }
-
 
 
         #endregion
@@ -395,108 +412,189 @@ namespace Applied_Accounts.Forms
 
         private void txtDR_Leave(object sender, EventArgs e)
         {
-            decimal _Amount = Conversion.ToMoney(txtDR.Text);
-            if (_Amount > 0)
-            {
-                txtCR.Text = "";
-                txtDR.Text = string.Format(NumberFormat, decimal.Parse(txtDR.Text));
-            }
-            else
-            {
-                txtDR.Text = string.Empty;
-            }
+            //decimal _Amount = Conversion.ToMoney(txtDR.Text);
+            //if (_Amount > 0)
+            //{
+            //    txtCR.Text = "0";
+            //    decimal _DR = Conversion.ToMoney(txtDR.Text);
+            //    decimal _CR = Conversion.ToMoney(txtCR.Text);
+            //    txtDR.Text = _DR.ToString(NumberFormat);
+            //    txtCR.Text = _CR.ToString(NumberFormat);
 
-            grp_Action.Visible = IsBalance();
+            //}
+            //else
+            //{
+            //    txtDR.Text = string.Empty;
+            //}
+
+            //grp_Action.Visible = IsBalance();
         }
 
         private void txtCR_Leave(object sender, EventArgs e)
         {
-            decimal _Amount = Conversion.ToMoney(txtCR.Text);
-            if (_Amount > 0)
-            {
-                txtDR.Text = "";
-                txtCR.Text = string.Format(NumberFormat, decimal.Parse(txtCR.Text));
-            }
-            else
-            {
-                txtCR.Text = string.Empty;
-            }
+            //decimal _Amount = Conversion.ToMoney(txtCR.Text);
+            //if (_Amount > 0)
+            //{
+            //    txtDR.Text = "0";
+            //    decimal _DR = Conversion.ToMoney(txtDR.Text);
+            //    decimal _CR = Conversion.ToMoney(txtCR.Text);
+            //    txtDR.Text = _DR.ToString(NumberFormat);
+            //    txtCR.Text = _CR.ToString(NumberFormat);
+            //}
+            //else
+            //{
+            //    txtCR.Text = string.Empty;
+            //}
 
-            grp_Action.Visible = IsBalance();
+            //grp_Action.Visible = IsBalance();
         }
 
         #endregion
 
-        
         #region Text Box Validation
 
         private void txtCOA_Validating(object sender, CancelEventArgs e)
         {
-            if (Intializaion) { return; }                           // return if objects initializing.
-            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
+            if (Initializaion) { return; }                           // return if objects initializing.
+            if (MyValidation.IsNullAllowed(sender)) { return; }           // Not Validate if Null is allowed.
             e.Cancel = MyValidation.Validating((TextBox)sender, tb_Accounts);
         }
         private void txtCOA_Validated(object sender, EventArgs e)
         {
-            txtAccountID.Text = MyValidation.Search_ComboID.ToString();
+            cBoxAccount.SelectedValue = MyValidation.Search_ComboID.ToString();
+
+            //  txtAccountID.Text = 
         }
 
         private void txtSupplier_Validating(object sender, CancelEventArgs e)
         {
-            if (Intializaion) { return; }                           // return if objects initializing.
-            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Suppliers);
+            if (Initializaion) { return; }                           // return if objects initializing.
+
+            if (string.IsNullOrWhiteSpace(txtSupplier.Text))
+            {
+                if (MyValidation.IsNullAllowed(sender)) { return; }           // Not Validate if Null is allowed.
+            }
+            else
+            {
+                e.Cancel = MyValidation.Validating((TextBox)sender, tb_Suppliers);
+            }
         }
         private void txtSupplier_Validated(object sender, EventArgs e)
         {
-            txtSupplierID.Text = MyValidation.Search_ComboID.ToString();
+            cBoxSupplier.SelectedValue = MyValidation.Search_ComboID.ToString();
         }
 
         private void txtProject_Validating(object sender, CancelEventArgs e)
         {
-            if (Intializaion) { return; }                           // return if objects initializing.
-            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Projects);
+            if (Initializaion) { return; }                           // return if objects initializing.
+            if (string.IsNullOrWhiteSpace(txtProject.Text))
+            {
+                if (MyValidation.IsNullAllowed(sender)) { return; }           // Not Validate if Null is allowed.
+            }
+            else
+            { e.Cancel = MyValidation.Validating((TextBox)sender, tb_Projects); }
+
         }
         private void txtProject_Validated(object sender, EventArgs e)
         {
-            txtProjectID.Text = MyValidation.Search_ComboID.ToString();
+            cBoxProject.SelectedValue = MyValidation.Search_ComboID.ToString();
         }
 
         private void txtUnit_Validating(object sender, CancelEventArgs e)
         {
-            if (Intializaion) { return; }                           // return if objects initializing.
-            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Units);
+            if (Initializaion) { return; }                           // return if objects initializing.
+            if (string.IsNullOrWhiteSpace(txtUnit.Text))
+            {
+                if (MyValidation.IsNullAllowed(sender)) { return; }           // Not Validate if Null is allowed.
+            }
+            else
+            { e.Cancel = MyValidation.Validating((TextBox)sender, tb_Units); }
+
         }
         private void txtUnit_Validated(object sender, EventArgs e)
         {
-            txtUnitID.Text = MyValidation.Search_ComboID.ToString();
+            cBoxUnit.SelectedValue = MyValidation.Search_ComboID.ToString();
         }
 
         private void txtStock_Validating(object sender, CancelEventArgs e)
         {
-            if (Intializaion) { return; }                           // return if objects initializing.
-            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Stock);
+            if (Initializaion) { return; }                           // return if objects initializing.
+            if (string.IsNullOrWhiteSpace(txtStock.Text))
+            {
+                if (MyValidation.IsNullAllowed(sender)) { return; }            // Not Validate if Null is allowed.
+            }
+            else
+            {
+                e.Cancel = MyValidation.Validating((TextBox)sender, tb_Stock);
+            }
+
         }
         private void txtStock_Validated(object sender, EventArgs e)
         {
-            txtStockID.Text = MyValidation.Search_ComboID.ToString();
+            cBoxStock.SelectedValue = MyValidation.Search_ComboID.ToString();
         }
 
         private void txtEmployee_Validating(object sender, CancelEventArgs e)
         {
-            if (Intializaion) { return; }                           // return if objects initializing.
-            if (MyValidation.IsNullAllowed()) { return; }           // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Employees);
+            if (Initializaion) { return; }                           // return if objects initializing.
+            if(string.IsNullOrWhiteSpace(txtEmployee.Text))
+            {
+                if (MyValidation.IsNullAllowed(sender)) { return; }           // Not Validate if Null is allowed.
+            }
+            else
+            {
+                e.Cancel = MyValidation.Validating((TextBox)sender, tb_Employees);
+            }
+            
         }
         private void txtEmployee_Validated(object sender, EventArgs e)
         {
-            txtEmployeeID.Text = MyValidation.Search_ComboID.ToString();
+            cBoxEmployee.SelectedValue = MyValidation.Search_ComboID.ToString();
         }
 
         #endregion
 
-    }
+        #region New Record
+
+        private void btnNew_Click(object sender, EventArgs e)
+        {
+            MyVoucherClass.New();
+            if (MyVoucherClass.New_Record)
+            {
+                btnBottom_Click(sender, e);
+                lblMessage.Text = " New Transaction Created.";
+
+            }
+        }
+
+
+        #endregion
+
+        #region form Closing
+
+        private void frmVouchers1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MyVoucherClass.Voucher_Saved)         // Skip it when Voucher is saved.
+            {
+                e.Cancel = false;
+                return;
+            }
+
+            MessageBoxResult _Result;
+            _Result = MessageBox.Show("Are you sure to close", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+            if (_Result == MessageBoxResult.Yes)
+            {
+                e.Cancel = false;
+            }
+            else
+            {
+                lblMessage.Text = "Form Not Closed";
+                e.Cancel = true;
+            }
+        }
+
+
+        #endregion
+
+    }   //============================== END
 }

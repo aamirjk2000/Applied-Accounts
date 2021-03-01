@@ -21,20 +21,20 @@ namespace Applied_Accounts.Classes
         public TextBox_Validation()
         {
         }
-            
-        
+
+
         public int Search_ComboID { get; set; }
         public string Search_Title { get; set; }
         public string Search_Tag { get; set; }
         public string Search_Code { get; set; }
         public string Voucher_Type { get; set; }
-            
+
 
         public bool Validating(object sender, DataTable _DataTable)
         {
-            if (((TextBox)sender).Text.Length == 0) { return false; }      // Text Box is empty, do not validate
+            //if (((TextBox)sender).Text.Length == 0) { return true; }                    // Text Box is empty, do not validate
 
-
+            Search_ComboID = Conversion.ToInteger(((TextBox)sender).Text.Trim());
             bool IsSearch1 = SearchID(((TextBox)sender).Text, _DataTable);              // Seek Id in Table
             bool IsSearch2 = SearchCode(((TextBox)sender).Text, _DataTable);            // Seek Code in Table
             bool IsSearch3 = SearchTag(((TextBox)sender).Text, _DataTable);             // Seek SCode in table
@@ -120,9 +120,79 @@ namespace Applied_Accounts.Classes
             return _Result;
         }
 
-        public bool IsNullAllowed()
+        public bool IsNullAllowed(object sender)
         {
-            return false;                        // Temporary allowed true.
+            bool _Result = false;
+            TextBox _Textbox = (TextBox)sender;
+            switch (Voucher_Type)
+            {
+                case null:
+                    break;
+
+                case "":
+                    break;
+
+                case "Journal":
+
+                    if(_Textbox.Name == "txtCOA") { _Result = false;}
+                    if (_Textbox.Name == "txtSupplier") { _Result = true; }
+                    if (_Textbox.Name == "txtProject") { _Result = true; }
+                    if (_Textbox.Name == "txtUnit") { _Result = true; }
+                    if (_Textbox.Name == "txtStock") { _Result = true; }
+                    if (_Textbox.Name == "txtEmployee") { _Result = true; }
+
+                    break;
+
+                case "Payment":
+
+                    if (_Textbox.Name == "txtCOA") { _Result = false; }
+                    if (_Textbox.Name == "txtSupplier") { _Result = false; }
+                    if (_Textbox.Name == "txtProject") { _Result = false; }
+                    if (_Textbox.Name == "txtUnit") { _Result = true; }
+                    if (_Textbox.Name == "txtStock") { _Result = true; }
+                    if (_Textbox.Name == "txtEmployee") { _Result = true; }
+
+
+                    break;
+
+                case "Receipt":
+                    if (_Textbox.Name == "txtCOA") { _Result = false; }
+                    if (_Textbox.Name == "txtSupplier") { _Result = false; }
+                    if (_Textbox.Name == "txtProject") { _Result = false; }
+                    if (_Textbox.Name == "txtUnit") { _Result = false; }
+                    if (_Textbox.Name == "txtStock") { _Result = true; }
+                    if (_Textbox.Name == "txtEmployee") { _Result = true; }
+
+
+                    break;
+
+                case "Stock":
+                    if (_Textbox.Name == "txtCOA") { _Result = false; }
+                    if (_Textbox.Name == "txtSupplier") { _Result = false; }
+                    if (_Textbox.Name == "txtProject") { _Result = false; }
+                    if (_Textbox.Name == "txtUnit") { _Result = true; }
+                    if (_Textbox.Name == "txtStock") { _Result = false; }
+                    if (_Textbox.Name == "txtEmployee") { _Result = true; }
+
+                    break;
+
+                case "Payroll":
+                    if (_Textbox.Name == "txtCOA") { _Result = false; }
+                    if (_Textbox.Name == "txtSupplier") { _Result = true; }
+                    if (_Textbox.Name == "txtProject") { _Result = false; }
+                    if (_Textbox.Name == "txtUnit") { _Result = true; }
+                    if (_Textbox.Name == "txtStock") { _Result = true; }
+                    if (_Textbox.Name == "txtEmployee") { _Result = false; }
+
+                    break;
+
+                default:
+                    break;
+            }
+
+
+
+            return _Result;                        // Temporary allowed true.
         }
 
     }

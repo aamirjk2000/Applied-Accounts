@@ -114,7 +114,7 @@ namespace Applied_Accounts.Forms
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
             this.P2.Padding = new System.Windows.Forms.Padding(3);
-            this.P2.Size = new System.Drawing.Size(697, 561);
+            this.P2.Size = new System.Drawing.Size(701, 561);
             this.P2.TabIndex = 1;
             this.P2.Text = "TRANSACTIONS";
             this.P2.UseVisualStyleBackColor = true;
@@ -136,7 +136,7 @@ namespace Applied_Accounts.Forms
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
-            this.P1.Size = new System.Drawing.Size(697, 561);
+            this.P1.Size = new System.Drawing.Size(701, 561);
             this.P1.TabIndex = 0;
             this.P1.Text = "VOUCHER";
             this.P1.UseVisualStyleBackColor = true;
@@ -155,7 +155,7 @@ namespace Applied_Accounts.Forms
             // 
             // button13
             // 
-            this.button13.Location = new System.Drawing.Point(393, 19);
+            this.button13.Location = new System.Drawing.Point(433, 22);
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(75, 23);
             this.button13.TabIndex = 5;
@@ -164,7 +164,7 @@ namespace Applied_Accounts.Forms
             // 
             // button11
             // 
-            this.button11.Location = new System.Drawing.Point(231, 19);
+            this.button11.Location = new System.Drawing.Point(211, 22);
             this.button11.Name = "button11";
             this.button11.Size = new System.Drawing.Size(75, 23);
             this.button11.TabIndex = 3;
@@ -173,7 +173,7 @@ namespace Applied_Accounts.Forms
             // 
             // button12
             // 
-            this.button12.Location = new System.Drawing.Point(312, 19);
+            this.button12.Location = new System.Drawing.Point(322, 22);
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(75, 23);
             this.button12.TabIndex = 4;
@@ -305,6 +305,7 @@ namespace Applied_Accounts.Forms
             this.btnNew.TabStop = false;
             this.btnNew.Text = "New";
             this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // label5
             // 
@@ -358,7 +359,6 @@ namespace Applied_Accounts.Forms
             this.cBoxPOrder.Name = "cBoxPOrder";
             this.cBoxPOrder.Size = new System.Drawing.Size(121, 21);
             this.cBoxPOrder.TabIndex = 11;
-            this.cBoxPOrder.SelectedIndexChanged += new System.EventHandler(this.cBoxPOrder_SelectedIndexChanged);
             // 
             // btnEmployees
             // 
@@ -473,7 +473,6 @@ namespace Applied_Accounts.Forms
             this.cBoxAccount.Size = new System.Drawing.Size(380, 21);
             this.cBoxAccount.TabIndex = 130;
             this.cBoxAccount.TabStop = false;
-            this.cBoxAccount.SelectedIndexChanged += new System.EventHandler(this.cBoxAccount_SelectedIndexChanged);
             // 
             // txtEmployeeID
             // 
@@ -483,7 +482,6 @@ namespace Applied_Accounts.Forms
             this.txtEmployeeID.Size = new System.Drawing.Size(40, 20);
             this.txtEmployeeID.TabIndex = 129;
             this.txtEmployeeID.TabStop = false;
-            this.txtEmployeeID.TextChanged += new System.EventHandler(this.txtEmployeeID_TextChanged);
             // 
             // txtStockID
             // 
@@ -493,7 +491,6 @@ namespace Applied_Accounts.Forms
             this.txtStockID.Size = new System.Drawing.Size(40, 20);
             this.txtStockID.TabIndex = 128;
             this.txtStockID.TabStop = false;
-            this.txtStockID.TextChanged += new System.EventHandler(this.txtStockID_TextChanged);
             // 
             // txtUnitID
             // 
@@ -503,7 +500,6 @@ namespace Applied_Accounts.Forms
             this.txtUnitID.Size = new System.Drawing.Size(40, 20);
             this.txtUnitID.TabIndex = 127;
             this.txtUnitID.TabStop = false;
-            this.txtUnitID.TextChanged += new System.EventHandler(this.txtUnitID_TextChanged);
             // 
             // txtProjectID
             // 
@@ -513,7 +509,6 @@ namespace Applied_Accounts.Forms
             this.txtProjectID.Size = new System.Drawing.Size(40, 20);
             this.txtProjectID.TabIndex = 126;
             this.txtProjectID.TabStop = false;
-            this.txtProjectID.TextChanged += new System.EventHandler(this.txtProjectID_TextChanged);
             // 
             // txtSupplierID
             // 
@@ -523,7 +518,6 @@ namespace Applied_Accounts.Forms
             this.txtSupplierID.Size = new System.Drawing.Size(40, 20);
             this.txtSupplierID.TabIndex = 125;
             this.txtSupplierID.TabStop = false;
-            this.txtSupplierID.TextChanged += new System.EventHandler(this.txtSupplierID_TextChanged);
             // 
             // txtAccountID
             // 
@@ -533,7 +527,6 @@ namespace Applied_Accounts.Forms
             this.txtAccountID.Size = new System.Drawing.Size(40, 20);
             this.txtAccountID.TabIndex = 124;
             this.txtAccountID.TabStop = false;
-            this.txtAccountID.TextChanged += new System.EventHandler(this.txtAccountID_TextChanged);
             // 
             // txtRemarks
             // 
@@ -575,7 +568,7 @@ namespace Applied_Accounts.Forms
             // 
             this.txtEmployee.Location = new System.Drawing.Point(125, 191);
             this.txtEmployee.Name = "txtEmployee";
-            this.txtEmployee.Size = new System.Drawing.Size(40, 20);
+            this.txtEmployee.Size = new System.Drawing.Size(55, 20);
             this.txtEmployee.TabIndex = 7;
             this.txtEmployee.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmployee_Validating);
             this.txtEmployee.Validated += new System.EventHandler(this.txtEmployee_Validated);
@@ -584,7 +577,7 @@ namespace Applied_Accounts.Forms
             // 
             this.txtStock.Location = new System.Drawing.Point(125, 164);
             this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new System.Drawing.Size(40, 20);
+            this.txtStock.Size = new System.Drawing.Size(55, 20);
             this.txtStock.TabIndex = 6;
             this.txtStock.Validating += new System.ComponentModel.CancelEventHandler(this.txtStock_Validating);
             this.txtStock.Validated += new System.EventHandler(this.txtStock_Validated);
@@ -593,7 +586,7 @@ namespace Applied_Accounts.Forms
             // 
             this.txtUnit.Location = new System.Drawing.Point(125, 137);
             this.txtUnit.Name = "txtUnit";
-            this.txtUnit.Size = new System.Drawing.Size(40, 20);
+            this.txtUnit.Size = new System.Drawing.Size(55, 20);
             this.txtUnit.TabIndex = 5;
             this.txtUnit.Validating += new System.ComponentModel.CancelEventHandler(this.txtUnit_Validating);
             this.txtUnit.Validated += new System.EventHandler(this.txtUnit_Validated);
@@ -602,7 +595,7 @@ namespace Applied_Accounts.Forms
             // 
             this.txtProject.Location = new System.Drawing.Point(125, 110);
             this.txtProject.Name = "txtProject";
-            this.txtProject.Size = new System.Drawing.Size(40, 20);
+            this.txtProject.Size = new System.Drawing.Size(55, 20);
             this.txtProject.TabIndex = 4;
             this.txtProject.Validating += new System.ComponentModel.CancelEventHandler(this.txtProject_Validating);
             this.txtProject.Validated += new System.EventHandler(this.txtProject_Validated);
@@ -611,7 +604,7 @@ namespace Applied_Accounts.Forms
             // 
             this.txtSupplier.Location = new System.Drawing.Point(125, 83);
             this.txtSupplier.Name = "txtSupplier";
-            this.txtSupplier.Size = new System.Drawing.Size(40, 20);
+            this.txtSupplier.Size = new System.Drawing.Size(55, 20);
             this.txtSupplier.TabIndex = 3;
             this.txtSupplier.Validating += new System.ComponentModel.CancelEventHandler(this.txtSupplier_Validating);
             this.txtSupplier.Validated += new System.EventHandler(this.txtSupplier_Validated);
@@ -620,7 +613,7 @@ namespace Applied_Accounts.Forms
             // 
             this.txtCOA.Location = new System.Drawing.Point(125, 56);
             this.txtCOA.Name = "txtCOA";
-            this.txtCOA.Size = new System.Drawing.Size(40, 20);
+            this.txtCOA.Size = new System.Drawing.Size(55, 20);
             this.txtCOA.TabIndex = 2;
             this.txtCOA.Validating += new System.ComponentModel.CancelEventHandler(this.txtCOA_Validating);
             this.txtCOA.Validated += new System.EventHandler(this.txtCOA_Validated);
@@ -831,18 +824,20 @@ namespace Applied_Accounts.Forms
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
-            this.Pages.Size = new System.Drawing.Size(705, 587);
+            this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
             // 
             // frmVouchers1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 611);
+            this.ClientSize = new System.Drawing.Size(733, 611);
             this.Controls.Add(this.Pages);
             this.Name = "frmVouchers1";
             this.Text = "Voucher1";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVouchers1_FormClosing);
             this.Load += new System.EventHandler(this.frmVouchers1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmVouchers1_Paint);
             this.P2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).EndInit();
             this.P1.ResumeLayout(false);

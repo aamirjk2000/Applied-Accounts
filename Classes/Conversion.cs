@@ -58,8 +58,19 @@ namespace Applied_Accounts.Classes
 
         public static decimal ToMoney(string _Value)
         {
-            if (_Value.Length == 0) { return 0; }
-            return Convert.ToDecimal(_Value);
+            try
+            {
+
+                if (_Value.Length == 0) { return 0; }
+                if (_Value == "-") { return 0; }
+                if (_Value == "+") { return 0; }
+                return Convert.ToDecimal(_Value);
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            
         }
 
         public static decimal ToMoney(int _Value)

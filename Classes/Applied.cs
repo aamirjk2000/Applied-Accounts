@@ -441,6 +441,14 @@ namespace Applied_Accounts.Classes
             return 0;
         }
 
+        public static string ID2Code(long _ID, DataView _DataView)
+        {
+            if (_DataView == null) { return string.Empty; }
+
+            _DataView.RowFilter = "ID='" + _ID.ToString() + "'";
+            if (_DataView.Count == 1) { return _DataView[0].Row["Code"].ToString(); }
+            return string.Empty;
+        }
 
 
 
