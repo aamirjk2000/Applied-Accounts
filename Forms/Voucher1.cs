@@ -12,7 +12,8 @@ namespace Applied_Accounts.Forms
 {
     public partial class frmVouchers1 : Form
     {
-        private const string NumberFormat = "#,###.00;(#,###.00);-";
+        //private const string NumberFormat = "#,###.00;(#,###.00);0";
+        private string NumberFormat = Applied.GetString("CurrencyFormat");
         private string DateFormat = Applied.GetString("DataFormat");
         private string ComboDateFormat = Applied.GetString("DateFormat_Combo");
 
@@ -286,6 +287,17 @@ namespace Applied_Accounts.Forms
             cBoxStock.SelectedValue = Applied.Code2ID(txtStock.Text, tb_Stock.AsDataView());
             cBoxEmployee.SelectedValue = Applied.Code2ID(txtEmployee.Text, tb_Employees.AsDataView());
 
+            // IF SRNO is focused then not binding else biding this object.
+            if (txtSRNO.Focused)
+            {
+                txtSRNO.DataBindings.Clear();
+            }
+            else
+            {
+                txtSRNO.DataBindings.Clear();
+                txtSRNO.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
+            }
+
             grp_Action.Visible = IsBalance();
         }
 
@@ -379,21 +391,43 @@ namespace Applied_Accounts.Forms
 
         private void txtSRNO_Leave(object sender, EventArgs e)
         {
-            txtSRNO.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
-            grp_Action.Visible = IsBalance();
+            long SelectedPosition = Conversion.ToLong(txtSRNO.Text);
+            DataView _Voucher = tb_Voucher.AsDataView();
+            _Voucher.RowFilter = "SRNO=" + SelectedPosition.ToString();
+            foreach (DataRow _Row in tb_Voucher.Rows)
+            {
+                if (_Row["SRNO"].ToString() == SelectedPosition.ToString())
+                {
+                    TableBinding.Position = tb_Voucher.Rows.IndexOf(_Row);
+                }
+            }
             PositionChange();
-
-
         }
 
         private void txtSRNO_Validating(object sender, CancelEventArgs e)
         {
-            DataView _DataView = MyDataSource.Tables["Ledger"].AsDataView();
-            _DataView.RowFilter = "SrNo=" + Conversion.ToInteger(txtSRNO.Text.Trim());
-            if (_DataView.Count == 1) { TableBinding.Position = _DataView.Table.Rows.IndexOf(_DataView.Table.Rows[0]); }
-            else { e.Cancel = true; }
+            if (string.IsNullOrWhiteSpace(txtSRNO.Text))
+            {
+                e.Cancel = true;
+            }
+
+            if (Conversion.ToLong(txtSRNO.Text) > TableBinding.Count)
+            {
+                txtSRNO.Text = TableBinding.Count.ToString();
+                e.Cancel = true;
+            }
+
+            if (Conversion.ToLong(txtSRNO.Text) == 0)
+            {
+                txtSRNO.Text = "1";
+                e.Cancel = true;
+            }
         }
 
+        private void txtSRNO_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Applied.IsDigit(sender, e);
+        }
 
         #endregion
 
@@ -461,10 +495,17 @@ namespace Applied_Accounts.Forms
         }
         private void txtCOA_Validated(object sender, EventArgs e)
         {
-            cBoxAccount.SelectedValue = MyValidation.Search_ComboID.ToString();
-
-            //  txtAccountID.Text = 
+            if (!string.IsNullOrEmpty(txtCOA.Text))
+            {
+                cBoxAccount.SelectedValue = MyValidation.Search_ComboID.ToString();
+                if (string.IsNullOrWhiteSpace(txtAccountID.Text) || txtAccountID.Text == "0")
+                {
+                    txtAccountID.Text = MyValidation.ObjectID(sender, tb_Accounts);
+                }
+            }
         }
+
+
 
         private void txtSupplier_Validating(object sender, CancelEventArgs e)
         {
@@ -481,7 +522,14 @@ namespace Applied_Accounts.Forms
         }
         private void txtSupplier_Validated(object sender, EventArgs e)
         {
-            cBoxSupplier.SelectedValue = MyValidation.Search_ComboID.ToString();
+            if (!string.IsNullOrEmpty(txtSupplier.Text))
+            {
+                cBoxSupplier.SelectedValue = MyValidation.Search_ComboID.ToString();
+                if (string.IsNullOrWhiteSpace(txtSupplierID.Text) || txtSupplierID.Text == "0")
+                {
+                    txtSupplierID.Text = MyValidation.ObjectID(sender, tb_Suppliers);
+                }
+            }
         }
 
         private void txtProject_Validating(object sender, CancelEventArgs e)
@@ -497,7 +545,16 @@ namespace Applied_Accounts.Forms
         }
         private void txtProject_Validated(object sender, EventArgs e)
         {
-            cBoxProject.SelectedValue = MyValidation.Search_ComboID.ToString();
+            if (!string.IsNullOrEmpty(txtProject.Text))
+            {
+                cBoxProject.SelectedValue = MyValidation.Search_ComboID.ToString();
+
+                if (string.IsNullOrWhiteSpace(txtProjectID.Text) || txtProjectID.Text == "0")
+                {
+                    txtProjectID.Text = MyValidation.ObjectID(sender, tb_Projects);
+                }
+            }
+
         }
 
         private void txtUnit_Validating(object sender, CancelEventArgs e)
@@ -513,7 +570,15 @@ namespace Applied_Accounts.Forms
         }
         private void txtUnit_Validated(object sender, EventArgs e)
         {
-            cBoxUnit.SelectedValue = MyValidation.Search_ComboID.ToString();
+
+            if (!string.IsNullOrEmpty(txtUnit.Text))
+            {
+                cBoxUnit.SelectedValue = MyValidation.Search_ComboID.ToString();
+                if (string.IsNullOrWhiteSpace(txtUnitID.Text) || txtUnitID.Text == "0")
+                {
+                    txtUnitID.Text = MyValidation.ObjectID(sender, tb_Units);
+                }
+            }
         }
 
         private void txtStock_Validating(object sender, CancelEventArgs e)
@@ -531,13 +596,21 @@ namespace Applied_Accounts.Forms
         }
         private void txtStock_Validated(object sender, EventArgs e)
         {
-            cBoxStock.SelectedValue = MyValidation.Search_ComboID.ToString();
+
+            if (!string.IsNullOrEmpty(txtStock.Text))
+            {
+                cBoxStock.SelectedValue = MyValidation.Search_ComboID.ToString();
+                if (string.IsNullOrWhiteSpace(txtStockID.Text) || txtStockID.Text == "0")
+                {
+                    txtStockID.Text = MyValidation.ObjectID(sender, tb_Stock);
+                }
+            }
         }
 
         private void txtEmployee_Validating(object sender, CancelEventArgs e)
         {
             if (Initializaion) { return; }                           // return if objects initializing.
-            if(string.IsNullOrWhiteSpace(txtEmployee.Text))
+            if (string.IsNullOrWhiteSpace(txtEmployee.Text))
             {
                 if (MyValidation.IsNullAllowed(sender)) { return; }           // Not Validate if Null is allowed.
             }
@@ -545,11 +618,19 @@ namespace Applied_Accounts.Forms
             {
                 e.Cancel = MyValidation.Validating((TextBox)sender, tb_Employees);
             }
-            
+
         }
         private void txtEmployee_Validated(object sender, EventArgs e)
         {
-            cBoxEmployee.SelectedValue = MyValidation.Search_ComboID.ToString();
+            
+            if (!string.IsNullOrEmpty(txtEmployee.Text))
+            {
+                cBoxEmployee.SelectedValue = MyValidation.Search_ComboID.ToString();
+                if (string.IsNullOrWhiteSpace(txtEmployeeID.Text) || txtEmployeeID.Text == "0")
+                {
+                    txtEmployeeID.Text = MyValidation.ObjectID(sender, tb_Employees);
+                }
+            }
         }
 
         #endregion
@@ -563,9 +644,22 @@ namespace Applied_Accounts.Forms
             {
                 btnBottom_Click(sender, e);
                 lblMessage.Text = " New Transaction Created.";
-
+                txtSRNO.Focus();
             }
         }
+
+        private void Grid_Voucher_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Grid_Voucher_Leave(object sender, EventArgs e)
+        {
+            TableBinding.Position = Grid_Voucher.CurrentRow.Index;
+        }
+
+
+
 
 
         #endregion

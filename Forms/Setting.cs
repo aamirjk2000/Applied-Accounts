@@ -28,6 +28,7 @@ namespace Applied_Accounts.Forms
             txtComboDateFormat.Text = Applied.GetString("DateFormat_Combo");
             txtDefaultDateFormat.Text = Applied.GetString("DateFormat_Default");
             txtReportDateFormat.Text = Applied.GetString("DateFormat_Heading");
+            txtCurrencyFormat.Text = Applied.GetString("CurrencyFormat");
 
         }
 
@@ -81,6 +82,11 @@ namespace Applied_Accounts.Forms
         private void txtReportHeadingFormat_Leave(object sender, EventArgs e)
         {
             Applied.SetValue("DateFormat_Heading", txtReportHeadingFormat.Text.Trim(), Applied.KeyType.String);
+        }
+
+        private void txtCurrencyFormat_Leave(object sender, EventArgs e)
+        {
+            Applied.SetValue("CurrencyFormat", txtCurrencyFormat.Text.Trim(), Applied.KeyType.String);
         }
     }
 }

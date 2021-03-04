@@ -45,6 +45,8 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.txtReportHeadingFormat = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtCurrencyFormat = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label1
@@ -180,7 +182,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(14, 258);
+            this.label8.Location = new System.Drawing.Point(14, 254);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(108, 13);
             this.label8.TabIndex = 108;
@@ -188,17 +190,36 @@
             // 
             // txtReportHeadingFormat
             // 
-            this.txtReportHeadingFormat.Location = new System.Drawing.Point(143, 255);
+            this.txtReportHeadingFormat.Location = new System.Drawing.Point(143, 251);
             this.txtReportHeadingFormat.Name = "txtReportHeadingFormat";
             this.txtReportHeadingFormat.Size = new System.Drawing.Size(200, 20);
             this.txtReportHeadingFormat.TabIndex = 109;
             this.txtReportHeadingFormat.Leave += new System.EventHandler(this.txtReportHeadingFormat_Leave);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(14, 280);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(84, 13);
+            this.label9.TabIndex = 110;
+            this.label9.Text = "Currency Format";
+            // 
+            // txtCurrencyFormat
+            // 
+            this.txtCurrencyFormat.Location = new System.Drawing.Point(143, 277);
+            this.txtCurrencyFormat.Name = "txtCurrencyFormat";
+            this.txtCurrencyFormat.Size = new System.Drawing.Size(200, 20);
+            this.txtCurrencyFormat.TabIndex = 111;
+            this.txtCurrencyFormat.Leave += new System.EventHandler(this.txtCurrencyFormat_Leave);
             // 
             // frmSetting
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtCurrencyFormat);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.txtReportHeadingFormat);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtComboDateFormat);
@@ -243,5 +264,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtReportHeadingFormat;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtCurrencyFormat;
     }
 }

@@ -126,6 +126,8 @@ namespace Applied_Accounts.Forms
             this.Grid_Voucher.Name = "Grid_Voucher";
             this.Grid_Voucher.Size = new System.Drawing.Size(685, 549);
             this.Grid_Voucher.TabIndex = 0;
+            this.Grid_Voucher.Enter += new System.EventHandler(this.Grid_Voucher_Enter);
+            this.Grid_Voucher.Leave += new System.EventHandler(this.Grid_Voucher_Leave);
             // 
             // P1
             // 
@@ -625,6 +627,7 @@ namespace Applied_Accounts.Forms
             this.txtSRNO.Size = new System.Drawing.Size(100, 20);
             this.txtSRNO.TabIndex = 1;
             this.txtSRNO.Enter += new System.EventHandler(this.txtSRNO_Enter);
+            this.txtSRNO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSRNO_KeyPress);
             this.txtSRNO.Leave += new System.EventHandler(this.txtSRNO_Leave);
             this.txtSRNO.Validating += new System.ComponentModel.CancelEventHandler(this.txtSRNO_Validating);
             // 

@@ -359,6 +359,15 @@ namespace Applied_Accounts.Classes
             return e.Handled;
         }
 
+        public static bool IsDigit(object sender, KeyPressEventArgs e)
+        {
+            //Verify that the pressed key isn't CTRL or any non-numeric digit
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+            return e.Handled;
+        }
         public static bool IsChar(string _Text, string _ValidChars)
         {
             bool _Result = false;
@@ -449,9 +458,6 @@ namespace Applied_Accounts.Classes
             if (_DataView.Count == 1) { return _DataView[0].Row["Code"].ToString(); }
             return string.Empty;
         }
-
-
-
 
         public static string Tag(long _ID, DataView _DataView)
         {

@@ -20,9 +20,17 @@ namespace Applied_Accounts.Classes
 
         public static long ToLong(string _Value)
         {
-            if (_Value == "") { return 0; }
-            if (_Value == string.Empty) { return 0; }
-            else { return Convert.ToInt64(_Value); }
+            try
+            {
+                if (_Value == "") { return 0; }
+                if (_Value == string.Empty) { return 0; }
+                else { return Convert.ToInt64(_Value); }
+            }
+            catch (Exception)
+            {
+                return 0;
+            }
+            
         }
 
 

@@ -13,6 +13,7 @@ namespace Applied_Accounts.Classes
     public interface ITextBox_Validation
     {
         bool Validating(object sender, DataTable _DataTable);
+        string ObjectID(object sender, DataTable _DataTable);
 
     }
 
@@ -42,6 +43,23 @@ namespace Applied_Accounts.Classes
         }
 
 
+        public string ObjectID(object sender, DataTable _DataTable)
+        {
+            TextBox _TextBox = (TextBox)sender;
+            DataView _DataView = _DataTable.AsDataView();
+            long _Value = Conversion.ToLong(_TextBox.Text.Trim());
+
+            _DataView.RowFilter = "ID=" + _Value;
+            if(_DataView.Count==1) { return _DataView[0]["ID"].ToString(); }
+
+            _DataView.RowFilter = "Code='" + _TextBox.Text+"'";
+            if (_DataView.Count == 1) { return _DataView[0]["ID"].ToString(); }
+
+            _DataView.RowFilter = "SCode='" + _TextBox.Text+"'";
+            if (_DataView.Count == 1) { return _DataView[0]["ID"].ToString(); }
+
+            return "";
+        }
 
         //=================================== END VALIDATING
 
