@@ -401,52 +401,6 @@ namespace Applied_Accounts
         {
             return (int)((Tables)Enum.Parse(typeof(Tables), _DataTable.TableName));
         }
-        public static int DeleteRow(DataRow _Row, bool ShowMessage)
-        {
-            long _ID = Conversion.ToLong(_Row["ID"]);
-
-            if (_ID < 0) { return -1; }
-
-
-            SQLiteCommand DELCommand = new SQLiteCommand("DELETE FROM [Ledger] WHERE ID=@ID ", Connection.AppliedConnection());
-            DELCommand.Parameters.AddWithValue("@ID", _ID);
-
-            string _Message = "Are you Sure to DELETE \n " + "Voucerh Serial No. " + _Row["SRNO"].ToString();
-            int _RowEfected = 0;
-
-
-            if (ShowMessage)
-            {
-                DialogResult _YesNo =
-                MessageBox.Show(_Message, "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (_YesNo == DialogResult.Yes)
-                {
-                    _RowEfected = DELCommand.ExecuteNonQuery();
-                }
-            }
-            else
-            {
-                _RowEfected = DELCommand.ExecuteNonQuery();
-            }
-
-
-            if (ShowMessage)
-            {
-
-                if (_RowEfected == 0)
-                {
-                    MessageBox.Show(_Row["SRNO"].ToString() + " Not Deleted", "ERROR");
-                    return -1;
-
-                }
-                else
-                {
-                    MessageBox.Show(_Row["SRNO"].ToString() + " Deleted", "ERROR");
-                }
-            }
-
-            return _RowEfected;
-        }
         public static object[] SearchText(TextBox _Value, DataTable _DataTable)
         {
             // Get a variables of Table Row
@@ -514,6 +468,57 @@ namespace Applied_Accounts
 
             return _Result;
         }
+
+        #region Delete Row
+
+        public static int DeleteRow(DataRow _Row, bool ShowMessage)
+        {
+            long _ID = Conversion.ToLong(_Row["ID"]);
+
+            if (_ID < 0) { return -1; }
+
+
+            SQLiteCommand DELCommand = new SQLiteCommand("DELETE FROM [Ledger] WHERE ID=@ID ", Connection.AppliedConnection());
+            DELCommand.Parameters.AddWithValue("@ID", _ID);
+
+            string _Message = "Are you Sure to DELETE \n " + "Voucerh Serial No. " + _Row["SRNO"].ToString();
+            int _RowEfected = 0;
+
+
+            if (ShowMessage)
+            {
+                DialogResult _YesNo =
+                MessageBox.Show(_Message, "DELETE", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (_YesNo == DialogResult.Yes)
+                {
+                    _RowEfected = DELCommand.ExecuteNonQuery();
+                }
+            }
+            else
+            {
+                _RowEfected = DELCommand.ExecuteNonQuery();
+            }
+
+
+            if (ShowMessage)
+            {
+
+                if (_RowEfected == 0)
+                {
+                    MessageBox.Show(_Row["SRNO"].ToString() + " Not Deleted", "ERROR");
+                    return -1;
+
+                }
+                else
+                {
+                    MessageBox.Show(_Row["SRNO"].ToString() + " Deleted", "ERROR");
+                }
+            }
+
+            return _RowEfected;
+        }
+
+        #endregion
 
     }                             // Main
 

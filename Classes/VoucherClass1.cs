@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.SQLite;
 using System.Windows.Forms;
 using Applied_Accounts.Classes;
 
@@ -7,12 +8,15 @@ namespace Applied_Accounts.Classes
 {
     interface IVoucherClass1
     {
-        void Save();
-        void Save(DataRow _Row);
+
+        void Insert(DataRow _Row);
+        void Update(DataRow _Row);
+        void Delete(DataRow _Row);
         void Load_Tables();
         void Load_Voucher(string _Vou_No);
         DataTable Create_GridTable();
         void New();
+
     }
 
 
@@ -29,13 +33,22 @@ namespace Applied_Accounts.Classes
         public string Vou_Status;
 
         public int Count { get => tb_Voucher.Rows.Count; }
+        public object DR_Amount { get => tb_Voucher.Compute("Sum(DR)", ""); }
+        public object CR_Amount { get => tb_Voucher.Compute("Sum(CR)", ""); }
+
+
         public DataRow MyRow { get; set; }
 
         public Array Vou_Types = Enum.GetValues(typeof(Applied.VoucherType));
-        public bool Voucher_Loaded = false;
-        public bool Voucher_Saved = true;
-        public bool New_Record = false;
-        
+        public bool Voucher_Loaded = false;                             //  True if, Voucher has been loaded sucessfully
+        public bool Voucher_Saved = true;                               //
+        public bool New_Record = false;                                 //
+        public bool Save_Sucessfull = false;                            //  True if, Voucher has been saved sucessfull
+        public bool Record_is_Saved = false;
+        public int Effected_Records = 0;
+        public string MyMessage = "";
+        public long Max_ID;
+
         //===============================================================================================
 
 
@@ -134,21 +147,121 @@ namespace Applied_Accounts.Classes
 
         #endregion
 
-        #region Save
 
-        public void Save()
+        #region Insert / Update / Delete 
+
+        public void Save(DataTable _Voucher)
         {
-            Save(MyRow);
+            if (!DR_Amount.Equals(CR_Amount))
+            {
+                string _Message = string.Format("Voucher Debit and Credirt is not equal. \n {1,15:N0} Debit & {1,15:N0} Credit ", (decimal)DR_Amount, (decimal)CR_Amount);
+                MessageBox.Show(_Message, "Voucher", MessageBoxButtons.OK);
+                return;
+            }
+            //=========================================================================================== RETURN 
+
+            DataView View_Ledger = AppliedTable.GetDataTable(Tables.Ledger).AsDataView();
+            long _ID = 0;
+            string Action = "";
+            int _SRNO_NEW = 1;
+            Effected_Records = 0;
+            Max_ID = Conversion.ToLong(View_Ledger.Table.Compute("MAX(ID)", string.Empty).ToString());
+
+
+            foreach (DataRow _Row in _Voucher.Rows)
+            {
+
+                //View_Ledger.RowFilter = "ID=" + _ID_Value;
+                //if (View_Ledger.Count == 1)
+                //{
+                _ID = Conversion.ToLong(_Row["ID"].ToString());
+                int _SRNO = Conversion.ToInteger(_Row["SRNO"].ToString());
+
+                if (_ID == 0)
+                {
+                    Action = "Insert";
+                }
+                else if (_ID > 0)
+                {
+                    Action = "Update";
+                }
+                else if (_ID < 0)
+                {
+                    Action = "Delete";
+                }
+
+                #region Set Null Values if applicable.
+                _Row["Vou_No"] = Vou_No;
+                _Row["Vou_Date"] = Vou_Date;
+                _Row["Vou_Type"] = Vou_Type;
+                _Row["SRNO"] = _SRNO_NEW; _SRNO_NEW += 1;
+                if (Conversion.ToLong(_Row["Project"].ToString()) == 0) { _Row["Project"] = 0; }
+                if (Conversion.ToLong(_Row["Supplier"].ToString()) == 0) { _Row["Supplier"] = 0; }
+                if (Conversion.ToLong(_Row["Unit"].ToString()) == 0) { _Row["Unit"] = 0; }
+                if (Conversion.ToLong(_Row["Stock"].ToString()) == 0) { _Row["Stock"] = 0; }
+                if (Conversion.ToLong(_Row["Employee"].ToString()) == 0) { _Row["Employee"] = 0; }
+                if (Conversion.ToLong(_Row["POrder"].ToString()) == 0) { _Row["POrder"] = 0; }
+                if (string.IsNullOrWhiteSpace(_Row["RefNo"].ToString())) { _Row["RefNo"] = DBNull.Value; }
+                if (string.IsNullOrWhiteSpace(_Row["Remarks"].ToString())) { _Row["Remarks"] = DBNull.Value; }
+                if (string.IsNullOrWhiteSpace(_Row["Chq_No"].ToString())) { _Row["Chq_No"] = DBNull.Value; _Row["Chq_Date"] = DBNull.Value; };
+                #endregion
+                //}
+
+                switch (Action)
+                {
+                    case "Insert":
+                        Insert(_Row);
+                        break;
+
+                    case "Update":
+                        Update(_Row);
+                        break;
+
+                    case "Delete":
+                        Delete(_Row);
+                        break;
+                }
+            }
+
+            MyMessage = "Total record effected " + Effected_Records.ToString();
+            MessageBox.Show(MyMessage, "SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+
+        }
+        public void Insert(DataRow _Row)
+        {
+            SQLiteCommand _CmdInsert = new SQLiteCommand();
+            try
+            {
+                _Row["ID"] = Max_ID + 1;
+                _CmdInsert = Connection_Class.SQLite.SQLiteInsert(_Row, Connection.AppliedConnection());
+                Effected_Records += _CmdInsert.ExecuteNonQuery();
+                if (Effected_Records > 0) { Record_is_Saved = true; } else { Record_is_Saved = false; }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK);
+            }
         }
 
-        private void Save(object myRow)
+        public void Update(DataRow _Row)
         {
-            throw new NotImplementedException();
+            SQLiteCommand _CmdUpdate = new SQLiteCommand();
+            try
+            {
+                _CmdUpdate = Connection_Class.SQLite.SQLiteUpdate(_Row, "ID", Connection.AppliedConnection());
+                Effected_Records += _CmdUpdate.ExecuteNonQuery();
+                if (Effected_Records > 0) { Record_is_Saved = true; } else { Record_is_Saved = false; }
+            }
+            catch (Exception e)
+            {
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK);
+            }
         }
 
-        public void Save(DataRow _Row)
+        public void Delete(DataRow _Row)
         {
-
+            SQLiteCommand _CmdDelete = new SQLiteCommand();
         }
 
         #endregion
@@ -157,23 +270,22 @@ namespace Applied_Accounts.Classes
 
         public void New()
         {
-            long MaxNo = (long)tb_Voucher.Compute("Max(SRNO)", string.Empty) + 1; 
+            long MaxNo = (long)tb_Voucher.Compute("Max(SRNO)", string.Empty) + 1;
 
             DataRow _NewRow = tb_Voucher.NewRow();
             _NewRow.BeginEdit();
 
-            _NewRow["ID"] = -1;
+            _NewRow["ID"] = 0;
             _NewRow["Vou_No"] = Vou_No;
             _NewRow["Vou_Date"] = Vou_Date;
             _NewRow["Vou_Type"] = Vou_Type;
             _NewRow["SrNO"] = MaxNo;
             tb_Voucher.Rows.Add(_NewRow);
 
-            //ds_Voucher.Tables.Remove(tb_Voucher);           // Remove out of Date Table
-            //ds_Voucher.Tables.Add(tb_Voucher.Copy());              // Add Updated Table.
-
             Load_GridData();
             New_Record = true;
+
+
         }
 
 
@@ -183,7 +295,7 @@ namespace Applied_Accounts.Classes
         private DataTable Get_Voucher(string _VouNo)
         {
             DataTable _Result;
-            
+
             _Result = AppliedTable.GetDataTable(Tables.Ledger, "Vou_No='" + _VouNo + "'");
 
             ds_Voucher.Tables["Ledger"].Clear();

@@ -33,10 +33,11 @@ namespace Applied_Accounts.Forms
             this.Grid_Voucher = new System.Windows.Forms.DataGridView();
             this.P1 = new System.Windows.Forms.TabPage();
             this.grp_Action = new System.Windows.Forms.GroupBox();
-            this.button13 = new System.Windows.Forms.Button();
-            this.button11 = new System.Windows.Forms.Button();
-            this.button12 = new System.Windows.Forms.Button();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.grp_Transactions = new System.Windows.Forms.GroupBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.btnBottom = new System.Windows.Forms.Button();
             this.btnNext = new System.Windows.Forms.Button();
@@ -145,9 +146,9 @@ namespace Applied_Accounts.Forms
             // 
             // grp_Action
             // 
-            this.grp_Action.Controls.Add(this.button13);
-            this.grp_Action.Controls.Add(this.button11);
-            this.grp_Action.Controls.Add(this.button12);
+            this.grp_Action.Controls.Add(this.btnSave);
+            this.grp_Action.Controls.Add(this.btnRefresh);
+            this.grp_Action.Controls.Add(this.btnPrint);
             this.grp_Action.Location = new System.Drawing.Point(6, 465);
             this.grp_Action.Name = "grp_Action";
             this.grp_Action.Size = new System.Drawing.Size(684, 60);
@@ -155,35 +156,37 @@ namespace Applied_Accounts.Forms
             this.grp_Action.TabStop = false;
             this.grp_Action.Text = "ACTION";
             // 
-            // button13
+            // btnSave
             // 
-            this.button13.Location = new System.Drawing.Point(433, 22);
-            this.button13.Name = "button13";
-            this.button13.Size = new System.Drawing.Size(75, 23);
-            this.button13.TabIndex = 5;
-            this.button13.Text = "Save";
-            this.button13.UseVisualStyleBackColor = true;
+            this.btnSave.Location = new System.Drawing.Point(433, 22);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(75, 23);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.Text = "Save";
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // button11
+            // btnRefresh
             // 
-            this.button11.Location = new System.Drawing.Point(211, 22);
-            this.button11.Name = "button11";
-            this.button11.Size = new System.Drawing.Size(75, 23);
-            this.button11.TabIndex = 3;
-            this.button11.Text = "Refresh";
-            this.button11.UseVisualStyleBackColor = true;
+            this.btnRefresh.Location = new System.Drawing.Point(211, 22);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.Text = "Refresh";
+            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
-            // button12
+            // btnPrint
             // 
-            this.button12.Location = new System.Drawing.Point(322, 22);
-            this.button12.Name = "button12";
-            this.button12.Size = new System.Drawing.Size(75, 23);
-            this.button12.TabIndex = 4;
-            this.button12.Text = "Print";
-            this.button12.UseVisualStyleBackColor = true;
+            this.btnPrint.Location = new System.Drawing.Point(322, 22);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(75, 23);
+            this.btnPrint.TabIndex = 4;
+            this.btnPrint.Text = "Print";
+            this.btnPrint.UseVisualStyleBackColor = true;
             // 
             // grp_Transactions
             // 
+            this.grp_Transactions.Controls.Add(this.btnDelete);
             this.grp_Transactions.Controls.Add(this.label12);
             this.grp_Transactions.Controls.Add(this.btnBottom);
             this.grp_Transactions.Controls.Add(this.btnNext);
@@ -245,10 +248,23 @@ namespace Applied_Accounts.Forms
             this.grp_Transactions.Text = "TRANSACTIONS";
             this.grp_Transactions.Enter += new System.EventHandler(this.grp_Transactions_Enter);
             // 
+            // btnDelete
+            // 
+            this.btnDelete.BackColor = System.Drawing.Color.DarkRed;
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDelete.Location = new System.Drawing.Point(282, 28);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(70, 21);
+            this.btnDelete.TabIndex = 153;
+            this.btnDelete.TabStop = false;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(271, 222);
+            this.label12.Location = new System.Drawing.Point(271, 223);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(81, 13);
             this.label12.TabIndex = 152;
@@ -357,7 +373,7 @@ namespace Applied_Accounts.Forms
             // 
             this.cBoxPOrder.FormattingEnabled = true;
             this.cBoxPOrder.ItemHeight = 13;
-            this.cBoxPOrder.Location = new System.Drawing.Point(232, 244);
+            this.cBoxPOrder.Location = new System.Drawing.Point(231, 244);
             this.cBoxPOrder.Name = "cBoxPOrder";
             this.cBoxPOrder.Size = new System.Drawing.Size(121, 21);
             this.cBoxPOrder.TabIndex = 11;
@@ -861,9 +877,9 @@ namespace Applied_Accounts.Forms
         private System.Windows.Forms.DataGridView Grid_Voucher;
         private System.Windows.Forms.TabPage P1;
         private System.Windows.Forms.GroupBox grp_Action;
-        private System.Windows.Forms.Button button13;
-        private System.Windows.Forms.Button button11;
-        private System.Windows.Forms.Button button12;
+        private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.Button btnPrint;
         private System.Windows.Forms.GroupBox grp_Transactions;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button btnBottom;
@@ -927,5 +943,6 @@ namespace Applied_Accounts.Forms
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.TabControl Pages;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

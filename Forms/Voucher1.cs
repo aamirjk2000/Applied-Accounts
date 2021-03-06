@@ -12,7 +12,7 @@ namespace Applied_Accounts.Forms
 {
     public partial class frmVouchers1 : Form
     {
-        //private const string NumberFormat = "#,###.00;(#,###.00);0";
+
         private string NumberFormat = Applied.GetString("CurrencyFormat");
         private string DateFormat = Applied.GetString("DataFormat");
         private string ComboDateFormat = Applied.GetString("DateFormat_Combo");
@@ -39,6 +39,7 @@ namespace Applied_Accounts.Forms
         private DataTable tb_GridData { get => MyVoucherClass.tb_GridData; }
 
         private BindingManagerBase TableBinding;
+        private BindingManagerBase POrderBinding;
         private System.Data.DataSet MyDataSource;
 
 
@@ -67,6 +68,7 @@ namespace Applied_Accounts.Forms
 
             MyDataSource = MyVoucherClass.ds_Voucher;
             TableBinding = BindingContext[MyVoucherClass.tb_Voucher];
+            POrderBinding = BindingContext[tb_POrder];
 
             TableBinding.PositionChanged += new EventHandler(TableBinding_PositionChange);
             TableBinding.CurrentChanged += new EventHandler(TableBinding_CurrentChange);
@@ -98,7 +100,7 @@ namespace Applied_Accounts.Forms
             cBoxUnit.DisplayMember = "Units.Title";
             cBoxStock.DisplayMember = "Stock.Title";
             cBoxEmployee.DisplayMember = "Employees.Title";
-            cBoxPOrder.DisplayMember = "Title";
+            cBoxPOrder.DisplayMember = "POrder.Title";
 
             cBoxAccount.ValueMember = "COA.ID";
             cBoxSupplier.ValueMember = "Suppliers.ID";
@@ -161,9 +163,7 @@ namespace Applied_Accounts.Forms
             txtCR.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "CR", true, DataSourceUpdateMode.OnPropertyChanged));
             txtDescription.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Description", true, DataSourceUpdateMode.OnPropertyChanged));
             txtRemarks.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged));
-
         }
-
 
         private void TableBinding_PositionChange(object sender, EventArgs e)
         {
@@ -174,6 +174,10 @@ namespace Applied_Accounts.Forms
         {
 
         }
+
+        #endregion
+
+        #region Form Paint
 
 
         private void frmVouchers1_Paint(object sender, PaintEventArgs e)
@@ -268,6 +272,7 @@ namespace Applied_Accounts.Forms
 
         private void PositionChange()
         {
+            lblMessage.Text = string.Empty;
             decimal _DR = Conversion.ToMoney(txtDR.Text);
             decimal _CR = Conversion.ToMoney(txtCR.Text);
             txtDR.Text = _DR.ToString(NumberFormat);
@@ -296,9 +301,51 @@ namespace Applied_Accounts.Forms
             {
                 txtSRNO.DataBindings.Clear();
                 txtSRNO.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
+                if (Conversion.ToLong(txtSRNO.Text) > 0)
+                {
+                    btnDelete.Text = "Delete";
+                    Enabled(true);
+                }
+                else
+                {
+                    lblMessage.Text = "Record has been marked 'Delete'.";
+                    btnDelete.Text = "Recover";
+                    Enabled(false);
+                }
+
             }
 
             grp_Action.Visible = IsBalance();
+        }
+
+        #endregion
+
+        #region Object Enable / Disable
+
+        private void Enabled(bool _Value)
+        {
+            txtCOA.Enabled = _Value;
+            txtSupplier.Enabled = _Value;
+            txtProject.Enabled = _Value;
+            txtUnit.Enabled = _Value;
+            txtStock.Enabled = _Value;
+            txtEmployee.Enabled = _Value;
+
+            cBoxAccount.Enabled = _Value;
+            cBoxSupplier.Enabled = _Value;
+            cBoxProject.Enabled = _Value;
+            cBoxUnit.Enabled = _Value;
+            cBoxStock.Enabled = _Value;
+            cBoxEmployee.Enabled = _Value;
+
+            txtRefNo.Enabled = _Value;
+            txtChqNo.Enabled = _Value;
+            dt_ChqDate.Enabled = _Value;
+            txtDR.Enabled = _Value;
+            txtCR.Enabled = _Value;
+            txtRemarks.Enabled = _Value;
+            txtDescription.Enabled = _Value;
+
         }
 
         #endregion
@@ -622,7 +669,7 @@ namespace Applied_Accounts.Forms
         }
         private void txtEmployee_Validated(object sender, EventArgs e)
         {
-            
+
             if (!string.IsNullOrEmpty(txtEmployee.Text))
             {
                 cBoxEmployee.SelectedValue = MyValidation.Search_ComboID.ToString();
@@ -656,6 +703,33 @@ namespace Applied_Accounts.Forms
         private void Grid_Voucher_Leave(object sender, EventArgs e)
         {
             TableBinding.Position = Grid_Voucher.CurrentRow.Index;
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            MyVoucherClass.Save(tb_Voucher);
+        }
+
+        #region DELETE Record
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+
+            if (Conversion.ToLong(txtSRNO.Text) > 0)
+            {
+                txtSRNO.Text = (Conversion.ToLong(txtSRNO.Text) * -1).ToString();
+                PositionChange();
+            }
+            else
+            {
+                if (Conversion.ToLong(txtSRNO.Text) < 0)
+                {
+                    txtSRNO.Text = (Conversion.ToLong(txtSRNO.Text) * -1).ToString();
+                    PositionChange();
+                }
+            }
+            #endregion
+
         }
 
 
