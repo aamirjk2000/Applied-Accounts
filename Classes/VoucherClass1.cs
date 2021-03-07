@@ -16,6 +16,7 @@ namespace Applied_Accounts.Classes
         void Load_Voucher(string _Vou_No);
         DataTable Create_GridTable();
         void New();
+        bool Is_Balanced();
 
     }
 
@@ -33,8 +34,8 @@ namespace Applied_Accounts.Classes
         public string Vou_Status;
 
         public int Count { get => tb_Voucher.Rows.Count; }
-        public object DR_Amount { get => tb_Voucher.Compute("Sum(DR)", ""); }
-        public object CR_Amount { get => tb_Voucher.Compute("Sum(CR)", ""); }
+        public object DR_Amount { get => tb_Voucher.Compute("Sum(DR)", "DR >= 0"); }
+        public object CR_Amount { get => tb_Voucher.Compute("Sum(CR)", "CR >= 0"); }
 
 
         public DataRow MyRow { get; set; }
@@ -50,7 +51,6 @@ namespace Applied_Accounts.Classes
         public long Max_ID;
 
         //===============================================================================================
-
 
         #region Initialization
 
@@ -116,7 +116,6 @@ namespace Applied_Accounts.Classes
                 Vou_Type = tb_Voucher.Rows[0]["Vou_Type"].ToString();
                 Voucher_Loaded = true;
                 Load_GridData();
-
             }
             else
             {
@@ -124,35 +123,13 @@ namespace Applied_Accounts.Classes
             }
         }
 
-        public void Load_GridData()
-        {
-            tb_GridData.Clear();
-
-            DataRow _GridRow = tb_GridData.NewRow();
-
-            foreach (DataRow _Row in tb_Voucher.Rows)
-            {
-                _GridRow = tb_GridData.NewRow();
-                _GridRow["SrNo"] = _Row["SRNO"];
-                _GridRow["Vou_no"] = _Row["Vou_No"];
-                _GridRow["Vou_Date"] = _Row["Vou_Date"];
-                _GridRow["Cheque"] = _Row["Chq_No"];
-                _GridRow["Remarks"] = _Row["Description"];
-                _GridRow["Debit"] = _Row["DR"];
-                _GridRow["Credit"] = _Row["CR"];
-                tb_GridData.Rows.Add(_GridRow);
-            }
-        }
-
-
         #endregion
-
 
         #region Insert / Update / Delete 
 
         public void Save(DataTable _Voucher)
         {
-            if (!DR_Amount.Equals(CR_Amount))
+            if (!Is_Balanced())
             {
                 string _Message = string.Format("Voucher Debit and Credirt is not equal. \n {1,15:N0} Debit & {1,15:N0} Credit ", (decimal)DR_Amount, (decimal)CR_Amount);
                 MessageBox.Show(_Message, "Voucher", MessageBoxButtons.OK);
@@ -308,6 +285,7 @@ namespace Applied_Accounts.Classes
 
         #endregion
 
+        #region Grid Table
         public DataTable Create_GridTable()
         {
             DataTable GridTable = new DataTable();
@@ -315,13 +293,72 @@ namespace Applied_Accounts.Classes
             GridTable.Columns.Add("SrNo", typeof(string));
             GridTable.Columns.Add("Vou_No", typeof(string));
             GridTable.Columns.Add("Vou_Date", typeof(DateTime));
+            GridTable.Columns.Add("Account", typeof(string));
             GridTable.Columns.Add("Cheque", typeof(string));
             GridTable.Columns.Add("Remarks", typeof(string));
             GridTable.Columns.Add("Debit", typeof(decimal));
             GridTable.Columns.Add("Credit", typeof(decimal));
+            GridTable.Columns.Add("Status", typeof(string));
 
             return GridTable;
         }
+        public void Load_GridData()
+        {
+            tb_GridData.Clear();
+
+            DataRow _GridRow = tb_GridData.NewRow();
+
+            foreach (DataRow _Row in tb_Voucher.Rows)
+            {
+                _GridRow = tb_GridData.NewRow();
+                _GridRow["SrNo"] = _Row["SRNO"];
+                _GridRow["Vou_no"] = _Row["Vou_No"];
+                _GridRow["Vou_Date"] = _Row["Vou_Date"];
+                _GridRow["Account"] = Applied.Title(Conversion.ToLong(_Row["COA"]), ds_Voucher.Tables["COA"].AsDataView());
+                _GridRow["Cheque"] = _Row["Chq_No"];
+                _GridRow["Remarks"] = _Row["Description"];
+                _GridRow["Debit"] = _Row["DR"];
+                _GridRow["Credit"] = _Row["CR"];
+
+                if (Conversion.ToInteger(_Row["SRNO"].ToString()) < 0)
+                { _GridRow["Status"] = "Delete"; }
+                else if (Conversion.ToInteger(_Row["SRNO"].ToString()) == 0)
+                { _GridRow["Status"] = "Insert"; }
+                else { _GridRow["Status"] = "Update"; }
+
+                tb_GridData.Rows.Add(_GridRow);
+            }
+
+            #region ADD ROW FOR TOTAL
+            _GridRow = tb_GridData.NewRow();
+            _GridRow["SrNo"] = "0";
+            _GridRow["Vou_no"] = "";
+            _GridRow["Vou_Date"] = DBNull.Value;
+            _GridRow["Account"] = "";
+            _GridRow["Cheque"] = "";
+            _GridRow["Remarks"] = "TOTAL";
+            _GridRow["Debit"] = DR_Amount;
+            _GridRow["Credit"] = CR_Amount;
+            tb_GridData.Rows.Add(_GridRow);
+            #endregion
+
+        }
+
+
+        #endregion
+
+        #region Other Codes
+        public bool Is_Balanced()
+        {
+            if(tb_Voucher.Rows.Count>0)
+            {
+                return DR_Amount.Equals(CR_Amount);
+            }
+            else
+            { return false; }
+        }
+
+        #endregion
 
         #region Print Voucher
 

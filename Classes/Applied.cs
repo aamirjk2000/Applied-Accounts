@@ -12,8 +12,6 @@ namespace Applied_Accounts.Classes
     {
         DateTime MinVouDate();
         DateTime MaxVouDate();
-
-
     }
 
 

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
@@ -33,7 +34,7 @@ namespace Applied_Accounts.Forms
         private DataTable tb_Employees { get => MyVoucherClass.ds_Voucher.Tables["Employees"]; }
         private DataTable tb_POrder { get => MyVoucherClass.ds_Voucher.Tables["POrder"]; }
         private DataTable tb_Voucher { get => MyVoucherClass.tb_Voucher; }
-        private DataTable tb_voucher_Delete { get => MyVoucherClass.tb_Voucher_Delete; }
+        //private DataTable tb_voucher_Delete { get => MyVoucherClass.tb_Voucher_Delete; }
         private DataTable tb_GridData { get => MyVoucherClass.tb_GridData; }
 
         private BindingManagerBase TableBinding;
@@ -41,11 +42,9 @@ namespace Applied_Accounts.Forms
         private System.Data.DataSet MyDataSource;
 
 
-        private decimal Total_DR, Total_CR;                     // Store Total Amount of DE & CR 
-
         private bool Vou_Found;
         private bool Initializaion = true;
-        private bool IsNullAllowed = false;
+        //private bool IsNullAllowed = false;
 
 
         #region Initialization
@@ -302,25 +301,27 @@ namespace Applied_Accounts.Forms
                 if (Conversion.ToLong(txtSRNO.Text) > 0)
                 {
                     btnDelete.Text = "Delete";
-                    Enabled(true);
+                    MyEnabled(true);
                 }
                 else
                 {
                     lblMessage.Text = "Record has been marked 'Delete'.";
                     btnDelete.Text = "Recover";
-                    Enabled(false);
+                    MyEnabled(false);
                 }
 
             }
 
-            grp_Action.Visible = IsBalance();
+            MyVoucherClass.Load_GridData();
+            grp_Action.Visible = MyVoucherClass.Is_Balanced();
+            Set_DataGrid();
         }
 
         #endregion
 
         #region Object Enable / Disable
 
-        private void Enabled(bool _Value)
+        private void MyEnabled(bool _Value)
         {
             txtCOA.Enabled = _Value;
             txtSupplier.Enabled = _Value;
@@ -343,7 +344,6 @@ namespace Applied_Accounts.Forms
             txtCR.Enabled = _Value;
             txtRemarks.Enabled = _Value;
             txtDescription.Enabled = _Value;
-
         }
 
         #endregion
@@ -401,29 +401,30 @@ namespace Applied_Accounts.Forms
             Grid_Voucher.Columns[0].Width = 40;
             Grid_Voucher.Columns[1].Width = 80;
             Grid_Voucher.Columns[2].Width = 80;
-            Grid_Voucher.Columns[3].Width = 80;
-            Grid_Voucher.Columns[4].Width = 180;
-            Grid_Voucher.Columns[5].Width = 80;
+            Grid_Voucher.Columns[3].Width = 180;
+            Grid_Voucher.Columns[4].Width = 80;
+            Grid_Voucher.Columns[5].Width = 180;
             Grid_Voucher.Columns[6].Width = 80;
-        }
+            Grid_Voucher.Columns[7].Width = 80;
+            Grid_Voucher.Columns[8].Width = 80;
 
-        private bool IsBalance()
-        {
-            bool _Result = false;
-
-            if (tb_Voucher.Rows.Count >= 2)
+            if (Grid_Voucher.Rows.Count > 0)
             {
-                Total_DR = (decimal)tb_Voucher.Compute("SUM(DR)", string.Empty);
-                Total_CR = (decimal)tb_Voucher.Compute("SUM(CR)", string.Empty);
+                foreach (DataGridViewRow _Row in Grid_Voucher.Rows)
+                {
+                    if (_Row.Cells["Status"].Value != null)
+                    {
 
-                if (Total_DR == Total_CR) { _Result = true; }
+                        if (_Row.Cells["Status"].Value.ToString() == "Delete")
+                        {
+                            Grid_Voucher.Rows[Grid_Voucher.Rows.IndexOf(_Row)].DefaultCellStyle.BackColor = Color.Yellow;
+                            Grid_Voucher.Rows[Grid_Voucher.Rows.IndexOf(_Row)].DefaultCellStyle.ForeColor = Color.Red;
+                        }
+                    }
+                }
             }
-            else { _Result = false; }
 
-            return _Result;
         }
-
-
 
         #endregion
 
@@ -712,20 +713,8 @@ namespace Applied_Accounts.Forms
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
-            if (Conversion.ToLong(txtSRNO.Text) > 0)
-            {
-                txtSRNO.Text = (Conversion.ToLong(txtSRNO.Text) * -1).ToString();
-                PositionChange();
-            }
-            else
-            {
-                if (Conversion.ToLong(txtSRNO.Text) < 0)
-                {
-                    txtSRNO.Text = (Conversion.ToLong(txtSRNO.Text) * -1).ToString();
-                    PositionChange();
-                }
-            }
+            txtSRNO.Text = (Conversion.ToLong(txtSRNO.Text) * -1).ToString();
+            PositionChange();
             #endregion
 
         }

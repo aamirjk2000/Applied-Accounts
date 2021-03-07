@@ -116,7 +116,7 @@ namespace Applied_Accounts.Classes
             if (_Value == "") { return 0; }
             if (_Value == string.Empty) { return 0; }
 
-            if (!Applied.IsChar(_Value,"0123456789"))
+            if (!Applied.IsChar(_Value,"-0123456789"))
             {
                 return Convert.ToInt32(_Value);
             }
