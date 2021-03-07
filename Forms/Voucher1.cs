@@ -1,9 +1,7 @@
 ﻿using Applied_Accounts.Classes;
-using Microsoft.ReportingServices.Diagnostics.Internal;
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.Migrations.Builders;
 using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
