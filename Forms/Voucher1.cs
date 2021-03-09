@@ -19,6 +19,7 @@ namespace Applied_Accounts.Forms
         public static TextBox_Validation MyValidation = new TextBox_Validation();
         public static VoucherClass1 MyVoucherClass = new VoucherClass1();
 
+        private string Voucher_NO { get => txtVou_No.Text.Trim(); } // Voucher No.
         private string MyCheque_No;                                 // For copy and past
         private string MyCheque_Date;                               // For copy and past
         private string MyRefNo;                                     // For copy and past
@@ -216,25 +217,26 @@ namespace Applied_Accounts.Forms
         {
             if (Vou_Found)
             {
-                MyVoucherClass.Load_Voucher(txtVou_No.Text.Trim().ToUpper());
-                if (MyVoucherClass.Voucher_Loaded)
+                MyVoucherClass.Load_Voucher(Voucher_NO);
+                if (MyVoucherClass.Voucher_Loaded)                      // Voucher has been sucessfully loaded.
                 {
                     txtVou_No.Text = MyVoucherClass.Vou_No;
                     dt_VoucherDate.Value = MyVoucherClass.Vou_Date;
                     cBoxVouType.Text = MyVoucherClass.Vou_Type;
 
                     MyVoucherClass.Vou_Status = "Edit";
-                    MyVoucherClass.Load_GridData();
+                    MyVoucherClass.Load_GridData();                                     // Load Table for Data Grid.
+                    Set_DataGrid();                                                     // Design Data Grid.
                     grp_Transactions.Visible = true;
                     MyValidation.Voucher_Type = MyVoucherClass.Vou_Type;
 
-                    txtCOA.Text = Applied.ID2Code((long)tb_Voucher.Rows[0]["ID"], tb_Accounts.AsDataView());
-
+                    //txtCOA.Text = Applied.ID2Code((long)tb_Voucher.Rows[0]["ID"], tb_Accounts.AsDataView());
 
                 }
                 else
                 {
                     grp_Transactions.Visible = false;
+
                 }
             }
         }
@@ -270,10 +272,8 @@ namespace Applied_Accounts.Forms
         private void PositionChange()
         {
             lblMessage.Text = string.Empty;
-            decimal _DR = Conversion.ToMoney(txtDR.Text);
-            decimal _CR = Conversion.ToMoney(txtCR.Text);
-            txtDR.Text = _DR.ToString(NumberFormat);
-            txtCR.Text = _CR.ToString(NumberFormat);
+            txtDR.Text = Conversion.ToMoney(txtDR.Text).ToString(NumberFormat);
+            txtCR.Text = Conversion.ToMoney(txtCR.Text).ToString(NumberFormat);
 
             txtCOA.Text = Applied.ID2Code(Conversion.ToLong(txtAccountID.Text), tb_Accounts.AsDataView());
             txtSupplier.Text = Applied.ID2Code(Conversion.ToLong(txtSupplierID.Text), tb_Suppliers.AsDataView());
@@ -311,8 +311,6 @@ namespace Applied_Accounts.Forms
                 }
 
             }
-
-            MyVoucherClass.Load_GridData();
             grp_Action.Visible = MyVoucherClass.Is_Balanced();
             Set_DataGrid();
         }
@@ -398,6 +396,19 @@ namespace Applied_Accounts.Forms
         private void Set_DataGrid()
         {
             Grid_Voucher.DataSource = tb_GridData;
+            Grid_Voucher.ReadOnly = true;
+            Grid_Voucher.AllowUserToAddRows = false;
+            Grid_Voucher.AllowUserToDeleteRows = false;
+            Grid_Voucher.AllowUserToOrderColumns = true;
+            Grid_Voucher.AllowUserToResizeColumns = true;
+            Grid_Voucher.AllowUserToResizeRows = false;
+            Grid_Voucher.AutoGenerateColumns = false;
+
+            Grid_Voucher.MultiSelect = false;
+            Grid_Voucher.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            Grid_Voucher.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.None;
+            Grid_Voucher.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.DisableResizing;
+
             Grid_Voucher.Columns[0].Width = 40;
             Grid_Voucher.Columns[1].Width = 80;
             Grid_Voucher.Columns[2].Width = 80;
@@ -408,21 +419,41 @@ namespace Applied_Accounts.Forms
             Grid_Voucher.Columns[7].Width = 80;
             Grid_Voucher.Columns[8].Width = 80;
 
+
+            Grid_Voucher.Columns[6].DefaultCellStyle.Format = NumberFormat;
+            Grid_Voucher.Columns[7].DefaultCellStyle.Format = NumberFormat;
+
+            Grid_Voucher.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            Grid_Voucher.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
+            #region Fill Color
             if (Grid_Voucher.Rows.Count > 0)
             {
                 foreach (DataGridViewRow _Row in Grid_Voucher.Rows)
                 {
                     if (_Row.Cells["Status"].Value != null)
                     {
-
                         if (_Row.Cells["Status"].Value.ToString() == "Delete")
                         {
-                            Grid_Voucher.Rows[Grid_Voucher.Rows.IndexOf(_Row)].DefaultCellStyle.BackColor = Color.Yellow;
-                            Grid_Voucher.Rows[Grid_Voucher.Rows.IndexOf(_Row)].DefaultCellStyle.ForeColor = Color.Red;
+                            Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.BackColor = Color.Yellow;
+                            Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.ForeColor = Color.Red;
                         }
+                        if (_Row.Cells["Status"].Value.ToString() == "Total")
+                        {
+                            Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.BackColor = Color.LightBlue;
+                            Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.ForeColor = Color.Navy;
+                        }
+
                     }
                 }
             }
+            #endregion
+
+            int i = TableBinding.Position;
+            TableBinding.Position = 0;
+            TableBinding.Position = i;              // Move pointer to Objest reset
+
+
 
         }
 
@@ -492,41 +523,22 @@ namespace Applied_Accounts.Forms
 
         private void txtDR_Leave(object sender, EventArgs e)
         {
-            //decimal _Amount = Conversion.ToMoney(txtDR.Text);
-            //if (_Amount > 0)
-            //{
-            //    txtCR.Text = "0";
-            //    decimal _DR = Conversion.ToMoney(txtDR.Text);
-            //    decimal _CR = Conversion.ToMoney(txtCR.Text);
-            //    txtDR.Text = _DR.ToString(NumberFormat);
-            //    txtCR.Text = _CR.ToString(NumberFormat);
-
-            //}
-            //else
-            //{
-            //    txtDR.Text = string.Empty;
-            //}
-
-            //grp_Action.Visible = IsBalance();
+            decimal _Amount = Conversion.ToMoney(txtDR.Text);
+            if (_Amount > 0)
+            {
+                txtCR.Text = "0";
+                PositionChange();
+            }
         }
 
         private void txtCR_Leave(object sender, EventArgs e)
         {
-            //decimal _Amount = Conversion.ToMoney(txtCR.Text);
-            //if (_Amount > 0)
-            //{
-            //    txtDR.Text = "0";
-            //    decimal _DR = Conversion.ToMoney(txtDR.Text);
-            //    decimal _CR = Conversion.ToMoney(txtCR.Text);
-            //    txtDR.Text = _DR.ToString(NumberFormat);
-            //    txtCR.Text = _CR.ToString(NumberFormat);
-            //}
-            //else
-            //{
-            //    txtCR.Text = string.Empty;
-            //}
-
-            //grp_Action.Visible = IsBalance();
+            decimal _Amount = Conversion.ToMoney(txtCR.Text);
+            if (_Amount > 0)
+            {
+                txtDR.Text = "0";
+                PositionChange();
+            }
         }
 
         #endregion
@@ -690,7 +702,7 @@ namespace Applied_Accounts.Forms
             {
                 btnBottom_Click(sender, e);
                 lblMessage.Text = " New Transaction Created.";
-                txtSRNO.Focus();
+                txtCOA.Focus();
             }
         }
 
@@ -707,21 +719,31 @@ namespace Applied_Accounts.Forms
         private void btnSave_Click(object sender, EventArgs e)
         {
             MyVoucherClass.Save(tb_Voucher);
+
+
+
         }
+        #endregion
 
         #region DELETE Record
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            txtSRNO.Text = (Conversion.ToLong(txtSRNO.Text) * -1).ToString();
+            DataRowView _Row = (DataRowView)TableBinding.Current;
+
+            if (Conversion.ToLong(_Row["ID"].ToString()) == 0)
+            {
+                tb_Voucher.Rows.Remove(_Row.Row);            
+            }
+            else
+            {
+                txtSRNO.Text = (Conversion.ToLong(txtSRNO.Text) * -1).ToString();
+            }
+
             PositionChange();
-            #endregion
+
 
         }
-
-
-
-
 
         #endregion
 
@@ -751,5 +773,23 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
+        private void Stop_Click(object sender, EventArgs e)
+        {
+            int i = 1;
+        }
+
+        private void P2_Enter(object sender, EventArgs e)
+        {
+            MyVoucherClass.Load_GridData();
+            Set_DataGrid();
+            Grid_Voucher.Refresh();
+            P2.Refresh();
+
+        }
+
+        private void Grid_Voucher_RowDefaultCellStyleChanged(object sender, DataGridViewRowEventArgs e)
+        {
+            int j = 0;
+        }
     }   //============================== END
 }

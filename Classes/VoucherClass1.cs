@@ -34,9 +34,8 @@ namespace Applied_Accounts.Classes
         public string Vou_Status;
 
         public int Count { get => tb_Voucher.Rows.Count; }
-        public object DR_Amount { get => tb_Voucher.Compute("Sum(DR)", "DR >= 0"); }
-        public object CR_Amount { get => tb_Voucher.Compute("Sum(CR)", "CR >= 0"); }
-
+        public object DR_Amount { get => tb_Voucher.Compute("Sum(DR)", "SRNO>-1"); }
+        public object CR_Amount { get => tb_Voucher.Compute("Sum(CR)", "SRNO>-1"); }
 
         public DataRow MyRow { get; set; }
 
@@ -144,13 +143,8 @@ namespace Applied_Accounts.Classes
             Effected_Records = 0;
             Max_ID = Conversion.ToLong(View_Ledger.Table.Compute("MAX(ID)", string.Empty).ToString());
 
-
             foreach (DataRow _Row in _Voucher.Rows)
             {
-
-                //View_Ledger.RowFilter = "ID=" + _ID_Value;
-                //if (View_Ledger.Count == 1)
-                //{
                 _ID = Conversion.ToLong(_Row["ID"].ToString());
                 int _SRNO = Conversion.ToInteger(_Row["SRNO"].ToString());
 
@@ -162,7 +156,9 @@ namespace Applied_Accounts.Classes
                 {
                     Action = "Update";
                 }
-                else if (_ID < 0)
+
+                //===================================== DELETE IF SERIAL IS IN NEGATIVE.
+                if (_SRNO < 0)
                 {
                     Action = "Delete";
                 }
@@ -203,7 +199,6 @@ namespace Applied_Accounts.Classes
             MyMessage = "Total record effected " + Effected_Records.ToString();
             MessageBox.Show(MyMessage, "SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-
         }
         public void Insert(DataRow _Row)
         {
@@ -217,7 +212,7 @@ namespace Applied_Accounts.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK);
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
         }
 
@@ -232,13 +227,26 @@ namespace Applied_Accounts.Classes
             }
             catch (Exception e)
             {
-                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK);
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Question);
             }
         }
 
         public void Delete(DataRow _Row)
         {
+
             SQLiteCommand _CmdDelete = new SQLiteCommand();
+            try
+            {
+                _CmdDelete = Connection_Class.SQLite.SQLiteDelete(_Row, Connection.AppliedConnection());
+                Effected_Records = _CmdDelete.ExecuteNonQuery();
+                if (Effected_Records > 0) { Record_is_Saved = true; } else { Record_is_Saved = false; }
+            }
+            catch (Exception e)
+            {
+
+                MessageBox.Show(e.Message, "ERROR", MessageBoxButtons.OK, MessageBoxIcon.Question);
+            }
+
         }
 
         #endregion
@@ -339,6 +347,7 @@ namespace Applied_Accounts.Classes
             _GridRow["Remarks"] = "TOTAL";
             _GridRow["Debit"] = DR_Amount;
             _GridRow["Credit"] = CR_Amount;
+            _GridRow["Status"] = "Total";
             tb_GridData.Rows.Add(_GridRow);
             #endregion
 
@@ -350,7 +359,7 @@ namespace Applied_Accounts.Classes
         #region Other Codes
         public bool Is_Balanced()
         {
-            if(tb_Voucher.Rows.Count>0)
+            if (tb_Voucher.Rows.Count > 0)
             {
                 return DR_Amount.Equals(CR_Amount);
             }

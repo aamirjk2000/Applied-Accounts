@@ -100,6 +100,7 @@ namespace Applied_Accounts.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
+            this.Stop = new System.Windows.Forms.Button();
             this.P2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
@@ -111,6 +112,7 @@ namespace Applied_Accounts.Forms
             // 
             // P2
             // 
+            this.P2.Controls.Add(this.Stop);
             this.P2.Controls.Add(this.Grid_Voucher);
             this.P2.Location = new System.Drawing.Point(4, 22);
             this.P2.Name = "P2";
@@ -119,14 +121,16 @@ namespace Applied_Accounts.Forms
             this.P2.TabIndex = 1;
             this.P2.Text = "TRANSACTIONS";
             this.P2.UseVisualStyleBackColor = true;
+            this.P2.Enter += new System.EventHandler(this.P2_Enter);
             // 
             // Grid_Voucher
             // 
             this.Grid_Voucher.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.Grid_Voucher.Location = new System.Drawing.Point(6, 6);
             this.Grid_Voucher.Name = "Grid_Voucher";
-            this.Grid_Voucher.Size = new System.Drawing.Size(685, 549);
+            this.Grid_Voucher.Size = new System.Drawing.Size(692, 510);
             this.Grid_Voucher.TabIndex = 0;
+            this.Grid_Voucher.RowDefaultCellStyleChanged += new System.Windows.Forms.DataGridViewRowEventHandler(this.Grid_Voucher_RowDefaultCellStyleChanged);
             this.Grid_Voucher.Enter += new System.EventHandler(this.Grid_Voucher_Enter);
             this.Grid_Voucher.Leave += new System.EventHandler(this.Grid_Voucher_Leave);
             // 
@@ -846,6 +850,16 @@ namespace Applied_Accounts.Forms
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
             // 
+            // Stop
+            // 
+            this.Stop.Location = new System.Drawing.Point(616, 522);
+            this.Stop.Name = "Stop";
+            this.Stop.Size = new System.Drawing.Size(75, 23);
+            this.Stop.TabIndex = 1;
+            this.Stop.Text = "Stop";
+            this.Stop.UseVisualStyleBackColor = true;
+            this.Stop.Click += new System.EventHandler(this.Stop_Click);
+            // 
             // frmVouchers1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -944,5 +958,6 @@ namespace Applied_Accounts.Forms
         private System.Windows.Forms.Label lblMessage;
         private System.Windows.Forms.TabControl Pages;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button Stop;
     }
 }
