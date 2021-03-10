@@ -58,7 +58,9 @@ namespace Applied_Accounts.Classes
 
             Load_Tables();
 
-            Vou_No = "J0319-0007";
+            //Vou_No = "J0319-0007";
+            Vou_No = "";
+
             Vou_Date = DateTime.Now;
             Vou_Type = string.Empty;
             Vou_Status = "New";

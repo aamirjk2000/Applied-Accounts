@@ -280,7 +280,7 @@ namespace Applied_Accounts.Forms
             txtProject.Text = Applied.ID2Code(Conversion.ToLong(txtProjectID.Text), tb_Projects.AsDataView());
             txtUnit.Text = Applied.ID2Code(Conversion.ToLong(txtUnitID.Text), tb_Units.AsDataView());
             txtStock.Text = Applied.ID2Code(Conversion.ToLong(txtStockID.Text), tb_Stock.AsDataView());
-            txtEmployee.Text = Applied.ID2Code(Conversion.ToLong(txtAccountID.Text), tb_Employees.AsDataView());
+            txtEmployee.Text = Applied.ID2Code(Conversion.ToLong(txtEmployeeID.Text), tb_Employees.AsDataView());
 
             cBoxAccount.SelectedValue = Applied.Code2ID(txtCOA.Text, tb_Accounts.AsDataView());
             cBoxSupplier.SelectedValue = Applied.Code2ID(txtSupplier.Text, tb_Suppliers.AsDataView());
@@ -529,6 +529,10 @@ namespace Applied_Accounts.Forms
                 txtCR.Text = "0";
                 PositionChange();
             }
+            else if (_Amount.ToString().Length == 0)
+            {
+                txtDR.Text = "0";
+            }
         }
 
         private void txtCR_Leave(object sender, EventArgs e)
@@ -681,7 +685,7 @@ namespace Applied_Accounts.Forms
         private void txtEmployee_Validated(object sender, EventArgs e)
         {
 
-            if (!string.IsNullOrEmpty(txtEmployee.Text))
+            if (!string.IsNullOrEmpty(txtEmployee.Text))                                                // Exeute if text box has some value
             {
                 cBoxEmployee.SelectedValue = MyValidation.Search_ComboID.ToString();
                 if (string.IsNullOrWhiteSpace(txtEmployeeID.Text) || txtEmployeeID.Text == "0")
@@ -733,7 +737,7 @@ namespace Applied_Accounts.Forms
 
             if (Conversion.ToLong(_Row["ID"].ToString()) == 0)
             {
-                tb_Voucher.Rows.Remove(_Row.Row);            
+                tb_Voucher.Rows.Remove(_Row.Row);
             }
             else
             {
@@ -791,5 +795,41 @@ namespace Applied_Accounts.Forms
         {
             int j = 0;
         }
+
+        #region Combox Change.
+
+        private void cBoxEmployee_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtEmployeeID.Text = cBoxEmployee.SelectedValue.ToString();
+            txtEmployee.Text = Applied.ID2Code(Conversion.ToLong(txtEmployeeID.Text), tb_Employees.AsDataView());
+        }
+
+        private void cBoxStock_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtStockID.Text = cBoxStock.SelectedValue.ToString();
+        }
+
+        private void cBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtUnitID.Text = cBoxUnit.SelectedValue.ToString();
+        }
+
+        private void cBoxProject_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtProject.Text = cBoxProject.SelectedValue.ToString();
+        }
+
+        private void cBoxSupplier_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSupplier.Text = cBoxSupplier.SelectedValue.ToString();
+        }
+
+        private void cBoxAccount_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtAccountID.Text = cBoxAccount.SelectedValue.ToString();
+        }
+
+#endregion
+
     }   //============================== END
 }

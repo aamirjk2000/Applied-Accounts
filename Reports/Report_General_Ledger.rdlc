@@ -1124,9 +1124,11 @@ iif(string.IsNullOrWhiteSpace(Fields!RefNo.Value),"",
                     <TablixMember />
                     <TablixMember>
                       <Visibility>
-                        <Hidden>=iif(
+                        <Hidden>=iif((
 string.IsNullOrEmpty(Fields!Chq_No.Value) AND 
-string.IsNullOrEmpty(Fields!RefNo.Value), TRUE, FALSE
+string.IsNullOrEmpty(Fields!RefNo.Value))
+OR (Fields!Chq_No.Value = "0" AND Fields!RefNo.Value = "0")
+, TRUE, FALSE
 )</Hidden>
                       </Visibility>
                     </TablixMember>

@@ -30,6 +30,7 @@ namespace Applied_Accounts.Forms
         private void InitializeComponent()
         {
             this.P2 = new System.Windows.Forms.TabPage();
+            this.Stop = new System.Windows.Forms.Button();
             this.Grid_Voucher = new System.Windows.Forms.DataGridView();
             this.P1 = new System.Windows.Forms.TabPage();
             this.grp_Action = new System.Windows.Forms.GroupBox();
@@ -100,7 +101,6 @@ namespace Applied_Accounts.Forms
             this.label1 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
-            this.Stop = new System.Windows.Forms.Button();
             this.P2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
@@ -122,6 +122,16 @@ namespace Applied_Accounts.Forms
             this.P2.Text = "TRANSACTIONS";
             this.P2.UseVisualStyleBackColor = true;
             this.P2.Enter += new System.EventHandler(this.P2_Enter);
+            // 
+            // Stop
+            // 
+            this.Stop.Location = new System.Drawing.Point(616, 522);
+            this.Stop.Name = "Stop";
+            this.Stop.Size = new System.Drawing.Size(75, 23);
+            this.Stop.TabIndex = 1;
+            this.Stop.Text = "Stop";
+            this.Stop.UseVisualStyleBackColor = true;
+            this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
             // Grid_Voucher
             // 
@@ -450,6 +460,7 @@ namespace Applied_Accounts.Forms
             this.cBoxEmployee.Size = new System.Drawing.Size(380, 21);
             this.cBoxEmployee.TabIndex = 135;
             this.cBoxEmployee.TabStop = false;
+            this.cBoxEmployee.SelectedIndexChanged += new System.EventHandler(this.cBoxEmployee_SelectedIndexChanged);
             // 
             // cBoxStock
             // 
@@ -459,6 +470,7 @@ namespace Applied_Accounts.Forms
             this.cBoxStock.Size = new System.Drawing.Size(380, 21);
             this.cBoxStock.TabIndex = 134;
             this.cBoxStock.TabStop = false;
+            this.cBoxStock.SelectedIndexChanged += new System.EventHandler(this.cBoxStock_SelectedIndexChanged);
             // 
             // cBoxUnit
             // 
@@ -468,6 +480,7 @@ namespace Applied_Accounts.Forms
             this.cBoxUnit.Size = new System.Drawing.Size(380, 21);
             this.cBoxUnit.TabIndex = 133;
             this.cBoxUnit.TabStop = false;
+            this.cBoxUnit.SelectedIndexChanged += new System.EventHandler(this.cBoxUnit_SelectedIndexChanged);
             // 
             // cBoxProject
             // 
@@ -477,6 +490,7 @@ namespace Applied_Accounts.Forms
             this.cBoxProject.Size = new System.Drawing.Size(380, 21);
             this.cBoxProject.TabIndex = 132;
             this.cBoxProject.TabStop = false;
+            this.cBoxProject.SelectedIndexChanged += new System.EventHandler(this.cBoxProject_SelectedIndexChanged);
             // 
             // cBoxSupplier
             // 
@@ -486,6 +500,7 @@ namespace Applied_Accounts.Forms
             this.cBoxSupplier.Size = new System.Drawing.Size(380, 21);
             this.cBoxSupplier.TabIndex = 131;
             this.cBoxSupplier.TabStop = false;
+            this.cBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.cBoxSupplier_SelectedIndexChanged);
             // 
             // cBoxAccount
             // 
@@ -495,6 +510,7 @@ namespace Applied_Accounts.Forms
             this.cBoxAccount.Size = new System.Drawing.Size(380, 21);
             this.cBoxAccount.TabIndex = 130;
             this.cBoxAccount.TabStop = false;
+            this.cBoxAccount.SelectedIndexChanged += new System.EventHandler(this.cBoxAccount_SelectedIndexChanged);
             // 
             // txtEmployeeID
             // 
@@ -849,16 +865,6 @@ namespace Applied_Accounts.Forms
             this.Pages.SelectedIndex = 0;
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
-            // 
-            // Stop
-            // 
-            this.Stop.Location = new System.Drawing.Point(616, 522);
-            this.Stop.Name = "Stop";
-            this.Stop.Size = new System.Drawing.Size(75, 23);
-            this.Stop.TabIndex = 1;
-            this.Stop.Text = "Stop";
-            this.Stop.UseVisualStyleBackColor = true;
-            this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
             // frmVouchers1
             // 
