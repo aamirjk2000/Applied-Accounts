@@ -191,20 +191,30 @@ namespace Applied_Accounts.Forms
         {
             TextBox _TextBox = (TextBox)sender;
 
-            Boolean IsClose = false;
+            bool IsClose = false;
 
             if (string.IsNullOrWhiteSpace(_TextBox.Text)) { IsClose = true; }
             if (_TextBox.Text == "0") { IsClose = true; }
             if (_TextBox.Text.ToUpper().Trim() == "END") { IsClose = true; }
             if (_TextBox.Text.ToUpper().Trim() == "CLOSE") { IsClose = true; }
+            if (_TextBox.Text.ToUpper().Trim() == "NEW") { IsClose = false; }
+            if (_TextBox.Text.ToUpper().Trim() == "-1") { IsClose = false; _TextBox.Text = "NEW"; }             // New Voucher
             if (IsClose) { e.Cancel = !IsClose; }
             else
             {
-                DataView _TableView = AppliedTable.GetDataTable(Tables.View_Vou_Nos).AsDataView();
-                _TableView.RowFilter = "Voucher_No='" + _TextBox.Text.Trim() + "'";
-                if (_TableView.Count == 0) { e.Cancel = true; Vou_Found = false; }
-                else { e.Cancel = IsClose; Vou_Found = true; }
-                _TableView.Dispose();
+                if (_TextBox.Text.ToUpper().Trim() == "NEW")
+                {
+                    MyVoucherClass.Vou_Status = "NEW";
+                }
+
+                else
+                {
+                    DataView _TableView = AppliedTable.GetDataTable(Tables.View_Vou_Nos).AsDataView();
+                    _TableView.RowFilter = "Voucher_No='" + _TextBox.Text.Trim() + "'";
+                    if (_TableView.Count == 0) { e.Cancel = true; Vou_Found = false; }
+                    else { e.Cancel = IsClose; Vou_Found = true; }
+                    _TableView.Dispose();
+                }
             }
         }
 
@@ -438,11 +448,24 @@ namespace Applied_Accounts.Forms
                             Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.BackColor = Color.Yellow;
                             Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.ForeColor = Color.Red;
                         }
-                        if (_Row.Cells["Status"].Value.ToString() == "Total")
+                        if (MyVoucherClass.Is_Balanced())
                         {
-                            Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.BackColor = Color.LightBlue;
-                            Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.ForeColor = Color.Navy;
+                            if (_Row.Cells["Status"].Value.ToString() == "Total")
+                            {
+                                Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.BackColor = Color.LightBlue;
+                                Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.ForeColor = Color.Navy;
+                            }
+
                         }
+                        else
+                        {
+                            if (_Row.Cells["Status"].Value.ToString() == "Total")
+                            {
+                                Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.BackColor = Color.Linen;
+                                Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.ForeColor = Color.DarkRed;
+                            }
+                        }
+
 
                     }
                 }
@@ -777,11 +800,7 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-        private void Stop_Click(object sender, EventArgs e)
-        {
-            int i = 1;
-        }
-
+        #region Page 2 Active
         private void P2_Enter(object sender, EventArgs e)
         {
             MyVoucherClass.Load_GridData();
@@ -791,45 +810,53 @@ namespace Applied_Accounts.Forms
 
         }
 
-        private void Grid_Voucher_RowDefaultCellStyleChanged(object sender, DataGridViewRowEventArgs e)
-        {
-            int j = 0;
-        }
+        #endregion
 
         #region Combox Change.
 
         private void cBoxEmployee_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cBoxEmployee.SelectedValue == null) { return; }
             txtEmployeeID.Text = cBoxEmployee.SelectedValue.ToString();
             txtEmployee.Text = Applied.ID2Code(Conversion.ToLong(txtEmployeeID.Text), tb_Employees.AsDataView());
         }
 
         private void cBoxStock_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cBoxStock.SelectedValue == null) { return; }
             txtStockID.Text = cBoxStock.SelectedValue.ToString();
+            txtStock.Text = Applied.ID2Code(Conversion.ToLong(txtStockID.Text), tb_Stock.AsDataView());
         }
 
         private void cBoxUnit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cBoxUnit.SelectedValue == null) { return; }
             txtUnitID.Text = cBoxUnit.SelectedValue.ToString();
+            txtUnit.Text = Applied.ID2Code(Conversion.ToLong(txtUnitID.Text), tb_Units.AsDataView());
         }
 
         private void cBoxProject_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cBoxProject.SelectedValue == null) { return; }
             txtProject.Text = cBoxProject.SelectedValue.ToString();
+            txtProject.Text = Applied.ID2Code(Conversion.ToLong(txtProjectID.Text), tb_Projects.AsDataView());
         }
 
         private void cBoxSupplier_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cBoxSupplier.SelectedValue == null) { return; }
             txtSupplier.Text = cBoxSupplier.SelectedValue.ToString();
+            txtSupplier.Text = Applied.ID2Code(Conversion.ToLong(txtSupplierID.Text), tb_Suppliers.AsDataView());
         }
 
         private void cBoxAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if (cBoxAccount.SelectedValue == null) { return; }
             txtAccountID.Text = cBoxAccount.SelectedValue.ToString();
+            txtCOA.Text = Applied.ID2Code(Conversion.ToLong(txtProjectID.Text), tb_Accounts.AsDataView());
         }
 
-#endregion
+        #endregion
 
     }   //============================== END
 }

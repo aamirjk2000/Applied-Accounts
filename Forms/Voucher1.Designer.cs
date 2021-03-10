@@ -1,5 +1,4 @@
-﻿
-namespace Applied_Accounts.Forms
+﻿namespace Applied_Accounts.Forms
 {
     partial class frmVouchers1
     {
@@ -131,7 +130,6 @@ namespace Applied_Accounts.Forms
             this.Stop.TabIndex = 1;
             this.Stop.Text = "Stop";
             this.Stop.UseVisualStyleBackColor = true;
-            this.Stop.Click += new System.EventHandler(this.Stop_Click);
             // 
             // Grid_Voucher
             // 
@@ -140,7 +138,6 @@ namespace Applied_Accounts.Forms
             this.Grid_Voucher.Name = "Grid_Voucher";
             this.Grid_Voucher.Size = new System.Drawing.Size(692, 510);
             this.Grid_Voucher.TabIndex = 0;
-            this.Grid_Voucher.RowDefaultCellStyleChanged += new System.Windows.Forms.DataGridViewRowEventHandler(this.Grid_Voucher_RowDefaultCellStyleChanged);
             this.Grid_Voucher.Enter += new System.EventHandler(this.Grid_Voucher_Enter);
             this.Grid_Voucher.Leave += new System.EventHandler(this.Grid_Voucher_Leave);
             // 
@@ -172,7 +169,7 @@ namespace Applied_Accounts.Forms
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(433, 22);
+            this.btnSave.Location = new System.Drawing.Point(594, 19);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 5;
@@ -182,7 +179,7 @@ namespace Applied_Accounts.Forms
             // 
             // btnRefresh
             // 
-            this.btnRefresh.Location = new System.Drawing.Point(211, 22);
+            this.btnRefresh.Location = new System.Drawing.Point(12, 19);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 23);
             this.btnRefresh.TabIndex = 3;
@@ -191,7 +188,7 @@ namespace Applied_Accounts.Forms
             // 
             // btnPrint
             // 
-            this.btnPrint.Location = new System.Drawing.Point(322, 22);
+            this.btnPrint.Location = new System.Drawing.Point(513, 19);
             this.btnPrint.Name = "btnPrint";
             this.btnPrint.Size = new System.Drawing.Size(75, 23);
             this.btnPrint.TabIndex = 4;
@@ -855,8 +852,8 @@ namespace Applied_Accounts.Forms
             // 
             // Pages
             // 
-            this.Pages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.Pages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+            | System.Windows.Forms.AnchorStyles.Left)
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pages.Controls.Add(this.P1);
             this.Pages.Controls.Add(this.P2);
@@ -866,13 +863,13 @@ namespace Applied_Accounts.Forms
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
             // 
-            // frmVouchers1
+            // frmVouchers2
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 611);
             this.Controls.Add(this.Pages);
-            this.Name = "frmVouchers1";
+            this.Name = "frmVouchers2";
             this.Text = "Voucher1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVouchers1_FormClosing);
             this.Load += new System.EventHandler(this.frmVouchers1_Load);
