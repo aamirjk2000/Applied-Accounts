@@ -51,9 +51,11 @@
             this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.btnExit = new System.Windows.Forms.Button();
             this.lblMessage = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // Pages
@@ -71,8 +73,8 @@
             // 
             // P1
             // 
+            this.P1.Controls.Add(this.panel1);
             this.P1.Controls.Add(this.txtCode);
-            this.P1.Controls.Add(this.MyNavigator);
             this.P1.Controls.Add(this.chkActive);
             this.P1.Controls.Add(this.txtNote);
             this.P1.Controls.Add(this.txtNotesTitle);
@@ -105,7 +107,8 @@
             // 
             // MyNavigator
             // 
-            this.MyNavigator.Location = new System.Drawing.Point(55, 398);
+            this.MyNavigator.Current_Mode = 0;
+            this.MyNavigator.Location = new System.Drawing.Point(20, 8);
             this.MyNavigator.Name = "MyNavigator";
             this.MyNavigator.Size = new System.Drawing.Size(579, 26);
             this.MyNavigator.TabIndex = 19;
@@ -296,6 +299,15 @@
             this.lblMessage.TabIndex = 13;
             this.lblMessage.Text = "Message";
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.Gainsboro;
+            this.panel1.Controls.Add(this.MyNavigator);
+            this.panel1.Location = new System.Drawing.Point(47, 395);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(612, 40);
+            this.panel1.TabIndex = 20;
+            // 
             // frmCOA
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -311,6 +323,7 @@
             this.P1.ResumeLayout(false);
             this.P1.PerformLayout();
             this.P2.ResumeLayout(false);
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -341,5 +354,6 @@
         private System.Windows.Forms.CheckBox chkActive;
         private Navigator MyNavigator;
         private System.Windows.Forms.TextBox txtCode;
+        private System.Windows.Forms.Panel panel1;
     }
 }

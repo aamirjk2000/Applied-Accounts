@@ -17,6 +17,7 @@ namespace Applied_Accounts.Classes
         DataTable Create_GridTable();
         void New();
         bool Is_Balanced();
+        bool Is_Edited();
 
     }
 
@@ -26,6 +27,7 @@ namespace Applied_Accounts.Classes
         public DataSet ds_Voucher;
         public DataTable tb_Voucher { get => ds_Voucher.Tables["Ledger"]; }
         public DataTable tb_Voucher_Delete;
+        public DataTable tb_Voucher_Original;
         public DataTable tb_GridData;
 
         public string Vou_No;
@@ -49,6 +51,14 @@ namespace Applied_Accounts.Classes
         public string MyMessage = "";
         public long Max_ID;
 
+        public enum Voucher_Status
+        {
+            Insert = 1,
+            Update = 2,
+            Delete = 3,
+            Posted = 4
+        }
+
         //===============================================================================================
 
         #region Initialization
@@ -60,7 +70,7 @@ namespace Applied_Accounts.Classes
 
             //Vou_No = "J0319-0007";
             Vou_No = "";
-           Vou_Date = DateTime.Now;
+            Vou_Date = DateTime.Now;
             Vou_Type = string.Empty;
             Vou_Status = "New";
 
@@ -77,7 +87,7 @@ namespace Applied_Accounts.Classes
 
         public void Load_Tables()
         {
-
+            ds_Voucher = null;                                                                  // Reset the Data Set for initialize
             ds_Voucher = new DataSet();
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Ledger).Clone());
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.COA).Copy());
@@ -200,7 +210,10 @@ namespace Applied_Accounts.Classes
             MyMessage = "Total record effected " + Effected_Records.ToString();
             MessageBox.Show(MyMessage, "SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
+            tb_Voucher_Original = ds_Voucher.Tables["Ledger"].Copy();
+
         }
+
         public void Insert(DataRow _Row)
         {
             SQLiteCommand _CmdInsert = new SQLiteCommand();
@@ -254,13 +267,22 @@ namespace Applied_Accounts.Classes
 
         #region New
 
-        public void New()
+        public void New()                                                               // New Voucher Transaction [SR No]
         {
-            long MaxNo = (long)tb_Voucher.Compute("Max(SRNO)", string.Empty) + 1;
-
+            long MaxNo;
             DataRow _NewRow = tb_Voucher.NewRow();
             _NewRow.BeginEdit();
 
+
+            if (tb_Voucher.Rows.Count==0)
+            {
+                MaxNo = 1;
+            }
+            else
+            {
+                MaxNo = (long)tb_Voucher.Compute("Max(SRNO)", string.Empty) + 1;
+            }
+            
             _NewRow["ID"] = 0;
             _NewRow["Vou_No"] = Vou_No;
             _NewRow["Vou_Date"] = Vou_Date;
@@ -280,16 +302,35 @@ namespace Applied_Accounts.Classes
         #region Set VoucherTable
         private DataTable Get_Voucher(string _VouNo)
         {
-            DataTable _Result;
+            DataTable _DataTable;
 
-            _Result = AppliedTable.GetDataTable(Tables.Ledger, "Vou_No='" + _VouNo + "'");
-
-            ds_Voucher.Tables["Ledger"].Clear();
-            foreach (DataRow _Row in _Result.Rows)
+            if (_VouNo.ToUpper().Trim() == "NEW")
             {
-                ds_Voucher.Tables["Ledger"].Rows.Add(_Row.ItemArray);
+                Vou_No = "New";
+                Vou_Status = "Insert";
+                Vou_Date = DateTime.Now;
+                Vou_Type = "";
+                tb_Voucher_Original = null;
+                Load_Tables();
             }
-            return _Result;
+
+            //====================================================== New Voucher END
+
+            _DataTable = AppliedTable.GetDataTable(Tables.Ledger, "Vou_No='" + _VouNo + "'");
+
+            if (_DataTable.Rows.Count > 0)
+            {
+                Vou_Status = Voucher_Status.Update.ToString();
+                ds_Voucher.Tables["Ledger"].Clear();
+                foreach (DataRow _Row in _DataTable.Rows)
+                {
+                    ds_Voucher.Tables["Ledger"].Rows.Add(_Row.ItemArray);
+                }
+
+                tb_Voucher_Original = ds_Voucher.Tables["Ledger"].Copy();                      // Store Voucher Original Data in saperate Table.
+            }
+
+            return _DataTable;
         }
 
         #endregion
@@ -360,12 +401,32 @@ namespace Applied_Accounts.Classes
         #region Other Codes
         public bool Is_Balanced()
         {
+
+            if(DR_Amount==DBNull.Value  || CR_Amount==DBNull.Value)
+            {
+                return false;
+            }
+
+
+            if ((decimal)DR_Amount + (decimal)CR_Amount == 0)
+            {
+                return false;
+            }
+
             if (tb_Voucher.Rows.Count > 0)
             {
                 return DR_Amount.Equals(CR_Amount);
             }
             else
-            { return false; }
+            { 
+                return false; 
+            }
+        }
+
+        public bool Is_Edited()
+        {
+            if(tb_Voucher_Original == null) { return false; }
+            return tb_Voucher_Original.Equals(ds_Voucher.Tables["Ledger"]);
         }
 
         #endregion

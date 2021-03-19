@@ -19,36 +19,36 @@ namespace Applied_Accounts.Classes
 
     public class ReportClass : IReportClass
     {
-        public string CompanyName { get; set; }
-        public string Heading1 { get; set; }
-        public string Heading2 { get; set; }
-        public DateTime Report_From { get; set; }
-        public DateTime Report_To { get; set; }
-        public DataView Report_Data { get; set; }
-        public string Report_Date_Format { get => Applied.GetString("DateFormat_Report"); }
-        public string Report_Heading_Format { get => Applied.GetString("DateFormat_Heading"); }
-        public string Report_Filter { get; set; }
-        public string DataSet_Name { get; set; }
-        public string Vou_No { get; set; }
-        public DateTime Vou_Date { get; set; }
-        public int ID_COA { get; set; }
-        public int ID_Supplier { get; set; }
-        public int ID_Project { get; set; }
-        public int ID_Unit { get; set; }
-        public int ID_Employee { get; set; }
-        public object PreviewForm { get; set; }
-        public object DataTableID { get; set; }
-        public DataTable DataSource { get; set; }
-        public string DataSource_Filter { get; set; }
-        public string ReportView_Filter { get; set; }
-        public string ReportView_Sort { get; set; }
-        public string Report_Location { get; set; }
+        public string CompanyName { get; set; }                                                     // Company Name for report heading
+        public string Heading1 { get; set; }                                                        // Main Heading / Report Heading
+        public string Heading2 { get; set; }                                                        // Sub Heading for Period
+        public DateTime Report_From { get; set; }                                                   // Report start from this date
+        public DateTime Report_To { get; set; }                                                     // Report end on this date
+        public DataView Report_Data { get; set; }                                                   // Report printed on this date 
+        public string Report_Date_Format { get => Applied.GetString("DateFormat_Report"); }         // Date format for the report date column
+        public string Report_Heading_Format { get => Applied.GetString("DateFormat_Heading"); }     // Date print in this format for sub Heading
+        public string Report_Filter { get; set; }                                                   // filter for the report data
+        public string DataSet_Name { get; set; }                                                    // Name of the Database
+        public string Vou_No { get; set; }                                                          // Voucher no 
+        public DateTime Vou_Date { get; set; }                                                      // voucher Date
+        public int ID_COA { get; set; }                                                             // ID for chart of accounts
+        public int ID_Supplier { get; set; }                                                        // ID for Supplier
+        public int ID_Project { get; set; }                                                         // ID for Project
+        public int ID_Unit { get; set; }                                                            // ID for unit
+        public int ID_Employee { get; set; }                                                        // ID for Employee
+        public object PreviewForm { get; set; }                                                     // Report Name (.rdl File with Path)
+        public object DataTableID { get; set; }                                                     // Database (Table) ID
+        public DataTable DataSource { get; set; }                                                   // Date source in DataTable
+        public string DataSource_Filter { get; set; }                                               // Filter for DataSource
+        public string ReportView_Filter { get; set; }                                               // Report View Filter
+        public string ReportView_Sort { get; set; }                                                 // sort Order for report.
+        public string Report_Location { get; set; }                                                 // Report Location 
 
-        public string Title_COA { get; set; }
-        public string Title_Supplier { get; set; }
-        public string Title_Project { get; set; }
-        public string Title_Unit { get; set; }
-        public string Title_Employee { get; set; }
+        public string Title_COA { get; set; }                                                      // Title of Chart of Accounts
+        public string Title_Supplier { get; set; }                                                  // Title of Supplier
+        public string Title_Project { get; set; }                                                   // Title of Project
+        public string Title_Unit { get; set; }                                                      // Title of unit
+        public string Title_Employee { get; set; }                                                  // Title of Employee
 
 
 

@@ -54,31 +54,31 @@
             // cBoxSuppliers
             // 
             this.cBoxSuppliers.FormattingEnabled = true;
-            this.cBoxSuppliers.Location = new System.Drawing.Point(128, 27);
+            this.cBoxSuppliers.Location = new System.Drawing.Point(128, 51);
             this.cBoxSuppliers.Name = "cBoxSuppliers";
             this.cBoxSuppliers.Size = new System.Drawing.Size(373, 21);
-            this.cBoxSuppliers.TabIndex = 0;
+            this.cBoxSuppliers.TabIndex = 3;
             // 
             // cBoxCOA
             // 
             this.cBoxCOA.FormattingEnabled = true;
-            this.cBoxCOA.Location = new System.Drawing.Point(128, 54);
+            this.cBoxCOA.Location = new System.Drawing.Point(128, 78);
             this.cBoxCOA.Name = "cBoxCOA";
             this.cBoxCOA.Size = new System.Drawing.Size(373, 21);
-            this.cBoxCOA.TabIndex = 1;
+            this.cBoxCOA.TabIndex = 4;
             // 
             // cBoxProjects
             // 
             this.cBoxProjects.FormattingEnabled = true;
-            this.cBoxProjects.Location = new System.Drawing.Point(128, 84);
+            this.cBoxProjects.Location = new System.Drawing.Point(128, 108);
             this.cBoxProjects.Name = "cBoxProjects";
             this.cBoxProjects.Size = new System.Drawing.Size(373, 21);
-            this.cBoxProjects.TabIndex = 2;
+            this.cBoxProjects.TabIndex = 5;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 27);
+            this.label1.Location = new System.Drawing.Point(23, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(90, 13);
             this.label1.TabIndex = 3;
@@ -87,7 +87,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(23, 57);
+            this.label2.Location = new System.Drawing.Point(23, 83);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(83, 13);
             this.label2.TabIndex = 4;
@@ -96,7 +96,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(23, 87);
+            this.label3.Location = new System.Drawing.Point(23, 114);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(40, 13);
             this.label3.TabIndex = 5;
@@ -105,7 +105,7 @@
             // cBoxUnits
             // 
             this.cBoxUnits.FormattingEnabled = true;
-            this.cBoxUnits.Location = new System.Drawing.Point(128, 115);
+            this.cBoxUnits.Location = new System.Drawing.Point(128, 139);
             this.cBoxUnits.Name = "cBoxUnits";
             this.cBoxUnits.Size = new System.Drawing.Size(373, 21);
             this.cBoxUnits.TabIndex = 6;
@@ -113,7 +113,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(23, 120);
+            this.label4.Location = new System.Drawing.Point(23, 143);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(73, 13);
             this.label4.TabIndex = 7;
@@ -123,15 +123,15 @@
             // 
             this.dt_From.CustomFormat = "dd-MMM-yyyy";
             this.dt_From.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dt_From.Location = new System.Drawing.Point(129, 150);
+            this.dt_From.Location = new System.Drawing.Point(129, 18);
             this.dt_From.Name = "dt_From";
             this.dt_From.Size = new System.Drawing.Size(105, 20);
-            this.dt_From.TabIndex = 8;
+            this.dt_From.TabIndex = 1;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(23, 154);
+            this.label5.Location = new System.Drawing.Point(23, 22);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(65, 13);
             this.label5.TabIndex = 9;
@@ -140,7 +140,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(256, 154);
+            this.label6.Location = new System.Drawing.Point(256, 22);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(20, 13);
             this.label6.TabIndex = 10;
@@ -150,34 +150,34 @@
             // 
             this.dt_To.CustomFormat = "dd-MMM-yyyy";
             this.dt_To.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dt_To.Location = new System.Drawing.Point(291, 150);
+            this.dt_To.Location = new System.Drawing.Point(291, 18);
             this.dt_To.Name = "dt_To";
             this.dt_To.Size = new System.Drawing.Size(105, 20);
-            this.dt_To.TabIndex = 11;
+            this.dt_To.TabIndex = 2;
             // 
             // btnPreview
             // 
             this.btnPreview.Image = global::Applied_Accounts.Properties.Resources.PRINT;
-            this.btnPreview.Location = new System.Drawing.Point(507, 154);
+            this.btnPreview.Location = new System.Drawing.Point(471, 179);
             this.btnPreview.Name = "btnPreview";
             this.btnPreview.Size = new System.Drawing.Size(30, 30);
-            this.btnPreview.TabIndex = 12;
+            this.btnPreview.TabIndex = 7;
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click);
             // 
             // btnExit
             // 
             this.btnExit.Image = global::Applied_Accounts.Properties.Resources.Exit2;
-            this.btnExit.Location = new System.Drawing.Point(545, 154);
+            this.btnExit.Location = new System.Drawing.Point(509, 179);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(30, 30);
-            this.btnExit.TabIndex = 13;
+            this.btnExit.TabIndex = 8;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnSupplier
             // 
-            this.btnSupplier.Location = new System.Drawing.Point(507, 27);
+            this.btnSupplier.Location = new System.Drawing.Point(507, 51);
             this.btnSupplier.Name = "btnSupplier";
             this.btnSupplier.Size = new System.Drawing.Size(32, 23);
             this.btnSupplier.TabIndex = 14;
@@ -187,7 +187,7 @@
             // 
             // btnAccount
             // 
-            this.btnAccount.Location = new System.Drawing.Point(507, 54);
+            this.btnAccount.Location = new System.Drawing.Point(507, 78);
             this.btnAccount.Name = "btnAccount";
             this.btnAccount.Size = new System.Drawing.Size(32, 23);
             this.btnAccount.TabIndex = 15;
@@ -197,7 +197,7 @@
             // 
             // btnProject
             // 
-            this.btnProject.Location = new System.Drawing.Point(507, 84);
+            this.btnProject.Location = new System.Drawing.Point(507, 108);
             this.btnProject.Name = "btnProject";
             this.btnProject.Size = new System.Drawing.Size(32, 23);
             this.btnProject.TabIndex = 16;
@@ -207,7 +207,7 @@
             // 
             // btnUnit
             // 
-            this.btnUnit.Location = new System.Drawing.Point(507, 115);
+            this.btnUnit.Location = new System.Drawing.Point(507, 139);
             this.btnUnit.Name = "btnUnit";
             this.btnUnit.Size = new System.Drawing.Size(32, 23);
             this.btnUnit.TabIndex = 17;
@@ -218,38 +218,41 @@
             // chkUnit
             // 
             this.chkUnit.AutoSize = true;
-            this.chkUnit.Location = new System.Drawing.Point(545, 117);
+            this.chkUnit.Location = new System.Drawing.Point(545, 141);
             this.chkUnit.Name = "chkUnit";
-            this.chkUnit.Size = new System.Drawing.Size(37, 17);
-            this.chkUnit.TabIndex = 2;
-            this.chkUnit.Text = "All";
+            this.chkUnit.Size = new System.Drawing.Size(45, 17);
+            this.chkUnit.TabIndex = 11;
+            this.chkUnit.TabStop = false;
+            this.chkUnit.Text = "ALL";
             this.chkUnit.UseVisualStyleBackColor = true;
             // 
             // chkProject
             // 
             this.chkProject.AutoSize = true;
-            this.chkProject.Location = new System.Drawing.Point(545, 86);
+            this.chkProject.Location = new System.Drawing.Point(545, 110);
             this.chkProject.Name = "chkProject";
-            this.chkProject.Size = new System.Drawing.Size(37, 17);
-            this.chkProject.TabIndex = 1;
-            this.chkProject.Text = "All";
+            this.chkProject.Size = new System.Drawing.Size(45, 17);
+            this.chkProject.TabIndex = 10;
+            this.chkProject.TabStop = false;
+            this.chkProject.Text = "ALL";
             this.chkProject.UseVisualStyleBackColor = true;
             // 
             // chkCOA
             // 
             this.chkCOA.AutoSize = true;
-            this.chkCOA.Location = new System.Drawing.Point(545, 58);
+            this.chkCOA.Location = new System.Drawing.Point(545, 82);
             this.chkCOA.Name = "chkCOA";
-            this.chkCOA.Size = new System.Drawing.Size(37, 17);
-            this.chkCOA.TabIndex = 0;
-            this.chkCOA.Text = "All";
+            this.chkCOA.Size = new System.Drawing.Size(45, 17);
+            this.chkCOA.TabIndex = 9;
+            this.chkCOA.TabStop = false;
+            this.chkCOA.Text = "ALL";
             this.chkCOA.UseVisualStyleBackColor = true;
             // 
             // frmGL_Supplier
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(595, 190);
+            this.ClientSize = new System.Drawing.Size(605, 225);
             this.Controls.Add(this.chkCOA);
             this.Controls.Add(this.chkProject);
             this.Controls.Add(this.chkUnit);

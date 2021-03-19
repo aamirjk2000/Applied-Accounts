@@ -80,6 +80,31 @@ namespace Applied_Accounts
                 return new DataTable();
             }
         }
+
+        public static DataTable GetDataTable_Active(object TableID)
+        {
+            int _TableID = (int)TableID;
+
+            if (_TableID > 0)               // ID is zero
+            {
+                DataTable _DataTable; //= new DataTable();
+                string _TableName = Conversion.GetTableName(_TableID);
+                string _Text = "SELECT * FROM " + _TableName + " WHERE Active";
+                SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
+                SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
+                DataSet _DataSet = new DataSet();
+                _Adapter.Fill(_DataSet, _TableName);
+                _DataTable = _DataSet.Tables[_TableName];
+                return _DataTable;
+            }
+            else                                            // Error found.
+            {
+                MessageBox.Show("Data Table not found", "ERROR");
+                return new DataTable();
+            }
+        }
+
+
         public static DataTable GetDataTable(object TableID, int ID)
         {
             int _TableID = (int)TableID;

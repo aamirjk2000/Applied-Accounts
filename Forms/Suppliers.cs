@@ -15,7 +15,8 @@ namespace Applied_Accounts.Forms
     {
 
         private DataTable MyDataTable = AppliedTable.GetDataTable(Tables.Suppliers);
-        
+        private Code_Validation Code_Validate = new Code_Validation();
+
 
         #region initialize
 

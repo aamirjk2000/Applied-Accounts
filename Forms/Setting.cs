@@ -28,8 +28,9 @@ namespace Applied_Accounts.Forms
             txtComboDateFormat.Text = Applied.GetString("DateFormat_Combo");
             txtDefaultDateFormat.Text = Applied.GetString("DateFormat_Default");
             txtReportDateFormat.Text = Applied.GetString("DateFormat_Heading");
+            txtReportHeadingFormat.Text = Applied.GetString("DateFormat_Heading");
             txtCurrencyFormat.Text = Applied.GetString("CurrencyFormat");
-
+            
         }
 
 

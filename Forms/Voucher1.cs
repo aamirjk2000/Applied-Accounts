@@ -7,6 +7,7 @@ using System.Windows;
 using System.Windows.Forms;
 using MessageBox = System.Windows.MessageBox;
 
+
 namespace Applied_Accounts.Forms
 {
     public partial class frmVouchers1 : Form
@@ -187,6 +188,11 @@ namespace Applied_Accounts.Forms
 
         #region Voucher No Validation 
 
+        private void txtVou_No_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
         private void txtVou_No_Validating(object sender, CancelEventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
@@ -219,10 +225,6 @@ namespace Applied_Accounts.Forms
         }
 
 
-
-
-
-
         private void txtVou_No_Validated(object sender, EventArgs e)
         {
             if (Vou_Found)
@@ -233,6 +235,7 @@ namespace Applied_Accounts.Forms
                     txtVou_No.Text = MyVoucherClass.Vou_No;
                     dt_VoucherDate.Value = MyVoucherClass.Vou_Date;
                     cBoxVouType.Text = MyVoucherClass.Vou_Type;
+                    cBoxVouType.Enabled = false;
 
                     MyVoucherClass.Vou_Status = "Edit";
                     MyVoucherClass.Load_GridData();                                     // Load Table for Data Grid.
@@ -246,7 +249,11 @@ namespace Applied_Accounts.Forms
                 else
                 {
                     grp_Transactions.Visible = false;
-
+                    if (txtVou_No.Text.Trim().ToUpper() == "NEW")
+                    {
+                        cBoxVouType.Enabled = true;                                         // Voucher Type Enable is voucher is new    
+                        cBoxVouType.Focus();
+                    }
                 }
             }
         }
@@ -284,6 +291,13 @@ namespace Applied_Accounts.Forms
             lblMessage.Text = string.Empty;
             txtDR.Text = Conversion.ToMoney(txtDR.Text).ToString(NumberFormat);
             txtCR.Text = Conversion.ToMoney(txtCR.Text).ToString(NumberFormat);
+            
+            cBoxAccount.SelectedValue = Applied.Code2ID(txtCOA.Text, tb_Accounts.AsDataView());
+            cBoxSupplier.SelectedValue = Applied.Code2ID(txtSupplier.Text, tb_Suppliers.AsDataView());
+            cBoxProject.SelectedValue = Applied.Code2ID(txtProject.Text, tb_Projects.AsDataView());
+            cBoxUnit.SelectedValue = Applied.Code2ID(txtUnit.Text, tb_Units.AsDataView());
+            cBoxStock.SelectedValue = Applied.Code2ID(txtStock.Text, tb_Stock.AsDataView());
+            cBoxEmployee.SelectedValue = Applied.Code2ID(txtEmployee.Text, tb_Employees.AsDataView());
 
             txtCOA.Text = Applied.ID2Code(Conversion.ToLong(txtAccountID.Text), tb_Accounts.AsDataView());
             txtSupplier.Text = Applied.ID2Code(Conversion.ToLong(txtSupplierID.Text), tb_Suppliers.AsDataView());
@@ -292,12 +306,6 @@ namespace Applied_Accounts.Forms
             txtStock.Text = Applied.ID2Code(Conversion.ToLong(txtStockID.Text), tb_Stock.AsDataView());
             txtEmployee.Text = Applied.ID2Code(Conversion.ToLong(txtEmployeeID.Text), tb_Employees.AsDataView());
 
-            cBoxAccount.SelectedValue = Applied.Code2ID(txtCOA.Text, tb_Accounts.AsDataView());
-            cBoxSupplier.SelectedValue = Applied.Code2ID(txtSupplier.Text, tb_Suppliers.AsDataView());
-            cBoxProject.SelectedValue = Applied.Code2ID(txtProject.Text, tb_Projects.AsDataView());
-            cBoxUnit.SelectedValue = Applied.Code2ID(txtUnit.Text, tb_Units.AsDataView());
-            cBoxStock.SelectedValue = Applied.Code2ID(txtStock.Text, tb_Stock.AsDataView());
-            cBoxEmployee.SelectedValue = Applied.Code2ID(txtEmployee.Text, tb_Employees.AsDataView());
 
             // IF SRNO is focused then not binding else biding this object.
             if (txtSRNO.Focused)
@@ -315,12 +323,16 @@ namespace Applied_Accounts.Forms
                 }
                 else
                 {
-                    lblMessage.Text = "Record has been marked 'Delete'.";
-                    btnDelete.Text = "Recover";
+                    //lblMessage.Text = "Record has been marked 'Delete'.";
+                    //btnDelete.Text = "Recover";
                     MyEnabled(false);
                 }
 
             }
+
+
+
+
             grp_Action.Visible = MyVoucherClass.Is_Balanced();
             Set_DataGrid();
         }
@@ -482,7 +494,7 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-        #region Serial No Text box
+        #region Serial No Text box / Voucher Date
 
         private void txtSRNO_Enter(object sender, EventArgs e)
         {
@@ -527,6 +539,21 @@ namespace Applied_Accounts.Forms
         private void txtSRNO_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.Handled = Applied.IsDigit(sender, e);
+        }
+
+        private void dt_VoucherDate_Leave(object sender, EventArgs e)
+        {
+            if (txtVou_No.Text.Trim().ToUpper() == "NEW")
+            {
+                grp_Transactions.Visible = true;
+
+                if (tb_Voucher.Rows.Count == 0)
+                {
+                    MyVoucherClass.New();
+                    PositionChange();
+                    txtSRNO.Focus();
+                }
+            }
         }
 
         #endregion
@@ -774,27 +801,34 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-        #region form Closing
+        #region Form Closing
 
         private void frmVouchers1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MyVoucherClass.Voucher_Saved)         // Skip it when Voucher is saved.
+            if (MyVoucherClass.Is_Edited())
             {
-                e.Cancel = false;
-                return;
+                MessageBoxResult _Result;
+                _Result = MessageBox.Show("Are you sure to close", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (_Result == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else
+                {
+                    lblMessage.Text = "Form Not Closed";
+                    e.Cancel = true;
+                }
             }
 
-            MessageBoxResult _Result;
-            _Result = MessageBox.Show("Are you sure to close", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (_Result == MessageBoxResult.Yes)
-            {
-                e.Cancel = false;
-            }
-            else
-            {
-                lblMessage.Text = "Form Not Closed";
-                e.Cancel = true;
-            }
+            MyVoucherClass = null;
+
+            //if (MyVoucherClass.Voucher_Saved)         // Skip it when Voucher is saved.
+            //{
+            //    e.Cancel = false;
+            //    return;
+            //}
+
+
         }
 
 
@@ -838,25 +872,76 @@ namespace Applied_Accounts.Forms
         private void cBoxProject_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cBoxProject.SelectedValue == null) { return; }
-            txtProject.Text = cBoxProject.SelectedValue.ToString();
+            txtProjectID.Text = cBoxProject.SelectedValue.ToString();
             txtProject.Text = Applied.ID2Code(Conversion.ToLong(txtProjectID.Text), tb_Projects.AsDataView());
         }
 
         private void cBoxSupplier_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cBoxSupplier.SelectedValue == null) { return; }
-            txtSupplier.Text = cBoxSupplier.SelectedValue.ToString();
+            txtSupplierID.Text = cBoxSupplier.SelectedValue.ToString();
             txtSupplier.Text = Applied.ID2Code(Conversion.ToLong(txtSupplierID.Text), tb_Suppliers.AsDataView());
         }
 
         private void cBoxAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
+            if(Initializaion) { return; }
             if (cBoxAccount.SelectedValue == null) { return; }
             txtAccountID.Text = cBoxAccount.SelectedValue.ToString();
-            txtCOA.Text = Applied.ID2Code(Conversion.ToLong(txtProjectID.Text), tb_Accounts.AsDataView());
+            txtCOA.Text = Applied.ID2Code(Conversion.ToLong(txtAccountID.Text), tb_Accounts.AsDataView());
         }
+
 
         #endregion
 
+        #region REFRESH 
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            MessageBoxResult _Result;
+            _Result = System.Windows.MessageBox.Show("Are you sure to Refresh Voucher", "Refresh Voucher", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+            if (MessageBoxResult.Yes == _Result)
+            {
+                MyVoucherClass = new VoucherClass1();
+                grp_Transactions.Visible = false;
+                grp_Action.Visible = false;
+                grp_Voucher.Enabled = true;
+                txtVou_No.Focus();
+                txtVou_No.Text = MyVoucherClass.Vou_No;
+                cBoxVouType.Text = MyVoucherClass.Vou_Type;
+                dt_ChqDate.Value = MyVoucherClass.Vou_Date;
+            }
+
+        }
+
+
+        #endregion
+
+        private void cBoxVouType_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cBoxVouType_Validating(object sender, CancelEventArgs e)
+        {
+            if (cBoxVouType.Text.Length == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            e.Cancel = true;
+
+            foreach (object _VType in cBoxVouType.Items)
+            {
+                if(_VType.ToString() == cBoxVouType.Text.Trim())
+                {
+                    e.Cancel = false;
+                    break;
+                }
+           }
+            
+        }
     }   //============================== END
 }

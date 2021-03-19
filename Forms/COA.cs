@@ -41,8 +41,6 @@ namespace Applied_Accounts
             chkBank.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "IsBankBook", true, DataSourceUpdateMode.OnValidation));
             chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnValidation));
 
-
-
         }
 
         private void Load_Grid()
@@ -55,6 +53,8 @@ namespace Applied_Accounts
                                     (int)TextFormat.Numbers,
                                     (int)TextFormat.Currency,0};
             int[] ColumnWidth = { 60, 75, 260, 50, 50, 50, 80, 40 };
+
+            
 
             MyDataGrid.ColumnsName = ColumnsName;
             MyDataGrid.ColumnsWidth = ColumnWidth;

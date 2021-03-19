@@ -185,6 +185,7 @@
             this.btnRefresh.TabIndex = 3;
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnPrint
             // 
@@ -580,6 +581,8 @@
             // 
             // dt_ChqDate
             // 
+            this.dt_ChqDate.CustomFormat = "dd-MMM-yyyy";
+            this.dt_ChqDate.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dt_ChqDate.Location = new System.Drawing.Point(125, 271);
             this.dt_ChqDate.Name = "dt_ChqDate";
             this.dt_ChqDate.Size = new System.Drawing.Size(100, 20);
@@ -794,6 +797,8 @@
             this.cBoxVouType.Name = "cBoxVouType";
             this.cBoxVouType.Size = new System.Drawing.Size(100, 21);
             this.cBoxVouType.TabIndex = 2;
+            this.cBoxVouType.Leave += new System.EventHandler(this.cBoxVouType_Leave);
+            this.cBoxVouType.Validating += new System.ComponentModel.CancelEventHandler(this.cBoxVouType_Validating);
             // 
             // dt_VoucherDate
             // 
@@ -803,6 +808,7 @@
             this.dt_VoucherDate.Name = "dt_VoucherDate";
             this.dt_VoucherDate.Size = new System.Drawing.Size(115, 20);
             this.dt_VoucherDate.TabIndex = 3;
+            this.dt_VoucherDate.Leave += new System.EventHandler(this.dt_VoucherDate_Leave);
             // 
             // lblVoucherDate
             // 
@@ -819,6 +825,7 @@
             this.txtVou_No.Name = "txtVou_No";
             this.txtVou_No.Size = new System.Drawing.Size(100, 20);
             this.txtVou_No.TabIndex = 1;
+            this.txtVou_No.TextChanged += new System.EventHandler(this.txtVou_No_TextChanged);
             this.txtVou_No.Leave += new System.EventHandler(this.txtVou_No_Leave);
             this.txtVou_No.Validating += new System.ComponentModel.CancelEventHandler(this.txtVou_No_Validating);
             this.txtVou_No.Validated += new System.EventHandler(this.txtVou_No_Validated);
@@ -852,8 +859,8 @@
             // 
             // Pages
             // 
-            this.Pages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-            | System.Windows.Forms.AnchorStyles.Left)
+            this.Pages.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.Pages.Controls.Add(this.P1);
             this.Pages.Controls.Add(this.P2);
@@ -863,13 +870,13 @@
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
             // 
-            // frmVouchers2
+            // frmVouchers1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(733, 611);
             this.Controls.Add(this.Pages);
-            this.Name = "frmVouchers2";
+            this.Name = "frmVouchers1";
             this.Text = "Voucher1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVouchers1_FormClosing);
             this.Load += new System.EventHandler(this.frmVouchers1_Load);

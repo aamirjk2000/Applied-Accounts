@@ -60,9 +60,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.MyNavigator = new Applied_Accounts.Navigator();
             this.P2 = new System.Windows.Forms.TabPage();
-            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.btnExit = new System.Windows.Forms.Button();
             this.label14 = new System.Windows.Forms.Label();
+            this.MyDataGrid = new Applied_Accounts.AppliedDataGrid();
             this.Pages.SuspendLayout();
             this.P1.SuspendLayout();
             this.P2.SuspendLayout();
@@ -361,26 +361,6 @@
             this.P2.Text = "List";
             this.P2.UseVisualStyleBackColor = true;
             // 
-            // MyDataGrid
-            // 
-            this.MyDataGrid.Active = false;
-            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.MyDataGrid.ColumnsFormat = null;
-            this.MyDataGrid.ColumnsName = null;
-            this.MyDataGrid.ColumnsVisiable = null;
-            this.MyDataGrid.ColumnsWidth = null;
-            this.MyDataGrid.IsBrowseWin = false;
-            this.MyDataGrid.IsPressEnter = false;
-            this.MyDataGrid.Location = new System.Drawing.Point(3, 3);
-            this.MyDataGrid.MyDataRow = null;
-            this.MyDataGrid.MyDataView = null;
-            this.MyDataGrid.MyViewRow = null;
-            this.MyDataGrid.Name = "MyDataGrid";
-            this.MyDataGrid.RecordID = ((long)(0));
-            this.MyDataGrid.Size = new System.Drawing.Size(563, 394);
-            this.MyDataGrid.TabIndex = 0;
-            // 
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -400,6 +380,26 @@
             this.label14.Size = new System.Drawing.Size(50, 13);
             this.label14.TabIndex = 13;
             this.label14.Text = "Message";
+            // 
+            // MyDataGrid
+            // 
+            this.MyDataGrid.Active = false;
+            this.MyDataGrid.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.MyDataGrid.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.MyDataGrid.ColumnsFormat = null;
+            this.MyDataGrid.ColumnsName = null;
+            this.MyDataGrid.ColumnsVisiable = null;
+            this.MyDataGrid.ColumnsWidth = null;
+            this.MyDataGrid.IsBrowseWin = false;
+            this.MyDataGrid.IsPressEnter = false;
+            this.MyDataGrid.Location = new System.Drawing.Point(3, 3);
+            this.MyDataGrid.MyDataRow = null;
+            this.MyDataGrid.MyDataView = null;
+            this.MyDataGrid.MyViewRow = null;
+            this.MyDataGrid.Name = "MyDataGrid";
+            this.MyDataGrid.RecordID = ((long)(0));
+            this.MyDataGrid.Size = new System.Drawing.Size(570, 354);
+            this.MyDataGrid.TabIndex = 0;
             // 
             // frmSuppliers
             // 
@@ -438,7 +438,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.TabPage P2;
-        private AppliedDataGrid MyDataGrid;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label9;
@@ -456,5 +455,6 @@
         private System.Windows.Forms.TextBox txtContact;
         private System.Windows.Forms.TextBox txtPerson;
         private System.Windows.Forms.Label label14;
+        private AppliedDataGrid MyDataGrid;
     }
 }

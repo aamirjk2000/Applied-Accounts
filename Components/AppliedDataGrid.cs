@@ -30,7 +30,9 @@ namespace Applied_Accounts
 
         public void Load_Data(DataTable _DataTable)
         {
-            BrowseGrid.DataSource = _DataTable.AsDataView();
+            MyDataView = _DataTable.AsDataView();
+
+            BrowseGrid.DataSource = MyDataView;    //_DataTable.AsDataView();
 
 
             if (_DataTable.Rows.Count > 0)
@@ -92,7 +94,7 @@ namespace Applied_Accounts
 
                 BrowseGrid.Columns[ColumnsVisiable[i]].Width = ColumnsWidth[i];
                 BrowseGrid.Columns[ColumnsVisiable[i]].DataPropertyName = ColumnsVisiable[i];
-                BrowseGrid.Columns[ColumnsVisiable[i]].DefaultCellStyle.Format = _Format ;
+                BrowseGrid.Columns[ColumnsVisiable[i]].DefaultCellStyle.Format = _Format;
             }
         }
 
@@ -103,8 +105,10 @@ namespace Applied_Accounts
             _Filter += string.Concat("Code like '%", txtFilter.Text, "%'" + " OR ");
             _Filter += string.Concat("SCode like '%", txtFilter.Text, "%'");
 
-            MyDataView.RowFilter = _Filter;
-
+            if (MyDataView != null)
+            {
+                MyDataView.RowFilter = _Filter;
+            }
 
             //((DataView)BrowseGrid.DataSource).RowFilter = _Filter;
         }
@@ -159,7 +163,7 @@ namespace Applied_Accounts
         {
             if (MyDataRow == null) { return; }
             DataGridViewRow _DataRow = BrowseGrid.CurrentRow;
-            
+
             if (_DataRow != null)
             {
                 MyDataRow = ((DataRowView)_DataRow.DataBoundItem).Row;
