@@ -291,7 +291,7 @@ namespace Applied_Accounts.Forms
             lblMessage.Text = string.Empty;
             txtDR.Text = Conversion.ToMoney(txtDR.Text).ToString(NumberFormat);
             txtCR.Text = Conversion.ToMoney(txtCR.Text).ToString(NumberFormat);
-            
+
             cBoxAccount.SelectedValue = Applied.Code2ID(txtCOA.Text, tb_Accounts.AsDataView());
             cBoxSupplier.SelectedValue = Applied.Code2ID(txtSupplier.Text, tb_Suppliers.AsDataView());
             cBoxProject.SelectedValue = Applied.Code2ID(txtProject.Text, tb_Projects.AsDataView());
@@ -801,39 +801,6 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-        #region Form Closing
-
-        private void frmVouchers1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MyVoucherClass.Is_Edited())
-            {
-                MessageBoxResult _Result;
-                _Result = MessageBox.Show("Are you sure to close", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (_Result == MessageBoxResult.Yes)
-                {
-                    e.Cancel = false;
-                }
-                else
-                {
-                    lblMessage.Text = "Form Not Closed";
-                    e.Cancel = true;
-                }
-            }
-
-            MyVoucherClass = null;
-
-            //if (MyVoucherClass.Voucher_Saved)         // Skip it when Voucher is saved.
-            //{
-            //    e.Cancel = false;
-            //    return;
-            //}
-
-
-        }
-
-
-        #endregion
-
         #region Page 2 Active
         private void P2_Enter(object sender, EventArgs e)
         {
@@ -885,7 +852,7 @@ namespace Applied_Accounts.Forms
 
         private void cBoxAccount_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(Initializaion) { return; }
+            if (Initializaion) { return; }
             if (cBoxAccount.SelectedValue == null) { return; }
             txtAccountID.Text = cBoxAccount.SelectedValue.ToString();
             txtCOA.Text = Applied.ID2Code(Conversion.ToLong(txtAccountID.Text), tb_Accounts.AsDataView());
@@ -904,6 +871,7 @@ namespace Applied_Accounts.Forms
             if (MessageBoxResult.Yes == _Result)
             {
                 MyVoucherClass = new VoucherClass1();
+
                 grp_Transactions.Visible = false;
                 grp_Action.Visible = false;
                 grp_Voucher.Enabled = true;
@@ -935,13 +903,39 @@ namespace Applied_Accounts.Forms
 
             foreach (object _VType in cBoxVouType.Items)
             {
-                if(_VType.ToString() == cBoxVouType.Text.Trim())
+                if (_VType.ToString() == cBoxVouType.Text.Trim())
                 {
                     e.Cancel = false;
                     break;
                 }
-           }
-            
+            }
+
         }
+
+
+        #region Form Closing
+
+        private void frmVouchers1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MyVoucherClass.Is_Edited())
+            {
+                MessageBoxResult _Result;
+                _Result = MessageBox.Show("Are you sure to close", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (_Result == MessageBoxResult.Yes)
+                {
+                    e.Cancel = false;
+                }
+                else
+                {
+                    lblMessage.Text = "Form Not Closed";
+                    e.Cancel = true;
+                }
+            }
+        }
+
+
+        #endregion
+
+
     }   //============================== END
 }

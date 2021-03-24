@@ -140,5 +140,22 @@ namespace Applied_Accounts.Forms
         {
            cBoxCOA.SelectedValue = Applied.ShowBrowseWin(dt_COA, cBoxCOA.SelectedValue);
         }
+
+        #region DATE From
+
+        private void dt_From_Leave(object sender, EventArgs e)
+        {
+            if(dt_To.Value < dt_From.Value)
+            {
+                dt_To.Value = dt_From.Value;
+            }
+        }
+
+        private void label3_DoubleClick(object sender, EventArgs e)
+        {
+            dt_To.Value = dt_From.Value;
+        }
+
+        #endregion
     }
 }

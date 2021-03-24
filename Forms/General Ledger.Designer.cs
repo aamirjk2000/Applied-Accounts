@@ -45,20 +45,20 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(233, 77);
+            this.label3.Location = new System.Drawing.Point(241, 74);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(20, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "To";
+            this.label3.DoubleClick += new System.EventHandler(this.label3_DoubleClick);
             // 
             // btnExit
             // 
             this.btnExit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExit.ImageIndex = 1;
-            this.btnExit.ImageList = this.imageList1;
-            this.btnExit.Location = new System.Drawing.Point(577, 141);
+            this.btnExit.Image = global::Applied_Accounts.Properties.Resources.Exit2;
+            this.btnExit.Location = new System.Drawing.Point(601, 78);
             this.btnExit.Name = "btnExit";
-            this.btnExit.Size = new System.Drawing.Size(59, 54);
+            this.btnExit.Size = new System.Drawing.Size(35, 35);
             this.btnExit.TabIndex = 17;
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click_1);
@@ -73,11 +73,10 @@
             // btnPreview
             // 
             this.btnPreview.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnPreview.ImageIndex = 0;
-            this.btnPreview.ImageList = this.imageList1;
-            this.btnPreview.Location = new System.Drawing.Point(515, 141);
+            this.btnPreview.Image = global::Applied_Accounts.Properties.Resources.PRINT;
+            this.btnPreview.Location = new System.Drawing.Point(546, 78);
             this.btnPreview.Name = "btnPreview";
-            this.btnPreview.Size = new System.Drawing.Size(56, 53);
+            this.btnPreview.Size = new System.Drawing.Size(35, 35);
             this.btnPreview.TabIndex = 16;
             this.btnPreview.UseVisualStyleBackColor = true;
             this.btnPreview.Click += new System.EventHandler(this.btnPreview_Click_1);
@@ -99,6 +98,7 @@
             this.dt_From.Name = "dt_From";
             this.dt_From.Size = new System.Drawing.Size(100, 20);
             this.dt_From.TabIndex = 14;
+            this.dt_From.Leave += new System.EventHandler(this.dt_From_Leave);
             // 
             // btnBrowseSupplier
             // 
@@ -140,7 +140,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(648, 207);
+            this.ClientSize = new System.Drawing.Size(648, 125);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnPreview);

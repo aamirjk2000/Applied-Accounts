@@ -425,8 +425,9 @@ namespace Applied_Accounts.Classes
 
         public bool Is_Edited()
         {
+            // Check the edited table is equal with original. if matched = no edit in voucher 
             if(tb_Voucher_Original == null) { return false; }
-            return tb_Voucher_Original.Equals(ds_Voucher.Tables["Ledger"]);
+            return !tb_Voucher_Original.Equals(ds_Voucher.Tables["Ledger"]);
         }
 
         #endregion
