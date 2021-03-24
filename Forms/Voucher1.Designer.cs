@@ -100,6 +100,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
+            this.btnUndo = new System.Windows.Forms.Button();
             this.P2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
@@ -198,6 +199,7 @@
             // 
             // grp_Transactions
             // 
+            this.grp_Transactions.Controls.Add(this.btnUndo);
             this.grp_Transactions.Controls.Add(this.btnDelete);
             this.grp_Transactions.Controls.Add(this.label12);
             this.grp_Transactions.Controls.Add(this.btnBottom);
@@ -870,6 +872,15 @@
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
             // 
+            // btnUndo
+            // 
+            this.btnUndo.Location = new System.Drawing.Point(358, 28);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(45, 21);
+            this.btnUndo.TabIndex = 154;
+            this.btnUndo.Text = "Undo";
+            this.btnUndo.UseVisualStyleBackColor = true;
+            // 
             // frmVouchers1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -969,5 +980,6 @@
         private System.Windows.Forms.TabControl Pages;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button Stop;
+        private System.Windows.Forms.Button btnUndo;
     }
 }

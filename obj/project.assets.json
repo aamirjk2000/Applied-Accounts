@@ -20,7 +20,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1440.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.SqlServer.Types": "14.0.0"
@@ -247,7 +247,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1440.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.SqlServer.Types": "14.0.0"
@@ -474,7 +474,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1440.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.SqlServer.Types": "14.0.0"
@@ -701,7 +701,7 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
-      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
+      "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1440.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.SqlServer.Types": "14.0.0"
@@ -962,10 +962,10 @@
         "tools/netcoreapp3.0/any/ef6.runtimeconfig.json"
       ]
     },
-    "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1427.0": {
-      "sha512": "CLqux9ERNfgB8TBXuWGUtITuU7JNZhoAzPe6XxzXiLGCsNhBenzRBVh4x0GxEwl2/kUL4i4u+0RMFpf2k2vFVg==",
+    "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1440.0": {
+      "sha512": "HZvoVBfEvahUQJJqcRU0Zv9iUx/hku/D1gdOKojOqyrpds6gIqStxD7GOkX6c2WHSVjoKrfaKOXHGupNuysKjg==",
       "type": "package",
-      "path": "microsoft.reportingservices.reportviewercontrol.winforms/150.1427.0",
+      "path": "microsoft.reportingservices.reportviewercontrol.winforms/150.1440.0",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -1020,7 +1020,7 @@
         "lib/net40/zh-CHT/Microsoft.ReportViewer.WinForms.resources.dll",
         "license/License_ReportViewer.rtf",
         "license/ThirdPartyNotices_ReportViewer.txt",
-        "microsoft.reportingservices.reportviewercontrol.winforms.150.1427.0.nupkg.sha512",
+        "microsoft.reportingservices.reportviewercontrol.winforms.150.1440.0.nupkg.sha512",
         "microsoft.reportingservices.reportviewercontrol.winforms.nuspec"
       ]
     },
@@ -1193,26 +1193,31 @@
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.7": [
       "Microsoft.ReportViewer.WinForms.v12 >= 12.0.0.1",
-      "Microsoft.ReportingServices.ReportViewerControl.WinForms >= 150.1427.0",
+      "Microsoft.ReportingServices.ReportViewerControl.WinForms >= 150.1440.0",
       "Microsoft.SqlServer.Types >= 14.0.1016.290",
       "System.Data.SQLite >= 1.0.113.7"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Desktop\\.nuget\\packages\\": {}
+    "C:\\Users\\Administrator\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Applied\\Backup\\Applied_Source\\Applied Accounts.csproj",
+      "projectUniqueName": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
       "projectName": "Applied Accounts",
-      "projectPath": "C:\\Applied\\Backup\\Applied_Source\\Applied Accounts.csproj",
-      "packagesPath": "C:\\Users\\Desktop\\.nuget\\packages\\",
-      "outputPath": "C:\\Applied\\Backup\\Applied_Source\\obj\\",
+      "projectPath": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
+      "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
+      "outputPath": "D:\\Applied\\Applied-Accounts\\obj\\",
       "projectStyle": "PackageReference",
       "skipContentFileWrite": true,
+      "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+      ],
       "configFilePaths": [
-        "C:\\Users\\Desktop\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
@@ -1237,7 +1242,7 @@
           },
           "Microsoft.ReportingServices.ReportViewerControl.WinForms": {
             "target": "Package",
-            "version": "[150.1427.0, )"
+            "version": "[150.1440.0, )"
           },
           "Microsoft.SqlServer.Types": {
             "target": "Package",

@@ -16,6 +16,7 @@ namespace Applied_Accounts
         void Bottom();
         DataRow GetNewRow();
         void Update(int _TableID);
+        int Count();
     }
 
 
@@ -38,7 +39,7 @@ namespace Applied_Accounts
         public bool Active { get; set; }
         public DataRow MyDataRow { get; set; }                      // current DataRow
         public DataRow OriginalRow { get; set; }                    // Original Data of the row
-        public int Count { get => MyDataTable.Rows.Count; }         // Numbers of total records
+        //public int Count { get => MyDataTable.Rows.Count; }         // Numbers of total records
         public int Row_Index { get; set; }                          // Current Row Index of Data Table
         public string Filter { get => MyDataView.RowFilter; set => MyDataView.RowFilter = value; }
 
@@ -131,11 +132,11 @@ namespace Applied_Accounts
         #region Row
         public DataRow GetNewRow()                              // Get New Row
         {
-            if(MyDataTable==null) { MessageBox.Show("Error thisTable.GetBewRow()");  return null; }
+            if (MyDataTable == null) { MessageBox.Show("Error thisTable.GetBewRow()"); return null; }
             DataRow _Row = MyDataTable.NewRow();
             _Row["ID"] = -1;
 
-            if(MyDataTable.Columns.Contains("Active"))
+            if (MyDataTable.Columns.Contains("Active"))
             {
                 _Row["Active"] = true;
             }
@@ -184,7 +185,7 @@ namespace Applied_Accounts
                 _Result = (long)MyDataTable.Compute("MAX(ID)", string.Empty);
             }
 
-            if(_Result==-1) { _Result = 0; }  // Zero when table is empty.
+            if (_Result == -1) { _Result = 0; }  // Zero when table is empty.
 
             return _Result;
         }
@@ -241,7 +242,7 @@ namespace Applied_Accounts
             if (ShowSaveMessage)                     // Show Message Box ans Ask to save the record?
             {
                 DialogResult Ask = MessageBox.Show(_MessageBoxText[0], _MessageBoxText[1], MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (Ask == DialogResult.No) 
+                if (Ask == DialogResult.No)
                 { return "Cancelled."; }
             }
 
@@ -279,10 +280,10 @@ namespace Applied_Accounts
                     }
                     else
                     {
-                        MessageBox.Show(Error_Message,"ERROR");
+                        MessageBox.Show(Error_Message, "ERROR");
                         MyMessage = Error_Message;           // Save the message to Class Message 
                     }
-                    
+
                 }
             }
             return MyMessage;
@@ -394,7 +395,7 @@ namespace Applied_Accounts
         public void MoveNext()
         {
             Row_Index = MyDataTable.Rows.IndexOf(MyDataRow) + 1;
-            if (Row_Index > (Count - 1)) { Row_Index = (Count - 1); }       // if index is more than total record. get last record
+            if (Row_Index > (Count() - 1)) { Row_Index = (Count() - 1); }       // if index is more than total record. get last record
             MyDataRow = MyDataTable.Rows[Row_Index];
         }
 
@@ -431,6 +432,12 @@ namespace Applied_Accounts
         }
 
         #endregion
+
+
+        public int Count()
+        {
+            return MyDataTable.Rows.Count;
+        }
 
         public void Update(int _TableID)                                            // Update MyTable from DB
         {

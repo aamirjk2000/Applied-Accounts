@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SQLite;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using Applied_Accounts.Classes;
 
@@ -137,6 +138,54 @@ namespace Applied_Accounts.Classes
 
         #region Insert / Update / Delete 
 
+        private string Create_Voucher_Number()
+        {
+            string _VouNo = "";
+
+            DataView _View = AppliedTable.GetDataTable(Tables.View_VouNo).AsDataView();
+            string _Filter = "Voucher='";
+            
+
+            switch (Vou_Type)
+            {
+                case "Journal":
+                    _Filter = "J";
+                    break;
+
+                case "Payment":
+                    _Filter = "P";
+                    break;
+
+                case "Receipt":
+                    _Filter = "R";
+                    break;
+
+                case "Stock":
+                    _Filter = "S";
+                    break;
+
+                case "Payroll":
+                    _Filter = "P";
+                    break;
+
+                case "Revenue":
+                    _Filter = "I";
+                    break;
+
+                default:
+                    break;
+            }
+
+            _Filter += (Vou_Date.ToString("mm")).ToString();
+            _Filter += (Vou_Date.ToString("yy")).ToString();
+
+
+
+
+
+            return _VouNo;
+        }
+
         public void Save(DataTable _Voucher)
         {
             if (!Is_Balanced())
@@ -146,6 +195,15 @@ namespace Applied_Accounts.Classes
                 return;
             }
             //=========================================================================================== RETURN 
+
+            if(Vou_No.Trim().ToUpper()=="NEW")
+            {
+                Create_Voucher_Number()
+
+            }
+
+
+
 
             DataView View_Ledger = AppliedTable.GetDataTable(Tables.Ledger).AsDataView();
             long _ID = 0;

@@ -71,7 +71,8 @@ namespace Applied_Accounts.Forms
 
             TableBinding.PositionChanged += new EventHandler(TableBinding_PositionChange);
             TableBinding.CurrentChanged += new EventHandler(TableBinding_CurrentChange);
-
+            TableBinding.BindingComplete += new BindingCompleteEventHandler(TableBiding_Completed);
+            
             // ======================= END
 
             Set_ComboBox();                                 // Combo box setting DisplayMemebr, ValueMembers & DataSource
@@ -166,12 +167,26 @@ namespace Applied_Accounts.Forms
 
         private void TableBinding_PositionChange(object sender, EventArgs e)
         {
-
+            lblMessage.Text = "";
+            lblMessage.Text = TableBinding.Position.ToString() + " | ";
         }
 
         private void TableBinding_CurrentChange(object sender, EventArgs e)
         {
+            cBoxAccount.SelectedValue = Applied.Code2ID(txtCOA.Text, tb_Accounts.AsDataView());
+            cBoxSupplier.SelectedValue = Applied.Code2ID(txtSupplier.Text, tb_Suppliers.AsDataView());
+            cBoxProject.SelectedValue = Applied.Code2ID(txtProject.Text, tb_Projects.AsDataView());
+            cBoxUnit.SelectedValue = Applied.Code2ID(txtUnit.Text, tb_Units.AsDataView());
+            cBoxStock.SelectedValue = Applied.Code2ID(txtStock.Text, tb_Stock.AsDataView());
+            cBoxEmployee.SelectedValue = Applied.Code2ID(txtEmployee.Text, tb_Employees.AsDataView());
 
+            txtDR.Text = Conversion.ToMoney(txtDR.Text).ToString(NumberFormat);
+            txtCR.Text = Conversion.ToMoney(txtCR.Text).ToString(NumberFormat);
+        }
+
+        private void TableBiding_Completed(object sender, EventArgs e)
+        {
+           
         }
 
         #endregion
@@ -284,20 +299,15 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
+
+        /// <summary>
+        /// POSITION CHANGED.
+        /// </summary>
         #region Position Changed
 
         private void PositionChange()
         {
-            lblMessage.Text = string.Empty;
-            txtDR.Text = Conversion.ToMoney(txtDR.Text).ToString(NumberFormat);
-            txtCR.Text = Conversion.ToMoney(txtCR.Text).ToString(NumberFormat);
-
-            cBoxAccount.SelectedValue = Applied.Code2ID(txtCOA.Text, tb_Accounts.AsDataView());
-            cBoxSupplier.SelectedValue = Applied.Code2ID(txtSupplier.Text, tb_Suppliers.AsDataView());
-            cBoxProject.SelectedValue = Applied.Code2ID(txtProject.Text, tb_Projects.AsDataView());
-            cBoxUnit.SelectedValue = Applied.Code2ID(txtUnit.Text, tb_Units.AsDataView());
-            cBoxStock.SelectedValue = Applied.Code2ID(txtStock.Text, tb_Stock.AsDataView());
-            cBoxEmployee.SelectedValue = Applied.Code2ID(txtEmployee.Text, tb_Employees.AsDataView());
+            //lblMessage.Text = string.Empty;
 
             txtCOA.Text = Applied.ID2Code(Conversion.ToLong(txtAccountID.Text), tb_Accounts.AsDataView());
             txtSupplier.Text = Applied.ID2Code(Conversion.ToLong(txtSupplierID.Text), tb_Suppliers.AsDataView());
@@ -330,11 +340,10 @@ namespace Applied_Accounts.Forms
 
             }
 
-
-
-
             grp_Action.Visible = MyVoucherClass.Is_Balanced();
             Set_DataGrid();
+
+            lblMessage.Text += TableBinding.Position.ToString();
         }
 
         #endregion
@@ -373,6 +382,8 @@ namespace Applied_Accounts.Forms
         {
             Save_Values();
             TableBinding.Position = 0;
+            
+            
             PositionChange();
         }
 

@@ -59,7 +59,7 @@ namespace Applied_Accounts
             TableBinding = BindingContext[MyBindingSource];
 
 
-            if (TableClass.Count > 0)                   // If Data Table has some records.
+            if (TableClass.Count() > 0)                   // If Data Table has some records.
             {
 
                 txtPointer.Text = (TableBinding.Position + 1).ToString();
@@ -203,7 +203,7 @@ namespace Applied_Accounts
                 TableClass.OriginalRow = TableClass.MyDataRow;
                 After_Save.Invoke(sender, e);
 
-                if (TableClass.Count > 1) { Buttons_Display(3); }
+                if (TableClass.Count() > 1) { Buttons_Display(3); }
                 else { Buttons_Display(4); }
                 TableClass.Update(TableClass.MyTableID);           // Update Datatable from DB after save row
                 TableClass.Row_Index = TableClass.MyDataTable.Rows.IndexOf(TableClass.MyDataRow);
