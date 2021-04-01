@@ -149,12 +149,26 @@ namespace Applied_Accounts.Forms
         private void Set_DataBinding()
         {
             txtSRNO.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtAccountID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "COA", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtSupplierID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Supplier", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtProjectID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtUnitID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtStockID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Stock", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtEmployeeID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Employee", true, DataSourceUpdateMode.OnPropertyChanged));
+            //txtAccountID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "COA", true, DataSourceUpdateMode.OnPropertyChanged));
+            //txtSupplierID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Supplier", true, DataSourceUpdateMode.OnPropertyChanged));
+            //txtProjectID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
+            //txtUnitID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
+            //txtStockID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Stock", true, DataSourceUpdateMode.OnPropertyChanged));
+            //txtEmployeeID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Employee", true, DataSourceUpdateMode.OnPropertyChanged));
+
+            cBoxAccount.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "COA", false, DataSourceUpdateMode.OnPropertyChanged));
+            cBoxSupplier.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Supplier", false, DataSourceUpdateMode.OnPropertyChanged));
+            cBoxProject.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Project", false, DataSourceUpdateMode.OnPropertyChanged));
+            cBoxUnit.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Unit", false, DataSourceUpdateMode.OnPropertyChanged));
+            cBoxStock.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Stock", false, DataSourceUpdateMode.OnPropertyChanged));
+            cBoxEmployee.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Employee", false, DataSourceUpdateMode.OnPropertyChanged));
+
+            txtAccountID.Text = cBoxAccount.SelectedValue.ToString();
+            txtSupplierID.Text = cBoxSupplier.SelectedValue.ToString();
+            txtProject.Text = cBoxProject.SelectedValue.ToString();
+            txtUnit.Text = cBoxUnit.SelectedValue.ToString();
+            txtStock.Text = cBoxStock.SelectedValue.ToString();
+            txtEmployee.Text = cBoxEmployee.SelectedValue.ToString();
 
             txtRefNo.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "RefNo", true, DataSourceUpdateMode.OnPropertyChanged));
             txtChqNo.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Chq_No", true, DataSourceUpdateMode.OnPropertyChanged));
@@ -295,6 +309,18 @@ namespace Applied_Accounts.Forms
         private void grp_Transactions_Enter(object sender, EventArgs e)
         {
             grp_Voucher.Enabled = false;
+
+            if (txtVou_No.Text.ToUpper().Trim() == "NEW") 
+            {
+                MyVoucherClass.Vou_No = "NEW";
+                MyVoucherClass.Vou_Type = cBoxVouType.Text;
+                MyVoucherClass.Vou_Date = dt_VoucherDate.Value;
+
+                tb_Voucher.Rows[0]["Vou_No"] = MyVoucherClass.Vou_No;
+                tb_Voucher.Rows[0]["Vou_Type"] = MyVoucherClass.Vou_Type;
+                tb_Voucher.Rows[0]["Vou_Date"] = MyVoucherClass.Vou_Date;
+
+            }
         }
 
         #endregion
@@ -478,7 +504,6 @@ namespace Applied_Accounts.Forms
                                 Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.BackColor = Color.LightBlue;
                                 Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.ForeColor = Color.Navy;
                             }
-
                         }
                         else
                         {
@@ -488,19 +513,14 @@ namespace Applied_Accounts.Forms
                                 Grid_Voucher.Rows[_Row.Index].DefaultCellStyle.ForeColor = Color.DarkRed;
                             }
                         }
-
-
                     }
                 }
             }
             #endregion
 
-            int i = TableBinding.Position;
-            TableBinding.Position = 0;
-            TableBinding.Position = i;              // Move pointer to Objest reset
-
-
-
+            //int i = TableBinding.Position;
+            //TableBinding.Position = 0;
+            //TableBinding.Position = i;              // Move pointer to Objest reset
         }
 
         #endregion
@@ -768,6 +788,13 @@ namespace Applied_Accounts.Forms
                 btnBottom_Click(sender, e);
                 lblMessage.Text = " New Transaction Created.";
                 txtCOA.Focus();
+
+                cBoxAccount.SelectedValue = 0;
+                cBoxSupplier.SelectedValue = 0;
+                cBoxProject.SelectedValue = 0;
+                cBoxUnit.SelectedValue = 0;
+                cBoxStock.SelectedValue = 0;
+                cBoxEmployee.SelectedValue = 0;
             }
         }
 
@@ -881,6 +908,7 @@ namespace Applied_Accounts.Forms
 
             if (MessageBoxResult.Yes == _Result)
             {
+                
                 MyVoucherClass = new VoucherClass1();
 
                 grp_Transactions.Visible = false;

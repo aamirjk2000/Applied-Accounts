@@ -37,6 +37,7 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.grp_Transactions = new System.Windows.Forms.GroupBox();
+            this.btnUndo = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
             this.btnBottom = new System.Windows.Forms.Button();
@@ -100,7 +101,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
-            this.btnUndo = new System.Windows.Forms.Button();
             this.P2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
@@ -261,6 +261,15 @@
             this.grp_Transactions.TabStop = false;
             this.grp_Transactions.Text = "TRANSACTIONS";
             this.grp_Transactions.Enter += new System.EventHandler(this.grp_Transactions_Enter);
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.Location = new System.Drawing.Point(358, 28);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(45, 21);
+            this.btnUndo.TabIndex = 154;
+            this.btnUndo.Text = "Undo";
+            this.btnUndo.UseVisualStyleBackColor = true;
             // 
             // btnDelete
             // 
@@ -871,15 +880,6 @@
             this.Pages.SelectedIndex = 0;
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
-            // 
-            // btnUndo
-            // 
-            this.btnUndo.Location = new System.Drawing.Point(358, 28);
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(45, 21);
-            this.btnUndo.TabIndex = 154;
-            this.btnUndo.Text = "Undo";
-            this.btnUndo.UseVisualStyleBackColor = true;
             // 
             // frmVouchers1
             // 

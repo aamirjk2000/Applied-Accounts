@@ -381,7 +381,42 @@ namespace Applied_Accounts.Classes
             return _Result;
         }
 
+        public static string VouChar(string _VouType)
+        {
+            string _Result = "";
 
+            switch (_VouType)
+            {
+                case "Journal":
+                    _Result = "J";
+                    break;
+
+                case "Payment":
+                    _Result = "P";
+                    break;
+
+                case "Receipt":
+                    _Result = "R";
+                    break;
+
+                case "Stock":
+                    _Result = "S";
+                    break;
+
+                case "Payroll":
+                    _Result = "P";
+                    break;
+
+                case "Revenue":
+                    _Result = "I";
+                    break;
+
+                default:
+                    break;
+            }
+
+            return _Result;
+        }
         #endregion
 
 

@@ -2,6 +2,7 @@
 using System.Data;
 using System.Data.SQLite;
 using System.Runtime.InteropServices;
+using System.Text;
 using System.Windows.Forms;
 using Applied_Accounts.Classes;
 
@@ -140,50 +141,31 @@ namespace Applied_Accounts.Classes
 
         private string Create_Voucher_Number()
         {
-            string _VouNo = "";
-
             DataView _View = AppliedTable.GetDataTable(Tables.View_VouNo).AsDataView();
+            StringBuilder _VouNo = new StringBuilder();
             string _Filter = "Voucher='";
-            
 
-            switch (Vou_Type)
+            _VouNo.Append(Applied.VouChar(Vou_Type));                           // Add VouType Charactor  i.e P, R, 
+            _VouNo.Append(Vou_Date.ToString("yy").ToString());
+            _VouNo.Append(Vou_Date.ToString("MM").ToString());
+
+            _Filter += _VouNo.ToString() + "'";
+
+            _View.RowFilter = _Filter;
+
+            if(_View.Count==1)
             {
-                case "Journal":
-                    _Filter = "J";
-                    break;
-
-                case "Payment":
-                    _Filter = "P";
-                    break;
-
-                case "Receipt":
-                    _Filter = "R";
-                    break;
-
-                case "Stock":
-                    _Filter = "S";
-                    break;
-
-                case "Payroll":
-                    _Filter = "P";
-                    break;
-
-                case "Revenue":
-                    _Filter = "I";
-                    break;
-
-                default:
-                    break;
+                int _MaxNo = Conversion.ToInteger(_View[0]["MaxNo"]) + 1;
+                _VouNo.Append("-");
+                _VouNo.Append(_MaxNo.ToString("0000"));
+            }
+            else
+            {
+                _VouNo.Append("-");
+                _VouNo.Append("0001");
             }
 
-            _Filter += (Vou_Date.ToString("mm")).ToString();
-            _Filter += (Vou_Date.ToString("yy")).ToString();
-
-
-
-
-
-            return _VouNo;
+            return _VouNo.ToString();
         }
 
         public void Save(DataTable _Voucher)
@@ -198,12 +180,8 @@ namespace Applied_Accounts.Classes
 
             if(Vou_No.Trim().ToUpper()=="NEW")
             {
-                Create_Voucher_Number()
-
+                Vou_No =  Create_Voucher_Number();
             }
-
-
-
 
             DataView View_Ledger = AppliedTable.GetDataTable(Tables.Ledger).AsDataView();
             long _ID = 0;
@@ -277,7 +255,8 @@ namespace Applied_Accounts.Classes
             SQLiteCommand _CmdInsert = new SQLiteCommand();
             try
             {
-                _Row["ID"] = Max_ID + 1;
+                Max_ID += 1;
+                _Row["ID"] = Max_ID;
                 _CmdInsert = Connection_Class.SQLite.SQLiteInsert(_Row, Connection.AppliedConnection());
                 Effected_Records += _CmdInsert.ExecuteNonQuery();
                 if (Effected_Records > 0) { Record_is_Saved = true; } else { Record_is_Saved = false; }
