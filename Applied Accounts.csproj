@@ -651,13 +651,17 @@
     <Content Include="Help\DevelopmentTools.txt" />
     <Content Include="Icons\Accounting.ico" />
     <Content Include="Icons\Accounting.png" />
+    <None Include="Icons\add.gif" />
     <Content Include="Icons\AppliedLogo.jpg" />
     <Content Include="Icons\BACK.png" />
     <Content Include="Icons\BACKD.png" />
     <Content Include="Icons\BOTTOM.png" />
     <Content Include="Icons\BOTTOMD.png" />
     <Content Include="Icons\Close.png" />
+    <None Include="Icons\Copy.gif" />
     <Content Include="Icons\Delete.png" />
+    <None Include="Icons\delete1.png" />
+    <None Include="Icons\edit.png" />
     <Content Include="Icons\exit-48.png" />
     <Content Include="Icons\Exit.png" />
     <None Include="Icons\Exit2.png" />
@@ -710,7 +714,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="False" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

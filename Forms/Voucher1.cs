@@ -162,6 +162,7 @@ namespace Applied_Accounts.Forms
             cBoxUnit.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Unit", false, DataSourceUpdateMode.OnPropertyChanged));
             cBoxStock.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Stock", false, DataSourceUpdateMode.OnPropertyChanged));
             cBoxEmployee.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Employee", false, DataSourceUpdateMode.OnPropertyChanged));
+            cBoxPOrder.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "POrder", false, DataSourceUpdateMode.OnPropertyChanged));
 
             txtAccountID.Text = cBoxAccount.SelectedValue.ToString();
             txtSupplierID.Text = cBoxSupplier.SelectedValue.ToString();
