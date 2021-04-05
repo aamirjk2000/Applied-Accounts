@@ -13,6 +13,7 @@ namespace Applied_Accounts
         public string MyTitle { get; set; } 
         public bool IsSelect { get; set; }
         public long MyID { get; set; }
+        public long OldID { get; set; }
 
         public Browse(DataView _DataView)
         {

@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
@@ -21,12 +22,13 @@ namespace Applied_Accounts.Forms
         public static VoucherClass1 MyVoucherClass = new VoucherClass1();
 
         private string Voucher_NO { get => txtVou_No.Text.Trim(); } // Voucher No.
-        private string MyCheque_No;                                 // For copy and past
-        private string MyCheque_Date;                               // For copy and past
-        private string MyRefNo;                                     // For copy and past
-        private string MyPOrder;                                    // For copy and past
-        private string MyDescription;                               // For copy and past
-        private string MyRemarks;                                   // for Copy and past.
+        private string Copy_Cheque_No;                                 // For copy and past
+        private DateTime Copy_Cheque_Date;                             // For copy and past
+        private string Copy_RefNo;                                     // For copy and past
+        private string Copy_POrder;                                    // For copy and past
+        private string Copy_Description;                               // For copy and past
+        private string Copy_Remarks;                                   // for Copy and past.
+        private bool Is_Copied = false;
 
         private DataTable tb_Accounts { get => MyVoucherClass.ds_Voucher.Tables["COA"]; }
         private DataTable tb_Suppliers { get => MyVoucherClass.ds_Voucher.Tables["Suppliers"]; }
@@ -72,7 +74,7 @@ namespace Applied_Accounts.Forms
             TableBinding.PositionChanged += new EventHandler(TableBinding_PositionChange);
             TableBinding.CurrentChanged += new EventHandler(TableBinding_CurrentChange);
             TableBinding.BindingComplete += new BindingCompleteEventHandler(TableBiding_Completed);
-            
+
             // ======================= END
 
             Set_ComboBox();                                 // Combo box setting DisplayMemebr, ValueMembers & DataSource
@@ -201,17 +203,7 @@ namespace Applied_Accounts.Forms
 
         private void TableBiding_Completed(object sender, EventArgs e)
         {
-           
-        }
 
-        #endregion
-
-        #region Form Paint
-
-
-        private void frmVouchers1_Paint(object sender, PaintEventArgs e)
-        {
-            PositionChange();
         }
 
         #endregion
@@ -222,10 +214,14 @@ namespace Applied_Accounts.Forms
         {
 
         }
-
+        private void label2_DoubleClick(object sender, EventArgs e)
+        {
+            txtVou_No.Text = Applied.GetString("LastVoucher");
+        }
         private void txtVou_No_Validating(object sender, CancelEventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
+
 
             bool IsClose = false;
 
@@ -253,8 +249,6 @@ namespace Applied_Accounts.Forms
                 }
             }
         }
-
-
         private void txtVou_No_Validated(object sender, EventArgs e)
         {
             if (Vou_Found)
@@ -287,7 +281,6 @@ namespace Applied_Accounts.Forms
                 }
             }
         }
-
         private void txtVou_No_Leave(object sender, EventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
@@ -295,6 +288,38 @@ namespace Applied_Accounts.Forms
             if (_TextBox.Text == "0") { Close(); }
             if (_TextBox.Text.ToUpper().Trim() == "END") { Close(); }
             if (_TextBox.Text.ToUpper().Trim() == "CLOSE") { Close(); }
+
+            Applied.SetValue("LastVoucher", txtVou_No.Text.Trim(),Applied.KeyType.String);
+
+        }
+
+        #endregion
+
+        #region Voucher Type
+
+        private void cBoxVouType_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void cBoxVouType_Validating(object sender, CancelEventArgs e)
+        {
+            if (cBoxVouType.Text.Length == 0)
+            {
+                e.Cancel = true;
+                return;
+            }
+
+            e.Cancel = true;
+
+            foreach (object _VType in cBoxVouType.Items)
+            {
+                if (_VType.ToString() == cBoxVouType.Text.Trim())
+                {
+                    e.Cancel = false;
+                    break;
+                }
+            }
 
         }
 
@@ -311,7 +336,7 @@ namespace Applied_Accounts.Forms
         {
             grp_Voucher.Enabled = false;
 
-            if (txtVou_No.Text.ToUpper().Trim() == "NEW") 
+            if (txtVou_No.Text.ToUpper().Trim() == "NEW")
             {
                 MyVoucherClass.Vou_No = "NEW";
                 MyVoucherClass.Vou_Type = cBoxVouType.Text;
@@ -409,8 +434,8 @@ namespace Applied_Accounts.Forms
         {
             Save_Values();
             TableBinding.Position = 0;
-            
-            
+
+
             PositionChange();
         }
 
@@ -441,12 +466,13 @@ namespace Applied_Accounts.Forms
         private void Save_Values()
         {
             int i = TableBinding.Position;
-            MyCheque_No = tb_Voucher.Rows[i]["Chq_no"].ToString();
-            MyCheque_Date = tb_Voucher.Rows[i]["Chq_Date"].ToString();
-            MyRefNo = tb_Voucher.Rows[i]["RefNo"].ToString();
-            MyPOrder = tb_Voucher.Rows[i]["POrder"].ToString();
-            MyDescription = tb_Voucher.Rows[i]["Description"].ToString();
-            MyRemarks = tb_Voucher.Rows[i]["Remarks"].ToString();
+            Copy_Cheque_No = txtChqNo.Text;
+            Copy_Cheque_Date = dt_ChqDate.Value;
+            Copy_RefNo = txtRefNo.Text;
+            Copy_POrder = cBoxPOrder.Text;
+            Copy_Description = txtDescription.Text;
+            Copy_Remarks = txtRemarks.Text;
+            Is_Copied = true;
         }
 
         #endregion
@@ -812,9 +838,7 @@ namespace Applied_Accounts.Forms
         private void btnSave_Click(object sender, EventArgs e)
         {
             MyVoucherClass.Save(tb_Voucher);
-
-
-
+            lblMessage.Text = string.Concat("Voucher No ", MyVoucherClass.Vou_No, " Created.");
         }
         #endregion
 
@@ -909,7 +933,7 @@ namespace Applied_Accounts.Forms
 
             if (MessageBoxResult.Yes == _Result)
             {
-                
+
                 MyVoucherClass = new VoucherClass1();
 
                 grp_Transactions.Visible = false;
@@ -919,63 +943,128 @@ namespace Applied_Accounts.Forms
                 txtVou_No.Text = MyVoucherClass.Vou_No;
                 cBoxVouType.Text = MyVoucherClass.Vou_Type;
                 dt_ChqDate.Value = MyVoucherClass.Vou_Date;
-            }
 
+                MyDataSource = MyVoucherClass.ds_Voucher;
+                TableBinding = BindingContext[MyVoucherClass.tb_Voucher];
+
+            }
         }
 
 
         #endregion
-
-        private void cBoxVouType_Leave(object sender, EventArgs e)
-        {
-
-        }
-
-        private void cBoxVouType_Validating(object sender, CancelEventArgs e)
-        {
-            if (cBoxVouType.Text.Length == 0)
-            {
-                e.Cancel = true;
-                return;
-            }
-
-            e.Cancel = true;
-
-            foreach (object _VType in cBoxVouType.Items)
-            {
-                if (_VType.ToString() == cBoxVouType.Text.Trim())
-                {
-                    e.Cancel = false;
-                    break;
-                }
-            }
-
-        }
-
 
         #region Form Closing
 
         private void frmVouchers1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (MyVoucherClass.Is_Edited())
+           
+
+        }
+
+        #endregion
+
+
+        #region Undo
+
+        private void btnUndo_Click(object sender, EventArgs e)
+        {
+            string _ID = txtSRNO.Text.Trim(); ;
+            DataView _View1 = MyVoucherClass.tb_Voucher_Original.AsDataView();
+            DataRow _BoundedRow = ((DataRowView)TableBinding.Current).Row;
+            DataRow _OriginalRow = MyVoucherClass.tb_Voucher_Original.NewRow();
+            int _BoundedID = Conversion.ToInteger(_BoundedRow["ID"]);
+
+            if (_BoundedID > 0)
             {
-                MessageBoxResult _Result;
-                _Result = MessageBox.Show("Are you sure to close", "", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (_Result == MessageBoxResult.Yes)
+                _View1.RowFilter = string.Concat("ID=", _BoundedID.ToString());
+                if (_View1.Count == 1)
                 {
-                    e.Cancel = false;
+                    _OriginalRow = _View1.ToTable().Rows[0];
                 }
-                else
+
+                TableBinding.SuspendBinding();
+
+                foreach (DataRow _Row in tb_Voucher.Rows)
                 {
-                    lblMessage.Text = "Form Not Closed";
-                    e.Cancel = true;
+                    if (_Row["ID"].ToString().Trim() == _OriginalRow["ID"].ToString().Trim())
+                    {
+                        int _indexRow = tb_Voucher.Rows.IndexOf(_Row);
+                        tb_Voucher.Rows[_indexRow].ItemArray = _OriginalRow.ItemArray;
+                        lblMessage.Text = "Revert Row";
+                        txtCOA.Focus();
+                    }
                 }
+
+                TableBinding.ResumeBinding();
             }
         }
 
 
         #endregion
 
+        #region Browse Window
 
+        private void btnAccounts_Click(object sender, EventArgs e)
+        {
+            cBoxAccount.SelectedValue = Applied.ShowBrowseWin(tb_Accounts, cBoxAccount.SelectedValue);
+            txtCOA.Focus();
+        }
+
+        private void btnSuppliers_Click(object sender, EventArgs e)
+        {
+            cBoxSupplier.SelectedValue = Applied.ShowBrowseWin(tb_Suppliers, cBoxSupplier.SelectedValue);
+            txtSupplier.Focus();
+        }
+
+        private void btnProjects_Click(object sender, EventArgs e)
+        {
+            cBoxProject.SelectedValue = Applied.ShowBrowseWin(tb_Projects, cBoxProject.SelectedValue);
+            txtProject.Focus();
+        }
+
+        private void btnUnits_Click(object sender, EventArgs e)
+        {
+            cBoxUnit.SelectedValue = Applied.ShowBrowseWin(tb_Units, cBoxUnit.SelectedValue);
+            txtUnit.Focus();
+        }
+
+        private void btnStocks_Click(object sender, EventArgs e)
+        {
+            cBoxStock.SelectedValue = Applied.ShowBrowseWin(tb_Stock, cBoxStock.SelectedValue);
+            txtStock.Focus();
+        }
+
+        private void btnEmployees_Click(object sender, EventArgs e)
+        {
+            cBoxEmployee.SelectedValue = Applied.ShowBrowseWin(tb_Employees, cBoxEmployee.SelectedValue);
+            txtEmployee.Focus();
+        }
+
+        #endregion
+
+        #region Copy
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+
+            if(!Is_Copied) { return; }
+            txtRefNo.Text = Copy_RefNo;
+            txtChqNo.Text = Copy_Cheque_No;
+            dt_ChqDate.Value = Copy_Cheque_Date;
+            txtRemarks.Text = Copy_Remarks;
+            txtDescription.Text = Copy_Description;
+            cBoxPOrder.Text = Copy_POrder;
+        }
+
+        #endregion
+
+        #region Print
+        
+        private void btnPrint_Click(object sender, EventArgs e)
+        {
+            MyVoucherClass.Preview_Voucher();
+        }
+
+        #endregion
     }   //============================== END
 }

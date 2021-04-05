@@ -37,8 +37,15 @@
             this.btnRefresh = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
             this.grp_Transactions = new System.Windows.Forms.GroupBox();
+            this.btnCopy = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnBottom = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnTop = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCR = new System.Windows.Forms.TextBox();
@@ -95,12 +102,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnBottom = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnTop = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
             this.P2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
@@ -196,9 +197,11 @@
             this.btnPrint.Size = new System.Drawing.Size(35, 23);
             this.btnPrint.TabIndex = 4;
             this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // grp_Transactions
             // 
+            this.grp_Transactions.Controls.Add(this.btnCopy);
             this.grp_Transactions.Controls.Add(this.btnUndo);
             this.grp_Transactions.Controls.Add(this.btnDelete);
             this.grp_Transactions.Controls.Add(this.label12);
@@ -262,6 +265,16 @@
             this.grp_Transactions.Text = "TRANSACTIONS";
             this.grp_Transactions.Enter += new System.EventHandler(this.grp_Transactions_Enter);
             // 
+            // btnCopy
+            // 
+            this.btnCopy.Image = global::Applied_Accounts.Properties.Resources.Copy;
+            this.btnCopy.Location = new System.Drawing.Point(339, 28);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(29, 23);
+            this.btnCopy.TabIndex = 155;
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
             // btnUndo
             // 
             this.btnUndo.Image = global::Applied_Accounts.Properties.Resources.UNDO;
@@ -270,6 +283,19 @@
             this.btnUndo.Size = new System.Drawing.Size(30, 21);
             this.btnUndo.TabIndex = 154;
             this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.delete1;
+            this.btnDelete.Location = new System.Drawing.Point(267, 28);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(30, 21);
+            this.btnDelete.TabIndex = 153;
+            this.btnDelete.TabStop = false;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // label12
             // 
@@ -279,6 +305,61 @@
             this.label12.Size = new System.Drawing.Size(81, 13);
             this.label12.TabIndex = 152;
             this.label12.Text = "Purchase Order";
+            // 
+            // btnBottom
+            // 
+            this.btnBottom.Image = global::Applied_Accounts.Properties.Resources.BOTTOM;
+            this.btnBottom.Location = new System.Drawing.Point(566, 28);
+            this.btnBottom.Name = "btnBottom";
+            this.btnBottom.Size = new System.Drawing.Size(45, 21);
+            this.btnBottom.TabIndex = 151;
+            this.btnBottom.TabStop = false;
+            this.btnBottom.UseVisualStyleBackColor = true;
+            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Image = global::Applied_Accounts.Properties.Resources.NEXT;
+            this.btnNext.Location = new System.Drawing.Point(516, 28);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(45, 21);
+            this.btnNext.TabIndex = 150;
+            this.btnNext.TabStop = false;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Image = global::Applied_Accounts.Properties.Resources.BACK;
+            this.btnPrevious.Location = new System.Drawing.Point(466, 28);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(45, 21);
+            this.btnPrevious.TabIndex = 149;
+            this.btnPrevious.TabStop = false;
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnTop
+            // 
+            this.btnTop.Image = global::Applied_Accounts.Properties.Resources.TOP;
+            this.btnTop.Location = new System.Drawing.Point(416, 28);
+            this.btnTop.Name = "btnTop";
+            this.btnTop.Size = new System.Drawing.Size(45, 21);
+            this.btnTop.TabIndex = 148;
+            this.btnTop.TabStop = false;
+            this.btnTop.UseVisualStyleBackColor = true;
+            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Image = global::Applied_Accounts.Properties.Resources.add;
+            this.btnNew.Location = new System.Drawing.Point(231, 28);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(30, 21);
+            this.btnNew.TabIndex = 147;
+            this.btnNew.TabStop = false;
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // label5
             // 
@@ -342,6 +423,7 @@
             this.btnEmployees.TabStop = false;
             this.btnEmployees.Text = "...";
             this.btnEmployees.UseVisualStyleBackColor = true;
+            this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
             // 
             // btnStocks
             // 
@@ -352,6 +434,7 @@
             this.btnStocks.TabStop = false;
             this.btnStocks.Text = "...";
             this.btnStocks.UseVisualStyleBackColor = true;
+            this.btnStocks.Click += new System.EventHandler(this.btnStocks_Click);
             // 
             // btnUnits
             // 
@@ -362,6 +445,7 @@
             this.btnUnits.TabStop = false;
             this.btnUnits.Text = "...";
             this.btnUnits.UseVisualStyleBackColor = true;
+            this.btnUnits.Click += new System.EventHandler(this.btnUnits_Click);
             // 
             // btnProjects
             // 
@@ -372,6 +456,7 @@
             this.btnProjects.TabStop = false;
             this.btnProjects.Text = "...";
             this.btnProjects.UseVisualStyleBackColor = true;
+            this.btnProjects.Click += new System.EventHandler(this.btnProjects_Click);
             // 
             // btnSuppliers
             // 
@@ -382,6 +467,7 @@
             this.btnSuppliers.TabStop = false;
             this.btnSuppliers.Text = "...";
             this.btnSuppliers.UseVisualStyleBackColor = true;
+            this.btnSuppliers.Click += new System.EventHandler(this.btnSuppliers_Click);
             // 
             // btnAccounts
             // 
@@ -392,6 +478,7 @@
             this.btnAccounts.TabStop = false;
             this.btnAccounts.Text = "...";
             this.btnAccounts.UseVisualStyleBackColor = true;
+            this.btnAccounts.Click += new System.EventHandler(this.btnAccounts_Click);
             // 
             // cBoxEmployee
             // 
@@ -399,6 +486,7 @@
             this.cBoxEmployee.Location = new System.Drawing.Point(231, 190);
             this.cBoxEmployee.Name = "cBoxEmployee";
             this.cBoxEmployee.Size = new System.Drawing.Size(380, 21);
+            this.cBoxEmployee.Sorted = true;
             this.cBoxEmployee.TabIndex = 135;
             this.cBoxEmployee.TabStop = false;
             this.cBoxEmployee.SelectedIndexChanged += new System.EventHandler(this.cBoxEmployee_SelectedIndexChanged);
@@ -409,6 +497,7 @@
             this.cBoxStock.Location = new System.Drawing.Point(232, 163);
             this.cBoxStock.Name = "cBoxStock";
             this.cBoxStock.Size = new System.Drawing.Size(380, 21);
+            this.cBoxStock.Sorted = true;
             this.cBoxStock.TabIndex = 134;
             this.cBoxStock.TabStop = false;
             this.cBoxStock.SelectedIndexChanged += new System.EventHandler(this.cBoxStock_SelectedIndexChanged);
@@ -419,6 +508,7 @@
             this.cBoxUnit.Location = new System.Drawing.Point(231, 136);
             this.cBoxUnit.Name = "cBoxUnit";
             this.cBoxUnit.Size = new System.Drawing.Size(380, 21);
+            this.cBoxUnit.Sorted = true;
             this.cBoxUnit.TabIndex = 133;
             this.cBoxUnit.TabStop = false;
             this.cBoxUnit.SelectedIndexChanged += new System.EventHandler(this.cBoxUnit_SelectedIndexChanged);
@@ -429,6 +519,7 @@
             this.cBoxProject.Location = new System.Drawing.Point(232, 109);
             this.cBoxProject.Name = "cBoxProject";
             this.cBoxProject.Size = new System.Drawing.Size(380, 21);
+            this.cBoxProject.Sorted = true;
             this.cBoxProject.TabIndex = 132;
             this.cBoxProject.TabStop = false;
             this.cBoxProject.SelectedIndexChanged += new System.EventHandler(this.cBoxProject_SelectedIndexChanged);
@@ -439,6 +530,7 @@
             this.cBoxSupplier.Location = new System.Drawing.Point(231, 82);
             this.cBoxSupplier.Name = "cBoxSupplier";
             this.cBoxSupplier.Size = new System.Drawing.Size(380, 21);
+            this.cBoxSupplier.Sorted = true;
             this.cBoxSupplier.TabIndex = 131;
             this.cBoxSupplier.TabStop = false;
             this.cBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.cBoxSupplier_SelectedIndexChanged);
@@ -449,6 +541,7 @@
             this.cBoxAccount.Location = new System.Drawing.Point(232, 55);
             this.cBoxAccount.Name = "cBoxAccount";
             this.cBoxAccount.Size = new System.Drawing.Size(380, 21);
+            this.cBoxAccount.Sorted = true;
             this.cBoxAccount.TabIndex = 130;
             this.cBoxAccount.TabStop = false;
             this.cBoxAccount.SelectedIndexChanged += new System.EventHandler(this.cBoxAccount_SelectedIndexChanged);
@@ -781,6 +874,7 @@
             this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 8;
             this.label2.Text = "Voucher No";
+            this.label2.DoubleClick += new System.EventHandler(this.label2_DoubleClick);
             // 
             // label1
             // 
@@ -813,73 +907,6 @@
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
             // 
-            // btnDelete
-            // 
-            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.delete1;
-            this.btnDelete.Location = new System.Drawing.Point(267, 28);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(30, 21);
-            this.btnDelete.TabIndex = 153;
-            this.btnDelete.TabStop = false;
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnBottom
-            // 
-            this.btnBottom.Image = global::Applied_Accounts.Properties.Resources.BOTTOM;
-            this.btnBottom.Location = new System.Drawing.Point(566, 28);
-            this.btnBottom.Name = "btnBottom";
-            this.btnBottom.Size = new System.Drawing.Size(45, 21);
-            this.btnBottom.TabIndex = 151;
-            this.btnBottom.TabStop = false;
-            this.btnBottom.UseVisualStyleBackColor = true;
-            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Image = global::Applied_Accounts.Properties.Resources.NEXT;
-            this.btnNext.Location = new System.Drawing.Point(515, 28);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(45, 21);
-            this.btnNext.TabIndex = 150;
-            this.btnNext.TabStop = false;
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Image = global::Applied_Accounts.Properties.Resources.BACK;
-            this.btnPrevious.Location = new System.Drawing.Point(466, 28);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(45, 21);
-            this.btnPrevious.TabIndex = 149;
-            this.btnPrevious.TabStop = false;
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // btnTop
-            // 
-            this.btnTop.Image = global::Applied_Accounts.Properties.Resources.TOP;
-            this.btnTop.Location = new System.Drawing.Point(415, 28);
-            this.btnTop.Name = "btnTop";
-            this.btnTop.Size = new System.Drawing.Size(45, 21);
-            this.btnTop.TabIndex = 148;
-            this.btnTop.TabStop = false;
-            this.btnTop.UseVisualStyleBackColor = true;
-            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
-            // 
-            // btnNew
-            // 
-            this.btnNew.Image = global::Applied_Accounts.Properties.Resources.add;
-            this.btnNew.Location = new System.Drawing.Point(231, 28);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(30, 21);
-            this.btnNew.TabIndex = 147;
-            this.btnNew.TabStop = false;
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
             // frmVouchers1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -890,7 +917,6 @@
             this.Text = "Voucher1";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmVouchers1_FormClosing);
             this.Load += new System.EventHandler(this.frmVouchers1_Load);
-            this.Paint += new System.Windows.Forms.PaintEventHandler(this.frmVouchers1_Paint);
             this.P2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).EndInit();
             this.P1.ResumeLayout(false);
@@ -980,5 +1006,6 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button Stop;
         private System.Windows.Forms.Button btnUndo;
+        private System.Windows.Forms.Button btnCopy;
     }
 }

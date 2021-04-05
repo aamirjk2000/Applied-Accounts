@@ -243,8 +243,8 @@ namespace Applied_Accounts.Classes
                 }
             }
 
-            MyMessage = "Total record effected " + Effected_Records.ToString();
-            MessageBox.Show(MyMessage, "SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MyMessage = "Total record effected " + Effected_Records.ToString(); //+ "\\n" + Vou_No;
+            MessageBox.Show(MyMessage, "SAVED " + Vou_No , MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             tb_Voucher_Original = ds_Voucher.Tables["Ledger"].Copy();
 
@@ -255,8 +255,7 @@ namespace Applied_Accounts.Classes
             SQLiteCommand _CmdInsert = new SQLiteCommand();
             try
             {
-                Max_ID += 1;
-                _Row["ID"] = Max_ID;
+                Max_ID += 1; _Row["ID"] = Max_ID;
                 _CmdInsert = Connection_Class.SQLite.SQLiteInsert(_Row, Connection.AppliedConnection());
                 Effected_Records += _CmdInsert.ExecuteNonQuery();
                 if (Effected_Records > 0) { Record_is_Saved = true; } else { Record_is_Saved = false; }
