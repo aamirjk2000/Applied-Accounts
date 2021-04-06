@@ -53,6 +53,13 @@ namespace Applied_Accounts.Classes
             return (_Key, (int)_KeyType);
         }
 
+        public static string GetValue(string _Key)
+        {
+            // Return String value from applied.Table colum string
+            return (_Key, (int)KeyType.String).ToString();
+        }
+
+
         public static object GetValue(string _Key, int _KeyType)
         {
 

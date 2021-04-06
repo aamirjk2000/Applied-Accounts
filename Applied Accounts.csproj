@@ -54,7 +54,8 @@
     <StartupObject>Applied_Accounts.Program</StartupObject>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Safe-Open.ico</ApplicationIcon>
+    <ApplicationIcon>
+    </ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>38E723C0C648F66762D51C320B43E848B503F6CD</ManifestCertificateThumbprint>
@@ -70,6 +71,10 @@
   </PropertyGroup>
   <PropertyGroup>
     <TargetZone>LocalIntranet</TargetZone>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Connection_Class, Version=2020.10.31.0, Culture=neutral, processorArchitecture=MSIL">
@@ -292,6 +297,12 @@
     <Compile Include="Forms\Suppliers.Designer.cs">
       <DependentUpon>Suppliers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\Temp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Temp.Designer.cs">
+      <DependentUpon>Temp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\Trial Balance.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -460,6 +471,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Suppliers.resx">
       <DependentUpon>Suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Temp.resx">
+      <DependentUpon>Temp.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Trial Balance.resx">
       <DependentUpon>Trial Balance.cs</DependentUpon>
@@ -714,7 +728,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="False" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" />
+      <UserProperties BuildVersion_UseUniversalClock="True" BuildVersion_UseGlobalSettings="False" BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

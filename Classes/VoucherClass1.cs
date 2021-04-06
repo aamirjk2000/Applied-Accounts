@@ -20,6 +20,7 @@ namespace Applied_Accounts.Classes
         void New();
         bool Is_Balanced();
         bool Is_Edited();
+        decimal Difference();
 
     }
 
@@ -40,6 +41,13 @@ namespace Applied_Accounts.Classes
         public int Count { get => tb_Voucher.Rows.Count; }
         public object DR_Amount { get => tb_Voucher.Compute("Sum(DR)", "SRNO>-1"); }
         public object CR_Amount { get => tb_Voucher.Compute("Sum(CR)", "SRNO>-1"); }
+        public decimal Difference()
+        {
+            if (DR_Amount == DBNull.Value) { return -1; }
+            if (CR_Amount == DBNull.Value) { return -2; }
+            return (decimal)DR_Amount - (decimal)CR_Amount;     // Show Difference if Voucher
+        }
+
 
         public DataRow MyRow { get; set; }
 
@@ -153,7 +161,7 @@ namespace Applied_Accounts.Classes
 
             _View.RowFilter = _Filter;
 
-            if(_View.Count==1)
+            if (_View.Count == 1)
             {
                 int _MaxNo = Conversion.ToInteger(_View[0]["MaxNo"]) + 1;
                 _VouNo.Append("-");
@@ -178,9 +186,9 @@ namespace Applied_Accounts.Classes
             }
             //=========================================================================================== RETURN 
 
-            if(Vou_No.Trim().ToUpper()=="NEW")
+            if (Vou_No.Trim().ToUpper() == "NEW")
             {
-                Vou_No =  Create_Voucher_Number();
+                Vou_No = Create_Voucher_Number();
             }
 
             DataView View_Ledger = AppliedTable.GetDataTable(Tables.Ledger).AsDataView();
@@ -244,7 +252,7 @@ namespace Applied_Accounts.Classes
             }
 
             MyMessage = "Total record effected " + Effected_Records.ToString(); //+ "\\n" + Vou_No;
-            MessageBox.Show(MyMessage, "SAVED " + Vou_No , MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show(MyMessage, "SAVED " + Vou_No, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             tb_Voucher_Original = ds_Voucher.Tables["Ledger"].Copy();
 
@@ -310,7 +318,7 @@ namespace Applied_Accounts.Classes
             _NewRow.BeginEdit();
 
 
-            if (tb_Voucher.Rows.Count==0)
+            if (tb_Voucher.Rows.Count == 0)
             {
                 MaxNo = 1;
             }
@@ -318,7 +326,7 @@ namespace Applied_Accounts.Classes
             {
                 MaxNo = (long)tb_Voucher.Compute("Max(SRNO)", string.Empty) + 1;
             }
-            
+
             _NewRow["ID"] = 0;
             _NewRow["Vou_No"] = Vou_No;
             _NewRow["Vou_Date"] = Vou_Date;
@@ -438,7 +446,7 @@ namespace Applied_Accounts.Classes
         public bool Is_Balanced()
         {
 
-            if(DR_Amount==DBNull.Value  || CR_Amount==DBNull.Value)
+            if (DR_Amount == DBNull.Value || CR_Amount == DBNull.Value)
             {
                 return false;
             }
@@ -454,15 +462,15 @@ namespace Applied_Accounts.Classes
                 return DR_Amount.Equals(CR_Amount);
             }
             else
-            { 
-                return false; 
+            {
+                return false;
             }
         }
 
         public bool Is_Edited()
         {
             // Check the edited table is equal with original. if matched = no edit in voucher 
-            if(tb_Voucher_Original == null) { return false; }
+            if (tb_Voucher_Original == null) { return false; }
             return !tb_Voucher_Original.Equals(ds_Voucher.Tables["Ledger"]);
         }
 
@@ -477,10 +485,11 @@ namespace Applied_Accounts.Classes
 
         public void Preview_Voucher(string _DataFilter)
         {
+            string DateFormat = Applied.GetValue("DateFormat_Report");
 
             if (_DataFilter.Length == 0)
             {
-                _DataFilter = "Vou_Date ='" + DateTime.Now.ToString("yyyy-MM-dd") + "'";
+                _DataFilter = "Vou_Date ='" + DateTime.Now.ToString(DateFormat) + "'";
             }
 
             ReportClass PreviewClass = new ReportClass();                                       // Initialize Report Class
@@ -511,7 +520,6 @@ namespace Applied_Accounts.Classes
                 {
                     PreviewClass.Heading1 = "Vouchers from " + Conversion.ToPrintDate(MinDate) + " to " + Conversion.ToPrintDate(MaxDate);
                     PreviewClass.Heading2 = Vou_Type + " Voucher";
-
                 }
 
                 PreviewClass.Report_From = PreviewClass.Vou_Date;

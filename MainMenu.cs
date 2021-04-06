@@ -188,5 +188,11 @@ namespace Applied_Accounts
             frmVouchers1 Thisform = new frmVouchers1();
             Thisform.Show();
         }
+
+        private void testToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            frmTemp ThisForm = new frmTemp();
+            ThisForm.Show();
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Applied_Accounts.Classes;
+using Applied_Accounts.Data;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,19 +18,17 @@ namespace Applied_Accounts.Forms
     {
         private DataTable dt_POrder = AppliedTable.GetDataTable(Tables.POrder);
         private DataTable dt_Suppliers = AppliedTable.GetComboData(Tables.Suppliers);
-        private DataTable GridData_POrder = AppliedTable.GetComboData(Tables.Grid_POrder);
+        private DataTable GridData_POrder = AppliedTable.GetDataTable(Tables.Grid_POrder);
+        
 
-        
-        
         private bool InitializingNow = true;
-
-        
 
         #region Initializing
 
         public frmPOrder()
         {
             InitializeComponent();
+            
             cBoxSuppliers.DataSource = dt_Suppliers;
             cBoxSuppliers.DisplayMember = "Title";
             cBoxSuppliers.ValueMember = "ID";

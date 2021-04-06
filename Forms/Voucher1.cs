@@ -2,12 +2,11 @@
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
-using MessageBox = System.Windows.MessageBox;
-
+//using TextBox = System.Windows.Forms.TextBox;
+//using ToolTip = System.Windows.Forms.ToolTip;
 
 namespace Applied_Accounts.Forms
 {
@@ -44,7 +43,8 @@ namespace Applied_Accounts.Forms
         private BindingManagerBase TableBinding;
         private BindingManagerBase POrderBinding;
         private System.Data.DataSet MyDataSource;
-
+        
+        private ToolTip MyToolTip;
 
         private bool Vou_Found;
         private bool Initializaion = true;
@@ -64,6 +64,18 @@ namespace Applied_Accounts.Forms
             txtVou_No.Focus();
             Vou_Found = false;
 
+            MyToolTip = new ToolTip();
+            MyToolTip.AutoPopDelay = 5000;
+            MyToolTip.InitialDelay = 100;
+            MyToolTip.ReshowDelay = 500;
+
+            MyToolTip.SetToolTip(txtDR, MyVoucherClass.Difference().ToString());
+            MyToolTip.SetToolTip(txtCR, MyVoucherClass.Difference().ToString());
+            MyToolTip.SetToolTip(btnSave, "Save Voucher");
+            MyToolTip.SetToolTip(btnNext, "Next Record");
+            MyToolTip.SetToolTip(btnPrevious, "Previous Record");
+            MyToolTip.SetToolTip(btnTop, "First Record");
+            MyToolTip.SetToolTip(btnBottom, "Last Record");
 
             // Binding Setup
 
@@ -84,10 +96,35 @@ namespace Applied_Accounts.Forms
 
         }
 
+
+        private void frmVouchers1_Load(object sender, EventArgs e)
+        {
+            txtVou_No.Text = MyVoucherClass.Vou_No;
+            dt_VoucherDate.Value = MyVoucherClass.Vou_Date;
+            cBoxVouType.Text = MyVoucherClass.Vou_Type;
+
+            txtVou_No.Focus();
+
+        }
+
+        private void dt_ChqDate_Layout(object sender, LayoutEventArgs e)
+        {
+            dt_ChqDate.Format = DateTimePickerFormat.Custom;
+            dt_VoucherDate.CustomFormat = Program.DateTimeFormat;
+        }
+
+        private void dt_VoucherDate_Layout(object sender, LayoutEventArgs e)
+        {
+            dt_VoucherDate.Format = DateTimePickerFormat.Custom;
+            dt_VoucherDate.CustomFormat = Program.DateTimeFormat;
+        }
+
+        #endregion
+
+
+        #region Combo Boxs
         private void Set_ComboBox()
         {
-            //if(MyDataSource==null) { return; }
-
             cBoxAccount.DataSource = MyDataSource;
             cBoxSupplier.DataSource = MyDataSource;
             cBoxProject.DataSource = MyDataSource;
@@ -122,42 +159,14 @@ namespace Applied_Accounts.Forms
 
         }
 
-        private void frmVouchers1_Load(object sender, EventArgs e)
-        {
-            txtVou_No.Text = MyVoucherClass.Vou_No;
-            dt_VoucherDate.Value = MyVoucherClass.Vou_Date;
-            cBoxVouType.Text = MyVoucherClass.Vou_Type;
-
-            txtVou_No.Focus();
-
-        }
-
-        private void dt_ChqDate_Layout(object sender, LayoutEventArgs e)
-        {
-            dt_ChqDate.Format = DateTimePickerFormat.Custom;
-            dt_VoucherDate.CustomFormat = Program.DateTimeFormat;
-        }
-
-        private void dt_VoucherDate_Layout(object sender, LayoutEventArgs e)
-        {
-            dt_VoucherDate.Format = DateTimePickerFormat.Custom;
-            dt_VoucherDate.CustomFormat = Program.DateTimeFormat;
-        }
-
         #endregion
+
 
         #region Data Binding
 
         private void Set_DataBinding()
         {
             txtSRNO.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "SRNO", true, DataSourceUpdateMode.OnPropertyChanged));
-            //txtAccountID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "COA", true, DataSourceUpdateMode.OnPropertyChanged));
-            //txtSupplierID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Supplier", true, DataSourceUpdateMode.OnPropertyChanged));
-            //txtProjectID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Project", true, DataSourceUpdateMode.OnPropertyChanged));
-            //txtUnitID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Unit", true, DataSourceUpdateMode.OnPropertyChanged));
-            //txtStockID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Stock", true, DataSourceUpdateMode.OnPropertyChanged));
-            //txtEmployeeID.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Employee", true, DataSourceUpdateMode.OnPropertyChanged));
-
             cBoxAccount.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "COA", false, DataSourceUpdateMode.OnPropertyChanged));
             cBoxSupplier.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Supplier", false, DataSourceUpdateMode.OnPropertyChanged));
             cBoxProject.DataBindings.Add(new Binding("SelectedValue", MyVoucherClass.tb_Voucher, "Project", false, DataSourceUpdateMode.OnPropertyChanged));
@@ -395,7 +404,7 @@ namespace Applied_Accounts.Forms
             grp_Action.Visible = MyVoucherClass.Is_Balanced();
             Set_DataGrid();
 
-            lblMessage.Text += TableBinding.Position.ToString();
+            //lblMessage.Text += TableBinding.Position.ToString();
         }
 
         #endregion
@@ -621,12 +630,14 @@ namespace Applied_Accounts.Forms
 
         private void txtDR_TextChanged(object sender, EventArgs e)
         {
-
+            decimal _DR = Conversion.ToMoney(txtDR.Text);
+            txtDR.Text = _DR.ToString(NumberFormat);
         }
 
         private void txtCR_TextChanged(object sender, EventArgs e)
         {
-
+            decimal _CR = Conversion.ToMoney(txtCR.Text);
+            txtCR.Text = _CR.ToString(NumberFormat);
         }
 
         private void txtDR_Leave(object sender, EventArgs e)
@@ -957,12 +968,12 @@ namespace Applied_Accounts.Forms
 
         private void frmVouchers1_FormClosing(object sender, FormClosingEventArgs e)
         {
-           
+            System.Windows.Forms.MessageBox.Show("are you sure to close?");
+
 
         }
 
         #endregion
-
 
         #region Undo
 
@@ -1066,5 +1077,7 @@ namespace Applied_Accounts.Forms
         }
 
         #endregion
+
+       
     }   //============================== END
 }
