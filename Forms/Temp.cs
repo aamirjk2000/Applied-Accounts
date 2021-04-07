@@ -13,13 +13,13 @@ namespace Applied_Accounts.Forms
 {
     public partial class frmTemp : Form
     {
-        DataTable _DataTable = AppliedTable.GetDataTable(Tables.Suppliers);
+        DataTable _DataTable = AppliedTable.GetDataTable(Tables.Suppliers,true);
         bool _Sorted { get; set; }
 
         public frmTemp()
         {
             InitializeComponent();
-            _Sorted = true;
+            _Sorted = false;
             SetCBox();
            
         }
@@ -43,7 +43,7 @@ namespace Applied_Accounts.Forms
             cBoxTest.DataSource = _DataTable;
             cBoxTest.DisplayMember = "Title";
             cBoxTest.ValueMember = "ID";
-            cBoxTest.Sorted = _Sorted;
+            //cBoxTest.Sorted = _Sorted;
 
 
             lBox.DataSource = _DataTable;

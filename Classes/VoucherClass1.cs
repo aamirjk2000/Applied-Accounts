@@ -100,12 +100,12 @@ namespace Applied_Accounts.Classes
             ds_Voucher = null;                                                                  // Reset the Data Set for initialize
             ds_Voucher = new DataSet();
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Ledger).Clone());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.COA).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Suppliers).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Projects).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Units).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Stock).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Employees).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.COA, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Suppliers, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Projects, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Units, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Stock, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Employees, true).Copy());
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.POrder).Copy());
 
             ds_Voucher.Relations.Add("rlt_COA", ds_Voucher.Tables["COA"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["COA"]);

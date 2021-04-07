@@ -81,6 +81,57 @@ namespace Applied_Accounts
             }
         }
 
+
+        // Sort by Title
+        public static DataTable GetDataTable(object TableID, bool _Sorted)
+        {
+            int _TableID = (int)TableID;
+
+            if (_TableID > 0)               // ID is zero
+            {
+                DataTable _DataTable; //= new DataTable();
+                string _TableName = Conversion.GetTableName(_TableID);
+                string _Text = "SELECT * FROM " + _TableName;
+                if(_Sorted) { _Text = string.Concat(_Text, " ORDER BY Title"); }
+                SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
+                SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
+                DataSet _DataSet = new DataSet();
+                _Adapter.Fill(_DataSet, _TableName);
+                _DataTable = _DataSet.Tables[_TableName];
+                return _DataTable;
+            }
+            else                                            // Error found.
+            {
+                MessageBox.Show("Data Table not found", "ERROR");
+                return new DataTable();
+            }
+        }
+
+
+        public static DataTable GetDataTable(object TableID, bool _Sorted, bool _Active)
+        {
+            int _TableID = (int)TableID;
+
+            if (_TableID > 0)               // ID is zero
+            {
+                DataTable _DataTable; //= new DataTable();
+                string _TableName = Conversion.GetTableName(_TableID);
+                string _Text = "SELECT * FROM " + _TableName;
+                if (_Sorted) { _Text = string.Concat(_Text, " ORDER BY Title"); }
+                if (_Active) { _Text = string.Concat(_Text, " WHERE Active"); }
+                SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
+                SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
+                DataSet _DataSet = new DataSet();
+                _Adapter.Fill(_DataSet, _TableName);
+                _DataTable = _DataSet.Tables[_TableName];
+                return _DataTable;
+            }
+            else                                            // Error found.
+            {
+                MessageBox.Show("Data Table not found", "ERROR");
+                return new DataTable();
+            }
+        }
         public static DataTable GetDataTable_Active(object TableID)
         {
             int _TableID = (int)TableID;
@@ -384,8 +435,8 @@ namespace Applied_Accounts
                     }
 
                     _AddRow["BALANCE"] = Conversion.ToMoney(_AddRow["OBAL"])
-                                        + Conversion.ToMoney(_AddRow["Debit"])
-                                        - Conversion.ToMoney(_AddRow["Credit"]);
+                                       + Conversion.ToMoney(_AddRow["Debit"])
+                                       - Conversion.ToMoney(_AddRow["Credit"]);
 
                     _DataTable.Rows.Add(_AddRow);
                     continue;
@@ -394,10 +445,6 @@ namespace Applied_Accounts
                 if (_DataView.Count > 0)
                 {
                     _Index = _DataTable.Rows.IndexOf(_DataView[0].Row);
-                    //_DR = Conversion.ToMoney(_DataView[0].Row["Debit"]);
-                    //_CR = Conversion.ToMoney(_DataView[0].Row["Credit"]);
-                    //_Balance =  Conversion.ToMoney(_DataView[0].Row["Balance"]);
-
                     _AddRow = _DataTable.NewRow();
 
                     if ((DateTime)_Row["Vou_Date"] < _From)

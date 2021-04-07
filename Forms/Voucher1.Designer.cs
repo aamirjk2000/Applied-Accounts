@@ -32,9 +32,19 @@
             this.Grid_Voucher = new System.Windows.Forms.DataGridView();
             this.P1 = new System.Windows.Forms.TabPage();
             this.grp_Action = new System.Windows.Forms.GroupBox();
+            this.btnSave = new System.Windows.Forms.Button();
             this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.grp_Transactions = new System.Windows.Forms.GroupBox();
+            this.btnCopy = new System.Windows.Forms.Button();
+            this.btnUndo = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnBottom = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnTop = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCR = new System.Windows.Forms.TextBox();
@@ -91,16 +101,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.btnCopy = new System.Windows.Forms.Button();
-            this.btnUndo = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnBottom = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnTop = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
             this.P2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
@@ -158,6 +158,16 @@
             this.grp_Action.TabStop = false;
             this.grp_Action.Text = "ACTION";
             // 
+            // btnSave
+            // 
+            this.btnSave.Image = global::Applied_Accounts.Properties.Resources.Save;
+            this.btnSave.Location = new System.Drawing.Point(606, 19);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(35, 23);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
             // btnRefresh
             // 
             this.btnRefresh.Location = new System.Drawing.Point(12, 19);
@@ -167,6 +177,16 @@
             this.btnRefresh.Text = "Refresh";
             this.btnRefresh.UseVisualStyleBackColor = true;
             this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Image = global::Applied_Accounts.Properties.Resources.PRINT;
+            this.btnPrint.Location = new System.Drawing.Point(565, 19);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(35, 23);
+            this.btnPrint.TabIndex = 4;
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // grp_Transactions
             // 
@@ -234,6 +254,38 @@
             this.grp_Transactions.Text = "TRANSACTIONS";
             this.grp_Transactions.Enter += new System.EventHandler(this.grp_Transactions_Enter);
             // 
+            // btnCopy
+            // 
+            this.btnCopy.Image = global::Applied_Accounts.Properties.Resources.Copy;
+            this.btnCopy.Location = new System.Drawing.Point(339, 28);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(29, 23);
+            this.btnCopy.TabIndex = 155;
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.Image = global::Applied_Accounts.Properties.Resources.UNDO;
+            this.btnUndo.Location = new System.Drawing.Point(303, 28);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(30, 21);
+            this.btnUndo.TabIndex = 154;
+            this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.delete1;
+            this.btnDelete.Location = new System.Drawing.Point(267, 28);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(30, 21);
+            this.btnDelete.TabIndex = 153;
+            this.btnDelete.TabStop = false;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -242,6 +294,61 @@
             this.label12.Size = new System.Drawing.Size(81, 13);
             this.label12.TabIndex = 152;
             this.label12.Text = "Purchase Order";
+            // 
+            // btnBottom
+            // 
+            this.btnBottom.Image = global::Applied_Accounts.Properties.Resources.BOTTOM;
+            this.btnBottom.Location = new System.Drawing.Point(566, 28);
+            this.btnBottom.Name = "btnBottom";
+            this.btnBottom.Size = new System.Drawing.Size(45, 21);
+            this.btnBottom.TabIndex = 151;
+            this.btnBottom.TabStop = false;
+            this.btnBottom.UseVisualStyleBackColor = true;
+            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Image = global::Applied_Accounts.Properties.Resources.NEXT;
+            this.btnNext.Location = new System.Drawing.Point(516, 28);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(45, 21);
+            this.btnNext.TabIndex = 150;
+            this.btnNext.TabStop = false;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Image = global::Applied_Accounts.Properties.Resources.BACK;
+            this.btnPrevious.Location = new System.Drawing.Point(466, 28);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(45, 21);
+            this.btnPrevious.TabIndex = 149;
+            this.btnPrevious.TabStop = false;
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnTop
+            // 
+            this.btnTop.Image = global::Applied_Accounts.Properties.Resources.TOP;
+            this.btnTop.Location = new System.Drawing.Point(416, 28);
+            this.btnTop.Name = "btnTop";
+            this.btnTop.Size = new System.Drawing.Size(45, 21);
+            this.btnTop.TabIndex = 148;
+            this.btnTop.TabStop = false;
+            this.btnTop.UseVisualStyleBackColor = true;
+            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Image = global::Applied_Accounts.Properties.Resources.add;
+            this.btnNew.Location = new System.Drawing.Point(231, 28);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(30, 21);
+            this.btnNew.TabIndex = 147;
+            this.btnNew.TabStop = false;
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // label5
             // 
@@ -430,6 +537,7 @@
             this.txtEmployeeID.Size = new System.Drawing.Size(40, 20);
             this.txtEmployeeID.TabIndex = 129;
             this.txtEmployeeID.TabStop = false;
+            this.txtEmployeeID.Visible = false;
             // 
             // txtStockID
             // 
@@ -439,6 +547,7 @@
             this.txtStockID.Size = new System.Drawing.Size(40, 20);
             this.txtStockID.TabIndex = 128;
             this.txtStockID.TabStop = false;
+            this.txtStockID.Visible = false;
             // 
             // txtUnitID
             // 
@@ -448,6 +557,7 @@
             this.txtUnitID.Size = new System.Drawing.Size(40, 20);
             this.txtUnitID.TabIndex = 127;
             this.txtUnitID.TabStop = false;
+            this.txtUnitID.Visible = false;
             // 
             // txtProjectID
             // 
@@ -457,6 +567,7 @@
             this.txtProjectID.Size = new System.Drawing.Size(40, 20);
             this.txtProjectID.TabIndex = 126;
             this.txtProjectID.TabStop = false;
+            this.txtProjectID.Visible = false;
             // 
             // txtSupplierID
             // 
@@ -466,6 +577,7 @@
             this.txtSupplierID.Size = new System.Drawing.Size(40, 20);
             this.txtSupplierID.TabIndex = 125;
             this.txtSupplierID.TabStop = false;
+            this.txtSupplierID.Visible = false;
             // 
             // txtAccountID
             // 
@@ -475,6 +587,7 @@
             this.txtAccountID.Size = new System.Drawing.Size(40, 20);
             this.txtAccountID.TabIndex = 124;
             this.txtAccountID.TabStop = false;
+            this.txtAccountID.Visible = false;
             // 
             // txtRemarks
             // 
@@ -782,113 +895,6 @@
             this.Pages.SelectedIndex = 0;
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
-            // 
-            // btnSave
-            // 
-            this.btnSave.Image = global::Applied_Accounts.Properties.Resources.Save;
-            this.btnSave.Location = new System.Drawing.Point(606, 19);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 23);
-            this.btnSave.TabIndex = 5;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Image = global::Applied_Accounts.Properties.Resources.PRINT;
-            this.btnPrint.Location = new System.Drawing.Point(565, 19);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(35, 23);
-            this.btnPrint.TabIndex = 4;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // btnCopy
-            // 
-            this.btnCopy.Image = global::Applied_Accounts.Properties.Resources.Copy;
-            this.btnCopy.Location = new System.Drawing.Point(339, 28);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(29, 23);
-            this.btnCopy.TabIndex = 155;
-            this.btnCopy.UseVisualStyleBackColor = true;
-            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
-            // 
-            // btnUndo
-            // 
-            this.btnUndo.Image = global::Applied_Accounts.Properties.Resources.UNDO;
-            this.btnUndo.Location = new System.Drawing.Point(303, 28);
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(30, 21);
-            this.btnUndo.TabIndex = 154;
-            this.btnUndo.UseVisualStyleBackColor = true;
-            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.delete1;
-            this.btnDelete.Location = new System.Drawing.Point(267, 28);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(30, 21);
-            this.btnDelete.TabIndex = 153;
-            this.btnDelete.TabStop = false;
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnBottom
-            // 
-            this.btnBottom.Image = global::Applied_Accounts.Properties.Resources.BOTTOM;
-            this.btnBottom.Location = new System.Drawing.Point(566, 28);
-            this.btnBottom.Name = "btnBottom";
-            this.btnBottom.Size = new System.Drawing.Size(45, 21);
-            this.btnBottom.TabIndex = 151;
-            this.btnBottom.TabStop = false;
-            this.btnBottom.UseVisualStyleBackColor = true;
-            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Image = global::Applied_Accounts.Properties.Resources.NEXT;
-            this.btnNext.Location = new System.Drawing.Point(516, 28);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(45, 21);
-            this.btnNext.TabIndex = 150;
-            this.btnNext.TabStop = false;
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Image = global::Applied_Accounts.Properties.Resources.BACK;
-            this.btnPrevious.Location = new System.Drawing.Point(466, 28);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(45, 21);
-            this.btnPrevious.TabIndex = 149;
-            this.btnPrevious.TabStop = false;
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // btnTop
-            // 
-            this.btnTop.Image = global::Applied_Accounts.Properties.Resources.TOP;
-            this.btnTop.Location = new System.Drawing.Point(416, 28);
-            this.btnTop.Name = "btnTop";
-            this.btnTop.Size = new System.Drawing.Size(45, 21);
-            this.btnTop.TabIndex = 148;
-            this.btnTop.TabStop = false;
-            this.btnTop.UseVisualStyleBackColor = true;
-            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
-            // 
-            // btnNew
-            // 
-            this.btnNew.Image = global::Applied_Accounts.Properties.Resources.add;
-            this.btnNew.Location = new System.Drawing.Point(231, 28);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(30, 21);
-            this.btnNew.TabIndex = 147;
-            this.btnNew.TabStop = false;
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // frmVouchers1
             // 
