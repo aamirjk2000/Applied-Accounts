@@ -63,9 +63,29 @@ namespace Applied_Accounts.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        public static System.Drawing.Bitmap Active_Rows {
+            get {
+                object obj = ResourceManager.GetObject("Active_Rows", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         public static System.Drawing.Bitmap add {
             get {
                 object obj = ResourceManager.GetObject("add", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        public static System.Drawing.Bitmap All_Rows {
+            get {
+                object obj = ResourceManager.GetObject("All_Rows", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

@@ -1,8 +1,10 @@
 ﻿using Applied_Accounts.Classes;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 //using TextBox = System.Windows.Forms.TextBox;
@@ -43,13 +45,21 @@ namespace Applied_Accounts.Forms
         private BindingManagerBase TableBinding;
         private BindingManagerBase POrderBinding;
         private System.Data.DataSet MyDataSource;
-        
+
         private ToolTip MyToolTip;
 
         private bool Vou_Found;
         private bool Initializaion = true;
-        //private bool IsNullAllowed = false;
+        private int IsShowAll = 1;                            // Show Active or Non-Active records in Combo Box 
 
+
+        DataView dv_Accounts;
+        DataView dv_Supplier;
+        DataView dv_Project;
+        DataView dv_Unit;
+        DataView dv_Stock;
+        DataView dv_Employee;
+        DataView dv_POrder;
 
         #region Initialization
 
@@ -125,7 +135,23 @@ namespace Applied_Accounts.Forms
         #region Combo Boxs
         private void Set_ComboBox()
         {
-            cBoxAccount.DataSource = MyDataSource;
+            dv_Accounts = MyDataSource.Tables["COA"].AsDataView();
+            dv_Supplier = MyDataSource.Tables["Suppliers"].AsDataView();
+            dv_Project = MyDataSource.Tables["Projects"].AsDataView();
+            dv_Unit = MyDataSource.Tables["Units"].AsDataView();
+            dv_Stock = MyDataSource.Tables["Stock"].AsDataView();
+            dv_Employee = MyDataSource.Tables["Employees"].AsDataView();
+            dv_POrder = MyDataSource.Tables["POrder"].AsDataView();
+
+            dv_Accounts.RowFilter = ShowAll();
+            dv_Supplier.RowFilter = ShowAll();
+            dv_Project.RowFilter = ShowAll();
+            dv_Unit.RowFilter = ShowAll();
+            dv_Stock.RowFilter = ShowAll();
+            dv_Employee.RowFilter = ShowAll();
+            dv_POrder.RowFilter = ShowAll();
+
+            cBoxAccount.DataSource = dv_Accounts;
             cBoxSupplier.DataSource = MyDataSource;
             cBoxProject.DataSource = MyDataSource;
             cBoxUnit.DataSource = MyDataSource;
@@ -133,7 +159,7 @@ namespace Applied_Accounts.Forms
             cBoxEmployee.DataSource = MyDataSource;
             cBoxPOrder.DataSource = MyDataSource;
 
-            cBoxAccount.DisplayMember = "COA.Title";
+            cBoxAccount.DisplayMember = "Title";
             cBoxSupplier.DisplayMember = "Suppliers.Title";
             cBoxProject.DisplayMember = "Projects.Title";
             cBoxUnit.DisplayMember = "Units.Title";
@@ -141,7 +167,7 @@ namespace Applied_Accounts.Forms
             cBoxEmployee.DisplayMember = "Employees.Title";
             cBoxPOrder.DisplayMember = "POrder.Title";
 
-            cBoxAccount.ValueMember = "COA.ID";
+            cBoxAccount.ValueMember = "ID";
             cBoxSupplier.ValueMember = "Suppliers.ID";
             cBoxProject.ValueMember = "Projects.ID";
             cBoxUnit.ValueMember = "Units.ID";
@@ -157,6 +183,49 @@ namespace Applied_Accounts.Forms
             dt_VoucherDate.CustomFormat = ComboDateFormat;
             dt_ChqDate.CustomFormat = ComboDateFormat;
 
+        }
+
+        private string ShowAll()
+        {
+            if (IsShowAll == 1) { return "Active=1"; } else { return ""; }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (IsShowAll == 1)
+            {
+                IsShowAll = 0;
+                lblMessage.Text = "Show All Records";
+                btnActive.Image = Properties.Resources.Active_Rows;
+
+            }
+            else
+            {
+                IsShowAll = 1;
+                lblMessage.Text = "Show Active Records";
+                btnActive.Image = Properties.Resources.All_Rows;
+            }
+
+
+            // Store BomboBox Value 
+            long ID_COA = Conversion.ToLong(cBoxAccount.SelectedValue);
+            long ID_Supplier = Conversion.ToLong(cBoxSupplier.SelectedValue);
+            long ID_Project = Conversion.ToLong(cBoxProject.SelectedValue);
+            long ID_Unit = Conversion.ToLong(cBoxUnit.SelectedValue);
+            long ID_Stock = Conversion.ToLong(cBoxStock.SelectedValue);
+            long ID_Employee = Conversion.ToLong(cBoxEmployee.SelectedValue);
+            long ID_POrder = Conversion.ToLong(cBoxPOrder.SelectedValue);
+
+            Set_ComboBox();
+
+            // Restore ComboBox Value after refresh / reset.
+            cBoxAccount.SelectedValue = ID_COA;
+            cBoxSupplier.SelectedValue = ID_Supplier;
+            cBoxProject.SelectedValue = ID_Project;
+            cBoxUnit.SelectedValue = ID_Unit;
+            cBoxStock.SelectedValue = ID_Stock;
+            cBoxEmployee.SelectedValue = ID_Employee;
+            cBoxPOrder.SelectedValue = ID_POrder;
         }
 
         #endregion
@@ -298,7 +367,7 @@ namespace Applied_Accounts.Forms
             if (_TextBox.Text.ToUpper().Trim() == "END") { Close(); }
             if (_TextBox.Text.ToUpper().Trim() == "CLOSE") { Close(); }
 
-            Applied.SetValue("LastVoucher", txtVou_No.Text.Trim(),Applied.KeyType.String);
+            Applied.SetValue("LastVoucher", txtVou_No.Text.Trim(), Applied.KeyType.String);
 
         }
 
@@ -1058,7 +1127,7 @@ namespace Applied_Accounts.Forms
         private void btnCopy_Click(object sender, EventArgs e)
         {
 
-            if(!Is_Copied) { return; }
+            if (!Is_Copied) { return; }
             txtRefNo.Text = Copy_RefNo;
             txtChqNo.Text = Copy_Cheque_No;
             dt_ChqDate.Value = Copy_Cheque_Date;
@@ -1070,14 +1139,15 @@ namespace Applied_Accounts.Forms
         #endregion
 
         #region Print
-        
+
         private void btnPrint_Click(object sender, EventArgs e)
         {
             MyVoucherClass.Preview_Voucher();
         }
 
+
         #endregion
 
-       
+
     }   //============================== END
 }

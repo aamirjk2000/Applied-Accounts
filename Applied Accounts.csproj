@@ -666,6 +666,8 @@
     <Content Include="Icons\Accounting.ico" />
     <Content Include="Icons\Accounting.png" />
     <None Include="Icons\add.gif" />
+    <None Include="Icons\All_Rows.png" />
+    <None Include="Icons\Active_Rows.png" />
     <Content Include="Icons\AppliedLogo.jpg" />
     <Content Include="Icons\BACK.png" />
     <Content Include="Icons\BACKD.png" />
@@ -728,7 +730,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseUniversalClock="True" BuildVersion_UseGlobalSettings="False" BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" BuildVersion_UseGlobalSettings="False" BuildVersion_UseUniversalClock="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

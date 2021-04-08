@@ -117,8 +117,8 @@ namespace Applied_Accounts
                 DataTable _DataTable; //= new DataTable();
                 string _TableName = Conversion.GetTableName(_TableID);
                 string _Text = "SELECT * FROM " + _TableName;
-                if (_Sorted) { _Text = string.Concat(_Text, " ORDER BY Title"); }
                 if (_Active) { _Text = string.Concat(_Text, " WHERE Active"); }
+                if (_Sorted) { _Text = string.Concat(_Text, " ORDER BY Title"); }
                 SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
                 SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
                 DataSet _DataSet = new DataSet();

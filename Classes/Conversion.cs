@@ -36,6 +36,8 @@ namespace Applied_Accounts.Classes
 
         public static long ToLong(object _Value)
         {
+            if(_Value==null) { return 0; }                          // Retuern Zero if value is null
+
             long _Result;
             string _value = _Value.ToString();
 
