@@ -17,6 +17,8 @@ namespace Applied_Accounts.Classes
         void Load_Tables();
         void Load_Voucher(string _Vou_No);
         DataTable Create_GridTable();
+        DataTable Create_StockTable();
+        DataTable Create_EmployeeTable();
         void New();
         bool Is_Balanced();
         bool Is_Edited();
@@ -441,6 +443,28 @@ namespace Applied_Accounts.Classes
 
 
         #endregion
+
+        #region Create Stock Table
+
+        public DataTable Create_StockTable()
+        {
+
+
+
+
+            return new DataTable();
+        }
+
+        #endregion
+
+        #region Create Payroll Table
+        public DataTable Create_PayrollTable()
+        {
+
+            return new DataTable();
+        }
+
+
 
         #region Other Codes
         public bool Is_Balanced()

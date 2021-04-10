@@ -209,6 +209,7 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmPOrder.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmProject.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmSetting.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmSuppliers.resources
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmTemp.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmTrial_Balance.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmUnits.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmUsers.resources
@@ -234,4 +235,3 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csprojAssemblyReference.cache
-D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmTemp.resources

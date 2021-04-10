@@ -50,12 +50,12 @@ namespace Applied_Accounts.Classes
             long _Value = Conversion.ToLong(_TextBox.Text.Trim());
 
             _DataView.RowFilter = "ID=" + _Value;
-            if(_DataView.Count==1) { return _DataView[0]["ID"].ToString(); }
-
-            _DataView.RowFilter = "Code='" + _TextBox.Text+"'";
             if (_DataView.Count == 1) { return _DataView[0]["ID"].ToString(); }
 
-            _DataView.RowFilter = "SCode='" + _TextBox.Text+"'";
+            _DataView.RowFilter = "Code='" + _Value.ToString() + "'";
+            if (_DataView.Count == 1) { return _DataView[0]["ID"].ToString(); }
+
+            _DataView.RowFilter = "SCode='" + _Value.ToString() + "'";
             if (_DataView.Count == 1) { return _DataView[0]["ID"].ToString(); }
 
             return "";
@@ -152,7 +152,7 @@ namespace Applied_Accounts.Classes
 
                 case "Journal":
 
-                    if(_Textbox.Name == "txtCOA") { _Result = false;}
+                    if (_Textbox.Name == "txtCOA") { _Result = false; }
                     if (_Textbox.Name == "txtSupplier") { _Result = true; }
                     if (_Textbox.Name == "txtProject") { _Result = true; }
                     if (_Textbox.Name == "txtUnit") { _Result = true; }

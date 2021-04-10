@@ -678,6 +678,7 @@
     <Content Include="Icons\Delete.png" />
     <None Include="Icons\delete1.png" />
     <None Include="Icons\edit.png" />
+    <None Include="Icons\Employee.png" />
     <Content Include="Icons\exit-48.png" />
     <Content Include="Icons\Exit.png" />
     <None Include="Icons\Exit2.png" />
@@ -691,10 +692,13 @@
     <None Include="Icons\PRINT.BMP" />
     <Content Include="Icons\Printer.png" />
     <Content Include="Icons\Save.png" />
+    <None Include="Icons\search.png" />
+    <None Include="Icons\Stock.png" />
     <Content Include="Icons\TOP.png" />
     <Content Include="Icons\TOPD.png" />
     <Content Include="Icons\UNDO.png" />
     <None Include="Resources\Exit.png" />
+    <None Include="Icons\Undo1.png" />
     <Content Include="Safe-Open.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -730,7 +734,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" BuildVersion_UseGlobalSettings="False" BuildVersion_UseUniversalClock="True" />
+      <UserProperties BuildVersion_UseUniversalClock="True" BuildVersion_UseGlobalSettings="False" BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

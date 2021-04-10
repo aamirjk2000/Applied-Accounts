@@ -32,7 +32,6 @@
             this.Grid_Voucher = new System.Windows.Forms.DataGridView();
             this.P1 = new System.Windows.Forms.TabPage();
             this.grp_Action = new System.Windows.Forms.GroupBox();
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.grp_Transactions = new System.Windows.Forms.GroupBox();
             this.label12 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -40,24 +39,12 @@
             this.txtCR = new System.Windows.Forms.TextBox();
             this.txtDR = new System.Windows.Forms.TextBox();
             this.cBoxPOrder = new System.Windows.Forms.ComboBox();
-            this.btnEmployees = new System.Windows.Forms.Button();
-            this.btnStocks = new System.Windows.Forms.Button();
-            this.btnUnits = new System.Windows.Forms.Button();
-            this.btnProjects = new System.Windows.Forms.Button();
-            this.btnSuppliers = new System.Windows.Forms.Button();
-            this.btnAccounts = new System.Windows.Forms.Button();
             this.cBoxEmployee = new System.Windows.Forms.ComboBox();
             this.cBoxStock = new System.Windows.Forms.ComboBox();
             this.cBoxUnit = new System.Windows.Forms.ComboBox();
             this.cBoxProject = new System.Windows.Forms.ComboBox();
             this.cBoxSupplier = new System.Windows.Forms.ComboBox();
             this.cBoxAccount = new System.Windows.Forms.ComboBox();
-            this.txtEmployeeID = new System.Windows.Forms.TextBox();
-            this.txtStockID = new System.Windows.Forms.TextBox();
-            this.txtUnitID = new System.Windows.Forms.TextBox();
-            this.txtProjectID = new System.Windows.Forms.TextBox();
-            this.txtSupplierID = new System.Windows.Forms.TextBox();
-            this.txtAccountID = new System.Windows.Forms.TextBox();
             this.txtRemarks = new System.Windows.Forms.TextBox();
             this.txtDescription = new System.Windows.Forms.TextBox();
             this.dt_ChqDate = new System.Windows.Forms.DateTimePicker();
@@ -92,7 +79,15 @@
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
             this.btnSave = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnPrint = new System.Windows.Forms.Button();
+            this.Img_Stock = new System.Windows.Forms.PictureBox();
+            this.brws_Employees = new System.Windows.Forms.PictureBox();
+            this.brws_Stock = new System.Windows.Forms.PictureBox();
+            this.brws_Units = new System.Windows.Forms.PictureBox();
+            this.brws_Projects = new System.Windows.Forms.PictureBox();
+            this.brws_Suppliers = new System.Windows.Forms.PictureBox();
+            this.brws_Accounts = new System.Windows.Forms.PictureBox();
             this.btnActive = new System.Windows.Forms.Button();
             this.btnCopy = new System.Windows.Forms.Button();
             this.btnUndo = new System.Windows.Forms.Button();
@@ -102,6 +97,7 @@
             this.btnPrevious = new System.Windows.Forms.Button();
             this.btnTop = new System.Windows.Forms.Button();
             this.btnNew = new System.Windows.Forms.Button();
+            this.Imp_Employees = new System.Windows.Forms.PictureBox();
             this.P2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
@@ -109,6 +105,14 @@
             this.grp_Transactions.SuspendLayout();
             this.grp_Voucher.SuspendLayout();
             this.Pages.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Img_Stock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Employees)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Stock)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Units)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Projects)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Suppliers)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Accounts)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Imp_Employees)).BeginInit();
             this.SuspendLayout();
             // 
             // P2
@@ -159,18 +163,16 @@
             this.grp_Action.TabStop = false;
             this.grp_Action.Text = "ACTION";
             // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(12, 19);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.Text = "Refresh";
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
             // grp_Transactions
             // 
+            this.grp_Transactions.Controls.Add(this.Imp_Employees);
+            this.grp_Transactions.Controls.Add(this.Img_Stock);
+            this.grp_Transactions.Controls.Add(this.brws_Employees);
+            this.grp_Transactions.Controls.Add(this.brws_Stock);
+            this.grp_Transactions.Controls.Add(this.brws_Units);
+            this.grp_Transactions.Controls.Add(this.brws_Projects);
+            this.grp_Transactions.Controls.Add(this.brws_Suppliers);
+            this.grp_Transactions.Controls.Add(this.brws_Accounts);
             this.grp_Transactions.Controls.Add(this.btnActive);
             this.grp_Transactions.Controls.Add(this.btnCopy);
             this.grp_Transactions.Controls.Add(this.btnUndo);
@@ -186,24 +188,12 @@
             this.grp_Transactions.Controls.Add(this.txtCR);
             this.grp_Transactions.Controls.Add(this.txtDR);
             this.grp_Transactions.Controls.Add(this.cBoxPOrder);
-            this.grp_Transactions.Controls.Add(this.btnEmployees);
-            this.grp_Transactions.Controls.Add(this.btnStocks);
-            this.grp_Transactions.Controls.Add(this.btnUnits);
-            this.grp_Transactions.Controls.Add(this.btnProjects);
-            this.grp_Transactions.Controls.Add(this.btnSuppliers);
-            this.grp_Transactions.Controls.Add(this.btnAccounts);
             this.grp_Transactions.Controls.Add(this.cBoxEmployee);
             this.grp_Transactions.Controls.Add(this.cBoxStock);
             this.grp_Transactions.Controls.Add(this.cBoxUnit);
             this.grp_Transactions.Controls.Add(this.cBoxProject);
             this.grp_Transactions.Controls.Add(this.cBoxSupplier);
             this.grp_Transactions.Controls.Add(this.cBoxAccount);
-            this.grp_Transactions.Controls.Add(this.txtEmployeeID);
-            this.grp_Transactions.Controls.Add(this.txtStockID);
-            this.grp_Transactions.Controls.Add(this.txtUnitID);
-            this.grp_Transactions.Controls.Add(this.txtProjectID);
-            this.grp_Transactions.Controls.Add(this.txtSupplierID);
-            this.grp_Transactions.Controls.Add(this.txtAccountID);
             this.grp_Transactions.Controls.Add(this.txtRemarks);
             this.grp_Transactions.Controls.Add(this.txtDescription);
             this.grp_Transactions.Controls.Add(this.dt_ChqDate);
@@ -298,78 +288,12 @@
             this.cBoxPOrder.Size = new System.Drawing.Size(121, 21);
             this.cBoxPOrder.TabIndex = 11;
             // 
-            // btnEmployees
-            // 
-            this.btnEmployees.Location = new System.Drawing.Point(619, 190);
-            this.btnEmployees.Name = "btnEmployees";
-            this.btnEmployees.Size = new System.Drawing.Size(21, 21);
-            this.btnEmployees.TabIndex = 141;
-            this.btnEmployees.TabStop = false;
-            this.btnEmployees.Text = "...";
-            this.btnEmployees.UseVisualStyleBackColor = true;
-            this.btnEmployees.Click += new System.EventHandler(this.btnEmployees_Click);
-            // 
-            // btnStocks
-            // 
-            this.btnStocks.Location = new System.Drawing.Point(619, 163);
-            this.btnStocks.Name = "btnStocks";
-            this.btnStocks.Size = new System.Drawing.Size(21, 21);
-            this.btnStocks.TabIndex = 140;
-            this.btnStocks.TabStop = false;
-            this.btnStocks.Text = "...";
-            this.btnStocks.UseVisualStyleBackColor = true;
-            this.btnStocks.Click += new System.EventHandler(this.btnStocks_Click);
-            // 
-            // btnUnits
-            // 
-            this.btnUnits.Location = new System.Drawing.Point(619, 136);
-            this.btnUnits.Name = "btnUnits";
-            this.btnUnits.Size = new System.Drawing.Size(21, 21);
-            this.btnUnits.TabIndex = 139;
-            this.btnUnits.TabStop = false;
-            this.btnUnits.Text = "...";
-            this.btnUnits.UseVisualStyleBackColor = true;
-            this.btnUnits.Click += new System.EventHandler(this.btnUnits_Click);
-            // 
-            // btnProjects
-            // 
-            this.btnProjects.Location = new System.Drawing.Point(620, 109);
-            this.btnProjects.Name = "btnProjects";
-            this.btnProjects.Size = new System.Drawing.Size(21, 21);
-            this.btnProjects.TabIndex = 138;
-            this.btnProjects.TabStop = false;
-            this.btnProjects.Text = "...";
-            this.btnProjects.UseVisualStyleBackColor = true;
-            this.btnProjects.Click += new System.EventHandler(this.btnProjects_Click);
-            // 
-            // btnSuppliers
-            // 
-            this.btnSuppliers.Location = new System.Drawing.Point(620, 82);
-            this.btnSuppliers.Name = "btnSuppliers";
-            this.btnSuppliers.Size = new System.Drawing.Size(21, 21);
-            this.btnSuppliers.TabIndex = 137;
-            this.btnSuppliers.TabStop = false;
-            this.btnSuppliers.Text = "...";
-            this.btnSuppliers.UseVisualStyleBackColor = true;
-            this.btnSuppliers.Click += new System.EventHandler(this.btnSuppliers_Click);
-            // 
-            // btnAccounts
-            // 
-            this.btnAccounts.Location = new System.Drawing.Point(620, 55);
-            this.btnAccounts.Name = "btnAccounts";
-            this.btnAccounts.Size = new System.Drawing.Size(21, 21);
-            this.btnAccounts.TabIndex = 136;
-            this.btnAccounts.TabStop = false;
-            this.btnAccounts.Text = "...";
-            this.btnAccounts.UseVisualStyleBackColor = true;
-            this.btnAccounts.Click += new System.EventHandler(this.btnAccounts_Click);
-            // 
             // cBoxEmployee
             // 
             this.cBoxEmployee.FormattingEnabled = true;
-            this.cBoxEmployee.Location = new System.Drawing.Point(231, 190);
+            this.cBoxEmployee.Location = new System.Drawing.Point(204, 190);
             this.cBoxEmployee.Name = "cBoxEmployee";
-            this.cBoxEmployee.Size = new System.Drawing.Size(380, 21);
+            this.cBoxEmployee.Size = new System.Drawing.Size(407, 21);
             this.cBoxEmployee.TabIndex = 135;
             this.cBoxEmployee.TabStop = false;
             this.cBoxEmployee.SelectedIndexChanged += new System.EventHandler(this.cBoxEmployee_SelectedIndexChanged);
@@ -377,9 +301,9 @@
             // cBoxStock
             // 
             this.cBoxStock.FormattingEnabled = true;
-            this.cBoxStock.Location = new System.Drawing.Point(232, 163);
+            this.cBoxStock.Location = new System.Drawing.Point(205, 163);
             this.cBoxStock.Name = "cBoxStock";
-            this.cBoxStock.Size = new System.Drawing.Size(380, 21);
+            this.cBoxStock.Size = new System.Drawing.Size(407, 21);
             this.cBoxStock.TabIndex = 134;
             this.cBoxStock.TabStop = false;
             this.cBoxStock.SelectedIndexChanged += new System.EventHandler(this.cBoxStock_SelectedIndexChanged);
@@ -387,9 +311,9 @@
             // cBoxUnit
             // 
             this.cBoxUnit.FormattingEnabled = true;
-            this.cBoxUnit.Location = new System.Drawing.Point(231, 136);
+            this.cBoxUnit.Location = new System.Drawing.Point(204, 136);
             this.cBoxUnit.Name = "cBoxUnit";
-            this.cBoxUnit.Size = new System.Drawing.Size(380, 21);
+            this.cBoxUnit.Size = new System.Drawing.Size(407, 21);
             this.cBoxUnit.TabIndex = 133;
             this.cBoxUnit.TabStop = false;
             this.cBoxUnit.SelectedIndexChanged += new System.EventHandler(this.cBoxUnit_SelectedIndexChanged);
@@ -397,9 +321,9 @@
             // cBoxProject
             // 
             this.cBoxProject.FormattingEnabled = true;
-            this.cBoxProject.Location = new System.Drawing.Point(232, 109);
+            this.cBoxProject.Location = new System.Drawing.Point(205, 109);
             this.cBoxProject.Name = "cBoxProject";
-            this.cBoxProject.Size = new System.Drawing.Size(380, 21);
+            this.cBoxProject.Size = new System.Drawing.Size(407, 21);
             this.cBoxProject.TabIndex = 132;
             this.cBoxProject.TabStop = false;
             this.cBoxProject.SelectedIndexChanged += new System.EventHandler(this.cBoxProject_SelectedIndexChanged);
@@ -407,9 +331,9 @@
             // cBoxSupplier
             // 
             this.cBoxSupplier.FormattingEnabled = true;
-            this.cBoxSupplier.Location = new System.Drawing.Point(231, 82);
+            this.cBoxSupplier.Location = new System.Drawing.Point(204, 82);
             this.cBoxSupplier.Name = "cBoxSupplier";
-            this.cBoxSupplier.Size = new System.Drawing.Size(380, 21);
+            this.cBoxSupplier.Size = new System.Drawing.Size(407, 21);
             this.cBoxSupplier.TabIndex = 131;
             this.cBoxSupplier.TabStop = false;
             this.cBoxSupplier.SelectedIndexChanged += new System.EventHandler(this.cBoxSupplier_SelectedIndexChanged);
@@ -417,72 +341,12 @@
             // cBoxAccount
             // 
             this.cBoxAccount.FormattingEnabled = true;
-            this.cBoxAccount.Location = new System.Drawing.Point(232, 55);
+            this.cBoxAccount.Location = new System.Drawing.Point(205, 55);
             this.cBoxAccount.Name = "cBoxAccount";
-            this.cBoxAccount.Size = new System.Drawing.Size(380, 21);
+            this.cBoxAccount.Size = new System.Drawing.Size(407, 21);
             this.cBoxAccount.TabIndex = 130;
             this.cBoxAccount.TabStop = false;
             this.cBoxAccount.SelectedIndexChanged += new System.EventHandler(this.cBoxAccount_SelectedIndexChanged);
-            // 
-            // txtEmployeeID
-            // 
-            this.txtEmployeeID.Enabled = false;
-            this.txtEmployeeID.Location = new System.Drawing.Point(185, 191);
-            this.txtEmployeeID.Name = "txtEmployeeID";
-            this.txtEmployeeID.Size = new System.Drawing.Size(40, 20);
-            this.txtEmployeeID.TabIndex = 129;
-            this.txtEmployeeID.TabStop = false;
-            this.txtEmployeeID.Visible = false;
-            // 
-            // txtStockID
-            // 
-            this.txtStockID.Enabled = false;
-            this.txtStockID.Location = new System.Drawing.Point(185, 164);
-            this.txtStockID.Name = "txtStockID";
-            this.txtStockID.Size = new System.Drawing.Size(40, 20);
-            this.txtStockID.TabIndex = 128;
-            this.txtStockID.TabStop = false;
-            this.txtStockID.Visible = false;
-            // 
-            // txtUnitID
-            // 
-            this.txtUnitID.Enabled = false;
-            this.txtUnitID.Location = new System.Drawing.Point(185, 137);
-            this.txtUnitID.Name = "txtUnitID";
-            this.txtUnitID.Size = new System.Drawing.Size(40, 20);
-            this.txtUnitID.TabIndex = 127;
-            this.txtUnitID.TabStop = false;
-            this.txtUnitID.Visible = false;
-            // 
-            // txtProjectID
-            // 
-            this.txtProjectID.Enabled = false;
-            this.txtProjectID.Location = new System.Drawing.Point(185, 110);
-            this.txtProjectID.Name = "txtProjectID";
-            this.txtProjectID.Size = new System.Drawing.Size(40, 20);
-            this.txtProjectID.TabIndex = 126;
-            this.txtProjectID.TabStop = false;
-            this.txtProjectID.Visible = false;
-            // 
-            // txtSupplierID
-            // 
-            this.txtSupplierID.Enabled = false;
-            this.txtSupplierID.Location = new System.Drawing.Point(185, 83);
-            this.txtSupplierID.Name = "txtSupplierID";
-            this.txtSupplierID.Size = new System.Drawing.Size(40, 20);
-            this.txtSupplierID.TabIndex = 125;
-            this.txtSupplierID.TabStop = false;
-            this.txtSupplierID.Visible = false;
-            // 
-            // txtAccountID
-            // 
-            this.txtAccountID.Enabled = false;
-            this.txtAccountID.Location = new System.Drawing.Point(185, 56);
-            this.txtAccountID.Name = "txtAccountID";
-            this.txtAccountID.Size = new System.Drawing.Size(40, 20);
-            this.txtAccountID.TabIndex = 124;
-            this.txtAccountID.TabStop = false;
-            this.txtAccountID.Visible = false;
             // 
             // txtRemarks
             // 
@@ -526,7 +390,7 @@
             // 
             this.txtEmployee.Location = new System.Drawing.Point(125, 191);
             this.txtEmployee.Name = "txtEmployee";
-            this.txtEmployee.Size = new System.Drawing.Size(55, 20);
+            this.txtEmployee.Size = new System.Drawing.Size(74, 20);
             this.txtEmployee.TabIndex = 7;
             this.txtEmployee.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmployee_Validating);
             this.txtEmployee.Validated += new System.EventHandler(this.txtEmployee_Validated);
@@ -535,7 +399,7 @@
             // 
             this.txtStock.Location = new System.Drawing.Point(125, 164);
             this.txtStock.Name = "txtStock";
-            this.txtStock.Size = new System.Drawing.Size(55, 20);
+            this.txtStock.Size = new System.Drawing.Size(74, 20);
             this.txtStock.TabIndex = 6;
             this.txtStock.Validating += new System.ComponentModel.CancelEventHandler(this.txtStock_Validating);
             this.txtStock.Validated += new System.EventHandler(this.txtStock_Validated);
@@ -544,7 +408,7 @@
             // 
             this.txtUnit.Location = new System.Drawing.Point(125, 137);
             this.txtUnit.Name = "txtUnit";
-            this.txtUnit.Size = new System.Drawing.Size(55, 20);
+            this.txtUnit.Size = new System.Drawing.Size(74, 20);
             this.txtUnit.TabIndex = 5;
             this.txtUnit.Validating += new System.ComponentModel.CancelEventHandler(this.txtUnit_Validating);
             this.txtUnit.Validated += new System.EventHandler(this.txtUnit_Validated);
@@ -553,7 +417,7 @@
             // 
             this.txtProject.Location = new System.Drawing.Point(125, 110);
             this.txtProject.Name = "txtProject";
-            this.txtProject.Size = new System.Drawing.Size(55, 20);
+            this.txtProject.Size = new System.Drawing.Size(74, 20);
             this.txtProject.TabIndex = 4;
             this.txtProject.Validating += new System.ComponentModel.CancelEventHandler(this.txtProject_Validating);
             this.txtProject.Validated += new System.EventHandler(this.txtProject_Validated);
@@ -562,7 +426,7 @@
             // 
             this.txtSupplier.Location = new System.Drawing.Point(125, 83);
             this.txtSupplier.Name = "txtSupplier";
-            this.txtSupplier.Size = new System.Drawing.Size(55, 20);
+            this.txtSupplier.Size = new System.Drawing.Size(74, 20);
             this.txtSupplier.TabIndex = 3;
             this.txtSupplier.Validating += new System.ComponentModel.CancelEventHandler(this.txtSupplier_Validating);
             this.txtSupplier.Validated += new System.EventHandler(this.txtSupplier_Validated);
@@ -571,16 +435,17 @@
             // 
             this.txtCOA.Location = new System.Drawing.Point(125, 56);
             this.txtCOA.Name = "txtCOA";
-            this.txtCOA.Size = new System.Drawing.Size(55, 20);
+            this.txtCOA.Size = new System.Drawing.Size(74, 20);
             this.txtCOA.TabIndex = 2;
             this.txtCOA.Validating += new System.ComponentModel.CancelEventHandler(this.txtCOA_Validating);
             this.txtCOA.Validated += new System.EventHandler(this.txtCOA_Validated);
             // 
             // txtSRNO
             // 
+            this.txtSRNO.HideSelection = false;
             this.txtSRNO.Location = new System.Drawing.Point(125, 29);
             this.txtSRNO.Name = "txtSRNO";
-            this.txtSRNO.Size = new System.Drawing.Size(100, 20);
+            this.txtSRNO.Size = new System.Drawing.Size(74, 20);
             this.txtSRNO.TabIndex = 1;
             this.txtSRNO.Enter += new System.EventHandler(this.txtSRNO_Enter);
             this.txtSRNO.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSRNO_KeyPress);
@@ -741,6 +606,7 @@
             // 
             // txtVou_No
             // 
+            this.txtVou_No.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtVou_No.Location = new System.Drawing.Point(125, 26);
             this.txtVou_No.Name = "txtVou_No";
             this.txtVou_No.Size = new System.Drawing.Size(100, 20);
@@ -796,48 +662,133 @@
             this.btnSave.Image = global::Applied_Accounts.Properties.Resources.Save;
             this.btnSave.Location = new System.Drawing.Point(606, 19);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 23);
+            this.btnSave.Size = new System.Drawing.Size(35, 35);
             this.btnSave.TabIndex = 5;
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::Applied_Accounts.Properties.Resources.Exit2;
+            this.btnRefresh.Location = new System.Drawing.Point(11, 19);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(35, 35);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // btnPrint
             // 
             this.btnPrint.Image = global::Applied_Accounts.Properties.Resources.PRINT;
             this.btnPrint.Location = new System.Drawing.Point(565, 19);
             this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(35, 23);
+            this.btnPrint.Size = new System.Drawing.Size(35, 35);
             this.btnPrint.TabIndex = 4;
             this.btnPrint.UseVisualStyleBackColor = true;
             this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
+            // Img_Stock
+            // 
+            this.Img_Stock.Image = global::Applied_Accounts.Properties.Resources.Stock;
+            this.Img_Stock.Location = new System.Drawing.Point(644, 166);
+            this.Img_Stock.Name = "Img_Stock";
+            this.Img_Stock.Size = new System.Drawing.Size(20, 20);
+            this.Img_Stock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Img_Stock.TabIndex = 159;
+            this.Img_Stock.TabStop = false;
+            this.Img_Stock.Click += new System.EventHandler(this.Img_Stock_Click);
+            // 
+            // brws_Employees
+            // 
+            this.brws_Employees.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Employees.Location = new System.Drawing.Point(621, 192);
+            this.brws_Employees.Name = "brws_Employees";
+            this.brws_Employees.Size = new System.Drawing.Size(17, 20);
+            this.brws_Employees.TabIndex = 158;
+            this.brws_Employees.TabStop = false;
+            this.brws_Employees.Click += new System.EventHandler(this.brws_Employees_Click);
+            // 
+            // brws_Stock
+            // 
+            this.brws_Stock.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Stock.Location = new System.Drawing.Point(621, 165);
+            this.brws_Stock.Name = "brws_Stock";
+            this.brws_Stock.Size = new System.Drawing.Size(17, 20);
+            this.brws_Stock.TabIndex = 157;
+            this.brws_Stock.TabStop = false;
+            this.brws_Stock.Click += new System.EventHandler(this.brws_Stock_Click);
+            // 
+            // brws_Units
+            // 
+            this.brws_Units.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Units.Location = new System.Drawing.Point(621, 139);
+            this.brws_Units.Name = "brws_Units";
+            this.brws_Units.Size = new System.Drawing.Size(17, 20);
+            this.brws_Units.TabIndex = 156;
+            this.brws_Units.TabStop = false;
+            this.brws_Units.Click += new System.EventHandler(this.brws_Units_Click);
+            // 
+            // brws_Projects
+            // 
+            this.brws_Projects.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Projects.Location = new System.Drawing.Point(622, 112);
+            this.brws_Projects.Name = "brws_Projects";
+            this.brws_Projects.Size = new System.Drawing.Size(17, 20);
+            this.brws_Projects.TabIndex = 155;
+            this.brws_Projects.TabStop = false;
+            this.brws_Projects.Click += new System.EventHandler(this.brws_Projects_Click);
+            // 
+            // brws_Suppliers
+            // 
+            this.brws_Suppliers.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Suppliers.Location = new System.Drawing.Point(623, 83);
+            this.brws_Suppliers.Name = "brws_Suppliers";
+            this.brws_Suppliers.Size = new System.Drawing.Size(17, 20);
+            this.brws_Suppliers.TabIndex = 154;
+            this.brws_Suppliers.TabStop = false;
+            this.brws_Suppliers.Click += new System.EventHandler(this.brws_Suppliers_Click);
+            // 
+            // brws_Accounts
+            // 
+            this.brws_Accounts.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Accounts.Location = new System.Drawing.Point(623, 56);
+            this.brws_Accounts.Name = "brws_Accounts";
+            this.brws_Accounts.Size = new System.Drawing.Size(17, 20);
+            this.brws_Accounts.TabIndex = 153;
+            this.brws_Accounts.TabStop = false;
+            this.brws_Accounts.Click += new System.EventHandler(this.brws_Accounts_Click);
+            // 
             // btnActive
             // 
-            this.btnActive.Image = global::Applied_Accounts.Properties.Resources.All_Rows;
-            this.btnActive.Location = new System.Drawing.Point(374, 28);
+            this.btnActive.Image = global::Applied_Accounts.Properties.Resources.Active_Rows;
+            this.btnActive.Location = new System.Drawing.Point(347, 26);
             this.btnActive.Name = "btnActive";
             this.btnActive.Size = new System.Drawing.Size(29, 23);
-            this.btnActive.TabIndex = 4;
+            this.btnActive.TabIndex = 55;
+            this.btnActive.TabStop = false;
             this.btnActive.UseVisualStyleBackColor = true;
             this.btnActive.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnCopy
             // 
             this.btnCopy.Image = global::Applied_Accounts.Properties.Resources.Copy;
-            this.btnCopy.Location = new System.Drawing.Point(339, 28);
+            this.btnCopy.Location = new System.Drawing.Point(312, 26);
             this.btnCopy.Name = "btnCopy";
             this.btnCopy.Size = new System.Drawing.Size(29, 23);
-            this.btnCopy.TabIndex = 155;
+            this.btnCopy.TabIndex = 54;
+            this.btnCopy.TabStop = false;
             this.btnCopy.UseVisualStyleBackColor = true;
             this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
             // 
             // btnUndo
             // 
             this.btnUndo.Image = global::Applied_Accounts.Properties.Resources.UNDO;
-            this.btnUndo.Location = new System.Drawing.Point(303, 28);
+            this.btnUndo.Location = new System.Drawing.Point(277, 28);
             this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(30, 21);
-            this.btnUndo.TabIndex = 154;
+            this.btnUndo.Size = new System.Drawing.Size(29, 21);
+            this.btnUndo.TabIndex = 53;
+            this.btnUndo.TabStop = false;
             this.btnUndo.UseVisualStyleBackColor = true;
             this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
             // 
@@ -845,10 +796,10 @@
             // 
             this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.delete1;
-            this.btnDelete.Location = new System.Drawing.Point(267, 28);
+            this.btnDelete.Location = new System.Drawing.Point(242, 28);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(30, 21);
-            this.btnDelete.TabIndex = 153;
+            this.btnDelete.Size = new System.Drawing.Size(29, 21);
+            this.btnDelete.TabIndex = 52;
             this.btnDelete.TabStop = false;
             this.btnDelete.UseVisualStyleBackColor = false;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
@@ -859,7 +810,7 @@
             this.btnBottom.Location = new System.Drawing.Point(566, 28);
             this.btnBottom.Name = "btnBottom";
             this.btnBottom.Size = new System.Drawing.Size(45, 21);
-            this.btnBottom.TabIndex = 151;
+            this.btnBottom.TabIndex = 59;
             this.btnBottom.TabStop = false;
             this.btnBottom.UseVisualStyleBackColor = true;
             this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
@@ -870,7 +821,7 @@
             this.btnNext.Location = new System.Drawing.Point(516, 28);
             this.btnNext.Name = "btnNext";
             this.btnNext.Size = new System.Drawing.Size(45, 21);
-            this.btnNext.TabIndex = 150;
+            this.btnNext.TabIndex = 58;
             this.btnNext.TabStop = false;
             this.btnNext.UseVisualStyleBackColor = true;
             this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
@@ -881,7 +832,7 @@
             this.btnPrevious.Location = new System.Drawing.Point(466, 28);
             this.btnPrevious.Name = "btnPrevious";
             this.btnPrevious.Size = new System.Drawing.Size(45, 21);
-            this.btnPrevious.TabIndex = 149;
+            this.btnPrevious.TabIndex = 57;
             this.btnPrevious.TabStop = false;
             this.btnPrevious.UseVisualStyleBackColor = true;
             this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
@@ -892,7 +843,7 @@
             this.btnTop.Location = new System.Drawing.Point(416, 28);
             this.btnTop.Name = "btnTop";
             this.btnTop.Size = new System.Drawing.Size(45, 21);
-            this.btnTop.TabIndex = 148;
+            this.btnTop.TabIndex = 56;
             this.btnTop.TabStop = false;
             this.btnTop.UseVisualStyleBackColor = true;
             this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
@@ -900,13 +851,24 @@
             // btnNew
             // 
             this.btnNew.Image = global::Applied_Accounts.Properties.Resources.add;
-            this.btnNew.Location = new System.Drawing.Point(231, 28);
+            this.btnNew.Location = new System.Drawing.Point(207, 28);
             this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(30, 21);
-            this.btnNew.TabIndex = 147;
+            this.btnNew.Size = new System.Drawing.Size(29, 21);
+            this.btnNew.TabIndex = 51;
             this.btnNew.TabStop = false;
             this.btnNew.UseVisualStyleBackColor = true;
             this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
+            // 
+            // Imp_Employees
+            // 
+            this.Imp_Employees.Image = global::Applied_Accounts.Properties.Resources.Employee;
+            this.Imp_Employees.Location = new System.Drawing.Point(644, 193);
+            this.Imp_Employees.Name = "Imp_Employees";
+            this.Imp_Employees.Size = new System.Drawing.Size(20, 20);
+            this.Imp_Employees.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Imp_Employees.TabIndex = 160;
+            this.Imp_Employees.TabStop = false;
+            this.Imp_Employees.Click += new System.EventHandler(this.Imp_Employees_Click);
             // 
             // frmVouchers1
             // 
@@ -928,6 +890,14 @@
             this.grp_Voucher.ResumeLayout(false);
             this.grp_Voucher.PerformLayout();
             this.Pages.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Img_Stock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Employees)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Stock)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Units)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Projects)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Suppliers)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.brws_Accounts)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.Imp_Employees)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -953,24 +923,12 @@
         private System.Windows.Forms.TextBox txtCR;
         private System.Windows.Forms.TextBox txtDR;
         private System.Windows.Forms.ComboBox cBoxPOrder;
-        private System.Windows.Forms.Button btnEmployees;
-        private System.Windows.Forms.Button btnStocks;
-        private System.Windows.Forms.Button btnUnits;
-        private System.Windows.Forms.Button btnProjects;
-        private System.Windows.Forms.Button btnSuppliers;
-        private System.Windows.Forms.Button btnAccounts;
         private System.Windows.Forms.ComboBox cBoxEmployee;
         private System.Windows.Forms.ComboBox cBoxStock;
         private System.Windows.Forms.ComboBox cBoxUnit;
         private System.Windows.Forms.ComboBox cBoxProject;
         private System.Windows.Forms.ComboBox cBoxSupplier;
         private System.Windows.Forms.ComboBox cBoxAccount;
-        private System.Windows.Forms.TextBox txtEmployeeID;
-        private System.Windows.Forms.TextBox txtStockID;
-        private System.Windows.Forms.TextBox txtUnitID;
-        private System.Windows.Forms.TextBox txtProjectID;
-        private System.Windows.Forms.TextBox txtSupplierID;
-        private System.Windows.Forms.TextBox txtAccountID;
         private System.Windows.Forms.TextBox txtRemarks;
         private System.Windows.Forms.TextBox txtDescription;
         private System.Windows.Forms.DateTimePicker dt_ChqDate;
@@ -1008,5 +966,13 @@
         private System.Windows.Forms.Button btnUndo;
         private System.Windows.Forms.Button btnCopy;
         private System.Windows.Forms.Button btnActive;
+        private System.Windows.Forms.PictureBox brws_Employees;
+        private System.Windows.Forms.PictureBox brws_Stock;
+        private System.Windows.Forms.PictureBox brws_Units;
+        private System.Windows.Forms.PictureBox brws_Projects;
+        private System.Windows.Forms.PictureBox brws_Suppliers;
+        private System.Windows.Forms.PictureBox brws_Accounts;
+        private System.Windows.Forms.PictureBox Img_Stock;
+        private System.Windows.Forms.PictureBox Imp_Employees;
     }
 }
