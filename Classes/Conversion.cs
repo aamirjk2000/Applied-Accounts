@@ -60,6 +60,24 @@ namespace Applied_Accounts.Classes
             return _Result;
         }
 
+        public static long ToLong(System.Windows.Forms.TextBox _Value)
+        {
+            long _Result;
+
+            if(_Value.Text.Length==0) { return 0; }             // Zero if Lenth is zero
+
+            try
+            {
+                _Result = long.Parse(_Value.Text);
+            }
+            catch
+            {
+                _Result = 0;
+            }
+
+            return _Result;
+        }
+
 
 
         #endregion

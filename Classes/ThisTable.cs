@@ -16,7 +16,8 @@ namespace Applied_Accounts
         void Bottom();
         DataRow GetNewRow();
         void Update(int _TableID);
-        int Count();
+        int ViewCount();
+        int TableCount();
     }
 
 
@@ -39,7 +40,6 @@ namespace Applied_Accounts
         public bool Active { get; set; }
         public DataRow MyDataRow { get; set; }                      // current DataRow
         public DataRow OriginalRow { get; set; }                    // Original Data of the row
-        //public int Count { get => MyDataTable.Rows.Count; }         // Numbers of total records
         public int Row_Index { get; set; }                          // Current Row Index of Data Table
         public string Filter { get => MyDataView.RowFilter; set => MyDataView.RowFilter = value; }
 
@@ -151,10 +151,10 @@ namespace Applied_Accounts
             }
             else
             {
-                if (MyPrimaryKeyName.Length == 0) { MyPrimaryKeyName = "ID"; }                        // Assign ID Column as PK if not exist.
+                if (MyPrimaryKeyName.Length == 0) { MyPrimaryKeyName = "ID"; }                      // Assign ID Column as PK if not exist.
                 MyDataView.RowFilter = string.Concat(MyPrimaryKeyName, "=", _ID.ToString());        // Get DataRow after filter condition appled.
                 if (MyDataView.Count == 1) { return MyDataView.ToTable().Rows[0]; }                 // Get a row from Table is exist.
-                else { return GetNewRow(); }                                               // Get New Row if Filter count zero rows.
+                else { return GetNewRow(); }                                                        // Get New Row if Filter count zero rows.
             }
         }
         public DataRow GetRow(string _Filter)                   // Get Row after filter applied (string condition).
@@ -168,7 +168,7 @@ namespace Applied_Accounts
         #endregion
 
         // Record Save / DElete
-        #region Save & Delete
+        #region Save
 
         public long GetMaxID()                                  // Get Table Primery Kay Maximum Value for add new record.
         {
@@ -213,7 +213,7 @@ namespace Applied_Accounts
 
             #region Primary Key
             MyPrimaryKeyValue = Conversion.ToLong(_DataRow[MyPrimaryKeyName]);                           // Set Primary Key Value
-            if (MyPrimaryKeyValue <= 0)                                                     // return if Table PK not exist.
+            if (MyPrimaryKeyValue < 0)                                                     // return if Table PK not exist.
             {
                 MessageBox.Show("Primary Key not found.", "ERROR");
                 return "Primary Key not found.";
@@ -288,6 +288,12 @@ namespace Applied_Accounts
             }
             return MyMessage;
         }
+
+
+        #endregion
+
+        #region Delete
+
         public string Delete(int ID)
         {
             string _Message = "Deleted.";
@@ -392,10 +398,12 @@ namespace Applied_Accounts
 
         #endregion
 
+
+
         public void MoveNext()
         {
             Row_Index = MyDataTable.Rows.IndexOf(MyDataRow) + 1;
-            if (Row_Index > (Count() - 1)) { Row_Index = (Count() - 1); }       // if index is more than total record. get last record
+            if (Row_Index > (ViewCount() - 1)) { Row_Index = (ViewCount() - 1); }       // if index is more than total record. get last record
             MyDataRow = MyDataTable.Rows[Row_Index];
         }
 
@@ -433,11 +441,20 @@ namespace Applied_Accounts
 
         #endregion
 
+        #region Count
+        public int ViewCount()
+        {
+            return MyDataView.Count;
+        }
 
-        public int Count()
+        public int TableCount()
         {
             return MyDataTable.Rows.Count;
         }
+
+        #endregion
+
+        #region Table Update / Reload
 
         public void Update(int _TableID)                                            // Update MyTable from DB
         {
@@ -448,5 +465,6 @@ namespace Applied_Accounts
         }
         // Data Conversion
 
+        #endregion
     }                                   // Main Class End
 }                                       // Name Space End.

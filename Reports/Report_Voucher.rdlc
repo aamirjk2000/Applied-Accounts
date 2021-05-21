@@ -59,15 +59,23 @@
         </Field>
         <Field Name="Vou_Date">
           <DataField>Vou_Date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Chq_Date">
           <DataField>Chq_Date</DataField>
-          <rd:TypeName>System.DateTime</rd:TypeName>
+          <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="Chq_No">
           <DataField>Chq_No</DataField>
           <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="RefNo">
+          <DataField>RefNo</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="POrder">
+          <DataField>POrder</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="COA_ID">
           <DataField>COA_ID</DataField>
@@ -89,10 +97,6 @@
           <DataField>Ledger</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="RefNo">
-          <DataField>RefNo</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>ds_Voucher</rd:DataSetName>
@@ -108,7 +112,7 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Tablix Name="Tablix1">
+          <Tablix Name="VoucherData">
             <TablixBody>
               <TablixColumns>
                 <TablixColumn>
@@ -573,7 +577,7 @@
                   <TablixCells>
                     <TablixCell>
                       <CellContents>
-                        <Textbox Name="Textbox2">
+                        <Textbox Name="txtDescription1">
                           <CanGrow>true</CanGrow>
                           <KeepTogether>true</KeepTogether>
                           <Paragraphs>
@@ -587,7 +591,6 @@
                               <Style />
                             </Paragraph>
                           </Paragraphs>
-                          <rd:DefaultName>Textbox2</rd:DefaultName>
                           <Style>
                             <Border>
                               <Color>LightGrey</Color>
@@ -709,11 +712,15 @@
                             <Paragraph>
                               <TextRuns>
                                 <TextRun>
-                                  <Value />
-                                  <Style />
+                                  <Value>Chq:</Value>
+                                  <Style>
+                                    <FontSize>8pt</FontSize>
+                                  </Style>
                                 </TextRun>
                               </TextRuns>
-                              <Style />
+                              <Style>
+                                <TextAlign>Right</TextAlign>
+                              </Style>
                             </Paragraph>
                           </Paragraphs>
                           <rd:DefaultName>Textbox8</rd:DefaultName>
@@ -1501,29 +1508,25 @@
                           </Visibility>
                         </TablixMember>
                         <TablixMember />
+                        <TablixMember />
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=IIF(String.IsNullOrEmpty(TRIM(Fields!Description.Value)),TRUE,FALSE)</Hidden>
+                            <Hidden>=iif(string.IsNullOrWhiteSpace(Fields!Chq_No.Value+Fields!RefNo.Value),False,True)</Hidden>
                           </Visibility>
                         </TablixMember>
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=if(string.IsNullOrWhiteSpace(Fields!Chq_No.Value+Fields!RefNo.Value),TRUE,FALSE)</Hidden>
+                            <Hidden>=IIF(Fields!Supplier_ID.Value=0,TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=IIF(String.IsNullOrEmpty(TRIM(Fields!SUPPLIER.Value)),TRUE,FALSE)</Hidden>
+                            <Hidden>=iif(Fields!Project_ID.Value=0,TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
                         <TablixMember>
                           <Visibility>
-                            <Hidden>=iif(String.IsNullOrEmpty(TRIM(Fields!Project.Value)),TRUE,FALSE)</Hidden>
-                          </Visibility>
-                        </TablixMember>
-                        <TablixMember>
-                          <Visibility>
-                            <Hidden>=iif(String.IsNullOrEmpty(TRIM(Fields!Unit.Value)),TRUE,FALSE)</Hidden>
+                            <Hidden>=iif(Fields!Unit_ID.Value=0,TRUE,FALSE)</Hidden>
                           </Visibility>
                         </TablixMember>
                       </TablixMembers>

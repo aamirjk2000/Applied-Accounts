@@ -31,11 +31,12 @@ namespace Applied_Accounts
         public void Load_Data(DataTable _DataTable)
         {
             MyDataView = _DataTable.AsDataView();
+            MyDataView.RowFilter = "ID > 0";
 
             BrowseGrid.DataSource = MyDataView;    //_DataTable.AsDataView();
 
 
-            if (_DataTable.Rows.Count > 0)
+            if (MyDataView.Count > 0)
             {
                 Active = true;
                 MyDataRow = _DataTable.Rows[0];

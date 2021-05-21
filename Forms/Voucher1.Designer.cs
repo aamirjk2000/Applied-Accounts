@@ -32,8 +32,28 @@
             this.Grid_Voucher = new System.Windows.Forms.DataGridView();
             this.P1 = new System.Windows.Forms.TabPage();
             this.grp_Action = new System.Windows.Forms.GroupBox();
+            this.btnSave = new System.Windows.Forms.Button();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.btnPrint = new System.Windows.Forms.Button();
             this.grp_Transactions = new System.Windows.Forms.GroupBox();
+            this.Imp_Employees = new System.Windows.Forms.PictureBox();
+            this.Img_Stock = new System.Windows.Forms.PictureBox();
+            this.brws_Employees = new System.Windows.Forms.PictureBox();
+            this.brws_Stock = new System.Windows.Forms.PictureBox();
+            this.brws_Units = new System.Windows.Forms.PictureBox();
+            this.brws_Projects = new System.Windows.Forms.PictureBox();
+            this.brws_Suppliers = new System.Windows.Forms.PictureBox();
+            this.brws_Accounts = new System.Windows.Forms.PictureBox();
+            this.btnActive = new System.Windows.Forms.Button();
+            this.btnCopy = new System.Windows.Forms.Button();
+            this.btnUndo = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.label12 = new System.Windows.Forms.Label();
+            this.btnBottom = new System.Windows.Forms.Button();
+            this.btnNext = new System.Windows.Forms.Button();
+            this.btnPrevious = new System.Windows.Forms.Button();
+            this.btnTop = new System.Windows.Forms.Button();
+            this.btnNew = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.txtCR = new System.Windows.Forms.TextBox();
@@ -78,33 +98,12 @@
             this.label1 = new System.Windows.Forms.Label();
             this.lblMessage = new System.Windows.Forms.Label();
             this.Pages = new System.Windows.Forms.TabControl();
-            this.btnSave = new System.Windows.Forms.Button();
-            this.btnRefresh = new System.Windows.Forms.Button();
-            this.btnPrint = new System.Windows.Forms.Button();
-            this.Img_Stock = new System.Windows.Forms.PictureBox();
-            this.brws_Employees = new System.Windows.Forms.PictureBox();
-            this.brws_Stock = new System.Windows.Forms.PictureBox();
-            this.brws_Units = new System.Windows.Forms.PictureBox();
-            this.brws_Projects = new System.Windows.Forms.PictureBox();
-            this.brws_Suppliers = new System.Windows.Forms.PictureBox();
-            this.brws_Accounts = new System.Windows.Forms.PictureBox();
-            this.btnActive = new System.Windows.Forms.Button();
-            this.btnCopy = new System.Windows.Forms.Button();
-            this.btnUndo = new System.Windows.Forms.Button();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnBottom = new System.Windows.Forms.Button();
-            this.btnNext = new System.Windows.Forms.Button();
-            this.btnPrevious = new System.Windows.Forms.Button();
-            this.btnTop = new System.Windows.Forms.Button();
-            this.btnNew = new System.Windows.Forms.Button();
-            this.Imp_Employees = new System.Windows.Forms.PictureBox();
             this.P2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.Grid_Voucher)).BeginInit();
             this.P1.SuspendLayout();
             this.grp_Action.SuspendLayout();
             this.grp_Transactions.SuspendLayout();
-            this.grp_Voucher.SuspendLayout();
-            this.Pages.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.Imp_Employees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.Img_Stock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.brws_Employees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.brws_Stock)).BeginInit();
@@ -112,7 +111,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.brws_Projects)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.brws_Suppliers)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.brws_Accounts)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Imp_Employees)).BeginInit();
+            this.grp_Voucher.SuspendLayout();
+            this.Pages.SuspendLayout();
             this.SuspendLayout();
             // 
             // P2
@@ -162,6 +162,37 @@
             this.grp_Action.TabIndex = 3;
             this.grp_Action.TabStop = false;
             this.grp_Action.Text = "ACTION";
+            // 
+            // btnSave
+            // 
+            this.btnSave.Image = global::Applied_Accounts.Properties.Resources.Save;
+            this.btnSave.Location = new System.Drawing.Point(606, 19);
+            this.btnSave.Name = "btnSave";
+            this.btnSave.Size = new System.Drawing.Size(35, 35);
+            this.btnSave.TabIndex = 5;
+            this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.Image = global::Applied_Accounts.Properties.Resources.Exit2;
+            this.btnRefresh.Location = new System.Drawing.Point(11, 19);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(35, 35);
+            this.btnRefresh.TabIndex = 3;
+            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+            // 
+            // btnPrint
+            // 
+            this.btnPrint.Image = global::Applied_Accounts.Properties.Resources.PRINT;
+            this.btnPrint.Location = new System.Drawing.Point(565, 19);
+            this.btnPrint.Name = "btnPrint";
+            this.btnPrint.Size = new System.Drawing.Size(35, 35);
+            this.btnPrint.TabIndex = 4;
+            this.btnPrint.UseVisualStyleBackColor = true;
+            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
             // 
             // grp_Transactions
             // 
@@ -226,6 +257,133 @@
             this.grp_Transactions.Text = "TRANSACTIONS";
             this.grp_Transactions.Enter += new System.EventHandler(this.grp_Transactions_Enter);
             // 
+            // Imp_Employees
+            // 
+            this.Imp_Employees.Image = global::Applied_Accounts.Properties.Resources.Employee;
+            this.Imp_Employees.Location = new System.Drawing.Point(644, 193);
+            this.Imp_Employees.Name = "Imp_Employees";
+            this.Imp_Employees.Size = new System.Drawing.Size(20, 20);
+            this.Imp_Employees.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Imp_Employees.TabIndex = 160;
+            this.Imp_Employees.TabStop = false;
+            this.Imp_Employees.Click += new System.EventHandler(this.Imp_Employees_Click);
+            // 
+            // Img_Stock
+            // 
+            this.Img_Stock.Image = global::Applied_Accounts.Properties.Resources.Stock;
+            this.Img_Stock.Location = new System.Drawing.Point(644, 166);
+            this.Img_Stock.Name = "Img_Stock";
+            this.Img_Stock.Size = new System.Drawing.Size(20, 20);
+            this.Img_Stock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
+            this.Img_Stock.TabIndex = 159;
+            this.Img_Stock.TabStop = false;
+            this.Img_Stock.Click += new System.EventHandler(this.Img_Stock_Click);
+            // 
+            // brws_Employees
+            // 
+            this.brws_Employees.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Employees.Location = new System.Drawing.Point(621, 192);
+            this.brws_Employees.Name = "brws_Employees";
+            this.brws_Employees.Size = new System.Drawing.Size(17, 20);
+            this.brws_Employees.TabIndex = 158;
+            this.brws_Employees.TabStop = false;
+            this.brws_Employees.Click += new System.EventHandler(this.brws_Employees_Click);
+            // 
+            // brws_Stock
+            // 
+            this.brws_Stock.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Stock.Location = new System.Drawing.Point(621, 165);
+            this.brws_Stock.Name = "brws_Stock";
+            this.brws_Stock.Size = new System.Drawing.Size(17, 20);
+            this.brws_Stock.TabIndex = 157;
+            this.brws_Stock.TabStop = false;
+            this.brws_Stock.Click += new System.EventHandler(this.brws_Stock_Click);
+            // 
+            // brws_Units
+            // 
+            this.brws_Units.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Units.Location = new System.Drawing.Point(621, 139);
+            this.brws_Units.Name = "brws_Units";
+            this.brws_Units.Size = new System.Drawing.Size(17, 20);
+            this.brws_Units.TabIndex = 156;
+            this.brws_Units.TabStop = false;
+            this.brws_Units.Click += new System.EventHandler(this.brws_Units_Click);
+            // 
+            // brws_Projects
+            // 
+            this.brws_Projects.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Projects.Location = new System.Drawing.Point(622, 112);
+            this.brws_Projects.Name = "brws_Projects";
+            this.brws_Projects.Size = new System.Drawing.Size(17, 20);
+            this.brws_Projects.TabIndex = 155;
+            this.brws_Projects.TabStop = false;
+            this.brws_Projects.Click += new System.EventHandler(this.brws_Projects_Click);
+            // 
+            // brws_Suppliers
+            // 
+            this.brws_Suppliers.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Suppliers.Location = new System.Drawing.Point(623, 83);
+            this.brws_Suppliers.Name = "brws_Suppliers";
+            this.brws_Suppliers.Size = new System.Drawing.Size(17, 20);
+            this.brws_Suppliers.TabIndex = 154;
+            this.brws_Suppliers.TabStop = false;
+            this.brws_Suppliers.Click += new System.EventHandler(this.brws_Suppliers_Click);
+            // 
+            // brws_Accounts
+            // 
+            this.brws_Accounts.Image = global::Applied_Accounts.Properties.Resources.search;
+            this.brws_Accounts.Location = new System.Drawing.Point(623, 56);
+            this.brws_Accounts.Name = "brws_Accounts";
+            this.brws_Accounts.Size = new System.Drawing.Size(17, 20);
+            this.brws_Accounts.TabIndex = 153;
+            this.brws_Accounts.TabStop = false;
+            this.brws_Accounts.Click += new System.EventHandler(this.brws_Accounts_Click);
+            // 
+            // btnActive
+            // 
+            this.btnActive.Image = global::Applied_Accounts.Properties.Resources.Active_Rows;
+            this.btnActive.Location = new System.Drawing.Point(347, 26);
+            this.btnActive.Name = "btnActive";
+            this.btnActive.Size = new System.Drawing.Size(29, 23);
+            this.btnActive.TabIndex = 55;
+            this.btnActive.TabStop = false;
+            this.btnActive.UseVisualStyleBackColor = true;
+            this.btnActive.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnCopy
+            // 
+            this.btnCopy.Image = global::Applied_Accounts.Properties.Resources.Copy;
+            this.btnCopy.Location = new System.Drawing.Point(312, 26);
+            this.btnCopy.Name = "btnCopy";
+            this.btnCopy.Size = new System.Drawing.Size(29, 23);
+            this.btnCopy.TabIndex = 54;
+            this.btnCopy.TabStop = false;
+            this.btnCopy.UseVisualStyleBackColor = true;
+            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
+            // 
+            // btnUndo
+            // 
+            this.btnUndo.Image = global::Applied_Accounts.Properties.Resources.UNDO;
+            this.btnUndo.Location = new System.Drawing.Point(277, 28);
+            this.btnUndo.Name = "btnUndo";
+            this.btnUndo.Size = new System.Drawing.Size(29, 21);
+            this.btnUndo.TabIndex = 53;
+            this.btnUndo.TabStop = false;
+            this.btnUndo.UseVisualStyleBackColor = true;
+            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.delete1;
+            this.btnDelete.Location = new System.Drawing.Point(242, 28);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(29, 21);
+            this.btnDelete.TabIndex = 52;
+            this.btnDelete.TabStop = false;
+            this.btnDelete.UseVisualStyleBackColor = false;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // label12
             // 
             this.label12.AutoSize = true;
@@ -234,6 +392,61 @@
             this.label12.Size = new System.Drawing.Size(81, 13);
             this.label12.TabIndex = 152;
             this.label12.Text = "Purchase Order";
+            // 
+            // btnBottom
+            // 
+            this.btnBottom.Image = global::Applied_Accounts.Properties.Resources.BOTTOM;
+            this.btnBottom.Location = new System.Drawing.Point(566, 28);
+            this.btnBottom.Name = "btnBottom";
+            this.btnBottom.Size = new System.Drawing.Size(45, 21);
+            this.btnBottom.TabIndex = 59;
+            this.btnBottom.TabStop = false;
+            this.btnBottom.UseVisualStyleBackColor = true;
+            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
+            // 
+            // btnNext
+            // 
+            this.btnNext.Image = global::Applied_Accounts.Properties.Resources.NEXT;
+            this.btnNext.Location = new System.Drawing.Point(516, 28);
+            this.btnNext.Name = "btnNext";
+            this.btnNext.Size = new System.Drawing.Size(45, 21);
+            this.btnNext.TabIndex = 58;
+            this.btnNext.TabStop = false;
+            this.btnNext.UseVisualStyleBackColor = true;
+            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
+            // 
+            // btnPrevious
+            // 
+            this.btnPrevious.Image = global::Applied_Accounts.Properties.Resources.BACK;
+            this.btnPrevious.Location = new System.Drawing.Point(466, 28);
+            this.btnPrevious.Name = "btnPrevious";
+            this.btnPrevious.Size = new System.Drawing.Size(45, 21);
+            this.btnPrevious.TabIndex = 57;
+            this.btnPrevious.TabStop = false;
+            this.btnPrevious.UseVisualStyleBackColor = true;
+            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
+            // 
+            // btnTop
+            // 
+            this.btnTop.Image = global::Applied_Accounts.Properties.Resources.TOP;
+            this.btnTop.Location = new System.Drawing.Point(416, 28);
+            this.btnTop.Name = "btnTop";
+            this.btnTop.Size = new System.Drawing.Size(45, 21);
+            this.btnTop.TabIndex = 56;
+            this.btnTop.TabStop = false;
+            this.btnTop.UseVisualStyleBackColor = true;
+            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
+            // 
+            // btnNew
+            // 
+            this.btnNew.Image = global::Applied_Accounts.Properties.Resources.add;
+            this.btnNew.Location = new System.Drawing.Point(207, 28);
+            this.btnNew.Name = "btnNew";
+            this.btnNew.Size = new System.Drawing.Size(29, 21);
+            this.btnNew.TabIndex = 51;
+            this.btnNew.TabStop = false;
+            this.btnNew.UseVisualStyleBackColor = true;
+            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
             // 
             // label5
             // 
@@ -347,6 +560,7 @@
             this.cBoxAccount.TabIndex = 130;
             this.cBoxAccount.TabStop = false;
             this.cBoxAccount.SelectedIndexChanged += new System.EventHandler(this.cBoxAccount_SelectedIndexChanged);
+            this.cBoxAccount.Enter += new System.EventHandler(this.cBoxAccount_Enter);
             // 
             // txtRemarks
             // 
@@ -393,7 +607,6 @@
             this.txtEmployee.Size = new System.Drawing.Size(74, 20);
             this.txtEmployee.TabIndex = 7;
             this.txtEmployee.Validating += new System.ComponentModel.CancelEventHandler(this.txtEmployee_Validating);
-            this.txtEmployee.Validated += new System.EventHandler(this.txtEmployee_Validated);
             // 
             // txtStock
             // 
@@ -402,7 +615,6 @@
             this.txtStock.Size = new System.Drawing.Size(74, 20);
             this.txtStock.TabIndex = 6;
             this.txtStock.Validating += new System.ComponentModel.CancelEventHandler(this.txtStock_Validating);
-            this.txtStock.Validated += new System.EventHandler(this.txtStock_Validated);
             // 
             // txtUnit
             // 
@@ -411,7 +623,6 @@
             this.txtUnit.Size = new System.Drawing.Size(74, 20);
             this.txtUnit.TabIndex = 5;
             this.txtUnit.Validating += new System.ComponentModel.CancelEventHandler(this.txtUnit_Validating);
-            this.txtUnit.Validated += new System.EventHandler(this.txtUnit_Validated);
             // 
             // txtProject
             // 
@@ -420,7 +631,6 @@
             this.txtProject.Size = new System.Drawing.Size(74, 20);
             this.txtProject.TabIndex = 4;
             this.txtProject.Validating += new System.ComponentModel.CancelEventHandler(this.txtProject_Validating);
-            this.txtProject.Validated += new System.EventHandler(this.txtProject_Validated);
             // 
             // txtSupplier
             // 
@@ -429,7 +639,6 @@
             this.txtSupplier.Size = new System.Drawing.Size(74, 20);
             this.txtSupplier.TabIndex = 3;
             this.txtSupplier.Validating += new System.ComponentModel.CancelEventHandler(this.txtSupplier_Validating);
-            this.txtSupplier.Validated += new System.EventHandler(this.txtSupplier_Validated);
             // 
             // txtCOA
             // 
@@ -438,7 +647,6 @@
             this.txtCOA.Size = new System.Drawing.Size(74, 20);
             this.txtCOA.TabIndex = 2;
             this.txtCOA.Validating += new System.ComponentModel.CancelEventHandler(this.txtCOA_Validating);
-            this.txtCOA.Validated += new System.EventHandler(this.txtCOA_Validated);
             // 
             // txtSRNO
             // 
@@ -582,7 +790,6 @@
             this.cBoxVouType.Name = "cBoxVouType";
             this.cBoxVouType.Size = new System.Drawing.Size(100, 21);
             this.cBoxVouType.TabIndex = 2;
-            this.cBoxVouType.Leave += new System.EventHandler(this.cBoxVouType_Leave);
             this.cBoxVouType.Validating += new System.ComponentModel.CancelEventHandler(this.cBoxVouType_Validating);
             // 
             // dt_VoucherDate
@@ -611,7 +818,6 @@
             this.txtVou_No.Name = "txtVou_No";
             this.txtVou_No.Size = new System.Drawing.Size(100, 20);
             this.txtVou_No.TabIndex = 1;
-            this.txtVou_No.TextChanged += new System.EventHandler(this.txtVou_No_TextChanged);
             this.txtVou_No.Leave += new System.EventHandler(this.txtVou_No_Leave);
             this.txtVou_No.Validating += new System.ComponentModel.CancelEventHandler(this.txtVou_No_Validating);
             this.txtVou_No.Validated += new System.EventHandler(this.txtVou_No_Validated);
@@ -657,219 +863,6 @@
             this.Pages.Size = new System.Drawing.Size(709, 587);
             this.Pages.TabIndex = 0;
             // 
-            // btnSave
-            // 
-            this.btnSave.Image = global::Applied_Accounts.Properties.Resources.Save;
-            this.btnSave.Location = new System.Drawing.Point(606, 19);
-            this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(35, 35);
-            this.btnSave.TabIndex = 5;
-            this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Image = global::Applied_Accounts.Properties.Resources.Exit2;
-            this.btnRefresh.Location = new System.Drawing.Point(11, 19);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(35, 35);
-            this.btnRefresh.TabIndex = 3;
-            this.btnRefresh.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
-            // 
-            // btnPrint
-            // 
-            this.btnPrint.Image = global::Applied_Accounts.Properties.Resources.PRINT;
-            this.btnPrint.Location = new System.Drawing.Point(565, 19);
-            this.btnPrint.Name = "btnPrint";
-            this.btnPrint.Size = new System.Drawing.Size(35, 35);
-            this.btnPrint.TabIndex = 4;
-            this.btnPrint.UseVisualStyleBackColor = true;
-            this.btnPrint.Click += new System.EventHandler(this.btnPrint_Click);
-            // 
-            // Img_Stock
-            // 
-            this.Img_Stock.Image = global::Applied_Accounts.Properties.Resources.Stock;
-            this.Img_Stock.Location = new System.Drawing.Point(644, 166);
-            this.Img_Stock.Name = "Img_Stock";
-            this.Img_Stock.Size = new System.Drawing.Size(20, 20);
-            this.Img_Stock.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Img_Stock.TabIndex = 159;
-            this.Img_Stock.TabStop = false;
-            this.Img_Stock.Click += new System.EventHandler(this.Img_Stock_Click);
-            // 
-            // brws_Employees
-            // 
-            this.brws_Employees.Image = global::Applied_Accounts.Properties.Resources.search;
-            this.brws_Employees.Location = new System.Drawing.Point(621, 192);
-            this.brws_Employees.Name = "brws_Employees";
-            this.brws_Employees.Size = new System.Drawing.Size(17, 20);
-            this.brws_Employees.TabIndex = 158;
-            this.brws_Employees.TabStop = false;
-            this.brws_Employees.Click += new System.EventHandler(this.brws_Employees_Click);
-            // 
-            // brws_Stock
-            // 
-            this.brws_Stock.Image = global::Applied_Accounts.Properties.Resources.search;
-            this.brws_Stock.Location = new System.Drawing.Point(621, 165);
-            this.brws_Stock.Name = "brws_Stock";
-            this.brws_Stock.Size = new System.Drawing.Size(17, 20);
-            this.brws_Stock.TabIndex = 157;
-            this.brws_Stock.TabStop = false;
-            this.brws_Stock.Click += new System.EventHandler(this.brws_Stock_Click);
-            // 
-            // brws_Units
-            // 
-            this.brws_Units.Image = global::Applied_Accounts.Properties.Resources.search;
-            this.brws_Units.Location = new System.Drawing.Point(621, 139);
-            this.brws_Units.Name = "brws_Units";
-            this.brws_Units.Size = new System.Drawing.Size(17, 20);
-            this.brws_Units.TabIndex = 156;
-            this.brws_Units.TabStop = false;
-            this.brws_Units.Click += new System.EventHandler(this.brws_Units_Click);
-            // 
-            // brws_Projects
-            // 
-            this.brws_Projects.Image = global::Applied_Accounts.Properties.Resources.search;
-            this.brws_Projects.Location = new System.Drawing.Point(622, 112);
-            this.brws_Projects.Name = "brws_Projects";
-            this.brws_Projects.Size = new System.Drawing.Size(17, 20);
-            this.brws_Projects.TabIndex = 155;
-            this.brws_Projects.TabStop = false;
-            this.brws_Projects.Click += new System.EventHandler(this.brws_Projects_Click);
-            // 
-            // brws_Suppliers
-            // 
-            this.brws_Suppliers.Image = global::Applied_Accounts.Properties.Resources.search;
-            this.brws_Suppliers.Location = new System.Drawing.Point(623, 83);
-            this.brws_Suppliers.Name = "brws_Suppliers";
-            this.brws_Suppliers.Size = new System.Drawing.Size(17, 20);
-            this.brws_Suppliers.TabIndex = 154;
-            this.brws_Suppliers.TabStop = false;
-            this.brws_Suppliers.Click += new System.EventHandler(this.brws_Suppliers_Click);
-            // 
-            // brws_Accounts
-            // 
-            this.brws_Accounts.Image = global::Applied_Accounts.Properties.Resources.search;
-            this.brws_Accounts.Location = new System.Drawing.Point(623, 56);
-            this.brws_Accounts.Name = "brws_Accounts";
-            this.brws_Accounts.Size = new System.Drawing.Size(17, 20);
-            this.brws_Accounts.TabIndex = 153;
-            this.brws_Accounts.TabStop = false;
-            this.brws_Accounts.Click += new System.EventHandler(this.brws_Accounts_Click);
-            // 
-            // btnActive
-            // 
-            this.btnActive.Image = global::Applied_Accounts.Properties.Resources.Active_Rows;
-            this.btnActive.Location = new System.Drawing.Point(347, 26);
-            this.btnActive.Name = "btnActive";
-            this.btnActive.Size = new System.Drawing.Size(29, 23);
-            this.btnActive.TabIndex = 55;
-            this.btnActive.TabStop = false;
-            this.btnActive.UseVisualStyleBackColor = true;
-            this.btnActive.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btnCopy
-            // 
-            this.btnCopy.Image = global::Applied_Accounts.Properties.Resources.Copy;
-            this.btnCopy.Location = new System.Drawing.Point(312, 26);
-            this.btnCopy.Name = "btnCopy";
-            this.btnCopy.Size = new System.Drawing.Size(29, 23);
-            this.btnCopy.TabIndex = 54;
-            this.btnCopy.TabStop = false;
-            this.btnCopy.UseVisualStyleBackColor = true;
-            this.btnCopy.Click += new System.EventHandler(this.btnCopy_Click);
-            // 
-            // btnUndo
-            // 
-            this.btnUndo.Image = global::Applied_Accounts.Properties.Resources.UNDO;
-            this.btnUndo.Location = new System.Drawing.Point(277, 28);
-            this.btnUndo.Name = "btnUndo";
-            this.btnUndo.Size = new System.Drawing.Size(29, 21);
-            this.btnUndo.TabIndex = 53;
-            this.btnUndo.TabStop = false;
-            this.btnUndo.UseVisualStyleBackColor = true;
-            this.btnUndo.Click += new System.EventHandler(this.btnUndo_Click);
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.btnDelete.Image = global::Applied_Accounts.Properties.Resources.delete1;
-            this.btnDelete.Location = new System.Drawing.Point(242, 28);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(29, 21);
-            this.btnDelete.TabIndex = 52;
-            this.btnDelete.TabStop = false;
-            this.btnDelete.UseVisualStyleBackColor = false;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnBottom
-            // 
-            this.btnBottom.Image = global::Applied_Accounts.Properties.Resources.BOTTOM;
-            this.btnBottom.Location = new System.Drawing.Point(566, 28);
-            this.btnBottom.Name = "btnBottom";
-            this.btnBottom.Size = new System.Drawing.Size(45, 21);
-            this.btnBottom.TabIndex = 59;
-            this.btnBottom.TabStop = false;
-            this.btnBottom.UseVisualStyleBackColor = true;
-            this.btnBottom.Click += new System.EventHandler(this.btnBottom_Click);
-            // 
-            // btnNext
-            // 
-            this.btnNext.Image = global::Applied_Accounts.Properties.Resources.NEXT;
-            this.btnNext.Location = new System.Drawing.Point(516, 28);
-            this.btnNext.Name = "btnNext";
-            this.btnNext.Size = new System.Drawing.Size(45, 21);
-            this.btnNext.TabIndex = 58;
-            this.btnNext.TabStop = false;
-            this.btnNext.UseVisualStyleBackColor = true;
-            this.btnNext.Click += new System.EventHandler(this.btnNext_Click);
-            // 
-            // btnPrevious
-            // 
-            this.btnPrevious.Image = global::Applied_Accounts.Properties.Resources.BACK;
-            this.btnPrevious.Location = new System.Drawing.Point(466, 28);
-            this.btnPrevious.Name = "btnPrevious";
-            this.btnPrevious.Size = new System.Drawing.Size(45, 21);
-            this.btnPrevious.TabIndex = 57;
-            this.btnPrevious.TabStop = false;
-            this.btnPrevious.UseVisualStyleBackColor = true;
-            this.btnPrevious.Click += new System.EventHandler(this.btnPrevious_Click);
-            // 
-            // btnTop
-            // 
-            this.btnTop.Image = global::Applied_Accounts.Properties.Resources.TOP;
-            this.btnTop.Location = new System.Drawing.Point(416, 28);
-            this.btnTop.Name = "btnTop";
-            this.btnTop.Size = new System.Drawing.Size(45, 21);
-            this.btnTop.TabIndex = 56;
-            this.btnTop.TabStop = false;
-            this.btnTop.UseVisualStyleBackColor = true;
-            this.btnTop.Click += new System.EventHandler(this.btnTop_Click);
-            // 
-            // btnNew
-            // 
-            this.btnNew.Image = global::Applied_Accounts.Properties.Resources.add;
-            this.btnNew.Location = new System.Drawing.Point(207, 28);
-            this.btnNew.Name = "btnNew";
-            this.btnNew.Size = new System.Drawing.Size(29, 21);
-            this.btnNew.TabIndex = 51;
-            this.btnNew.TabStop = false;
-            this.btnNew.UseVisualStyleBackColor = true;
-            this.btnNew.Click += new System.EventHandler(this.btnNew_Click);
-            // 
-            // Imp_Employees
-            // 
-            this.Imp_Employees.Image = global::Applied_Accounts.Properties.Resources.Employee;
-            this.Imp_Employees.Location = new System.Drawing.Point(644, 193);
-            this.Imp_Employees.Name = "Imp_Employees";
-            this.Imp_Employees.Size = new System.Drawing.Size(20, 20);
-            this.Imp_Employees.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
-            this.Imp_Employees.TabIndex = 160;
-            this.Imp_Employees.TabStop = false;
-            this.Imp_Employees.Click += new System.EventHandler(this.Imp_Employees_Click);
-            // 
             // frmVouchers1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -887,9 +880,7 @@
             this.grp_Action.ResumeLayout(false);
             this.grp_Transactions.ResumeLayout(false);
             this.grp_Transactions.PerformLayout();
-            this.grp_Voucher.ResumeLayout(false);
-            this.grp_Voucher.PerformLayout();
-            this.Pages.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.Imp_Employees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.Img_Stock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.brws_Employees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.brws_Stock)).EndInit();
@@ -897,7 +888,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.brws_Projects)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.brws_Suppliers)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.brws_Accounts)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.Imp_Employees)).EndInit();
+            this.grp_Voucher.ResumeLayout(false);
+            this.grp_Voucher.PerformLayout();
+            this.Pages.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

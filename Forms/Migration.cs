@@ -68,8 +68,6 @@ namespace Applied_Accounts.Forms
             MyExcelFileName = "";
             MyRefresh();
 
-            
-
             Grid_Applied.Refresh();
             Grid_Notes.Refresh();
             Grid_Accounts.Refresh();
@@ -82,7 +80,6 @@ namespace Applied_Accounts.Forms
             Grid_Ledger.Refresh();
 
             Pages.Visible = true;
-            
 
         }
 

@@ -73,9 +73,7 @@
     <TargetZone>LocalIntranet</TargetZone>
   </PropertyGroup>
   <PropertyGroup />
-  <PropertyGroup>
-    <NoWin32Manifest>true</NoWin32Manifest>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemGroup>
     <Reference Include="Connection_Class, Version=2020.10.31.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -102,6 +100,7 @@
     <Compile Include="Classes\Connection.cs" />
     <Compile Include="Classes\Conversion.cs" />
     <Compile Include="Classes\DataSets.cs" />
+    <Compile Include="Classes\InventoryClass.cs" />
     <Compile Include="Classes\TextBox_Validation.cs" />
     <Compile Include="Classes\InWords.cs" />
     <Compile Include="Classes\MigrationClass.cs" />
@@ -266,6 +265,12 @@
     </Compile>
     <Compile Include="Forms\GL_Supplier.Designer.cs">
       <DependentUpon>GL_Supplier.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Inventory.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Inventory.Designer.cs">
+      <DependentUpon>Inventory.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Migration.cs">
       <SubType>Form</SubType>
@@ -456,6 +461,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\GL_Supplier.resx">
       <DependentUpon>GL_Supplier.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Inventory.resx">
+      <DependentUpon>Inventory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Migration.resx">
       <DependentUpon>Migration.cs</DependentUpon>
@@ -698,7 +706,6 @@
     <Content Include="Icons\TOPD.png" />
     <Content Include="Icons\UNDO.png" />
     <None Include="Resources\Exit.png" />
-    <None Include="Icons\Undo1.png" />
     <Content Include="Safe-Open.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -734,7 +741,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseUniversalClock="True" BuildVersion_UseGlobalSettings="False" BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" BuildVersion_UseGlobalSettings="False" BuildVersion_UseUniversalClock="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

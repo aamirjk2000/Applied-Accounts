@@ -50,6 +50,8 @@ namespace Applied_Accounts
                     }
                 }
 
+                EmptyTable(_DataTable);
+
                 return _DataTable;
             }
             else                                            // Error found.
@@ -72,6 +74,7 @@ namespace Applied_Accounts
                 DataSet _DataSet = new DataSet();
                 _Adapter.Fill(_DataSet, _TableName);
                 _DataTable = _DataSet.Tables[_TableName];
+                EmptyTable(_DataTable);                         // Add One report if table is empty
                 return _DataTable;
             }
             else                                            // Error found.
@@ -80,8 +83,6 @@ namespace Applied_Accounts
                 return new DataTable();
             }
         }
-
-
         // Sort by Title
         public static DataTable GetDataTable(object TableID, bool _Sorted)
         {
@@ -92,12 +93,13 @@ namespace Applied_Accounts
                 DataTable _DataTable; //= new DataTable();
                 string _TableName = Conversion.GetTableName(_TableID);
                 string _Text = "SELECT * FROM " + _TableName;
-                if(_Sorted) { _Text = string.Concat(_Text, " ORDER BY Title"); }
+                if (_Sorted) { _Text = string.Concat(_Text, " ORDER BY Title"); }
                 SQLiteCommand _SQLCommand = new SQLiteCommand(_Text, Connection.AppliedConnection());
                 SQLiteDataAdapter _Adapter = new SQLiteDataAdapter(_SQLCommand);
                 DataSet _DataSet = new DataSet();
                 _Adapter.Fill(_DataSet, _TableName);
                 _DataTable = _DataSet.Tables[_TableName];
+                EmptyTable(_DataTable);                         // Add One report if table is empty
                 return _DataTable;
             }
             else                                            // Error found.
@@ -106,8 +108,6 @@ namespace Applied_Accounts
                 return new DataTable();
             }
         }
-
-
         public static DataTable GetDataTable(object TableID, bool _Sorted, bool _Active)
         {
             int _TableID = (int)TableID;
@@ -124,6 +124,7 @@ namespace Applied_Accounts
                 DataSet _DataSet = new DataSet();
                 _Adapter.Fill(_DataSet, _TableName);
                 _DataTable = _DataSet.Tables[_TableName];
+                EmptyTable(_DataTable);                         // Add One report if table is empty
                 return _DataTable;
             }
             else                                            // Error found.
@@ -146,6 +147,7 @@ namespace Applied_Accounts
                 DataSet _DataSet = new DataSet();
                 _Adapter.Fill(_DataSet, _TableName);
                 _DataTable = _DataSet.Tables[_TableName];
+                EmptyTable(_DataTable);                         // Add One report if table is empty
                 return _DataTable;
             }
             else                                            // Error found.
@@ -154,8 +156,6 @@ namespace Applied_Accounts
                 return new DataTable();
             }
         }
-
-
         public static DataTable GetDataTable(object TableID, int ID)
         {
             int _TableID = (int)TableID;
@@ -171,7 +171,7 @@ namespace Applied_Accounts
                 DataSet _DataSet = new DataSet();
                 _Adapter.Fill(_DataSet, _TableName);
                 _DataTable = _DataSet.Tables[_TableName];
-
+                EmptyTable(_DataTable);                         // Add One report if table is empty
                 return _DataTable;
             }
             else                                            // Error found.
@@ -196,7 +196,7 @@ namespace Applied_Accounts
 
                 _Adapter.Fill(_DataSet, _TableName);
                 _DataTable = _DataSet.Tables[_TableName];
-
+                EmptyTable(_DataTable);                         // Add One report if table is empty
                 return _DataTable;
             }
             else                                            // Error found.
@@ -219,7 +219,7 @@ namespace Applied_Accounts
                 DataSet _DataSet = new DataSet();
                 _Adapter.Fill(_DataSet, _TableName);
                 _DataTable = _DataSet.Tables[_TableName];
-
+                EmptyTable(_DataTable);                         // Add One report if table is empty
                 return _DataTable;
             }
             else                                            // Error found.
@@ -242,27 +242,16 @@ namespace Applied_Accounts
                 _DataTable = _DataSet.Tables["MyTable"];
             }
 
-
+            EmptyTable(_DataTable);                         // Add One report if table is empty
             return _DataTable;
 
         }
         public static DataTable GetComboData(object TableID)                       // Get Table for Combo box object.
         {
             DataTable _DataTable = new DataTable();
-            DataRow _Row;
             string _TableName = Conversion.GetTableName((int)TableID);
             string _Text = "SELECT * FROM " + _TableName + " WHERE Active ORDER BY Title ";
             _DataTable = GetDataTable(_Text, _TableName);
-
-            // Add a one record Title "Select"
-
-            _Row = _DataTable.NewRow();
-            _Row["ID"] = 0;
-            _Row["Title"] = "_Select";
-            _DataTable.Rows.Add(_Row);
-
-            //===============================
-
             return _DataTable;
         }
 
@@ -540,6 +529,52 @@ namespace Applied_Accounts
 
             return _Result;
         }
+
+        public static void EmptyTable(DataTable _DataTable)
+        {
+            if (_DataTable.TableName.Contains("Ledger")) { return; }            // Skip if Table is Ledger
+            if(_DataTable.TableName.Contains("View")) { return; }               // Skip if Data View call.
+            if (_DataTable.TableName.Contains("MyTable")) { return; }           // Skip if Data View call.
+
+            if (_DataTable.Rows.Count == 0)
+            {
+                // Add One Row Id = 0
+
+                ThisTable MyDataTable = new ThisTable(_DataTable);
+                DataRow _Row = MyDataTable.MyDataTable.NewRow();
+
+                if (_Row.Table.Columns.Contains("ID"))
+                {
+                    _Row["ID"] = 0;
+                }
+
+                if (_Row.Table.Columns.Contains("Code"))
+                {
+                    _Row["Code"] = "0";
+                }
+
+                if (_Row.Table.Columns.Contains("SCode"))
+                {
+                    _Row["SCode"] = "0";
+                }
+
+                if (_Row.Table.Columns.Contains("Title"))
+                {
+                    _Row["Title"] = "0";
+                }
+
+                if (_Row.Table.Columns.Contains("Active"))
+                {
+                    _Row["Active"] = true;
+                }
+
+                MyDataTable.MyPrimaryKeyName = "ID";
+                MyDataTable.MyPrimaryKeyValue = 0;
+                MyDataTable.Save(_Row, false);
+
+            }
+        }
+
 
         #region Delete Row
 

@@ -58,8 +58,9 @@ namespace Applied_Accounts
             MyBindingSource.DataSource = TableClass.MyDataView;
             TableBinding = BindingContext[MyBindingSource];
 
+            TableClass.MyDataView.RowFilter = "ID > 0";
 
-            if (TableClass.Count() > 0)                   // If Data Table has some records.
+            if (TableClass.ViewCount() > 0)                   // If Data Table has some records.
             {
 
                 txtPointer.Text = (TableBinding.Position + 1).ToString();
@@ -141,6 +142,9 @@ namespace Applied_Accounts
             Cancel_Position = TableBinding.Position;                                    // Save current posision for Jump on event of cancled.
             MyBindingSource.AddNew();
 
+            string _Filter = TableClass.MyDataView.RowFilter;                           // Store Filter string
+            TableClass.MyDataView.RowFilter = string.Empty;                             // Set Filter Nil
+
             NewRecordPosition = ((DataView)MyBindingSource.DataSource).Count -1;
             TableBinding.Position = NewRecordPosition;
 
@@ -155,11 +159,13 @@ namespace Applied_Accounts
             }
 
             OriginalRow = ((DataRowView)TableBinding.Current).Row;
-            Buttons_Display(2);                                  // Enable or Disable buttons for New voucher profile
-            Current_Mode = (int)Applied.Modes.New;               // Row is new
+            Buttons_Display(2);                                                             // Enable or Disable buttons for New voucher profile
+            Current_Mode = (int)Applied.Modes.New;                                          // Row is new
+
+            TableClass.MyDataView.RowFilter = _Filter;                                      // View Filter restore.
 
         }
-        private void BtnSave_Click(object sender, EventArgs e)              // Save Record
+        private void BtnSave_Click(object sender, EventArgs e)                              // Save Record
         {
             TableClass.MyDataRow = OriginalRow;
 
@@ -172,6 +178,9 @@ namespace Applied_Accounts
                 MessageBox.Show(MyMessage, "ERROR");
                 return;
             }
+
+            string _Filter = TableClass.MyDataView.RowFilter;
+            TableClass.MyDataView.RowFilter = string.Empty;
 
             // New Record Added
             if (Current_Mode == (int)Applied.Modes.New)
@@ -203,7 +212,7 @@ namespace Applied_Accounts
                 TableClass.OriginalRow = TableClass.MyDataRow;
                 After_Save.Invoke(sender, e);
 
-                if (TableClass.Count() > 1) { Buttons_Display(3); }
+                if (TableClass.ViewCount() > 1) { Buttons_Display(3); }
                 else { Buttons_Display(4); }
                 TableClass.Update(TableClass.MyTableID);           // Update Datatable from DB after save row
                 TableClass.Row_Index = TableClass.MyDataTable.Rows.IndexOf(TableClass.MyDataRow);
@@ -213,6 +222,8 @@ namespace Applied_Accounts
                 MyMessage = TableClass.MyMessage;
                 MessageBox.Show(MyMessage, "RECORD NOT SAVED", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+
+            TableClass.MyDataView.RowFilter = _Filter;
 
             Buttons_Display((int)NavButtons.Records);
 
@@ -231,7 +242,6 @@ namespace Applied_Accounts
             {
                 MessageBox.Show(TableClass.MyMessage, "RECORD NOT DELETE ", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
             }
-
 
         }
         private void btnCancel_Click(object sender, EventArgs e)
@@ -384,5 +394,7 @@ namespace Applied_Accounts
             }
 
         }
+
+       
     }       // Main
 }           // Namespace

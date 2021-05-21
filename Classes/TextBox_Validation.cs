@@ -21,6 +21,8 @@ namespace Applied_Accounts.Classes
     {
         public TextBox_Validation()
         {
+            Zero_Allowed = false;
+            Validation_Allowed = false;
         }
 
 
@@ -29,12 +31,11 @@ namespace Applied_Accounts.Classes
         public string Search_Tag { get; set; }
         public string Search_Code { get; set; }
         public string Voucher_Type { get; set; }
-
+        public bool Validation_Allowed { get; set; }
+        public bool Zero_Allowed { get; set; }
 
         public bool Validating(object sender, DataTable _DataTable)
         {
-            //if (((TextBox)sender).Text.Length == 0) { return true; }                    // Text Box is empty, do not validate
-
             Search_ComboID = Conversion.ToInteger(((TextBox)sender).Text.Trim());
             bool IsSearch1 = SearchID(((TextBox)sender).Text, _DataTable);              // Seek Id in Table
             bool IsSearch2 = SearchCode(((TextBox)sender).Text, _DataTable);            // Seek Code in Table
@@ -138,10 +139,10 @@ namespace Applied_Accounts.Classes
             return _Result;
         }
 
-        public bool IsNullAllowed(object sender)
+        public bool IsNullAllowed(TextBox _Textbox)
         {
+            // return a bool value for Textbox Validation
             bool _Result = false;
-            TextBox _Textbox = (TextBox)sender;
             switch (Voucher_Type)
             {
                 case null:

@@ -18,8 +18,9 @@ namespace Applied_Accounts.Classes
         void Load_Voucher(string _Vou_No);
         DataTable Create_GridTable();
         DataTable Create_StockTable();
-        DataTable Create_EmployeeTable();
+        DataTable Create_PayrollTable();
         void New();
+        void Add(string _Vou_no);
         bool Is_Balanced();
         bool Is_Edited();
         decimal Difference();
@@ -99,15 +100,18 @@ namespace Applied_Accounts.Classes
 
         public void Load_Tables()
         {
+            // GetDataTable(Table ID, Sorted by Name, Active Record only)
+
+
             ds_Voucher = null;                                                                  // Reset the Data Set for initialize
             ds_Voucher = new DataSet();
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Ledger).Clone());
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.COA, true).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Suppliers, true, true).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Projects, true, true).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Units, true, true).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Stock, true, true).Copy());
-            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Employees, true, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Suppliers, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Projects, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Units, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Stock, true).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Employees, true).Copy());
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.POrder).Copy());
 
             ds_Voucher.Relations.Add("rlt_COA", ds_Voucher.Tables["COA"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["COA"]);
@@ -126,6 +130,11 @@ namespace Applied_Accounts.Classes
         #endregion
 
         #region Voucher Load
+
+        public void Add(string _Vou_no)
+        {
+            Load_Voucher(_Vou_no);
+        }
 
         public void Load_Voucher(string _Vou_No)
         {
@@ -231,9 +240,12 @@ namespace Applied_Accounts.Classes
                 if (Conversion.ToLong(_Row["Stock"].ToString()) == 0) { _Row["Stock"] = 0; }
                 if (Conversion.ToLong(_Row["Employee"].ToString()) == 0) { _Row["Employee"] = 0; }
                 if (Conversion.ToLong(_Row["POrder"].ToString()) == 0) { _Row["POrder"] = 0; }
+                if (Conversion.ToLong(_Row["DR"].ToString()) == 0) { _Row["DR"] = 0; }
+                if (Conversion.ToLong(_Row["CR"].ToString()) == 0) { _Row["CR"] = 0; }
                 if (string.IsNullOrWhiteSpace(_Row["RefNo"].ToString())) { _Row["RefNo"] = DBNull.Value; }
                 if (string.IsNullOrWhiteSpace(_Row["Remarks"].ToString())) { _Row["Remarks"] = DBNull.Value; }
                 if (string.IsNullOrWhiteSpace(_Row["Chq_No"].ToString())) { _Row["Chq_No"] = DBNull.Value; _Row["Chq_Date"] = DBNull.Value; };
+                if (string.IsNullOrWhiteSpace(_Row["Description"].ToString())) { _Row["Description"] = Vou_No; }
                 #endregion
                 //}
 
@@ -322,11 +334,11 @@ namespace Applied_Accounts.Classes
 
             if (tb_Voucher.Rows.Count == 0)
             {
-                MaxNo = 1;
+                MaxNo = 1;                                                          // No record sr no 1
             }
             else
             {
-                MaxNo = (long)tb_Voucher.Compute("Max(SRNO)", string.Empty) + 1;
+                MaxNo = (long)tb_Voucher.Compute("Max(SRNO)", string.Empty) + 1;    // add sr no if not empty
             }
 
             _NewRow["ID"] = 0;
@@ -334,6 +346,14 @@ namespace Applied_Accounts.Classes
             _NewRow["Vou_Date"] = Vou_Date;
             _NewRow["Vou_Type"] = Vou_Type;
             _NewRow["SrNO"] = MaxNo;
+
+            _NewRow["COA"] = 0;
+            _NewRow["Supplier"] = 0;
+            _NewRow["Project"] = 0;
+            _NewRow["Unit"] = 0;
+            _NewRow["Stock"] = 0;
+            _NewRow["Employee"] = 0;
+
             tb_Voucher.Rows.Add(_NewRow);
 
             Load_GridData();
@@ -464,6 +484,7 @@ namespace Applied_Accounts.Classes
             return new DataTable();
         }
 
+        #endregion
 
 
         #region Other Codes

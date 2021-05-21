@@ -225,7 +225,6 @@ D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.CoreCompileInput
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.pdb
-D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csprojAssemblyReference.cache
 D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Preview.Temp.Preview_Voucher.resources
 D:\Applied\Applied-Accounts\bin\Release\Applied Accounts.exe.config
 D:\Applied\Applied-Accounts\bin\Release\Applied Accounts.exe.manifest
@@ -391,3 +390,6 @@ C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.csproj.CoreCompile
 C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.csproj.CopyComplete
 C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.exe
 C:\Applied\Backup\Applied_Source\obj\Release\Applied Accounts.pdb
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmInventory.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied_Accounts.Forms.frmTemp.resources
+D:\Applied\Applied-Accounts\obj\Release\Applied Accounts.csproj.AssemblyReference.cache

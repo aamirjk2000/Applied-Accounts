@@ -1,14 +1,12 @@
 ﻿using Applied_Accounts.Classes;
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Drawing;
-using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
-//using TextBox = System.Windows.Forms.TextBox;
-//using ToolTip = System.Windows.Forms.ToolTip;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Applied_Accounts.Forms
 {
@@ -39,8 +37,12 @@ namespace Applied_Accounts.Forms
         private DataTable tb_Employees { get => MyVoucherClass.ds_Voucher.Tables["Employees"]; }
         private DataTable tb_POrder { get => MyVoucherClass.ds_Voucher.Tables["POrder"]; }
         private DataTable tb_Voucher { get => MyVoucherClass.tb_Voucher; }
-        //private DataTable tb_voucher_Delete { get => MyVoucherClass.tb_Voucher_Delete; }
+        private DataView vw_CashBank
+        {
+            get => AppliedTable.GetDataTable(Tables.COA, "(IsCashBook OR IsBankBook) AND Active=1").AsDataView();
+        }
         private DataTable tb_GridData { get => MyVoucherClass.tb_GridData; }
+        private DataRowView MyDataRow { get => (DataRowView)TableBinding.Current; }
 
         private BindingManagerBase TableBinding;
         private BindingManagerBase POrderBinding;
@@ -146,7 +148,6 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-
         #region Combo Boxs
         private void Set_ComboBox()
         {
@@ -243,8 +244,43 @@ namespace Applied_Accounts.Forms
             cBoxPOrder.SelectedValue = ID_POrder;
         }
 
-        #endregion
+        private void cBoxAccount_Enter(object sender, EventArgs e)
+        {
+            switch (MyVoucherClass.Vou_Type)
+            {
+                case "Payment":
 
+                    if (Conversion.ToInteger(txtSRNO.Text) == 1)
+                    {
+                        dv_Accounts.RowFilter = "(IsCashBook=1 OR IsBankbook=1) AND Active=1";
+                    }
+                    else
+                    {
+                        dv_Accounts.RowFilter = string.Empty;
+                    }
+
+                    break;
+
+                case "Receipt":
+                    if (Conversion.ToInteger(txtSRNO.Text) == 1)
+                    {
+                        dv_Accounts.RowFilter = "(IsCashBook=1 OR IsBankbook=1) AND Active=1";
+                    }
+                    else
+                    {
+                        dv_Accounts.RowFilter = string.Empty;
+                    }
+
+                    break;
+
+                default:
+                    dv_Accounts.RowFilter = string.Empty;
+                    break;
+            }
+
+        }
+
+        #endregion
 
         #region Data Binding
 
@@ -295,10 +331,6 @@ namespace Applied_Accounts.Forms
 
         #region Voucher No Validation 
 
-        private void txtVou_No_TextChanged(object sender, EventArgs e)
-        {
-
-        }
         private void label2_DoubleClick(object sender, EventArgs e)
         {
             txtVou_No.Text = Applied.GetString("LastVoucher");
@@ -306,7 +338,6 @@ namespace Applied_Accounts.Forms
         private void txtVou_No_Validating(object sender, CancelEventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
-
 
             bool IsClose = false;
 
@@ -326,19 +357,19 @@ namespace Applied_Accounts.Forms
 
                 else
                 {
-                    DataView _TableView = AppliedTable.GetDataTable(Tables.View_Vou_Nos).AsDataView();
-                    _TableView.RowFilter = "Voucher_No='" + _TextBox.Text.Trim() + "'";
-                    if (_TableView.Count == 0) { e.Cancel = true; Vou_Found = false; }
-                    else { e.Cancel = IsClose; Vou_Found = true; }
-                    _TableView.Dispose();
+                    DataView _TableView = AppliedTable.GetDataTable(Tables.View_Vou_Nos).AsDataView();      // Load Table
+                    _TableView.RowFilter = "Voucher_No='" + _TextBox.Text.Trim() + "'";                     // filter Table
+                    if (_TableView.Count == 0) { e.Cancel = true; Vou_Found = false; }                      // Logic Voucher Found??
+                    else { e.Cancel = IsClose; Vou_Found = true; }                                          // Set Validation Variables
+                    _TableView.Dispose();                                                                   // Dispose Table
                 }
             }
         }
         private void txtVou_No_Validated(object sender, EventArgs e)
         {
-            if (Vou_Found)
+            if (Vou_Found)                                              // If Voucher Found in Ledger DB.Table
             {
-                MyVoucherClass.Load_Voucher(Voucher_NO);
+                MyVoucherClass.Load_Voucher(Voucher_NO);                // Load Vohcher from Data base
                 if (MyVoucherClass.Voucher_Loaded)                      // Voucher has been sucessfully loaded.
                 {
                     txtVou_No.Text = MyVoucherClass.Vou_No;
@@ -353,7 +384,6 @@ namespace Applied_Accounts.Forms
                     MyValidation.Voucher_Type = MyVoucherClass.Vou_Type;
 
                     if (MyVoucherClass.Is_Balanced()) { grp_Action.Visible = true; }
-
                 }
                 else
                 {
@@ -363,29 +393,27 @@ namespace Applied_Accounts.Forms
                         cBoxVouType.Enabled = true;                                         // Voucher Type Enable is voucher is new    
                         cBoxVouType.Focus();
                     }
+
+                    // To see Create a New Voucher goto "dt_VoucherDate_Leave"
+
                 }
             }
         }
         private void txtVou_No_Leave(object sender, EventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
-            if (string.IsNullOrWhiteSpace(_TextBox.Text)) { Close(); }
-            if (_TextBox.Text == "0") { Close(); }
-            if (_TextBox.Text.ToUpper().Trim() == "END") { Close(); }
-            if (_TextBox.Text.ToUpper().Trim() == "CLOSE") { Close(); }
+            if (string.IsNullOrWhiteSpace(_TextBox.Text)) { Close(); }                      // Form Close if Nill
+            if (_TextBox.Text == "0") { Close(); }                                          // form Close if Zero
+            if (_TextBox.Text.ToUpper().Trim() == "END") { Close(); }                       // form Close if END
+            if (_TextBox.Text.ToUpper().Trim() == "CLOSE") { Close(); }                     // form close if close
 
-            Applied.SetValue("LastVoucher", txtVou_No.Text.Trim(), Applied.KeyType.String);
+            Applied.SetValue("LastVoucher", txtVou_No.Text.Trim(), Applied.KeyType.String); // Save Value in Key Table.
 
         }
 
         #endregion
 
         #region Voucher Type
-
-        private void cBoxVouType_Leave(object sender, EventArgs e)
-        {
-
-        }
 
         private void cBoxVouType_Validating(object sender, CancelEventArgs e)
         {
@@ -415,6 +443,7 @@ namespace Applied_Accounts.Forms
         private void grp_Transactions_Enter(object sender, EventArgs e)
         {
             grp_Voucher.Enabled = false;
+            MyValidation.Voucher_Type = MyVoucherClass.Vou_Type;
 
             if (txtVou_No.Text.ToUpper().Trim() == "NEW")
             {
@@ -428,12 +457,11 @@ namespace Applied_Accounts.Forms
             }
         }
 
+
+
+
         #endregion
 
-
-        /// <summary>
-        /// POSITION CHANGED.
-        /// </summary>
         #region Position Changed
 
         private void PositionChange()
@@ -736,121 +764,230 @@ namespace Applied_Accounts.Forms
 
         #region Text Box Validation
 
+        private bool TextBox_Validation(TextBox _TextBox, DataTable _DataTable)
+        {
+            bool _Result = false;                                                       // e.Cancel Default value;
+            long _Value = Conversion.ToLong(_TextBox);
+            MyValidation.Zero_Allowed = false;
+            if (Initializaion) { return _Result; }                                      // return if objects initializing.
+            if (_DataTable.Rows.Count == 0) { return _Result; }                         // DataBase if empty
+            if (MyValidation.IsNullAllowed(_TextBox))                                   // Not Validate if Null is allowed.
+            {
+                if (_Value == 0)
+                {
+                    MyValidation.Zero_Allowed = true;
+                    return _Result;
+                }
+            }
+            _Result = MyValidation.Validating(_TextBox, _DataTable);
+            return _Result;
+        }
+
         private void txtCOA_Validating(object sender, CancelEventArgs e)
         {
-            if (Initializaion) { return; }                                  // return if objects initializing.
-            if (MyValidation.IsNullAllowed(sender)) { return; }             // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Accounts);
-        }
-        private void txtCOA_Validated(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtCOA.Text))
+            DataTable _DataTable = new DataTable();
+            TextBox _TextBox = (TextBox)sender;
+            ComboBox _ComboBox = cBoxAccount;
+
+            switch (MyVoucherClass.Vou_Type)
             {
-                cBoxAccount.SelectedValue = MyValidation.Search_ComboID.ToString();
-                //if (string.IsNullOrWhiteSpace(txtCOA.Text) || txtCOA.Text == "0")
-                //{
-                //    txtCOA.Text = MyValidation.ObjectID(sender, tb_Accounts);
-                //}
+                case "Payment":
+                    if (Conversion.ToInteger(txtSRNO.Text) == 1)            // Show Only Bank and Cash 
+                    {
+                        _DataTable = vw_CashBank.ToTable();
+                    }
+                    else
+                    {
+                        dv_Accounts.RowFilter = "Active=1";
+                        _DataTable = dv_Accounts.ToTable();
+                    }
+                    break;
+
+                case "Receipt":
+                    if (Conversion.ToInteger(txtSRNO.Text) == 1)            // Show Only Bank and Cash 
+                    {
+                        _DataTable = vw_CashBank.ToTable();
+                    }
+                    else
+                    {
+                        dv_Accounts.RowFilter = "Active=1";
+                        _DataTable = dv_Accounts.ToTable();
+                    }
+                    break;
+
+
+                default:
+                    dv_Accounts.RowFilter = "Active=1";
+                    _DataTable = dv_Accounts.ToTable();
+                    break;
             }
+
+            bool _Cancel = TextBox_Validation((TextBox)sender, _DataTable);
+
+            if (_Cancel)
+            {
+                string _Text = _TextBox.Text;                     // Save Text Box Value
+                _ComboBox.SelectedValue = 0;
+                _TextBox.Text = _Text;                            // Restore TextBox Value
+            }
+            else
+            {
+                _ComboBox.SelectedValue = MyValidation.Search_ComboID.ToString();
+            }
+            e.Cancel = _Cancel;
         }
+
+
         private void txtSupplier_Validating(object sender, CancelEventArgs e)
         {
-            if (Initializaion) { return; }                                  // return if objects initializing.
-            if (MyValidation.IsNullAllowed(sender)) { return; }             // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Suppliers);
-        }
-        private void txtSupplier_Validated(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtSupplier.Text))
+            TextBox _TextBox = (TextBox)sender;
+            ComboBox _ComboBox = cBoxSupplier;
+
+            bool _Cancel = TextBox_Validation(_TextBox, tb_Suppliers);
+
+            if (_Cancel)
             {
-                cBoxSupplier.SelectedValue = MyValidation.Search_ComboID.ToString();
-                //    if (string.IsNullOrWhiteSpace(txtSupplier.Text) || txtSupplier.Text == "0")
-                //    {
-                //        txtSupplier.Text = MyValidation.ObjectID(sender, tb_Suppliers);
-                //    }
+                string _Text = _TextBox.Text;                     // Save Text Box Value
+                _ComboBox.SelectedValue = 0;
+                _TextBox.Text = _Text;                            // Restore TextBox Value
             }
+            else
+            {
+                if (MyValidation.Zero_Allowed)
+                {
+                    string _Text = _TextBox.Text;                     // Save Text Box Value
+                    _ComboBox.SelectedValue = 0;
+                    _TextBox.Text = _Text;                            // Restore TextBox Value
+                }
+                else
+                {
+                    _ComboBox.SelectedValue = MyValidation.Search_ComboID.ToString();
+                }
+            }
+            e.Cancel = _Cancel;
         }
+
 
         private void txtProject_Validating(object sender, CancelEventArgs e)
         {
-            if (Initializaion) { return; }                                  // return if objects initializing.
-            if (MyValidation.IsNullAllowed(sender)) { return; }             // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Projects);
+            TextBox _TextBox = (TextBox)sender;
+            ComboBox _ComboBox = cBoxProject;
 
-        }
-        private void txtProject_Validated(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txtProject.Text))
+            bool _Cancel = TextBox_Validation(_TextBox, tb_Projects);
+
+            if (_Cancel)
             {
-                cBoxProject.SelectedValue = MyValidation.Search_ComboID.ToString();
-
-            //    if (string.IsNullOrWhiteSpace(txtProject.Text) || txtProject.Text == "0")
-            //    {
-            //        txtProject.Text = MyValidation.ObjectID(sender, tb_Projects);
-            //    }
+                string _Text = _TextBox.Text;                     // Save Text Box Value
+                _ComboBox.SelectedValue = 0;
+                _TextBox.Text = _Text;                            // Restore TextBox Value
             }
+            else
+            {
+                if (MyValidation.Zero_Allowed)
+                {
+                    string _Text = _TextBox.Text;                     // Save Text Box Value
+                    _ComboBox.SelectedValue = 0;
+                    _TextBox.Text = _Text;                            // Restore TextBox Value
+                }
+                else
+                {
+                    _ComboBox.SelectedValue = MyValidation.Search_ComboID.ToString();
+                }
+            }
+            e.Cancel = _Cancel;
 
         }
+
 
         private void txtUnit_Validating(object sender, CancelEventArgs e)
         {
-            if (Initializaion) { return; }                                  // return if objects initializing.
-            if (MyValidation.IsNullAllowed(sender)) { return; }             // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Units);
+            TextBox _TextBox = (TextBox)sender;
+            ComboBox _ComboBox = cBoxUnit;
 
-        }
-        private void txtUnit_Validated(object sender, EventArgs e)
-        {
+            bool _Cancel = TextBox_Validation(_TextBox, tb_Units);
 
-            if (!string.IsNullOrEmpty(txtUnit.Text))
+            if (_Cancel)
             {
-                cBoxUnit.SelectedValue = MyValidation.Search_ComboID.ToString();
-            //    if (string.IsNullOrWhiteSpace(txtUnitID.Text) || txtUnitID.Text == "0")
-            //    {
-            //        txtUnitID.Text = MyValidation.ObjectID(sender, tb_Units);
-            //    }
+                string _Text = _TextBox.Text;                     // Save Text Box Value
+                _ComboBox.SelectedValue = 0;
+                _TextBox.Text = _Text;                            // Restore TextBox Value
             }
+            else
+            {
+                if (MyValidation.Zero_Allowed)
+                {
+                    string _Text = _TextBox.Text;                     // Save Text Box Value
+                    _ComboBox.SelectedValue = 0;
+                    _TextBox.Text = _Text;                            // Restore TextBox Value
+                }
+                else
+                {
+                    _ComboBox.SelectedValue = MyValidation.Search_ComboID.ToString();
+                }
+            }
+            e.Cancel = _Cancel;
+
+
         }
+
 
         private void txtStock_Validating(object sender, CancelEventArgs e)
         {
-            if (Initializaion) { return; }                                  // return if objects initializing.
-            if (MyValidation.IsNullAllowed(sender)) { return; }             // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Stock);
+            TextBox _TextBox = (TextBox)sender;
+            ComboBox _ComboBox = cBoxStock;
 
+            bool _Cancel = TextBox_Validation(_TextBox, tb_Stock);
 
-        }
-        private void txtStock_Validated(object sender, EventArgs e)
-        {
-
-            if (!string.IsNullOrEmpty(txtStock.Text))
+            if (_Cancel)
             {
-                cBoxStock.SelectedValue = MyValidation.Search_ComboID.ToString();
-            //    if (string.IsNullOrWhiteSpace(txtStockID.Text) || txtStockID.Text == "0")
-            //    {
-            //        txtStockID.Text = MyValidation.ObjectID(sender, tb_Stock);
-            //    }
+                string _Text = _TextBox.Text;                     // Save Text Box Value
+                _ComboBox.SelectedValue = 0;
+                _TextBox.Text = _Text;                            // Restore TextBox Value
             }
+            else
+            {
+                if (MyValidation.Zero_Allowed)
+                {
+                    string _Text = _TextBox.Text;                     // Save Text Box Value
+                    _ComboBox.SelectedValue = 0;
+                    _TextBox.Text = _Text;                            // Restore TextBox Value
+                }
+                else
+                {
+                    _ComboBox.SelectedValue = MyValidation.Search_ComboID.ToString();
+                }
+            }
+            e.Cancel = _Cancel;
         }
+
 
         private void txtEmployee_Validating(object sender, CancelEventArgs e)
         {
-            if (Initializaion) { return; }                                  // return if objects initializing.
-            if (MyValidation.IsNullAllowed(sender)) { return; }             // Not Validate if Null is allowed.
-            e.Cancel = MyValidation.Validating((TextBox)sender, tb_Employees);
+            TextBox _TextBox = (TextBox)sender;
+            ComboBox _ComboBox = cBoxEmployee;
 
-        }
-        private void txtEmployee_Validated(object sender, EventArgs e)
-        {
+            bool _Cancel = TextBox_Validation(_TextBox, tb_Employees);
 
-            if (!string.IsNullOrEmpty(txtEmployee.Text))                                                // Exeute if text box has some value
+            if (_Cancel)
             {
-                cBoxEmployee.SelectedValue = MyValidation.Search_ComboID.ToString();
-            //    if (string.IsNullOrWhiteSpace(txtEmployeeID.Text) || txtEmployeeID.Text == "0")
-            //    {
-            //        txtEmployeeID.Text = MyValidation.ObjectID(sender, tb_Employees);
-            //    }
+                string _Text = _TextBox.Text;                     // Save Text Box Value
+                _ComboBox.SelectedValue = 0;
+                _TextBox.Text = _Text;                            // Restore TextBox Value
             }
+            else
+            {
+                if (MyValidation.Zero_Allowed)
+                {
+                    string _Text = _TextBox.Text;                     // Save Text Box Value
+                    _ComboBox.SelectedValue = 0;
+                    _TextBox.Text = _Text;                            // Restore TextBox Value
+                }
+                else
+                {
+                    _ComboBox.SelectedValue = MyValidation.Search_ComboID.ToString();
+                }
+            }
+            e.Cancel = _Cancel;
         }
 
         #endregion
@@ -865,6 +1002,13 @@ namespace Applied_Accounts.Forms
                 btnBottom_Click(sender, e);
                 lblMessage.Text = " New Transaction Created.";
                 txtCOA.Focus();
+
+                txtCOA.Text = "0";
+                txtSupplier.Text = "0";
+                txtProject.Text = "0";
+                txtUnit.Text = "0";
+                txtStock.Text = "0";
+                txtEmployee.Text = "0";
 
                 cBoxAccount.SelectedValue = 0;
                 cBoxSupplier.SelectedValue = 0;
@@ -1074,7 +1218,6 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-
         #region Browse Windows
 
         private void brws_Accounts_Click(object sender, EventArgs e)
@@ -1120,19 +1263,23 @@ namespace Applied_Accounts.Forms
 
         private void Img_Stock_Click(object sender, EventArgs e)
         {
-
+            frmInventory Brows_Invenotory = new frmInventory(MyVoucherClass.Vou_No);
+            Brows_Invenotory.Inventory_Class.Filter(Conversion.ToLong(MyDataRow["ID"]));
+            Brows_Invenotory.ShowDialog();
         }
 
         #endregion
 
-        #region payroll Browse
+        #region Payroll Browse
 
         private void Imp_Employees_Click(object sender, EventArgs e)
         {
 
         }
 
+
         #endregion
+
 
     }   //============================== END
 }

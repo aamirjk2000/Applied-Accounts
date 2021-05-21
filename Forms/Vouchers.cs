@@ -27,6 +27,7 @@ namespace Applied_Accounts.Forms
         private DataTable tbStocks;
         private DataTable tbEmployees;
         private DataTable tbPOrder;
+        private DataView ViewCashBank;
 
         private string MyCheque_No;                                 // For copy and past
         private string MyCheque_Date;                               // For copy and past
@@ -86,6 +87,8 @@ namespace Applied_Accounts.Forms
             tbEmployees = AppliedTable.GetComboData((int)Tables.Employees);
             tbPOrder = AppliedTable.GetComboData((int)Tables.POrder);
             // DATABASE 
+
+            ViewCashBank = new DataView(tbAccounts, "IsCashBook && IsBankBook", "Title", DataViewRowState.None);
 
             dtVouDate.Format = DateTimePickerFormat.Custom;
             dtVouDate.CustomFormat = ComboDateFormat;
