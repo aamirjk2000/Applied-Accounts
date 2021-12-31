@@ -8,32 +8,34 @@ namespace Applied_Accounts
     public partial class Browse : Form
     {
 
-        public DataView MyDataView { get; set; }
-        public DataRow MyDataRow { get; set; }
-        public string MyTitle { get; set; } 
+        public DataView MyDataView { get => DataGrid_Browse.MyDataView; }
+        public DataRow MyDataRow { get => DataGrid_Browse.MyDataRow; }
+        public string MyTitle { get; set; }
         public bool IsSelect { get; set; }
-        public long MyID { get; set; }
-        public long OldID { get; set; }
+        public long MyID { get => Conversion.ToLong(DataGrid_Browse.MyDataRow["ID"]); }
+        public string MyCode { get => DataGrid_Browse.MyDataRow["Code"].ToString(); }
+        public string OldCode { get; set; }                     // Current / Old Code of the row
 
         public Browse(DataView _DataView)
         {
             InitializeComponent();
-            MyDataView = _DataView;
+            DataGrid_Browse.MyDataView = _DataView;
+            //MyDataView = _DataView;
             MyDataView.RowFilter = "";
             MyRefresh();
         }
 
-        public Browse(DataView _DataView, string _CurrentValue)
+        public Browse(DataView _DataView, string _CurrentValue)   // _CurrentValue -> focus on this code / row when browse shows.
         {
             InitializeComponent();
-            MyDataView = _DataView;
             MyDataView.RowFilter = "";
+            OldCode = _CurrentValue;
             MyRefresh();
         }
 
         public void MyRefresh()
         {
-            if(MyTitle==null)
+            if (MyTitle == null)
             {
                 MyTitle = MyDataView.Table.TableName;
             }
@@ -65,29 +67,28 @@ namespace Applied_Accounts
 
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            IsSelect = true;
-            if (MyDataView.Count == 0)
-            {
-                MyDataRow = MyDataView.Table.NewRow();                                              // Select a row from browse grid record.
-                MyID = -1;
-            }
-            else
-            {
-                MyDataRow = DataGrid_Browse.MyDataRow;                                              // Select a row from browse grid record.
-                string _Value = DataGrid_Browse.BrowseGrid.CurrentRow.Cells[0].Value.ToString();
-                //   Conversion.ToLong(MyDataRow["ID"]
-                MyID =  Applied.Code2ID(_Value, MyDataView);
-            }
+            DataGrid_Browse.IsSelected = true;
             Close();
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             IsSelect = false;
-            MyID = 0;
             Close();
         }
 
-        
+        private void Browse_FormClosed(object sender, FormClosedEventArgs e)
+        {
+        }
+
+        private void DataGrid_Browse_Enter(object sender, EventArgs e)
+        {
+            DataGrid_Browse.IsSelected = false;                 // User enter for select
+        }
+
+        private void DataGrid_Browse_Leave(object sender, EventArgs e)
+        {
+            IsSelect = DataGrid_Browse.IsSelected;              // Is Selected the row by user by DataGrid enter Button.
+        }
     }           // Main
 }               // NameSpace

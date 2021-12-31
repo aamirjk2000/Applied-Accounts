@@ -176,8 +176,8 @@ namespace Applied_Accounts
                     Browse WinBrowse = new Browse(MyDataTable.AsDataView());
                     MyDataView.RowFilter = "";
                     WinBrowse.DataGrid_Browse.IsBrowseWin = true;
-                    WinBrowse.MyDataRow = MyDataRow;
-                    WinBrowse.MyDataView = MyDataView;
+                    //WinBrowse.MyDataRow = MyDataRow;
+                    //WinBrowse.MyDataView = MyDataView;
                     WinBrowse.MyRefresh();
                     WinBrowse.ShowDialog();
                     if (WinBrowse.IsSelect) { MyDataRow = WinBrowse.MyDataRow; } else { MyDataRow = thisRow; }

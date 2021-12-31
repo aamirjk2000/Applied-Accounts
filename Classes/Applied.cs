@@ -48,10 +48,10 @@ namespace Applied_Accounts.Classes
 
         #region Get Values;
 
-        public static object GetValue(string _Key, KeyType _KeyType)
-        {
-            return (_Key, (int)_KeyType);
-        }
+        //public static object GetValue(string _Key, KeyType _KeyType)
+        //{
+        //    return (_Key, (int)_KeyType);
+        //}
 
         public static string GetValue(string _Key)
         {
@@ -428,16 +428,15 @@ namespace Applied_Accounts.Classes
 
 
 
-        public static long ShowBrowseWin(DataView _DataView, object _CurrentValue)
+        public static DataRow ShowBrowseWin(DataView _DataView, object _CurrentValue)
         {
             Browse BrowseWindow = new Browse(_DataView);
             BrowseWindow.ShowDialog();
-            long _Result = Conversion.ToInteger(_CurrentValue);
-            if (BrowseWindow.IsSelect) { _Result = BrowseWindow.MyID; }
-            return _Result;
+            return BrowseWindow.MyDataRow;
+            
         }
 
-        public static long ShowBrowseWin(DataTable _DataTable, object _CurrentValue)
+        public static DataRow ShowBrowseWin(DataTable _DataTable, object _CurrentValue)
         {
             return ShowBrowseWin(new DataView(_DataTable), _CurrentValue);
         }

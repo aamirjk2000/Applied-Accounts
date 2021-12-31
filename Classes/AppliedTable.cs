@@ -7,7 +7,7 @@ using System.Data;
 using System.Data.SQLite;
 using System.Windows.Forms;
 using Applied_Accounts.Classes;
-using Connection_Class;
+//using Connection_Class;
 
 namespace Applied_Accounts
 {
@@ -403,6 +403,7 @@ namespace Applied_Accounts
             foreach (DataRow _Row in _Ledger.Rows)
             {
                 _DataView.RowFilter = string.Concat("[COA]=", (long)_Row["COA"]);
+
                 if (_DataView.Count == 0)
                 {
                     _AddRow = _DataTable.NewRow();
@@ -410,25 +411,29 @@ namespace Applied_Accounts
                     _AddRow["Code"] = "";
                     _AddRow["Title"] = GetTitle(Conversion.ToInteger(_Row["COA"]), _COA);
 
-                    if ((DateTime)_Row["Vou_Date"] < _From)
-                    {
-                        _AddRow["OBAL"] = (decimal)_Row["DR"] - (decimal)_Row["CR"];
-                        _AddRow["Debit"] = 0;
-                        _AddRow["Credit"] = 0;
-                    }
-                    if ((DateTime)_Row["Vou_Date"] >= _From && (DateTime)_Row["Vou_Date"] <= _To)
-                    {
-                        _AddRow["OBAL"] = 0;
-                        _AddRow["Debit"] = (decimal)_Row["DR"];
-                        _AddRow["Credit"] = (decimal)_Row["CR"];
-                    }
+                    _AddRow["OBAL"] = 0;
+                    _AddRow["Debit"] = 0;
+                    _AddRow["Credit"] = 0;
 
-                    _AddRow["BALANCE"] = Conversion.ToMoney(_AddRow["OBAL"])
-                                       + Conversion.ToMoney(_AddRow["Debit"])
-                                       - Conversion.ToMoney(_AddRow["Credit"]);
+                    //if ((DateTime)_Row["Vou_Date"] < _From)
+                    //{
+                    //    _AddRow["OBAL"] = (decimal)_AddRow["OBAL"] + ((decimal)_Row["DR"] - (decimal)_Row["CR"]);
+                    //    _AddRow["Debit"] = _AddRow["Debit"];
+                    //    _AddRow["Credit"] = _AddRow["Debit"];
+                    //}
+                    //if ((DateTime)_Row["Vou_Date"] >= _From && (DateTime)_Row["Vou_Date"] <= _To)
+                    //{
+                    //    //_AddRow["OBAL"] = 0;
+                    //    _AddRow["Debit"] = (decimal)_AddRow["Debit"] + (decimal)_Row["DR"];
+                    //    _AddRow["Credit"] = (decimal)_AddRow["Credit"] + (decimal)_Row["CR"];
+                    //}
+
+                    //_AddRow["BALANCE"] = Conversion.ToMoney(_AddRow["OBAL"])
+                    //                   + Conversion.ToMoney(_AddRow["Debit"])
+                    //                   - Conversion.ToMoney(_AddRow["Credit"]);
 
                     _DataTable.Rows.Add(_AddRow);
-                    continue;
+                    //continue;
                 }
 
                 if (_DataView.Count > 0)
@@ -453,6 +458,7 @@ namespace Applied_Accounts
                                     = Conversion.ToMoney(_DataTable.Rows[_Index]["OBAL"])
                                     + Conversion.ToMoney(_DataTable.Rows[_Index]["DEBIT"])
                                     - Conversion.ToMoney(_DataTable.Rows[_Index]["CREDIT"]);
+
                 }
 
             }
@@ -582,7 +588,7 @@ namespace Applied_Accounts
         {
             long _ID = Conversion.ToLong(_Row["ID"]);
 
-            if (_ID < 0) { return -1; }
+            if (_ID < 0) { return -1; }         // Already Marked deleted.
 
 
             SQLiteCommand DELCommand = new SQLiteCommand("DELETE FROM [Ledger] WHERE ID=@ID ", Connection.AppliedConnection());

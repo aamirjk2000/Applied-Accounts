@@ -8,7 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Applied_Accounts</RootNamespace>
     <AssemblyName>Applied Accounts</AssemblyName>
-    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
@@ -75,9 +75,9 @@
   <PropertyGroup />
   <PropertyGroup />
   <ItemGroup>
-    <Reference Include="Connection_Class, Version=2020.10.31.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Connection_Class, Version=2021.3.9.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>Classes\Connection_Class.dll</HintPath>
+      <HintPath>..\Connection Class\Connection_Class_DLL\obj\Debug\Connection_Class.dll</HintPath>
     </Reference>
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -199,6 +199,12 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>ds_Voucher1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Data\tb_TB_Period.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Data\tb_TB_Period.Designer.cs">
+      <DependentUpon>tb_TB_Period.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Accounts_Notes.cs">
       <SubType>Form</SubType>
@@ -428,6 +434,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Components\WinBrowse.resx">
       <DependentUpon>WinBrowse.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Data\tb_TB_Period.resx">
+      <DependentUpon>tb_TB_Period.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Accounts_Notes.resx">
       <DependentUpon>Accounts_Notes.cs</DependentUpon>
@@ -722,7 +731,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WinForms">
-      <Version>150.1440.0</Version>
+      <Version>150.1484.0</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.ReportViewer.WinForms.v12">
       <Version>12.0.0.1</Version>
@@ -731,7 +740,10 @@
       <Version>14.0.1016.290</Version>
     </PackageReference>
     <PackageReference Include="System.Data.SQLite">
-      <Version>1.0.113.7</Version>
+      <Version>1.0.115.5</Version>
+    </PackageReference>
+    <PackageReference Include="System.ValueTuple">
+      <Version>4.5.0</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

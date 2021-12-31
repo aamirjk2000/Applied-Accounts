@@ -2,13 +2,6 @@
 <Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
-    <DataSource Name="ds_Trial_Balance">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>41880871-d57b-447b-96dd-d73e33031f38</rd:DataSourceID>
-    </DataSource>
     <DataSource Name="ds_Trial_Balance_Period">
       <ConnectionProperties>
         <DataProvider>System.Data.DataSet</DataProvider>

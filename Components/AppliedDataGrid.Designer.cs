@@ -46,8 +46,10 @@ namespace Applied_Accounts
             this.BrowseGrid.Location = new System.Drawing.Point(3, 3);
             this.BrowseGrid.Name = "BrowseGrid";
             this.BrowseGrid.Size = new System.Drawing.Size(484, 296);
-            this.BrowseGrid.TabIndex = 0;
+            this.BrowseGrid.TabIndex = 2;
             this.BrowseGrid.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this._DataGrid_CellMouseClick);
+            this.BrowseGrid.RowLeave += new System.Windows.Forms.DataGridViewCellEventHandler(this.BrowseGrid_RowLeave);
+            this.BrowseGrid.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.BrowseGrid_KeyPress);
             // 
             // txtFilter
             // 
@@ -56,7 +58,7 @@ namespace Applied_Accounts
             this.txtFilter.Location = new System.Drawing.Point(38, 305);
             this.txtFilter.Name = "txtFilter";
             this.txtFilter.Size = new System.Drawing.Size(393, 20);
-            this.txtFilter.TabIndex = 4;
+            this.txtFilter.TabIndex = 1;
             this.txtFilter.TextChanged += new System.EventHandler(this.txtFilter_TextChanged);
             // 
             // btnClear
@@ -65,7 +67,7 @@ namespace Applied_Accounts
             this.btnClear.Location = new System.Drawing.Point(437, 303);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(50, 23);
-            this.btnClear.TabIndex = 5;
+            this.btnClear.TabIndex = 3;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -92,7 +94,7 @@ namespace Applied_Accounts
             this.Controls.Add(this.BrowseGrid);
             this.Name = "AppliedDataGrid";
             this.Size = new System.Drawing.Size(490, 331);
-            this.Leave += new System.EventHandler(this.AppliedDataGrid_Leave_1);
+            this.Leave += new System.EventHandler(this.AppliedDataGrid_Leave1);
             ((System.ComponentModel.ISupportInitialize)(this.BrowseGrid)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

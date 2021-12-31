@@ -477,8 +477,7 @@
             this.txtCR.Size = new System.Drawing.Size(140, 26);
             this.txtCR.TabIndex = 13;
             this.txtCR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtCR.TextChanged += new System.EventHandler(this.txtCR_TextChanged);
-            this.txtCR.Leave += new System.EventHandler(this.txtCR_Leave);
+            this.txtCR.Enter += new System.EventHandler(this.txtCR_Enter);
             // 
             // txtDR
             // 
@@ -489,8 +488,7 @@
             this.txtDR.Size = new System.Drawing.Size(140, 26);
             this.txtDR.TabIndex = 12;
             this.txtDR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.txtDR.TextChanged += new System.EventHandler(this.txtDR_TextChanged);
-            this.txtDR.Leave += new System.EventHandler(this.txtDR_Leave);
+            this.txtDR.Enter += new System.EventHandler(this.txtDR_Enter);
             // 
             // cBoxPOrder
             // 

@@ -228,11 +228,11 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Preview.frmPreview_GL_Sup
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Preview.Temp.Preview_Voucher.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Reports.frmReport_Vouchers.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.GenerateResource.cache
-D:\Applied\Applied-Accounts\obj\Debug\RdlCompile.cache
-D:\Applied\Applied-Accounts\obj\Debug\RdlCompile.compiled
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CoreCompileInputs.cache
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmInventory.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.AssemblyReference.cache
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Data.tb_TB_Period.resources
+D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.SuggestedBindingRedirects.cache

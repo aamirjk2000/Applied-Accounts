@@ -67,6 +67,7 @@
             // 
             // DataGrid_Browse
             // 
+            this.DataGrid_Browse.Active = false;
             this.DataGrid_Browse.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
@@ -81,10 +82,13 @@
             this.DataGrid_Browse.Location = new System.Drawing.Point(15, 12);
             this.DataGrid_Browse.MyDataRow = null;
             this.DataGrid_Browse.MyDataView = null;
+            this.DataGrid_Browse.MyViewRow = null;
             this.DataGrid_Browse.Name = "DataGrid_Browse";
             this.DataGrid_Browse.RecordID = ((long)(0));
             this.DataGrid_Browse.Size = new System.Drawing.Size(522, 436);
             this.DataGrid_Browse.TabIndex = 1;
+            this.DataGrid_Browse.Enter += new System.EventHandler(this.DataGrid_Browse_Enter);
+            this.DataGrid_Browse.Leave += new System.EventHandler(this.DataGrid_Browse_Leave);
             // 
             // Browse
             // 
@@ -99,7 +103,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Browse";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Browse";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Browse_FormClosed);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -1,18 +1,19 @@
 {
   "version": 2,
-  "dgSpecHash": "3UsyvcXbdtUMa7S2oieIWqcfCVBYqq18AqZG25Ne/7wYOfuiqxmCjksIkvgfN1M9KQcgCwRswBHHnfGfb4Dmww==",
+  "dgSpecHash": "339H418SmYYsp1osSM8+S5y0I4kvtBxrfEXuuYnMTsZcjoBjRxvTpEF/fUel/bao7mbDfppNijO+MwaRh3sKig==",
   "success": true,
   "projectFilePath": "D:\\Applied\\Applied-Accounts\\Applied Accounts.csproj",
   "expectedPackageFiles": [
-    "C:\\Users\\Administrator\\.nuget\\packages\\entityframework\\6.3.0\\entityframework.6.3.0.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.reportingservices.reportviewercontrol.winforms\\150.1440.0\\microsoft.reportingservices.reportviewercontrol.winforms.150.1440.0.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\entityframework\\6.4.4\\entityframework.6.4.4.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.reportingservices.reportviewercontrol.winforms\\150.1484.0\\microsoft.reportingservices.reportviewercontrol.winforms.150.1484.0.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.reportviewer.winforms.v12\\12.0.0.1\\microsoft.reportviewer.winforms.v12.12.0.0.1.nupkg.sha512",
     "C:\\Users\\Administrator\\.nuget\\packages\\microsoft.sqlserver.types\\14.0.1016.290\\microsoft.sqlserver.types.14.0.1016.290.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\stub.system.data.sqlite.core.netframework\\1.0.113.3\\stub.system.data.sqlite.core.netframework.1.0.113.3.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.sqlite\\1.0.113.7\\system.data.sqlite.1.0.113.7.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.sqlite.core\\1.0.113.7\\system.data.sqlite.core.1.0.113.7.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.sqlite.ef6\\1.0.113\\system.data.sqlite.ef6.1.0.113.nupkg.sha512",
-    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.sqlite.linq\\1.0.113\\system.data.sqlite.linq.1.0.113.nupkg.sha512"
+    "C:\\Users\\Administrator\\.nuget\\packages\\stub.system.data.sqlite.core.netframework\\1.0.115.5\\stub.system.data.sqlite.core.netframework.1.0.115.5.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.sqlite\\1.0.115.5\\system.data.sqlite.1.0.115.5.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.sqlite.core\\1.0.115.5\\system.data.sqlite.core.1.0.115.5.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.sqlite.ef6\\1.0.115.5\\system.data.sqlite.ef6.1.0.115.5.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.data.sqlite.linq\\1.0.115.5\\system.data.sqlite.linq.1.0.115.5.nupkg.sha512",
+    "C:\\Users\\Administrator\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512"
   ],
   "logs": []
 }

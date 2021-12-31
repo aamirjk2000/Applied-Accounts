@@ -25,20 +25,20 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "net47"
+          "net46"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net47": {
+          "net46": {
             "projectReferences": {}
           }
         }
       },
       "frameworks": {
-        "net47": {
+        "net46": {
           "dependencies": {
             "Microsoft.ReportViewer.WinForms.v12": {
               "target": "Package",
@@ -46,7 +46,7 @@
             },
             "Microsoft.ReportingServices.ReportViewerControl.WinForms": {
               "target": "Package",
-              "version": "[150.1440.0, )"
+              "version": "[150.1484.0, )"
             },
             "Microsoft.SqlServer.Types": {
               "target": "Package",
@@ -54,7 +54,11 @@
             },
             "System.Data.SQLite": {
               "target": "Package",
-              "version": "[1.0.113.7, )"
+              "version": "[1.0.115.5, )"
+            },
+            "System.ValueTuple": {
+              "target": "Package",
+              "version": "[4.5.0, )"
             }
           }
         }

@@ -23,22 +23,17 @@ namespace Applied_Accounts.Forms
         public frmGeneral_Ledger()
         {
             InitializeComponent();
-
             cBoxCOA.DataSource = dt_COA;
             cBoxCOA.DisplayMember = "Title";
             cBoxCOA.ValueMember = "ID";
-            
-
         }
 
        
         private void frmGeneral_Ledger_Load(object sender, EventArgs e)
         {
-
             cBoxCOA.SelectedValue = Applied.GetInteger("rptGL_COA");
             dt_From.Value = Applied.GetDate("rptGL_dtFrom");
             dt_To.Value = Applied.GetDate("rptGL_dtTo");
-
         }
 
 

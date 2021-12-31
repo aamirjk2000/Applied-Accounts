@@ -16,22 +16,24 @@ namespace Applied_Accounts
 
         //public event EventHandler RecordLeaved;
 
-        public DataView MyDataView { get; set; }                // Data View in Grid
-        public DataRow MyDataRow { get; set; }                  // Store current row of DataTable
-        public DataGridViewRow MyViewRow { get; set; }          // Store current row of Data Grid View
-        public string[] ColumnsName { get; set; }               // Names of Data table Columbns
-        public int[] ColumnsWidth { get; set; }                 // Width of Grid columns
-        public string[] ColumnsVisiable { get; set; }           // Visiable Columns of Table
-        public int[] ColumnsFormat { get; set; }                // Grid Columns format
-        public long RecordID { get; set; }                      // Record ID of Data Table.
-        public bool IsBrowseWin { get; set; }                   // This object called by Browse Window
-        public bool IsPressEnter { get; set; }                  // Leave this object by user press enter.
-        public bool Active { get; set; }                        // this object is active when table has row(s).
+        public DataView MyDataView { get; set; }               // Data View in Grid
+        public DataRow MyDataRow { get; set; }                 // Store current row of DataTable
+        public bool IsSelected { get; set; }                            // code is selected by enter Key.
+        public DataGridViewRow MyViewRow { get; set; }  // Store current row of Data Grid View
+        public string[] ColumnsName { get; set; }                // Names of Data table Columbns
+        public int[] ColumnsWidth { get; set; }                     // Width of Grid columns
+        public string[] ColumnsVisiable { get; set; }            // Visiable Columns of Table
+        public int[] ColumnsFormat { get; set; }                   // Grid Columns format
+        public long RecordID { get; set; }                            // Record ID of Data Table.
+        public bool IsBrowseWin { get; set; }                     // This object called by Browse Window
+        public bool IsPressEnter { get; set; }                     // Leave this object by user press enter.
+        public bool Active { get; set; }                               // this object is active when table has row(s).
 
         public void Load_Data(DataTable _DataTable)
         {
             MyDataView = _DataTable.AsDataView();
             MyDataView.RowFilter = "ID > 0";
+            IsSelected = false;                    // Record is not selecrted by user, default value.
 
             BrowseGrid.DataSource = MyDataView;    //_DataTable.AsDataView();
 
@@ -118,24 +120,24 @@ namespace Applied_Accounts
 
         private void AppliedDataGrid_Leave(object sender, EventArgs e)
         {
-            if (BrowseGrid == null) { return; }
-            if (BrowseGrid.DataSource == null) { return; }
+            //if (BrowseGrid == null) { return; }
+            //if (BrowseGrid.DataSource == null) { return; }
 
-            if (((DataView)BrowseGrid.DataSource).Table.Rows.Count == 0)                 // If Table does not have any record (Empty Table)
-            {
-                MyViewRow = null;
-                MyDataRow = ((DataView)BrowseGrid.DataSource).Table.NewRow();
-            }
-            if (BrowseGrid.CurrentRow != null)                                           // Grid View has not selected any row.
-            {
-                MyViewRow = BrowseGrid.CurrentRow;
-                MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
-            }
-            else                                                                        // Grod View has select a row.
-            {
-                MyViewRow = BrowseGrid.Rows[0];                                          // Select first Row of DataGrid
-                MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
-            }
+            //if (((DataView)BrowseGrid.DataSource).Table.Rows.Count == 0)                 // If Table does not have any record (Empty Table)
+            //{
+            //    MyViewRow = null;
+            //    MyDataRow = ((DataView)BrowseGrid.DataSource).Table.NewRow();
+            //}
+            //if (BrowseGrid.CurrentRow != null)                                           // Grid View has not selected any row.
+            //{
+            //    MyViewRow = BrowseGrid.CurrentRow;
+            //    MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
+            //}
+            //else                                                                        // Grod View has select a row.
+            //{
+            //    MyViewRow = BrowseGrid.Rows[0];                                          // Select first Row of DataGrid
+            //    MyDataRow = ((DataRowView)MyViewRow.DataBoundItem).Row;
+            //}
         }
 
         #endregion
@@ -160,15 +162,20 @@ namespace Applied_Accounts
             BrowseGrid.Refresh();
         }
 
-        private void AppliedDataGrid_Leave_1(object sender, EventArgs e)
+        private void AppliedDataGrid_Leave1(object sender, EventArgs e)
         {
-            if (MyDataRow == null) { return; }
-            DataGridViewRow _DataRow = BrowseGrid.CurrentRow;
 
-            if (_DataRow != null)
-            {
-                MyDataRow = ((DataRowView)_DataRow.DataBoundItem).Row;
-            }
+            //MyDataRow = MyDataView[BrowseGrid.CurrentRow.Index - 1].Row;          // Select the current Row in DataGrid
+            //IsSelected = true;
+
+
+            //if (MyDataRow == null) { return; }
+            //DataGridViewRow _DataRow = BrowseGrid.CurrentRow;
+
+            //if (_DataRow != null)
+            //{
+            //    MyDataRow = ((DataRowView)_DataRow.DataBoundItem).Row;
+            //}
         }
 
         private void _DataGrid_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
@@ -195,6 +202,26 @@ namespace Applied_Accounts
                     _DataTable.Save(MyDataRow, false);                     // Save record Active true if false or false if true.
                 }
             }
+        }
+
+
+        private void BrowseGrid_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)Keys.Return)
+            {
+                //MyDataRow = MyDataView[BrowseGrid.CurrentRow.Index-1].Row;          // Select the current Row in DataGrid
+                IsSelected = true;
+                ParentForm.Close();
+            }
+        }
+
+        private void BrowseGrid_RowLeave(object sender, DataGridViewCellEventArgs e)
+        {
+            int _Index = 0;
+
+            if(BrowseGrid.CurrentRow.Index - 1 < 0) { _Index = 0; } else { _Index = BrowseGrid.CurrentRow.Index - 1; }
+
+            MyDataRow = MyDataView[BrowseGrid.CurrentRow.Index].Row;          // Select the current Row in DataGrid
         }
     }           // Main 
 }               // Namespace
