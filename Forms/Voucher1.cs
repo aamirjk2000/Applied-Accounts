@@ -720,6 +720,14 @@ namespace Applied_Accounts.Forms
         private void txtDR_Enter(object sender, EventArgs e)
         {
 
+
+        }
+
+        private void txtDR_Leave(object sender, EventArgs e)
+        {
+            decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
+            if(_Amount>0) { txtCR.Text = "0"; txtDR.Text = _Amount.ToString("N"); }
+
         }
 
         private void txtCR_Enter(object sender, EventArgs e)
@@ -727,10 +735,12 @@ namespace Applied_Accounts.Forms
 
         }
 
+        private void txtCR_Leave(object sender, EventArgs e)
+        {
+            decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
+            if (_Amount > 0) { txtDR.Text = "0";  txtCR.Text = _Amount.ToString("N"); }
 
-
-
-
+        }
 
         #endregion
 
@@ -817,8 +827,7 @@ namespace Applied_Accounts.Forms
             }
             e.Cancel = _Cancel;
         }
-
-
+        
         private void txtSupplier_Validating(object sender, CancelEventArgs e)
         {
             if (!IsValidate) { return; }
@@ -849,8 +858,7 @@ namespace Applied_Accounts.Forms
             }
             e.Cancel = _Cancel;
         }
-
-
+        
         private void txtProject_Validating(object sender, CancelEventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
@@ -880,7 +888,6 @@ namespace Applied_Accounts.Forms
             e.Cancel = _Cancel;
 
         }
-
 
         private void txtUnit_Validating(object sender, CancelEventArgs e)
         {
@@ -912,8 +919,7 @@ namespace Applied_Accounts.Forms
 
 
         }
-
-
+        
         private void txtStock_Validating(object sender, CancelEventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
@@ -942,7 +948,6 @@ namespace Applied_Accounts.Forms
             }
             e.Cancel = _Cancel;
         }
-
 
         private void txtEmployee_Validating(object sender, CancelEventArgs e)
         {
@@ -1341,7 +1346,9 @@ namespace Applied_Accounts.Forms
 
 
 
+
         #endregion
 
+        
     }   //============================== END
 }

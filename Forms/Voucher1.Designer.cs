@@ -478,6 +478,7 @@
             this.txtCR.TabIndex = 13;
             this.txtCR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtCR.Enter += new System.EventHandler(this.txtCR_Enter);
+            this.txtCR.Leave += new System.EventHandler(this.txtCR_Leave);
             // 
             // txtDR
             // 
@@ -489,6 +490,7 @@
             this.txtDR.TabIndex = 12;
             this.txtDR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.txtDR.Enter += new System.EventHandler(this.txtDR_Enter);
+            this.txtDR.Leave += new System.EventHandler(this.txtDR_Leave);
             // 
             // cBoxPOrder
             // 
