@@ -146,7 +146,7 @@
             this.P1.Location = new System.Drawing.Point(4, 22);
             this.P1.Name = "P1";
             this.P1.Padding = new System.Windows.Forms.Padding(3);
-            this.P1.Size = new System.Drawing.Size(701, 561);
+            this.P1.Size = new System.Drawing.Size(707, 561);
             this.P1.TabIndex = 0;
             this.P1.Text = "VOUCHER";
             this.P1.UseVisualStyleBackColor = true;
@@ -477,6 +477,7 @@
             this.txtCR.Size = new System.Drawing.Size(140, 26);
             this.txtCR.TabIndex = 13;
             this.txtCR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtCR.TextChanged += new System.EventHandler(this.txtCR_TextChanged);
             this.txtCR.Enter += new System.EventHandler(this.txtCR_Enter);
             this.txtCR.Leave += new System.EventHandler(this.txtCR_Leave);
             // 
@@ -489,6 +490,7 @@
             this.txtDR.Size = new System.Drawing.Size(140, 26);
             this.txtDR.TabIndex = 12;
             this.txtDR.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtDR.TextChanged += new System.EventHandler(this.txtDR_TextChanged);
             this.txtDR.Enter += new System.EventHandler(this.txtDR_Enter);
             this.txtDR.Leave += new System.EventHandler(this.txtDR_Leave);
             // 
@@ -860,14 +862,14 @@
             this.Pages.Location = new System.Drawing.Point(12, 12);
             this.Pages.Name = "Pages";
             this.Pages.SelectedIndex = 0;
-            this.Pages.Size = new System.Drawing.Size(709, 587);
+            this.Pages.Size = new System.Drawing.Size(715, 587);
             this.Pages.TabIndex = 0;
             // 
             // frmVouchers1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(733, 611);
+            this.ClientSize = new System.Drawing.Size(739, 611);
             this.Controls.Add(this.Pages);
             this.Name = "frmVouchers1";
             this.Text = "Voucher1";

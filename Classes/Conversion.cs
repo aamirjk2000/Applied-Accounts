@@ -92,7 +92,8 @@ namespace Applied_Accounts.Classes
                 if (_Value.Length == 0) { return 0; }
                 if (_Value == "-") { return 0; }
                 if (_Value == "+") { return 0; }
-                return Convert.ToDecimal(_Value);
+                //return Convert.ToDecimal(_Value);
+                return decimal.Parse(_Value);                   // convert string into decimal or Money
             }
             catch (Exception)
             {

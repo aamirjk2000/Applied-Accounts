@@ -16,10 +16,9 @@ namespace Applied_Accounts.Classes
     {
         int Count();
         void Save();
-        void Filter();
-        void Filter(long TrancsctionID);
+        DataRow Row();
     }
-    
+
 
     public class InventoryClass : IInventoryClass
     {
@@ -33,11 +32,11 @@ namespace Applied_Accounts.Classes
         public DataTable tb_Inventory;
         public DataView dv_Inventory;
         public DataTable Original_Inventory;
-        
+        public DataRow MyRow;
 
 
         public int Count() { return tb_Inventory.Rows.Count; }
-
+        public DataRow Row() {return MyRow; }
 
         #region Initialize
 
@@ -46,12 +45,24 @@ namespace Applied_Accounts.Classes
             tb_Inventory = new DataTable();
         }
 
-        public InventoryClass(string _VouNo)
+        public InventoryClass(DataRow _VouRow)
         {
-            Vou_No = _VouNo;
-            tb_Inventory = AppliedTable.GetDataTable("SELECT * FROM Inventory WHERE Vou_No='" + _VouNo + "'", "Inventory");
-            dv_Inventory = AppliedTable.GetDataTable("SELECT * FROM View_Inventory WHERE Vou_No='" + _VouNo + "'", "Grid_Inventory").AsDataView(); ;
+            Vou_No = _VouRow["Vou_No"].ToString();
+            Vou_Date = Conversion.ToDate(_VouRow["Vou_Date"].ToString());
+            Vou_Amount = Conversion.ToMoney(_VouRow["DR"].ToString());
+
+            tb_Inventory = AppliedTable.GetDataTable("SELECT * FROM Inventory WHERE Vou_No=' " + Vou_No + " ' ", "Inventory");
+            dv_Inventory = AppliedTable.GetDataTable("SELECT * FROM View_Inventory WHERE Vou_No='" + Vou_No + " ' ", "Grid_Inventory").AsDataView();
             Original_Inventory = tb_Inventory.Copy();
+
+            if(tb_Inventory.Rows.Count > 0)
+            {
+                MyRow = tb_Inventory.Rows[0];                   // Get First row of the table
+            }
+            else
+            {
+                MyRow = tb_Inventory.NewRow();              // Get New Row if table is empty.
+            }
         }
 
         #endregion
@@ -100,21 +111,6 @@ namespace Applied_Accounts.Classes
 
 
 
-
-        #endregion
-
-
-        #region Filter
-        public void Filter(long _TransactionID)
-        {
-            Transaction_ID = _TransactionID;
-            dv_Inventory.RowFilter = "Vou_ID=" + Transaction_ID.ToString();               // Invoke Filter in Grid View.
-        }
-
-        public void Filter()
-        {
-            dv_Inventory.RowFilter = "Vou_ID=" + Transaction_ID.ToString();               // Invoke Filter in Grid View.
-        }
 
         #endregion
 

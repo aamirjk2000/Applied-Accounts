@@ -538,9 +538,11 @@ namespace Applied_Accounts
 
         public static void EmptyTable(DataTable _DataTable)
         {
-            if (_DataTable.TableName.Contains("Ledger")) { return; }            // Skip if Table is Ledger
-            if(_DataTable.TableName.Contains("View")) { return; }               // Skip if Data View call.
-            if (_DataTable.TableName.Contains("MyTable")) { return; }           // Skip if Data View call.
+            if (_DataTable.TableName.Contains("Ledger")) { return; }             // Skip if Table is Ledger
+            if (_DataTable.TableName.Contains(Tables.Inventory.ToString())) { return; }             // Skip if Table is Ledger
+            if (_DataTable.TableName.Contains("View")) { return; }                 // Skip if Data View call.
+            if (_DataTable.TableName.Contains("Grid")) { return; }                 // Skip if Data View for Grid call.
+            if (_DataTable.TableName.Contains("MyTable")) { return; }          // Skip if Data View call.
 
             if (_DataTable.Rows.Count == 0)
             {
@@ -655,6 +657,7 @@ namespace Applied_Accounts
         Instalments = 14,
         Schedule = 15,
         POrder = 16,
+        Inventory = 17,
 
         View_Voucher = 101,
         View_VouNo = 102,
@@ -669,9 +672,11 @@ namespace Applied_Accounts
         View_TB_Projects = 111,
         View_TB_Project_Supplier = 112,
         View_Vou_Nos = 113,
+        View_Inventory = 114,
 
         Grid_POrder = 201,
         Grid_Booking = 202,
+        Grid_Inventory = 203,
 
     };
 }                               // Namespace

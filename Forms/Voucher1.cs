@@ -299,10 +299,11 @@ namespace Applied_Accounts.Forms
             txtRefNo.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "RefNo", true, DataSourceUpdateMode.OnPropertyChanged));
             txtChqNo.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Chq_No", true, DataSourceUpdateMode.OnPropertyChanged));
             dt_ChqDate.DataBindings.Add(new Binding("Value", MyVoucherClass.tb_Voucher, "Chq_Date", true, DataSourceUpdateMode.OnPropertyChanged, DateTime.Now, DateFormat));
-            txtDR.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "DR", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtCR.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "CR", true, DataSourceUpdateMode.OnPropertyChanged));
+            txtDR.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "DR", false, DataSourceUpdateMode.OnPropertyChanged));
+            txtCR.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "CR", false, DataSourceUpdateMode.OnPropertyChanged));
             txtDescription.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Description", true, DataSourceUpdateMode.OnPropertyChanged));
             txtRemarks.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged));
+
         }
 
         private void TableBinding_PositionChange(object sender, EventArgs e)
@@ -320,13 +321,12 @@ namespace Applied_Accounts.Forms
             cBoxStock.SelectedValue = Applied.Code2ID(txtStock.Text, tb_Stock.AsDataView());
             cBoxEmployee.SelectedValue = Applied.Code2ID(txtEmployee.Text, tb_Employees.AsDataView());
 
-            txtDR.Text = Conversion.ToMoney(txtDR.Text).ToString(NumberFormat);
-            txtCR.Text = Conversion.ToMoney(txtCR.Text).ToString(NumberFormat);
+            txtDR.Text = (Conversion.ToMoney(txtDR.Text)).ToString("N");
+            txtCR.Text = (Conversion.ToMoney(txtCR.Text)).ToString("N");
         }
 
         private void TableBiding_Completed(object sender, EventArgs e)
         {
-
         }
 
         #endregion
@@ -719,27 +719,49 @@ namespace Applied_Accounts.Forms
 
         private void txtDR_Enter(object sender, EventArgs e)
         {
-
-
+            IsValidate = false;                  // Execute TextChange event disable
         }
 
         private void txtDR_Leave(object sender, EventArgs e)
         {
             decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
-            if(_Amount>0) { txtCR.Text = "0"; txtDR.Text = _Amount.ToString("N"); }
+            if(_Amount>0) { txtCR.Text = "0"; txtDR.Text = _Amount.ToString("N");  }
+            IsValidate = true;                  // Execute TextChange event enable
+
+            grp_Action.Visible = MyVoucherClass.Is_Balanced();
 
         }
 
         private void txtCR_Enter(object sender, EventArgs e)
         {
+            IsValidate = false;                  // Execute TextChange event disable
+        }
 
+        private void txtDR_TextChanged(object sender, EventArgs e)
+        {
+            if(IsValidate)
+            {
+                decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
+                txtDR.Text = _Amount.ToString("N");
+            }
         }
 
         private void txtCR_Leave(object sender, EventArgs e)
         {
             decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
-            if (_Amount > 0) { txtDR.Text = "0";  txtCR.Text = _Amount.ToString("N"); }
+            if (_Amount > 0) { txtDR.Text = "0"; txtCR.Text = _Amount.ToString("N");   }
+            IsValidate = true;                  // Execute TextChange event enable
 
+            grp_Action.Visible = MyVoucherClass.Is_Balanced();
+        }
+
+        private void txtCR_TextChanged(object sender, EventArgs e)
+        {
+            if (IsValidate)
+            {
+                decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
+                txtCR.Text = _Amount.ToString("N");
+            }
         }
 
         #endregion
@@ -1330,8 +1352,8 @@ namespace Applied_Accounts.Forms
 
         private void Img_Stock_Click(object sender, EventArgs e)
         {
-            frmInventory Brows_Invenotory = new frmInventory(MyVoucherClass.Vou_No);
-            Brows_Invenotory.Inventory_Class.Filter(Conversion.ToLong(MyDataRow["ID"]));
+            frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
+            //Brows_Invenotory.MyInventoryClass.Filter(Conversion.ToLong(MyDataRow["ID"]));
             Brows_Invenotory.ShowDialog();
         }
 
@@ -1343,6 +1365,8 @@ namespace Applied_Accounts.Forms
         {
 
         }
+
+
 
 
 

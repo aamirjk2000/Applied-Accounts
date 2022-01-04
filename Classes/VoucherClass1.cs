@@ -64,6 +64,7 @@ namespace Applied_Accounts.Classes
         public string MyMessage = "";
         public long Max_ID;
 
+
         public enum Voucher_Status
         {
             Insert = 1,
@@ -211,22 +212,21 @@ namespace Applied_Accounts.Classes
 
             foreach (DataRow _Row in _Voucher.Rows)
             {
-                _ID = Conversion.ToLong(_Row["ID"].ToString());
-                int _SRNO = Conversion.ToInteger(_Row["SRNO"].ToString());
+                _ID = Conversion.ToLong(_Row["ID"].ToString());                                 // Get Record ID
+                int _SRNO = Conversion.ToInteger(_Row["SRNO"].ToString());            // Get Voucher Serial No.
 
                 if (_ID == 0)
                 {
-                    Action = "Insert";
+                    Action = "Insert";                      // New Record
                 }
                 else if (_ID > 0)
                 {
-                    Action = "Update";
+                    Action = "Update";                  // Record Exist / Present
                 }
-
-                //===================================== DELETE IF SERIAL IS IN NEGATIVE.
+                
                 if (_SRNO < 0)
                 {
-                    Action = "Delete";
+                    Action = "Delete";                      // DELETE IF SERIAL IS IN NEGATIVE.
                 }
 
                 #region Set Null Values if applicable.
@@ -240,12 +240,13 @@ namespace Applied_Accounts.Classes
                 if (Conversion.ToLong(_Row["Stock"].ToString()) == 0) { _Row["Stock"] = 0; }
                 if (Conversion.ToLong(_Row["Employee"].ToString()) == 0) { _Row["Employee"] = 0; }
                 if (Conversion.ToLong(_Row["POrder"].ToString()) == 0) { _Row["POrder"] = 0; }
-                if (Conversion.ToLong(_Row["DR"].ToString()) == 0) { _Row["DR"] = 0; }
-                if (Conversion.ToLong(_Row["CR"].ToString()) == 0) { _Row["CR"] = 0; }
+                if (Conversion.ToMoney(_Row["DR"].ToString()) == 0) { _Row["DR"] = 0; }
+                if (Conversion.ToMoney(_Row["CR"].ToString()) == 0) { _Row["CR"] = 0; }
                 if (string.IsNullOrWhiteSpace(_Row["RefNo"].ToString())) { _Row["RefNo"] = DBNull.Value; }
                 if (string.IsNullOrWhiteSpace(_Row["Remarks"].ToString())) { _Row["Remarks"] = DBNull.Value; }
                 if (string.IsNullOrWhiteSpace(_Row["Chq_No"].ToString())) { _Row["Chq_No"] = DBNull.Value; _Row["Chq_Date"] = DBNull.Value; };
                 if (string.IsNullOrWhiteSpace(_Row["Description"].ToString())) { _Row["Description"] = Vou_No; }
+
                 #endregion
                 //}
 
@@ -485,7 +486,6 @@ namespace Applied_Accounts.Classes
         }
 
         #endregion
-
 
         #region Other Codes
         public bool Is_Balanced()
