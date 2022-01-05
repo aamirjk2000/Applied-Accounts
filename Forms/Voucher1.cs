@@ -303,7 +303,6 @@ namespace Applied_Accounts.Forms
             txtCR.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "CR", false, DataSourceUpdateMode.OnPropertyChanged));
             txtDescription.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Description", true, DataSourceUpdateMode.OnPropertyChanged));
             txtRemarks.DataBindings.Add(new Binding("Text", MyVoucherClass.tb_Voucher, "Remarks", true, DataSourceUpdateMode.OnPropertyChanged));
-
         }
 
         private void TableBinding_PositionChange(object sender, EventArgs e)
@@ -725,7 +724,7 @@ namespace Applied_Accounts.Forms
         private void txtDR_Leave(object sender, EventArgs e)
         {
             decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
-            if(_Amount>0) { txtCR.Text = "0"; txtDR.Text = _Amount.ToString("N");  }
+            if (_Amount > 0) { txtCR.Text = "0"; txtDR.Text = _Amount.ToString("N"); }
             IsValidate = true;                  // Execute TextChange event enable
 
             grp_Action.Visible = MyVoucherClass.Is_Balanced();
@@ -739,7 +738,7 @@ namespace Applied_Accounts.Forms
 
         private void txtDR_TextChanged(object sender, EventArgs e)
         {
-            if(IsValidate)
+            if (IsValidate)
             {
                 decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
                 txtDR.Text = _Amount.ToString("N");
@@ -749,7 +748,7 @@ namespace Applied_Accounts.Forms
         private void txtCR_Leave(object sender, EventArgs e)
         {
             decimal _Amount = Conversion.ToMoney(((TextBox)sender).Text);
-            if (_Amount > 0) { txtDR.Text = "0"; txtCR.Text = _Amount.ToString("N");   }
+            if (_Amount > 0) { txtDR.Text = "0"; txtCR.Text = _Amount.ToString("N"); }
             IsValidate = true;                  // Execute TextChange event enable
 
             grp_Action.Visible = MyVoucherClass.Is_Balanced();
@@ -849,7 +848,7 @@ namespace Applied_Accounts.Forms
             }
             e.Cancel = _Cancel;
         }
-        
+
         private void txtSupplier_Validating(object sender, CancelEventArgs e)
         {
             if (!IsValidate) { return; }
@@ -880,7 +879,7 @@ namespace Applied_Accounts.Forms
             }
             e.Cancel = _Cancel;
         }
-        
+
         private void txtProject_Validating(object sender, CancelEventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
@@ -941,7 +940,7 @@ namespace Applied_Accounts.Forms
 
 
         }
-        
+
         private void txtStock_Validating(object sender, CancelEventArgs e)
         {
             TextBox _TextBox = (TextBox)sender;
@@ -1243,7 +1242,7 @@ namespace Applied_Accounts.Forms
                     if (Conversion.ToInteger(txtSRNO.Text) == 1)            // Show Only Bank and Cash 
                     {
                         _DataTable = vw_CashBank.ToTable();
-                        
+
                     }
                     else
                     {
@@ -1352,9 +1351,15 @@ namespace Applied_Accounts.Forms
 
         private void Img_Stock_Click(object sender, EventArgs e)
         {
-            frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
-            //Brows_Invenotory.MyInventoryClass.Filter(Conversion.ToLong(MyDataRow["ID"]));
-            Brows_Invenotory.ShowDialog();
+
+            long _COA = Conversion.ToLong(MyDataRow["COA"]);                    // Chart of Accounts for the row.
+
+            // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
+            if (Conversion.ToLong(Applied.GetInteger("NatureStock")) == Applied.AccountNature(_COA))
+            {
+                frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
+                Brows_Invenotory.ShowDialog();
+            }
         }
 
         #endregion
@@ -1373,6 +1378,6 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-        
+
     }   //============================== END
 }

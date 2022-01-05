@@ -100,6 +100,7 @@
     <Compile Include="Classes\Connection.cs" />
     <Compile Include="Classes\Conversion.cs" />
     <Compile Include="Classes\DataSets.cs" />
+    <Compile Include="Classes\IApplied.cs" />
     <Compile Include="Classes\InventoryClass.cs" />
     <Compile Include="Classes\TextBox_Validation.cs" />
     <Compile Include="Classes\InWords.cs" />
@@ -753,7 +754,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" BuildVersion_UseGlobalSettings="False" BuildVersion_UseUniversalClock="True" />
+      <UserProperties BuildVersion_UseUniversalClock="True" BuildVersion_UseGlobalSettings="False" BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

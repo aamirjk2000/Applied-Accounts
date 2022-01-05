@@ -658,6 +658,7 @@ namespace Applied_Accounts
         Schedule = 15,
         POrder = 16,
         Inventory = 17,
+        Nature = 18,
 
         View_Voucher = 101,
         View_VouNo = 102,

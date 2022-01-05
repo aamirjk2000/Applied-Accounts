@@ -11,12 +11,10 @@ namespace Applied_Accounts
 {
     public partial class frmCOA : Form
     {
-
         private DataTable MyDataTable = AppliedTable.GetDataTable(Tables.COA);
-        //private DataView MyTableView { get => MyNavigator.MyDataView; }
-
         private Code_Validation Code_Validate = new Code_Validation();
         private DataTable tb_Notes = AppliedTable.GetDataTable(Tables.Notes);
+        private DataTable tb_Nature = AppliedTable.GetDataTable(Tables.Nature);
 
         #region Initialize
 
@@ -24,8 +22,17 @@ namespace Applied_Accounts
         {
             InitializeComponent();
             MyNavigator.InitializeClass(MyDataTable);
+            
+            cBoxNotes.DataSource = tb_Notes;
+            cBoxNotes.DisplayMember = "Title";
+            cBoxNotes.ValueMember = "ID";
+
+            cBoxNature.DataSource = tb_Nature;
+            cBoxNature.DisplayMember = "Title";
+            cBoxNature.ValueMember = "ID";
+            
             DataBinding();                      // Data Binding with form objects
-            Load_Grid();                        // Load Data in Data Grid.
+            Load_Grid();                         // Load Data in Data Grid.
 
         }
 
@@ -35,12 +42,12 @@ namespace Applied_Accounts
             txtCode.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Code", true, DataSourceUpdateMode.OnPropertyChanged));
             txtTag.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "SCode", true, DataSourceUpdateMode.OnPropertyChanged));
             txtTitle.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Title", true, DataSourceUpdateMode.OnPropertyChanged));
-            txtNote.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Notes", true, DataSourceUpdateMode.OnPropertyChanged));
             txtOBal.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "OBal", true, DataSourceUpdateMode.OnPropertyChanged));
-            chkCash.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "IsCashBook", true, DataSourceUpdateMode.OnValidation));
-            chkBank.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "IsBankBook", true, DataSourceUpdateMode.OnValidation));
-            chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnValidation));
-
+            chkCash.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "IsCashBook", true, DataSourceUpdateMode.OnPropertyChanged));
+            chkBank.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "IsBankBook", true, DataSourceUpdateMode.OnPropertyChanged));
+            chkActive.DataBindings.Add(new Binding("Checked", MyNavigator.MyBindingSource, "Active", true, DataSourceUpdateMode.OnPropertyChanged));
+            cBoxNotes.DataBindings.Add(new Binding("SelectedValue", MyNavigator.MyBindingSource, "Notes", true, DataSourceUpdateMode.OnPropertyChanged));
+            cBoxNature.DataBindings.Add(new Binding("SelectedValue", MyNavigator.MyBindingSource, "Nature", true, DataSourceUpdateMode.OnPropertyChanged));
         }
 
         private void Load_Grid()
@@ -53,8 +60,6 @@ namespace Applied_Accounts
                                     (int)TextFormat.Numbers,
                                     (int)TextFormat.Currency,0};
             int[] ColumnWidth = { 60, 75, 260, 50, 50, 50, 80, 40 };
-
-            
 
             MyDataGrid.ColumnsName = ColumnsName;
             MyDataGrid.ColumnsWidth = ColumnWidth;
@@ -81,18 +86,13 @@ namespace Applied_Accounts
         }
 
         #endregion
-        private void txtNote_Validating(object sender, CancelEventArgs e)
-        {
-            //Classes.Validation thisValidation = new Classes.Validation((TextBox)sender, (int)Tables.Notes);
-            //e.Cancel = thisValidation.TextValidation();
-            //lblMessage.Text = thisValidation.Message;
-        }
-
+        #region Close / Exit
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        #endregion
         #region Navigator Codes
 
         private void MyNavigator_After_Delete(object sender, EventArgs e)
@@ -119,7 +119,6 @@ namespace Applied_Accounts
                 }
 
             }
-
             if (txtTitle.Text.Length == 0)
             {
                 MyNavigator.NewRow_Valid = false;
@@ -127,19 +126,6 @@ namespace Applied_Accounts
                 txtTitle.Focus();
                 return;
             }
-
-            if (!string.Equals(Applied.Code(txtNote.Text, tb_Notes.AsDataView()), txtNote.Text.Trim()))
-            {
-                MyNavigator.NewRow_Valid = false;
-                MyNavigator.MyMessage = "Account Note is not exist.";
-                txtNote.Text = "";
-                return;
-            }
-            else
-            {
-                MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Notes"] = Applied.Code2ID(txtNote.Text, tb_Notes.AsDataView());
-            }
-
             if (txtTitle.Text.Length == 0)                                                  // Check title must be some 
             {
                 MyNavigator.NewRow_Valid = false;
@@ -148,17 +134,11 @@ namespace Applied_Accounts
                 return;
 
             }
-
-
-
-
             // Set DEfault values is Data Columns value is null
             if (_Row["IsBankbook"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["IsBankBook"] = false; }
             if (_Row["IsCashbook"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["IsCashBook"] = false; }
             if (_Row["OBal"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["OBal"] = 0; }
             if (_Row["Active"] == DBNull.Value) { MyNavigator.MyDataView[MyNavigator.NewRecordPosition]["Active"] = true; }
-
-
         }
 
         private void MyNavigator_After_Save(object sender, EventArgs e)
@@ -180,21 +160,14 @@ namespace Applied_Accounts
 
         private void txtCode_Enter(object sender, EventArgs e)
         {
-            txtCode.DataBindings.Clear();
+            txtCode.DataBindings.Clear();                           // Clear Binding for search code
         }
 
         private void txtCode_Leave(object sender, EventArgs e)
         {
+            // Bind resume for
             txtCode.DataBindings.Add(new Binding("Text", MyNavigator.MyBindingSource, "Code", true, DataSourceUpdateMode.OnPropertyChanged));
         }
-
-        private void txtNote_TextChanged(object sender, EventArgs e)
-        {
-            int _NoteID = Conversion.ToInteger(((TextBox)sender).Text);
-            txtNotesTitle.Text = Applied.Title(((TextBox)sender).Text, tb_Notes.AsDataView());
-        }
-
-
 
 
         #endregion

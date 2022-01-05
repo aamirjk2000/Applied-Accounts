@@ -8,17 +8,8 @@ using Microsoft.Win32;
 
 namespace Applied_Accounts.Classes
 {
-    interface IApplied
-    {
-        DateTime MinVouDate();
-        DateTime MaxVouDate();
-    }
-
-
     public class Applied : IApplied
     {
-
-
         //private CultureInfo Culture { get; set; } aamir   
         private DateTime Voucher_MinDate { get; set; }
         private DateTime Voucher_MaxDate { get; set; }
@@ -47,29 +38,20 @@ namespace Applied_Accounts.Classes
 
 
         #region Get Values;
-
-        //public static object GetValue(string _Key, KeyType _KeyType)
-        //{
-        //    return (_Key, (int)_KeyType);
-        //}
-
         public static string GetValue(string _Key)
         {
             // Return String value from applied.Table colum string
             return (_Key, (int)KeyType.String).ToString();
         }
 
-
         public static object GetValue(string _Key, int _KeyType)
         {
-
             DataTable _DataTable = AppliedTable.GetDataTable((int)Tables.Applied);
             DataView _DataView = new DataView(_DataTable);
 
             if (_DataView.Count == 0) { return null; }
 
             _DataView.RowFilter = string.Concat("Key='", _Key, "'");
-
 
             if (_DataView.Count == 1)
             {
@@ -387,7 +369,6 @@ namespace Applied_Accounts.Classes
             }
             return _Result;
         }
-
         public static string VouChar(string _VouType)
         {
             string _Result = "";
@@ -425,15 +406,11 @@ namespace Applied_Accounts.Classes
             return _Result;
         }
         #endregion
-
-
-
         public static DataRow ShowBrowseWin(DataView _DataView, object _CurrentValue)
         {
             Browse BrowseWindow = new Browse(_DataView);
             BrowseWindow.ShowDialog();
             return BrowseWindow.MyDataRow;
-            
         }
 
         public static DataRow ShowBrowseWin(DataTable _DataTable, object _CurrentValue)
@@ -506,6 +483,20 @@ namespace Applied_Accounts.Classes
 
         }
 
+        public static long AccountNature(long _ID)
+        {
+            DataView _TableView = AppliedTable.GetDataTable(Tables.COA).AsDataView();
+            _TableView.RowFilter = "ID=" + _ID.ToString();
+            if (_TableView.Count == 1)
+            {
+                return Conversion.ToLong(_TableView[0].Row["Nature"]);
+            }
+            else
+            {
+                return -1;
+            }
+
+        }
         #endregion
 
     }       // END Main Class

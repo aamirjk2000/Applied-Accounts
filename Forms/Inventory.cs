@@ -22,13 +22,7 @@ namespace Applied_Accounts.Forms
         {
             InitializeComponent();
         }
-
-        //public frmInventory(string _VouNo)
-        //{
-        //    InitializeComponent();
-        //    MyInventoryClass = new InventoryClass(_VouNo);
-        //    Set_Grid();
-        //}
+          
 
         public frmInventory(DataRow _VouRow)
         {
@@ -36,7 +30,6 @@ namespace Applied_Accounts.Forms
             MyInventoryClass = new InventoryClass(_VouRow);
             Set_Grid();
         }
-
 
         private void Set_Grid()
         {

@@ -13,9 +13,30 @@ namespace Applied_Accounts.Forms
 {
     public partial class frmSetting : Form
     {
+
+        DataTable tb_Nature = AppliedTable.GetDataTable(Tables.Nature);          // Load Account - Nature Table
+
         public frmSetting()
         {
             InitializeComponent();
+
+            cBoxStock.DataSource = tb_Nature.Copy();
+            cBoxPayroll.DataSource = tb_Nature.Copy();
+            cBoxPayable.DataSource = tb_Nature.Copy();
+            cBoxReceivable.DataSource = tb_Nature.Copy();
+
+            cBoxStock.DisplayMember = "Title";
+            cBoxPayroll.DisplayMember = "Title";
+            cBoxPayable.DisplayMember = "Title";
+            cBoxReceivable.DisplayMember = "Title";
+
+            cBoxStock.ValueMember = "ID";
+            cBoxPayroll.ValueMember = "ID";
+            cBoxPayable.ValueMember = "ID";
+            cBoxReceivable.ValueMember = "ID";
+
+            
+
         }
 
         private void frmSetting_Load(object sender, EventArgs e)
@@ -30,7 +51,11 @@ namespace Applied_Accounts.Forms
             txtReportDateFormat.Text = Applied.GetString("DateFormat_Heading");
             txtReportHeadingFormat.Text = Applied.GetString("DateFormat_Heading");
             txtCurrencyFormat.Text = Applied.GetString("CurrencyFormat");
-            
+
+            cBoxStock.SelectedValue = Applied.GetInteger("NatureStock");
+            cBoxPayroll.SelectedValue = Applied.GetInteger("NaturePayroll");
+            cBoxPayable.SelectedValue = Applied.GetInteger("NaturePayable");
+            cBoxReceivable.SelectedValue = Applied.GetInteger("NatureReceivable");
         }
 
 
@@ -38,12 +63,13 @@ namespace Applied_Accounts.Forms
         {
             Close();
         }
-
-      
+             
         private void txtCompanyName_Leave(object sender, EventArgs e)
         {
             Applied.SetValue("Company", txtCompanyName.Text.Trim(), Applied.KeyType.String);
         }
+
+        #region Dates
 
         private void dtAccountingFrom_Leave(object sender, EventArgs e)
         {
@@ -89,5 +115,31 @@ namespace Applied_Accounts.Forms
         {
             Applied.SetValue("CurrencyFormat", txtCurrencyFormat.Text.Trim(), Applied.KeyType.String);
         }
-    }
-}
+
+        #endregion
+
+        #region Accounts Nature
+
+        private void cBoxStock_Leave(object sender, EventArgs e)
+        {
+            Applied.SetValue("NatureStock", cBoxStock.SelectedValue, Applied.KeyType.Integer);
+        }
+
+        private void cBoxPayroll_Leave(object sender, EventArgs e)
+        {
+            Applied.SetValue("NaturePayroll", cBoxPayroll.SelectedValue, Applied.KeyType.Integer);
+        }
+
+        private void cBoxReceivable_Leave(object sender, EventArgs e)
+        {
+            Applied.SetValue("NatureReceivable", cBoxReceivable.SelectedValue, Applied.KeyType.Integer);
+        }
+
+        private void cBoxPayable_Leave(object sender, EventArgs e)
+        {
+            Applied.SetValue("NaturePayable", cBoxPayable.SelectedValue, Applied.KeyType.Integer);
+        }
+        #endregion
+
+    }   //  END Main Class
+}       // END Namespace
