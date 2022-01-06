@@ -17,14 +17,12 @@ namespace Applied_Accounts.Classes
         void Load_Tables();
         void Load_Voucher(string _Vou_No);
         DataTable Create_GridTable();
-        DataTable Create_StockTable();
-        DataTable Create_PayrollTable();
         void New();
         void Add(string _Vou_no);
         bool Is_Balanced();
         bool Is_Edited();
         decimal Difference();
-
+        long GetNature(DataRow _Row);
     }
 
 
@@ -50,8 +48,6 @@ namespace Applied_Accounts.Classes
             if (CR_Amount == DBNull.Value) { return -2; }
             return (decimal)DR_Amount - (decimal)CR_Amount;     // Show Difference if Voucher
         }
-
-
         public DataRow MyRow { get; set; }
 
         public Array Vou_Types = Enum.GetValues(typeof(Applied.VoucherType));
@@ -223,7 +219,7 @@ namespace Applied_Accounts.Classes
                 {
                     Action = "Update";                  // Record Exist / Present
                 }
-                
+
                 if (_SRNO < 0)
                 {
                     Action = "Delete";                      // DELETE IF SERIAL IS IN NEGATIVE.
@@ -462,29 +458,6 @@ namespace Applied_Accounts.Classes
 
         }
 
-
-        #endregion
-
-        #region Create Stock Table
-
-        public DataTable Create_StockTable()
-        {
-
-
-
-
-            return new DataTable();
-        }
-
-        #endregion
-
-        #region Create Payroll Table
-        public DataTable Create_PayrollTable()
-        {
-
-            return new DataTable();
-        }
-
         #endregion
 
         #region Other Codes
@@ -579,6 +552,17 @@ namespace Applied_Accounts.Classes
         }
 
         #endregion
+
+        #region Get Nature Code
+
+        public long GetNature(DataRow _Row)
+        {
+            long _COA = Conversion.ToLong(_Row["COA"]);
+            return Applied.AccountNature(_COA);
+        }
+
+        #endregion
+               
 
     }       // END Class
 }           // END NameSpace

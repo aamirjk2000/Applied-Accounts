@@ -458,8 +458,10 @@ namespace Applied_Accounts.Forms
             }
         }
 
-
-
+        private long GetNature(string _Nature)                                                          // Get Account Nature Code from Applied Table;
+        {
+            return Conversion.ToLong(Applied.GetInteger("_Nature"));
+        }
 
         #endregion
 
@@ -1351,11 +1353,10 @@ namespace Applied_Accounts.Forms
 
         private void Img_Stock_Click(object sender, EventArgs e)
         {
-
-            long _COA = Conversion.ToLong(MyDataRow["COA"]);                    // Chart of Accounts for the row.
-
+            long _Nature = Conversion.ToLong(Applied.GetInteger("NatureStock"));    // Get Default Nature Value for Stock Account
+            
             // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
-            if (Conversion.ToLong(Applied.GetInteger("NatureStock")) == Applied.AccountNature(_COA))
+            if ( _Nature == MyVoucherClass.GetNature(MyDataRow.Row))
             {
                 frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
                 Brows_Invenotory.ShowDialog();
@@ -1368,11 +1369,18 @@ namespace Applied_Accounts.Forms
 
         private void Imp_Employees_Click(object sender, EventArgs e)
         {
+            long _Nature = GetNature("NaturePayroll");    // Get Default Nature Value for Stock Account
+
+            // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
+            if (_Nature == MyVoucherClass.GetNature(MyDataRow.Row))
+            {
+                frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
+                Brows_Invenotory.ShowDialog();
+            }
 
         }
 
-
-
+        
 
 
 

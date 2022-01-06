@@ -14,9 +14,19 @@ namespace Applied_Accounts.Forms
 {
     public partial class frmInventory : Form
     {
+
+        #region Variables
+
         public InventoryClass MyInventoryClass = new InventoryClass();
         private long Transaction_ID { get => MyInventoryClass.Transaction_ID; }
         private string Vou_No { get => MyInventoryClass.Vou_No; }
+        private decimal MyQty { get => Conversion.ToMoney(txtQty.Text); }
+        private decimal MyRate {  get=> Conversion.ToMoney(txtRate.Text);}
+        private decimal MyAmount { get => MyQty * MyRate; }
+
+        #endregion
+
+        #region Initialize
 
         public frmInventory()
         {
@@ -29,28 +39,44 @@ namespace Applied_Accounts.Forms
             InitializeComponent();
             MyInventoryClass = new InventoryClass(_VouRow);
             Set_Grid();
+            Set_Textbox();
         }
 
+        #endregion
+
+        private void Set_Textbox()
+        {
+            txtVouID.Text = MyInventoryClass.Transaction_ID.ToString();
+            txtVouNo.Text = MyInventoryClass.Vou_No.ToString();
+            txtStock.Text = MyInventoryClass.Stock_Title;
+            txtTotalAmount.Text = MyInventoryClass.Vou_Amount.ToString("###,###,###.##");
+        }
+        
+
+
+        #region Grid Setting
         private void Set_Grid()
         {
             Grid_Inventory.DataSource = MyInventoryClass.dv_Inventory;
 
-            string[] Headings = { "ID", "Vou ID", "Vou #", "Stock #", "Stock Title", "Qty", "Rate", "Amount", "Description", "Comments", "Total Rs." };
+            string[] Headings = { "ID", "Vou ID", "Vou #", "Stock #", "Stock Title", "Qty", "UOM", "Size", "Rate", "Amount", "Description", "Comments", "Total Rs." };
 
             List<string> _Headings = new List<string>(Headings);
             int i = 0;
 
             Grid_Inventory.Columns[0].Visible = false;
-            Grid_Inventory.Columns[1].Width = 60;
+            Grid_Inventory.Columns[1].Width = 50;
             Grid_Inventory.Columns[2].Width = 60;
-            Grid_Inventory.Columns[3].Width = 120;
-            Grid_Inventory.Columns[4].Width = 240;
+            Grid_Inventory.Columns[3].Width = 100;
+            Grid_Inventory.Columns[4].Width = 200;
             Grid_Inventory.Columns[5].Width = 70;
             Grid_Inventory.Columns[6].Width = 70;
-            Grid_Inventory.Columns[7].Width = 90;
-            Grid_Inventory.Columns[8].Width = 120;
-            Grid_Inventory.Columns[9].Width = 150;
-            Grid_Inventory.Columns[10].Width = 60;
+            Grid_Inventory.Columns[7].Width = 70;
+            Grid_Inventory.Columns[8].Width = 70;
+            Grid_Inventory.Columns[9].Width = 90;
+            Grid_Inventory.Columns[10].Width = 120;
+            Grid_Inventory.Columns[11].Width = 150;
+            Grid_Inventory.Columns[12].Width = 60;
 
             Grid_Inventory.Columns[1].HeaderText = _Headings[i + 1]; i += 1;            // Set Header title of Data Grid.
             Grid_Inventory.Columns[2].HeaderText = _Headings[i + 1]; i += 1;
@@ -62,16 +88,28 @@ namespace Applied_Accounts.Forms
             Grid_Inventory.Columns[8].HeaderText = _Headings[i + 1]; i += 1;
             Grid_Inventory.Columns[9].HeaderText = _Headings[i + 1]; i += 1;
             Grid_Inventory.Columns[10].HeaderText = _Headings[i + 1]; i += 1;
+            Grid_Inventory.Columns[11].HeaderText = _Headings[i + 1]; i += 1;
+            Grid_Inventory.Columns[12].HeaderText = _Headings[i + 1]; i += 1;
+
 
             Grid_Inventory.Columns[7].DefaultCellStyle.Format = "###,###,###,###.##";
 
             Grid_Inventory.Columns[0].Visible = false;              // Disable ID
             Grid_Inventory.Columns[1].Visible = false;              // Disable Vou ID
             Grid_Inventory.Columns[2].Visible = false;              // Disable Vou No
-            Grid_Inventory.Columns[9].Visible = false;            // Disable Comments
-            Grid_Inventory.Columns[10].Visible = false;             // Disable Vou Total Amount
+            Grid_Inventory.Columns[11].Visible = false;            // Disable Comments
+            Grid_Inventory.Columns[12].Visible = false;             // Disable Vou Total Amount
         }
 
+
+
+        private void Grid_Inventory_Enter(object sender, EventArgs e)
+        {
+        }
+
+        #endregion
+
+        #region Stock Row
         private void Grid_Inventory_UserAddedRow(object sender, DataGridViewRowEventArgs e)
         {
 
@@ -81,6 +119,8 @@ namespace Applied_Accounts.Forms
             Grid_Inventory.Rows[0].Cells["Stock"].Value = 0;
             Grid_Inventory.Rows[0].Cells["Title"].Value = "title";
             Grid_Inventory.Rows[0].Cells["Qty"].Value = 0;
+            Grid_Inventory.Rows[0].Cells["UOM"].Value = "";
+            Grid_Inventory.Rows[0].Cells["Size"].Value = "";
             Grid_Inventory.Rows[0].Cells["Rate"].Value = 0;
             Grid_Inventory.Rows[0].Cells["Amount"].Value = 0;
             Grid_Inventory.Rows[0].Cells["Description"].Value = "desc";
@@ -89,19 +129,50 @@ namespace Applied_Accounts.Forms
             MessageBox.Show("User Row Added");
         }
 
-        private void Grid_Inventory_Enter(object sender, EventArgs e)
-        {
-            //if (Grid_Inventory.Rows.Count == 0)
-            //{
-            //    Grid_Inventory.Rows.Add();
-            //}
-
-
-        }
-
         private void Grid_Inventory_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
-
         }
-    }
-}
+        #endregion
+
+        #region Form close
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        #endregion
+
+        #region TextBox QTY
+
+        private void txtQty_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Applied.IsNumeric(sender, e);
+        }
+
+        private void txtQty_Leave(object sender, EventArgs e)
+        {
+            txtAmount.Text = (MyQty * MyRate).ToString("###,###,###.##");
+            txtQty.Text = (Conversion.ToLong(txtQty.Text).ToString("###,###,###.##"));
+        }
+
+        #endregion
+
+        #region TextBox Rate
+
+        private void txtRate_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            e.Handled = Applied.IsNumeric(sender, e);
+        }
+
+        private void txtRate_Leave(object sender, EventArgs e)
+        {
+            txtAmount.Text = (MyQty * MyRate).ToString("###,###,###.##");
+            txtRate.Text = (Conversion.ToLong(txtRate.Text).ToString("###,###,###.##"));
+        }
+
+
+        #endregion
+
+        
+    }       // END -- Class
+}           // END -- Namespace

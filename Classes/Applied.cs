@@ -10,6 +10,9 @@ namespace Applied_Accounts.Classes
 {
     public class Applied : IApplied
     {
+
+        #region Initialize
+
         //private CultureInfo Culture { get; set; } aamir   
         private DateTime Voucher_MinDate { get; set; }
         private DateTime Voucher_MaxDate { get; set; }
@@ -21,6 +24,7 @@ namespace Applied_Accounts.Classes
             Voucher_MaxDate = (DateTime)GetValue("VouDate2", (int)KeyType.Date);
         }
 
+        #endregion
 
         #region Interface Codes
 
@@ -35,7 +39,6 @@ namespace Applied_Accounts.Classes
         }
 
         #endregion
-
 
         #region Get Values;
         public static string GetValue(string _Key)
@@ -118,9 +121,18 @@ namespace Applied_Accounts.Classes
             return Conversion.ToDate(_DateString);
         }
 
+        public static bool GetBoolean(string _Key)
+        {
+            return (bool)GetValue(_Key, (int)KeyType.Boolean);
+        }
+
+        #endregion
+
+        #region Voucher Date
+
         public static DateTime GetVouDate(string _Key)
         {
-            // Control Voucher Date should be in Date boundry
+            // Control Voucher Date should be in Date boundry .. Reports need this codes.
             DateTime _DateTime = GetDate(_Key);
             DateTime _MinDate = Applied.GetDate("VouDate1");
             DateTime _MaxDate = Applied.GetDate("VouDate2");
@@ -128,13 +140,6 @@ namespace Applied_Accounts.Classes
             if (_DateTime > _MaxDate) { _DateTime = _MaxDate; }
             return _DateTime;
         }
-
-
-        public static bool GetBoolean(string _Key)
-        {
-            return (bool)GetValue(_Key, (int)KeyType.Boolean);
-        }
-
 
         #endregion
 
@@ -329,6 +334,8 @@ namespace Applied_Accounts.Classes
             }
         }
 
+        #region Press Key Validations
+
         public static bool IsNumeric(object sender, KeyPressEventArgs e)
         {
             //Verify that the pressed key isn't CTRL or any non-numeric digit
@@ -345,7 +352,6 @@ namespace Applied_Accounts.Classes
 
             return e.Handled;
         }
-
         public static bool IsDigit(object sender, KeyPressEventArgs e)
         {
             //Verify that the pressed key isn't CTRL or any non-numeric digit
@@ -369,6 +375,9 @@ namespace Applied_Accounts.Classes
             }
             return _Result;
         }
+
+        #endregion
+
         public static string VouChar(string _VouType)
         {
             string _Result = "";
@@ -406,6 +415,9 @@ namespace Applied_Accounts.Classes
             return _Result;
         }
         #endregion
+
+        #region Browse Window
+
         public static DataRow ShowBrowseWin(DataView _DataView, object _CurrentValue)
         {
             Browse BrowseWindow = new Browse(_DataView);
@@ -418,12 +430,18 @@ namespace Applied_Accounts.Classes
             return ShowBrowseWin(new DataView(_DataTable), _CurrentValue);
         }
 
+        #endregion
+
+        #region Amount to Words
+
         public static string Amount2Words(object _Amount)
         {
             InWords WordClass = new InWords(_Amount);
             string result = WordClass.ToWords();
             return result;
         }
+
+        #endregion
 
         #region SEARCH Code, Tag & Title
 
