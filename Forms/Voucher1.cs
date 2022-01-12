@@ -2,16 +2,18 @@
 using System;
 using System.ComponentModel;
 using System.Data;
-using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Drawing;
 using System.Windows;
 using System.Windows.Forms;
-using MessageBox = System.Windows.MessageBox;
+
+//using System.Data.Entity.ModelConfiguration.Conventions;
+//using MessageBox = System.Windows.MessageBox;
 
 namespace Applied_Accounts.Forms
 {
     public partial class frmVouchers1 : Form
     {
+        #region Variables
 
         private string NumberFormat = Applied.GetString("CurrencyFormat");
         private string DateFormat = Applied.GetString("DataFormat");
@@ -36,6 +38,7 @@ namespace Applied_Accounts.Forms
         private DataTable tb_Stock { get => MyVoucherClass.ds_Voucher.Tables["Stock"]; }
         private DataTable tb_Employees { get => MyVoucherClass.ds_Voucher.Tables["Employees"]; }
         private DataTable tb_POrder { get => MyVoucherClass.ds_Voucher.Tables["POrder"]; }
+        private DataTable tb_Inventories { get => MyVoucherClass.ds_Voucher.Tables["Inventory"]; }
         private DataTable tb_Voucher { get => MyVoucherClass.tb_Voucher; }
         private DataView vw_CashBank
         {
@@ -63,6 +66,8 @@ namespace Applied_Accounts.Forms
         private DataView dv_Employee;
         private DataView dv_POrder;
         private bool IsValidate;                            // TextBox or Combo box Validat or not?
+
+        #endregion
 
         #region Initialization
 
@@ -1353,13 +1358,63 @@ namespace Applied_Accounts.Forms
 
         private void Img_Stock_Click(object sender, EventArgs e)
         {
-            long _Nature = Conversion.ToLong(Applied.GetInteger("NatureStock"));    // Get Default Nature Value for Stock Account
+            long DefaultNature = Conversion.ToLong(Applied.GetInteger("NatureStock"));    // Get Default Nature Value for Stock Account
             
             // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
-            if ( _Nature == MyVoucherClass.GetNature(MyDataRow.Row))
+            if ( DefaultNature == MyVoucherClass.GetNature(MyDataRow.Row))
             {
-                frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
-                Brows_Invenotory.ShowDialog();
+                InventoryClass _InventoryClass = new InventoryClass(MyDataRow.Row);             // Create a Inventory Class
+                _InventoryClass.tb_Inventory = tb_Inventories;                                                      // Copy DB Tabel to Class Table;
+                frmInventory Brows_Inventory = new frmInventory(_InventoryClass);                   // Create Stock Inventory form
+                Brows_Inventory.ShowDialog();                                                                               // show Inventory Form
+
+                DataView dv_Inventory = tb_Inventories.AsDataView();
+
+                foreach(DataRow _Row in Brows_Inventory.MyInventoryClass.tb_Inventory.Rows)
+                {
+                    dv_Inventory.RowFilter = "Vou_ID=" + _Row["Vou_ID"].ToString().Trim() + " AND SRNO=" + _Row["SRNO"].ToString().Trim();
+                    if (dv_Inventory.Count== 1)
+                    {
+                        dv_Inventory[0].Row["SRNO"] = _Row["SRNO"];
+                        dv_Inventory[0].Row["Vou_No"] = _Row["Vou_No"];
+                        dv_Inventory[0].Row["Vou_ID"] = _Row["Vou_ID"];
+                        dv_Inventory[0].Row["Vou_Amount"] = _Row["Vou_Amount"];
+                        dv_Inventory[0].Row["Stock"] = _Row["Stock"];
+                        dv_Inventory[0].Row["Qty"] = _Row["Qty"];
+                        dv_Inventory[0].Row["UOM"] = _Row["UOM"];
+                        dv_Inventory[0].Row["Size"] = _Row["Size"];
+                        dv_Inventory[0].Row["Amount"] = _Row["Amount"];
+                        dv_Inventory[0].Row["Description"] = _Row["Description"];
+                        dv_Inventory[0].Row["Comments"] = _Row["Comments"];
+                        dv_Inventory[0].Row["Batch"] = _Row["Batch"];
+                        dv_Inventory[0].Row["Status"] = _Row["Status"];
+                    }
+                    else
+                    {
+                        // Add a New Record.
+                        DataRow _NewRow = tb_Inventories.NewRow();
+
+                        _NewRow["ID"] = _Row["ID"];
+                        _NewRow["Vou_No"] = _Row["Vou_No"];
+                        _NewRow["Vou_ID"] = _Row["Vou_ID"];
+                        _NewRow["Vou_Amount"] = _Row["Vou_Amount"];
+                        _NewRow["SRNO"] = _Row["SRNO"];
+                        _NewRow["Stock"] = _Row["Stock"];
+                        _NewRow["Qty"] = _Row["Qty"];
+                        _NewRow["UOM"] = _Row["UOM"];
+                        _NewRow["Size"] = _Row["Size"];
+                        _NewRow["Amount"] = _Row["Amount"];
+                        _NewRow["Description"] = _Row["Description"];
+                        _NewRow["Comments"] = _Row["Comments"];
+                        _NewRow["Batch"] = _Row["Batch"];
+                        _NewRow["Status"] = _Row["Status"];
+                        tb_Inventories.Rows.Add(_NewRow);
+                    }
+
+                }
+
+
+
             }
         }
 
@@ -1372,11 +1427,11 @@ namespace Applied_Accounts.Forms
             long _Nature = GetNature("NaturePayroll");    // Get Default Nature Value for Stock Account
 
             // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
-            if (_Nature == MyVoucherClass.GetNature(MyDataRow.Row))
-            {
-                frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
-                Brows_Invenotory.ShowDialog();
-            }
+            //if (_Nature == MyVoucherClass.GetNature(MyDataRow.Row))
+            //{
+                //frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
+                //Brows_Invenotory.ShowDialog();
+            //}
 
         }
 

@@ -21,9 +21,9 @@ namespace Applied_Accounts.Forms
         private long Transaction_ID { get => MyInventoryClass.Transaction_ID; }
         private string Vou_No { get => MyInventoryClass.Vou_No; }
         private decimal MyQty { get => Conversion.ToMoney(txtQty.Text); }
-        private decimal MyRate {  get=> Conversion.ToMoney(txtRate.Text);}
-        private decimal MyAmount { get => MyQty * MyRate; }
-
+        private decimal MyRate { get => Conversion.ToMoney(txtRate.Text); }
+        //private decimal MyAmount { get => MyQty * MyRate; }
+        private string CurrencyFormat { get => Applied.GetString("CurrencyFormat"); }
         #endregion
 
         #region Initialize
@@ -32,106 +32,113 @@ namespace Applied_Accounts.Forms
         {
             InitializeComponent();
         }
-          
 
-        public frmInventory(DataRow _VouRow)
+        public frmInventory(InventoryClass _InventoryClass)
         {
             InitializeComponent();
-            MyInventoryClass = new InventoryClass(_VouRow);
+            MyInventoryClass = _InventoryClass;
             Set_Grid();
             Set_Textbox();
         }
 
         #endregion
 
+        #region Set TextBox
+
         private void Set_Textbox()
         {
-            txtVouID.Text = MyInventoryClass.Transaction_ID.ToString();
-            txtVouNo.Text = MyInventoryClass.Vou_No.ToString();
+            txtID.Text = MyInventoryClass.StockRow["SRNO"].ToString();
+            txtVouID.Text = MyInventoryClass.StockRow["Vou_ID"].ToString();
+            txtVouNo.Text = MyInventoryClass.StockRow["Vou_No"].ToString();
             txtStock.Text = MyInventoryClass.Stock_Title;
-            txtTotalAmount.Text = MyInventoryClass.Vou_Amount.ToString("###,###,###.##");
-        }
-        
+            txtSize.Text = MyInventoryClass.StockRow["Size"].ToString();
+            txtQty.Text = MyInventoryClass.StockRow["Qty"].ToString();
+            txtUOM.Text = MyInventoryClass.StockRow["UOM"].ToString();
+            txtRate.Text = MyInventoryClass.StockRow["Rate"].ToString();
+            txtAmount.Text = MyInventoryClass.StockRow["Amount"].ToString();
+            txtDescription.Text = MyInventoryClass.StockRow["Description"].ToString();
+            txtComments.Text = MyInventoryClass.StockRow["comments"].ToString();
+            txtTotalAmount.Text = Conversion.ToMoney(MyInventoryClass.StockRow["Vou_Amount"]).ToString(CurrencyFormat);
+            txtGridAmount.Text = MyInventoryClass.GridTotal().ToString(CurrencyFormat);
+            decimal Amount1 = Conversion.ToMoney(txtTotalAmount.Text), Amount2 = Conversion.ToMoney(txtGridAmount.Text);
+            txtDifference.Text = (Amount2 - Amount2).ToString(CurrencyFormat);
 
+            #region Enable & Disbale TextBox
+            if (Conversion.ToLong(txtID.Text) < 0)
+            {
+                txtID.Enabled = false;                                              // Deletion Marked Record
+                txtVouID.Enabled = false;
+                txtVouNo.Enabled = false;
+                txtStock.Enabled = false;
+                txtSize.Enabled = false;
+                txtQty.Enabled = false;
+                txtUOM.Enabled = false;
+                txtRate.Enabled = false;
+                txtAmount.Enabled = false;
+                txtDescription.Enabled = false;
+                txtComments.Enabled = false;
+            }
+            else
+            {
+                txtID.Enabled = true;                                               // not deleted record.
+                txtVouID.Enabled = true;
+                txtVouNo.Enabled = true;
+                txtStock.Enabled = true;
+                txtSize.Enabled = true;
+                txtQty.Enabled = true;
+                txtUOM.Enabled = true;
+                txtRate.Enabled = true;
+                txtAmount.Enabled = true;
+                txtDescription.Enabled = true;
+                txtComments.Enabled = true;
+            }
+            #endregion
+
+        }
+
+        private void Set_Textbox(int _RowIndex)
+        {
+            MyInventoryClass.UpdateStockRow(_RowIndex);                 // Update Stock Row by Table Index Row
+            Set_Textbox();
+        }
+
+
+        #endregion
 
         #region Grid Setting
         private void Set_Grid()
         {
-            Grid_Inventory.DataSource = MyInventoryClass.dv_Inventory;
+            Grid_Inventory.DataSource = MyInventoryClass.UpdateGridView();
 
-            string[] Headings = { "ID", "Vou ID", "Vou #", "Stock #", "Stock Title", "Qty", "UOM", "Size", "Rate", "Amount", "Description", "Comments", "Total Rs." };
+            Grid_Inventory.Columns[0].HeaderText = "SRNO";
+            Grid_Inventory.Columns[1].HeaderText = "Stock Title";
+            Grid_Inventory.Columns[2].HeaderText = "Size";
+            Grid_Inventory.Columns[3].HeaderText = "Measuer";
+            Grid_Inventory.Columns[4].HeaderText = "Quantity";
+            Grid_Inventory.Columns[5].HeaderText = "Rate";
+            Grid_Inventory.Columns[6].HeaderText = "Amount";
+            Grid_Inventory.Columns[7].HeaderText = "Status";
 
-            List<string> _Headings = new List<string>(Headings);
-            int i = 0;
+            Grid_Inventory.Columns[0].Width = 30;
+            Grid_Inventory.Columns[1].Width = 240;
+            Grid_Inventory.Columns[2].Width = 80;
+            Grid_Inventory.Columns[3].Width = 80;
+            Grid_Inventory.Columns[4].Width = 90;
+            Grid_Inventory.Columns[5].Width = 90;
+            Grid_Inventory.Columns[6].Width = 120;
+            Grid_Inventory.Columns[7].Width = 80;
 
-            Grid_Inventory.Columns[0].Visible = false;
-            Grid_Inventory.Columns[1].Width = 50;
-            Grid_Inventory.Columns[2].Width = 60;
-            Grid_Inventory.Columns[3].Width = 100;
-            Grid_Inventory.Columns[4].Width = 200;
-            Grid_Inventory.Columns[5].Width = 70;
-            Grid_Inventory.Columns[6].Width = 70;
-            Grid_Inventory.Columns[7].Width = 70;
-            Grid_Inventory.Columns[8].Width = 70;
-            Grid_Inventory.Columns[9].Width = 90;
-            Grid_Inventory.Columns[10].Width = 120;
-            Grid_Inventory.Columns[11].Width = 150;
-            Grid_Inventory.Columns[12].Width = 60;
-
-            Grid_Inventory.Columns[1].HeaderText = _Headings[i + 1]; i += 1;            // Set Header title of Data Grid.
-            Grid_Inventory.Columns[2].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[3].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[4].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[5].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[6].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[7].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[8].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[9].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[10].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[11].HeaderText = _Headings[i + 1]; i += 1;
-            Grid_Inventory.Columns[12].HeaderText = _Headings[i + 1]; i += 1;
-
-
-            Grid_Inventory.Columns[7].DefaultCellStyle.Format = "###,###,###,###.##";
-
-            Grid_Inventory.Columns[0].Visible = false;              // Disable ID
-            Grid_Inventory.Columns[1].Visible = false;              // Disable Vou ID
-            Grid_Inventory.Columns[2].Visible = false;              // Disable Vou No
-            Grid_Inventory.Columns[11].Visible = false;            // Disable Comments
-            Grid_Inventory.Columns[12].Visible = false;             // Disable Vou Total Amount
+            Grid_Inventory.Columns[3].DefaultCellStyle.Format = CurrencyFormat;
+            Grid_Inventory.Columns[4].DefaultCellStyle.Format = CurrencyFormat;
+            Grid_Inventory.Columns[5].DefaultCellStyle.Format = CurrencyFormat;
+            Grid_Inventory.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
-
-
-        private void Grid_Inventory_Enter(object sender, EventArgs e)
-        {
-        }
 
         #endregion
 
         #region Stock Row
-        private void Grid_Inventory_UserAddedRow(object sender, DataGridViewRowEventArgs e)
-        {
 
-            Grid_Inventory.Rows[0].Cells["ID"].Value = -1;
-            Grid_Inventory.Rows[0].Cells["Vou_ID"].Value = Transaction_ID;
-            Grid_Inventory.Rows[0].Cells["Vou_No"].Value = MyInventoryClass.Vou_No;
-            Grid_Inventory.Rows[0].Cells["Stock"].Value = 0;
-            Grid_Inventory.Rows[0].Cells["Title"].Value = "title";
-            Grid_Inventory.Rows[0].Cells["Qty"].Value = 0;
-            Grid_Inventory.Rows[0].Cells["UOM"].Value = "";
-            Grid_Inventory.Rows[0].Cells["Size"].Value = "";
-            Grid_Inventory.Rows[0].Cells["Rate"].Value = 0;
-            Grid_Inventory.Rows[0].Cells["Amount"].Value = 0;
-            Grid_Inventory.Rows[0].Cells["Description"].Value = "desc";
-            Grid_Inventory.Rows[0].Cells["Comments"].Value = "Comm";
-            Grid_Inventory.Rows[0].Cells["Amount"].Value = MyInventoryClass.Vou_Amount;
-            MessageBox.Show("User Row Added");
-        }
-
-        private void Grid_Inventory_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-        }
         #endregion
 
         #region Form close
@@ -151,8 +158,8 @@ namespace Applied_Accounts.Forms
 
         private void txtQty_Leave(object sender, EventArgs e)
         {
-            txtAmount.Text = (MyQty * MyRate).ToString("###,###,###.##");
-            txtQty.Text = (Conversion.ToLong(txtQty.Text).ToString("###,###,###.##"));
+            txtAmount.Text = (MyQty * MyRate).ToString(CurrencyFormat);
+            txtQty.Text = (Conversion.ToLong(txtQty.Text).ToString(CurrencyFormat));
         }
 
         #endregion
@@ -166,13 +173,120 @@ namespace Applied_Accounts.Forms
 
         private void txtRate_Leave(object sender, EventArgs e)
         {
-            txtAmount.Text = (MyQty * MyRate).ToString("###,###,###.##");
-            txtRate.Text = (Conversion.ToLong(txtRate.Text).ToString("###,###,###.##"));
+            txtAmount.Text = (MyQty * MyRate).ToString(CurrencyFormat);
+            txtRate.Text = Conversion.ToLong(txtRate.Text).ToString(CurrencyFormat);
+        }
+
+        #endregion
+
+        #region Add / Save / delete Button
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+
+
+            MyInventoryClass.StockRow["SRNO"] = MyInventoryClass.MaxSRNO() + 1;
+            MyInventoryClass.StockRow["Vou_ID"] = MyInventoryClass.Vou_ID;
+            MyInventoryClass.StockRow["Vou_No"] = MyInventoryClass.Vou_No;
+            MyInventoryClass.StockRow["Vou_Amount"] = MyInventoryClass.Vou_Amount;
+            MyInventoryClass.StockRow["Stock"] = MyInventoryClass.Stock_COA;
+            MyInventoryClass.StockRow["Qty"] = 0.00;
+            MyInventoryClass.StockRow["UOM"] = "";
+            MyInventoryClass.StockRow["Size"] = "";
+            MyInventoryClass.StockRow["Rate"] = 0.00;
+            MyInventoryClass.StockRow["Amount"] = 0.00;
+            MyInventoryClass.StockRow["Description"] = "";
+            MyInventoryClass.StockRow["Comments"] = "";
+            MyInventoryClass.StockRow["Batch"] = 0;
+
+            Set_Textbox();            // Refresh Text box
+
+        }
+
+        private void btnSave_Click(object sender, EventArgs e)
+        {
+            MyInventoryClass.StockRow["SRNO"] = Conversion.ToLong(txtID.Text);
+            MyInventoryClass.StockRow["Vou_ID"] = Conversion.ToLong(txtVouID.Text);
+            MyInventoryClass.StockRow["Vou_No"] = txtVouNo.Text.Trim();
+            MyInventoryClass.StockRow["Vou_Amount"] = Conversion.ToMoney(txtTotalAmount.Text);
+            MyInventoryClass.StockRow["Stock"] = MyInventoryClass.Stock_COA;
+            MyInventoryClass.StockRow["Qty"] = Conversion.ToMoney(txtQty.Text);
+            MyInventoryClass.StockRow["UOM"] = txtUOM.Text.Trim();
+            MyInventoryClass.StockRow["Size"] = txtSize.Text.Trim();
+            MyInventoryClass.StockRow["Rate"] = Conversion.ToMoney(txtRate.Text);
+            MyInventoryClass.StockRow["Amount"] = Conversion.ToMoney(txtAmount.Text);
+            MyInventoryClass.StockRow["Description"] = txtDescription.Text.Trim();
+            MyInventoryClass.StockRow["Comments"] = txtComments.Text.Trim();
+            MyInventoryClass.StockRow["Batch"] = 0;
+            
+
+            MyInventoryClass.Save();                                                                                            // Save a record in Table and Grid View 
+            Grid_Inventory.DataSource = MyInventoryClass.UpdateGridView();
+            txtGridAmount.Text = MyInventoryClass.Grid_Amount.ToString(CurrencyFormat);
+            Set_Textbox(MyInventoryClass.Row_Index);                                                              // Refresh Text box
+
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            foreach (DataRow _Row in MyInventoryClass.tb_Inventory.Rows)
+            {
+                if (Conversion.ToLong(_Row["ID"]) == Conversion.ToLong(txtID.Text))
+                {
+                    MyInventoryClass.StockRow["ID"] = Conversion.ToLong(_Row["ID"]) * -1;
+                    MyInventoryClass.Row_Index = MyInventoryClass.tb_Inventory.Rows.IndexOf(_Row);   // SaveFileDialog Table Index
+                }
+
+                MyInventoryClass.Save();                                                                                               // Update Table Record
+                Grid_Inventory.DataSource = MyInventoryClass.UpdateGridView();                             // Update Grid Source
+                txtGridAmount.Text = MyInventoryClass.Grid_Amount.ToString(CurrencyFormat);       // Update Grid total Amount Textbox
+                Set_Textbox(MyInventoryClass.Row_Index);                                                                 // Update Textbox 
+            }
+        }
+      
+
+        #endregion
+
+        #region Totals
+
+        private void txtGridAmount_TextChanged(object sender, EventArgs e)
+        {
+            decimal Amount1 = Conversion.ToMoney(txtTotalAmount.Text), Amount2 = Conversion.ToMoney(MyInventoryClass.GridTotal());
+            txtGridAmount.Text = Amount2.ToString(CurrencyFormat);
+            txtDifference.Text = (Amount1 - Amount2).ToString(CurrencyFormat);
+        }
+
+
+
+
+        #endregion
+
+        #region Grid Events
+
+
+       
+
+        private void Grid_Inventory_CurrentCellChanged(object sender, EventArgs e)
+        {
+            if (Controls["Grid_Inventory"].Focused)         // Execute this event if grid is focused.
+            {
+                long GridSRNO = Conversion.ToLong(Grid_Inventory.CurrentRow.Cells["SRNO"].Value);
+                foreach (DataRow _Row in MyInventoryClass.tb_Inventory.Rows)
+                {
+                    if (GridSRNO == Conversion.ToLong(_Row["SRNO"]))
+                    {
+                        MyInventoryClass.Row_Index = MyInventoryClass.tb_Inventory.Rows.IndexOf(_Row);
+                        Set_Textbox(MyInventoryClass.Row_Index);
+                    }
+                }
+            }
         }
 
 
         #endregion
 
-        
+        private void frmInventory_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+        }
     }       // END -- Class
 }           // END -- Namespace

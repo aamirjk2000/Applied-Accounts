@@ -334,28 +334,25 @@ namespace Applied_Accounts.Classes
             }
         }
 
+        #endregion
+
         #region Press Key Validations
 
         public static bool IsNumeric(object sender, KeyPressEventArgs e)
         {
             //Verify that the pressed key isn't CTRL or any non-numeric digit
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.')) { e.Handled = true; }
 
             //If you want, you can allow decimal(float) numbers
-            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
-
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1)) {e.Handled = true;}
+            if (e.KeyChar == '-') { e.Handled = false; }
+            
             return e.Handled;
         }
         public static bool IsDigit(object sender, KeyPressEventArgs e)
         {
             //Verify that the pressed key isn't CTRL or any non-numeric digit
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.') && (e.KeyChar != '-'))
             {
                 e.Handled = true;
             }
@@ -375,6 +372,7 @@ namespace Applied_Accounts.Classes
             }
             return _Result;
         }
+        
 
         #endregion
 
@@ -414,7 +412,7 @@ namespace Applied_Accounts.Classes
 
             return _Result;
         }
-        #endregion
+
 
         #region Browse Window
 

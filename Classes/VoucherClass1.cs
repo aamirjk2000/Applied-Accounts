@@ -11,6 +11,8 @@ namespace Applied_Accounts.Classes
     interface IVoucherClass1
     {
 
+
+
         void Insert(DataRow _Row);
         void Update(DataRow _Row);
         void Delete(DataRow _Row);
@@ -28,11 +30,17 @@ namespace Applied_Accounts.Classes
 
     public class VoucherClass1 : IVoucherClass1
     {
+
+        #region Varoables
+
         public DataSet ds_Voucher;
         public DataTable tb_Voucher { get => ds_Voucher.Tables["Ledger"]; }
-        public DataTable tb_Voucher_Delete;
         public DataTable tb_Voucher_Original;
         public DataTable tb_GridData;
+
+        public DataView dv_Inventory { get => ds_Voucher.Tables["Inventory"].AsDataView(); }
+        public DataView dv_Payroll;  //{ get => ds_Voucher.Tables["Inventory"].AsDataView()};
+
 
         public string Vou_No;
         public DateTime Vou_Date;
@@ -52,14 +60,15 @@ namespace Applied_Accounts.Classes
 
         public Array Vou_Types = Enum.GetValues(typeof(Applied.VoucherType));
         public bool Voucher_Loaded = false;                             //  True if, Voucher has been loaded sucessfully
-        public bool Voucher_Saved = true;                               //
-        public bool New_Record = false;                                 //
-        public bool Save_Sucessfull = false;                            //  True if, Voucher has been saved sucessfull
+        public bool Voucher_Saved = true;                                 //
+        public bool New_Record = false;                                   //
+        public bool Save_Sucessfull = false;                              //  True if, Voucher has been saved sucessfull
         public bool Record_is_Saved = false;
         public int Effected_Records = 0;
         public string MyMessage = "";
         public long Max_ID;
 
+        #endregion
 
         public enum Voucher_Status
         {
@@ -110,6 +119,9 @@ namespace Applied_Accounts.Classes
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Stock, true).Copy());
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Employees, true).Copy());
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.POrder).Copy());
+            ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Inventory, "Vou_No='" + Vou_No + "';").Copy());
+            // Payroll Table will be add when payroll codes ..... 10-01-2022
+
 
             ds_Voucher.Relations.Add("rlt_COA", ds_Voucher.Tables["COA"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["COA"]);
             ds_Voucher.Relations.Add("rlt_PRJ", ds_Voucher.Tables["Projects"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["Project"]);
@@ -118,7 +130,7 @@ namespace Applied_Accounts.Classes
             ds_Voucher.Relations.Add("rlt_STK", ds_Voucher.Tables["Stock"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["Stock"]);
             ds_Voucher.Relations.Add("rlt_EMP", ds_Voucher.Tables["Employees"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["Employee"]);
 
-            tb_Voucher_Delete = ds_Voucher.Tables["Ledger"].Clone();
+
             tb_GridData = Create_GridTable();
 
         }
@@ -562,7 +574,7 @@ namespace Applied_Accounts.Classes
         }
 
         #endregion
-               
+
 
     }       // END Class
 }           // END NameSpace
