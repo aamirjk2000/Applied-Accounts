@@ -91,6 +91,8 @@ namespace Applied_Accounts.Forms
                 txtAmount.Enabled = true;
                 txtDescription.Enabled = true;
                 txtComments.Enabled = true;
+
+                txtSize.Focus();
             }
             #endregion
 
@@ -182,21 +184,23 @@ namespace Applied_Accounts.Forms
         #region Add / Save / delete Button
         private void btnAdd_Click(object sender, EventArgs e)
         {
+            //if (!RecordFound(Conversion.ToLong(MyInventoryClass.StockRow["SRNO"]))) ;
+            //{
+                MyInventoryClass.StockRow["SRNO"] = MyInventoryClass.MaxSRNO() + 1;
+                MyInventoryClass.StockRow["Vou_ID"] = MyInventoryClass.Vou_ID;
+                MyInventoryClass.StockRow["Vou_No"] = MyInventoryClass.Vou_No;
+                MyInventoryClass.StockRow["Vou_Amount"] = MyInventoryClass.Vou_Amount;
+                MyInventoryClass.StockRow["Stock"] = MyInventoryClass.Stock_COA;
+                MyInventoryClass.StockRow["Qty"] = 0.00;
+                MyInventoryClass.StockRow["UOM"] = "";
+                MyInventoryClass.StockRow["Size"] = "";
+                MyInventoryClass.StockRow["Rate"] = 0.00;
+                MyInventoryClass.StockRow["Amount"] = 0.00;
+                MyInventoryClass.StockRow["Description"] = "";
+                MyInventoryClass.StockRow["Comments"] = "";
+                MyInventoryClass.StockRow["Batch"] = 0;
 
-
-            MyInventoryClass.StockRow["SRNO"] = MyInventoryClass.MaxSRNO() + 1;
-            MyInventoryClass.StockRow["Vou_ID"] = MyInventoryClass.Vou_ID;
-            MyInventoryClass.StockRow["Vou_No"] = MyInventoryClass.Vou_No;
-            MyInventoryClass.StockRow["Vou_Amount"] = MyInventoryClass.Vou_Amount;
-            MyInventoryClass.StockRow["Stock"] = MyInventoryClass.Stock_COA;
-            MyInventoryClass.StockRow["Qty"] = 0.00;
-            MyInventoryClass.StockRow["UOM"] = "";
-            MyInventoryClass.StockRow["Size"] = "";
-            MyInventoryClass.StockRow["Rate"] = 0.00;
-            MyInventoryClass.StockRow["Amount"] = 0.00;
-            MyInventoryClass.StockRow["Description"] = "";
-            MyInventoryClass.StockRow["Comments"] = "";
-            MyInventoryClass.StockRow["Batch"] = 0;
+            //}
 
             Set_Textbox();            // Refresh Text box
 
@@ -217,7 +221,7 @@ namespace Applied_Accounts.Forms
             MyInventoryClass.StockRow["Description"] = txtDescription.Text.Trim();
             MyInventoryClass.StockRow["Comments"] = txtComments.Text.Trim();
             MyInventoryClass.StockRow["Batch"] = 0;
-            
+
 
             MyInventoryClass.Save();                                                                                            // Save a record in Table and Grid View 
             Grid_Inventory.DataSource = MyInventoryClass.UpdateGridView();
@@ -242,7 +246,7 @@ namespace Applied_Accounts.Forms
                 Set_Textbox(MyInventoryClass.Row_Index);                                                                 // Update Textbox 
             }
         }
-      
+
 
         #endregion
 
@@ -263,7 +267,7 @@ namespace Applied_Accounts.Forms
         #region Grid Events
 
 
-       
+
 
         private void Grid_Inventory_CurrentCellChanged(object sender, EventArgs e)
         {

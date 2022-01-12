@@ -92,7 +92,6 @@ namespace Applied_Accounts.Classes
             Vou_Date = DateTime.Now;
             Vou_Type = string.Empty;
             Vou_Status = "New";
-
             //MyRow = tb_Voucher.NewRow();
 
         }
@@ -122,14 +121,12 @@ namespace Applied_Accounts.Classes
             ds_Voucher.Tables.Add(AppliedTable.GetDataTable(Tables.Inventory, "Vou_No='" + Vou_No + "';").Copy());
             // Payroll Table will be add when payroll codes ..... 10-01-2022
 
-
             ds_Voucher.Relations.Add("rlt_COA", ds_Voucher.Tables["COA"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["COA"]);
             ds_Voucher.Relations.Add("rlt_PRJ", ds_Voucher.Tables["Projects"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["Project"]);
             ds_Voucher.Relations.Add("rlt_SUP", ds_Voucher.Tables["Suppliers"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["Supplier"]);
             ds_Voucher.Relations.Add("rlt_UNI", ds_Voucher.Tables["Units"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["Unit"]);
             ds_Voucher.Relations.Add("rlt_STK", ds_Voucher.Tables["Stock"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["Stock"]);
             ds_Voucher.Relations.Add("rlt_EMP", ds_Voucher.Tables["Employees"].Columns["ID"], ds_Voucher.Tables["Ledger"].Columns["Employee"]);
-
 
             tb_GridData = Create_GridTable();
 
@@ -198,19 +195,26 @@ namespace Applied_Accounts.Classes
 
         public void Save(DataTable _Voucher)
         {
+            #region Voucher Amunt / Balance
+
             if (!Is_Balanced())
             {
                 string _Message = string.Format("Voucher Debit and Credirt is not equal. \n {1,15:N0} Debit & {1,15:N0} Credit ", (decimal)DR_Amount, (decimal)CR_Amount);
                 MessageBox.Show(_Message, "Voucher", MessageBoxButtons.OK);
                 return;
             }
-            //=========================================================================================== RETURN 
+
+            #endregion
+
+            #region Create New voucher
 
             if (Vou_No.Trim().ToUpper() == "NEW")
             {
                 Vou_No = Create_Voucher_Number();
             }
+            #endregion
 
+            #region Variables
             DataView View_Ledger = AppliedTable.GetDataTable(Tables.Ledger).AsDataView();
             long _ID = 0;
             string Action = "";
@@ -218,11 +222,14 @@ namespace Applied_Accounts.Classes
             Effected_Records = 0;
             Max_ID = Conversion.ToLong(View_Ledger.Table.Compute("MAX(ID)", string.Empty).ToString());
 
+            #endregion
+
             foreach (DataRow _Row in _Voucher.Rows)
             {
                 _ID = Conversion.ToLong(_Row["ID"].ToString());                                 // Get Record ID
                 int _SRNO = Conversion.ToInteger(_Row["SRNO"].ToString());            // Get Voucher Serial No.
 
+                #region Action
                 if (_ID == 0)
                 {
                     Action = "Insert";                      // New Record
@@ -231,27 +238,27 @@ namespace Applied_Accounts.Classes
                 {
                     Action = "Update";                  // Record Exist / Present
                 }
-
                 if (_SRNO < 0)
                 {
                     Action = "Delete";                      // DELETE IF SERIAL IS IN NEGATIVE.
                 }
+                #endregion
 
                 #region Set Null Values if applicable.
                 _Row["Vou_No"] = Vou_No;
                 _Row["Vou_Date"] = Vou_Date;
                 _Row["Vou_Type"] = Vou_Type;
                 _Row["SRNO"] = _SRNO_NEW; _SRNO_NEW += 1;
-                if (Conversion.ToLong(_Row["Project"].ToString()) == 0) { _Row["Project"] = 0; }
-                if (Conversion.ToLong(_Row["Supplier"].ToString()) == 0) { _Row["Supplier"] = 0; }
-                if (Conversion.ToLong(_Row["Unit"].ToString()) == 0) { _Row["Unit"] = 0; }
-                if (Conversion.ToLong(_Row["Stock"].ToString()) == 0) { _Row["Stock"] = 0; }
-                if (Conversion.ToLong(_Row["Employee"].ToString()) == 0) { _Row["Employee"] = 0; }
-                if (Conversion.ToLong(_Row["POrder"].ToString()) == 0) { _Row["POrder"] = 0; }
-                if (Conversion.ToMoney(_Row["DR"].ToString()) == 0) { _Row["DR"] = 0; }
-                if (Conversion.ToMoney(_Row["CR"].ToString()) == 0) { _Row["CR"] = 0; }
+                if (Conversion.ToLong(_Row["Project"]) == 0) { _Row["Project"] = 0; }
+                if (Conversion.ToLong(_Row["Supplier"]) == 0) { _Row["Supplier"] = 0; }
+                if (Conversion.ToLong(_Row["Unit"]) == 0) { _Row["Unit"] = 0; }
+                if (Conversion.ToLong(_Row["Stock"]) == 0) { _Row["Stock"] = 0; }
+                if (Conversion.ToLong(_Row["Employee"]) == 0) { _Row["Employee"] = 0; }
+                if (Conversion.ToLong(_Row["POrder"]) == 0) { _Row["POrder"] = 0; }
+                if (Conversion.ToMoney(_Row["DR"]) == 0) { _Row["DR"] = 0; }
+                if (Conversion.ToMoney(_Row["CR"]) == 0) { _Row["CR"] = 0; }
                 if (string.IsNullOrWhiteSpace(_Row["RefNo"].ToString())) { _Row["RefNo"] = DBNull.Value; }
-                if (string.IsNullOrWhiteSpace(_Row["Remarks"].ToString())) { _Row["Remarks"] = DBNull.Value; }
+                if (string.IsNullOrWhiteSpace(_Row["Remarks"].ToString())) { _Row["Remarks"] = DBNull.Value; }          // Comments
                 if (string.IsNullOrWhiteSpace(_Row["Chq_No"].ToString())) { _Row["Chq_No"] = DBNull.Value; _Row["Chq_Date"] = DBNull.Value; };
                 if (string.IsNullOrWhiteSpace(_Row["Description"].ToString())) { _Row["Description"] = Vou_No; }
 
@@ -262,14 +269,21 @@ namespace Applied_Accounts.Classes
                 {
                     case "Insert":
                         Insert(_Row);
+                        if (IsStockNature(_Row)) { SaveStock(   tb_   tb_Inventories, "Insert"); }
+                        if (IsPayrollNature(_Row)) { SavePayroll(tb_Inventories, "Insert"); }
                         break;
 
                     case "Update":
                         Update(_Row);
+                        if (IsStockNature(_Row)) { 
+                            SaveStock(tb_Inventories, "Update"); }
+                        if (IsPayrollNature(_Row)) { SavePayroll(tb_Inventories, "Update"); }
                         break;
 
                     case "Delete":
                         Delete(_Row);
+                        if (IsStockNature(_Row)) { SaveStock(tb_Inventories, "Delete"); }
+                        if (IsPayrollNature(_Row)) { SavePayroll(tb_Inventories, "Delete"); }
                         break;
                 }
             }
@@ -281,12 +295,15 @@ namespace Applied_Accounts.Classes
 
         }
 
+
+        #region Voucher SQL Function
+
         public void Insert(DataRow _Row)
         {
             SQLiteCommand _CmdInsert = new SQLiteCommand();
             try
             {
-                Max_ID += 1; _Row["ID"] = Max_ID;
+                _Row["ID"] = Applied.MaxID(Tables.Inventory);
                 _CmdInsert = Connection_Class.SQLite.SQLiteInsert(_Row, Connection.AppliedConnection());
                 Effected_Records += _CmdInsert.ExecuteNonQuery();
                 if (Effected_Records > 0) { Record_is_Saved = true; } else { Record_is_Saved = false; }
@@ -329,6 +346,68 @@ namespace Applied_Accounts.Classes
             }
 
         }
+        #endregion
+
+        #region Stock SQL Function
+
+        public void SaveStock(DataTable _StockTable, string _Action)
+        {
+            DataView _StockView = _StockTable.AsDataView();
+
+            if (_Action == "Delete") { Stock_DeleteAll(_StockView); }
+            else
+            {
+                foreach (DataRow _Row in _StockView.Table.Rows)
+                {
+                    long _ID = Conversion.ToLong(_Row["ID"]);
+
+                    if (_ID == 0)                               // New Record
+                    {
+                        Insert(_Row);
+                    }
+                    if (_ID > 0)                               // Update Record
+                    {
+                        Update(_Row);
+                    }
+                    if (_ID < 0)                               // Delete Record
+                    {
+                        Delete(_Row);
+                    }
+                   
+                }
+            }
+        }
+
+       
+
+        public void Stock_DeleteAll(DataView _Inventory)
+        { }
+
+        #endregion
+
+        #region payroll SQL Function 
+
+        public void SavePayroll(DataTable _PayrollTable, string _Action)
+        {
+
+        }
+
+        public void Payroll_Insert(DataRow _Row)
+        {
+
+        }
+
+        public void Payroll_Update(DataRow _Row)
+        {
+
+        }
+
+        public void Payroll_Delete(DataRow _Row)
+        {
+
+        }
+
+        #endregion
 
         #endregion
 
@@ -565,12 +644,25 @@ namespace Applied_Accounts.Classes
 
         #endregion
 
-        #region Get Nature Code
 
-        public long GetNature(DataRow _Row)
+        #region Get Account Neture
+
+        public long GetNature(DataRow _Row)                                // Narure ID from COA Table
         {
             long _COA = Conversion.ToLong(_Row["COA"]);
             return Applied.AccountNature(_COA);
+        }
+        private bool IsStockNature(DataRow _Row)                        // Check it is Stock Nature COA ??
+        {
+            long StockNature_COA = GetNature(_Row);
+            long StockNature = Conversion.ToLong(Applied.GetInteger("NatureStock"));
+            if (StockNature == StockNature_COA) { return true; } else { return false; }
+        }
+        private bool IsPayrollNature(DataRow _Row)                      // Check it is Payroll Nature COA ??
+        {
+            long PayrollNature_COA = GetNature(_Row);
+            long PayrollNature = Conversion.ToLong(Applied.GetInteger("NaturePayroll"));
+            if (PayrollNature == PayrollNature_COA) { return true; } else { return false; }
         }
 
         #endregion

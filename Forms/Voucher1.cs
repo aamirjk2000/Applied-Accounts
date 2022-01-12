@@ -38,7 +38,7 @@ namespace Applied_Accounts.Forms
         private DataTable tb_Stock { get => MyVoucherClass.ds_Voucher.Tables["Stock"]; }
         private DataTable tb_Employees { get => MyVoucherClass.ds_Voucher.Tables["Employees"]; }
         private DataTable tb_POrder { get => MyVoucherClass.ds_Voucher.Tables["POrder"]; }
-        private DataTable tb_Inventories { get => MyVoucherClass.ds_Voucher.Tables["Inventory"]; }
+        private DataTable tb_Inventories { get; set; }
         private DataTable tb_Voucher { get => MyVoucherClass.tb_Voucher; }
         private DataView vw_CashBank
         {
@@ -1359,21 +1359,22 @@ namespace Applied_Accounts.Forms
         private void Img_Stock_Click(object sender, EventArgs e)
         {
             long DefaultNature = Conversion.ToLong(Applied.GetInteger("NatureStock"));    // Get Default Nature Value for Stock Account
-            
+
             // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
-            if ( DefaultNature == MyVoucherClass.GetNature(MyDataRow.Row))
+            if (DefaultNature == MyVoucherClass.GetNature(MyDataRow.Row))
             {
                 InventoryClass _InventoryClass = new InventoryClass(MyDataRow.Row);             // Create a Inventory Class
-                _InventoryClass.tb_Inventory = tb_Inventories;                                                      // Copy DB Tabel to Class Table;
+                _InventoryClass.tb_Inventory = AppliedTable.GetDataTable(Tables.Inventory, "Vou_No='" + MyVoucherClass.Vou_No + "'");                                                      // Copy DB Tabel to Class Table;
                 frmInventory Brows_Inventory = new frmInventory(_InventoryClass);                   // Create Stock Inventory form
                 Brows_Inventory.ShowDialog();                                                                               // show Inventory Form
 
-                DataView dv_Inventory = tb_Inventories.AsDataView();
+                #region Update Ledger Inventory from Inventory form Table
 
-                foreach(DataRow _Row in Brows_Inventory.MyInventoryClass.tb_Inventory.Rows)
+                DataView dv_Inventory = _InventoryClass.tb_Inventory.AsDataView();
+                foreach (DataRow _Row in Brows_Inventory.MyInventoryClass.tb_Inventory.Rows)
                 {
                     dv_Inventory.RowFilter = "Vou_ID=" + _Row["Vou_ID"].ToString().Trim() + " AND SRNO=" + _Row["SRNO"].ToString().Trim();
-                    if (dv_Inventory.Count== 1)
+                    if (dv_Inventory.Count == 1)
                     {
                         dv_Inventory[0].Row["SRNO"] = _Row["SRNO"];
                         dv_Inventory[0].Row["Vou_No"] = _Row["Vou_No"];
@@ -1383,6 +1384,7 @@ namespace Applied_Accounts.Forms
                         dv_Inventory[0].Row["Qty"] = _Row["Qty"];
                         dv_Inventory[0].Row["UOM"] = _Row["UOM"];
                         dv_Inventory[0].Row["Size"] = _Row["Size"];
+                        dv_Inventory[0].Row["Rate"] = _Row["Rate"];
                         dv_Inventory[0].Row["Amount"] = _Row["Amount"];
                         dv_Inventory[0].Row["Description"] = _Row["Description"];
                         dv_Inventory[0].Row["Comments"] = _Row["Comments"];
@@ -1392,7 +1394,7 @@ namespace Applied_Accounts.Forms
                     else
                     {
                         // Add a New Record.
-                        DataRow _NewRow = tb_Inventories.NewRow();
+                        DataRow _NewRow = _InventoryClass.tb_Inventory.NewRow();
 
                         _NewRow["ID"] = _Row["ID"];
                         _NewRow["Vou_No"] = _Row["Vou_No"];
@@ -1408,11 +1410,13 @@ namespace Applied_Accounts.Forms
                         _NewRow["Comments"] = _Row["Comments"];
                         _NewRow["Batch"] = _Row["Batch"];
                         _NewRow["Status"] = _Row["Status"];
-                        tb_Inventories.Rows.Add(_NewRow);
+                        _InventoryClass.tb_Inventory.Rows.Add(_NewRow);
                     }
 
+                    tb_Inventories = _InventoryClass.tb_Inventory;
                 }
 
+                #endregion
 
 
             }
@@ -1425,17 +1429,9 @@ namespace Applied_Accounts.Forms
         private void Imp_Employees_Click(object sender, EventArgs e)
         {
             long _Nature = GetNature("NaturePayroll");    // Get Default Nature Value for Stock Account
-
-            // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
-            //if (_Nature == MyVoucherClass.GetNature(MyDataRow.Row))
-            //{
-                //frmInventory Brows_Invenotory = new frmInventory(MyDataRow.Row);
-                //Brows_Invenotory.ShowDialog();
-            //}
-
         }
 
-        
+
 
 
 

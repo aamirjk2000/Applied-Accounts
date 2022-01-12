@@ -372,9 +372,11 @@ namespace Applied_Accounts.Classes
             }
             return _Result;
         }
-        
+
 
         #endregion
+
+        #region Get Voucher First Char
 
         public static string VouChar(string _VouType)
         {
@@ -412,6 +414,7 @@ namespace Applied_Accounts.Classes
 
             return _Result;
         }
+        #endregion
 
 
         #region Browse Window
@@ -513,6 +516,31 @@ namespace Applied_Accounts.Classes
             }
 
         }
+        #endregion
+
+        #region Seek ID / Max ID
+
+        public static bool Seek(long _ID, DataTable _Table)
+        {
+            return Seek(_ID, _Table.AsDataView());
+        }
+        public static bool Seek(long _ID, DataView _DataView)
+        {
+            _DataView.RowFilter = "ID=" + _ID.ToString().Trim();
+            if(_DataView.Count == 1)
+            { return true; }
+            else { return false; }
+        }
+
+        public static long MaxID(object _TableEnum)
+        {
+            DataTable _Table = AppliedTable.GetDataTable(_TableEnum);
+            if(_Table.Rows.Count ==0 ) { return 0; } else
+            {
+                return (Conversion.ToLong(_Table.Compute("MAX(ID)", "")));
+            }
+        }
+
         #endregion
 
     }       // END Main Class
