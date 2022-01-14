@@ -444,8 +444,7 @@ namespace Applied_Accounts.Classes
 
         #endregion
 
-        #region SEARCH Code, Tag & Title
-
+        #region Title
         public static string Title(long _ID, DataView _DataView)                 // return Title by ID of Data Table
         {
             _DataView.RowFilter = "ID=" + _ID.ToString();
@@ -459,6 +458,35 @@ namespace Applied_Accounts.Classes
             if (_DataView.Count == 1) { return _DataView[0].Row["Title"].ToString().Trim(); }
             return "";
         }
+
+        public static string Title(long _ID, int _Table)                 // return Title by ID of Data Table
+        {
+            DataView _DataView = AppliedTable.GetDataTable(_Table).AsDataView();
+            _DataView.RowFilter = "Code=" + _ID.ToString().Trim();
+            if (_DataView.Count == 1) { return _DataView[0].Row["Title"].ToString().Trim(); }
+            return "";
+        }
+
+        public static string Title(long _ID, object _TablesEnum)                 // return Title by ID of Data Table
+        {
+            DataView _DataView = AppliedTable.GetDataTable((int)_TablesEnum).AsDataView();
+            _DataView.RowFilter = "Code=" + _ID.ToString().Trim();
+            if (_DataView.Count == 1) { return _DataView[0].Row["Title"].ToString().Trim(); }
+            return "";
+        }
+
+        public static string Title(string _Code, int _Table)                 // return Title by ID of Data Table
+        {
+            DataView _DataView = AppliedTable.GetDataTable(_Table).AsDataView();
+            _DataView.RowFilter = "Code='" + _Code.Trim() + "'";
+            if (_DataView.Count == 1) { return _DataView[0].Row["Title"].ToString().Trim(); }
+            return "";
+        }
+
+        #endregion
+
+        #region SEARCH Code, Tag
+
 
         public static string Code(long _ID, DataView _DataView)
         {

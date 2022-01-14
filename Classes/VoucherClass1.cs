@@ -38,8 +38,8 @@ namespace Applied_Accounts.Classes
         public DataTable tb_Voucher_Original;
         public DataTable tb_GridData;
 
-        public DataView dv_Inventory { get => ds_Voucher.Tables["Inventory"].AsDataView(); }
-        public DataView dv_Payroll;  //{ get => ds_Voucher.Tables["Inventory"].AsDataView()};
+        public DataView dv_Inventory { get; set; }
+        public DataView dv_Payroll { get; set; }
 
 
         public string Vou_No;
@@ -265,25 +265,27 @@ namespace Applied_Accounts.Classes
                 #endregion
                 //}
 
+                dv_Inventory = ds_Voucher.Tables["Inventory"].AsDataView();
+
                 switch (Action)
                 {
                     case "Insert":
                         Insert(_Row);
-                        if (IsStockNature(_Row)) { SaveStock(   tb_   tb_Inventories, "Insert"); }
-                        if (IsPayrollNature(_Row)) { SavePayroll(tb_Inventories, "Insert"); }
+                        if (IsStockNature(_Row)) { SaveStock(dv_Inventory.Table, "Insert"); }
+                        if (IsPayrollNature(_Row)) { SavePayroll(dv_Inventory.Table, "Insert"); }
                         break;
 
                     case "Update":
                         Update(_Row);
                         if (IsStockNature(_Row)) { 
-                            SaveStock(tb_Inventories, "Update"); }
-                        if (IsPayrollNature(_Row)) { SavePayroll(tb_Inventories, "Update"); }
+                            SaveStock(dv_Inventory.Table, "Update"); }
+                        if (IsPayrollNature(_Row)) { SavePayroll(dv_Inventory.Table, "Update"); }
                         break;
 
                     case "Delete":
                         Delete(_Row);
-                        if (IsStockNature(_Row)) { SaveStock(tb_Inventories, "Delete"); }
-                        if (IsPayrollNature(_Row)) { SavePayroll(tb_Inventories, "Delete"); }
+                        if (IsStockNature(_Row)) { SaveStock(dv_Inventory.Table, "Delete"); }
+                        if (IsPayrollNature(_Row)) { SavePayroll(dv_Inventory.Table, "Delete"); }
                         break;
                 }
             }
@@ -480,9 +482,19 @@ namespace Applied_Accounts.Classes
                 {
                     ds_Voucher.Tables["Ledger"].Rows.Add(_Row.ItemArray);
                 }
-
                 tb_Voucher_Original = ds_Voucher.Tables["Ledger"].Copy();                      // Store Voucher Original Data in saperate Table.
             }
+
+
+            // Fill Inventory Table for Voucher Number.
+            _DataTable = new DataTable();
+            _DataTable = AppliedTable.GetDataTable(Tables.Inventory, "Vou_No='" + ds_Voucher.Tables["Ledger"].Rows[0]["Vou_No"] + "';");
+            ds_Voucher.Tables["Inventory"].Clear();
+            foreach (DataRow _Row in _DataTable.Rows)
+            {
+                ds_Voucher.Tables["Inventory"].Rows.Add(_Row.ItemArray);
+            }
+            dv_Inventory = _DataTable.AsDataView();
 
             return _DataTable;
         }
@@ -518,7 +530,7 @@ namespace Applied_Accounts.Classes
                 _GridRow["SrNo"] = _Row["SRNO"];
                 _GridRow["Vou_no"] = _Row["Vou_No"];
                 _GridRow["Vou_Date"] = _Row["Vou_Date"];
-                _GridRow["Account"] = Applied.Title(Conversion.ToLong(_Row["COA"]), ds_Voucher.Tables["COA"].AsDataView());
+                _GridRow["Account"] = Applied.Title(Conversion.ToLong(_Row["COA"]), Tables.COA);
                 _GridRow["Cheque"] = _Row["Chq_No"];
                 _GridRow["Remarks"] = _Row["Description"];
                 _GridRow["Debit"] = _Row["DR"];

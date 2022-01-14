@@ -110,8 +110,15 @@ namespace Applied_Accounts.Classes
 
         private DataTable CreateTableInventory()
         {
+            if(tb_Inventory == null)
+            { 
             tb_Inventory = AppliedTable.GetDataTable(Tables.Inventory, Filter_Inventory);
             return tb_Inventory;
+            }
+            else
+            {
+                return tb_Inventory;
+            }
         }
 
 
