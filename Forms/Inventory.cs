@@ -184,44 +184,40 @@ namespace Applied_Accounts.Forms
         #region Add / Save / delete Button
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            //if (!RecordFound(Conversion.ToLong(MyInventoryClass.StockRow["SRNO"]))) ;
-            //{
-                MyInventoryClass.StockRow["SRNO"] = MyInventoryClass.MaxSRNO() + 1;
-                MyInventoryClass.StockRow["Vou_ID"] = MyInventoryClass.Vou_ID;
-                MyInventoryClass.StockRow["Vou_No"] = MyInventoryClass.Vou_No;
-                MyInventoryClass.StockRow["Vou_Amount"] = MyInventoryClass.Vou_Amount;
-                MyInventoryClass.StockRow["Stock"] = MyInventoryClass.Stock_COA;
-                MyInventoryClass.StockRow["Qty"] = 0.00;
-                MyInventoryClass.StockRow["UOM"] = "";
-                MyInventoryClass.StockRow["Size"] = "";
-                MyInventoryClass.StockRow["Rate"] = 0.00;
-                MyInventoryClass.StockRow["Amount"] = 0.00;
-                MyInventoryClass.StockRow["Description"] = "";
-                MyInventoryClass.StockRow["Comments"] = "";
-                MyInventoryClass.StockRow["Batch"] = 0;
-
-            //}
-
+            
+            MyInventoryClass.StockRow["SRNO"] = MyInventoryClass.MaxSRNO() + 1;
+            MyInventoryClass.StockRow["Vou_ID"] = MyInventoryClass.Vou_ID;
+            MyInventoryClass.StockRow["Vou_No"] = MyInventoryClass.Vou_No;
+            MyInventoryClass.StockRow["Vou_Amount"] = MyInventoryClass.Vou_Amount;
+            MyInventoryClass.StockRow["Stock"] = MyInventoryClass.Stock_COA;
+            MyInventoryClass.StockRow["Qty"] = 0.00;
+            MyInventoryClass.StockRow["UOM"] = "";
+            MyInventoryClass.StockRow["Size"] = "";
+            MyInventoryClass.StockRow["Rate"] = 0.00;
+            MyInventoryClass.StockRow["Amount"] = 0.00;
+            MyInventoryClass.StockRow["Description"] = "";
+            MyInventoryClass.StockRow["Comments"] = "";
+            MyInventoryClass.StockRow["Batch"] = 0;
+            
             Set_Textbox();            // Refresh Text box
 
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            MyInventoryClass.StockRow["SRNO"] = Conversion.ToLong(txtID.Text);
-            MyInventoryClass.StockRow["Vou_ID"] = Conversion.ToLong(txtVouID.Text);
-            MyInventoryClass.StockRow["Vou_No"] = txtVouNo.Text.Trim();
-            MyInventoryClass.StockRow["Vou_Amount"] = Conversion.ToMoney(txtTotalAmount.Text);
-            MyInventoryClass.StockRow["Stock"] = MyInventoryClass.Stock_COA;
-            MyInventoryClass.StockRow["Qty"] = Conversion.ToMoney(txtQty.Text);
-            MyInventoryClass.StockRow["UOM"] = txtUOM.Text.Trim();
-            MyInventoryClass.StockRow["Size"] = txtSize.Text.Trim();
-            MyInventoryClass.StockRow["Rate"] = Conversion.ToMoney(txtRate.Text);
-            MyInventoryClass.StockRow["Amount"] = Conversion.ToMoney(txtAmount.Text);
-            MyInventoryClass.StockRow["Description"] = txtDescription.Text.Trim();
-            MyInventoryClass.StockRow["Comments"] = txtComments.Text.Trim();
-            MyInventoryClass.StockRow["Batch"] = 0;
-
+                MyInventoryClass.StockRow["SRNO"] = Conversion.ToLong(txtID.Text);
+                MyInventoryClass.StockRow["Vou_ID"] = Conversion.ToLong(txtVouID.Text);
+                MyInventoryClass.StockRow["Vou_No"] = txtVouNo.Text.Trim();
+                MyInventoryClass.StockRow["Vou_Amount"] = Conversion.ToMoney(txtTotalAmount.Text);
+                MyInventoryClass.StockRow["Stock"] = MyInventoryClass.Stock_COA;
+                MyInventoryClass.StockRow["Qty"] = Conversion.ToMoney(txtQty.Text);
+                MyInventoryClass.StockRow["UOM"] = txtUOM.Text.Trim();
+                MyInventoryClass.StockRow["Size"] = txtSize.Text.Trim();
+                MyInventoryClass.StockRow["Rate"] = Conversion.ToMoney(txtRate.Text);
+                MyInventoryClass.StockRow["Amount"] = Conversion.ToMoney(txtAmount.Text);
+                MyInventoryClass.StockRow["Description"] = txtDescription.Text.Trim();
+                MyInventoryClass.StockRow["Comments"] = txtComments.Text.Trim();
+                MyInventoryClass.StockRow["Batch"] = 0;
 
             MyInventoryClass.Save();                                                                                            // Save a record in Table and Grid View 
             Grid_Inventory.DataSource = MyInventoryClass.UpdateGridView();

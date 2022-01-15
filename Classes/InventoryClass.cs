@@ -127,7 +127,7 @@ namespace Applied_Accounts.Classes
         #region Save / Create / Update / Insert / Delete
 
 
-        private bool RecordFound(long _SRNO)
+        public bool RecordFound(long _SRNO)
         {
             if (tb_Inventory.Rows.Count == 0) { return false; }
             DataView _DataView = tb_Inventory.AsDataView();
@@ -259,8 +259,8 @@ namespace Applied_Accounts.Classes
         {
             if (_Row != null)
             {
-                //Filter_Inventory = " Vou_No='" + MyRow["Vou_No"].ToString().Trim() + "' AND Vou_ID=" + MyRow["Vou_ID"].ToString().Trim() + ";";
-                Filter_Inventory = "Vou_ID=" + MyRow["ID"].ToString().Trim();
+                MyRow = _Row;
+                Filter_Inventory = "Vou_No='" + MyRow["Vou_No"].ToString().Trim() + "';";           // filter all Inventory of Voucher
             }
             else
             {
@@ -268,6 +268,12 @@ namespace Applied_Accounts.Classes
             }
         }
 
+        public void FilterTransaction(DataRow _Row) 
+        {
+            MyRow = _Row;
+            Filter_Inventory = " Vou_ID='" + _Row["ID"].ToString().Trim();
+            return;
+        }
         #endregion
 
     }   // END Class

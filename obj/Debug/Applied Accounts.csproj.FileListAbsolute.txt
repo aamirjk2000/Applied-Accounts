@@ -186,6 +186,7 @@ C:\Applied\Backup\Applied_Source\obj\Debug\Applied Accounts.pdb
 C:\Output\Release\Applied Accounts.exe.config
 C:\Output\Release\Applied Accounts.exe
 C:\Output\Release\Applied Accounts.pdb
+D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.SuggestedBindingRedirects.cache
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.AppliedDataGrid.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Components.FKeyID.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.MyTextBox.resources
@@ -193,6 +194,7 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Navigator.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.SearchID.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Components.TextNum.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Components.WinBrowse.resources
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Data.tb_TB_Period.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.frmAccNotes.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.Booking.frmBooking.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.Booking.frmInstalments.resources
@@ -204,6 +206,7 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmEmployees.resour
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmGeneral_Ledger.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmGL_Project.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmGL_Supplier.resources
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmInventory.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmMigration.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmPOrder.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmProject.resources
@@ -232,7 +235,3 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CoreCompileInputs.
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
-D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmInventory.resources
-D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.AssemblyReference.cache
-D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Data.tb_TB_Period.resources
-D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.SuggestedBindingRedirects.cache

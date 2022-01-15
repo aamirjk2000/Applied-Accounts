@@ -46,6 +46,7 @@ namespace Applied_Accounts.Forms
         }
         private DataTable tb_GridData { get => MyVoucherClass.tb_GridData; }
         private DataRowView MyDataRow { get => (DataRowView)TableBinding.Current; }
+        public InventoryClass MyInventoryClass { get => MyVoucherClass.MyInventoryClass; }
 
         private BindingManagerBase TableBinding;
         private BindingManagerBase POrderBinding;
@@ -1363,15 +1364,13 @@ namespace Applied_Accounts.Forms
             // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
             if (DefaultNature == MyVoucherClass.GetNature(MyDataRow.Row))
             {
-                InventoryClass _InventoryClass = new InventoryClass(MyDataRow.Row);             // Create a Inventory Class
-                _InventoryClass.tb_Inventory = MyVoucherClass.dv_Inventory.Table;
-                frmInventory Brows_Inventory = new frmInventory(_InventoryClass);                   // Create Stock Inventory form
-                MyVoucherClass.dv_Inventory = _InventoryClass.tb_Inventory.AsDataView();
-                Brows_Inventory.ShowDialog();                                                                               // show Inventory Form
-                
-                #region Update Ledger Inventory from Inventory form Table
+                MyVoucherClass.MyInventoryClass.FilterTransaction(MyDataRow.Row);
 
-                
+
+                frmInventory Brows_Inventory = new frmInventory(MyInventoryClass);                   // Create Stock Inventory form
+                Brows_Inventory.ShowDialog();                                                                               // show Inventory Form
+
+                #region Update Ledger Inventory from Inventory form Table
                 foreach (DataRow _Row in MyVoucherClass.dv_Inventory.Table.Rows)
                 {
                     MyVoucherClass.dv_Inventory.RowFilter = "Vou_ID=" + _Row["Vou_ID"].ToString().Trim() + " AND SRNO=" + _Row["SRNO"].ToString().Trim();

@@ -38,9 +38,8 @@ namespace Applied_Accounts.Classes
         public DataTable tb_Voucher_Original;
         public DataTable tb_GridData;
 
-        public DataView dv_Inventory { get; set; }
-        public DataView dv_Payroll { get; set; }
-
+        public InventoryClass MyInventoryClass;
+        public DataView dv_Inventory { get => MyInventoryClass.tb_Inventory.AsDataView(); }
 
         public string Vou_No;
         public DateTime Vou_Date;
@@ -265,7 +264,7 @@ namespace Applied_Accounts.Classes
                 #endregion
                 //}
 
-                dv_Inventory = ds_Voucher.Tables["Inventory"].AsDataView();
+                //dv_Inventory = ds_Voucher.Tables["Inventory"].AsDataView();
 
                 switch (Action)
                 {
@@ -277,8 +276,10 @@ namespace Applied_Accounts.Classes
 
                     case "Update":
                         Update(_Row);
-                        if (IsStockNature(_Row)) { 
-                            SaveStock(dv_Inventory.Table, "Update"); }
+                        if (IsStockNature(_Row))
+                        {
+                            SaveStock(dv_Inventory.Table, "Update");
+                        }
                         if (IsPayrollNature(_Row)) { SavePayroll(dv_Inventory.Table, "Update"); }
                         break;
 
@@ -375,12 +376,12 @@ namespace Applied_Accounts.Classes
                     {
                         Delete(_Row);
                     }
-                   
+
                 }
             }
         }
 
-       
+
 
         public void Stock_DeleteAll(DataView _Inventory)
         { }
@@ -485,17 +486,14 @@ namespace Applied_Accounts.Classes
                 tb_Voucher_Original = ds_Voucher.Tables["Ledger"].Copy();                      // Store Voucher Original Data in saperate Table.
             }
 
-
-            // Fill Inventory Table for Voucher Number.
-            _DataTable = new DataTable();
-            _DataTable = AppliedTable.GetDataTable(Tables.Inventory, "Vou_No='" + ds_Voucher.Tables["Ledger"].Rows[0]["Vou_No"] + "';");
-            ds_Voucher.Tables["Inventory"].Clear();
-            foreach (DataRow _Row in _DataTable.Rows)
+            if (tb_Voucher.Rows.Count > 0)
             {
-                ds_Voucher.Tables["Inventory"].Rows.Add(_Row.ItemArray);
+                MyInventoryClass = new InventoryClass(tb_Voucher.Rows[0]);
             }
-            dv_Inventory = _DataTable.AsDataView();
-
+            else
+            {
+                MyInventoryClass = new InventoryClass();
+            }
             return _DataTable;
         }
 
