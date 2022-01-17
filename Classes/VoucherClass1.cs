@@ -10,9 +10,6 @@ namespace Applied_Accounts.Classes
 {
     interface IVoucherClass1
     {
-
-
-
         void Insert(DataRow _Row);
         void Update(DataRow _Row);
         void Delete(DataRow _Row);
@@ -38,8 +35,9 @@ namespace Applied_Accounts.Classes
         public DataTable tb_Voucher_Original;
         public DataTable tb_GridData;
 
-        public InventoryClass MyInventoryClass;
-        public DataView dv_Inventory { get => MyInventoryClass.tb_Inventory.AsDataView(); }
+        public InventoryClass MyInventoryClass = new InventoryClass();
+        public DataView dv_Inventory { get => MyInventoryClass.dv_Inventory;}
+        public DataView dv_ { get => MyInventoryClass.dv_Inventory; }
 
         public string Vou_No;
         public DateTime Vou_Date;
@@ -486,13 +484,13 @@ namespace Applied_Accounts.Classes
                 tb_Voucher_Original = ds_Voucher.Tables["Ledger"].Copy();                      // Store Voucher Original Data in saperate Table.
             }
 
-            if (tb_Voucher.Rows.Count > 0)
-            {
+            if (tb_Voucher.Rows.Count > 0)                                                                      // If Voucher has records. Fill Inventory Data for this voucher.
+                {
                 MyInventoryClass = new InventoryClass(tb_Voucher.Rows[0]);
             }
             else
             {
-                MyInventoryClass = new InventoryClass();
+                MyInventoryClass = new InventoryClass();                                            // Empty Inventory Vohcher create.
             }
             return _DataTable;
         }

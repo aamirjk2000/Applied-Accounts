@@ -19,8 +19,7 @@ namespace Applied_Accounts.Classes
         void Save();
         decimal GridTotal();
         DataRow Row();
-        //long MaxID();
-        //DataView UpdateGridView();                          // Update Data View from Table
+        DataTable Table_Inventory();
     }
 
     public class InventoryClass : IInventoryClass
@@ -31,10 +30,11 @@ namespace Applied_Accounts.Classes
 
         public DataView dv_GridView = new DataView();
         public DataTable tb_GridView;
+        public DataView dv_Inventory;
+        public DataView dv_Inventory_Stock;
         public DataTable Original_Inventory;
         public DataRow MyRow;
         public DataRow StockRow;
-
 
         public DataTable tb_Inventory { get; set; }                                                         // Get Transaction (Stock) related entries
         public long Transaction_ID { get => Conversion.ToLong(MyRow["ID"].ToString()); }
@@ -45,7 +45,6 @@ namespace Applied_Accounts.Classes
         public decimal Vou_Amount { get => Conversion.ToMoney(MyRow["DR"].ToString()); }
         public decimal Grid_Amount { get; set; }
         public long Stock_COA { get => Conversion.ToLong(MyRow["Stock"]); }
-        public string Stock_Title { get => Applied.Title(Conversion.ToLong(MyRow["Stock"].ToString()), tb_Stock.AsDataView()); }
         public int Row_Index { get; set; }
         private string Filter_Inventory { get; set; }
         public decimal GridTotal()
@@ -64,131 +63,143 @@ namespace Applied_Accounts.Classes
             tb_Inventory = new DataTable();
             tb_GridView = new DataTable();
             dv_GridView = new DataView();
+            dv_Inventory = new DataView();
+            dv_Inventory_Stock = new DataView();
+            Original_Inventory = tb_Inventory;
+            MyRow = tb_Inventory.NewRow();
+            StockRow = tb_Inventory.NewRow();
         }
 
-        public InventoryClass(DataRow _VouRow)      // Construct a class empty.
+
+        public InventoryClass(string _Vou_No)
+        {
+            tb_Inventory = AppliedTable.GetDataTable(Tables.Inventory, SetFilter(_Vou_No));
+            dv_Inventory = tb_Inventory.AsDataView();
+            dv_Inventory_Stock = tb_Inventory.AsDataView();
+            Original_Inventory = tb_Inventory.Copy();
+            //MyRow = tb_Inventory.NewRow();
+            StockRow = tb_Inventory.NewRow();
+            UpdateGridView();
+            UpdateStockRow(0);
+
+        }
+
+
+        public InventoryClass(DataRow _VouRow)                                                  // Construct a class empty.
         {
             MyRow = _VouRow;
-            SetFilter(MyRow);
+            tb_Inventory = AppliedTable.GetDataTable(Tables.Inventory, SetFilter(Vou_No));
+            Original_Inventory = tb_Inventory.Copy();                                             // Save Table for Cancel data
 
-            tb_Inventory = CreateTableInventory();
-            tb_GridView = CreateDataViewTable();
-            Original_Inventory = tb_Inventory.Clone();                                              // Save Table for cancell data
-            UpdateGridView();                                                                                   // UpDate Grid from Invenoty Table
+            dv_Inventory = tb_Inventory.AsDataView();
+            dv_Inventory_Stock = tb_Inventory.AsDataView();
+            StockFilter(MyRow);
 
-            #region Generate Stock Row
+            if (tb_Inventory.Rows.Count > 0)                        // Fill a Data Row if empty
+            {
+                if (MyRow == null) { MyRow = tb_Inventory.Rows[0]; } else { MyRow = tb_Inventory.NewRow(); }
+            }
+
+            UpdateGridView();                                                                                     // Create a Grid Table and fill Data from Inventory.
+
+
+        }
+
+        #region Generate Stock Row
+
+        public DataRow GetStockRow(int _Index)
+        {
+            DataRow _StockRow = tb_Inventory.NewRow();
 
             if (tb_Inventory.Rows.Count > 0)
             {
-                StockRow = tb_Inventory.Rows[0];
+                _StockRow = tb_Inventory.Rows[_Index];
             }
             else
             {
                 decimal _Amount = Conversion.ToMoney(MyRow["DR"]) - Conversion.ToMoney(MyRow["CR"]);        // Transaction Amount
-                StockRow = tb_Inventory.NewRow();
-                StockRow["ID"] = 0;
-                StockRow["Vou_ID"] = MyRow["ID"];
-                StockRow["Vou_No"] = MyRow["Vou_No"];
-                StockRow["Vou_Amount"] = _Amount;                       // Transaction Amount 
-                StockRow["SRNO"] = MaxSRNO() + 1;
-                StockRow["Stock"] = Stock_COA;
-                StockRow["Qty"] = 0;
-                StockRow["UOM"] = "";
-                StockRow["Size"] = "";
-                StockRow["Rate"] = 0;
-                StockRow["Amount"] = 0.00;
-                StockRow["Description"] = "";
-                StockRow["comments"] = "";
+                _StockRow = tb_Inventory.NewRow();
+                _StockRow["ID"] = 0;
+                _StockRow["Vou_ID"] = MyRow["ID"];
+                _StockRow["Vou_No"] = MyRow["Vou_No"];
+                _StockRow["Vou_Amount"] = _Amount;                       // Transaction Amount 
+                _StockRow["SRNO"] = MaxSRNO() + 1;
+                _StockRow["Stock"] = Stock_COA;
+                _StockRow["Qty"] = 0;
+                _StockRow["UOM"] = "";
+                _StockRow["Size"] = "";
+                _StockRow["Rate"] = 0;
+                _StockRow["Amount"] = 0.00;
+                _StockRow["Description"] = "";
+                _StockRow["comments"] = "";
             }
-
-            #endregion
+            return _StockRow;
         }
+
 
         #endregion
-
-        #region Create Inventory Table
-
-        private DataTable CreateTableInventory()
-        {
-            if(tb_Inventory == null)
-            { 
-            tb_Inventory = AppliedTable.GetDataTable(Tables.Inventory, Filter_Inventory);
-            return tb_Inventory;
-            }
-            else
-            {
-                return tb_Inventory;
-            }
-        }
-
+        public DataTable Table_Inventory() { return tb_Inventory; }
+        public string Stock_Title() { return Applied.Title(Stock_COA, tb_Stock.AsDataView()); }
 
         #endregion
 
         #region Save / Create / Update / Insert / Delete
 
 
-        public bool RecordFound(long _SRNO)
-        {
-            if (tb_Inventory.Rows.Count == 0) { return false; }
-            DataView _DataView = tb_Inventory.AsDataView();
-            _DataView.RowFilter = "SRNO=" + _SRNO.ToString().Trim();
-            if (_DataView.Count > 0) { return true; } else { return false; }
-        }
-
         public void Save()
         {
             // Save Inventory 
-            if (RecordFound(Conversion.ToLong(StockRow["SRNO"])))
-            {
-                foreach (DataRow _Row in tb_Inventory.Rows)
-                {
-                    if (_Row["SRNO"].Equals(StockRow["SRNO"]))
-                    {
-                        Row_Index = tb_Inventory.Rows.IndexOf(_Row);            // Get a Row Index
+            //if (RecordFound(Conversion.ToLong(StockRow["SRNO"])))
+            //{
+            //    foreach (DataRow _Row in tb_Inventory.Rows)
+            //    {
+            //        if (_Row["SRNO"].Equals(StockRow["SRNO"]))
+            //        {
+            //            Row_Index = tb_Inventory.Rows.IndexOf(_Row);            // Get a Row Index
 
-                        tb_Inventory.Rows[Row_Index]["ID"] = StockRow["ID"];
-                        tb_Inventory.Rows[Row_Index]["Vou_ID"] = Vou_ID;
-                        tb_Inventory.Rows[Row_Index]["vou_No"] = Vou_No;
-                        tb_Inventory.Rows[Row_Index]["Vou_Amount"] = Vou_Amount;
-                        tb_Inventory.Rows[Row_Index]["SRNO"] = StockRow["SRNO"];
-                        tb_Inventory.Rows[Row_Index]["Stock"] = Stock_COA;
-                        tb_Inventory.Rows[Row_Index]["Size"] = StockRow["Size"];
-                        tb_Inventory.Rows[Row_Index]["UOM"] = StockRow["UOM"];
-                        tb_Inventory.Rows[Row_Index]["Qty"] = StockRow["Qty"];
-                        tb_Inventory.Rows[Row_Index]["Rate"] = StockRow["Rate"];
-                        tb_Inventory.Rows[Row_Index]["Amount"] = StockRow["Amount"];
-                        tb_Inventory.Rows[Row_Index]["Description"] = StockRow["Description"];
-                        tb_Inventory.Rows[Row_Index]["Comments"] = StockRow["Comments"];
-                        tb_Inventory.Rows[Row_Index]["Status"] = "Edit";
-                    }
-                }
-            }
-            else
-            {
-                DataRow _NewRow = tb_Inventory.NewRow();
-                _NewRow["ID"] = 0;
-                _NewRow["SRNO"] = MaxSRNO() + 1;
-                _NewRow["Vou_ID"] = Vou_ID;
-                _NewRow["vou_No"] = Vou_No;
-                _NewRow["Vou_Amount"] = Vou_Amount;
-                _NewRow["Stock"] = StockRow["Stock"];
-                _NewRow["Size"] = StockRow["Size"];
-                _NewRow["UOM"] = StockRow["UOM"];
-                _NewRow["Qty"] = StockRow["Qty"];
-                _NewRow["Rate"] = StockRow["Rate"];
-                _NewRow["Amount"] = StockRow["Amount"];
-                _NewRow["Description"] = StockRow["Description"];
-                _NewRow["Comments"] = StockRow["Comments"];
-                _NewRow["Status"] = "New";
-                tb_Inventory.Rows.Add(_NewRow);
-                Row_Index = tb_Inventory.Rows.IndexOf(_NewRow);         // Save a Row Index.
-                return;
-            }
+            //            tb_Inventory.Rows[Row_Index]["ID"] = StockRow["ID"];
+            //            tb_Inventory.Rows[Row_Index]["Vou_ID"] = Vou_ID;
+            //            tb_Inventory.Rows[Row_Index]["vou_No"] = Vou_No;
+            //            tb_Inventory.Rows[Row_Index]["Vou_Amount"] = Vou_Amount;
+            //            tb_Inventory.Rows[Row_Index]["SRNO"] = StockRow["SRNO"];
+            //            tb_Inventory.Rows[Row_Index]["Stock"] = Stock_COA;
+            //            tb_Inventory.Rows[Row_Index]["Size"] = StockRow["Size"];
+            //            tb_Inventory.Rows[Row_Index]["UOM"] = StockRow["UOM"];
+            //            tb_Inventory.Rows[Row_Index]["Qty"] = StockRow["Qty"];
+            //            tb_Inventory.Rows[Row_Index]["Rate"] = StockRow["Rate"];
+            //            tb_Inventory.Rows[Row_Index]["Amount"] = StockRow["Amount"];
+            //            tb_Inventory.Rows[Row_Index]["Description"] = StockRow["Description"];
+            //            tb_Inventory.Rows[Row_Index]["Comments"] = StockRow["Comments"];
+            //            tb_Inventory.Rows[Row_Index]["Status"] = "Edit";
+            //        }
+            //    }
+            //}
+            //else
+            //{
+            //    DataRow _NewRow = tb_Inventory.NewRow();
+            //    _NewRow["ID"] = 0;
+            //    _NewRow["SRNO"] = MaxSRNO() + 1;
+            //    _NewRow["Vou_ID"] = Vou_ID;
+            //    _NewRow["vou_No"] = Vou_No;
+            //    _NewRow["Vou_Amount"] = Vou_Amount;
+            //    _NewRow["Stock"] = StockRow["Stock"];
+            //    _NewRow["Size"] = StockRow["Size"];
+            //    _NewRow["UOM"] = StockRow["UOM"];
+            //    _NewRow["Qty"] = StockRow["Qty"];
+            //    _NewRow["Rate"] = StockRow["Rate"];
+            //    _NewRow["Amount"] = StockRow["Amount"];
+            //    _NewRow["Description"] = StockRow["Description"];
+            //    _NewRow["Comments"] = StockRow["Comments"];
+            //    _NewRow["Status"] = "New";
+            //    tb_Inventory.Rows.Add(_NewRow);
+            //    Row_Index = tb_Inventory.Rows.IndexOf(_NewRow);         // Save a Row Index.
+            //    return;
+            //}
         }
 
         public void UpdateStockRow(int _Index)
         {
-            if (tb_Inventory.Rows.Count > 0)
+            if (dv_Inventory_Stock.ToTable().Rows.Count> 0)
             {
                 StockRow["ID"] = tb_Inventory.Rows[Row_Index]["ID"];
                 StockRow["Vou_ID"] = tb_Inventory.Rows[Row_Index]["Vou_ID"];
@@ -209,7 +220,8 @@ namespace Applied_Accounts.Classes
         public long MaxSRNO()
         {
             long Max_SRNO = 0;
-            Max_SRNO = Conversion.ToLong(tb_Inventory.Compute("MAX(SRNO)", ""));
+            DataTable _DataTable = dv_Inventory_Stock.Table.Copy();
+            Max_SRNO = Conversion.ToLong(_DataTable.Compute("MAX(SRNO)", ""));
             return Max_SRNO;
         }
 
@@ -219,25 +231,27 @@ namespace Applied_Accounts.Classes
 
         public DataTable UpdateGridView()
         {
-            DataTable _DataTable = CreateDataViewTable();
-            foreach (DataRow _Row in tb_Inventory.Rows)
+            DataTable _DataTable = CreateGridViewTable();
+            DataTable _StockTable = dv_Inventory_Stock.Table.Copy();
+            if (dv_Inventory_Stock.Count > 0)
             {
-
-                DataRow _GridRow = _DataTable.NewRow();
-
-                _GridRow["SRNO"] = _Row["SRNO"];
-                _GridRow["Title"] = Stock_Title;
-                _GridRow["Qty"] = _Row["Qty"];
-                _GridRow["UOM"] = _Row["UOM"];
-                _GridRow["Size"] = _Row["Size"];
-                _GridRow["Rate"] = _Row["Rate"];
-                _GridRow["Amount"] = _Row["Amount"];
-                _GridRow["Status"] = _Row["Status"];
-                _DataTable.Rows.Add(_GridRow);
+                foreach (DataRow _Row in _StockTable.Rows)
+                {
+                    DataRow _GridRow = _DataTable.NewRow();
+                    _GridRow["SRNO"] = _Row["SRNO"];
+                    _GridRow["Title"] = Stock_Title();
+                    _GridRow["Qty"] = _Row["Qty"];
+                    _GridRow["UOM"] = _Row["UOM"];
+                    _GridRow["Size"] = _Row["Size"];
+                    _GridRow["Rate"] = _Row["Rate"];
+                    _GridRow["Amount"] = _Row["Amount"];
+                    _GridRow["Status"] = _Row["Status"];
+                    _DataTable.Rows.Add(_GridRow);
+                }
             }
             return _DataTable;
         }
-        public DataTable CreateDataViewTable()
+        public DataTable CreateGridViewTable()
         {
             DataTable ViewTable = new DataTable();
             ViewTable.Columns.Add("SRNO", typeof(long));
@@ -255,25 +269,25 @@ namespace Applied_Accounts.Classes
 
         #region Filter
 
-        public void SetFilter(DataRow _Row)
+        public string SetFilter(string _Vou_No)
         {
-            if (_Row != null)
-            {
-                MyRow = _Row;
-                Filter_Inventory = "Vou_No='" + MyRow["Vou_No"].ToString().Trim() + "';";           // filter all Inventory of Voucher
-            }
-            else
-            {
-                Filter_Inventory = "";
-            }
+            return "Vou_No='" + _Vou_No + "';";           // filter all Inventory of Voucher
         }
 
-        public void FilterTransaction(DataRow _Row) 
+        public string FilterTransaction(DataRow _Row)
         {
-            MyRow = _Row;
-            Filter_Inventory = " Vou_ID='" + _Row["ID"].ToString().Trim();
-            return;
+            // Filter Records as per Voucher Transaction.
+            return "Vou_No='" + MyRow["Vou_No"].ToString().Trim() + "' AND Vou_ID=" + MyRow["ID"].ToString().Trim();
         }
+
+        public void StockFilter(DataRow _Row)
+        {
+            string _Filter = FilterTransaction(_Row);
+            dv_Inventory_Stock.RowFilter = _Filter;
+        }
+
+
+
         #endregion
 
     }   // END Class

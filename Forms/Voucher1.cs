@@ -1364,7 +1364,8 @@ namespace Applied_Accounts.Forms
             // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
             if (DefaultNature == MyVoucherClass.GetNature(MyDataRow.Row))
             {
-                MyVoucherClass.MyInventoryClass.FilterTransaction(MyDataRow.Row);
+                MyInventoryClass.MyRow = MyDataRow.Row;
+                MyInventoryClass.StockFilter(MyDataRow.Row);
 
 
                 frmInventory Brows_Inventory = new frmInventory(MyInventoryClass);                   // Create Stock Inventory form

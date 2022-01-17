@@ -235,3 +235,4 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CoreCompileInputs.
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
+D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.AssemblyReference.cache
