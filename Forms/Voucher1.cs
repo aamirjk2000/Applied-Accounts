@@ -1355,7 +1355,7 @@ namespace Applied_Accounts.Forms
 
         #endregion
 
-        #region Stock Browse
+        //#region Stock Browse
 
         private void Img_Stock_Click(object sender, EventArgs e)
         {
@@ -1364,75 +1364,31 @@ namespace Applied_Accounts.Forms
             // If Account code is registered as Stock Nature then Browse the Stock Inventory Pop-up / Executue.
             if (DefaultNature == MyVoucherClass.GetNature(MyDataRow.Row))
             {
-                MyInventoryClass.MyRow = MyDataRow.Row;
+                MyInventoryClass.TransactionRow = MyDataRow.Row;
                 MyInventoryClass.StockFilter(MyDataRow.Row);
-
+                
 
                 frmInventory Brows_Inventory = new frmInventory(MyInventoryClass);                   // Create Stock Inventory form
                 Brows_Inventory.ShowDialog();                                                                               // show Inventory Form
 
-                #region Update Ledger Inventory from Inventory form Table
-                foreach (DataRow _Row in MyVoucherClass.dv_Inventory.Table.Rows)
-                {
-                    MyVoucherClass.dv_Inventory.RowFilter = "Vou_ID=" + _Row["Vou_ID"].ToString().Trim() + " AND SRNO=" + _Row["SRNO"].ToString().Trim();
-                    if (MyVoucherClass.dv_Inventory.Count == 1)
-                    {
-                        MyVoucherClass.dv_Inventory[0].Row["SRNO"] = _Row["SRNO"];
-                        MyVoucherClass.dv_Inventory[0].Row["Vou_No"] = _Row["Vou_No"];
-                        MyVoucherClass.dv_Inventory[0].Row["Vou_ID"] = _Row["Vou_ID"];
-                        MyVoucherClass.dv_Inventory[0].Row["Vou_Amount"] = _Row["Vou_Amount"];
-                        MyVoucherClass.dv_Inventory[0].Row["Stock"] = _Row["Stock"];
-                        MyVoucherClass.dv_Inventory[0].Row["Qty"] = _Row["Qty"];
-                        MyVoucherClass.dv_Inventory[0].Row["UOM"] = _Row["UOM"];
-                        MyVoucherClass.dv_Inventory[0].Row["Size"] = _Row["Size"];
-                        MyVoucherClass.dv_Inventory[0].Row["Rate"] = _Row["Rate"];
-                        MyVoucherClass.dv_Inventory[0].Row["Amount"] = _Row["Amount"];
-                        MyVoucherClass.dv_Inventory[0].Row["Description"] = _Row["Description"];
-                        MyVoucherClass.dv_Inventory[0].Row["Comments"] = _Row["Comments"];
-                        MyVoucherClass.dv_Inventory[0].Row["Batch"] = _Row["Batch"];
-                        MyVoucherClass.dv_Inventory[0].Row["Status"] = _Row["Status"];
-                    }
-                    else
-                    {
-                        // Add a New Record.
-                        DataRow _NewRow = MyVoucherClass.dv_Inventory.Table.NewRow();
-
-                        _NewRow["ID"] = _Row["ID"];
-                        _NewRow["Vou_No"] = _Row["Vou_No"];
-                        _NewRow["Vou_ID"] = _Row["Vou_ID"];
-                        _NewRow["Vou_Amount"] = _Row["Vou_Amount"];
-                        _NewRow["SRNO"] = _Row["SRNO"];
-                        _NewRow["Stock"] = _Row["Stock"];
-                        _NewRow["Qty"] = _Row["Qty"];
-                        _NewRow["UOM"] = _Row["UOM"];
-                        _NewRow["Size"] = _Row["Size"];
-                        _NewRow["Amount"] = _Row["Amount"];
-                        _NewRow["Description"] = _Row["Description"];
-                        _NewRow["Comments"] = _Row["Comments"];
-                        _NewRow["Batch"] = _Row["Batch"];
-                        _NewRow["Status"] = _Row["Status"];
-                        MyVoucherClass.dv_Inventory.Table.Rows.Add(_NewRow);
-                    }
-                }
-
-                #endregion
-
-
+                
             }
         }
 
-        #endregion
+        //#endregion
+
+
+        //}
+        //}
+
+        //#endregion
 
         #region Payroll Browse
 
         private void Imp_Employees_Click(object sender, EventArgs e)
-        {
-            long _Nature = GetNature("NaturePayroll");    // Get Default Nature Value for Stock Account
-        }
-
-
-
-
+{
+    long _Nature = GetNature("NaturePayroll");    // Get Default Nature Value for Stock Account
+}
 
         #endregion
 

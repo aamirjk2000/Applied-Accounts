@@ -304,7 +304,7 @@ namespace Applied_Accounts.Classes
             SQLiteCommand _CmdInsert = new SQLiteCommand();
             try
             {
-                _Row["ID"] = Applied.MaxID(Tables.Inventory);
+                _Row["ID"] = Applied.MaxID(Tables.Inventory) + 1;
                 _CmdInsert = Connection_Class.SQLite.SQLiteInsert(_Row, Connection.AppliedConnection());
                 Effected_Records += _CmdInsert.ExecuteNonQuery();
                 if (Effected_Records > 0) { Record_is_Saved = true; } else { Record_is_Saved = false; }
