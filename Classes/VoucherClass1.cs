@@ -379,8 +379,6 @@ namespace Applied_Accounts.Classes
             }
         }
 
-
-
         public void Stock_DeleteAll(DataView _Inventory)
         { }
 

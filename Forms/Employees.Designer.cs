@@ -328,6 +328,7 @@
             this.MyDataGrid.ColumnsWidth = null;
             this.MyDataGrid.IsBrowseWin = false;
             this.MyDataGrid.IsPressEnter = false;
+            this.MyDataGrid.IsSelected = false;
             this.MyDataGrid.Location = new System.Drawing.Point(6, 6);
             this.MyDataGrid.MyDataRow = null;
             this.MyDataGrid.MyDataView = null;

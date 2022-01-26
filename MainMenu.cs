@@ -194,5 +194,11 @@ namespace Applied_Accounts
             frmTemp ThisForm = new frmTemp();
             ThisForm.Show();
         }
+
+        private void mnuEmails_Click(object sender, EventArgs e)
+        {
+            frmEmails Thisform = new frmEmails();
+            Thisform.Show();
+        }
     }
 }

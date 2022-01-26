@@ -186,6 +186,7 @@ C:\Applied\Backup\Applied_Source\obj\Debug\Applied Accounts.pdb
 C:\Output\Release\Applied Accounts.exe.config
 C:\Output\Release\Applied Accounts.exe
 C:\Output\Release\Applied Accounts.pdb
+D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.AssemblyReference.cache
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.SuggestedBindingRedirects.cache
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.AppliedDataGrid.resources
 D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Components.FKeyID.resources
@@ -235,4 +236,4 @@ D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CoreCompileInputs.
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.CopyComplete
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.exe
 D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.pdb
-D:\Applied\Applied-Accounts\obj\Debug\Applied Accounts.csproj.AssemblyReference.cache
+D:\Applied\Applied-Accounts\obj\Debug\Applied_Accounts.Forms.frmEmails.resources

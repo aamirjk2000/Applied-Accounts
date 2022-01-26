@@ -6,10 +6,6 @@ namespace Applied_Accounts
 {
     public class AppliedClass
     {
-        
-        
-
-
         public static string Get_Format(int FormatID)
         {
             string _Result = "";

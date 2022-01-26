@@ -20,6 +20,35 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
+      "MailKit/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "MimeKit": "3.1.0"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Core",
+          "System.Data",
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net46/MailKit.dll": {}
+        },
+        "runtime": {
+          "lib/net46/MailKit.dll": {}
+        }
+      },
+      "Microsoft.Exchange.WebServices/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/40/Microsoft.Exchange.WebServices.Auth.dll": {},
+          "lib/40/Microsoft.Exchange.WebServices.dll": {}
+        },
+        "runtime": {
+          "lib/40/Microsoft.Exchange.WebServices.Auth.dll": {},
+          "lib/40/Microsoft.Exchange.WebServices.dll": {}
+        }
+      },
       "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1484.0": {
         "type": "package",
         "dependencies": {
@@ -180,6 +209,36 @@
           "lib/net40/Microsoft.SqlServer.Types.dll": {}
         }
       },
+      "MimeKit/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Portable.BouncyCastle": "1.9.0",
+          "System.Buffers": "4.5.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Core",
+          "System.Data",
+          "System.Data.DataSetExtensions",
+          "System.Net.Http",
+          "System.Security"
+        ],
+        "compile": {
+          "lib/net46/MimeKit.dll": {}
+        },
+        "runtime": {
+          "lib/net46/MimeKit.dll": {}
+        }
+      },
+      "Portable.BouncyCastle/1.9.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/net40/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "Stub.System.Data.SQLite.Core.NetFramework/1.0.115.5": {
         "type": "package",
         "compile": {
@@ -190,6 +249,18 @@
         },
         "build": {
           "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
+        }
+      },
+      "System.Buffers/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net45/System.Buffers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/System.Buffers.dll": {}
         }
       },
       "System.Data.SQLite/1.0.115.5": {
@@ -256,6 +327,35 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
+      "MailKit/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "MimeKit": "3.1.0"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Core",
+          "System.Data",
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net46/MailKit.dll": {}
+        },
+        "runtime": {
+          "lib/net46/MailKit.dll": {}
+        }
+      },
+      "Microsoft.Exchange.WebServices/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/40/Microsoft.Exchange.WebServices.Auth.dll": {},
+          "lib/40/Microsoft.Exchange.WebServices.dll": {}
+        },
+        "runtime": {
+          "lib/40/Microsoft.Exchange.WebServices.Auth.dll": {},
+          "lib/40/Microsoft.Exchange.WebServices.dll": {}
+        }
+      },
       "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1484.0": {
         "type": "package",
         "dependencies": {
@@ -416,6 +516,36 @@
           "lib/net40/Microsoft.SqlServer.Types.dll": {}
         }
       },
+      "MimeKit/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Portable.BouncyCastle": "1.9.0",
+          "System.Buffers": "4.5.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Core",
+          "System.Data",
+          "System.Data.DataSetExtensions",
+          "System.Net.Http",
+          "System.Security"
+        ],
+        "compile": {
+          "lib/net46/MimeKit.dll": {}
+        },
+        "runtime": {
+          "lib/net46/MimeKit.dll": {}
+        }
+      },
+      "Portable.BouncyCastle/1.9.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/net40/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "Stub.System.Data.SQLite.Core.NetFramework/1.0.115.5": {
         "type": "package",
         "compile": {
@@ -426,6 +556,18 @@
         },
         "build": {
           "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
+        }
+      },
+      "System.Buffers/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net45/System.Buffers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/System.Buffers.dll": {}
         }
       },
       "System.Data.SQLite/1.0.115.5": {
@@ -492,6 +634,35 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
+      "MailKit/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "MimeKit": "3.1.0"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Core",
+          "System.Data",
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net46/MailKit.dll": {}
+        },
+        "runtime": {
+          "lib/net46/MailKit.dll": {}
+        }
+      },
+      "Microsoft.Exchange.WebServices/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/40/Microsoft.Exchange.WebServices.Auth.dll": {},
+          "lib/40/Microsoft.Exchange.WebServices.dll": {}
+        },
+        "runtime": {
+          "lib/40/Microsoft.Exchange.WebServices.Auth.dll": {},
+          "lib/40/Microsoft.Exchange.WebServices.dll": {}
+        }
+      },
       "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1484.0": {
         "type": "package",
         "dependencies": {
@@ -652,6 +823,36 @@
           "lib/net40/Microsoft.SqlServer.Types.dll": {}
         }
       },
+      "MimeKit/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Portable.BouncyCastle": "1.9.0",
+          "System.Buffers": "4.5.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Core",
+          "System.Data",
+          "System.Data.DataSetExtensions",
+          "System.Net.Http",
+          "System.Security"
+        ],
+        "compile": {
+          "lib/net46/MimeKit.dll": {}
+        },
+        "runtime": {
+          "lib/net46/MimeKit.dll": {}
+        }
+      },
+      "Portable.BouncyCastle/1.9.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/net40/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "Stub.System.Data.SQLite.Core.NetFramework/1.0.115.5": {
         "type": "package",
         "compile": {
@@ -662,6 +863,18 @@
         },
         "build": {
           "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
+        }
+      },
+      "System.Buffers/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net45/System.Buffers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/System.Buffers.dll": {}
         }
       },
       "System.Data.SQLite/1.0.115.5": {
@@ -728,6 +941,35 @@
           "buildTransitive/EntityFramework.targets": {}
         }
       },
+      "MailKit/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "MimeKit": "3.1.0"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Core",
+          "System.Data",
+          "System.Net.Http"
+        ],
+        "compile": {
+          "lib/net46/MailKit.dll": {}
+        },
+        "runtime": {
+          "lib/net46/MailKit.dll": {}
+        }
+      },
+      "Microsoft.Exchange.WebServices/2.2.0": {
+        "type": "package",
+        "compile": {
+          "lib/40/Microsoft.Exchange.WebServices.Auth.dll": {},
+          "lib/40/Microsoft.Exchange.WebServices.dll": {}
+        },
+        "runtime": {
+          "lib/40/Microsoft.Exchange.WebServices.Auth.dll": {},
+          "lib/40/Microsoft.Exchange.WebServices.dll": {}
+        }
+      },
       "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1484.0": {
         "type": "package",
         "dependencies": {
@@ -888,6 +1130,36 @@
           "lib/net40/Microsoft.SqlServer.Types.dll": {}
         }
       },
+      "MimeKit/3.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Portable.BouncyCastle": "1.9.0",
+          "System.Buffers": "4.5.1"
+        },
+        "frameworkAssemblies": [
+          "System",
+          "System.Core",
+          "System.Data",
+          "System.Data.DataSetExtensions",
+          "System.Net.Http",
+          "System.Security"
+        ],
+        "compile": {
+          "lib/net46/MimeKit.dll": {}
+        },
+        "runtime": {
+          "lib/net46/MimeKit.dll": {}
+        }
+      },
+      "Portable.BouncyCastle/1.9.0": {
+        "type": "package",
+        "compile": {
+          "lib/net40/BouncyCastle.Crypto.dll": {}
+        },
+        "runtime": {
+          "lib/net40/BouncyCastle.Crypto.dll": {}
+        }
+      },
       "Stub.System.Data.SQLite.Core.NetFramework/1.0.115.5": {
         "type": "package",
         "compile": {
@@ -898,6 +1170,18 @@
         },
         "build": {
           "buildTransitive/net46/Stub.System.Data.SQLite.Core.NetFramework.targets": {}
+        }
+      },
+      "System.Buffers/4.5.1": {
+        "type": "package",
+        "frameworkAssemblies": [
+          "mscorlib"
+        ],
+        "compile": {
+          "ref/net45/System.Buffers.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.1/System.Buffers.dll": {}
         }
       },
       "System.Data.SQLite/1.0.115.5": {
@@ -1004,6 +1288,62 @@
         "tools/netcoreapp3.0/any/ef6.runtimeconfig.json"
       ]
     },
+    "MailKit/3.1.0": {
+      "sha512": "rTK4aBvNbJ+G+dB3W9C3J9EzdD3rt9A4863zjgnI+I1I//LwIZf83b0RKRZEmBFTScVARXFY25cXjS/7lUKcdg==",
+      "type": "package",
+      "path": "mailkit/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icons/mailkit-50.png",
+        "lib/net452/MailKit.dll",
+        "lib/net452/MailKit.pdb",
+        "lib/net452/MailKit.xml",
+        "lib/net46/MailKit.dll",
+        "lib/net46/MailKit.pdb",
+        "lib/net46/MailKit.xml",
+        "lib/net47/MailKit.dll",
+        "lib/net47/MailKit.pdb",
+        "lib/net47/MailKit.xml",
+        "lib/net48/MailKit.dll",
+        "lib/net48/MailKit.pdb",
+        "lib/net48/MailKit.xml",
+        "lib/net5.0/MailKit.dll",
+        "lib/net5.0/MailKit.pdb",
+        "lib/net5.0/MailKit.xml",
+        "lib/net6.0/MailKit.dll",
+        "lib/net6.0/MailKit.pdb",
+        "lib/net6.0/MailKit.xml",
+        "lib/netstandard2.0/MailKit.dll",
+        "lib/netstandard2.0/MailKit.pdb",
+        "lib/netstandard2.0/MailKit.xml",
+        "lib/netstandard2.1/MailKit.dll",
+        "lib/netstandard2.1/MailKit.pdb",
+        "lib/netstandard2.1/MailKit.xml",
+        "mailkit.3.1.0.nupkg.sha512",
+        "mailkit.nuspec"
+      ]
+    },
+    "Microsoft.Exchange.WebServices/2.2.0": {
+      "sha512": "NlkaTD0uWtg9VbiWq0VDWMBPzHFknH3tmstrxt0acrT09LBGqATTjRpsGOODz6tUdX7/dehBinxsf75U5Uw/+A==",
+      "type": "package",
+      "path": "microsoft.exchange.webservices/2.2.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "doc/License Terms.rtf",
+        "doc/README.htm",
+        "doc/Redist.txt",
+        "lib/40/Microsoft.Exchange.WebServices.Auth.dll",
+        "lib/40/Microsoft.Exchange.WebServices.Auth.pdb",
+        "lib/40/Microsoft.Exchange.WebServices.Auth.xml",
+        "lib/40/Microsoft.Exchange.WebServices.dll",
+        "lib/40/Microsoft.Exchange.WebServices.pdb",
+        "lib/40/Microsoft.Exchange.WebServices.xml",
+        "microsoft.exchange.webservices.2.2.0.nupkg.sha512",
+        "microsoft.exchange.webservices.nuspec"
+      ]
+    },
     "Microsoft.ReportingServices.ReportViewerControl.Winforms/150.1484.0": {
       "sha512": "n+2dsSL2uTJRW09O8n5JaqiL1XCUzqyWgrbuYFHsESw6hxL7GIi0q2l3RQ8UsikeabgtvIhTyO1f28mwzk5BkQ==",
       "type": "package",
@@ -1100,6 +1440,57 @@
         "tools/uninstall.ps1"
       ]
     },
+    "MimeKit/3.1.0": {
+      "sha512": "ZBx2Mmq+vvDASI59K525hoHOtf9HqsvE5/jBuVSQB6Pwrh8keFHiKtFzKuh/G1Idj0Wr5qJOxxwPtsKJA3K3hA==",
+      "type": "package",
+      "path": "mimekit/3.1.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "icons/mimekit-50.png",
+        "lib/net452/MimeKit.dll",
+        "lib/net452/MimeKit.pdb",
+        "lib/net452/MimeKit.xml",
+        "lib/net46/MimeKit.dll",
+        "lib/net46/MimeKit.pdb",
+        "lib/net46/MimeKit.xml",
+        "lib/net47/MimeKit.dll",
+        "lib/net47/MimeKit.pdb",
+        "lib/net47/MimeKit.xml",
+        "lib/net48/MimeKit.dll",
+        "lib/net48/MimeKit.pdb",
+        "lib/net48/MimeKit.xml",
+        "lib/net5.0/MimeKit.dll",
+        "lib/net5.0/MimeKit.pdb",
+        "lib/net5.0/MimeKit.xml",
+        "lib/net6.0/MimeKit.dll",
+        "lib/net6.0/MimeKit.pdb",
+        "lib/net6.0/MimeKit.xml",
+        "lib/netstandard2.0/MimeKit.dll",
+        "lib/netstandard2.0/MimeKit.pdb",
+        "lib/netstandard2.0/MimeKit.xml",
+        "lib/netstandard2.1/MimeKit.dll",
+        "lib/netstandard2.1/MimeKit.pdb",
+        "lib/netstandard2.1/MimeKit.xml",
+        "mimekit.3.1.0.nupkg.sha512",
+        "mimekit.nuspec"
+      ]
+    },
+    "Portable.BouncyCastle/1.9.0": {
+      "sha512": "eZZBCABzVOek+id9Xy04HhmgykF0wZg9wpByzrWN7q8qEI0Qen9b7tfd7w8VA3dOeesumMG7C5ZPy0jk7PSRHw==",
+      "type": "package",
+      "path": "portable.bouncycastle/1.9.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "lib/net40/BouncyCastle.Crypto.dll",
+        "lib/net40/BouncyCastle.Crypto.xml",
+        "lib/netstandard2.0/BouncyCastle.Crypto.dll",
+        "lib/netstandard2.0/BouncyCastle.Crypto.xml",
+        "portable.bouncycastle.1.9.0.nupkg.sha512",
+        "portable.bouncycastle.nuspec"
+      ]
+    },
     "Stub.System.Data.SQLite.Core.NetFramework/1.0.115.5": {
       "sha512": "fXkWBM+Dstt1JEItGsVyOJvY+UrnPaT7NCrWGyGuAxzF7ceKNsDBTjR1yrPOwUrQ/V9R6moHdB2FiO0+j94m6g==",
       "type": "package",
@@ -1144,6 +1535,37 @@
         "lib/net46/System.Data.SQLite.xml",
         "stub.system.data.sqlite.core.netframework.1.0.115.5.nupkg.sha512",
         "stub.system.data.sqlite.core.netframework.nuspec"
+      ]
+    },
+    "System.Buffers/4.5.1": {
+      "sha512": "Rw7ijyl1qqRS0YQD/WycNst8hUUMgrMH4FCn1nNm27M4VxchZ1js3fVjQaANHO5f3sN4isvP4a+Met9Y4YomAg==",
+      "type": "package",
+      "path": "system.buffers/4.5.1",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.TXT",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/net461/System.Buffers.dll",
+        "lib/net461/System.Buffers.xml",
+        "lib/netcoreapp2.0/_._",
+        "lib/netstandard1.1/System.Buffers.dll",
+        "lib/netstandard1.1/System.Buffers.xml",
+        "lib/netstandard2.0/System.Buffers.dll",
+        "lib/netstandard2.0/System.Buffers.xml",
+        "lib/uap10.0.16299/_._",
+        "ref/net45/System.Buffers.dll",
+        "ref/net45/System.Buffers.xml",
+        "ref/netcoreapp2.0/_._",
+        "ref/netstandard1.1/System.Buffers.dll",
+        "ref/netstandard1.1/System.Buffers.xml",
+        "ref/netstandard2.0/System.Buffers.dll",
+        "ref/netstandard2.0/System.Buffers.xml",
+        "ref/uap10.0.16299/_._",
+        "system.buffers.4.5.1.nupkg.sha512",
+        "system.buffers.nuspec",
+        "useSharedDesignerContext.txt",
+        "version.txt"
       ]
     },
     "System.Data.SQLite/1.0.115.5": {
@@ -1278,6 +1700,8 @@
   },
   "projectFileDependencyGroups": {
     ".NETFramework,Version=v4.6": [
+      "MailKit >= 3.1.0",
+      "Microsoft.Exchange.WebServices >= 2.2.0",
       "Microsoft.ReportViewer.WinForms.v12 >= 12.0.0.1",
       "Microsoft.ReportingServices.ReportViewerControl.WinForms >= 150.1484.0",
       "Microsoft.SqlServer.Types >= 14.0.1016.290",
@@ -1326,6 +1750,14 @@
     "frameworks": {
       "net46": {
         "dependencies": {
+          "MailKit": {
+            "target": "Package",
+            "version": "[3.1.0, )"
+          },
+          "Microsoft.Exchange.WebServices": {
+            "target": "Package",
+            "version": "[2.2.0, )"
+          },
           "Microsoft.ReportViewer.WinForms.v12": {
             "target": "Package",
             "version": "[12.0.0.1, )"

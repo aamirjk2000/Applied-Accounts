@@ -31,7 +31,7 @@ namespace Applied_Accounts.Classes
                     return DateTime.Now;
 
 
-                case 10:   // 2017-01-01     01-01-2017
+                case 10:   // 2017-01-01     01-01-2017                     Length of Date string.
 
                     if (MyDateTime.Substring(4, 1) == "-" && MyDateTime.Substring(7, 1) == "-")
                     {
@@ -81,7 +81,6 @@ namespace Applied_Accounts.Classes
 
                     thisDateTime = Convert.ToDateTime(MyDateTime);
                     break;
-
             }
 
             return thisDateTime;

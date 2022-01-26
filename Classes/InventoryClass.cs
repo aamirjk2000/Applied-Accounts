@@ -75,16 +75,14 @@ namespace Applied_Accounts.Classes
             TransactionRow = _TransactionRow;
             tb_Inventory = AppliedTable.GetDataTable(Tables.Inventory, FilterVoucher(Vou_No));
             Original_Inventory = tb_Inventory.Copy();                                             // Save Table for Cancel data
-
             dv_Inventory = tb_Inventory.AsDataView();
             dv_Inventory_Stock = tb_Inventory.AsDataView();
             StockFilter(TransactionRow);
             StockRow = GetStockRow(0);
-
             UpdateGridView();                                                                                     // Create a Grid Table and fill Data from Inventory.
         }
 
-        private DataRow GetStockRow(int _Index)
+        public DataRow GetStockRow(int _Index)
         {
             if (_Index == -1 || tb_Inventory.Rows.Count == 0 )
             {
@@ -102,7 +100,7 @@ namespace Applied_Accounts.Classes
                 StockRow["Amount"] = 0.00;
                 StockRow["Description"] = "";
                 StockRow["Comments"] = "";
-                StockRow["Batch"] = "";
+                StockRow["Batch"] = 0;
                 StockRow["Status"] = "New";
             }
             else

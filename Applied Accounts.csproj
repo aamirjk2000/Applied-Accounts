@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="Classes\Applied.cs" />
     <Compile Include="Classes\AppliedClass.cs" />
+    <Compile Include="Classes\AppliedEmail.cs" />
     <Compile Include="Classes\AppliedTable.cs" />
     <Compile Include="Classes\Code_Validation.cs" />
     <Compile Include="Classes\Connection.cs" />
@@ -248,6 +249,12 @@
     </Compile>
     <Compile Include="Forms\DBSetting.Designer.cs">
       <DependentUpon>DBSetting.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\Emails.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\Emails.Designer.cs">
+      <DependentUpon>Emails.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\Employees.cs">
       <SubType>Form</SubType>
@@ -459,6 +466,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DBSetting.resx">
       <DependentUpon>DBSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\Emails.resx">
+      <DependentUpon>Emails.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Employees.resx">
       <DependentUpon>Employees.cs</DependentUpon>
@@ -731,6 +741,12 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="MailKit">
+      <Version>3.1.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Exchange.WebServices">
+      <Version>2.2.0</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.ReportingServices.ReportViewerControl.WinForms">
       <Version>150.1484.0</Version>
     </PackageReference>
@@ -754,7 +770,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <ProjectExtensions>
     <VisualStudio>
-      <UserProperties BuildVersion_UseUniversalClock="True" BuildVersion_UseGlobalSettings="False" BuildVersion_StartDate="2020/10/1" BuildVersion_UpdateFileVersion="True" BuildVersion_UpdateAssemblyVersion="True" />
+      <UserProperties BuildVersion_UpdateAssemblyVersion="True" BuildVersion_UpdateFileVersion="True" BuildVersion_StartDate="2020/10/1" BuildVersion_UseGlobalSettings="False" BuildVersion_UseUniversalClock="True" />
     </VisualStudio>
   </ProjectExtensions>
 </Project>

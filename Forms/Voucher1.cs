@@ -38,7 +38,6 @@ namespace Applied_Accounts.Forms
         private DataTable tb_Stock { get => MyVoucherClass.ds_Voucher.Tables["Stock"]; }
         private DataTable tb_Employees { get => MyVoucherClass.ds_Voucher.Tables["Employees"]; }
         private DataTable tb_POrder { get => MyVoucherClass.ds_Voucher.Tables["POrder"]; }
-        private DataTable tb_Inventories { get => MyVoucherClass.dv_Inventory.Table; }
         private DataTable tb_Voucher { get => MyVoucherClass.tb_Voucher; }
         private DataView vw_CashBank
         {
@@ -1366,7 +1365,13 @@ namespace Applied_Accounts.Forms
             {
                 MyInventoryClass.TransactionRow = MyDataRow.Row;
                 MyInventoryClass.StockFilter(MyDataRow.Row);
-                
+
+                if(MyInventoryClass.dv_Inventory_Stock.ToTable().Rows.Count > 0)
+                { MyInventoryClass.StockRow = MyInventoryClass.GetStockRow(0); }
+                else
+                { MyInventoryClass.StockRow = MyInventoryClass.GetStockRow(-1); }
+
+                MyInventoryClass.StockRow = MyInventoryClass.dv_Inventory_Stock.ToTable().Rows[0];  
 
                 frmInventory Brows_Inventory = new frmInventory(MyInventoryClass);                   // Create Stock Inventory form
                 Brows_Inventory.ShowDialog();                                                                               // show Inventory Form
